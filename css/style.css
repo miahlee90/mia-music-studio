@@ -12,7 +12,7 @@
   --ink:#0d253d; --ink-2:#273951; --muted:#64748d;
   --accent:#E8A33D; --accent-dark:#cf8f2e;
   --correct:#2E8B57; --wrong:#ea2261;
-  --bg:#f6f9fc; --card:#ffffff; --cream:#f5e9d4; --hairline:#e3e8ee; --hairline-input:#a8c3de;
+  --bg:#f6f0e2; --card:#ffffff; --cream:#f1e2c4; --hairline:#e7ddc8; --hairline-input:#c9b98f;
   --text:var(--ink);
   --radius:12px;
   --shadow:0 1px 3px rgba(0,55,112,.08);
@@ -185,7 +185,7 @@ hr.sep{border:none;border-top:1px solid var(--hairline);margin:20px 0}
 .vback{background:var(--bg);border:1px solid var(--hairline);font-size:14px}
 
 /* Mia's Tips — warm cream interlude band */
-#secTips{background:var(--cream);border-color:#e8d9bc}
+#secTips{background:var(--cream);border-color:#dcc794}
 #secTips .bub{background:rgba(255,255,255,.7);border-color:#e8d9bc}
 
 /* nav & next invite — dark featured card */
@@ -220,14 +220,14 @@ hr.sep{border:none;border-top:1px solid var(--hairline);margin:20px 0}
 .searchbox{width:100%;font:inherit;padding:11px 16px;border:1px solid var(--hairline-input);border-radius:8px;margin-top:16px;background:var(--card);color:var(--ink)}
 .searchbox:focus{outline:none;border-color:var(--primary)}
 .progress-line{font-size:14px;color:var(--muted);margin-top:10px;font-feature-settings:"tnum"}
-.progress-track{background:#e4eaf0;border-radius:9999px;height:8px;margin-top:6px;overflow:hidden}
+.progress-track{background:#eae2ce;border-radius:9999px;height:8px;margin-top:6px;overflow:hidden}
 .progress-fill{background:var(--primary);height:100%;border-radius:9999px;transition:width .4s}
 
 /* validation warning */
 .mf-warn{background:#fff3cd;border:1px solid #e0a800;border-radius:12px;padding:12px 16px;margin-top:16px;font-size:14px}
 
 /* ===== v2: design-doc lesson features ===== */
-.lesson-progress{position:sticky;top:0;height:4px;background:#e4eaf0;z-index:40}
+.lesson-progress{position:sticky;top:0;height:4px;background:#eae2ce;z-index:40}
 .lesson-progress-fill{height:100%;width:0;background:linear-gradient(90deg,#ffd166,#f96bee,#533afd);transition:width .5s}
 .bs-slots{max-width:420px;margin:10px auto;padding:4px 0}
 .bs-slot{height:0;border-top:2px dashed var(--primary-subtle);margin:26px 18px;position:relative}
@@ -240,7 +240,7 @@ hr.sep{border:none;border-top:1px solid var(--hairline);margin:20px 0}
 .dragnote{display:inline-block;font-size:46px;line-height:1;cursor:grab;user-select:none;color:var(--primary-dark)}
 .dragnote.dragging{cursor:grabbing;opacity:.85}
 .stars{font-size:2.4rem;letter-spacing:.1em}
-.badge-card{display:inline-flex;align-items:center;gap:10px;background:var(--cream);border:1px solid #e8d9bc;border-radius:12px;padding:12px 22px;margin-top:10px;font-size:1.05rem}
+.badge-card{display:inline-flex;align-items:center;gap:10px;background:var(--cream);border:1px solid #dcc794;border-radius:12px;padding:12px 22px;margin-top:10px;font-size:1.05rem}
 .badge-icon{font-size:1.8rem}
 .mistakes li.oops{list-style:none;margin-left:0;background:#fdecf2;border-left:3px solid var(--wrong);padding:9px 13px;border-radius:0 10px 10px 0;margin-bottom:8px}
 
