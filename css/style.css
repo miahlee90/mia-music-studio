@@ -20,7 +20,7 @@
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:Inter,"SF Pro Display",-apple-system,"Segoe UI",Roboto,"Noto Sans",sans-serif;
-  background:var(--bg);color:var(--ink);font-size:16px;line-height:1.55;font-weight:300;
+  background:var(--bg);color:var(--ink);font-size:16px;line-height:1.55;font-weight:400;
   font-feature-settings:"ss01"}
 b,strong{font-weight:600}
 main,.container{max-width:860px;margin:0 auto;padding:16px 16px 120px}
@@ -38,26 +38,21 @@ a{color:var(--primary);text-decoration:none}
 a:hover{text-decoration:underline}
 
 /* header — gradient mesh band, ink type */
-.lesson-header{color:var(--ink);padding:26px 16px 30px;
-  background:
-    radial-gradient(60% 130% at 8% 0%, rgba(245,233,212,.95), transparent 60%),
-    radial-gradient(45% 110% at 38% 8%, rgba(249,107,238,.22), transparent 60%),
-    radial-gradient(55% 130% at 68% 0%, rgba(102,94,253,.28), transparent 58%),
-    radial-gradient(45% 110% at 96% 14%, rgba(234,34,97,.20), transparent 60%),
-    linear-gradient(180deg,#ffffff,#f6f9fc)}
+.lesson-header{color:#fff;padding:26px 16px 30px;
+  background:linear-gradient(135deg,#1c1e54 0%,#2e2b8c 62%,#4434d4 100%)}
 .lesson-header .inner{max-width:860px;margin:0 auto}
-.crumb{font-size:13px;color:var(--ink-2);opacity:.85;margin-bottom:8px}
-.crumb a{color:var(--ink-2);text-decoration:none}
+.crumb{font-size:13px;color:rgba(255,255,255,.85);margin-bottom:8px}
+.crumb a{color:#fff;text-decoration:none}
 .crumb a:hover{text-decoration:underline}
-.lesson-header h1{font-size:1.65rem;font-weight:300;letter-spacing:-.6px;line-height:1.15}
-.time-badge{display:inline-block;background:rgba(185,185,249,.45);color:var(--primary-dark);
-  border-radius:9999px;padding:3px 14px;font-size:12.5px;font-weight:500;margin-top:10px;
+.lesson-header h1{font-size:1.7rem;font-weight:800;letter-spacing:-.4px;line-height:1.2}
+.time-badge{display:inline-block;background:#ffd166;color:#1c1e54;
+  border-radius:9999px;padding:4px 14px;font-size:12.5px;font-weight:700;margin-top:10px;
   font-feature-settings:"tnum";letter-spacing:.02em}
 
 /* cards & sections */
 .card{background:var(--card);border:1px solid var(--hairline);border-radius:var(--radius);
   box-shadow:var(--shadow);padding:26px;margin-top:20px}
-.card h2{color:var(--ink);font-size:1.28rem;font-weight:300;letter-spacing:-.26px;margin-bottom:12px}
+.card h2{color:var(--brand-dark);font-size:1.25rem;font-weight:800;letter-spacing:-.2px;margin-bottom:12px}
 .tag{display:inline-block;font-size:10.5px;font-weight:600;letter-spacing:.1em;
   text-transform:uppercase;color:var(--primary-dark);background:rgba(185,185,249,.35);
   border-radius:9999px;padding:3px 10px;margin-bottom:8px}
@@ -147,7 +142,7 @@ hr.sep{border:none;border-top:1px solid var(--hairline);margin:20px 0}
 
 /* quiz */
 .qnum{font-size:13px;color:var(--muted);margin-bottom:6px;font-feature-settings:"tnum";letter-spacing:-.2px}
-.big-q{font-size:1.15rem;font-weight:500;margin:10px 0}
+.big-q{font-size:1.15rem;font-weight:600;margin:10px 0}
 .choices{display:flex;flex-direction:column;gap:8px;margin-top:12px}
 .choices button{background:var(--card);color:var(--ink);text-align:left;border:1px solid var(--hairline);border-radius:10px;font-weight:400}
 .choices button:hover{background:var(--bg);border-color:var(--hairline-input)}
@@ -155,7 +150,7 @@ hr.sep{border:none;border-top:1px solid var(--hairline);margin:20px 0}
 .choices button.wrongpick{background:#fdecf2;border-color:var(--wrong);color:var(--wrong)}
 .explain{background:var(--bg);border-left:3px solid var(--primary);padding:11px 15px;border-radius:0 10px 10px 0;margin-top:12px;font-size:15px}
 .score-box{text-align:center;padding:12px 0}
-.score-big{font-size:2.3rem;font-weight:300;letter-spacing:-1px;color:var(--ink);font-feature-settings:"tnum"}
+.score-big{font-size:2.3rem;font-weight:800;letter-spacing:-1px;color:var(--brand-dark);font-feature-settings:"tnum"}
 .score-box p{color:var(--ink-2)}
 .score-box p b{font-feature-settings:"tnum"}
 .code-chip{display:inline-block;background:var(--brand-dark);color:#cfd3ff;font-family:ui-monospace,monospace;font-size:1.05rem;padding:9px 20px;border-radius:9999px;margin-top:10px;letter-spacing:.08em;user-select:all;font-feature-settings:"tnum"}
@@ -204,23 +199,18 @@ hr.sep{border:none;border-top:1px solid var(--hairline);margin:20px 0}
 .nav-jump{flex:1;font:inherit;padding:12px;border-radius:9999px;border:1px solid var(--hairline);background:var(--card);color:var(--primary);font-weight:500;box-shadow:var(--shadow)}
 
 /* index & home — mesh hero */
-.hero{color:var(--ink);text-align:center;padding:64px 16px 72px;
-  background:
-    radial-gradient(60% 130% at 8% 0%, rgba(245,233,212,.95), transparent 60%),
-    radial-gradient(45% 110% at 38% 8%, rgba(249,107,238,.22), transparent 60%),
-    radial-gradient(55% 130% at 68% 0%, rgba(102,94,253,.28), transparent 58%),
-    radial-gradient(45% 110% at 96% 14%, rgba(234,34,97,.20), transparent 60%),
-    linear-gradient(180deg,#ffffff,#f6f9fc)}
-.hero h1{font-size:2.4rem;font-weight:300;letter-spacing:-1px;margin-bottom:12px}
-.hero p{max-width:560px;margin:0 auto 26px;color:var(--ink-2)}
+.hero{color:#fff;text-align:center;padding:64px 16px 72px;
+  background:linear-gradient(135deg,#1c1e54 0%,#2e2b8c 62%,#4434d4 100%)}
+.hero h1{font-size:2.4rem;font-weight:800;letter-spacing:-.8px;margin-bottom:12px}
+.hero p{max-width:560px;margin:0 auto 26px;color:rgba(255,255,255,.88)}
 .hero .btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-.hero a{display:inline-block;background:var(--primary);color:#fff;text-decoration:none;font-weight:500;padding:13px 28px;border-radius:9999px}
-.hero a:hover{background:var(--primary-dark);text-decoration:none}
-.hero a.ghost{background:#fff;color:var(--primary);border:1px solid var(--hairline)}
+.hero a{display:inline-block;background:#ffd166;color:#1c1e54;text-decoration:none;font-weight:700;padding:13px 28px;border-radius:9999px}
+.hero a:hover{background:#ffc247;text-decoration:none}
+.hero a.ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.6)}
 .how{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:18px}
 .how .card{text-align:center;margin-top:0}
 .unit-group{margin-top:16px}
-.unit-head{background:var(--card);border:1px solid var(--hairline);border-radius:12px;box-shadow:var(--shadow);padding:13px 18px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-weight:500;color:var(--ink)}
+.unit-head{background:var(--card);border:1px solid var(--hairline);border-radius:12px;box-shadow:var(--shadow);padding:13px 18px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-weight:700;color:var(--brand-dark)}
 .unit-body{display:none;padding:6px 0 0}
 .unit-group.open .unit-body{display:block}
 .lesson-link{display:flex;justify-content:space-between;align-items:center;background:var(--card);border:1px solid var(--hairline);border-radius:10px;padding:11px 16px;margin-top:6px;text-decoration:none;color:var(--ink)}
