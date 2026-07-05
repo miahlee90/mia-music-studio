@@ -171,39 +171,7 @@ LESSON_CONTENT[6]={
           });
           ask();
         } } },
-    /* Step 5 — build four beats (Activity 5) */
-    { say:"Now COMPOSE! A 4/4 measure holds exactly <b>4 beats</b>. Fill it with any mix of Whole (4), Half (2), and Quarter (1) notes. \u{1F447} <b>Build TWO different measures:</b>",
-      try:{ type:"custom",
-        hint:"Whole = 4, Half = 2, Quarter = 1. The beats must add up to exactly 4 — no more, no less.",
-        mount:(container,fb)=>{
-          const BEATS={w:4,h:2,q:1};
-          let cur=[],sum=0,found=[];
-          container.innerHTML=`<div class="bf-staff"></div>
-            <div class="big-q bf-q" style="text-align:center"></div>
-            <div class="choices bf-ch"><button data-v="w">Whole (4)</button><button data-v="h">Half (2)</button><button data-v="q">Quarter (1)</button><button class="ghost" data-v="x">↺ Clear</button></div>`;
-          const st=container.querySelector(".bf-staff"), q=container.querySelector(".bf-q");
-          function draw(){
-            Staff.render(st,{clef:"treble",time:"4/4",notes:[...cur.map(d=>({p:"B4",d})),{bar:"final"}],width:320});
-            q.textContent=`Beats: ${sum} of 4 · Measures built: ${found.length} of 2`;
-          }
-          [...container.querySelectorAll(".bf-ch button")].forEach(b=>b.onclick=()=>{
-            const v=b.dataset.v;
-            if(v==="x"){ cur=[];sum=0;draw(); return; }
-            if(sum+BEATS[v]>4){ fb(false,`That would make ${sum+BEATS[v]} beats — too many for one measure! Clear or choose smaller.`); return; }
-            cur.push(v); sum+=BEATS[v]; MFAudio.tone(71,BEATS[v]*.4); draw();
-            if(sum===4){
-              const key=cur.slice().sort().join("");
-              if(found.includes(key)){ fb(false,"You already built that combination — clear and invent a DIFFERENT one!"); cur=[];sum=0; setTimeout(draw,900); return; }
-              found.push(key);
-              let t=0; cur.forEach(d=>{ MFAudio.tone(71,BEATS[d]*.45,t); t+=BEATS[d]*.5; });
-              if(found.length>=2){ container.querySelector(".bf-ch").style.display="none"; q.textContent="Two measures composed!";
-                fb(true,"✓ You just wrote rhythm! Any mix works as long as it totals exactly 4 beats."); }
-              else { fb(true,"✓ Exactly 4 beats — listen to it! Now clear happens automatically… build a DIFFERENT one."); cur=[];sum=0; setTimeout(draw,1200); }
-            }
-          });
-          draw();
-        } } },
-    /* Step 6 — read a real rhythm */
+    /* Step 5 (was 6) — read a real rhythm; the build-4-beats composer step was REMOVED at instructor request (Session 15f) — the Four-Beat Builder GAME still covers it */
     { say:"Let's put it together and READ a two-measure rhythm. Follow the highlight and count out loud: <b>1-2, 3, 4 | 1-2-3-4</b>. \u{1F447}",
       try:{ type:"custom",
         hint:"Half = hold for 2 counts, quarters = 1 each, whole = all 4.",
