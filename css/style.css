@@ -293,3 +293,4 @@ hr.sep{border:none;border-top:1px solid var(--hairline);margin:20px 0}
    line when short), width follows content, centered text */
 .choices{flex-direction:row;flex-wrap:wrap;justify-content:center;gap:8px}
 .choices button{flex:0 1 auto;text-align:center;min-width:96px;max-width:100%}
+.mf-staff .clef-stroke{fill:none;stroke:#33415c;stroke-width:2.6;stroke-linecap:round}

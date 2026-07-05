@@ -50,7 +50,7 @@ LESSON_CONTENT[2]={
           const stage=container.querySelector(".tc-stage");
           Staff.render(stage,{clef:"treble",notes:[],width:400});
           const svg=stage.querySelector("svg");
-          const real=[...svg.querySelectorAll(".clef,.clef-path,.clefdot")];
+          const real=[...svg.querySelectorAll(".clef,.clef-path,.clefdot,.clef-stroke")];
           real.forEach(el=>{ el.style.opacity=0; el.style.transition="opacity .9s"; });
           const NS="http://www.w3.org/2000/svg";
           /* 6 strokes, wikiHow order; each starts exactly where the last ended */

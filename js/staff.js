@@ -9,6 +9,9 @@
    v4.2 (instructor fix): a bar item that is the LAST item in notes[] is drawn
    at the RIGHT EDGE of the staff (like engraved music), not at the spread position
    v4.3 (instructor fix): a SINGLE note/rest is centered in the staff area
+   v4.4 (instructor rule, DD-24): treble clef drawn as SVG STROKE PATHS (no font
+   glyph): spiral wraps the G line; the curve crosses the straight stem at the
+   D line (4th line); same stroke geometry as the L2 pencil animation.
    NOTE (maintenance): edit by FULL-FILE REWRITE only. */
 const MFAudio=(()=>{
   let ctx=null;
@@ -60,7 +63,18 @@ const Staff=(()=>{
       const y=y0+(4-s)*GAP+GAP/2;
       parts.push(`<rect class="clickspace" data-space="${s}" data-staff="${clef}" x="${LEFT}" y="${y-6}" width="${W-20}" height="12"/>`);
     }
-    if(clef==="treble") parts.push(`<text class="clef" x="${LEFT+4}" y="${y0+3.6*GAP}" font-size="${GAP*4.4}">\u{1D11E}</text>`);
+    if(clef==="treble"){
+      /* DD-24: stroke-drawn G clef (ported from the instructor-approved L2 animation).
+         Stem from above the staff to below; hook comes down and CROSSES the stem at
+         the D line (y0+GAP); loop sweeps left and wraps the G line; spiral ends over G. */
+      const g=y0; /* top line */
+      [`M 34 ${g-22} L 34 ${g+70}`,
+       `M 34 ${g-22} C 44 ${g-17} 45 ${g} 38 ${g+10} C 36 ${g+13} 35 ${g+14} 34 ${g+15}`,
+       `M 34 ${g+15} C 22.4 ${g+15} 13 ${g+25} 13 ${g+37.5} C 13 ${g+50} 22.4 ${g+60} 34 ${g+60}`,
+       `M 34 ${g+60} C 44 ${g+60} 47 ${g+48} 41 ${g+38} C 37 ${g+31} 29 ${g+29} 25 ${g+36} C 22 ${g+41} 25 ${g+47} 30 ${g+48}`,
+       `M 34 ${g+70} C 35 ${g+77} 25 ${g+80} 21 ${g+74} C 18 ${g+69} 24 ${g+66} 27 ${g+69}`
+      ].forEach(d=>parts.push(`<path class="clef-stroke" d="${d}"/>`));
+    }
     if(clef==="bass"){
       /* engraved-style bass clef: filled swelling curve + head blob on line 4 (F),
          two dots in the top two spaces (straddling the F line), like printed music */
