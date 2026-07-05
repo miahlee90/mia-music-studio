@@ -288,3 +288,8 @@ hr.sep{border:none;border-top:1px solid var(--hairline);margin:20px 0}
 .mf-staff .barline.thick{stroke-width:5}
 .mf-staff .clickbar{fill:transparent;cursor:pointer}
 .mf-staff .clickbar:hover{fill:rgba(83,58,253,.08)}
+
+/* v4.3 (instructor, DD-22 cont.): compact answer buttons — wrap in rows (4 fit on one
+   line when short), width follows content, centered text */
+.choices{flex-direction:row;flex-wrap:wrap;justify-content:center;gap:8px}
+.choices button{flex:0 1 auto;text-align:center;min-width:96px;max-width:100%}

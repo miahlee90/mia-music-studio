@@ -75,26 +75,26 @@ LESSON_CONTENT[6]={
   ],
   steps:[
     /* Step 1 — the three note values: listen & compare (Activity 1) */
-    { say:"One quick note before we begin: in this lesson we count note values using <b>4/4 time</b> — the most common counting system in music (you’ll officially meet the time signature in Lesson 8). In 4/4: <b>Whole = 4 · Half = 2 · Quarter = 1</b>. Later you’ll discover that different time signatures can change how we count!<br><br>Meet today's three notes. The <b>Whole Note</b> is a hollow oval with no stem — it lasts <b>4 beats</b>. The <b>Half Note</b> adds a stem — <b>2 beats</b>. The <b>Quarter Note</b> fills in the head — <b>1 beat</b>. \u{1F447} <b>Click each one and HEAR how long it lasts:</b>",
+    { say:"One quick note before we begin: in this lesson we count note values using <b>4/4 time</b> — the most common counting system in music (you’ll officially meet the time signature in Lesson 8). In 4/4: <b>1 Whole note = 2 Half notes = 4 Quarter notes</b>. Later you’ll discover that different time signatures can change how we count!<br><br>Meet today's three notes. The <b>Whole Note</b> is a hollow oval with no stem — the LONGEST sound. Cut it in half and you get the <b>Half Note</b> (a stem appears). Cut again and you get the <b>Quarter Note</b> (the head fills in). <b>1 Whole = 2 Halves = 4 Quarters!</b> \u{1F447} <b>Click each one and HEAR how long it lasts:</b>",
       try:{ type:"custom",
         hint:"Hollow + no stem = longest. Filled + stem = shortest.",
         mount:(container,fb)=>{
-          const items=[{d:"w",name:"Whole Note",beats:4},{d:"h",name:"Half Note",beats:2},{d:"q",name:"Quarter Note",beats:1}];
+          const items=[{d:"w",name:"Whole Note",beats:4,rel:"= 2 Half Notes = 4 Quarter Notes",relSay:"the longest — as long as 2 halves or 4 quarters"},{d:"h",name:"Half Note",beats:2,rel:"= 2 Quarter Notes (half of a Whole)",relSay:"half as long as a Whole"},{d:"q",name:"Quarter Note",beats:1,rel:"a quarter of a Whole",relSay:"a quarter of a Whole — the shortest of the three"}];
           const heard=new Set();
           container.innerHTML=`<div class="vocab lc-row"></div>`;
           const row=container.querySelector(".lc-row");
           items.forEach(it=>{
             const card=document.createElement("div");
             card.className="flashcard"; card.style.cursor="pointer"; card.style.textAlign="center";
-            card.innerHTML=`<div class="fc-title">${it.name}</div><div class="lc-staff"></div><div style="font-weight:800;color:var(--primary)">${it.beats} beat${it.beats>1?"s":""}</div>`;
+            card.innerHTML=`<div class="fc-title">${it.name}</div><div class="lc-staff"></div><div style="font-weight:800;color:var(--primary)">${it.rel}</div>`;
             Staff.render(card.querySelector(".lc-staff"),{clef:"treble",notes:[{p:"B4",d:it.d}],width:170});
             card.onclick=()=>{
               const spb=60/80;
               for(let k=0;k<it.beats;k++) MFAudio.click(k*spb,.4,k===0);
               MFAudio.tone(71,it.beats*spb*0.95,0);
               heard.add(it.d);
-              if(heard.size===3) fb(true,"✓ You heard all three — the whole note rings on and on, the quarter is just one tick. Same pitch, different DURATION!");
-              else fb(true,`✓ ${it.name}: ${it.beats} beat${it.beats>1?"s":""} of sound. ${3-heard.size} more to hear…`);
+              if(heard.size===3) fb(true,"✓ You heard all three — 1 Whole = 2 Halves = 4 Quarters. Same pitch, different DURATION!");
+              else fb(true,`✓ ${it.name}: ${it.relSay}. ${3-heard.size} more to hear…`);
             };
             row.appendChild(card);
           });
