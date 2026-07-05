@@ -68,7 +68,7 @@ function MF_L7_barSpots(container,fb){
 LESSON_CONTENT[7]={
   welcome:"Lesson 7! Today we tidy up the music. \u{1F4E6}",
   hook:{
-    say:"Have you ever tried reading a book with no spaces or punctuation? Itwouldbeverydifficult! Music has the same problem — so musicians divide it into small sections. \u{1F447} <b>Which staff is easier to read?</b>",
+    say:"For today's lesson, we'll keep counting in <b>4/4 Time</b>.<br>That means every measure has <b>4 beats</b>.<br>Your job today is to discover where the <b>bar lines</b> belong so the music is organized into easy-to-read measures.<br>Next lesson, you'll learn why every measure has 4 beats!<br><br>Have you ever tried reading a book with no spaces or punctuation? It would be very difficult! Music has the same problem, so musicians divide it into small sections called <b>measures</b>. \u{1F447} <b>Which staff is easier to read?</b>",
     interact:{ type:"custom",
       mount:(container,fb)=>{
         container.innerHTML=`<p style="text-align:center;font-weight:700">A</p><div class="hk-a"></div>
