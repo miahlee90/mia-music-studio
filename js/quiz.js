@@ -1,6 +1,8 @@
-/* Music Fundamentals — quiz engine (DD-07, DD-19 hybrid generators, DD-20 completion codes) v3
+/* Music Fundamentals — quiz engine (DD-07, DD-19 hybrid generators, DD-20 completion codes) v4
    v2: wrong-answer review list, explicit percentage, drill supports fixed questions.
    v3 (Milestone 2): "line-space" generator supports params:{clef:"bass"}.
+   v4 (Milestone 3): adds "note-value" (identify whole/half/quarter or its beats)
+   and "rhythm-count" (count the total beats of a short rhythm) generators.
    NOTE (maintenance): edit by FULL-FILE REWRITE only. */
 const Quiz=(()=>{
   const SALT="MF-MIA-2026";
@@ -11,6 +13,8 @@ const Quiz=(()=>{
                  bass:["G2","A2","B2","C3","D3","E3","F3","G3","A3"] };
   const LS_POS={ treble:{lines:["E4","G4","B4","D5","F5"], spaces:["F4","A4","C5","E5"]},
                  bass:  {lines:["G2","B2","D3","F3","A3"], spaces:["A2","C3","E3","G3"]} };
+  const VAL_NAME={w:"Whole Note",h:"Half Note",q:"Quarter Note"};
+  const VAL_BEATS={w:4,h:2,q:1};
   const generators={
     "note-name": p=>{
       const pool=p.pool||RANGES[p.clef||"treble"];
@@ -51,6 +55,43 @@ const Quiz=(()=>{
         choices:["Higher","Lower"], answer:b>a?0:1,
         explain:"Higher pitches sound brighter and thinner; lower ones deeper and warmer.",
         hint:"Hum both sounds — your voice moves the same direction as the pitch." };
+    },
+    /* v4 — identify a note value by sight (params:{values:["w","h","q"], ask:"name"|"beats"}) */
+    "note-value": p=>{
+      const values=(p&&p.values)||["w","h","q"];
+      const v=pick(values), askBeats=(p&&p.ask)==="beats"||((!p||!p.ask)&&Math.random()<.5);
+      const pitch=pick(["G4","B4","D5","F4","A4","E4","C5"]);
+      let choices,correct,q;
+      if(askBeats){
+        q="How many beats does this note receive?";
+        choices=shuffle(["1 beat","2 beats","4 beats"]);
+        correct=VAL_BEATS[v]+" beat"+(VAL_BEATS[v]>1?"s":"");
+      } else {
+        q="What kind of note is this?";
+        choices=shuffle(["Whole Note","Half Note","Quarter Note"]);
+        correct=VAL_NAME[v];
+      }
+      return { type:"mc", q,
+        staff:{clef:"treble",notes:[{p:pitch,d:v}],width:240},
+        choices, answer:choices.indexOf(correct),
+        explain:`It's a ${VAL_NAME[v]} — ${v==="w"?"hollow head with NO stem":v==="h"?"hollow head WITH a stem":"filled head with a stem"} — worth ${VAL_BEATS[v]} beat${VAL_BEATS[v]>1?"s":""}.`,
+        hint:"Check two things: is the head hollow or filled? Does it have a stem?" };
+    },
+    /* v4 — count the total beats of a short rhythm (params:{maxNotes:3, values:["w","h","q"]}) */
+    "rhythm-count": p=>{
+      const values=(p&&p.values)||["h","q"];
+      const maxNotes=(p&&p.maxNotes)||3;
+      const n=1+Math.floor(Math.random()*maxNotes);
+      const pat=[]; for(let i=0;i<n;i++) pat.push(pick(values));
+      const total=pat.reduce((s,d)=>s+VAL_BEATS[d],0);
+      const wrongs=new Set();
+      [total-2,total-1,total+1,total+2].forEach(x=>{ if(x>=1&&x!==total) wrongs.add(x); });
+      const choices=shuffle([String(total),...shuffle([...wrongs]).slice(0,3).map(String)]);
+      return { type:"mc", q:"Count the beats: how many beats do these notes add up to?",
+        staff:{clef:"treble",notes:pat.map(d=>({p:"B4",d})),width:260},
+        choices, answer:choices.indexOf(String(total)),
+        explain:`${pat.map(d=>VAL_NAME[d]+" ("+VAL_BEATS[d]+")").join(" + ")} = ${total} beat${total>1?"s":""}.`,
+        hint:"Whole = 4, Half = 2, Quarter = 1 — add them one note at a time." };
     }
   };
   function expand(quizArr){

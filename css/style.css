@@ -278,3 +278,11 @@ hr.sep{border:none;border-top:1px solid var(--hairline);margin:20px 0}
 .lesson-link:hover{transform:translateY(-1px);box-shadow:var(--shadow-2)}
 .choices.chips button:hover{transform:translateY(-1px)}
 .badge-card{box-shadow:0 6px 18px rgba(232,163,61,.25)}
+
+/* ===== v4 (Milestone 3): rhythm notation — rests, time signatures, bar lines ===== */
+.mf-staff .rest{fill:var(--primary-dark)}
+.mf-staff .rest.hl{fill:var(--accent)}
+.mf-staff .rest.clickable{cursor:pointer}
+.mf-staff text.tsig{fill:#33415c;font-weight:800;font-family:Georgia,'Times New Roman',serif}
+.mf-staff .barline{stroke:#33415c;stroke-width:1.6}
+.mf-staff .barline.thick{stroke-width:5}

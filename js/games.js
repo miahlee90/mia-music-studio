@@ -2,6 +2,9 @@
    v3 (Milestone 2, Session 13): adds note-race, alphabet-order, memory-match,
    clef-note, find-c, ledger-count, high-low-staff, pattern-fill;
    line-space now supports {clef:"bass"}; exposes Games.has(type) for validation.
+   v4 (Milestone 3, Session 15): adds value-race (note value ↔ beats),
+   rhythm-tap (tap a rhythm in time, Web Audio timing), measure-build
+   (fill a measure with exactly N beats; find every combination).
    NOTE (maintenance): edit by FULL-FILE REWRITE only. */
 const Games=(()=>{
   const LETTERS=["A","B","C","D","E","F","G"];
@@ -13,6 +16,8 @@ const Games=(()=>{
     LETTERS.forEach(l=>{ const b=document.createElement("button"); b.textContent=l; b.onclick=()=>onPick(l); row.appendChild(b); });
     parent.appendChild(row); return row;
   }
+  const VAL_NAME={w:"Whole Note",h:"Half Note",q:"Quarter Note"};
+  const VAL_BEATS={w:4,h:2,q:1};
   const registry={
 
     /* Higher or Lower? — ear training. spec:{rounds:5} */
@@ -490,6 +495,206 @@ const Games=(()=>{
         setTimeout(ask, ok?700:1800);
       }
       $(".gstart").onclick=function(){ this.style.display="none"; round=0;score=0; ask(); };
+    },
+
+    /* ===== v4 (Milestone 3): rhythm games ===== */
+
+    /* Note Value Flash — a note appears, answer its name or beat count.
+       spec:{rounds:10, seconds:0, ask:"beats"|"name", values:["w","h","q"]} */
+    "value-race":(el,spec,onFinish)=>{
+      const rounds=spec.rounds||10, secs=spec.seconds||0;
+      const values=spec.values||["w","h","q"], ask=spec.ask||"beats";
+      const PITCHES=["G4","B4","D5","F4","A4","E4","C5"];
+      el.innerHTML=`<div class="game-arena">
+        <button class="play gstart">▶ ${secs?`Start the ${secs}-second challenge`:"Start"}</button>
+        <div class="big-q gq"></div><div class="gstaff"></div>
+        <div class="gbtns gvals" style="display:none"></div>
+        <div class="streak gs"></div></div>`;
+      const $=s=>el.querySelector(s);
+      const btnRow=$(".gvals");
+      const opts=ask==="beats"?[["1 beat","q"],["2 beats","h"],["4 beats","w"]]
+                              :[["Whole","w"],["Half","h"],["Quarter","q"]];
+      opts.forEach(([label,v])=>{ const b=document.createElement("button"); b.textContent=label;
+        b.onclick=()=>ans(v); btnRow.appendChild(b); });
+      let cur=null,score=0,asked=0,streak=0,left=secs,tick=null,running=false,waiting=false;
+      function ask2(){
+        if(!running) return;
+        if(!secs&&asked>=rounds){ end(); return; }
+        let nxt=pick(values); if(cur&&values.length>1){ let g=0; while(nxt===cur.v&&g++<6) nxt=pick(values); }
+        cur={v:nxt,p:pick(PITCHES)}; waiting=false;
+        Staff.render($(".gstaff"),{clef:"treble",notes:[{p:cur.p,d:cur.v}],width:240});
+        $(".gq").textContent=secs?(ask==="beats"?"How many beats?":"What kind of note?")
+          :`Note ${asked+1} of ${rounds}: ${ask==="beats"?"how many beats does it get?":"what kind of note is this?"}`;
+        btnRow.style.display="block";
+      }
+      function ans(v){
+        if(!running||waiting) return;
+        waiting=true; asked++;
+        const ok=v===cur.v;
+        MFAudio.tone(MFAudio.midi(cur.p), VAL_BEATS[cur.v]*0.45);
+        if(ok){ score++; streak++; $(".gq").textContent=`✓ Yes — ${VAL_NAME[cur.v]}, ${VAL_BEATS[cur.v]} beat${VAL_BEATS[cur.v]>1?"s":""}!`; }
+        else { streak=0; $(".gq").textContent=`✗ It's a ${VAL_NAME[cur.v]} — ${VAL_BEATS[cur.v]} beat${VAL_BEATS[cur.v]>1?"s":""}. ${cur.v==="w"?"No stem, hollow head.":cur.v==="h"?"Hollow head WITH a stem.":"Filled head with a stem."}`; }
+        $(".gs").textContent=(secs?`⏱ ${left}s · `:"")+`Score: ${score} · Streak: ${streak}`;
+        setTimeout(ask2, ok?600:1700);
+      }
+      function end(){
+        running=false; clearInterval(tick); btnRow.style.display="none"; $(".gstaff").innerHTML="";
+        $(".gq").innerHTML=secs?`⏰ Time! You identified <b>${score}</b> note values 🎉`:`Done! <b>${score}</b> of ${rounds} 🎉`;
+        $(".gstart").style.display="inline-block"; $(".gstart").textContent="▶ Play again";
+        if(onFinish)onFinish(score,secs||rounds);
+      }
+      $(".gstart").onclick=function(){
+        this.style.display="none"; score=0;asked=0;streak=0;left=secs;running=true;
+        $(".gs").textContent=secs?`⏱ ${left}s`:"";
+        if(secs){ clearInterval(tick); tick=setInterval(()=>{ left--;
+          $(".gs").textContent=`⏱ ${left}s · Score: ${score} · Streak: ${streak}`;
+          if(left<=0) end(); },1000); }
+        ask2();
+      };
+    },
+
+    /* Rhythm Tap — hear the pattern, then tap it in time (Web Audio timing).
+       spec:{tempo:80, rounds:3, patterns:[["q","q","h"],["h","h"],["w"],["q","q","q","q"]]} */
+    "rhythm-tap":(el,spec,onFinish)=>{
+      const tempo=spec.tempo||80, spb=60/tempo;
+      const patterns=spec.patterns||[["q","q","h"],["h","h"],["w"],["q","q","q","q"],["h","q","q"]];
+      const rounds=Math.min(spec.rounds||3,patterns.length);
+      const tol=Math.min(0.4, spb*0.45);
+      el.innerHTML=`<div class="game-arena">
+        <button class="play gstart">▶ Start</button>
+        <div class="big-q gq"></div><div class="gstaff"></div>
+        <div style="text-align:center"><button class="play gtap" style="display:none;min-width:220px;padding:22px 30px;font-size:1.3rem">👏 TAP</button></div>
+        <div class="streak gs"></div></div>`;
+      const $=s=>el.querySelector(s);
+      let order=[],round=0,hits=0,total=0,taps=[],tapOn=false,t0=0,timers=[];
+      function clearTimers(){ timers.forEach(clearTimeout); timers=[]; }
+      function later(fn,ms){ timers.push(setTimeout(fn,ms)); }
+      function beatsOf(pat){ let b=0; return pat.map(d=>{const at=b; b+=Staff.BEATS[d]; return at;}); }
+      function showPattern(pat,label){
+        Staff.render($(".gstaff"),{clef:"treble",time:"4/4",
+          notes:[...pat.map(d=>({p:"B4",d})),{bar:"final"}],width:340});
+        if(label) $(".gq").textContent=label;
+      }
+      function playRound(){
+        if(round>=rounds){ end(); return; }
+        const pat=order[round];
+        const onsets=beatsOf(pat);
+        showPattern(pat,`Round ${round+1} of ${rounds} — listen first…`);
+        $(".gtap").style.display="none";
+        /* 4 count-in clicks, then the pattern with tones */
+        MFAudio.ac(); /* wake audio */
+        for(let i=0;i<4;i++) MFAudio.click(i*spb,.5,i===0);
+        pat.forEach((d,i)=>MFAudio.tone(59+12, Staff.BEATS[d]*spb*0.9, (4+onsets[i])*spb)); /* B4=71 */
+        const listenEnd=(8)*spb*1000;
+        later(()=>{
+          $(".gq").textContent="Your turn! Count-in… then TAP the rhythm!";
+          for(let i=0;i<4;i++) MFAudio.click(i*spb,.5,i===0);
+          for(let i=0;i<4;i++) MFAudio.click((4+i)*spb,.25); /* soft beat during tapping */
+          t0=performance.now()+ (0) ;
+          taps=[];
+          later(()=>{ $(".gtap").style.display="inline-block"; tapOn=true; }, Math.max(0, 4*spb*1000-600));
+          later(()=>grade(pat,onsets), (8*spb+0.7)*1000);
+        }, listenEnd+400);
+      }
+      function grade(pat,onsets){
+        tapOn=false; $(".gtap").style.display="none";
+        const expected=onsets.map(b=>(4+b)*spb*1000);
+        const used=new Set(); let ok=0;
+        expected.forEach(t=>{
+          let best=-1,bd=1e9;
+          taps.forEach((tp,i)=>{ if(used.has(i))return; const d=Math.abs(tp-t); if(d<bd){bd=d;best=i;} });
+          if(best>=0&&bd<=tol*1000){ used.add(best); ok++; }
+        });
+        const extra=taps.length-used.size;
+        hits+=ok; total+=pat.length;
+        const perfect=ok===pat.length&&extra===0;
+        $(".gq").innerHTML=perfect?`🎉 Perfect rhythm! ${ok} of ${pat.length} taps right on time!`
+          :`You landed <b>${ok}</b> of ${pat.length} taps${extra>0?` (${extra} extra)`:""} — ${ok>=pat.length-1?"so close!":"listen again and feel the steady beat!"}`;
+        round++;
+        later(playRound, 2200);
+      }
+      function end(){
+        $(".gq").innerHTML=`Done! You tapped <b>${hits}</b> of ${total} notes in time 🎉`;
+        $(".gstaff").innerHTML=""; $(".gtap").style.display="none";
+        $(".gstart").style.display="inline-block"; $(".gstart").textContent="▶ Play again";
+        if(onFinish)onFinish(hits,total);
+      }
+      $(".gtap").onclick=()=>{ if(!tapOn)return; taps.push(performance.now()-t0); MFAudio.click(0,.35); };
+      $(".gstart").onclick=function(){
+        this.style.display="none"; clearTimers();
+        order=shuffle(patterns).slice(0,rounds); round=0;hits=0;total=0;
+        $(".gs").textContent="";
+        playRound();
+      };
+    },
+
+    /* Measure Builder — fill a measure with exactly N beats; find every combination.
+       spec:{beats:4, rounds:4, unique:true} */
+    "measure-build":(el,spec,onFinish)=>{
+      const target=spec.beats||4;
+      const unique=spec.unique!==false;
+      const combosFor=t=>{ /* multisets of w/h/q summing to t (w only if t=4) */
+        const out=[]; const w=t===4?1:0;
+        if(w) out.push("w");
+        for(let h=Math.floor(t/2);h>=0;h--){ const q=t-2*h; if(q>=0&&(h||q)) out.push("h".repeat(h)+"q".repeat(q)); }
+        return [...new Set(out)];
+      };
+      const all=combosFor(target);
+      const rounds=unique? Math.min(spec.rounds||all.length, all.length) : (spec.rounds||4);
+      el.innerHTML=`<div class="game-arena">
+        <button class="play gstart">▶ Start</button>
+        <div class="big-q gq"></div><div class="gstaff"></div>
+        <div class="gbtns gvals" style="display:none">
+          <button data-v="w">Whole (4)</button><button data-v="h">Half (2)</button><button data-v="q">Quarter (1)</button>
+          <button class="ghost" data-v="reset">↺ Clear</button></div>
+        <div class="streak gs"></div></div>`;
+      const $=s=>el.querySelector(s);
+      let cur=[],sum=0,found=[],mistakes=0,running=false;
+      function draw(){
+        Staff.render($(".gstaff"),{clef:"treble",time:target+"/4",
+          notes:[...cur.map(d=>({p:"B4",d})),{bar:"final"}],width:340});
+        $(".gs").textContent=`Beats so far: ${sum} of ${target}`+(unique?` · Found: ${found.length} of ${rounds}`:"");
+      }
+      function add(v){
+        if(!running) return;
+        if(v==="reset"){ cur=[];sum=0;draw(); return; }
+        const b=VAL_BEATS[v];
+        if(sum+b>target){ mistakes++; MFAudio.tone(40,.25);
+          $(".gq").textContent=`Too many! That would make ${sum+b} beats — a ${target}/4 measure holds exactly ${target}. Clear or pick a smaller value.`;
+          return; }
+        cur.push(v); sum+=b;
+        MFAudio.tone(71, b*0.4);
+        draw();
+        if(sum===target){
+          const key=cur.slice().sort().join("");
+          if(unique&&found.includes(key)){
+            $(".gq").textContent="That combination is already on your list — clear and find a NEW one!";
+            cur=[];sum=0; setTimeout(draw,900); return;
+          }
+          found.push(key);
+          /* play the finished measure */
+          let t=0; cur.forEach(d=>{ MFAudio.tone(71, VAL_BEATS[d]*0.5*0.9, t); t+=VAL_BEATS[d]*0.5; });
+          if(found.length>=rounds){
+            running=false;
+            const stars=mistakes===0?3:mistakes<=2?2:1;
+            $(".gq").innerHTML=`🎉 ${unique?`You found ${found.length} different ways to fill the measure!`:"Measure complete!"} ${"⭐".repeat(stars)}`;
+            $(".gvals").style.display="none";
+            $(".gstart").style.display="inline-block"; $(".gstart").textContent="▶ Play again";
+            if(onFinish)onFinish(stars,3);
+          } else {
+            $(".gq").textContent=`✓ Exactly ${target} beats! ${unique?"Now find a DIFFERENT combination…":"Next measure…"}`;
+            cur=[];sum=0; setTimeout(draw,1200);
+          }
+        }
+      }
+      [...el.querySelectorAll(".gvals button")].forEach(b=>b.onclick=()=>add(b.dataset.v));
+      $(".gstart").onclick=function(){
+        this.style.display="none"; cur=[];sum=0;found=[];mistakes=0;running=true;
+        $(".gvals").style.display="block";
+        $(".gq").textContent=unique?`Fill the measure with EXACTLY ${target} beats — then find every other way to do it!`
+          :`Fill the measure with exactly ${target} beats!`;
+        draw();
+      };
     }
   };
   function mount(el,opts){

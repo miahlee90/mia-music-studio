@@ -1,10 +1,17 @@
-/* Music Fundamentals — SVG staff renderer + shared Web Audio (original notation, DD-05) v3
+/* Music Fundamentals — SVG staff renderer + shared Web Audio (original notation, DD-05) v4
    v3 (Session 14, instructor review fixes):
    - svg renders at natural size, centered (no full-width stretching)
    - viewBox auto-expands so high/low ledger notes are never clipped
    - note labels always placed BELOW the lowest drawn element (no overlap)
    - bass clef drawn as inline SVG path (correct size; dots straddle line 4)
    - grand staff brace drawn as a proper filled curly brace
+   v4 (Milestone 3, Session 15): rhythm support for Unit 2 —
+   - rest glyphs: items {rest:"w"|"h"|"q"} render whole/half/quarter rests
+   - bar lines: items {bar:"single"|"double"|"final"} render measure lines
+   - time signatures: spec.time:"4/4" draws stacked numbers after the clef
+   - whole note drawn slightly wider (stemless, engraved look)
+   - play() supports spec.tempo (bpm): beat-accurate rhythm playback, rests = silence
+   - highlight() also highlights rests
    NOTE (maintenance): edit by FULL-FILE REWRITE only. */
 const MFAudio=(()=>{
   let ctx=null;
@@ -18,18 +25,28 @@ const MFAudio=(()=>{
     g.gain.exponentialRampToValueAtTime(.001,t+dur);
     o.start(t);o2.start(t);o.stop(t+dur+.05);o2.stop(t+dur+.05);
   }
+  function click(when=0,vol=0.5,hi=false){ /* metronome tick (for rhythm games) */
+    const c=ac(),t=c.currentTime+when;
+    const o=c.createOscillator(),g=c.createGain();
+    o.type="square";o.frequency.value=hi?1568:1047;
+    o.connect(g);g.connect(c.destination);
+    g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(vol*.6,t+.005);
+    g.gain.exponentialRampToValueAtTime(.001,t+.07);
+    o.start(t);o.stop(t+.1);
+  }
   function chord(midis,dur=1,when=0){ midis.forEach(m=>tone(m,dur,when,.35)); }
   const P2M={C:0,D:2,E:4,F:5,G:7,A:9,B:11};
   function midi(p){ /* "C4", "F#3", "Bb4" */
     const m=p.match(/^([A-G])([#b]?)(\d)$/); if(!m) return 60;
     return 12*(+m[3]+1)+P2M[m[1]]+(m[2]==="#"?1:m[2]==="b"?-1:0);
   }
-  return {tone,chord,midi,ac};
+  return {tone,click,chord,midi,ac};
 })();
 
 const Staff=(()=>{
   const GAP=15, TOP=20, LEFT=10;
   const LETTERS=["C","D","E","F","G","A","B"];
+  const BEATS={w:4,h:2,q:1,"8":0.5};
   function dia(p){ const m=p.match(/^([A-G])[#b]?(\d)$/); return (+m[2])*7+LETTERS.indexOf(m[1]); }
   /* diatonic index of bottom line: treble E4=30, bass G2=18 */
   function baseIdx(clef){ return clef==="bass"?18:30; }
@@ -55,11 +72,23 @@ const Staff=(()=>{
       parts.push(`<circle class="clefdot" cx="${LEFT+31}" cy="${y0+GAP*0.5}" r="3.1"/>`);
       parts.push(`<circle class="clefdot" cx="${LEFT+31}" cy="${y0+GAP*1.5}" r="3.1"/>`);
     }
+    if(opts._time) drawTime(parts,y0,opts._time);
+  }
+  function parseTime(t){
+    if(!t) return null;
+    if(typeof t==="object") return t;
+    const m=String(t).match(/^(\d+)\s*\/\s*(\d+)$/); return m?{top:+m[1],bottom:+m[2]}:null;
+  }
+  function drawTime(parts,y0,ts){
+    const x=LEFT+52, fs=GAP*2.35;
+    parts.push(`<text class="tsig" x="${x}" y="${y0+2*GAP-1.5}" font-size="${fs}" text-anchor="middle">${ts.top}</text>`);
+    parts.push(`<text class="tsig" x="${x}" y="${y0+4*GAP-1.5}" font-size="${fs}" text-anchor="middle">${ts.bottom}</text>`);
   }
 
   function noteSVG(x,y,d,extra,y0){
     const s=durShape(d), cls="note"+(s.hollow?" hollow":"")+(extra||"");
-    let out=`<ellipse class="${cls}" cx="${x}" cy="${y}" rx="9" ry="6.5"/>`;
+    const rx=(d==="w")?10.5:9;
+    let out=`<ellipse class="${cls}" cx="${x}" cy="${y}" rx="${rx}" ry="6.5"/>`;
     if(s.stem){
       const up = y > y0+2*GAP;
       out+= up? `<line class="stem" x1="${x+8.4}" y1="${y-2}" x2="${x+8.4}" y2="${y-38}"/>`
@@ -69,6 +98,28 @@ const Staff=(()=>{
     }
     return out;
   }
+  function restSVG(x,y0,type,extra){
+    const cls="rest"+(extra||"");
+    if(type==="w") /* hangs below the 4th line (2nd from the top) */
+      return `<rect class="${cls}" x="${x-9}" y="${y0+GAP}" width="18" height="7"/>`;
+    if(type==="h") /* sits on the middle line */
+      return `<rect class="${cls}" x="${x-9}" y="${y0+2*GAP-7}" width="18" height="7"/>`;
+    /* quarter rest: filled zigzag with bottom hook */
+    return `<path class="${cls}" d="M ${x-4} ${y0+10}
+      C ${x+3} ${y0+16}, ${x+4} ${y0+19}, ${x-1} ${y0+25}
+      C ${x+5} ${y0+31}, ${x+6} ${y0+34}, ${x+3} ${y0+38}
+      C ${x-3} ${y0+36}, ${x-5} ${y0+40}, ${x+1} ${y0+47}
+      C ${x-7} ${y0+45}, ${x-8} ${y0+37}, ${x-1} ${y0+34}
+      L ${x-4} ${y0+30}
+      C ${x+1} ${y0+25}, ${x} ${y0+22}, ${x-6} ${y0+15} Z"/>`;
+  }
+  function barSVG(x,yTop,yBot,kind){
+    if(kind==="double")
+      return `<line class="barline" x1="${x-3}" y1="${yTop}" x2="${x-3}" y2="${yBot}"/><line class="barline" x1="${x+3}" y1="${yTop}" x2="${x+3}" y2="${yBot}"/>`;
+    if(kind==="final")
+      return `<line class="barline" x1="${x-5}" y1="${yTop}" x2="${x-5}" y2="${yBot}"/><line class="barline thick" x1="${x+2}" y1="${yTop}" x2="${x+2}" y2="${yBot}"/>`;
+    return `<line class="barline" x1="${x}" y1="${yTop}" x2="${x}" y2="${yBot}"/>`;
+  }
   function ledgersFor(p,clef,x,y0){
     const idx=dia(p)-baseIdx(clef); let out="";
     for(let i=-2;i>=idx;i-=2){ const y=y0+4*GAP-(i/2)*GAP; out+=`<line class="ledger" x1="${x-14}" y1="${y}" x2="${x+14}" y2="${y}"/>`; }
@@ -76,30 +127,43 @@ const Staff=(()=>{
     return out;
   }
 
-  /* spec: {clef:"treble"|"bass"|"grand", notes:[{p,d,clef?,label?}], width?, clickLines?, clickSpaces?, clickNotes?} */
+  /* spec: {clef:"treble"|"bass"|"grand", time:"4/4",
+            notes:[ {p,d,clef?,label?} | {rest:"w"|"h"|"q",label?,clef?} | {bar:"single"|"double"|"final"} ],
+            width?, tempo?, clickLines?, clickSpaces?, clickNotes?} */
   function render(el, spec){
     const W=spec.width||420;
     const grand=spec.clef==="grand";
+    const ts=parseTime(spec.time);
     const H0 = grand? 2*TOP+9*GAP+50 : 2*TOP+4*GAP+30;
     const y0t=TOP+10, y0b=grand? y0t+4*GAP+40 : y0t;
     const staffBottom=(grand? y0b:y0t)+4*GAP;
+    const opts=Object.assign({},spec,{_time:ts});
     const parts=[];
     if(grand){
-      drawOneStaff(parts,y0t,W,"treble",spec);
-      drawOneStaff(parts,y0b,W,"bass",spec);
+      drawOneStaff(parts,y0t,W,"treble",opts);
+      drawOneStaff(parts,y0b,W,"bass",opts);
       parts.push(`<line class="staffline" x1="${LEFT}" y1="${y0t}" x2="${LEFT}" y2="${y0b+4*GAP}"/>`);
       /* proper filled curly brace */
       const yT=y0t, yB=y0b+4*GAP, h=yB-yT, yM=(yT+yB)/2;
       parts.push(`<path class="brace" d="M 10 ${yT} C 2 ${yT+h*.18}, 7.5 ${yM-h*.20}, 1 ${yM} C 7.5 ${yM+h*.20}, 2 ${yB-h*.18}, 10 ${yB} C 5 ${yB-h*.16}, 9.8 ${yM+h*.22}, 4 ${yM} C 9.8 ${yM-h*.22}, 5 ${yT+h*.16}, 10 ${yT} Z"/>`);
-    } else drawOneStaff(parts,y0t,W,spec.clef||"treble",spec);
+    } else drawOneStaff(parts,y0t,W,spec.clef||"treble",opts);
 
-    /* compute note positions first so the viewBox can grow to fit them */
+    /* compute item positions first so the viewBox can grow to fit them */
+    const items=spec.notes||[];
+    const startX=(grand?70:80)+(ts?30:0);
     const placed=[];
     let minEl=0, maxEl=H0, maxNoteBottom=-Infinity, hasLabel=false;
-    (spec.notes||[]).forEach((n,i)=>{
+    items.forEach((n,i)=>{
       const clef = n.clef || (grand? "treble" : (spec.clef||"treble"));
       const y0 = clef==="bass"? y0b : y0t;
-      const x = n.x || (grand?70:80)+i*((W-120)/Math.max(1,(spec.notes.length-1)||1));
+      const x = n.x || startX+i*((W-40-startX)/Math.max(1,(items.length-1)||1));
+      if(n.bar){ placed.push({n,i,clef,y0,x,kind:"bar"}); return; }
+      if(n.rest){
+        minEl=Math.min(minEl,y0+4); maxEl=Math.max(maxEl,y0+54);
+        maxNoteBottom=Math.max(maxNoteBottom,y0+50);
+        if(n.label) hasLabel=true;
+        placed.push({n,i,clef,y0,x,kind:"rest"}); return;
+      }
       const y = yFor(n.p,clef,y0);
       const s = durShape(n.d);
       let top=y-8, bottom=y+8;
@@ -107,13 +171,22 @@ const Staff=(()=>{
       minEl=Math.min(minEl,top-6); maxEl=Math.max(maxEl,bottom+6);
       maxNoteBottom=Math.max(maxNoteBottom,bottom);
       if(n.label) hasLabel=true;
-      placed.push({n,i,clef,y0,x,y});
+      placed.push({n,i,clef,y0,x,y,kind:"note"});
     });
     const labelY = hasLabel? Math.max(staffBottom+22, maxNoteBottom+18) : 0;
     if(hasLabel) maxEl=Math.max(maxEl,labelY+6);
-    placed.forEach(({n,i,clef,y0,x,y})=>{
-      parts.push(ledgersFor(n.p,clef,x,y0));
-      parts.push(`<g class="notegroup" data-i="${i}" data-p="${n.p}">${noteSVG(x,y,n.d,(spec.clickNotes?" clickable":""),y0)}</g>`);
+    placed.forEach(({n,i,clef,y0,x,y,kind})=>{
+      if(kind==="bar"){
+        const yTop=grand? y0t : y0, yBot=grand? y0b+4*GAP : y0+4*GAP;
+        parts.push(barSVG(x,yTop,yBot,n.bar===true?"single":n.bar));
+        return;
+      }
+      if(kind==="rest"){
+        parts.push(`<g class="notegroup" data-i="${i}" data-rest="${n.rest}">${restSVG(x,y0,n.rest,(spec.clickNotes?" clickable":""))}</g>`);
+      } else {
+        parts.push(ledgersFor(n.p,clef,x,y0));
+        parts.push(`<g class="notegroup" data-i="${i}" data-p="${n.p}">${noteSVG(x,y,n.d,(spec.clickNotes?" clickable":""),y0)}</g>`);
+      }
       if(n.label){ const hw=Math.min(W/2-4, 4+String(n.label).length*3.4);
         const lx=Math.max(hw+4, Math.min(W-hw-4, x));
         parts.push(`<text class="lbl" x="${lx}" y="${labelY}" text-anchor="middle">${n.label}</text>`); }
@@ -125,24 +198,29 @@ const Staff=(()=>{
     const svg=el.querySelector("svg");
     if(spec.onLine) svg.querySelectorAll(".clickline").forEach(l=>l.addEventListener("click",()=>spec.onLine(+l.dataset.line,l.dataset.staff)));
     if(spec.onSpace) svg.querySelectorAll(".clickspace").forEach(s=>s.addEventListener("click",()=>spec.onSpace(+s.dataset.space,s.dataset.staff)));
-    if(spec.onNote) svg.querySelectorAll(".notegroup").forEach(g=>g.addEventListener("click",()=>spec.onNote(+g.dataset.i,g.dataset.p)));
+    if(spec.onNote) svg.querySelectorAll(".notegroup").forEach(g=>g.addEventListener("click",()=>spec.onNote(+g.dataset.i,g.dataset.p||null)));
     return {
       svg,
-      highlight(i){ svg.querySelectorAll(".notegroup .note").forEach(n=>n.classList.remove("hl"));
-        if(i!=null){ const g=svg.querySelector(`.notegroup[data-i="${i}"] .note`); if(g)g.classList.add("hl"); } }
+      highlight(i){ svg.querySelectorAll(".notegroup .note, .notegroup .rest").forEach(n=>n.classList.remove("hl"));
+        if(i!=null){ const g=svg.querySelector(`.notegroup[data-i="${i}"] .note, .notegroup[data-i="${i}"] .rest`); if(g)g.classList.add("hl"); } }
     };
   }
   const DURSEC={w:1.6,h:1.0,q:0.55,"8":0.3};
   function play(spec, api){
     let t=0;
+    const tempo=spec.tempo||0, spb=tempo?60/tempo:0;
     (spec.notes||[]).forEach((n,i)=>{
-      const dur=DURSEC[n.d||"q"];
-      MFAudio.tone(MFAudio.midi(n.p),Math.min(dur,1.2),t);
+      if(n.bar) return;
+      const d=n.d||n.rest||"q";
+      const dur=tempo? BEATS[d]*spb : DURSEC[d];
+      if(!n.rest){
+        MFAudio.tone(MFAudio.midi(n.p),tempo?Math.max(0.2,dur*0.92):Math.min(dur,1.2),t);
+      }
       if(api) setTimeout(()=>api.highlight(i), t*1000);
-      t+=dur+0.08;
+      t+=tempo? dur : dur+0.08;
     });
     if(api) setTimeout(()=>api.highlight(null), t*1000+200);
     return t;
   }
-  return {render,play,dia,yFor};
+  return {render,play,dia,yFor,BEATS};
 })();

@@ -98,5 +98,5 @@ const UNITS=[
  {unit:18, book:3, name:"Form", lessons:[72,75]}
 ];
 /* built lessons so far (index pages link only these) */
-const BUILT_THROUGH=5;
+const BUILT_THROUGH=6;
 const LESSON_CONTENT={}; /* filled by content/lesson-NN.js */
