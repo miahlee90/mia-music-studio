@@ -39,7 +39,7 @@ LESSON_CONTENT[10]={
   ],
   steps:[
     { say:"In <b>2/4 time</b>: the <b>2</b> means there are <b>2 beats per measure</b>; the <b>4</b> means the <b>quarter note receives 1 beat</b>. \u{1F447} <b>What does the bottom number 4 mean?</b>",
-      show:{ type:"staff", spec:{clef:"treble",time:"2/4",notes:[{p:"C4",d:"q",label:"1"},{p:"E4",d:"q",label:"2"},{bar:"single"},{p:"G4",d:"h",label:"1  2"},{bar:"final"}],width:400} },
+      show:{ type:"staff", spec:{clef:"treble",time:"2/4",notes:[{p:"C4",d:"q",label:"1"},{p:"E4",d:"q",label:"2"},{bar:"single"},{p:"G4",d:"h",label:"1-2"},{bar:"final"}],width:400} },
       try:{ type:"mc",
         choices:["The quarter note receives 1 beat","There are 4 beats per measure","Only 4 measures may be written"], answer:0,
         success:"✓ The bottom 4 assigns the beat to the quarter note — exactly as in 4/4.",
@@ -114,12 +114,28 @@ LESSON_CONTENT[10]={
             <div class="choices chips ic-ch"><button>A</button><button>B</button><button>C</button><button>D</button></div>`;
           const q=container.querySelector(".ic-q"), st=container.querySelector(".ic-staff"), ch=container.querySelector(".ic-ch");
           function ask(){
-            const cur=rounds[r], items=[];
+            const cur=rounds[r], items=[], spans=[];
             cur.items.forEach((meas,mi)=>{
-              meas.forEach((n,ni)=>items.push(Object.assign({},n,ni===0?{label:"ABCD"[mi]}:{})));
+              const s0=items.length;
+              meas.forEach(n=>items.push(Object.assign({},n)));
+              spans.push([s0,items.length-1]);
               items.push({bar:mi<cur.items.length-1?"single":"final"});
             });
             Staff.render(st,{clef:"treble",time:"2/4",notes:items,width:470});
+            const svg=st.querySelector("svg");
+            const startX=110, L=items.length;
+            const xAt=i2=> (items[i2]&&items[i2].bar!==undefined&&i2===L-1)? 470-16 : startX+i2*((470-40-startX)/(L-1));
+            let prev=startX-24;
+            const NS="http://www.w3.org/2000/svg";
+            spans.forEach(([s0,s1],mi)=>{
+              const nxt=xAt(s1+1);
+              const x=(prev+nxt)/2;
+              const tx=document.createElementNS(NS,"text");
+              tx.setAttribute("x",x);tx.setAttribute("y",127);tx.setAttribute("text-anchor","middle");
+              tx.setAttribute("class","lbl");tx.setAttribute("font-weight","800");tx.textContent="ABCD"[mi];
+              svg.appendChild(tx);
+              prev=nxt;
+            });
             q.textContent=`Line ${r+1} of ${rounds.length}: which measure has the INCORRECT number of beats?`;
           }
           [...ch.children].forEach((b,bi)=>b.onclick=()=>{
@@ -191,9 +207,9 @@ LESSON_CONTENT[10]={
   ],
   examples:[
     { caption:"A line in 2/4 — count “1 2 | 1 2” with the playback. The half note fills a complete measure.",
-      staff:{clef:"treble",tempo:92,time:"2/4",notes:[{p:"C4",d:"q",label:"1"},{p:"E4",d:"q",label:"2"},{bar:"single"},{p:"G4",d:"q",label:"1"},{p:"E4",d:"q",label:"2"},{bar:"single"},{p:"C4",d:"h",label:"1  2"},{bar:"final"}],width:440} },
+      staff:{clef:"treble",tempo:92,time:"2/4",notes:[{p:"C4",d:"q",label:"1"},{p:"E4",d:"q",label:"2"},{bar:"single"},{p:"G4",d:"q",label:"1"},{p:"E4",d:"q",label:"2"},{bar:"single"},{p:"C4",d:"h",label:"1-2"},{bar:"final"}],width:440} },
     { caption:"Rests in 2/4: the quarter rest takes 1 beat; a full measure of silence is written with the whole rest.",
-      staff:{clef:"treble",tempo:92,time:"2/4",notes:[{p:"D4",d:"q",label:"1"},{rest:"q",label:"2"},{bar:"single"},{rest:"w",label:"1  2"},{bar:"single"},{p:"D4",d:"h",label:"1  2"},{bar:"final"}],width:440} }
+      staff:{clef:"treble",tempo:92,time:"2/4",notes:[{p:"D4",d:"q",label:"1"},{rest:"q",label:"2"},{bar:"single"},{rest:"w",label:"1-2"},{bar:"single"},{p:"D4",d:"h",label:"1-2"},{bar:"final"}],width:440} }
   ],
   games:[
     { type:"rhythm-tap", title:"Game 1 · 2/4 Rhythm Tap",

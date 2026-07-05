@@ -39,19 +39,12 @@ LESSON_CONTENT[11]={
   ],
   steps:[
     { say:"In <b>3/4 time</b>: the <b>3</b> means there are <b>3 beats per measure</b>; the <b>4</b> means the <b>quarter note receives 1 beat</b>. \u{1F447} <b>What does the top number 3 mean?</b>",
-      show:{ type:"staff", spec:{clef:"treble",time:"3/4",notes:[{p:"C4",d:"q",label:"1"},{p:"E4",d:"q",label:"2"},{p:"G4",d:"q",label:"3"},{bar:"single"},{p:"E4",d:"h",label:"1  2"},{p:"C4",d:"q",label:"3"},{bar:"final"}],width:440} },
+      show:{ type:"staff", spec:{clef:"treble",time:"3/4",notes:[{p:"C4",d:"q",label:"1"},{p:"E4",d:"q",label:"2"},{p:"G4",d:"q",label:"3"},{bar:"single"},{p:"E4",d:"h",label:"1-2"},{p:"C4",d:"q",label:"3"},{bar:"final"}],width:440} },
       try:{ type:"mc",
         choices:["There are 3 beats per measure","The third note is accented","Only 3 measures may be written"], answer:0,
         success:"✓ The top 3 sets the measure length: three beats.",
         fail:"The top number counts the beats per measure.",
         hint:"Top = how many." } },
-    { say:"Beat values in 3/4: <b>♩ or its rest = 1 beat</b> · <b>half note or two quarter rests = 2 beats</b> · and a full measure of silence is written with the <b>whole rest</b>, even though the measure has only 3 beats. As in 2/4: <b>a half rest and a whole note are never used in 3/4 time</b>. \u{1F447} <b>Which symbol is used for a FULL measure of rest?</b>",
-      show:{ type:"staff", spec:{clef:"treble",time:"3/4",notes:[{p:"B4",d:"q",label:"1 beat"},{rest:"q",label:"1 beat"},{p:"B4",d:"h",label:"2 beats"},{rest:"w",label:"full measure"}],width:440} },
-      try:{ type:"mc",
-        choices:["A whole rest","A half rest","A whole note"], answer:0,
-        success:"✓ The whole rest marks a full measure of silence in ANY time signature.",
-        fail:"Half rests and whole notes are excluded from 3/4 writing — what remains?",
-        hint:"The same rule as 2/4." } },
     { say:"<b>2/4, 3/4 and 4/4 all have 4 as the bottom number</b>, so the quarter note always receives 1 beat. The difference is the top number: <b>2, 3 or 4 beats per measure</b>. \u{1F447} <b>Which signature matches each description?</b>",
       try:{ type:"custom",
         hint:"The top number = beats per measure.",
@@ -74,7 +67,7 @@ LESSON_CONTENT[11]={
           });
           ask();
         } } },
-    { say:"<b>Complete the measures using ONE note or rest.</b> Each 3/4 measure below is missing exactly one symbol. \u{1F447}",
+    { say:"<b>Complete the measures using ONE note or rest.</b> Remember two writing rules: a full measure of silence takes the <b>whole rest</b>, and <b>a half rest and a whole note are never used in 3/4 time</b>. Each measure below is missing exactly one symbol. \u{1F447}",
       try:{ type:"custom",
         hint:"Add the beats already present, then supply the difference with a single symbol.",
         mount:(container,fb)=>{
@@ -82,7 +75,7 @@ LESSON_CONTENT[11]={
             {given:[{p:"E4",d:"q",label:"1"},{p:"G4",d:"q",label:"2"}],accept:["q","Q"],needTxt:"1 more beat"},
             {given:[{p:"C4",d:"q",label:"1"}],accept:["h"],needTxt:"2 more beats (one symbol!)"},
             {given:[],accept:["W"],needTxt:"a full measure of silence"},
-            {given:[{p:"D4",d:"h",label:"1  2"}],accept:["q","Q"],needTxt:"1 more beat"}];
+            {given:[{p:"D4",d:"h",label:"1-2"}],accept:["q","Q"],needTxt:"1 more beat"}];
           const CARDS=[["q","Quarter Note",{p:"E4",d:"q"}],["h","Half Note",{p:"E4",d:"h"}],
                        ["Q","Quarter Rest",{rest:"q"}],["W","Whole Rest",{rest:"w"}]];
           let i=0;
@@ -128,12 +121,28 @@ LESSON_CONTENT[11]={
             <div class="choices chips i3-ch"><button>A</button><button>B</button><button>C</button><button>D</button></div>`;
           const q=container.querySelector(".i3-q"), st=container.querySelector(".i3-staff"), ch=container.querySelector(".i3-ch");
           function ask(){
-            const cur=rounds[r], items=[];
+            const cur=rounds[r], items=[], spans=[];
             cur.items.forEach((meas,mi)=>{
-              meas.forEach((n,ni)=>items.push(Object.assign({},n,ni===0?{label:"ABCD"[mi]}:{})));
+              const s0=items.length;
+              meas.forEach(n=>items.push(Object.assign({},n)));
+              spans.push([s0,items.length-1]);
               items.push({bar:mi<cur.items.length-1?"single":"final"});
             });
             Staff.render(st,{clef:"treble",time:"3/4",notes:items,width:470});
+            const svg=st.querySelector("svg");
+            const startX=110, L=items.length;
+            const xAt=i2=> (items[i2]&&items[i2].bar!==undefined&&i2===L-1)? 470-16 : startX+i2*((470-40-startX)/(L-1));
+            let prev=startX-24;
+            const NS="http://www.w3.org/2000/svg";
+            spans.forEach(([s0,s1],mi)=>{
+              const nxt=xAt(s1+1);
+              const x=(prev+nxt)/2;
+              const tx=document.createElementNS(NS,"text");
+              tx.setAttribute("x",x);tx.setAttribute("y",127);tx.setAttribute("text-anchor","middle");
+              tx.setAttribute("class","lbl");tx.setAttribute("font-weight","800");tx.textContent="ABCD"[mi];
+              svg.appendChild(tx);
+              prev=nxt;
+            });
             q.textContent=`Line ${r+1} of ${rounds.length}: which measure has the INCORRECT number of beats?`;
           }
           [...ch.children].forEach((b,bi)=>b.onclick=()=>{
@@ -205,9 +214,9 @@ LESSON_CONTENT[11]={
   ],
   examples:[
     { caption:"A line in 3/4 — count “1 2 3 | 1 2 3” with the playback.",
-      staff:{clef:"treble",tempo:100,time:"3/4",notes:[{p:"C4",d:"q",label:"1"},{p:"E4",d:"q",label:"2"},{p:"G4",d:"q",label:"3"},{bar:"single"},{p:"E4",d:"h",label:"1  2"},{p:"C4",d:"q",label:"3"},{bar:"final"}],width:440} },
+      staff:{clef:"treble",tempo:100,time:"3/4",notes:[{p:"C4",d:"q",label:"1"},{p:"E4",d:"q",label:"2"},{p:"G4",d:"q",label:"3"},{bar:"single"},{p:"E4",d:"h",label:"1-2"},{p:"C4",d:"q",label:"3"},{bar:"final"}],width:440} },
     { caption:"Rests in 3/4: quarter rests take 1 beat each; a full measure of silence is written with the whole rest.",
-      staff:{clef:"treble",tempo:100,time:"3/4",notes:[{p:"D4",d:"q",label:"1"},{rest:"q",label:"2"},{rest:"q",label:"3"},{bar:"single"},{rest:"w",label:"1  2  3"},{bar:"single"},{p:"D4",d:"h",label:"1  2"},{p:"D4",d:"q",label:"3"},{bar:"final"}],width:460} }
+      staff:{clef:"treble",tempo:100,time:"3/4",notes:[{p:"D4",d:"q",label:"1"},{rest:"q",label:"2"},{rest:"q",label:"3"},{bar:"single"},{rest:"w",label:"1-2-3"},{bar:"single"},{p:"D4",d:"h",label:"1-2"},{p:"D4",d:"q",label:"3"},{bar:"final"}],width:460} }
   ],
   games:[
     { type:"rhythm-tap", title:"Game 1 · 3/4 Rhythm Tap",
