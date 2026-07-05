@@ -7,6 +7,9 @@
    "measure-complete" (is this measure full?) and "measure-count" (count measures).
    v4.2 (instructor fix): compact chip layout for ALL short answers (<=14 chars,
    was <=3) so answer choices stay scannable; beat-count questions say "in 4/4 time".
+   v5 (Units 3-6): note-value supports eighths ("8") and dotted tokens ("h.","q.");
+   NEW generators: term-match (Italian terms / symbols ↔ meanings),
+   step-type (half vs whole step), enharmonic (same key, two names).
    NOTE (maintenance): edit by FULL-FILE REWRITE only. */
 const Quiz=(()=>{
   const SALT="MF-MIA-2026";
@@ -17,8 +20,10 @@ const Quiz=(()=>{
                  bass:["G2","A2","B2","C3","D3","E3","F3","G3","A3"] };
   const LS_POS={ treble:{lines:["E4","G4","B4","D5","F5"], spaces:["F4","A4","C5","E5"]},
                  bass:  {lines:["G2","B2","D3","F3","A3"], spaces:["A2","C3","E3","G3"]} };
-  const VAL_NAME={w:"Whole Note",h:"Half Note",q:"Quarter Note"};
-  const VAL_BEATS={w:4,h:2,q:1};
+  const VAL_NAME={w:"Whole Note",h:"Half Note",q:"Quarter Note","8":"Eighth Note","h.":"Dotted Half Note","q.":"Dotted Quarter Note"};
+  const VAL_BEATS={w:4,h:2,q:1,"8":0.5,"h.":3,"q.":1.5};
+  const BEATLBL={0.5:"\u00bd beat",1:"1 beat",1.5:"1\u00bd beats",2:"2 beats",3:"3 beats",4:"4 beats"};
+  const tokDot=t=>String(t).endsWith("."), tokBase=t=>String(t).replace(".","");
   const generators={
     "note-name": p=>{
       const pool=p.pool||RANGES[p.clef||"treble"];
@@ -60,33 +65,41 @@ const Quiz=(()=>{
         explain:"Higher pitches sound brighter and thinner; lower ones deeper and warmer.",
         hint:"Hum both sounds — your voice moves the same direction as the pitch." };
     },
-    /* v4 — identify a note value (or rest) by sight
-       (params:{values:["w","h","q"], ask:"name"|"beats", kind:"note"|"rest"}) */
+    /* v4/v5 — identify a note value (or rest) by sight
+       (params:{values:["w","h","q","8","h.","q."], ask:"name"|"beats", kind:"note"|"rest"}) */
     "note-value": p=>{
       const values=(p&&p.values)||["w","h","q"];
       const isRest=(p&&p.kind)==="rest";
       const v=pick(values), askBeats=(p&&p.ask)==="beats"||((!p||!p.ask)&&Math.random()<.5);
       const pitch=pick(["G4","B4","D5","F4","A4","E4","C5"]);
-      const NAMES=isRest?{w:"Whole Rest",h:"Half Rest",q:"Quarter Rest"}:VAL_NAME;
+      const NAMES=isRest?{w:"Whole Rest",h:"Half Rest",q:"Quarter Rest","8":"Eighth Rest"}:VAL_NAME;
       const SHAPE=isRest
-        ?{w:"it hangs BELOW the 4th line (the hole)",h:"it sits ON the 3rd line (the hat)",q:"the squiggly symbol"}
-        :{w:"hollow head with NO stem",h:"hollow head WITH a stem",q:"filled head with a stem"};
+        ?{w:"it hangs BELOW the 4th line (the hole)",h:"it sits ON the 3rd line (the hat)",q:"the squiggly symbol","8":"the little seven with a dot"}
+        :{w:"hollow head with NO stem",h:"hollow head WITH a stem",q:"filled head with a stem","8":"filled head with a stem and a flag","h.":"a half note PLUS a dot (2 + 1)","q.":"a quarter note PLUS a dot (1 + \u00bd)"};
       let choices,correct,q;
+      function build(correctVal,all){
+        const others=shuffle(all.filter(x=>x!==correctVal));
+        return shuffle([correctVal,...others.slice(0,3)]);
+      }
       if(askBeats){
         q=isRest?"In 4/4 time, how many beats of SILENCE does this rest receive?":"In 4/4 time, how many beats does this note receive?";
-        choices=shuffle(["1 beat","2 beats","4 beats"]);
-        correct=VAL_BEATS[v]+" beat"+(VAL_BEATS[v]>1?"s":"");
+        correct=BEATLBL[VAL_BEATS[v]];
+        let all=[...new Set(values.map(x=>BEATLBL[VAL_BEATS[x]]))];
+        if(all.length<3) all=[...new Set([...all,...Object.values(BEATLBL)])];
+        choices=build(correct,all);
       } else {
         q=isRest?"What kind of rest is this?":"What kind of note is this?";
-        choices=shuffle([NAMES.w,NAMES.h,NAMES.q]);
         correct=NAMES[v];
+        let all=[...new Set(values.map(x=>NAMES[x]))];
+        if(all.length<3) all=[...new Set([...all,...Object.values(NAMES)])];
+        choices=build(correct,all);
       }
       return { type:"mc", q,
-        staff:{clef:"treble",notes:[isRest?{rest:v}:{p:pitch,d:v}],width:240},
+        staff:{clef:"treble",notes:[isRest?{rest:tokBase(v)}:{p:pitch,d:tokBase(v),dot:tokDot(v)}],width:240},
         choices, answer:choices.indexOf(correct),
-        explain:`It's a ${NAMES[v]} — ${SHAPE[v]} — worth ${VAL_BEATS[v]} beat${VAL_BEATS[v]>1?"s":""}${isRest?" of silence":""}.`,
-        hint:isRest?"Hole hangs down (whole), hat sits on top (half), squiggle = quarter."
-                   :"Check two things: is the head hollow or filled? Does it have a stem?" };
+        explain:`It's a ${NAMES[v]} — ${SHAPE[v]||""} — worth ${BEATLBL[VAL_BEATS[v]]}${isRest?" of silence":""}.`,
+        hint:isRest?"Hole hangs down (whole), hat sits on top (half), squiggle = quarter, little seven = eighth."
+                   :"Check the head, the stem, any flag — and don\u2019t miss a DOT (dot = +half the value)." };
     },
     /* v4 — count the total beats of a short rhythm (params:{maxNotes:3, values:["w","h","q"]}) */
     "rhythm-count": p=>{
@@ -137,6 +150,49 @@ const Quiz=(()=>{
         hint:"Count the containers, not the lines." };
     }
 
+    ,
+    /* v5 — term/symbol ↔ meaning (params:{pool:[[term,meaning],…], subject:"dynamic marking"}) */
+    "term-match": p=>{
+      const pool=(p&&p.pool)||[];
+      const [term,meaning]=pick(pool);
+      const rev=(p&&p.reverse)? Math.random()<.5 : false;
+      const correct=rev? term : meaning;
+      const wrongs=shuffle(pool.filter(x=>x[0]!==term)).slice(0,3).map(x=>rev?x[0]:x[1]);
+      const choices=shuffle([correct,...wrongs]);
+      return { type:"mc",
+        q:rev? `Which ${(p&&p.subject)||"term"} means \u201c${meaning}\u201d?` : `What does ${term} mean?`,
+        choices, answer:choices.indexOf(correct),
+        explain:`${term} = ${meaning}.`,
+        hint:(p&&p.hint)||"Think back to the matching cards." };
+    },
+    /* v5 — half step or whole step (params:{show:"staff"|"none"}) */
+    "step-type": p=>{
+      const HALF=[["E4","F4"],["B4","C5"],["C4","C#4"],["F4","F#4"],["A4","Bb4"],["D4","Eb4"]];
+      const WHOLE=[["C4","D4"],["F4","G4"],["A4","B4"],["D4","E4"],["G4","A4"]];
+      const isHalf=Math.random()<.5;
+      const [a,b]=pick(isHalf?HALF:WHOLE);
+      const name=x=>x.replace(/(\d)/,"").replace("#","\u266f").replace("b","\u266d");
+      const correct=isHalf?"Half step":"Whole step";
+      const choices=shuffle(["Half step","Whole step"]);
+      return { type:"mc", q:`From ${name(a)} to ${name(b)} is a \u2026`,
+        staff:(p&&p.show)==="none"?undefined:{clef:"treble",notes:[{p:a,d:"q"},{p:b,d:"q"}],width:240},
+        choices, answer:choices.indexOf(correct),
+        explain:`${name(a)} \u2192 ${name(b)} = ${correct.toLowerCase()} — ${isHalf?"the very next key, nothing in between":"two half steps, one key is skipped"}.`,
+        hint:"Picture the keyboard: is there a key BETWEEN them?" };
+    },
+    /* v5 — enharmonic pairs */
+    "enharmonic": ()=>{
+      const PAIRS=[["C\u266f","D\u266d"],["D\u266f","E\u266d"],["F\u266f","G\u266d"],["G\u266f","A\u266d"],["A\u266f","B\u266d"]];
+      const [a,b]=pick(PAIRS);
+      const askA=Math.random()<.5;
+      const target=askA?a:b, correct=askA?b:a;
+      const wrongs=shuffle(PAIRS.filter(x=>x[0]!==a).map(x=>pick(x))).slice(0,3);
+      const choices=shuffle([correct,...wrongs]);
+      return { type:"mc", q:`Which note sounds exactly the same as ${target}?`,
+        choices, answer:choices.indexOf(correct),
+        explain:`${a} and ${b} are ENHARMONIC — two names for the same piano key.`,
+        hint:"Same black key — approached from the left or from the right." };
+    }
   };
   function expand(quizArr){
     const out=[];

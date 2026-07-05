@@ -1,22 +1,17 @@
-/* Music Fundamentals — SVG staff renderer + shared Web Audio (original notation, DD-05) v4.1
-   v3 (Session 14, instructor review fixes):
-   - svg renders at natural size, centered; viewBox auto-expands; labels below lowest element
-   - bass clef inline SVG path; grand staff filled curly brace
-   v4 (Milestone 3a): rest glyphs, bar lines, time signatures, whole-note polish,
-   play() spec.tempo (beat-accurate, rests silent), MFAudio.click(), highlight on rests
-   v4.1 (Milestone 3b): Common Time (spec.time:"C"), labels on bar items,
-   spec.clickBars + onBar(i,kind) for click-the-bar-line activities
-   v4.2 (instructor fix): a bar item that is the LAST item in notes[] is drawn
-   at the RIGHT EDGE of the staff (like engraved music), not at the spread position
-   v4.3 (instructor fix): a SINGLE note/rest is centered in the staff area
-   v4.4 (instructor rule, DD-24): treble clef drawn as SVG STROKE PATHS (no font
-   glyph): spiral wraps the G line; the curve crosses the straight stem at the
-   D line (4th line); same stroke geometry as the L2 pencil animation.
-   v4.5 (instructor fix): time-signature digits sized/positioned so the top number
-   sits fully in the upper two spaces and the bottom number in the lower two —
-   neither touches the middle line.
-   v4.6 (instructor fix): a whole rest that is alone in its measure is centered
-   between the surrounding bar lines (standard engraving).
+/* Music Fundamentals — SVG staff renderer + shared Web Audio (original notation, DD-05) v5
+   v3: natural size, viewBox auto-expand, labels below, SVG bass clef, curly brace
+   v4.x: rests, bar lines, time signatures (incl. C), tempo playback, clicks,
+   clickBars, final bar at right edge (DD-23), SVG treble clef (DD-24),
+   tsig digits clear of the middle line, single item centered, whole rest centered
+   v5 (Milestone 4/5, Units 3-6): dotted notes ({dot:true}, +50% duration),
+   eighth rest ({rest:"8"}), beams (spec.beams:[[i,j]] — flags suppressed),
+   ties/slurs (spec.arcs:[{from,to,type:"tie"|"slur"}]; tied notes not re-struck),
+   repeat bar lines ({bar:"repeat-start"|"repeat-end"}), 1st/2nd endings
+   (spec.endings:[{from,to,n}]), accidentals (pitch "F#4"/"Bb4" or {acc:"n"}),
+   articulation ({artic:"staccato"|"accent"|"tenuto"|"fermata"|"sfz"}),
+   dynamics ({dyn:"pp".."ff"} — playback volume follows), hairpins
+   (spec.hairpins:[{from,to,type:"cresc"|"decresc"}]), roadmap marks
+   ({mark:"segno"|"coda"|"tocoda"|"fine"|"dc-fine"|"ds-fine"|"dc-coda"|"ds-coda"}).
    NOTE (maintenance): edit by FULL-FILE REWRITE only. */
 const MFAudio=(()=>{
   let ctx=null;
@@ -52,11 +47,15 @@ const Staff=(()=>{
   const GAP=15, TOP=20, LEFT=10;
   const LETTERS=["C","D","E","F","G","A","B"];
   const BEATS={w:4,h:2,q:1,"8":0.5};
+  const VOLS={pp:.14,p:.24,mp:.36,mf:.5,f:.66,ff:.85};
   function dia(p){ const m=p.match(/^([A-G])[#b]?(\d)$/); return (+m[2])*7+LETTERS.indexOf(m[1]); }
   /* diatonic index of bottom line: treble E4=30, bass G2=18 */
   function baseIdx(clef){ return clef==="bass"?18:30; }
   function yFor(p,clef,y0){ return (y0+4*GAP)-(dia(p)-baseIdx(clef))*(GAP/2); }
-  function durShape(d){ return {w:{hollow:true,stem:false},h:{hollow:true,stem:true},q:{hollow:false,stem:true},"8":{hollow:false,stem:true,flag:true}}[d||"q"]; }
+  function normD(d){ d=String(d||"q"); return d.endsWith(".")? d.slice(0,-1) : d; }
+  function isDotted(n){ return !!n.dot || String(n.d||n.rest||"").endsWith("."); }
+  function durShape(d){ return {w:{hollow:true,stem:false},h:{hollow:true,stem:true},q:{hollow:false,stem:true},"8":{hollow:false,stem:true,flag:true}}[normD(d)]||{hollow:false,stem:true}; }
+  function beatsOf(n){ return BEATS[normD(n.d||n.rest)]*(isDotted(n)?1.5:1); }
 
   function drawOneStaff(parts,y0,W,clef,opts){
     for(let i=0;i<5;i++){
@@ -69,10 +68,8 @@ const Staff=(()=>{
       parts.push(`<rect class="clickspace" data-space="${s}" data-staff="${clef}" x="${LEFT}" y="${y-6}" width="${W-20}" height="12"/>`);
     }
     if(clef==="treble"){
-      /* DD-24: stroke-drawn G clef (ported from the instructor-approved L2 animation).
-         Stem from above the staff to below; hook comes down and CROSSES the stem at
-         the D line (y0+GAP); loop sweeps left and wraps the G line; spiral ends over G. */
-      const g=y0; /* top line */
+      /* DD-24: stroke-drawn G clef — stem crosses the hook at the D line, loop wraps G */
+      const g=y0;
       [`M 34 ${g-22} L 34 ${g+70}`,
        `M 34 ${g-22} C 44 ${g-17} 45 ${g} 38 ${g+10} C 36 ${g+13} 35 ${g+14} 34 ${g+15}`,
        `M 34 ${g+15} C 22.4 ${g+15} 13 ${g+25} 13 ${g+37.5} C 13 ${g+50} 22.4 ${g+60} 34 ${g+60}`,
@@ -81,8 +78,6 @@ const Staff=(()=>{
       ].forEach(d=>parts.push(`<path class="clef-stroke" d="${d}"/>`));
     }
     if(clef==="bass"){
-      /* engraved-style bass clef: filled swelling curve + head blob on line 4 (F),
-         two dots in the top two spaces (straddling the F line), like printed music */
       parts.push(`<circle class="clefdot" cx="${LEFT+7.5}" cy="${y0+GAP}" r="5.4"/>`);
       parts.push(`<path class="clef-path" d="M ${LEFT+5} ${y0+9} C ${LEFT+10} ${y0-2}, ${LEFT+22} ${y0-3}, ${LEFT+26} ${y0+6} C ${LEFT+30} ${y0+15}, ${LEFT+26} ${y0+32}, ${LEFT+8} ${y0+50} C ${LEFT+6} ${y0+52}, ${LEFT+5} ${y0+50}, ${LEFT+7} ${y0+48} C ${LEFT+20} ${y0+34}, ${LEFT+24} ${y0+18}, ${LEFT+21} ${y0+8} C ${LEFT+18} ${y0+1}, ${LEFT+10} ${y0+2}, ${LEFT+5} ${y0+9} Z"/>`);
       parts.push(`<circle class="clefdot" cx="${LEFT+31}" cy="${y0+GAP*0.5}" r="3.1"/>`);
@@ -98,16 +93,16 @@ const Staff=(()=>{
   }
   function drawTime(parts,y0,ts){
     const x=LEFT+52;
-    if(ts.common){ /* Common Time: a large serif C centered on the middle line */
+    if(ts.common){
       parts.push(`<text class="tsig" x="${x}" y="${y0+2*GAP+GAP*0.95}" font-size="${GAP*2.9}" text-anchor="middle">C</text>`);
       return;
     }
-    const fs=GAP*1.9; /* digits clear the middle line (top number in the upper half, bottom in the lower) */
+    const fs=GAP*1.9; /* digits clear the middle line */
     parts.push(`<text class="tsig" x="${x}" y="${y0+2*GAP-3}" font-size="${fs}" text-anchor="middle">${ts.top}</text>`);
     parts.push(`<text class="tsig" x="${x}" y="${y0+4*GAP-3}" font-size="${fs}" text-anchor="middle">${ts.bottom}</text>`);
   }
 
-  function noteSVG(x,y,d,extra,y0){
+  function noteSVG(x,y,d,extra,y0,noFlag,dot,onLine){
     const s=durShape(d), cls="note"+(s.hollow?" hollow":"")+(extra||"");
     const rx=(d==="w")?10.5:9;
     let out=`<ellipse class="${cls}" cx="${x}" cy="${y}" rx="${rx}" ry="6.5"/>`;
@@ -115,17 +110,21 @@ const Staff=(()=>{
       const up = y > y0+2*GAP;
       out+= up? `<line class="stem" x1="${x+8.4}" y1="${y-2}" x2="${x+8.4}" y2="${y-38}"/>`
               : `<line class="stem" x1="${x-8.4}" y1="${y+2}" x2="${x-8.4}" y2="${y+38}"/>`;
-      if(s.flag) out+= up? `<path class="stem" d="M${x+8.4} ${y-38} q12 6 8 20" fill="none"/>`
-                         : `<path class="stem" d="M${x-8.4} ${y+38} q-12 -6 -8 -20" fill="none"/>`;
+      if(s.flag&&!noFlag) out+= up? `<path class="stem" d="M${x+8.4} ${y-38} q12 6 8 20" fill="none"/>`
+                                  : `<path class="stem" d="M${x-8.4} ${y+38} q-12 -6 -8 -20" fill="none"/>`;
     }
+    if(dot) out+=`<circle class="artic" cx="${x+rx+6}" cy="${onLine? y-6 : y}" r="2.7"/>`;
     return out;
   }
   function restSVG(x,y0,type,extra){
     const cls="rest"+(extra||"");
-    if(type==="w") /* hangs below the 4th line (2nd from the top) */
+    if(type==="w")
       return `<rect class="${cls}" x="${x-9}" y="${y0+GAP}" width="18" height="7"/>`;
-    if(type==="h") /* sits on the middle line */
+    if(type==="h")
       return `<rect class="${cls}" x="${x-9}" y="${y0+2*GAP-7}" width="18" height="7"/>`;
+    if(type==="8") /* eighth rest: dot head + seven-stroke */
+      return `<circle class="${cls}" cx="${x-4}" cy="${y0+26}" r="3.4"/>
+        <path class="rest-line" d="M ${x-4} ${y0+26} C ${x-1} ${y0+30}, ${x+3} ${y0+29}, ${x+6} ${y0+23} L ${x-1} ${y0+44}"/>`;
     /* quarter rest: filled zigzag with bottom hook */
     return `<path class="${cls}" d="M ${x-4} ${y0+10}
       C ${x+3} ${y0+16}, ${x+4} ${y0+19}, ${x-1} ${y0+25}
@@ -136,11 +135,48 @@ const Staff=(()=>{
       C ${x+1} ${y0+25}, ${x} ${y0+22}, ${x-6} ${y0+15} Z"/>`;
   }
   function barSVG(x,yTop,yBot,kind){
+    const dots=(dx)=>`<circle class="clefdot" cx="${x+dx}" cy="${(yTop+yBot)/2-GAP/2}" r="2.6"/><circle class="clefdot" cx="${x+dx}" cy="${(yTop+yBot)/2+GAP/2}" r="2.6"/>`;
     if(kind==="double")
       return `<line class="barline" x1="${x-3}" y1="${yTop}" x2="${x-3}" y2="${yBot}"/><line class="barline" x1="${x+3}" y1="${yTop}" x2="${x+3}" y2="${yBot}"/>`;
     if(kind==="final")
       return `<line class="barline" x1="${x-5}" y1="${yTop}" x2="${x-5}" y2="${yBot}"/><line class="barline thick" x1="${x+2}" y1="${yTop}" x2="${x+2}" y2="${yBot}"/>`;
+    if(kind==="repeat-end")
+      return dots(-11)+`<line class="barline" x1="${x-5}" y1="${yTop}" x2="${x-5}" y2="${yBot}"/><line class="barline thick" x1="${x+2}" y1="${yTop}" x2="${x+2}" y2="${yBot}"/>`;
+    if(kind==="repeat-start")
+      return `<line class="barline thick" x1="${x-2}" y1="${yTop}" x2="${x-2}" y2="${yBot}"/><line class="barline" x1="${x+5}" y1="${yTop}" x2="${x+5}" y2="${yBot}"/>`+dots(11);
     return `<line class="barline" x1="${x}" y1="${yTop}" x2="${x}" y2="${yBot}"/>`;
+  }
+  function accSVG(x,y,a){
+    const L=(x1,y1,x2,y2)=>`<line class="acc" x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}"/>`;
+    if(a==="#") return L(x-2,y-9,x-2,y+10)+L(x+2,y-10,x+2,y+9)
+      +L(x-6,y-3,x+6,y-5.5)+L(x-6,y+5.5,x+6,y+3);
+    if(a==="b") return L(x-2,y-12,x-2,y+5)
+      +`<path class="acc" fill="none" d="M ${x-2} ${y+5} C ${x+7} ${y}, ${x+6} ${y-6}, ${x-2} ${y-2}"/>`;
+    /* natural */
+    return L(x-2.5,y-10,x-2.5,y+5)+L(x+2.5,y-5,x+2.5,y+10)
+      +L(x-2.5,y-3.5,x+2.5,y-5.5)+L(x-2.5,y+5.5,x+2.5,y+3.5);
+  }
+  function articSVG(x,y,y0,artic,W){
+    const up = y > y0+2*GAP; /* stem up → mark below the notehead */
+    const yy = up? y+14 : y-14;
+    if(artic==="staccato") return `<circle class="artic" cx="${x}" cy="${yy}" r="2.6"/>`;
+    if(artic==="tenuto") return `<line class="acc" x1="${x-7}" y1="${yy}" x2="${x+7}" y2="${yy}"/>`;
+    if(artic==="accent") return `<path class="acc" fill="none" d="M ${x-8} ${yy-4} L ${x+8} ${yy} L ${x-8} ${yy+4}"/>`;
+    if(artic==="fermata"){ const fy=y0-8;
+      return `<path class="acc" fill="none" d="M ${x-11} ${fy} C ${x-7} ${fy-11}, ${x+7} ${fy-11}, ${x+11} ${fy}"/><circle class="artic" cx="${x}" cy="${fy-3.5}" r="2.4"/>`; }
+    if(artic==="sfz") return `<text class="dyn" x="${x}" y="${y0+4*GAP+18}" text-anchor="middle">sfz</text>`;
+    return "";
+  }
+  function markSVG(x,y0,kind){
+    const y=y0-12;
+    if(kind==="coda"||kind==="tocoda"){
+      const lbl=kind==="tocoda"? `<text class="mark-txt" x="${x}" y="${y-16}" text-anchor="middle">To</text>`:"";
+      return lbl+`<circle class="acc" fill="none" cx="${x}" cy="${y-4}" r="6"/><line class="acc" x1="${x}" y1="${y-14}" x2="${x}" y2="${y+6}"/><line class="acc" x1="${x-9}" y1="${y-4}" x2="${x+9}" y2="${y-4}"/>`;
+    }
+    if(kind==="segno")
+      return `<text class="mark-txt seg" x="${x}" y="${y+2}" text-anchor="middle" font-size="21">S</text><line class="acc" x1="${x-6}" y1="${y+5}" x2="${x+6}" y2="${y-17}"/><circle class="artic" cx="${x-9}" cy="${y-10}" r="1.8"/><circle class="artic" cx="${x+9}" cy="${y-2}" r="1.8"/>`;
+    const TXT={fine:"Fine","dc":"D.C.","ds":"D.S.","dc-fine":"D.C. al Fine","ds-fine":"D.S. al Fine","dc-coda":"D.C. al Coda","ds-coda":"D.S. al Coda"};
+    return `<text class="mark-txt" x="${x}" y="${y}" text-anchor="middle">${TXT[kind]||kind}</text>`;
   }
   function ledgersFor(p,clef,x,y0){
     const idx=dia(p)-baseIdx(clef); let out="";
@@ -149,9 +185,6 @@ const Staff=(()=>{
     return out;
   }
 
-  /* spec: {clef:"treble"|"bass"|"grand", time:"4/4"|"C",
-            notes:[ {p,d,clef?,label?} | {rest:"w"|"h"|"q",label?,clef?} | {bar:"single"|"double"|"final",label?} ],
-            width?, tempo?, clickLines?, clickSpaces?, clickNotes?, clickBars?} */
   function render(el, spec){
     const W=spec.width||420;
     const grand=spec.clef==="grand";
@@ -165,16 +198,16 @@ const Staff=(()=>{
       drawOneStaff(parts,y0t,W,"treble",opts);
       drawOneStaff(parts,y0b,W,"bass",opts);
       parts.push(`<line class="staffline" x1="${LEFT}" y1="${y0t}" x2="${LEFT}" y2="${y0b+4*GAP}"/>`);
-      /* proper filled curly brace */
       const yT=y0t, yB=y0b+4*GAP, h=yB-yT, yM=(yT+yB)/2;
       parts.push(`<path class="brace" d="M 10 ${yT} C 2 ${yT+h*.18}, 7.5 ${yM-h*.20}, 1 ${yM} C 7.5 ${yM+h*.20}, 2 ${yB-h*.18}, 10 ${yB} C 5 ${yB-h*.16}, 9.8 ${yM+h*.22}, 4 ${yM} C 9.8 ${yM-h*.22}, 5 ${yT+h*.16}, 10 ${yT} Z"/>`);
     } else drawOneStaff(parts,y0t,W,spec.clef||"treble",opts);
 
-    /* compute item positions first so the viewBox can grow to fit them */
     const items=spec.notes||[];
     const startX=(grand?70:80)+(ts?30:0);
+    const beamSet=new Set();
+    (spec.beams||[]).forEach(([a,b])=>{ for(let i=a;i<=b;i++) beamSet.add(i); });
     const placed=[];
-    let minEl=0, maxEl=H0, maxNoteBottom=-Infinity, hasLabel=false;
+    let minEl=0, maxEl=H0, maxNoteBottom=-Infinity, hasLabel=false, hasDyn=false;
     items.forEach((n,i)=>{
       const clef = n.clef || (grand? "treble" : (spec.clef||"treble"));
       const y0 = clef==="bass"? y0b : y0t;
@@ -182,7 +215,9 @@ const Staff=(()=>{
         : startX+i*((W-40-startX)/Math.max(1,(items.length-1)||1));
       const x = n.x || ((n.bar!==undefined && i===items.length-1)? W-16 : spreadX);
       if(n.label) hasLabel=true;
+      if(n.dyn) hasDyn=true;
       if(n.bar!==undefined){ placed.push({n,i,clef,y0,x,kind:"bar"}); return; }
+      if(n.mark!==undefined){ minEl=Math.min(minEl,y0-38); placed.push({n,i,clef,y0,x,kind:"mark"}); return; }
       if(n.rest){
         minEl=Math.min(minEl,y0+4); maxEl=Math.max(maxEl,y0+54);
         maxNoteBottom=Math.max(maxNoteBottom,y0+50);
@@ -192,11 +227,13 @@ const Staff=(()=>{
       const s = durShape(n.d);
       let top=y-8, bottom=y+8;
       if(s.stem){ if(y > y0+2*GAP) top=Math.min(top,y-40); else bottom=Math.max(bottom,y+40); }
+      if(n.artic==="fermata") top=Math.min(top,y0-24);
+      if(n.artic) { top=Math.min(top,y-18); bottom=Math.max(bottom,y+18); }
       minEl=Math.min(minEl,top-6); maxEl=Math.max(maxEl,bottom+6);
       maxNoteBottom=Math.max(maxNoteBottom,bottom);
       placed.push({n,i,clef,y0,x,y,kind:"note"});
     });
-    /* engraving rule (v4.6): a whole rest alone in its measure sits centered in it */
+    /* whole rest alone in its measure sits centered in it */
     placed.forEach((pl,pi)=>{
       if(pl.kind!=="rest"||pl.n.rest!=="w"||pl.n.x) return;
       let alone=true, segStart=startX-24, segEnd=W-40;
@@ -206,8 +243,9 @@ const Staff=(()=>{
       if(k<placed.length) segEnd=placed[k].x;
       if(alone) pl.x=(segStart+segEnd)/2;
     });
+    if(hasDyn) maxEl=Math.max(maxEl,staffBottom+26);
     if(hasLabel&&maxNoteBottom===-Infinity) maxNoteBottom=staffBottom;
-    const labelY = hasLabel? Math.max(staffBottom+22, maxNoteBottom+18) : 0;
+    const labelY = hasLabel? Math.max(staffBottom+22, maxNoteBottom+18, hasDyn?staffBottom+38:0) : 0;
     if(hasLabel) maxEl=Math.max(maxEl,labelY+6);
     placed.forEach(({n,i,clef,y0,x,y,kind})=>{
       if(kind==="bar"){
@@ -215,15 +253,59 @@ const Staff=(()=>{
         const bk=n.bar===true?"single":n.bar;
         parts.push(barSVG(x,yTop,yBot,bk));
         if(spec.clickBars) parts.push(`<rect class="clickbar" data-bar="${i}" data-kind="${bk}" x="${x-11}" y="${yTop-6}" width="22" height="${yBot-yTop+12}"/>`);
+      } else if(kind==="mark"){
+        parts.push(`<g class="notegroup" data-i="${i}" data-mark="${n.mark}">${markSVG(x,y0,n.mark)}</g>`);
       } else if(kind==="rest"){
-        parts.push(`<g class="notegroup" data-i="${i}" data-rest="${n.rest}">${restSVG(x,y0,n.rest,(spec.clickNotes?" clickable":""))}</g>`);
+        parts.push(`<g class="notegroup" data-i="${i}" data-rest="${n.rest}">${restSVG(x,y0,normD(n.rest),(spec.clickNotes?" clickable":""))}${n.dot?`<circle class="artic" cx="${x+13}" cy="${y0+2*GAP-7}" r="2.7"/>`:""}</g>`);
       } else {
         parts.push(ledgersFor(n.p,clef,x,y0));
-        parts.push(`<g class="notegroup" data-i="${i}" data-p="${n.p}">${noteSVG(x,y,n.d,(spec.clickNotes?" clickable":""),y0)}</g>`);
+        const accCh = n.acc==="n"?"n" : (n.p.match(/^[A-G]([#b])\d$/)||[])[1];
+        const idx=dia(n.p)-baseIdx(clef);
+        const onLine=idx%2===0;
+        let inner=noteSVG(x,y,normD(n.d),(spec.clickNotes?" clickable":""),y0,beamSet.has(i),isDotted(n),onLine);
+        if(accCh) inner=accSVG(x-18,y,accCh==="n"?"nat":accCh)+inner;
+        if(n.artic) inner+=articSVG(x,y,y0,n.artic,W);
+        parts.push(`<g class="notegroup" data-i="${i}" data-p="${n.p}">${inner}</g>`);
+        if(n.dyn) parts.push(`<text class="dyn" x="${x}" y="${y0+4*GAP+20}" text-anchor="middle">${n.dyn}</text>`);
       }
       if(n.label){ const hw=Math.min(W/2-4, 4+String(n.label).length*3.4);
         const lx=Math.max(hw+4, Math.min(W-hw-4, x));
         parts.push(`<text class="lbl" x="${lx}" y="${labelY}" text-anchor="middle">${n.label}</text>`); }
+    });
+    /* beams: connect stem tips of first/last beamed note in each group */
+    (spec.beams||[]).forEach(([a,b])=>{
+      const A=placed[a], B=placed[b];
+      if(!A||!B||A.y===undefined||B.y===undefined) return;
+      const up=A.y > A.y0+2*GAP;
+      const xa=up? A.x+8.4 : A.x-8.4, xb=up? B.x+8.4 : B.x-8.4;
+      const ya=up? A.y-38 : A.y+38, yb=up? B.y-38 : B.y+38;
+      parts.push(`<line class="beam" x1="${xa}" y1="${ya}" x2="${xb}" y2="${yb}"/>`);
+    });
+    /* ties & slurs */
+    (spec.arcs||[]).forEach(a=>{
+      const A=placed[a.from], B=placed[a.to];
+      if(!A||!B||A.y===undefined||B.y===undefined) return;
+      const up=((A.y+B.y)/2) > (A.y0+2*GAP); /* stems up → curve above the noteheads */
+      const s=up? -1 : 1;
+      const y1=A.y+s*11, y2=B.y+s*11, cy=(up? Math.min(y1,y2) : Math.max(y1,y2))+s*15;
+      minEl=Math.min(minEl,cy-4); maxEl=Math.max(maxEl,cy+4);
+      parts.push(`<path class="arc" d="M ${A.x+3} ${y1} C ${(A.x+B.x)/2} ${cy}, ${(A.x+B.x)/2} ${cy}, ${B.x-3} ${y2}"/>`);
+    });
+    /* hairpins (crescendo / decrescendo wedges below the staff) */
+    (spec.hairpins||[]).forEach(hp=>{
+      const A=placed[hp.from], B=placed[hp.to]; if(!A||!B) return;
+      const y=staffBottom+22; maxEl=Math.max(maxEl,y+10);
+      if(hp.type==="decresc")
+        parts.push(`<line class="acc" x1="${A.x}" y1="${y-5}" x2="${B.x}" y2="${y}"/><line class="acc" x1="${A.x}" y1="${y+5}" x2="${B.x}" y2="${y}"/>`);
+      else
+        parts.push(`<line class="acc" x1="${A.x}" y1="${y}" x2="${B.x}" y2="${y-5}"/><line class="acc" x1="${A.x}" y1="${y}" x2="${B.x}" y2="${y+5}"/>`);
+    });
+    /* 1st / 2nd ending brackets */
+    (spec.endings||[]).forEach(e=>{
+      const A=placed[e.from], B=placed[e.to]; if(!A||!B) return;
+      const y=y0t-18, x1=A.x-12, x2=B.x+12;
+      minEl=Math.min(minEl,y-14);
+      parts.push(`<line class="acc" x1="${x1}" y1="${y}" x2="${x2}" y2="${y}"/><line class="acc" x1="${x1}" y1="${y}" x2="${x1}" y2="${y+12}"/>${e.n<2?`<line class="acc" x1="${x2}" y1="${y}" x2="${x2}" y2="${y+12}"/>`:""}<text class="lbl" x="${x1+8}" y="${y+12}" text-anchor="middle">${e.n}.</text>`);
     });
 
     const yTop=Math.floor(minEl), vH=Math.ceil(maxEl)-yTop;
@@ -244,15 +326,27 @@ const Staff=(()=>{
   function play(spec, api){
     let t=0;
     const tempo=spec.tempo||0, spb=tempo?60/tempo:0;
+    const arcs=(spec.arcs||[]).filter(a=>(a.type||"tie")==="tie");
+    const tiedTo=new Set(arcs.map(a=>a.to));
+    let vol=.5;
     (spec.notes||[]).forEach((n,i)=>{
-      if(n.bar!==undefined) return;
-      const d=n.d||n.rest||"q";
-      const dur=tempo? BEATS[d]*spb : DURSEC[d];
-      if(!n.rest){
-        MFAudio.tone(MFAudio.midi(n.p),tempo?Math.max(0.2,dur*0.92):Math.min(dur,1.2),t);
+      if(n.bar!==undefined||n.mark!==undefined) return;
+      if(n.dyn&&VOLS[n.dyn]!==undefined) vol=VOLS[n.dyn];
+      const base=tempo? beatsOf(n)*spb : DURSEC[normD(n.d||n.rest)]*(isDotted(n)?1.5:1);
+      const dur=n.artic==="fermata"? base*1.8 : base;
+      if(!n.rest&&!tiedTo.has(i)){
+        /* extend through tied notes */
+        let full=dur, j=i, guard=0;
+        while(guard++<8){ const a=arcs.find(x=>x.from===j); if(!a) break;
+          const nn=spec.notes[a.to]; if(!nn||nn.rest) break;
+          full+= tempo? beatsOf(nn)*spb : DURSEC[normD(nn.d)]*(isDotted(nn)?1.5:1); j=a.to; }
+        let v=vol, dd=full;
+        if(n.artic==="staccato") dd=Math.max(.12,full*0.4);
+        if(n.artic==="accent"||n.artic==="sfz") v=Math.min(.95,vol*1.7);
+        MFAudio.tone(MFAudio.midi(n.p), tempo? Math.max(0.18,dd*0.92):Math.min(dd,1.8), t, v);
       }
       if(api) setTimeout(()=>api.highlight(i), t*1000);
-      t+=tempo? dur : dur+0.08;
+      t+= tempo? dur : dur+0.08;
     });
     if(api) setTimeout(()=>api.highlight(null), t*1000+200);
     return t;
