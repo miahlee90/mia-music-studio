@@ -312,3 +312,5 @@ hr.sep{border:none;border-top:1px solid var(--hairline);margin:20px 0}
 .mf-staff text.dyn{fill:#33415c;font-weight:800;font-style:italic;font-size:15px;font-family:Georgia,serif}
 .mf-staff text.mark-txt{fill:#33415c;font-weight:800;font-style:italic;font-size:13px}
 .mf-staff text.mark-txt.seg{font-family:Georgia,serif}
+/* DD-27: notation-card option buttons inside games/activities */
+.gbtns button svg.mf-staff,.choices button svg.mf-staff{height:46px;width:auto;margin:0 auto;display:block}

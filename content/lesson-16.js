@@ -84,7 +84,7 @@ LESSON_CONTENT[16]={
           const api=Staff.render(container.querySelector(".c8-staff"),spec);
           container.querySelector(".c8-play").onclick=()=>{
             const total=Staff.play(spec,api);
-            setTimeout(()=>fb(true,"✓ 1-and-2-(and)-3-(4) — the count marched straight through every silence, big and small!"),total*1000+300);
+            setTimeout(()=>fb(true,"✓ 1-and-2-(and)-3-(4) — the count ran straight through every silence, big and small!"),total*1000+300);
           };
         } } },
     { say:"Family photo! Every rest matches its note: whole (4), half (2), quarter (1)… and now <b>eighth (½)</b>. \u{1F447} <b>Which rest is the SHORTEST?</b>",
@@ -98,16 +98,23 @@ LESSON_CONTENT[16]={
       try:{ type:"custom",
         hint:"Eighth rest = ½ silent beat. It counts toward the total like any note!",
         mount:(container,fb)=>{
-          const BT=[{t:"8",label:"Eighth (½)",beats:.5,item:{p:"B4",d:"8"}},
-                    {t:"E",label:"Eighth Rest (½)",beats:.5,item:{rest:"8"},isRest:true},
-                    {t:"q",label:"Quarter (1)",beats:1,item:{p:"B4",d:"q"}},
-                    {t:"Q",label:"Quarter Rest (1)",beats:1,item:{rest:"q"},isRest:true},
-                    {t:"h",label:"Half (2)",beats:2,item:{p:"B4",d:"h"}}];
+          const BT=[{t:"8",label:"Eighth Note",beats:.5,item:{p:"B4",d:"8"}},
+                    {t:"E",label:"Eighth Rest",beats:.5,item:{rest:"8"},isRest:true},
+                    {t:"q",label:"Quarter Note",beats:1,item:{p:"B4",d:"q"}},
+                    {t:"Q",label:"Quarter Rest",beats:1,item:{rest:"q"},isRest:true},
+                    {t:"h",label:"Half Note",beats:2,item:{p:"B4",d:"h"}}];
           let cur=[],sum=0,found=[];
           container.innerHTML=`<div class="br-staff"></div><div class="big-q br-q" style="text-align:center"></div>
             <div class="choices br-ch"></div>`;
           const st=container.querySelector(".br-staff"), q=container.querySelector(".br-q"), ch=container.querySelector(".br-ch");
-          BT.forEach(bt=>{ const b=document.createElement("button"); b.textContent=bt.label; b.onclick=()=>add(bt); ch.appendChild(b); });
+          const BTNS_LOCAL=BT;
+          BTNS_LOCAL.forEach(bt=>{ const b=document.createElement("button");
+            b.style.cssText="border-radius:10px;padding:6px 10px;min-width:104px";
+            const d0=document.createElement("div"); b.appendChild(d0);
+            Staff.render(d0,{clef:"none",notes:[bt.item],width:100});
+            const nm=document.createElement("div"); nm.style.cssText="font-weight:700;font-size:13px";
+            nm.textContent=bt.label.replace(/\s*\([^)]*\)\s*$/,""); b.appendChild(nm);
+            b.onclick=()=>add(bt); ch.appendChild(b); });
           const clr=document.createElement("button"); clr.className="ghost"; clr.textContent="↺ Clear";
           clr.onclick=()=>{ cur=[];sum=0;draw(); }; ch.appendChild(clr);
           function draw(){
@@ -164,11 +171,11 @@ LESSON_CONTENT[16]={
       intro:"Build 4-beat measures mixing notes, quarter rests, and eighth rests — three different creations!",
       miaIntro:"Compose with the quickest silence in music! \u{1F3A8}",
       spec:{beats:4, rounds:3, needRest:true, buttons:[
-        {t:"8",label:"Eighth (½)",beats:.5,item:{p:"B4",d:"8"}},
-        {t:"E",label:"Eighth Rest (½)",beats:.5,item:{rest:"8"},isRest:true},
-        {t:"q",label:"Quarter (1)",beats:1,item:{p:"B4",d:"q"}},
-        {t:"Q",label:"Quarter Rest (1)",beats:1,item:{rest:"q"},isRest:true},
-        {t:"h",label:"Half (2)",beats:2,item:{p:"B4",d:"h"}}]},
+        {t:"8",label:"Eighth Note",beats:.5,item:{p:"B4",d:"8"}},
+        {t:"E",label:"Eighth Rest",beats:.5,item:{rest:"8"},isRest:true},
+        {t:"q",label:"Quarter Note",beats:1,item:{p:"B4",d:"q"}},
+        {t:"Q",label:"Quarter Rest",beats:1,item:{rest:"q"},isRest:true},
+        {t:"h",label:"Half Note",beats:2,item:{p:"B4",d:"h"}}]},
       result:(stars)=>stars>=3?"Three balanced measures — silence placed with style!":null }
   ],
   practiceIntro:"20 practice questions — the eighth rest, its ½ beat, and counting through quick silences. Answer right and the next appears automatically!",

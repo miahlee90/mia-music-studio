@@ -103,14 +103,21 @@ LESSON_CONTENT[17]={
       try:{ type:"custom",
         hint:"Dotted quarter + eighth · quarter + two eighths · two quarters.",
         mount:(container,fb)=>{
-          const BT=[{t:"j",label:"Dotted Quarter (1½)",beats:1.5,item:{p:"B4",d:"q",dot:true}},
-                    {t:"8",label:"Eighth (½)",beats:.5,item:{p:"B4",d:"8"}},
-                    {t:"q",label:"Quarter (1)",beats:1,item:{p:"B4",d:"q"}}];
+          const BT=[{t:"j",label:"Dotted Quarter Note",beats:1.5,item:{p:"B4",d:"q",dot:true}},
+                    {t:"8",label:"Eighth Note",beats:.5,item:{p:"B4",d:"8"}},
+                    {t:"q",label:"Quarter Note",beats:1,item:{p:"B4",d:"q"}}];
           let cur=[],sum=0,found=[];
           container.innerHTML=`<div class="b2-staff"></div><div class="big-q b2-q" style="text-align:center"></div>
             <div class="choices b2-ch"></div>`;
           const st=container.querySelector(".b2-staff"), q=container.querySelector(".b2-q"), ch=container.querySelector(".b2-ch");
-          BT.forEach(bt=>{ const b=document.createElement("button"); b.textContent=bt.label; b.onclick=()=>add(bt); ch.appendChild(b); });
+          const BTNS_LOCAL=BT;
+          BTNS_LOCAL.forEach(bt=>{ const b=document.createElement("button");
+            b.style.cssText="border-radius:10px;padding:6px 10px;min-width:104px";
+            const d0=document.createElement("div"); b.appendChild(d0);
+            Staff.render(d0,{clef:"none",notes:[bt.item],width:100});
+            const nm=document.createElement("div"); nm.style.cssText="font-weight:700;font-size:13px";
+            nm.textContent=bt.label.replace(/\s*\([^)]*\)\s*$/,""); b.appendChild(nm);
+            b.onclick=()=>add(bt); ch.appendChild(b); });
           const clr=document.createElement("button"); clr.className="ghost"; clr.textContent="↺ Clear";
           clr.onclick=()=>{ cur=[];sum=0;draw(); }; ch.appendChild(clr);
           function draw(){
@@ -167,9 +174,9 @@ LESSON_CONTENT[17]={
       intro:"Fill exactly 2 beats — find all THREE recipes, dotted pair included!",
       miaIntro:"Small cell, big rhythm — build it every way! \u{1F3D7}\u{FE0F}",
       spec:{beats:2, unique:true, rounds:3, buttons:[
-        {t:"j",label:"Dotted Quarter (1½)",beats:1.5,item:{p:"B4",d:"q",dot:true}},
-        {t:"8",label:"Eighth (½)",beats:.5,item:{p:"B4",d:"8"}},
-        {t:"q",label:"Quarter (1)",beats:1,item:{p:"B4",d:"q"}}]},
+        {t:"j",label:"Dotted Quarter Note",beats:1.5,item:{p:"B4",d:"q",dot:true}},
+        {t:"8",label:"Eighth Note",beats:.5,item:{p:"B4",d:"8"}},
+        {t:"q",label:"Quarter Note",beats:1,item:{p:"B4",d:"q"}}]},
       result:(stars)=>stars>=3?"All three recipes — the 2-beat cell is conquered!":null },
     { type:"symbol-hunt", title:"Game 4 · Dotted Family Hunt",
       intro:"Dotted quarter, dotted half, plain quarter, eighth — click exactly what Mia names!",

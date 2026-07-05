@@ -109,14 +109,21 @@ LESSON_CONTENT[12]={
       try:{ type:"custom",
         hint:"Dotted Half (3) alone · Half (2) + Quarter (1) · three Quarters.",
         mount:(container,fb)=>{
-          const BT=[{t:"D",label:"Dotted Half (3)",beats:3,item:{p:"B4",d:"h",dot:true}},
-                    {t:"h",label:"Half (2)",beats:2,item:{p:"B4",d:"h"}},
-                    {t:"q",label:"Quarter (1)",beats:1,item:{p:"B4",d:"q"}}];
+          const BT=[{t:"D",label:"Dotted Half Note",beats:3,item:{p:"B4",d:"h",dot:true}},
+                    {t:"h",label:"Half Note",beats:2,item:{p:"B4",d:"h"}},
+                    {t:"q",label:"Quarter Note",beats:1,item:{p:"B4",d:"q"}}];
           let cur=[],sum=0,found=[];
           container.innerHTML=`<div class="b3-staff"></div><div class="big-q b3-q" style="text-align:center"></div>
             <div class="choices b3-ch"></div>`;
           const st=container.querySelector(".b3-staff"), q=container.querySelector(".b3-q"), ch=container.querySelector(".b3-ch");
-          BT.forEach(bt=>{ const b=document.createElement("button"); b.textContent=bt.label; b.onclick=()=>add(bt); ch.appendChild(b); });
+          const BTNS_LOCAL=BT;
+          BTNS_LOCAL.forEach(bt=>{ const b=document.createElement("button");
+            b.style.cssText="border-radius:10px;padding:6px 10px;min-width:104px";
+            const d0=document.createElement("div"); b.appendChild(d0);
+            Staff.render(d0,{clef:"none",notes:[bt.item],width:100});
+            const nm=document.createElement("div"); nm.style.cssText="font-weight:700;font-size:13px";
+            nm.textContent=bt.label.replace(/\s*\([^)]*\)\s*$/,""); b.appendChild(nm);
+            b.onclick=()=>add(bt); ch.appendChild(b); });
           const clr=document.createElement("button"); clr.className="ghost"; clr.textContent="↺ Clear";
           clr.onclick=()=>{ cur=[];sum=0;draw(); }; ch.appendChild(clr);
           function draw(){
@@ -138,7 +145,7 @@ LESSON_CONTENT[12]={
           }
           draw();
         } } },
-    { say:"Let's READ a waltz that uses the dotted half. Count: <b>1-2-3 held</b>, then quarters. \u{1F447}",
+    { say:"Read a 3/4 line that uses the dotted half. Count: <b>1-2-3 held</b>, then quarters. \u{1F447}",
       try:{ type:"custom",
         hint:"The dotted half rings through all three counts of its measure.",
         mount:(container,fb)=>{
@@ -164,18 +171,18 @@ LESSON_CONTENT[12]={
       miaIntro:"Game time — don't let that little dot sneak past you! \u{1F50D}",
       spec:{rounds:10, ask:"name", values:["h","h.","q","w"]},
       result:(score)=>score>=9?"No dot escapes your eyes now!":null },
-    { type:"rhythm-tap", title:"Game 2 · Waltz Tap with Dots",
+    { type:"rhythm-tap", title:"Game 2 · 3/4 Tap with Dots",
       intro:"Tap 3/4 rhythms — including the loooong dotted half. Hold your tap-hand steady through 3 beats!",
-      miaIntro:"Tap the waltz — one tap can last three whole beats! \u{1F44F}",
+      miaIntro:"One tap can last three whole beats — hold it steady! \u{1F44F}",
       spec:{tempo:100, rounds:3, beatsPerBar:3, patterns:[["h."],["q","q","q"],["h","q"],["q","h"]]},
       result:(score)=>score>=5?"You FELT the 3-beat note — that's the hard part, done!":null },
     { type:"measure-build", title:"Game 3 · Three Ways to Three",
       intro:"Fill the 3/4 measure with exactly 3 beats — find <b>all three</b> combinations, dotted half included!",
       miaIntro:"Builder challenge: three bricks, three ways, three beats! \u{1F3D7}\u{FE0F}",
       spec:{beats:3, unique:true, rounds:3, buttons:[
-        {t:"D",label:"Dotted Half (3)",beats:3,item:{p:"B4",d:"h",dot:true}},
-        {t:"h",label:"Half (2)",beats:2,item:{p:"B4",d:"h"}},
-        {t:"q",label:"Quarter (1)",beats:1,item:{p:"B4",d:"q"}}]},
+        {t:"D",label:"Dotted Half Note",beats:3,item:{p:"B4",d:"h",dot:true}},
+        {t:"h",label:"Half Note",beats:2,item:{p:"B4",d:"h"}},
+        {t:"q",label:"Quarter Note",beats:1,item:{p:"B4",d:"q"}}]},
       result:(stars)=>stars>=3?"All three ways, no overflow — 3/4 completely conquered!":null },
     { type:"measure-judge", title:"Game 4 · 3/4 Inspector Returns",
       intro:"Complete or incomplete? Now the measures hold 3 beats — and the dot changes the math!",

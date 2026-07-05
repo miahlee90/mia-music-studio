@@ -1,243 +1,283 @@
-/* Lesson 10 — 2/4 Time Signature (AEMT Book 1, Unit 3)
-   Built from drafts/UNIT 3 – Lessons 10 & 11.md (combined draft — pages stay separate, DD-12).
-   QA note honored: 2/4 = MARCH ("Left–Right") repeated across steps, games, quiz.
+/* Lesson 10 — 2/4 Time Signature (AEMT Book 1, Unit 3) — v2 COLLEGE-TONE REWRITE
+   Content grounded in AEMT1 p.16 (definitions, beat-value table, whole-rest rule,
+   half-rest/whole-note prohibition) and its exercise types (complete the measures,
+   circle incorrect measures, draw bar lines). Per instructor (DD-26): no "march/
+   waltz", no "STRONG-weak" — textbook/dictionary-based explanations only.
+   Option styles per DD-27: notation cards + A/B/C/D worksheet choices.
    NOTE: edit by FULL-FILE REWRITE only. */
 
-/* march-or-waltz listening drill (unique L10 prefix) */
-function MF_L10_marchWaltz(container,fb,rounds){
-  const seq=[]; for(let i=0;i<rounds;i++) seq.push(i%2===0?2:3);
-  seq.sort(()=>Math.random()-.5);
-  let i=0,played=false;
-  container.innerHTML=`<div class="big-q mw-q" style="text-align:center"></div>
-    <div style="text-align:center"><button class="play mw-play">▶ Listen</button></div>
-    <div class="choices mw-ch" style="display:none"><button>\u{1F941} March (2/4)</button><button>\u{1F483} Waltz (3/4)</button></div>`;
-  const q=container.querySelector(".mw-q"), ch=container.querySelector(".mw-ch"), btn=container.querySelector(".mw-play");
-  function ask(){ q.textContent=`Round ${i+1} of ${seq.length}: march or waltz?`; played=false; ch.style.display="none"; }
-  btn.onclick=()=>{
-    const n=seq[i], spb=60/96;
-    for(let k=0;k<n*3;k++) MFAudio.click(k*spb, k%n===0?.6:.3, k%n===0);
-    played=true;
-    setTimeout(()=>{ ch.style.display=""; }, n*3*spb*1000+250);
-  };
-  [...ch.children].forEach((b,bi)=>b.onclick=()=>{
-    if(!played){ fb(false,"Listen first!"); return; }
-    const said=bi===0?2:3, ok=said===seq[i];
-    if(ok){ i++;
-      if(i>=seq.length){ ch.style.display="none"; btn.style.display="none"; q.textContent="Perfect ears!";
-        fb(true,"✓ You told every march from every waltz — STRONG-weak is 2/4, STRONG-weak-weak is 3/4!"); }
-      else { fb(true,`✓ Yes — ${seq[i-1]===2?"STRONG-weak, Left-Right — a march in 2/4!":"ONE-two-three — a waltz in 3/4!"} Next…`); ask(); } }
-    else fb(false,"Count the strong beats: STRONG-weak = 2, STRONG-weak-weak = 3. Play it again!");
-  });
-  ask();
-}
-
 LESSON_CONTENT[10]={
-  welcome:"Unit 3 begins — left, right, left, right! \u{1F941}",
+  welcome:"Unit 3 — a new time signature.",
   hook:{
-    say:"Have you ever noticed that some songs make you want to <b>march</b>, and others make you want to <b>dance</b>? Different time signatures create different rhythmic feelings. Press play and feel this one — <b>march or dance?</b>",
+    say:"You know 4/4. Now listen to this example — there is a two-beat count-off, then the music. <b>Count along: how many beats are in each measure?</b>",
     interact:{ type:"custom",
       mount:(container,fb)=>{
-        container.innerHTML=`<div style="text-align:center"><button class="play hk-play">▶ Feel it</button></div>
-          <div class="choices hk-ch" style="display:none"><button>\u{1F941} March — STRONG-weak</button><button>\u{1F483} Dance — STRONG-weak-weak</button></div>`;
+        container.innerHTML=`<div style="text-align:center"><button class="play hk-play">▶ Count-off, then the example</button></div>
+          <div class="choices chips hk-ch" style="display:none"><button>2</button><button>3</button><button>4</button></div>`;
         const ch=container.querySelector(".hk-ch");
         container.querySelector(".hk-play").onclick=()=>{
-          const spb=60/96; for(let k=0;k<8;k++) MFAudio.click(k*spb,k%2===0?.6:.3,k%2===0);
-          setTimeout(()=>{ ch.style.display=""; },8*spb*1000+250);
+          const spb=60/92;
+          for(let k=0;k<2;k++) MFAudio.click(k*spb,.55,k===0);
+          const mel=[[60,1],[64,1],[67,1],[64,1],[60,2]]; let b=2;
+          mel.forEach(([m,len])=>{ MFAudio.tone(m,len*spb*.9,b*spb); b+=len; });
+          for(let k=2;k<8;k+=1) MFAudio.click(k*spb,k%2===0?.5:.3,k%2===0);
+          setTimeout(()=>{ ch.style.display=""; },8*spb*1000+300);
         };
         [...ch.children].forEach((b,i)=>b.onclick=()=>{
-          if(i===0) fb(true,"✓ Left-Right, Left-Right — a MARCH! That steady STRONG-weak pulse is today's time signature: 2/4.");
-          else fb(false,"Listen again — the strong beat comes every TWO beats: STRONG-weak, like marching feet.");
+          if(i===0) fb(true,"✓ Two beats per measure. This is <b>2/4 time</b> — today's lesson.");
+          else fb(false,"Listen again and count with the clicks — the pattern repeats every TWO beats.");
         });
       } }
   },
   objectives:[
-    "Identify the 2/4 time signature",
-    "Count two beats in each measure",
-    "Recognize the marching feel of 2/4 time",
-    "Count rhythms using quarter notes",
-    "Complete measures correctly in 2/4 time",
-    "Tell 2/4 apart from other time signatures"
+    "Define the 2/4 time signature",
+    "State the beat values of notes and rests in 2/4 time",
+    "Compare 2/4 with 4/4",
+    "Complete measures in 2/4 using notes and rests",
+    "Identify measures with an incorrect number of beats",
+    "Place bar lines correctly in 2/4 time"
   ],
   steps:[
-    { say:"Meet <b>2/4 time</b>. The top number says <b>2 beats in every measure</b>; the bottom 4 says the <b>quarter note gets one beat</b> — the same beat note you already know. \u{1F447}",
-      show:{ type:"staff", spec:{clef:"treble",time:"2/4",notes:[{p:"C4",d:"q",label:"1"},{p:"G4",d:"q",label:"2"},{bar:"single"},{p:"E4",d:"q",label:"1"},{p:"C4",d:"q",label:"2"},{bar:"final"}],width:400} },
+    { say:"In <b>2/4 time</b>: the <b>2</b> means there are <b>2 beats per measure</b>; the <b>4</b> means the <b>quarter note receives 1 beat</b>. \u{1F447}",
+      show:{ type:"staff", spec:{clef:"treble",time:"2/4",notes:[{p:"C4",d:"q",label:"1"},{p:"E4",d:"q",label:"2"},{bar:"single"},{p:"G4",d:"h",label:"1  2"},{bar:"final"}],width:400} },
       try:{ type:"mc",
-        choices:["2 beats per measure","4 beats per measure","2 measures per beat"], answer:0,
-        success:"✓ Top number 2 = two beats in every container. Small measures, quick turnaround!",
-        fail:"Read the TOP number — how many beats fit in each measure?",
-        hint:"Top = how many. Bottom = which note." } },
-    { say:"2/4 is <b>marching time</b>: <b>STRONG – weak</b>, Left – Right, ONE-two. \u{1F447} <b>March along — tap on every beat, and stomp beat 1 in your mind:</b>",
+        choices:["The quarter note receives 1 beat","There are 4 beats per measure","Only 4 measures may be written"], answer:0,
+        success:"✓ The bottom 4 assigns the beat to the quarter note — exactly as in 4/4.",
+        fail:"The bottom number names the note that receives one beat.",
+        hint:"Same bottom number as 4/4." } },
+    { say:"2/4 and 4/4 <b>both have 4 as the bottom number</b>, so a quarter note receives 1 beat in each. <b>The difference:</b> 2/4 has <b>2 beats per measure</b>, while 4/4 has <b>4</b>. \u{1F447}",
+      try:{ type:"mc",
+        choices:["The number of beats per measure","Which note receives the beat","The speed of the music"], answer:0,
+        success:"✓ Only the measure length differs — 2 beats versus 4. The beat note is the same.",
+        fail:"Both share the bottom 4 — compare the TOP numbers.",
+        hint:"Compare 2 and 4 on top." } },
+    { say:"Beat values in 2/4: <b>♩ or its rest = 1 beat</b> · <b>half note = 2 beats</b> · and for a full measure of silence, use the <b>whole rest</b> — even though the measure has only 2 beats. One more rule from notation practice: <b>a half rest and a whole note are never used in 2/4 time</b>. \u{1F447}",
+      show:{ type:"staff", spec:{clef:"treble",time:"2/4",notes:[{p:"B4",d:"q",label:"1 beat"},{rest:"q",label:"1 beat"},{p:"B4",d:"h",label:"2 beats"},{rest:"w",label:"full measure"}],width:440} },
+      try:{ type:"mc",
+        choices:["A half rest and a whole note","A quarter note and a quarter rest","A half note and a whole rest"], answer:0,
+        success:"✓ Correct — in 2/4, silence for the full measure is written with the WHOLE rest, and the whole note simply doesn't fit.",
+        fail:"Check the rule text again: two symbols are excluded from 2/4 writing.",
+        hint:"One rest and one note are excluded." } },
+    { say:"<b>Complete the measures.</b> Each measure below is missing one symbol. Choose the card that completes it with exactly <b>2 beats</b>. \u{1F447}",
       try:{ type:"custom",
-        hint:"The accented click is always beat ONE — your left foot.",
+        hint:"Add the beats already in the measure, then supply the difference.",
         mount:(container,fb)=>{
-          const tempo=96, spb=60/tempo, total=8;
-          let t0=0,taps=[],on=false,timers=[];
-          container.innerHTML=`<div class="big-q mt-q" style="text-align:center">Count-in, then TAP every beat: ONE-two, ONE-two!</div>
-            <div style="text-align:center"><button class="play mt-start">▶ Start marching</button>
-            <button class="play mt-tap" style="display:none;min-width:200px;padding:20px 28px;font-size:1.25rem">\u{1F462} TAP</button></div>
-            <div class="mt-count" style="text-align:center;font-size:2rem;font-weight:800;color:var(--primary);min-height:44px"></div>`;
-          const q=container.querySelector(".mt-q"), cnt=container.querySelector(".mt-count"),
-                sB=container.querySelector(".mt-start"), tB=container.querySelector(".mt-tap");
-          tB.onclick=()=>{ if(!on)return; taps.push(performance.now()-t0); MFAudio.click(0,.35); };
-          sB.onclick=()=>{
-            sB.style.display="none"; taps=[]; timers.forEach(clearTimeout); timers=[];
-            MFAudio.ac();
-            for(let i=0;i<2;i++) MFAudio.click(i*spb,.5,i===0);
-            for(let i=0;i<total;i++) MFAudio.click((2+i)*spb,.5,i%2===0);
-            t0=performance.now();
-            for(let i=0;i<total;i++) timers.push(setTimeout(()=>{cnt.textContent=i%2===0?"ONE":"two";},(2+i)*spb*1000));
-            timers.push(setTimeout(()=>{ tB.style.display="inline-block"; on=true; },Math.max(0,2*spb*1000-400)));
-            timers.push(setTimeout(()=>{
-              on=false; tB.style.display="none"; cnt.textContent="";
-              const tol=spb*0.45*1000, expected=[]; for(let i=0;i<total;i++) expected.push((2+i)*spb*1000);
-              const used=new Set(); let hits=0;
-              expected.forEach(t=>{ let best=-1,bd=1e9;
-                taps.forEach((tp,j)=>{ if(used.has(j))return; const d=Math.abs(tp-t); if(d<bd){bd=d;best=j;} });
-                if(best>=0&&bd<=tol){ used.add(best); hits++; } });
-              sB.style.display="inline-block"; sB.textContent="▶ March again";
-              if(hits>=6) fb(true,`✓ ${hits} of ${total} right on the beat — ONE-two, ONE-two, a perfect march!`);
-              else fb(false,`${hits} of ${total}. Say “ONE-two” OUT LOUD with the clicks and march again!`);
-            },(2+total)*spb*1000+600));
-          };
-        } } },
-    { say:"Each 2/4 measure holds exactly <b>2 beats</b> — a small container that fills up fast. \u{1F447} <b>Build TWO different 2-beat measures:</b>",
-      try:{ type:"custom",
-        hint:"Half = 2, Quarter = 1. Only 2 beats fit — the whole note is too big!",
-        mount:(container,fb)=>{
-          const B={h:2,q:1};
-          let cur=[],sum=0,found=[];
-          container.innerHTML=`<div class="b2-staff"></div><div class="big-q b2-q" style="text-align:center"></div>
-            <div class="choices b2-ch"><button data-v="h">Half (2)</button><button data-v="q">Quarter (1)</button><button class="ghost" data-v="x">↺ Clear</button></div>`;
-          const st=container.querySelector(".b2-staff"), q=container.querySelector(".b2-q");
-          function draw(){
-            Staff.render(st,{clef:"treble",time:"2/4",notes:[...cur.map(d=>({p:"B4",d})),{bar:"final"}],width:300});
-            q.textContent=`Beats: ${sum} of 2 · Measures built: ${found.length} of 2`;
-          }
-          [...container.querySelectorAll(".b2-ch button")].forEach(b=>b.onclick=()=>{
-            const v=b.dataset.v;
-            if(v==="x"){ cur=[];sum=0;draw(); return; }
-            if(sum+B[v]>2){ fb(false,`Too many — a 2/4 measure holds exactly 2 beats!`); return; }
-            cur.push(v); sum+=B[v]; MFAudio.tone(71,B[v]*.4); draw();
-            if(sum===2){
-              const key=cur.slice().sort().join("");
-              if(found.includes(key)){ fb(false,"Same combination — clear and find the OTHER way!"); cur=[];sum=0; setTimeout(draw,900); return; }
-              found.push(key);
-              let t=0; cur.forEach(d=>{ MFAudio.tone(71,B[d]*.45,t); t+=B[d]*.5; });
-              if(found.length>=2){ container.querySelector(".b2-ch").style.display="none"; q.textContent="Both ways found!";
-                fb(true,"✓ Two quarters OR one half — those are the only two ways to fill a 2/4 measure with today's notes!"); }
-              else { fb(true,"✓ Exactly 2 beats! Now the OTHER combination…"); cur=[];sum=0; setTimeout(draw,1100); }
-            }
+          const rounds=[
+            {given:[{p:"C4",d:"q",label:"1"}],need:1,accept:["q","Q"],text:"one more beat"},
+            {given:[],need:2,accept:["h","W"],text:"a full two beats"},
+            {given:[{rest:"q",label:"1"}],need:1,accept:["q","Q"],text:"one more beat"}];
+          const CARDS=[["q","Quarter Note",{p:"E4",d:"q"},1],["h","Half Note",{p:"E4",d:"h"},2],
+                       ["Q","Quarter Rest",{rest:"q"},1],["W","Whole Rest",{rest:"w"},2]];
+          let i=0;
+          container.innerHTML=`<div class="big-q cm-q" style="text-align:center"></div><div class="cm-staff"></div>
+            <div class="cm-cards" style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:8px"></div>`;
+          const q=container.querySelector(".cm-q"), st=container.querySelector(".cm-staff"), grid=container.querySelector(".cm-cards");
+          CARDS.forEach(([t,name,item,beats])=>{
+            const b=document.createElement("button");
+            b.style.cssText="border-radius:10px;padding:6px 10px;min-width:108px";
+            const d=document.createElement("div"); b.appendChild(d);
+            Staff.render(d,{clef:"none",notes:[item],width:100});
+            const nm=document.createElement("div"); nm.style.cssText="font-weight:700;font-size:13px"; nm.textContent=name; b.appendChild(nm);
+            b.onclick=()=>{
+              const cur=rounds[i];
+              if(cur.accept.includes(t)){
+                Staff.render(st,{clef:"treble",time:"2/4",notes:[...cur.given,item,{bar:"final"}],width:320});
+                if(!item.rest) MFAudio.tone(64,beats*.45); else MFAudio.click(0,.35);
+                i++;
+                if(i>=rounds.length){ grid.style.display="none"; q.textContent="All measures completed.";
+                  fb(true,"✓ Every measure now holds exactly 2 beats — notes and rests both count toward the total."); }
+                else { fb(true,"✓ Exactly 2 beats. Next measure…"); setTimeout(ask,1200); }
+              } else {
+                const sum=cur.given.reduce((s,g)=>s+(g.d==="h"?2:1),0);
+                fb(false,`This measure already holds ${sum} beat${sum!==1?"s":""} — it needs ${cur.text} (${cur.need}). And remember: no half rests in 2/4.`);
+              }
+            };
+            grid.appendChild(b);
           });
-          draw();
+          function ask(){
+            const cur=rounds[i];
+            Staff.render(st,{clef:"treble",time:"2/4",notes:[...cur.given,{bar:"final"}],width:320});
+            q.textContent=`Measure ${i+1} of ${rounds.length}: choose the symbol that completes it.`;
+          }
+          ask();
         } } },
-    { say:"Your ears can tell time signatures apart! A march pulses <b>STRONG-weak</b>; a waltz pulses <b>STRONG-weak-weak</b> (that's 3/4 — next lesson!). \u{1F447} <b>March or waltz?</b>",
+    { say:"<b>Find the measure with the incorrect number of beats.</b> Three measures are correct; one is not. \u{1F447} <b>Click A, B, C or D:</b>",
       try:{ type:"custom",
-        hint:"Count how many beats pass between the STRONG clicks: 2 = march, 3 = waltz.",
-        mount:(container,fb)=>MF_L10_marchWaltz(container,fb,4) } },
-    { say:"Let's READ a march. Count out loud — <b>ONE-two | ONE-two</b> — and notice the count restarting at every bar line. \u{1F447}",
-      try:{ type:"custom",
-        hint:"Two beats per measure — the half note fills a whole measure by itself.",
+        hint:"Count each measure against the top number: exactly 2 beats.",
         mount:(container,fb)=>{
-          const spec={clef:"treble",time:"2/4",tempo:96,
-            notes:[{p:"C4",d:"q",label:"1"},{p:"E4",d:"q",label:"2"},{bar:"single"},{p:"G4",d:"q",label:"1"},{p:"E4",d:"q",label:"2"},{bar:"single"},{p:"C4",d:"h",label:"1-2"},{bar:"final"}],width:440};
-          container.innerHTML=`<div class="rm-staff"></div><div style="text-align:center"><button class="play rm-play">▶ Play & march along</button></div>`;
-          const api=Staff.render(container.querySelector(".rm-staff"),spec);
-          container.querySelector(".rm-play").onclick=()=>{
-            const total=Staff.play(spec,api);
-            setTimeout(()=>fb(true,"✓ ONE-two, ONE-two, ONE-(two) — you just read music in 2/4 time!"),total*1000+300);
-          };
+          const rounds=[
+            {items:[[{p:"C4",d:"q"},{p:"D4",d:"q"}],[{p:"E4",d:"h"}],[{p:"F4",d:"q"},{p:"G4",d:"q"},{p:"E4",d:"q"}],[{rest:"q"},{p:"D4",d:"q"}]],bad:2,why:"C holds 3 beats — one too many for 2/4."},
+            {items:[[{p:"G4",d:"h"}],[{p:"E4",d:"q"}],[{p:"C4",d:"q"},{rest:"q"}],[{rest:"w"}]],bad:1,why:"B holds only 1 beat — a 2/4 measure needs exactly 2. (D is fine: the whole rest fills any full measure.)"}];
+          let r=0;
+          container.innerHTML=`<div class="big-q ic-q" style="text-align:center"></div><div class="ic-staff"></div>
+            <div class="choices chips ic-ch"><button>A</button><button>B</button><button>C</button><button>D</button></div>`;
+          const q=container.querySelector(".ic-q"), st=container.querySelector(".ic-staff"), ch=container.querySelector(".ic-ch");
+          function ask(){
+            const cur=rounds[r], items=[];
+            cur.items.forEach((meas,mi)=>{
+              meas.forEach((n,ni)=>items.push(Object.assign({},n,ni===0?{label:"ABCD"[mi]}:{})));
+              items.push({bar:mi<cur.items.length-1?"single":"final"});
+            });
+            Staff.render(st,{clef:"treble",time:"2/4",notes:items,width:470});
+            q.textContent=`Line ${r+1} of ${rounds.length}: which measure has the INCORRECT number of beats?`;
+          }
+          [...ch.children].forEach((b,bi)=>b.onclick=()=>{
+            const cur=rounds[r];
+            if(bi===cur.bad){ MFAudio.click(0,.4,true); r++;
+              if(r>=rounds.length){ ch.style.display="none"; q.textContent="Both lines checked.";
+                fb(true,"✓ You found every faulty measure — counting against the top number never fails."); }
+              else { fb(true,"✓ "+cur.why+" Next line…"); ask(); } }
+            else { MFAudio.tone(40,.25); fb(false,"Count that measure again — it holds exactly 2 beats. "+cur.why); }
+          });
+          ask();
+        } } },
+    { say:"<b>Draw the bar lines.</b> The melody below has none — click the two positions where a bar line belongs, so that every measure holds <b>2 beats</b>. \u{1F447}",
+      try:{ type:"custom",
+        hint:"Count from the start: a bar line belongs after every 2 beats.",
+        mount:(container,fb)=>{
+          const seq=[{p:"C4",d:"q"},{p:"D4",d:"q"},{p:"E4",d:"h"},{p:"D4",d:"q"},{p:"C4",d:"q"}];
+          const cand=[{g:0,letter:"A"},{g:1,letter:"B"},{g:2,letter:"C"},{g:3,letter:"D"}];
+          const correct=new Set([1,2]);
+          const placed=new Set(), W=460, NS="http://www.w3.org/2000/svg";
+          container.innerHTML=`<div class="bl-staff"></div><div class="choices chips bl-ch"></div>`;
+          const st=container.querySelector(".bl-staff"), ch=container.querySelector(".bl-ch");
+          cand.forEach(c=>{ const b=document.createElement("button"); b.textContent=c.letter;
+            b.onclick=()=>pick(c,b); ch.appendChild(b); });
+          function items(){
+            const out=[]; seq.forEach((n,j)=>{ out.push(n); if(placed.has(j)) out.push({bar:"single"}); });
+            if(placed.size===correct.size) out.push({bar:"final"});
+            return out;
+          }
+          function draw(){
+            const its=items();
+            Staff.render(st,{clef:"treble",time:"2/4",notes:its,width:W});
+            const svg=st.querySelector("svg");
+            const startX=110, L=its.length;
+            const xAt=i2=> L===1? (startX+W-40)/2 : startX+i2*((W-40-startX)/(L-1));
+            const idxMap=[]; let k=0;
+            seq.forEach((n,j)=>{ idxMap[j]=k; k++; if(placed.has(j)) k++; });
+            cand.forEach(c=>{
+              if(placed.has(c.g)) return;
+              const xa=xAt(idxMap[c.g]), xb=c.g+1<seq.length? xAt(idxMap[c.g+1]) : W-16;
+              const x=(xa+xb)/2;
+              const ln=document.createElementNS(NS,"line");
+              ln.setAttribute("x1",x);ln.setAttribute("y1",112);ln.setAttribute("x2",x);ln.setAttribute("y2",96);
+              ln.setAttribute("stroke","#33415c");ln.setAttribute("stroke-width","2");
+              const hd=document.createElementNS(NS,"polygon");
+              hd.setAttribute("points",`${x-4},99 ${x+4},99 ${x},91`); hd.setAttribute("fill","#33415c");
+              const tx=document.createElementNS(NS,"text");
+              tx.setAttribute("x",x);tx.setAttribute("y",127);tx.setAttribute("text-anchor","middle");
+              tx.setAttribute("class","lbl");tx.setAttribute("font-weight","800");tx.textContent=c.letter;
+              svg.appendChild(ln);svg.appendChild(hd);svg.appendChild(tx);
+            });
+          }
+          function pick(c,b){
+            if(placed.has(c.g)||b.disabled) return;
+            if(correct.has(c.g)){
+              placed.add(c.g); b.disabled=true; MFAudio.tone(76,.3);
+              draw();
+              if([...correct].every(g=>placed.has(g))){
+                ch.style.display="none";
+                const spec={clef:"treble",time:"2/4",tempo:92,notes:items(),width:W};
+                const api=Staff.render(st,spec); Staff.play(spec,api);
+                fb(true,"✓ Bar lines after beats 2 and 4 — three measures of exactly 2 beats each, closed by a double bar.");
+              } else fb(true,"✓ A bar line belongs there. One more…");
+            } else { MFAudio.tone(40,.25);
+              fb(false,"Count from the last bar line — a bar line belongs exactly where the count reaches 2."); }
+          }
+          draw();
         } } }
   ],
   examples:[
-    { caption:"A 2/4 march — count ONE-two in every measure, and feel the LEFT-right of marching feet.",
-      staff:{clef:"treble",tempo:96,time:"2/4",notes:[{p:"C4",d:"q",label:"1"},{p:"C4",d:"q",label:"2"},{bar:"single"},{p:"G4",d:"q",label:"1"},{p:"G4",d:"q",label:"2"},{bar:"single"},{p:"E4",d:"h",label:"1-2"},{bar:"final"}],width:440} },
-    { caption:"The half note fills an entire 2/4 measure — one sound, two beats: ONE-two.",
-      staff:{clef:"treble",tempo:96,time:"2/4",notes:[{p:"D4",d:"h",label:"1-2"},{bar:"single"},{p:"E4",d:"q",label:"1"},{p:"D4",d:"q",label:"2"},{bar:"single"},{p:"C4",d:"h",label:"1-2"},{bar:"final"}],width:440} }
+    { caption:"A line in 2/4 — count “1 2 | 1 2” with the playback. The half note fills a complete measure.",
+      staff:{clef:"treble",tempo:92,time:"2/4",notes:[{p:"C4",d:"q",label:"1"},{p:"E4",d:"q",label:"2"},{bar:"single"},{p:"G4",d:"q",label:"1"},{p:"E4",d:"q",label:"2"},{bar:"single"},{p:"C4",d:"h",label:"1  2"},{bar:"final"}],width:440} },
+    { caption:"Rests in 2/4: the quarter rest takes 1 beat; a full measure of silence is written with the whole rest.",
+      staff:{clef:"treble",tempo:92,time:"2/4",notes:[{p:"D4",d:"q",label:"1"},{rest:"q",label:"2"},{bar:"single"},{rest:"w",label:"1  2"},{bar:"single"},{p:"D4",d:"h",label:"1  2"},{bar:"final"}],width:440} }
   ],
   games:[
-    { type:"rhythm-tap", title:"Game 1 · March Tap",
-      intro:"Tap 2/4 rhythms back — feel the STRONG-weak, Left-Right pulse in every measure!",
-      miaIntro:"Game time — your hands become marching feet! \u{1F941}",
-      spec:{tempo:96, rounds:3, beatsPerBar:2, patterns:[["q","q"],["h"],["q","rq"],["rq","q"]]},
-      result:(score)=>score>=4?"Right on the march — 2/4 lives in your hands now!":null },
-    { type:"measure-judge", title:"Game 2 · 2/4 Inspector",
-      intro:"Does each measure hold exactly <b>2 beats</b>? Small containers, quick math — judge fast!",
-      miaIntro:"Inspector duty again — but the containers just got smaller! \u{1F50D}",
+    { type:"rhythm-tap", title:"Game 1 · 2/4 Rhythm Tap",
+      intro:"Listen to a 2/4 measure, then tap it back precisely. The count-off gives you the tempo.",
+      miaIntro:"Two-beat measures — listen, then tap. \u{1F3AF}",
+      spec:{tempo:92, rounds:3, beatsPerBar:2, patterns:[["q","q"],["h"],["q","rq"],["rq","q"]]},
+      result:(score)=>score>=4?"Precise tapping in 2/4 — well done.":null },
+    { type:"measure-judge", title:"Game 2 · Correct or Incorrect?",
+      intro:"Just like the textbook exercise: does each measure hold exactly <b>2 beats</b>?",
+      miaIntro:"Check every measure against the top number. \u{1F50D}",
       spec:{rounds:8, beats:2},
-      result:(score)=>score>=7?"No incomplete 2/4 measure gets past you!":null },
-    { type:"measure-build", title:"Game 3 · Two-Beat Builder",
-      intro:"Fill 2/4 measures with exactly <b>2 beats</b> — find BOTH combinations!",
-      miaIntro:"Builder time — small measures, exact math! \u{1F3D7}\u{FE0F}",
+      result:(score)=>score>=7?"Sharp beat-counting — barely a miss.":null },
+    { type:"measure-build", title:"Game 3 · Complete the Measure",
+      intro:"Fill 2/4 measures with exactly <b>2 beats</b>, using the note cards. Find both combinations.",
+      miaIntro:"Build with the cards — exactly two beats. \u{1F3D7}\u{FE0F}",
       spec:{beats:2, unique:true, rounds:2},
-      result:(stars)=>stars>=3?"Both combinations, zero overflow — 2/4 mastered!":null },
-    { type:"symbol-hunt", title:"Game 4 · Time Signature Hunt",
-      intro:"2/4, 3/4, 4/4, C — they all look similar. Click the one Mia names!",
-      miaIntro:"Last game — can you spot 2/4 in a crowd of time signatures? \u{1F3AF}",
+      result:(stars)=>stars>=3?"Both combinations found without overflow.":null },
+    { type:"symbol-hunt", title:"Game 4 · Time Signature Identification",
+      intro:"2/4, 3/4, 4/4 and C — identify the one named. Read the top number carefully.",
+      miaIntro:"Identify each signature at sight. \u{1F3AF}",
       spec:{rounds:6, pool:[
         {label:"2/4 Time Signature", spec:{clef:"treble",time:"2/4",notes:[]}},
         {label:"3/4 Time Signature", spec:{clef:"treble",time:"3/4",notes:[]}},
         {label:"4/4 Time Signature", spec:{clef:"treble",time:"4/4",notes:[]}},
         {label:"Common Time (C)", spec:{clef:"treble",time:"C",notes:[]}}]},
-      result:(score)=>score>=5?"Sharp eyes — every top number spotted!":null }
+      result:(score)=>score>=5?"Every signature identified correctly.":null }
   ],
-  practiceIntro:"20 practice questions — 2/4 counting, complete measures, and beat math. Answer right and the next appears automatically!",
+  practiceIntro:"20 practice questions — definitions, beat values, and measure checking in 2/4. Answer correctly and the next appears automatically.",
   practice:[
     { gen:"measure-complete", params:{beats:2}, count:4 },
     { gen:"rhythm-count", params:{values:["h","q"],maxNotes:2}, count:3 },
     { gen:"note-value", params:{ask:"beats"}, count:2 },
     { gen:"measure-count", params:{min:2,max:4}, count:2 },
-    { type:"mc", q:"In 2/4 time, the TOP number tells you…", choices:["2 beats in every measure","the quarter note gets the beat","play twice as fast"], answer:0,
-      explain:"Top number = beats per measure. In 2/4, that's two." },
-    { type:"mc", q:"In 2/4 time, which note receives one beat?", choices:["Quarter Note","Half Note","Whole Note"], answer:0,
-      explain:"The bottom 4 = quarter note gets the beat — same as in 4/4." },
-    { type:"truefalse", q:"2/4 time has a marching feel: STRONG-weak.", answer:true,
-      explain:"Left-Right, ONE-two — that's the 2/4 march." },
-    { type:"truefalse", q:"A whole note fits in one 2/4 measure.", answer:false,
-      explain:"A whole note needs 4 beats — a 2/4 measure only holds 2." },
-    { type:"mc", q:"Which fills one complete 2/4 measure?", choices:["Half Note","Whole Note","Half + Quarter"], answer:0,
-      explain:"2 beats exactly. (Whole = 4 too many; half+quarter = 3.)" },
-    { type:"truefalse", q:"Counting in 2/4 goes “ONE-two, ONE-two.”", answer:true,
-      explain:"Strong beat 1, lighter beat 2 — every measure." },
-    { type:"mc", q:"The quarter note gets one beat in BOTH 2/4 and 4/4 because…", choices:["the bottom number is 4 in both","the top number is the same","quarter notes always get one beat in every time signature"], answer:0,
-      explain:"Bottom 4 = quarter note is the beat. (Other bottom numbers exist — later lessons!)" },
-    { type:"truefalse", q:"2/4 has fewer beats per measure than 4/4.", answer:true,
-      explain:"2 versus 4 — half the container size." },
-    { type:"mc", q:"Which piece would most likely be in 2/4?", choices:["A soldiers' march","A dreamy lullaby in 3","a piece with 4 strong beats"], answer:0,
-      explain:"STRONG-weak = perfect for marching feet." }
+    { type:"mc", q:"In 2/4 time, the top number 2 means…", choices:["there are 2 beats per measure","the half note receives one beat","the piece has 2 measures"], answer:0,
+      explain:"Top number = beats per measure." },
+    { type:"mc", q:"In 2/4 time, the bottom number 4 means…", choices:["the quarter note receives 1 beat","there are 4 beats per measure","play at a moderate speed"], answer:0,
+      explain:"Bottom 4 = quarter note gets the beat, as in 4/4." },
+    { type:"mc", q:"The difference between 2/4 and 4/4 is…", choices:["the number of beats per measure","which note receives the beat","the pitch of the notes"], answer:0,
+      explain:"2 beats versus 4 — the beat note is the same." },
+    { type:"truefalse", q:"In 2/4 time, a half note receives 2 beats.", answer:true,
+      explain:"It fills a complete 2/4 measure." },
+    { type:"truefalse", q:"A whole rest is used for a full measure of rest in 2/4 time.", answer:true,
+      explain:"The whole rest fills any full measure — even a 2-beat one." },
+    { type:"truefalse", q:"A half rest may be written in 2/4 time.", answer:false,
+      explain:"By convention, half rests and whole notes are never used in 2/4." },
+    { type:"truefalse", q:"A whole note may be written in 2/4 time.", answer:false,
+      explain:"Four beats cannot fit a two-beat measure." },
+    { type:"mc", q:"Counting in 2/4 is written…", choices:["1 2 | 1 2","1 2 3 | 1 2 3","1 2 3 4"], answer:0,
+      explain:"Two counts per measure, restarting after each bar line." },
+    { type:"mc", q:"Which fills one complete 2/4 measure?", choices:["Half note","Whole note","Half note + quarter note"], answer:0,
+      explain:"Exactly 2 beats. The others give 4 and 3." }
   ],
-  miaQuizIntro:"Quiz time! ONE-two, ONE-two — march through these questions!",
+  miaQuizIntro:"Quiz time — twenty questions on 2/4. Count carefully.",
   quiz:[
     { type:"mc", q:"How many beats are in one measure of 2/4 time?", choices:["1","2","3","4"], answer:1,
-      explain:"The top number says 2.", hint:"Look at the top number." },
-    { type:"mc", q:"Which note receives one beat in 2/4 time?", choices:["Whole Note","Half Note","Quarter Note","Eighth Note"], answer:2,
-      explain:"Bottom number 4 = quarter note gets the beat.", hint:"Look at the bottom number." },
-    { type:"truefalse", q:"The top number tells you how many beats are in each measure.", answer:true,
+      explain:"The top number says 2.", hint:"Read the top number." },
+    { type:"mc", q:"In 2/4 time, which note receives one beat?", choices:["Whole Note","Half Note","Quarter Note","Eighth Note"], answer:2,
+      explain:"The bottom 4 assigns the beat to the quarter note.", hint:"Read the bottom number." },
+    { type:"truefalse", q:"The top number of a time signature tells how many beats are in each measure.", answer:true,
       explain:"Top = how many; bottom = which note.", hint:"Same rule as 4/4." },
     { type:"truefalse", q:"A measure of 2/4 time contains three beats.", answer:false,
-      explain:"Two beats — that's what the top 2 promises.", hint:"Read the top number again." },
-    { type:"mc", q:"Which time signature has a MARCHING feel?", choices:["2/4","3/4","Neither"], answer:0,
-      explain:"STRONG-weak, Left-Right = 2/4 march.", hint:"Left-Right!" },
-    { type:"mc", q:"2/4 time is counted…", choices:["ONE-two, ONE-two","ONE-two-three","ONE-two-three-four"], answer:0,
-      explain:"Two beats per measure, strong beat first.", hint:"How many beats per container?" },
+      explain:"Two beats.", hint:"The top number." },
+    { type:"mc", q:"2/4 and 4/4 both have 4 as the bottom number. This means…", choices:["a quarter note receives 1 beat in both","both have 4 beats per measure","both are played at the same speed"], answer:0,
+      explain:"The shared bottom number fixes the beat note.", hint:"What does the bottom number control?" },
+    { type:"mc", q:"In 2/4 time, a half note receives…", choices:["1 beat","2 beats","4 beats"], answer:1,
+      explain:"Two beats — a complete measure.", hint:"Note values do not change." },
+    { type:"mc", q:"For a FULL measure of rest in 2/4 time, use…", choices:["a whole rest","a half rest","two eighth rests"], answer:0,
+      explain:"The whole rest marks a full measure of silence in any meter.", hint:"The rule beneath the beat table." },
+    { type:"mc", q:"Which two symbols are NEVER used in writing 2/4 time?", choices:["Half rest and whole note","Quarter rest and quarter note","Whole rest and half note"], answer:0,
+      explain:"The whole rest replaces the half rest for full-measure silence; the whole note cannot fit.", hint:"One rest, one note." },
     { type:"mc", q:"How many measures are shown?",
-      staff:{clef:"treble",time:"2/4",notes:[{p:"B4",d:"q"},{p:"B4",d:"q"},{bar:"single"},{p:"B4",d:"h"},{bar:"single"},{p:"B4",d:"q"},{p:"B4",d:"q"},{bar:"final"}],width:400},
+      staff:{clef:"treble",time:"2/4",notes:[{p:"B4",d:"q"},{p:"B4",d:"q"},{bar:"single"},{p:"B4",d:"h"},{bar:"single"},{p:"B4",d:"q"},{rest:"q"},{bar:"final"}],width:400},
       choices:["2","3","4"], answer:1,
-      explain:"Three containers of 2 beats each.", hint:"Count the spaces between bar lines." },
-    { type:"mc", q:"A measure of 2/4 time contains ____ beats.", choices:["1","2","3","4"], answer:1,
-      explain:"Two — top number 2.", hint:"2/4: the first number." },
+      explain:"Three measures of two beats each.", hint:"Count the spaces between bar lines." },
     { type:"truefalse", q:"This measure is complete.",
       staff:{clef:"treble",time:"2/4",notes:[{p:"B4",d:"q"},{bar:"final"}],width:260},
       answer:false,
-      explain:"Only 1 beat — a 2/4 measure needs exactly 2.", hint:"Add the beats, compare to the top number." },
-    { type:"mc", q:"Which fills one complete measure of 2/4?", choices:["Quarter + Quarter","Quarter + Half","Whole Note"], answer:0,
-      explain:"1+1 = 2 ✓. Quarter+half = 3; whole = 4 — both overflow.", hint:"Total must be exactly 2." },
-    { type:"mc", q:"Which is the 2/4 time signature?",
-      choices:["Top 2, bottom 4","Top 4, bottom 2","A large letter C"], answer:0,
-      explain:"2 beats per measure, quarter note gets the beat.", hint:"Top = beats." },
+      explain:"Only 1 beat — 2/4 requires exactly 2.", hint:"Compare with the top number." },
+    { type:"mc", q:"Which completes a 2/4 measure that already contains one quarter note?",
+      choices:["One quarter note or one quarter rest","One half note","One whole rest"], answer:0,
+      explain:"1 + 1 = 2. A half note would overflow to 3.", hint:"Supply exactly one beat." },
     { type:"mc", q:"Which statement is correct?",
       choices:["A quarter note has a different value in 2/4 than in 4/4","The quarter note equals one beat in both 2/4 and 4/4","2/4 and 4/4 have the same number of beats per measure","A measure of 2/4 contains four beats"], answer:1,
-      explain:"The bottom 4 keeps the quarter note as the beat — only the measure SIZE changes.",
-      hint:"What does the bottom number do?" },
+      explain:"The bottom 4 keeps the quarter note as the beat; only the measure length differs.",
+      hint:"The shared bottom number." },
     /* generated */
     { gen:"measure-complete", params:{beats:2}, count:3 },
     { gen:"rhythm-count", params:{values:["h","q"],maxNotes:2}, count:2 },
@@ -245,45 +285,45 @@ LESSON_CONTENT[10]={
     { gen:"note-name", params:{clef:"treble"}, count:1 }
   ],
   vocabulary:[
-    {def:"Two beats per measure — the quarter note gets one beat", term:"2/4 Time", staff:{clef:"none",time:"2/4",notes:[],width:140}},
-    {def:"The STRONG-weak marching pulse: Left–Right, ONE-two", term:"March Feel"},
-    {def:"A symbol telling how many beats per measure and which note gets one beat", term:"Time Signature", staff:{clef:"none",time:"2/4",notes:[],width:140}},
-    {def:"A group of beats separated by bar lines", term:"Measure (Bar)"}
+    {def:"Two beats per measure; the quarter note receives one beat", term:"2/4 Time", staff:{clef:"none",time:"2/4",notes:[],width:140}},
+    {def:"Tells how many beats are in each measure and which note receives one beat", term:"Time Signature"},
+    {def:"Used for a FULL measure of rest — in any time signature", term:"Whole Rest", staff:{clef:"none",notes:[{rest:"w"}],width:140}},
+    {def:"Never written in 2/4 time (use the whole rest / smaller notes instead)", term:"Half Rest · Whole Note"}
   ],
   mistakes:[],
   summary:[
-    "✔ <b>2/4</b> = <b>2 beats</b> per measure; the quarter note gets the beat.",
-    "✔ Count <b>ONE-two | ONE-two</b> — strong beat first.",
-    "✔ 2/4 feels like a <b>march</b>: Left–Right. \u{1F941}",
-    "✔ Only two ways to fill it with basic notes: <b>♩ ♩</b> or one <b>half note</b>.",
-    "✔ Different top numbers = different feels — the quarter note stays the beat."
+    "✔ <b>2/4</b>: 2 = <b>two beats per measure</b>; 4 = the <b>quarter note receives 1 beat</b>.",
+    "✔ 2/4 and 4/4 share the bottom 4 — only the <b>measure length</b> differs.",
+    "✔ ♩ or ♩-rest = 1 beat; half note = 2 beats.",
+    "✔ A <b>whole rest</b> marks a full measure of silence — even in 2/4.",
+    "✔ A <b>half rest</b> and a <b>whole note</b> are never used in 2/4 time."
   ],
   tips:[
-    "March around the room counting “ONE-two” — your feet learn 2/4 faster than your eyes.",
-    "The strong click is always beat ONE. Lost? Wait for the accent and jump back in.",
-    "Small measures fill up fast — always check the top number before you count.",
-    "\u{1F483} Next lesson: add one more beat and the march becomes a WALTZ — 3/4 time!"
+    "Count aloud in twos — “1 2 | 1 2” — and let the bar line restart the count.",
+    "Checking a measure? Add every note AND rest, then compare with the top number.",
+    "Remember the writing rule: full-measure silence = whole rest, in every meter.",
+    "Next lesson: the same system with three beats — 3/4 time."
   ],
-  rewards:{ badge:"March Time Keeper", icon:"\u{1F941}" },
+  rewards:{ badge:"2/4 Time Expert", icon:"\u{1F4CF}" },
   sectionOrder:["secHook","secObjectives","secLearn","secExample","secReview",
     "secGame0","secGame1","secGame2","secGame3","secPractice","secQuiz","secTips","secNext"],
-  miaPerfect:"A PERFECT march — ONE-two straight to the top! The waltz is waiting for you next. \u{1F941}\u{1F389}",
-  miaPass:"You passed! 2/4 is officially in your bones. Review below or march for the perfect run.",
+  miaPerfect:"A perfect score on 2/4 — definitions, values and rules all in place. 3/4 is next. \u{1F389}",
+  miaPass:"Passed. Review the summary if you like, or retry for a perfect run — several questions regenerate each attempt.",
   mia:{
     hook:{ label:"the welcome",
-      explain:"Time signatures shape how music FEELS. Two beats per measure = a march; you'll feel it before you can name it.",
-      play:()=>{const s=.62;for(let k=0;k<6;k++) MFAudio.click(k*s,k%2===0?.6:.3,k%2===0);} },
+      explain:"The example repeats its pattern every two beats — the defining feature of 2/4 time.",
+      play:()=>{const s=.62;for(let k=0;k<6;k++) MFAudio.click(k*s,k%2===0?.55:.3,k%2===0);} },
     learn:{ label:"2/4 time",
-      explain:"Top 2 = two beats per measure. Bottom 4 = quarter note gets the beat. Count ONE-two with a strong ONE, and remember only 2 beats fit per container.",
-      hint:"STRONG-weak, Left-Right — the march never lies.",
+      explain:"2 = two beats per measure; 4 = quarter note receives one beat. Whole rest for a full silent measure; half rest and whole note are not written in 2/4.",
+      hint:"Compare every measure with the top number.",
       play:()=>{const s=.6;[60,64].forEach((m,i)=>MFAudio.tone(m,s*.9,i*s));[67,64].forEach((m,i)=>MFAudio.tone(m,s*.9,(2+i)*s));} },
     example:{ label:"the examples",
-      explain:"Both examples are pure 2/4 — count ONE-two in every measure and hear the half note fill a whole container." },
+      explain:"Both examples count in twos; note the whole rest filling a complete silent measure in example 2." },
     game:{ label:"the games",
-      explain:"Tap marches, inspect 2-beat containers, build both combinations, and hunt the 2/4 sign.",
-      hint:"Everything is the same as 4/4 — just a smaller container." },
+      explain:"Tap 2/4 rhythms, judge measures against the top number, complete measures with the cards, and identify signatures at sight.",
+      hint:"Everything rests on one comparison: the measure total versus the top number." },
     quiz:{ label:"this question",
-      explain:"Two facts solve nearly everything: top 2 = two beats per measure; bottom 4 = quarter note gets the beat.",
-      play:()=>{MFAudio.click(0,.6,true);MFAudio.click(.6,.3);MFAudio.click(1.2,.6,true);MFAudio.click(1.8,.3);} }
+      explain:"Two definitions and two writing rules cover this quiz: 2 beats per measure, quarter note = 1 beat, whole rest for full silence, no half rest / whole note in 2/4.",
+      play:()=>{MFAudio.click(0,.55,true);MFAudio.click(.6,.3);} }
   }
 };

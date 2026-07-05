@@ -113,14 +113,21 @@ LESSON_CONTENT[15]={
       try:{ type:"custom",
         hint:"Eighth = ½, Quarter = 1, Half = 2. Land on exactly 4 — no half-beat left hanging!",
         mount:(container,fb)=>{
-          const BT=[{t:"8",label:"Eighth (½)",beats:.5,item:{p:"B4",d:"8"}},
-                    {t:"q",label:"Quarter (1)",beats:1,item:{p:"B4",d:"q"}},
-                    {t:"h",label:"Half (2)",beats:2,item:{p:"B4",d:"h"}}];
+          const BT=[{t:"8",label:"Eighth Note",beats:.5,item:{p:"B4",d:"8"}},
+                    {t:"q",label:"Quarter Note",beats:1,item:{p:"B4",d:"q"}},
+                    {t:"h",label:"Half Note",beats:2,item:{p:"B4",d:"h"}}];
           let cur=[],sum=0,found=[];
           container.innerHTML=`<div class="be-staff"></div><div class="big-q be-q" style="text-align:center"></div>
             <div class="choices be-ch"></div>`;
           const st=container.querySelector(".be-staff"), q=container.querySelector(".be-q"), ch=container.querySelector(".be-ch");
-          BT.forEach(bt=>{ const b=document.createElement("button"); b.textContent=bt.label; b.onclick=()=>add(bt); ch.appendChild(b); });
+          const BTNS_LOCAL=BT;
+          BTNS_LOCAL.forEach(bt=>{ const b=document.createElement("button");
+            b.style.cssText="border-radius:10px;padding:6px 10px;min-width:104px";
+            const d0=document.createElement("div"); b.appendChild(d0);
+            Staff.render(d0,{clef:"none",notes:[bt.item],width:100});
+            const nm=document.createElement("div"); nm.style.cssText="font-weight:700;font-size:13px";
+            nm.textContent=bt.label.replace(/\s*\([^)]*\)\s*$/,""); b.appendChild(nm);
+            b.onclick=()=>add(bt); ch.appendChild(b); });
           const clr=document.createElement("button"); clr.className="ghost"; clr.textContent="↺ Clear";
           clr.onclick=()=>{ cur=[];sum=0;draw(); }; ch.appendChild(clr);
           function draw(){
@@ -178,10 +185,10 @@ LESSON_CONTENT[15]={
       intro:"Build 4-beat measures with eighths in the mix — the math now includes ½!",
       miaIntro:"Builder time — tiny bricks included! \u{1F3D7}\u{FE0F}",
       spec:{beats:4, unique:true, rounds:3, buttons:[
-        {t:"8",label:"Eighth (½)",beats:.5,item:{p:"B4",d:"8"}},
-        {t:"q",label:"Quarter (1)",beats:1,item:{p:"B4",d:"q"}},
-        {t:"h",label:"Half (2)",beats:2,item:{p:"B4",d:"h"}},
-        {t:"w",label:"Whole (4)",beats:4,item:{p:"B4",d:"w"}}]},
+        {t:"8",label:"Eighth Note",beats:.5,item:{p:"B4",d:"8"}},
+        {t:"q",label:"Quarter Note",beats:1,item:{p:"B4",d:"q"}},
+        {t:"h",label:"Half Note",beats:2,item:{p:"B4",d:"h"}},
+        {t:"w",label:"Whole Note",beats:4,item:{p:"B4",d:"w"}}]},
       result:(stars)=>stars>=3?"Three different measures — half-beat math mastered!":null },
     { type:"symbol-hunt", title:"Game 4 · Flag vs Beam Hunt",
       intro:"Single eighths, beamed pairs, quarters — click exactly what Mia asks for!",

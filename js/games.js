@@ -654,13 +654,13 @@ const Games=(()=>{
       let BTNS;
       if(spec.buttons) BTNS=spec.buttons;
       else{
-        BTNS=[{t:"w",label:"Whole (4)",beats:4,item:{p:"B4",d:"w"}},
-              {t:"h",label:"Half (2)",beats:2,item:{p:"B4",d:"h"}},
-              {t:"q",label:"Quarter (1)",beats:1,item:{p:"B4",d:"q"}}];
+        BTNS=[{t:"w",label:"Whole Note",beats:4,item:{p:"B4",d:"w"}},
+              {t:"h",label:"Half Note",beats:2,item:{p:"B4",d:"h"}},
+              {t:"q",label:"Quarter Note",beats:1,item:{p:"B4",d:"q"}}];
         if(useRests) BTNS=BTNS.concat([
-              {t:"W",label:"Whole Rest (4)",beats:4,item:{rest:"w"},isRest:true},
-              {t:"H",label:"Half Rest (2)",beats:2,item:{rest:"h"},isRest:true},
-              {t:"Q",label:"Quarter Rest (1)",beats:1,item:{rest:"q"},isRest:true}]);
+              {t:"W",label:"Whole Rest",beats:4,item:{rest:"w"},isRest:true},
+              {t:"H",label:"Half Rest",beats:2,item:{rest:"h"},isRest:true},
+              {t:"Q",label:"Quarter Rest",beats:1,item:{rest:"q"},isRest:true}]);
       }
       const combosFor=t=>{ const out=[]; if(t===4) out.push("w");
         for(let h=Math.floor(t/2);h>=0;h--){ const q=t-2*h; if(q>=0&&(h||q)) out.push("h".repeat(h)+"q".repeat(q)); }
@@ -675,7 +675,15 @@ const Games=(()=>{
       const $=s=>el.querySelector(s);
       const row=$(".gvals");
       let cur=[],sum=0,found=[],mistakes=0,running=false;
-      BTNS.forEach(bt=>{ const b=document.createElement("button"); b.textContent=bt.label;
+      /* DD-27: option buttons are NOTATION CARDS — symbol drawn on a mini staff + name */
+      BTNS.forEach(bt=>{ const b=document.createElement("button");
+        if(bt.item){
+          b.style.cssText="border-radius:10px;padding:6px 10px;min-width:104px";
+          const d=document.createElement("div"); b.appendChild(d);
+          Staff.render(d,{clef:"none",notes:[bt.item],width:100});
+          const nm=document.createElement("div"); nm.style.cssText="font-weight:700;font-size:13px";
+          nm.textContent=bt.label.replace(/\s*\([^)]*\)\s*$/,""); b.appendChild(nm);
+        } else b.textContent=bt.label;
         b.onclick=()=>add(bt); row.appendChild(b); });
       const clr=document.createElement("button"); clr.className="ghost"; clr.textContent="↺ Clear";
       clr.onclick=()=>{ if(running){ cur=[];sum=0;draw(); } }; row.appendChild(clr);
