@@ -62,7 +62,7 @@ LESSON_CONTENT[9]={
   ],
   steps:[
     /* Step 1 — silent twins (Activity 2: match) */
-    { say:"Every note has a <b>silent twin</b> called a <b>Rest</b> — same length, zero sound. Whole note ↔ whole rest (4), half note ↔ half rest (2), quarter note ↔ quarter rest (1). \u{1F447} <b>Match each note to its twin:</b>",
+    { say:"Every note has a <b>silent partner</b> called a <b>rest</b> — it lasts for the same amount of time but makes no sound.<br>• Whole note ↔ Whole rest (<b>4 beats</b>)<br>• Half note ↔ Half rest (<b>2 beats</b>)<br>• Quarter note ↔ Quarter rest (<b>1 beat</b>)<br>\u{1F447} <b>Match each note with its matching rest!</b>",
       show:{ type:"staff", spec:{clef:"treble",notes:[{p:"B4",d:"w",label:"whole note"},{rest:"w",label:"whole rest"},{p:"B4",d:"h",label:"half note"},{rest:"h",label:"half rest"},{p:"B4",d:"q",label:"quarter note"},{rest:"q",label:"quarter rest"}],width:460} },
       try:{ type:"custom",
         hint:"The twin lasts the same number of beats — whole 4, half 2, quarter 1.",
