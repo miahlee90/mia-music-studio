@@ -143,53 +143,13 @@ LESSON_CONTENT[9]={
           };
           ask();
         } } },
-    /* Step 5 — build with notes AND rests (Activity 5) */
-    { say:"Composers mix sound and silence. Fill the 4/4 measure with exactly <b>4 beats</b> using notes AND rests — each measure needs <b>at least one rest</b>. Build TWO different ones! \u{1F447}",
+    /* Step 5 (was 6) — read through the silence; the sound-and-silence builder step was REMOVED at instructor request (Session 15o) — the Sound & Silence Builder GAME still covers it */
+    { say:"Let's READ a rhythm with rests. Follow the highlight and count out loud — on the silent beats, say <b>“rest”</b>: 1, rest, 3, rest | 1-2-3-4. \u{1F447}",
       try:{ type:"custom",
-        hint:"Rests count beats too! Whole/half/quarter rest = 4/2/1 silent beats.",
-        mount:(container,fb)=>{
-          const B={w:4,h:2,q:1};
-          const isRest=v=>/[A-Z]/.test(v);
-          let cur=[],sum=0,found=[];
-          container.innerHTML=`<div class="br-staff"></div>
-            <div class="big-q br-q" style="text-align:center"></div>
-            <div class="choices br-ch"><button data-v="w">Whole (4)</button><button data-v="h">Half (2)</button><button data-v="q">Quarter (1)</button>
-            <button data-v="W">Whole Rest (4)</button><button data-v="H">Half Rest (2)</button><button data-v="Q">Quarter Rest (1)</button>
-            <button class="ghost" data-v="x">↺ Clear</button></div>`;
-          const st=container.querySelector(".br-staff"), q=container.querySelector(".br-q");
-          function draw(){
-            Staff.render(st,{clef:"treble",time:"4/4",notes:[...cur.map(v=>isRest(v)?{rest:v.toLowerCase()}:{p:"B4",d:v}),{bar:"final"}],width:340});
-            q.textContent=`Beats: ${sum} of 4 · Measures built: ${found.length} of 2`;
-          }
-          [...container.querySelectorAll(".br-ch button")].forEach(b=>b.onclick=()=>{
-            const v=b.dataset.v;
-            if(v==="x"){ cur=[];sum=0;draw(); return; }
-            const bb=B[v.toLowerCase()];
-            if(sum+bb>4){ fb(false,`That would make ${sum+bb} beats — too many! Clear or choose smaller.`); return; }
-            cur.push(v); sum+=bb;
-            if(isRest(v)) MFAudio.click(0,.3); else MFAudio.tone(71,bb*.4);
-            draw();
-            if(sum===4){
-              if(!cur.some(isRest)){ fb(false,"Exactly 4 — but today's rule: every measure needs at least ONE rest. Clear and mix in some silence!"); cur=[];sum=0; setTimeout(draw,1100); return; }
-              const key=cur.slice().sort().join("");
-              if(found.includes(key)){ fb(false,"You already built that mix — clear and invent a DIFFERENT one!"); cur=[];sum=0; setTimeout(draw,900); return; }
-              found.push(key);
-              let t=0; cur.forEach(v2=>{ const b2=B[v2.toLowerCase()];
-                if(!isRest(v2)) MFAudio.tone(71,b2*.45,t); t+=b2*.5; });
-              if(found.length>=2){ container.querySelector(".br-ch").style.display="none"; q.textContent="Two measures of sound and silence!";
-                fb(true,"✓ You composed with silence! Notes and rests add up together — 4 beats is 4 beats, sounding or not."); }
-              else { fb(true,"✓ Exactly 4 beats with silence inside — listen to the gap! Now a DIFFERENT mix…"); cur=[];sum=0; setTimeout(draw,1300); }
-            }
-          });
-          draw();
-        } } },
-    /* Step 6 — read through the silence */
-    { say:"Let's READ a rhythm with rests. Follow the highlight and count out loud — <b>whisper the counts in parentheses</b>: 1 (2) 3 (4) | 1-2-3-4. \u{1F447}",
-      try:{ type:"custom",
-        hint:"Keep counting through every rest — silence has a beat too.",
+        hint:"Keep counting through every rest — say “rest” out loud on the silent beats.",
         mount:(container,fb)=>{
           const spec={clef:"treble",time:"4/4",tempo:80,
-            notes:[{p:"C4",d:"q",label:"1"},{rest:"q",label:"(2)"},{p:"E4",d:"q",label:"3"},{rest:"q",label:"(4)"},{bar:"single"},
+            notes:[{p:"C4",d:"q",label:"1"},{rest:"q",label:"rest"},{p:"E4",d:"q",label:"3"},{rest:"q",label:"rest"},{bar:"single"},
                    {p:"G4",d:"w",label:"1-2-3-4"},{bar:"final"}],width:440};
           container.innerHTML=`<div class="rs-staff"></div><div style="text-align:center"><button class="play rs-play">▶ Play & count along</button></div>`;
           const api=Staff.render(container.querySelector(".rs-staff"),spec);
@@ -200,10 +160,10 @@ LESSON_CONTENT[9]={
         } } }
   ],
   examples:[
-    { caption:"Sound, silence, sound, silence — count every beat: 1 (2) 3 (4). The rests are as musical as the notes.",
-      staff:{clef:"treble",tempo:85,time:"4/4",notes:[{p:"E4",d:"q",label:"1"},{rest:"q",label:"(2)"},{p:"G4",d:"q",label:"3"},{rest:"q",label:"(4)"},{bar:"final"}],width:400} },
-    { caption:"A half note rings for 2, then the HAT takes over for 2 silent beats: 1-2 (3-4).",
-      staff:{clef:"treble",tempo:85,time:"4/4",notes:[{p:"F4",d:"h",label:"1-2"},{rest:"h",label:"(3-4)"},{bar:"single"},{p:"C4",d:"w",label:"1-2-3-4"},{bar:"final"}],width:420} }
+    { caption:"Sound, silence, sound, silence — count every beat out loud: 1, rest, 3, rest. The rests are as musical as the notes.",
+      staff:{clef:"treble",tempo:85,time:"4/4",notes:[{p:"E4",d:"q",label:"1"},{rest:"q",label:"rest"},{p:"G4",d:"q",label:"3"},{rest:"q",label:"rest"},{bar:"final"}],width:400} },
+    { caption:"A half note rings for 2, then the HAT takes over for 2 silent beats: 1-2, rest-rest.",
+      staff:{clef:"treble",tempo:85,time:"4/4",notes:[{p:"F4",d:"h",label:"1-2"},{rest:"h",label:"rest-rest"},{bar:"single"},{p:"C4",d:"w",label:"1-2-3-4"},{bar:"final"}],width:420} }
   ],
   games:[
     { type:"value-race", title:"Game 1 · Rest Flash",
@@ -312,13 +272,7 @@ LESSON_CONTENT[9]={
     {term:"Quarter Rest", def:"The squiggly symbol — 1 beat of silence"},
     {term:"Silent Twin", def:"Every note value has a rest of the same length"}
   ],
-  mistakes:[
-    "<b>Mixing up the hat and the hole</b> — hole hangs DOWN (whole, 4); hat sits ON TOP (half, 2).",
-    "<b>Stopping the count during a rest</b> — the beat continues; only the sound stops.",
-    "<b>Forgetting rests count toward the measure</b> — a half note + half rest IS a full 4/4 measure.",
-    "<b>Rushing through rests</b> — give silence its FULL beats, just like notes.",
-    "<b>Thinking rests are optional decoration</b> — silence is composed on purpose."
-  ],
+  mistakes:[], /* Oops section removed at instructor request (Session 15o) */
   summary:[
     "✔ A <b>Rest</b> = measured silence; every note has a <b>silent twin</b>.",
     "✔ Whole Rest = <b>4</b> · Half Rest = <b>2</b> · Quarter Rest = <b>1</b> silent beat.",
@@ -327,7 +281,7 @@ LESSON_CONTENT[9]={
     "✔ <b>Keep counting through every rest</b> — the beat never stops."
   ],
   tips:[
-    "Whisper the counts during rests — “1, (2), 3, (4)” — until silent counting feels natural.",
+    "Say “rest” out loud on every silent beat — “1, rest, 3, rest” — until counting through silence feels natural.",
     "Hat or hole? Say it out loud every single time. Corny works — that's why it sticks!",
     "Great performers love rests: silence makes the next note land harder.",
     "\u{1F92B} You've finished Unit 2's core rhythm symbols! Next lesson opens Unit 3: the 2/4 time signature."
@@ -346,7 +300,7 @@ LESSON_CONTENT[9]={
       hint:"Hole hangs down = whole. Hat sits on top = half. Squiggle = quarter.",
       play:()=>{const s=.55;MFAudio.tone(67,s*.9,0);MFAudio.click(s,.35);MFAudio.tone(67,s*.9,2*s);MFAudio.click(3*s,.35);} },
     example:{ label:"the examples",
-      explain:"Count out loud and whisper the parenthesized beats — that's where the rests live. The pulse never pauses." },
+      explain:"Count out loud and say “rest” on the silent beats — that's where the rests live. The pulse never pauses." },
     game:{ label:"the games",
       explain:"Flash-name the rests, hunt them among notes, tap rhythms WITHOUT tapping the silences, and compose with sound + silence.",
       hint:"In the tap game, extra taps during rests count against you — stillness is a skill!" },

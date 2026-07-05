@@ -15,6 +15,8 @@
    v4.5 (instructor fix): time-signature digits sized/positioned so the top number
    sits fully in the upper two spaces and the bottom number in the lower two —
    neither touches the middle line.
+   v4.6 (instructor fix): a whole rest that is alone in its measure is centered
+   between the surrounding bar lines (standard engraving).
    NOTE (maintenance): edit by FULL-FILE REWRITE only. */
 const MFAudio=(()=>{
   let ctx=null;
@@ -193,6 +195,16 @@ const Staff=(()=>{
       minEl=Math.min(minEl,top-6); maxEl=Math.max(maxEl,bottom+6);
       maxNoteBottom=Math.max(maxNoteBottom,bottom);
       placed.push({n,i,clef,y0,x,y,kind:"note"});
+    });
+    /* engraving rule (v4.6): a whole rest alone in its measure sits centered in it */
+    placed.forEach((pl,pi)=>{
+      if(pl.kind!=="rest"||pl.n.rest!=="w"||pl.n.x) return;
+      let alone=true, segStart=startX-24, segEnd=W-40;
+      let j=pi-1; while(j>=0&&placed[j].kind!=="bar"){ alone=false; j--; }
+      if(j>=0) segStart=placed[j].x;
+      let k=pi+1; while(k<placed.length&&placed[k].kind!=="bar"){ alone=false; k++; }
+      if(k<placed.length) segEnd=placed[k].x;
+      if(alone) pl.x=(segStart+segEnd)/2;
     });
     if(hasLabel&&maxNoteBottom===-Infinity) maxNoteBottom=staffBottom;
     const labelY = hasLabel? Math.max(staffBottom+22, maxNoteBottom+18) : 0;
