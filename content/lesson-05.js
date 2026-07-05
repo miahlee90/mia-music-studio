@@ -270,11 +270,9 @@ LESSON_CONTENT[5]={
     { gen:"higher-lower", count:1 }
   ],
   vocabulary:[
-    {term:"Ledger Line", def:"A short line extending the staff for one note"},
-    {term:"Landmark Note", def:"A note you know instantly and count from (F5, G2, Middle C)"},
-    {term:"Musical Alphabet", def:"A-B-C-D-E-F-G repeating — even beyond the staff"},
-    {term:"Middle C", def:"The first ledger-line note, bridging the two staffs"},
-    {term:"Range", def:"How high and low the notes of a piece reach"}
+    {def:"A short line extending the staff for one note", term:"Ledger Line", staff:{clef:"treble",notes:[{p:"A5",d:"q"}],width:140}},
+    {def:"A note you know instantly and count from (top line F, bottom line G, Middle C)", term:"Landmark Note"},
+    {def:"A-B-C-D-E-F-G repeats — even beyond the staff", term:"Musical Alphabet"}
   ],
   mistakes:[
     "<b>Counting only the ledger lines</b> — count both lines AND spaces on the way.",

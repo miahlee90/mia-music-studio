@@ -237,11 +237,9 @@ LESSON_CONTENT[3]={
       hint:"What did Mia say about mnemonics in Lesson 2?" }
   ],
   vocabulary:[
-    {term:"Bass Clef", def:"The F clef — two dots mark line 4 as F; used for lower pitches"},
-    {term:"F Clef", def:"Another name for the bass clef, after its anchor line F"},
-    {term:"Bass Line Notes", def:"G-B-D-F-A (Good Boys Do Fine Always)"},
-    {term:"Bass Space Notes", def:"A-C-E-G (All Cows Eat Grass)"},
-    {term:"Foundation", def:"The low sounds that support the music above them"}
+    {def:"Two dots mark line 4 as F — used for lower notes", term:"Bass Clef (F Clef)", staff:{clef:"bass",notes:[],width:150}},
+    {def:"Good Boys Do Fine Always — the bass LINE notes, bottom to top", term:"G-B-D-F-A"},
+    {def:"All Cows Eat Grass — the bass SPACE notes, bottom to top", term:"A-C-E-G"}
   ],
   mistakes:[
     "<b>Confusing the two clefs</b> — swirl = treble (G), two dots = bass (F).",

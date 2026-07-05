@@ -284,11 +284,10 @@ LESSON_CONTENT[4]={
       hint:"How many Middle C keys does a piano have?" }
   ],
   vocabulary:[
-    {term:"Grand Staff", def:"Treble + bass staffs joined by a brace and barline"},
-    {term:"Brace", def:"The curly bracket connecting the two staffs on the left"},
-    {term:"Barline", def:"The straight vertical line joining the staffs"},
-    {term:"Middle C", def:"The C near the piano's center, between the two staffs"},
-    {term:"Ledger Line", def:"A short line that extends the staff for one note"}
+    {def:"Treble + bass staffs joined by a brace — piano music’s home", term:"Grand Staff"},
+    {def:"The curly bracket connecting the two staffs on the left", term:"Brace"},
+    {def:"The C between the two staffs, on its own short line", term:"Middle C", staff:{clef:"treble",notes:[{p:"C4",d:"q"}],width:140}},
+    {def:"A short line that extends the staff for one note", term:"Ledger Line", staff:{clef:"treble",notes:[{p:"A5",d:"q"}],width:140}}
   ],
   mistakes:[
     "<b>Thinking Middle C belongs only to the treble staff</b> — it belongs to BOTH.",

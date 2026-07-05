@@ -294,3 +294,11 @@ hr.sep{border:none;border-top:1px solid var(--hairline);margin:20px 0}
 .choices{flex-direction:row;flex-wrap:wrap;justify-content:center;gap:8px}
 .choices button{flex:0 1 auto;text-align:center;min-width:96px;max-width:100%}
 .mf-staff .clef-stroke{fill:none;stroke:#33415c;stroke-width:2.6;stroke-linecap:round}
+
+/* DD-25: vocabulary cards — front = description, flip to term + drawn symbol */
+.vcard{height:118px}
+.vback{flex-direction:column;gap:2px}
+.vback b{font-size:14.5px}
+.vback .vstaff{width:100%}
+.vback svg.mf-staff{height:56px;width:auto;margin:0 auto}
+.vfront{font-size:13px;line-height:1.35;font-weight:600}

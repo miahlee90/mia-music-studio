@@ -242,11 +242,9 @@ LESSON_CONTENT[7]={
     { gen:"note-name", params:{clef:"bass"}, count:1 }
   ],
   vocabulary:[
-    {term:"Bar Line", def:"Vertical lines dividing the staff into measures"},
-    {term:"Measure", def:"The space between two bar lines"},
-    {term:"Bar", def:"Another word for measure — same container!"},
-    {term:"Double Bar", def:"Two lines (thin and thick) signifying the end of a piece"},
-    {term:"Beat", def:"The steady pulse each measure holds"}
+    {def:"A vertical line dividing the staff into measures", term:"Bar Line", staff:{clef:"none",notes:[{bar:"single"}],width:140}},
+    {def:"The space between two bar lines — also called a Bar", term:"Measure", staff:{clef:"none",notes:[{bar:"single"},{p:"B4",d:"w"},{bar:"single"}],width:150}},
+    {def:"Thin + thick lines marking the END of a piece", term:"Double Bar", staff:{clef:"none",notes:[{bar:"final"}],width:140}}
   ],
   mistakes:[], /* Oops section removed at instructor request (Session 15h) */
   summary:[

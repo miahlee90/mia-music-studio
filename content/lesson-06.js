@@ -288,14 +288,11 @@ LESSON_CONTENT[6]={
     { gen:"note-name", params:{clef:"treble"}, count:1 }
   ],
   vocabulary:[
-    {term:"Note Value", def:"The shape of a note, telling how long it lasts"},
-    {term:"Duration", def:"How long a sound lasts"},
-    {term:"Beat", def:"The steady pulse of music — like a heartbeat"},
-    {term:"Notehead", def:"The oval part of a note"},
-    {term:"Stem", def:"The vertical line attached to the notehead"},
-    {term:"Whole Note", def:"Hollow head, no stem — 4 beats"},
-    {term:"Half Note", def:"Hollow head with a stem — 2 beats"},
-    {term:"Quarter Note", def:"Filled head with a stem — 1 beat"}
+    {def:"How LONG a sound lasts", term:"Duration"},
+    {def:"The steady pulse of music — like a heartbeat", term:"Beat"},
+    {def:"Hollow head, no stem — 4 beats in 4/4", term:"Whole Note", staff:{clef:"none",notes:[{p:"B4",d:"w"}],width:140}},
+    {def:"Hollow head with a stem — 2 beats in 4/4", term:"Half Note", staff:{clef:"none",notes:[{p:"B4",d:"h"}],width:140}},
+    {def:"Filled head with a stem — 1 beat in 4/4", term:"Quarter Note", staff:{clef:"none",notes:[{p:"B4",d:"q"}],width:140}}
   ],
   mistakes:[
     "<b>Mixing up half and quarter notes</b> — check the head first: hollow = half, filled = quarter.",
