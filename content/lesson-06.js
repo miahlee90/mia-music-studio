@@ -75,25 +75,27 @@ LESSON_CONTENT[6]={
   ],
   steps:[
     /* Step 1 — the three note values: listen & compare (Activity 1) */
-    { say:"One quick note before we begin: in this lesson we count note values using <b>4/4 time</b> — the most common counting system in music (you’ll officially meet the time signature in Lesson 8). In 4/4: <b>1 Whole note = 2 Half notes = 4 Quarter notes</b>. Later you’ll discover that different time signatures can change how we count!<br><br>Meet today's three notes. The <b>Whole Note</b> is a hollow oval with no stem — the LONGEST sound. Cut it in half and you get the <b>Half Note</b> (a stem appears). Cut again and you get the <b>Quarter Note</b> (the head fills in). <b>1 Whole = 2 Halves = 4 Quarters!</b> \u{1F447} <b>Click each one and HEAR how long it lasts:</b>",
+    { say:"One quick note before we begin: in this lesson we count note values using <b>4/4 time</b> — the most common counting system in music (you’ll officially meet the time signature in Lesson 8). In 4/4: <b>1 Whole note = 2 Half notes = 4 Quarter notes</b>. Later you’ll discover that different time signatures can change how we count!<br><br>Meet today's three notes. The <b>Whole Note</b> is a hollow oval with no stem — the LONGEST sound. Cut it in half and you get the <b>Half Note</b> (a stem appears). Cut again and you get the <b>Quarter Note</b> (the head fills in). <b>1 Whole note = 2 Half notes = 4 Quarter notes!</b> \u{1F447} <b>Click each one and HEAR how long it lasts:</b>",
       try:{ type:"custom",
         hint:"Hollow + no stem = longest. Filled + stem = shortest.",
         mount:(container,fb)=>{
-          const items=[{d:"w",n:1,w:170,name:"1 Whole Note",beats:4,rel:"= 2 Half Notes = 4 Quarter Notes",relSay:"one sound filling the whole measure"},{d:"h",n:2,w:200,name:"2 Half Notes",beats:2,rel:"= 1 Whole Note",relSay:"two sounds sharing the same time as one Whole"},{d:"q",n:4,w:240,name:"4 Quarter Notes",beats:1,rel:"= 1 Whole Note",relSay:"four quick sounds — same total time again"}];
+          const items=[{d:"w",n:1,w:150,name:"1 Whole Note",beats:4,rel:"= 2 Half Notes = 4 Quarter Notes",relSay:"one sound filling the whole measure"},{d:"h",n:2,w:170,name:"2 Half Notes",beats:2,rel:"= 1 Whole Note",relSay:"two sounds sharing the same time as one Whole"},{d:"q",n:4,w:210,name:"4 Quarter Notes",beats:1,rel:"= 1 Whole Note",relSay:"four quick sounds — same total time again"}];
           const heard=new Set();
-          container.innerHTML=`<div class="vocab lc-row"></div>`;
+          container.innerHTML=`<div class="lc-row" style="display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap"></div>`;
           const row=container.querySelector(".lc-row");
-          items.forEach(it=>{
+          items.forEach((it,idx)=>{
+            if(idx>0){ const eq=document.createElement("div");
+              eq.style.cssText="font-size:2.2rem;font-weight:800;color:var(--primary)"; eq.textContent="="; row.appendChild(eq); }
             const card=document.createElement("div");
             card.className="flashcard"; card.style.cursor="pointer"; card.style.textAlign="center";
-            card.innerHTML=`<div class="fc-title">${it.name}</div><div class="lc-staff"></div><div style="font-weight:800;color:var(--primary)">${it.rel}</div>`;
+            card.innerHTML=`<div class="lc-staff"></div><div style="font-weight:800;color:var(--primary)">${it.name}</div>`;
             Staff.render(card.querySelector(".lc-staff"),{clef:"treble",notes:Array.from({length:it.n},()=>({p:"B4",d:it.d})),width:it.w});
             card.onclick=()=>{
               const spb=60/80;
               for(let k=0;k<4;k++) MFAudio.click(k*spb,.4,k===0);
               for(let j=0;j<it.n;j++) MFAudio.tone(71,it.beats*spb*0.95,j*it.beats*spb);
               heard.add(it.d);
-              if(heard.size===3) fb(true,"✓ You heard all three — 1 Whole = 2 Halves = 4 Quarters. Same pitch, different DURATION!");
+              if(heard.size===3) fb(true,"✓ You heard all three — 1 Whole note = 2 Half notes = 4 Quarter notes. Same total time, different slices!");
               else fb(true,`✓ ${it.name}: ${it.relSay}. ${3-heard.size} more to hear…`);
             };
             row.appendChild(card);
