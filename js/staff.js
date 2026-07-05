@@ -213,8 +213,12 @@ const Staff=(()=>{
     items.forEach((n,i)=>{
       const clef = n.clef || (grand? "treble" : (spec.clef||"treble"));
       const y0 = clef==="bass"? y0b : y0t;
+      /* few items should GATHER toward the center instead of spreading full-width */
+      const avail=W-40-startX;
+      const span=Math.min(avail,(items.length-1)*92);
+      const off=startX+(avail-span)/2;
       const spreadX = items.length===1? (startX+W-40)/2
-        : startX+i*((W-40-startX)/Math.max(1,(items.length-1)||1));
+        : off+i*(span/Math.max(1,(items.length-1)||1));
       const x = n.x || ((n.bar!==undefined && i===items.length-1)? W-16 : spreadX);
       if(n.label) hasLabel=true;
       if(n.dyn) hasDyn=true;
