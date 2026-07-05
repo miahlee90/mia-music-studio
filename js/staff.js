@@ -1,17 +1,11 @@
-/* Music Fundamentals — SVG staff renderer + shared Web Audio (original notation, DD-05) v4
+/* Music Fundamentals — SVG staff renderer + shared Web Audio (original notation, DD-05) v4.1
    v3 (Session 14, instructor review fixes):
-   - svg renders at natural size, centered (no full-width stretching)
-   - viewBox auto-expands so high/low ledger notes are never clipped
-   - note labels always placed BELOW the lowest drawn element (no overlap)
-   - bass clef drawn as inline SVG path (correct size; dots straddle line 4)
-   - grand staff brace drawn as a proper filled curly brace
-   v4 (Milestone 3, Session 15): rhythm support for Unit 2 —
-   - rest glyphs: items {rest:"w"|"h"|"q"} render whole/half/quarter rests
-   - bar lines: items {bar:"single"|"double"|"final"} render measure lines
-   - time signatures: spec.time:"4/4" draws stacked numbers after the clef
-   - whole note drawn slightly wider (stemless, engraved look)
-   - play() supports spec.tempo (bpm): beat-accurate rhythm playback, rests = silence
-   - highlight() also highlights rests
+   - svg renders at natural size, centered; viewBox auto-expands; labels below lowest element
+   - bass clef inline SVG path; grand staff filled curly brace
+   v4 (Milestone 3a): rest glyphs, bar lines, time signatures, whole-note polish,
+   play() spec.tempo (beat-accurate, rests silent), MFAudio.click(), highlight on rests
+   v4.1 (Milestone 3b): Common Time (spec.time:"C"), labels on bar items,
+   spec.clickBars + onBar(i,kind) for click-the-bar-line activities
    NOTE (maintenance): edit by FULL-FILE REWRITE only. */
 const MFAudio=(()=>{
   let ctx=null;
@@ -77,10 +71,16 @@ const Staff=(()=>{
   function parseTime(t){
     if(!t) return null;
     if(typeof t==="object") return t;
+    if(String(t).trim().toUpperCase()==="C") return {common:true};
     const m=String(t).match(/^(\d+)\s*\/\s*(\d+)$/); return m?{top:+m[1],bottom:+m[2]}:null;
   }
   function drawTime(parts,y0,ts){
-    const x=LEFT+52, fs=GAP*2.35;
+    const x=LEFT+52;
+    if(ts.common){ /* Common Time: a large serif C centered on the middle line */
+      parts.push(`<text class="tsig" x="${x}" y="${y0+2*GAP+GAP*0.95}" font-size="${GAP*2.9}" text-anchor="middle">C</text>`);
+      return;
+    }
+    const fs=GAP*2.35;
     parts.push(`<text class="tsig" x="${x}" y="${y0+2*GAP-1.5}" font-size="${fs}" text-anchor="middle">${ts.top}</text>`);
     parts.push(`<text class="tsig" x="${x}" y="${y0+4*GAP-1.5}" font-size="${fs}" text-anchor="middle">${ts.bottom}</text>`);
   }
@@ -127,9 +127,9 @@ const Staff=(()=>{
     return out;
   }
 
-  /* spec: {clef:"treble"|"bass"|"grand", time:"4/4",
-            notes:[ {p,d,clef?,label?} | {rest:"w"|"h"|"q",label?,clef?} | {bar:"single"|"double"|"final"} ],
-            width?, tempo?, clickLines?, clickSpaces?, clickNotes?} */
+  /* spec: {clef:"treble"|"bass"|"grand", time:"4/4"|"C",
+            notes:[ {p,d,clef?,label?} | {rest:"w"|"h"|"q",label?,clef?} | {bar:"single"|"double"|"final",label?} ],
+            width?, tempo?, clickLines?, clickSpaces?, clickNotes?, clickBars?} */
   function render(el, spec){
     const W=spec.width||420;
     const grand=spec.clef==="grand";
@@ -157,11 +157,11 @@ const Staff=(()=>{
       const clef = n.clef || (grand? "treble" : (spec.clef||"treble"));
       const y0 = clef==="bass"? y0b : y0t;
       const x = n.x || startX+i*((W-40-startX)/Math.max(1,(items.length-1)||1));
-      if(n.bar){ placed.push({n,i,clef,y0,x,kind:"bar"}); return; }
+      if(n.label) hasLabel=true;
+      if(n.bar!==undefined){ placed.push({n,i,clef,y0,x,kind:"bar"}); return; }
       if(n.rest){
         minEl=Math.min(minEl,y0+4); maxEl=Math.max(maxEl,y0+54);
         maxNoteBottom=Math.max(maxNoteBottom,y0+50);
-        if(n.label) hasLabel=true;
         placed.push({n,i,clef,y0,x,kind:"rest"}); return;
       }
       const y = yFor(n.p,clef,y0);
@@ -170,18 +170,18 @@ const Staff=(()=>{
       if(s.stem){ if(y > y0+2*GAP) top=Math.min(top,y-40); else bottom=Math.max(bottom,y+40); }
       minEl=Math.min(minEl,top-6); maxEl=Math.max(maxEl,bottom+6);
       maxNoteBottom=Math.max(maxNoteBottom,bottom);
-      if(n.label) hasLabel=true;
       placed.push({n,i,clef,y0,x,y,kind:"note"});
     });
+    if(hasLabel&&maxNoteBottom===-Infinity) maxNoteBottom=staffBottom;
     const labelY = hasLabel? Math.max(staffBottom+22, maxNoteBottom+18) : 0;
     if(hasLabel) maxEl=Math.max(maxEl,labelY+6);
     placed.forEach(({n,i,clef,y0,x,y,kind})=>{
       if(kind==="bar"){
         const yTop=grand? y0t : y0, yBot=grand? y0b+4*GAP : y0+4*GAP;
-        parts.push(barSVG(x,yTop,yBot,n.bar===true?"single":n.bar));
-        return;
-      }
-      if(kind==="rest"){
+        const bk=n.bar===true?"single":n.bar;
+        parts.push(barSVG(x,yTop,yBot,bk));
+        if(spec.clickBars) parts.push(`<rect class="clickbar" data-bar="${i}" data-kind="${bk}" x="${x-11}" y="${yTop-6}" width="22" height="${yBot-yTop+12}"/>`);
+      } else if(kind==="rest"){
         parts.push(`<g class="notegroup" data-i="${i}" data-rest="${n.rest}">${restSVG(x,y0,n.rest,(spec.clickNotes?" clickable":""))}</g>`);
       } else {
         parts.push(ledgersFor(n.p,clef,x,y0));
@@ -199,6 +199,7 @@ const Staff=(()=>{
     if(spec.onLine) svg.querySelectorAll(".clickline").forEach(l=>l.addEventListener("click",()=>spec.onLine(+l.dataset.line,l.dataset.staff)));
     if(spec.onSpace) svg.querySelectorAll(".clickspace").forEach(s=>s.addEventListener("click",()=>spec.onSpace(+s.dataset.space,s.dataset.staff)));
     if(spec.onNote) svg.querySelectorAll(".notegroup").forEach(g=>g.addEventListener("click",()=>spec.onNote(+g.dataset.i,g.dataset.p||null)));
+    if(spec.onBar) svg.querySelectorAll(".clickbar").forEach(b=>b.addEventListener("click",()=>spec.onBar(+b.dataset.bar,b.dataset.kind)));
     return {
       svg,
       highlight(i){ svg.querySelectorAll(".notegroup .note, .notegroup .rest").forEach(n=>n.classList.remove("hl"));
@@ -210,7 +211,7 @@ const Staff=(()=>{
     let t=0;
     const tempo=spec.tempo||0, spb=tempo?60/tempo:0;
     (spec.notes||[]).forEach((n,i)=>{
-      if(n.bar) return;
+      if(n.bar!==undefined) return;
       const d=n.d||n.rest||"q";
       const dur=tempo? BEATS[d]*spb : DURSEC[d];
       if(!n.rest){

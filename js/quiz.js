@@ -3,6 +3,8 @@
    v3 (Milestone 2): "line-space" generator supports params:{clef:"bass"}.
    v4 (Milestone 3): adds "note-value" (identify whole/half/quarter or its beats)
    and "rhythm-count" (count the total beats of a short rhythm) generators.
+   v4.1 (Milestone 3b): note-value supports params.kind:"rest"; adds
+   "measure-complete" (is this measure full?) and "measure-count" (count measures).
    NOTE (maintenance): edit by FULL-FILE REWRITE only. */
 const Quiz=(()=>{
   const SALT="MF-MIA-2026";
@@ -56,26 +58,33 @@ const Quiz=(()=>{
         explain:"Higher pitches sound brighter and thinner; lower ones deeper and warmer.",
         hint:"Hum both sounds — your voice moves the same direction as the pitch." };
     },
-    /* v4 — identify a note value by sight (params:{values:["w","h","q"], ask:"name"|"beats"}) */
+    /* v4 — identify a note value (or rest) by sight
+       (params:{values:["w","h","q"], ask:"name"|"beats", kind:"note"|"rest"}) */
     "note-value": p=>{
       const values=(p&&p.values)||["w","h","q"];
+      const isRest=(p&&p.kind)==="rest";
       const v=pick(values), askBeats=(p&&p.ask)==="beats"||((!p||!p.ask)&&Math.random()<.5);
       const pitch=pick(["G4","B4","D5","F4","A4","E4","C5"]);
+      const NAMES=isRest?{w:"Whole Rest",h:"Half Rest",q:"Quarter Rest"}:VAL_NAME;
+      const SHAPE=isRest
+        ?{w:"it hangs BELOW the 4th line (the hole)",h:"it sits ON the 3rd line (the hat)",q:"the squiggly symbol"}
+        :{w:"hollow head with NO stem",h:"hollow head WITH a stem",q:"filled head with a stem"};
       let choices,correct,q;
       if(askBeats){
-        q="How many beats does this note receive?";
+        q=isRest?"How many beats of SILENCE does this rest receive?":"How many beats does this note receive?";
         choices=shuffle(["1 beat","2 beats","4 beats"]);
         correct=VAL_BEATS[v]+" beat"+(VAL_BEATS[v]>1?"s":"");
       } else {
-        q="What kind of note is this?";
-        choices=shuffle(["Whole Note","Half Note","Quarter Note"]);
-        correct=VAL_NAME[v];
+        q=isRest?"What kind of rest is this?":"What kind of note is this?";
+        choices=shuffle([NAMES.w,NAMES.h,NAMES.q]);
+        correct=NAMES[v];
       }
       return { type:"mc", q,
-        staff:{clef:"treble",notes:[{p:pitch,d:v}],width:240},
+        staff:{clef:"treble",notes:[isRest?{rest:v}:{p:pitch,d:v}],width:240},
         choices, answer:choices.indexOf(correct),
-        explain:`It's a ${VAL_NAME[v]} — ${v==="w"?"hollow head with NO stem":v==="h"?"hollow head WITH a stem":"filled head with a stem"} — worth ${VAL_BEATS[v]} beat${VAL_BEATS[v]>1?"s":""}.`,
-        hint:"Check two things: is the head hollow or filled? Does it have a stem?" };
+        explain:`It's a ${NAMES[v]} — ${SHAPE[v]} — worth ${VAL_BEATS[v]} beat${VAL_BEATS[v]>1?"s":""}${isRest?" of silence":""}.`,
+        hint:isRest?"Hole hangs down (whole), hat sits on top (half), squiggle = quarter."
+                   :"Check two things: is the head hollow or filled? Does it have a stem?" };
     },
     /* v4 — count the total beats of a short rhythm (params:{maxNotes:3, values:["w","h","q"]}) */
     "rhythm-count": p=>{
@@ -92,7 +101,40 @@ const Quiz=(()=>{
         choices, answer:choices.indexOf(String(total)),
         explain:`${pat.map(d=>VAL_NAME[d]+" ("+VAL_BEATS[d]+")").join(" + ")} = ${total} beat${total>1?"s":""}.`,
         hint:"Whole = 4, Half = 2, Quarter = 1 — add them one note at a time." };
+    },
+    /* v4.1 — is this measure complete? (params:{beats:4, rests:false}) */
+    "measure-complete": p=>{
+      const target=(p&&p.beats)||4, useRests=!!(p&&p.rests);
+      const complete=Math.random()<.5;
+      const sum=complete?target:1+Math.floor(Math.random()*(target-1));
+      const toks=[]; let r=sum;
+      while(r>0){ const opts=["q"]; if(r>=2)opts.push("h"); if(r>=4&&sum===4)opts.push("w");
+        const v=pick(opts); toks.push(v); r-=VAL_BEATS[v]; }
+      const items=toks.map(v=>(useRests&&Math.random()<.35)?{rest:v}:{p:"B4",d:v});
+      const mathTxt=toks.map(v=>VAL_BEATS[v]).join(" + ")+" = "+sum;
+      return { type:"truefalse",
+        q:`True or false: this measure is COMPLETE (exactly ${target} beats).`,
+        staff:{clef:"treble",time:target+"/4",notes:[...items,{bar:"final"}],width:300},
+        answer:complete,
+        explain:`Add the values: ${mathTxt} beat${sum>1?"s":""} — ${complete?"exactly "+target+", complete.":"it still needs "+(target-sum)+" more."}`,
+        hint:"Add every note (and rest) — the total must match the top number." };
+    },
+    /* v4.1 — how many measures? (params:{min:2,max:4}) */
+    "measure-count": p=>{
+      const min=(p&&p.min)||2, max=(p&&p.max)||4;
+      const n=min+Math.floor(Math.random()*(max-min+1));
+      const FILL=[["w"],["h","h"]];
+      const items=[];
+      for(let m=1;m<=n;m++){ pick(FILL).forEach(d=>items.push({p:"B4",d})); items.push({bar:m<n?"single":"final"}); }
+      const wrongs=[]; for(let x=min;x<=max+1;x++) if(x!==n) wrongs.push(String(x));
+      const choices=shuffle([String(n),...shuffle(wrongs).slice(0,3)]);
+      return { type:"mc", q:"How many measures does this staff contain?",
+        staff:{clef:"treble",notes:items,width:340},
+        choices, answer:choices.indexOf(String(n)),
+        explain:`${n} measures — count the spaces BETWEEN the bar lines; the double bar closes the last one.`,
+        hint:"Count the containers, not the lines." };
     }
+
   };
   function expand(quizArr){
     const out=[];
