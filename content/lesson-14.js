@@ -53,7 +53,7 @@ LESSON_CONTENT[14]={
     "Perform repeated sections accurately"
   ],
   steps:[
-    { say:"A <b>repeat sign</b> is a double bar with <b>two dots facing the music</b>. When you reach it: go back to the beginning (or to a facing repeat sign) and <b>play the section again</b>. \u{1F447}",
+    { say:"A <b>repeat sign</b> is a double bar with <b>two dots facing the music</b>. When you reach it: go back to the beginning (or to a facing repeat sign) and <b>play the section again</b>. \u{1F447} <b>What does a repeat sign tell you to do?</b>",
       show:{ type:"staff", spec:{clef:"treble",time:"4/4",notes:[{bar:"repeat-start",label:"start repeat"},{p:"C4",d:"h"},{p:"E4",d:"h"},{bar:"single"},{p:"G4",d:"w"},{bar:"repeat-end",label:"go back!"}],width:460} },
       try:{ type:"mc",
         choices:["Go back and play the section again","Stop playing","Play louder"], answer:0,
@@ -92,7 +92,7 @@ LESSON_CONTENT[14]={
       try:{ type:"custom",
         hint:"First trip → 1st ending. Second trip → skip 1st, play 2nd.",
         mount:(container,fb)=>MF_L14_whichEnding(container,fb) } },
-    { say:"Why bother? Repeat signs <b>save space</b> — one written section, played twice. A whole verse-chorus song can fit on one page! \u{1F447}",
+    { say:"Why bother? Repeat signs <b>save space</b> — one written section, played twice. A whole verse-chorus song can fit on one page! \u{1F447} <b>Why do composers use repeat signs?</b>",
       try:{ type:"mc",
         choices:["To save space and avoid writing music twice","To make the piece louder","To confuse performers"], answer:0,
         success:"✓ One section, two trips — half the ink, same music!",

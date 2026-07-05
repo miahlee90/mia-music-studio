@@ -71,7 +71,7 @@ LESSON_CONTENT[8]={
   ],
   steps:[
     /* Step 1 — what the time signature is; top number */
-    { say:"At the start of every song sit two numbers — the <b>Time Signature</b>, your rhythmic roadmap. In <b>4/4 time</b>, the <b>TOP number</b> tells you: <b>4 beats in every measure</b>. \u{1F447}",
+    { say:"At the start of every song sit two numbers — the <b>Time Signature</b>, your rhythmic roadmap. In <b>4/4 time</b>, the <b>TOP number</b> tells you: <b>4 beats in every measure</b>. \u{1F447} <b>What does the TOP number tell you?</b>",
       show:{ type:"staff", spec:{clef:"treble",time:"4/4",notes:[{p:"C4",d:"q",label:"1"},{p:"D4",d:"q",label:"2"},{p:"E4",d:"q",label:"3"},{p:"F4",d:"q",label:"4"},{bar:"final"}],width:400} },
       try:{ type:"mc",
         choices:["How many beats fit in each measure","Which note gets one beat","How fast to play"], answer:0,
@@ -79,14 +79,14 @@ LESSON_CONTENT[8]={
         fail:"The TOP number counts the beats per container.",
         hint:"Top = how many. (Bottom is coming next!)" } },
     /* Step 2 — bottom number */
-    { say:"The <b>BOTTOM number</b> answers a different question: <b>which note gets one beat?</b> A bottom <b>4</b> means the <b>Quarter Note</b> is the beat. So 4/4 = four beats per measure, quarter note gets the beat. \u{1F447}",
+    { say:"The <b>BOTTOM number</b> answers a different question: <b>which note gets one beat?</b> A bottom <b>4</b> means the <b>Quarter Note</b> is the beat. So 4/4 = four beats per measure, quarter note gets the beat. \u{1F447} <b>What does the BOTTOM number tell you?</b>",
       try:{ type:"mc",
         choices:["The Quarter Note","The Whole Note","The Half Note"], answer:0,
         success:"✓ Bottom 4 = quarter note gets one beat. (So a half note takes 2 of those beats, and a whole note takes all 4!)",
         fail:"Bottom number 4 stands for the QUARTER note.",
         hint:"4 at the bottom → quarter." } },
     /* Step 3 — Common Time */
-    { say:"Because 4/4 is <b>the most common time signature in all of music</b>, musicians have a shortcut: a big letter <b>C</b>, called <b>Common Time</b>. Same meaning, different look. \u{1F447} <b>Compare:</b>",
+    { say:"Because 4/4 is <b>the most common time signature in all of music</b>, musicians have a shortcut: a big letter <b>C</b>, called <b>Common Time</b>. Same meaning, different look. \u{1F447} <b>Compare — what does the big C mean?</b>",
       show:{ type:"staff", spec:{clef:"treble",time:"C",notes:[{p:"G4",d:"q",label:"1"},{p:"G4",d:"q",label:"2"},{p:"G4",d:"h",label:"3-4"},{bar:"final"}],width:380} },
       try:{ type:"mc",
         choices:["Exactly the same as 4/4","A different, faster meter","“Coda” — jump to the end"], answer:0,
@@ -165,6 +165,7 @@ LESSON_CONTENT[8]={
                        ["D","Clef",null,[]]];
           CARDS.forEach(([L,name,v,notes])=>{
             const bcard=document.createElement("button");
+            bcard.className="notecard";
             bcard.style.cssText="border-radius:10px;padding:8px 10px;min-width:118px";
             const tag=document.createElement("div"); tag.style.cssText="font-weight:800;font-size:12px;color:var(--muted)"; tag.textContent=L;
             const dd=document.createElement("div");

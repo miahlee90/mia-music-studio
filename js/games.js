@@ -678,6 +678,7 @@ const Games=(()=>{
       /* DD-27: option buttons are NOTATION CARDS — symbol drawn on a mini staff + name */
       BTNS.forEach(bt=>{ const b=document.createElement("button");
         if(bt.item){
+          b.className="notecard";
           b.style.cssText="border-radius:10px;padding:6px 10px;min-width:104px";
           const d=document.createElement("div"); b.appendChild(d);
           Staff.render(d,{clef:"none",notes:[bt.item],width:100});
@@ -795,6 +796,7 @@ const Games=(()=>{
         grid.innerHTML="";
         shuffle([target,...others]).forEach(c=>{
           const b=document.createElement("button");
+          b.className="notecard";
           b.style.cssText="min-height:92px;border-radius:10px;padding:6px";
           const d=document.createElement("div"); b.appendChild(d);
           if(c.html){ d.innerHTML=c.html; d.style.cssText="font-size:1.6rem;font-weight:800;color:var(--primary-dark)"; }

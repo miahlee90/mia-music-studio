@@ -55,7 +55,7 @@ LESSON_CONTENT[22]={
     "Play simple melodies containing flats"
   ],
   steps:[
-    { say:"A <b>flat (♭)</b> is an <b>accidental</b> — a pitch changer. It <b>lowers</b> a note by <b>one half step</b>: on the keyboard, move <b>one key to the LEFT</b> (black or white!). \u{1F447}",
+    { say:"A <b>flat (♭)</b> is an <b>accidental</b> — a pitch changer. It <b>lowers</b> a note by <b>one half step</b>: on the keyboard, move <b>one key to the LEFT</b> (black or white!). \u{1F447} <b>What does a flat do to a note?</b>",
       show:{ type:"staff", spec:{clef:"treble",notes:[{p:"B4",d:"q",label:"B"},{p:"Bb4",d:"q",label:"B♭ — a half step lower"}],width:340} },
       try:{ type:"mc",
         choices:["Lowers it by one half step","Raises it by one half step","Makes it louder"], answer:0,
@@ -66,7 +66,7 @@ LESSON_CONTENT[22]={
       try:{ type:"custom",
         hint:"Start on the marked key, slide ONE key left.",
         mount:(container,fb)=>MF_L22_flatKey(container,fb) } },
-    { say:"THE BIG RULE: an accidental affects <b>every note of the same letter on the same line or space</b> for the <b>rest of the measure</b> — then the <b>bar line cancels it</b>. \u{1F447} <b>Look at this measure:</b>",
+    { say:"THE BIG RULE: an accidental affects <b>every note of the same letter on the same line or space</b> for the <b>rest of the measure</b> — then the <b>bar line cancels it</b>. \u{1F447} <b>Look at this measure — which notes does the printed ♭ affect?</b>",
       show:{ type:"staff", spec:{clef:"treble",time:"4/4",notes:[{p:"Bb4",d:"q",label:"B♭ (flag raised!)"},{p:"G4",d:"q",label:"G"},{p:"B4",d:"q",label:"still B♭!"},{p:"B4",d:"q",label:"still B♭!"},{bar:"single"},{p:"B4",d:"w",label:"B again (new measure)"},{bar:"final"}],width:470} },
       try:{ type:"mc",
         choices:["Every B until the bar line","Only the note it's printed on","Every B in the whole piece"], answer:0,

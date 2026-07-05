@@ -65,7 +65,7 @@ LESSON_CONTENT[15]={
     "Build measures using quarter and eighth notes"
   ],
   steps:[
-    { say:"An <b>eighth note</b> is worth <b>½ beat</b> — half a quarter note. Alone, it wears a <b>flag</b>; in groups, the flags fuse into a <b>beam</b>. \u{1F447}",
+    { say:"An <b>eighth note</b> is worth <b>½ beat</b> — half a quarter note. Alone, it wears a <b>flag</b>; in groups, the flags fuse into a <b>beam</b>. \u{1F447} <b>How many beats does one eighth note receive?</b>",
       show:{ type:"staff", spec:{clef:"treble",notes:[{p:"G4",d:"8",label:"flag (alone)"},{p:"E4",d:"8",label:"beam"},{p:"F4",d:"8",label:"(group)"},{p:"G4",d:"q",label:"quarter = 2 eighths"}],beams:[[1,2]],width:440} },
       try:{ type:"mc",
         choices:["½ beat","1 beat","2 beats"], answer:0,
@@ -102,7 +102,7 @@ LESSON_CONTENT[15]={
             else fb(false,"The beat count stays 1-2-3-4 — eighth notes just add “and” BETWEEN the numbers.");
           });
         } } },
-    { say:"The pizza rule returns: <b>2 eighths = 1 quarter</b>, and <b>8 eighths = 1 whole note</b>. \u{1F447}",
+    { say:"The pizza rule returns: <b>2 eighths = 1 quarter</b>, and <b>8 eighths = 1 whole note</b>. \u{1F447} <b>How many eighth notes equal one whole note?</b>",
       show:{ type:"staff", spec:{clef:"treble",notes:[{p:"B4",d:"8"},{p:"B4",d:"8",label:"= "},{p:"B4",d:"q",label:"1 quarter"}],beams:[[0,1]],width:300} },
       try:{ type:"mc",
         choices:["8","4","2"], answer:0,

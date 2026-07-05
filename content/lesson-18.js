@@ -66,7 +66,7 @@ LESSON_CONTENT[18]={
       try:{ type:"custom",
         hint:"Whisper = p, shout = f.",
         mount:(container,fb)=>MF_L18_loudSoft(container,fb,4) } },
-    { say:"Between soft and loud lives <b>mezzo = moderately</b>: <b>mp (mezzo piano)</b> = moderately soft, <b>mf (mezzo forte)</b> = moderately loud. Add the extremes — <b>pp (pianissimo)</b> very soft, <b>ff (fortissimo)</b> very loud — and you have the whole ladder. \u{1F447}",
+    { say:"Between soft and loud lives <b>mezzo = moderately</b>: <b>mp (mezzo piano)</b> = moderately soft, <b>mf (mezzo forte)</b> = moderately loud. Add the extremes — <b>pp (pianissimo)</b> very soft, <b>ff (fortissimo)</b> very loud — and you have the whole ladder. \u{1F447} <b>What does “mezzo” mean?</b>",
       show:{ type:"html", html:"<div style='display:flex;gap:8px;justify-content:center;flex-wrap:wrap;font-family:Georgia,serif'>"+["pp","p","mp","mf","f","ff"].map((d,i)=>`<div style='padding:10px 14px;border:1.5px solid var(--primary);border-radius:10px;text-align:center'><div style='font-size:${15+i*3}px;font-weight:800;font-style:italic'>${d}</div><div style='font-size:11px'>${["very soft","soft","mod. soft","mod. loud","loud","very loud"][i]}</div></div>`).join("")+"</div>" },
       try:{ type:"mc",
         choices:["Moderately","Very","Suddenly"], answer:0,

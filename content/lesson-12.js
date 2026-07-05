@@ -38,7 +38,7 @@ LESSON_CONTENT[12]={
     "Perform rhythms containing dotted half notes"
   ],
   steps:[
-    { say:"The rule: <b>a dot adds HALF of the note's original value</b>. Half note = 2 beats. Half of 2 = 1. So: <b>2 + 1 = 3 beats</b>. A <b>Dotted Half Note</b> lasts <b>3 beats</b>. \u{1F447}",
+    { say:"The rule: <b>a dot adds HALF of the note's original value</b>. Half note = 2 beats. Half of 2 = 1. So: <b>2 + 1 = 3 beats</b>. A <b>Dotted Half Note</b> lasts <b>3 beats</b>. \u{1F447} <b>What does a dot add to a note?</b>",
       show:{ type:"staff", spec:{clef:"treble",notes:[{p:"B4",d:"h",label:"2 beats"},{p:"B4",d:"h",dot:true,label:"2 + 1 = 3 beats"}],width:340} },
       try:{ type:"mc",
         choices:["Half of the note's own value","Always exactly 1 beat","It doubles the note"], answer:0,

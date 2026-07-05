@@ -110,7 +110,7 @@ LESSON_CONTENT[7]={
             }});
         } } },
     /* Step 2 — measures (Activity 2: count the measures) */
-    { say:"The space BETWEEN two bar lines is called a <b>Measure</b> — or a <b>Bar</b> (both words mean exactly the same thing!). Think of each measure as a small musical container that holds a specific number of beats. \u{1F447} <b>Count the containers:</b>",
+    { say:"The space BETWEEN two bar lines is called a <b>Measure</b> — or a <b>Bar</b> (both words mean exactly the same thing!). Think of each measure as a small musical container that holds a specific number of beats. \u{1F447} <b>How many measures do you see?</b>",
       show:{ type:"staff", spec:{clef:"treble",notes:[{p:"C4",d:"h"},{p:"E4",d:"h"},{bar:"single"},{p:"G4",d:"w"},{bar:"single"},{p:"E4",d:"q"},{p:"D4",d:"q"},{p:"C4",d:"h"},{bar:"final"}],width:440} },
       try:{ type:"mc",
         choices:["2","3","4"], answer:1,

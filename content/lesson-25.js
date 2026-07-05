@@ -68,7 +68,7 @@ LESSON_CONTENT[25]={
     "Apply half- and whole-step thinking to simple examples"
   ],
   steps:[
-    { say:"A <b>half step (H)</b> is the distance from one key to the <b>VERY next key</b> — black or white, nothing skipped. It's the smallest interval in Western music. Examples: C→C♯, E→F, B→C. \u{1F447} <b>Notice: E–F and B–C are half steps with NO black key between!</b>",
+    { say:"A <b>half step (H)</b> is the distance from one key to the <b>VERY next key</b> — black or white, nothing skipped. It's the smallest interval in Western music. Examples: C→C♯, E→F, B→C. \u{1F447} <b>Notice: E–F and B–C are half steps with NO black key between!</b> <b>What is a half step?</b>",
       try:{ type:"mc",
         choices:["The very next key — nothing in between","Two keys apart","Always white to black"], answer:0,
         success:"✓ The very next neighbor — sometimes black, sometimes white (E–F and B–C!).",
@@ -115,7 +115,7 @@ LESSON_CONTENT[25]={
           function ask(){ q.innerHTML=`Pair ${i+1} of ${seq.length}: which note sounds the same as <b>${seq[i][0]}</b>?`; }
           ask();
         } } },
-    { say:"Why the sneaky white-key half steps? Look: between <b>E–F</b> and <b>B–C</b> there is <b>no black key</b> — so those neighbors are already half steps! \u{1F447} <b>Final check:</b>",
+    { say:"Why the sneaky white-key half steps? Look: between <b>E–F</b> and <b>B–C</b> there is <b>no black key</b> — so those neighbors are already half steps! \u{1F447} <b>Final check — which white-key pairs are half steps?</b>",
       try:{ type:"mc",
         choices:["E–F and B–C","C–D and F–G","A–B and D–E"], answer:0,
         success:"✓ The two famous white-key half steps — no black key between them. Everything else white-to-white is a whole step!",

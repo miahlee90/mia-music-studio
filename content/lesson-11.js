@@ -38,14 +38,14 @@ LESSON_CONTENT[11]={
     "Place bar lines correctly in 3/4 time"
   ],
   steps:[
-    { say:"In <b>3/4 time</b>: the <b>3</b> means there are <b>3 beats per measure</b>; the <b>4</b> means the <b>quarter note receives 1 beat</b>. \u{1F447}",
+    { say:"In <b>3/4 time</b>: the <b>3</b> means there are <b>3 beats per measure</b>; the <b>4</b> means the <b>quarter note receives 1 beat</b>. \u{1F447} <b>What does the top number 3 mean?</b>",
       show:{ type:"staff", spec:{clef:"treble",time:"3/4",notes:[{p:"C4",d:"q",label:"1"},{p:"E4",d:"q",label:"2"},{p:"G4",d:"q",label:"3"},{bar:"single"},{p:"E4",d:"h",label:"1  2"},{p:"C4",d:"q",label:"3"},{bar:"final"}],width:440} },
       try:{ type:"mc",
         choices:["There are 3 beats per measure","The third note is accented","Only 3 measures may be written"], answer:0,
         success:"✓ The top 3 sets the measure length: three beats.",
         fail:"The top number counts the beats per measure.",
         hint:"Top = how many." } },
-    { say:"Beat values in 3/4: <b>♩ or its rest = 1 beat</b> · <b>half note or two quarter rests = 2 beats</b> · and a full measure of silence is written with the <b>whole rest</b>, even though the measure has only 3 beats. As in 2/4: <b>a half rest and a whole note are never used in 3/4 time</b>. \u{1F447}",
+    { say:"Beat values in 3/4: <b>♩ or its rest = 1 beat</b> · <b>half note or two quarter rests = 2 beats</b> · and a full measure of silence is written with the <b>whole rest</b>, even though the measure has only 3 beats. As in 2/4: <b>a half rest and a whole note are never used in 3/4 time</b>. \u{1F447} <b>Which symbol is used for a FULL measure of rest?</b>",
       show:{ type:"staff", spec:{clef:"treble",time:"3/4",notes:[{p:"B4",d:"q",label:"1 beat"},{rest:"q",label:"1 beat"},{p:"B4",d:"h",label:"2 beats"},{rest:"w",label:"full measure"}],width:440} },
       try:{ type:"mc",
         choices:["A whole rest","A half rest","A whole note"], answer:0,
@@ -91,6 +91,7 @@ LESSON_CONTENT[11]={
           const q=container.querySelector(".c3-q"), st=container.querySelector(".c3-staff"), grid=container.querySelector(".c3-cards");
           CARDS.forEach(([t,name,item])=>{
             const b=document.createElement("button");
+            b.className="notecard";
             b.style.cssText="border-radius:10px;padding:6px 10px;min-width:108px";
             const d=document.createElement("div"); b.appendChild(d);
             Staff.render(d,{clef:"none",notes:[item],width:100});
@@ -145,7 +146,7 @@ LESSON_CONTENT[11]={
           });
           ask();
         } } },
-    { say:"<b>Draw the bar lines.</b> Click the two positions where a bar line belongs, so every measure holds <b>3 beats</b>, then hear the result. \u{1F447}",
+    { say:"Let's organize the melody!<br>Count the beats from left to right.<br>Every time you reach <b>3 beats</b>, place a bar line (a half note counts 2).<br>There are only <b>TWO</b> correct places.<br>\u{1F447} <b>Click the correct two positions:</b>",
       try:{ type:"custom",
         hint:"A bar line belongs after every 3 beats — count notes and rests.",
         mount:(container,fb)=>{

@@ -314,3 +314,8 @@ hr.sep{border:none;border-top:1px solid var(--hairline);margin:20px 0}
 .mf-staff text.mark-txt.seg{font-family:Georgia,serif}
 /* DD-27: notation-card option buttons inside games/activities */
 .gbtns button svg.mf-staff,.choices button svg.mf-staff{height:46px;width:auto;margin:0 auto;display:block}
+/* DD-27: notation-card buttons — WHITE card so the staff drawing is visible */
+button.notecard{background:#fff !important;background-image:none !important;color:var(--ink,#0d253d) !important;
+  border:1.5px solid #c9d4e3 !important;box-shadow:0 2px 6px rgba(13,37,61,.08) !important}
+button.notecard:hover{border-color:var(--primary) !important;background:#f8f9ff !important}
+button.notecard div{color:inherit}

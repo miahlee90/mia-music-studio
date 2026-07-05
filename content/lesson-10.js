@@ -38,20 +38,20 @@ LESSON_CONTENT[10]={
     "Place bar lines correctly in 2/4 time"
   ],
   steps:[
-    { say:"In <b>2/4 time</b>: the <b>2</b> means there are <b>2 beats per measure</b>; the <b>4</b> means the <b>quarter note receives 1 beat</b>. \u{1F447}",
+    { say:"In <b>2/4 time</b>: the <b>2</b> means there are <b>2 beats per measure</b>; the <b>4</b> means the <b>quarter note receives 1 beat</b>. \u{1F447} <b>What does the bottom number 4 mean?</b>",
       show:{ type:"staff", spec:{clef:"treble",time:"2/4",notes:[{p:"C4",d:"q",label:"1"},{p:"E4",d:"q",label:"2"},{bar:"single"},{p:"G4",d:"h",label:"1  2"},{bar:"final"}],width:400} },
       try:{ type:"mc",
         choices:["The quarter note receives 1 beat","There are 4 beats per measure","Only 4 measures may be written"], answer:0,
         success:"✓ The bottom 4 assigns the beat to the quarter note — exactly as in 4/4.",
         fail:"The bottom number names the note that receives one beat.",
         hint:"Same bottom number as 4/4." } },
-    { say:"2/4 and 4/4 <b>both have 4 as the bottom number</b>, so a quarter note receives 1 beat in each. <b>The difference:</b> 2/4 has <b>2 beats per measure</b>, while 4/4 has <b>4</b>. \u{1F447}",
+    { say:"2/4 and 4/4 <b>both have 4 as the bottom number</b>, so a quarter note receives 1 beat in each. <b>The difference:</b> 2/4 has <b>2 beats per measure</b>, while 4/4 has <b>4</b>. \u{1F447} <b>What is the difference between 2/4 and 4/4?</b>",
       try:{ type:"mc",
         choices:["The number of beats per measure","Which note receives the beat","The speed of the music"], answer:0,
         success:"✓ Only the measure length differs — 2 beats versus 4. The beat note is the same.",
         fail:"Both share the bottom 4 — compare the TOP numbers.",
         hint:"Compare 2 and 4 on top." } },
-    { say:"Beat values in 2/4: <b>♩ or its rest = 1 beat</b> · <b>half note = 2 beats</b> · and for a full measure of silence, use the <b>whole rest</b> — even though the measure has only 2 beats. One more rule from notation practice: <b>a half rest and a whole note are never used in 2/4 time</b>. \u{1F447}",
+    { say:"Beat values in 2/4: <b>♩ or its rest = 1 beat</b> · <b>half note = 2 beats</b> · and for a full measure of silence, use the <b>whole rest</b> — even though the measure has only 2 beats. One more rule from notation practice: <b>a half rest and a whole note are never used in 2/4 time</b>. \u{1F447} <b>Which two symbols are never used in 2/4 time?</b>",
       show:{ type:"staff", spec:{clef:"treble",time:"2/4",notes:[{p:"B4",d:"q",label:"1 beat"},{rest:"q",label:"1 beat"},{p:"B4",d:"h",label:"2 beats"},{rest:"w",label:"full measure"}],width:440} },
       try:{ type:"mc",
         choices:["A half rest and a whole note","A quarter note and a quarter rest","A half note and a whole rest"], answer:0,
@@ -74,6 +74,7 @@ LESSON_CONTENT[10]={
           const q=container.querySelector(".cm-q"), st=container.querySelector(".cm-staff"), grid=container.querySelector(".cm-cards");
           CARDS.forEach(([t,name,item,beats])=>{
             const b=document.createElement("button");
+            b.className="notecard";
             b.style.cssText="border-radius:10px;padding:6px 10px;min-width:108px";
             const d=document.createElement("div"); b.appendChild(d);
             Staff.render(d,{clef:"none",notes:[item],width:100});
@@ -131,7 +132,7 @@ LESSON_CONTENT[10]={
           });
           ask();
         } } },
-    { say:"<b>Draw the bar lines.</b> The melody below has none — click the two positions where a bar line belongs, so that every measure holds <b>2 beats</b>. \u{1F447}",
+    { say:"Let's organize the melody!<br>Count the beats from left to right.<br>Every time you reach <b>2 beats</b>, place a bar line.<br>There are only <b>TWO</b> correct places.<br>\u{1F447} <b>Click the correct two positions:</b>",
       try:{ type:"custom",
         hint:"Count from the start: a bar line belongs after every 2 beats.",
         mount:(container,fb)=>{

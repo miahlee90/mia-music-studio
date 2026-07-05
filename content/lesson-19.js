@@ -64,7 +64,7 @@ LESSON_CONTENT[19]={
     "Choose an appropriate tempo for different styles of music"
   ],
   steps:[
-    { say:"<b>Tempo</b> = the speed of the music — its heartbeat. Like dynamics, tempo words are <b>Italian</b>. The big five: \u{1F422} <b>Adagio</b> (slow) · \u{1F6B6} <b>Andante</b> (walking pace) · \u{1F642} <b>Moderato</b> (moderate) · \u{1F3C3} <b>Allegro</b> (fast & cheerful) · \u{26A1} <b>Vivace</b> (very lively). \u{1F447}",
+    { say:"<b>Tempo</b> = the speed of the music — its heartbeat. Like dynamics, tempo words are <b>Italian</b>. The big five: \u{1F422} <b>Adagio</b> (slow) · \u{1F6B6} <b>Andante</b> (walking pace) · \u{1F642} <b>Moderato</b> (moderate) · \u{1F3C3} <b>Allegro</b> (fast & cheerful) · \u{26A1} <b>Vivace</b> (very lively). \u{1F447} <b>What does tempo tell musicians?</b>",
       try:{ type:"mc",
         choices:["The speed of the music","The volume of the music","The names of the notes"], answer:0,
         success:"✓ Tempo = speed, the heartbeat that everything else rides on.",

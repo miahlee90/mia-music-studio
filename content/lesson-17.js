@@ -57,7 +57,7 @@ LESSON_CONTENT[17]={
     "Perform rhythms using dotted quarter and eighth notes"
   ],
   steps:[
-    { say:"The dot rule never changes: <b>a dot adds half the note's own value</b>. Quarter = 1 beat, half of 1 = ½. So: <b>1 + ½ = 1½ beats</b>. \u{1F447}",
+    { say:"The dot rule never changes: <b>a dot adds half the note's own value</b>. Quarter = 1 beat, half of 1 = ½. So: <b>1 + ½ = 1½ beats</b>. \u{1F447} <b>How many beats does a dotted quarter note receive?</b>",
       show:{ type:"staff", spec:{clef:"treble",notes:[{p:"B4",d:"q",label:"1 beat"},{p:"B4",d:"q",dot:true,label:"1 + ½ = 1½ beats"}],width:340} },
       try:{ type:"mc",
         choices:["1½ beats","2 beats","1 beat"], answer:0,
@@ -92,7 +92,7 @@ LESSON_CONTENT[17]={
       try:{ type:"custom",
         hint:"Dot = long (1½); flag = short (½).",
         mount:(container,fb)=>MF_L17_longShort(container,fb) } },
-    { say:"Another way to see 1½: the dotted quarter equals <b>three eighth notes</b> (½ + ½ + ½). \u{1F447}",
+    { say:"Another way to see 1½: the dotted quarter equals <b>three eighth notes</b> (½ + ½ + ½). \u{1F447} <b>How many eighth notes equal one dotted quarter note?</b>",
       show:{ type:"staff", spec:{clef:"treble",notes:[{p:"B4",d:"q",dot:true,label:"1½"},{p:"B4",d:"8",label:"½"},{p:"B4",d:"8",label:"½"},{p:"B4",d:"8",label:"½"}],beams:[[1,2]],width:380} },
       try:{ type:"mc",
         choices:["3","2","4"], answer:0,

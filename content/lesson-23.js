@@ -55,7 +55,7 @@ LESSON_CONTENT[23]={
     "Tell sharps and flats apart instantly"
   ],
   steps:[
-    { say:"A <b>sharp (♯)</b> <b>raises</b> a note by <b>one half step</b>: on the keyboard, move <b>one key to the RIGHT</b>. It's the flat's mirror twin. \u{1F447}",
+    { say:"A <b>sharp (♯)</b> <b>raises</b> a note by <b>one half step</b>: on the keyboard, move <b>one key to the RIGHT</b>. It's the flat's mirror twin. \u{1F447} <b>What does a sharp do to a note?</b>",
       show:{ type:"staff", spec:{clef:"treble",notes:[{p:"C4",d:"q",label:"C"},{p:"C#4",d:"q",label:"C♯ — a half step higher"}],width:340} },
       try:{ type:"mc",
         choices:["Raises it by one half step","Lowers it by one half step","Doubles its length"], answer:0,
@@ -66,7 +66,7 @@ LESSON_CONTENT[23]={
       try:{ type:"custom",
         hint:"Marked key, then ONE key right.",
         mount:(container,fb)=>MF_L23_sharpKey(container,fb) } },
-    { say:"The <b>one-measure rule</b> works exactly the same for sharps: one printed ♯ rules every matching note until the <b>bar line</b>. \u{1F447}",
+    { say:"The <b>one-measure rule</b> works exactly the same for sharps: one printed ♯ rules every matching note until the <b>bar line</b>. \u{1F447} <b>How does the THIRD F (no sign) sound in this measure?</b>",
       show:{ type:"staff", spec:{clef:"treble",time:"4/4",notes:[{p:"F#4",d:"q",label:"F♯"},{p:"A4",d:"q",label:"A"},{p:"F4",d:"q",label:"still F♯!"},{p:"A4",d:"q",label:"A"},{bar:"single"},{p:"F4",d:"w",label:"plain F again"},{bar:"final"}],width:470} },
       try:{ type:"mc",
         choices:["F♯ — the sharp still applies in this measure","Plain F — sharps affect only one note","F♭"], answer:0,

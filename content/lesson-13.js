@@ -65,14 +65,14 @@ LESSON_CONTENT[13]={
     "Perform slurred notes smoothly"
   ],
   steps:[
-    { say:"A <b>TIE</b> connects <b>two notes of the SAME pitch</b> — musical <b>glue</b> \u{1F9F2}. Play the first note ONCE and hold it for the combined value. Half + half tied = <b>4 beats of one sound</b>. \u{1F447}",
+    { say:"A <b>TIE</b> connects <b>two notes of the SAME pitch</b> — musical <b>glue</b> \u{1F9F2}. Play the first note ONCE and hold it for the combined value. Half + half tied = <b>4 beats of one sound</b>. \u{1F447} <b>Do you play the second tied note again?</b>",
       show:{ type:"staff", spec:{clef:"treble",time:"4/4",notes:[{p:"G4",d:"h",label:"play"},{p:"G4",d:"h",label:"(hold — 2+2=4)"},{bar:"final"}],arcs:[{from:0,to:1,type:"tie"}],width:380} },
       try:{ type:"mc",
         choices:["No — hold the first note through it","Yes — strike it again","Only on Tuesdays"], answer:0,
         success:"✓ Never re-strike a tied note — one attack, then pure holding. The values ADD together.",
         fail:"The tie is glue — the second note is held, not played again.",
         hint:"Tie = play ONCE." } },
-    { say:"A <b>SLUR</b> connects notes of <b>DIFFERENT pitches</b> — a musical <b>bridge</b> \u{1F309}. Play EVERY note, but smoothly connected, with no gaps. That style is called <b>legato</b>. \u{1F447}",
+    { say:"A <b>SLUR</b> connects notes of <b>DIFFERENT pitches</b> — a musical <b>bridge</b> \u{1F309}. Play EVERY note, but smoothly connected, with no gaps. That style is called <b>legato</b>. \u{1F447} <b>Under a slur, what do you do?</b>",
       show:{ type:"staff", spec:{clef:"treble",notes:[{p:"C4",d:"q",label:"C"},{p:"D4",d:"q",label:"D"},{p:"E4",d:"q",label:"E"},{p:"F4",d:"h",label:"F — all smooth!"}],arcs:[{from:0,to:3,type:"slur"}],width:420} },
       try:{ type:"mc",
         choices:["Play every note, smoothly connected","Play only the first note","Skip the notes under the curve"], answer:0,
@@ -107,7 +107,7 @@ LESSON_CONTENT[13]={
             else fb(false,"A had little silences between the notes — detached, not connected. Listen once more.");
           });
         } } },
-    { say:"Last check — match the words! \u{1F447}",
+    { say:"Last check! \u{1F447} <b>Which matching is correct?</b>",
       try:{ type:"mc",
         choices:["Tie → same pitch · Slur → different pitches · Legato → smoothly connected",
                  "Tie → different pitches · Slur → same pitch · Legato → very loud",

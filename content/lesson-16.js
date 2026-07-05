@@ -62,7 +62,7 @@ LESSON_CONTENT[16]={
     "Build measures using notes AND eighth rests"
   ],
   steps:[
-    { say:"The <b>eighth rest</b> looks like a little <b>7 with a dot</b> — and it means <b>½ beat of silence</b>. Exactly as long as an eighth note, minus the sound. \u{1F447}",
+    { say:"The <b>eighth rest</b> looks like a little <b>7 with a dot</b> — and it means <b>½ beat of silence</b>. Exactly as long as an eighth note, minus the sound. \u{1F447} <b>How long does the eighth rest last?</b>",
       show:{ type:"staff", spec:{clef:"treble",notes:[{p:"B4",d:"8",label:"eighth note — ½ beat of sound"},{rest:"8",label:"eighth rest — ½ beat of silence"}],width:380} },
       try:{ type:"mc",
         choices:["½ beat","1 beat","2 beats"], answer:0,
