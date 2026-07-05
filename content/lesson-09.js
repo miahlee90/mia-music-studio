@@ -144,12 +144,12 @@ LESSON_CONTENT[9]={
           ask();
         } } },
     /* Step 5 (was 6) — read through the silence; the sound-and-silence builder step was REMOVED at instructor request (Session 15o) — the Sound & Silence Builder GAME still covers it */
-    { say:"Let's READ a rhythm with rests. Follow the highlight and count out loud — on the silent beats, say <b>“rest”</b>: 1, rest, 3, rest | 1-2-3-4. \u{1F447}",
+    { say:"Let's READ a rhythm with rests. Follow the highlight and count out loud — on the silent beats, say <b>“rest”</b>: 1, rest(2), 3, rest(4) | 1-2-3-4. \u{1F447}",
       try:{ type:"custom",
         hint:"Keep counting through every rest — say “rest” out loud on the silent beats.",
         mount:(container,fb)=>{
           const spec={clef:"treble",time:"4/4",tempo:80,
-            notes:[{p:"C4",d:"q",label:"1"},{rest:"q",label:"rest"},{p:"E4",d:"q",label:"3"},{rest:"q",label:"rest"},{bar:"single"},
+            notes:[{p:"C4",d:"q",label:"1"},{rest:"q",label:"(2)"},{p:"E4",d:"q",label:"3"},{rest:"q",label:"(4)"},{bar:"single"},
                    {p:"G4",d:"w",label:"1-2-3-4"},{bar:"final"}],width:440};
           container.innerHTML=`<div class="rs-staff"></div><div style="text-align:center"><button class="play rs-play">▶ Play & count along</button></div>`;
           const api=Staff.render(container.querySelector(".rs-staff"),spec);
@@ -160,10 +160,10 @@ LESSON_CONTENT[9]={
         } } }
   ],
   examples:[
-    { caption:"Sound, silence, sound, silence — count every beat out loud: 1, rest, 3, rest. The rests are as musical as the notes.",
-      staff:{clef:"treble",tempo:85,time:"4/4",notes:[{p:"E4",d:"q",label:"1"},{rest:"q",label:"rest"},{p:"G4",d:"q",label:"3"},{rest:"q",label:"rest"},{bar:"final"}],width:400} },
-    { caption:"A half note rings for 2, then the HAT takes over for 2 silent beats: 1-2, rest-rest.",
-      staff:{clef:"treble",tempo:85,time:"4/4",notes:[{p:"F4",d:"h",label:"1-2"},{rest:"h",label:"rest-rest"},{bar:"single"},{p:"C4",d:"w",label:"1-2-3-4"},{bar:"final"}],width:420} }
+    { caption:"Sound, silence, sound, silence — count every beat out loud: 1, rest(2), 3, rest(4). The rests are as musical as the notes.",
+      staff:{clef:"treble",tempo:85,time:"4/4",notes:[{p:"E4",d:"q",label:"1"},{rest:"q",label:"(2)"},{p:"G4",d:"q",label:"3"},{rest:"q",label:"(4)"},{bar:"final"}],width:400} },
+    { caption:"A half note rings for 2, then the HAT takes over for 2 silent beats: 1-2, rest(3-4).",
+      staff:{clef:"treble",tempo:85,time:"4/4",notes:[{p:"F4",d:"h",label:"1-2"},{rest:"h",label:"(3-4)"},{bar:"single"},{p:"C4",d:"w",label:"1-2-3-4"},{bar:"final"}],width:420} }
   ],
   games:[
     { type:"value-race", title:"Game 1 · Rest Flash",
@@ -281,7 +281,7 @@ LESSON_CONTENT[9]={
     "✔ <b>Keep counting through every rest</b> — the beat never stops."
   ],
   tips:[
-    "Say “rest” out loud on every silent beat — “1, rest, 3, rest” — until counting through silence feels natural.",
+    "Say “rest” out loud on every silent beat — “1, rest(2), 3, rest(4)” — until counting through silence feels natural.",
     "Hat or hole? Say it out loud every single time. Corny works — that's why it sticks!",
     "Great performers love rests: silence makes the next note land harder.",
     "\u{1F92B} You've finished Unit 2's core rhythm symbols! Next lesson opens Unit 3: the 2/4 time signature."
