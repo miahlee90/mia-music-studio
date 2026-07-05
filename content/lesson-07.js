@@ -4,58 +4,65 @@
    Uses staff.js v4.1 (clickBars, labeled bars), games.js v4.1 (measure-count, symbol-hunt).
    NOTE: edit by FULL-FILE REWRITE only. */
 
-/* bar-line insertion activity (unique L7 prefix: safe for check.html batch load)
-   seq = [{d,beats}] — student clicks the gaps where a bar line belongs (after every 4 beats) */
-function MF_L7_organize(container,fb,rounds,doneMsg){
-  const BEATS={w:4,h:2,q:1};
-  const NAME={w:"Whole",h:"Half",q:"Quarter"};
-  let r=0;
-  container.innerHTML=`<div class="big-q og-q" style="text-align:center"></div>
-    <div class="og-row" style="display:flex;flex-wrap:wrap;gap:4px;justify-content:center;align-items:center;margin:12px 0"></div>
-    <div class="og-staff"></div>`;
-  const q=container.querySelector(".og-q"), row=container.querySelector(".og-row"), st=container.querySelector(".og-staff");
-  function build(){
-    const seq=rounds[r];
-    let cum=0;
-    const needed=new Set();
-    seq.forEach((d,i)=>{ cum+=BEATS[d]; if(cum%4===0&&i<seq.length-1) needed.add(i); });
-    const placed=new Set();
-    row.innerHTML=""; st.innerHTML="";
-    q.textContent=`Round ${r+1} of ${rounds.length}: click the gaps where a BAR LINE belongs (every 4 beats).`;
-    seq.forEach((d,i)=>{
-      const chip=document.createElement("span");
-      chip.style.cssText="display:inline-block;padding:8px 10px;border:1.5px solid var(--primary);border-radius:8px;font-weight:700";
-      chip.textContent=`${NAME[d]} (${BEATS[d]})`;
-      row.appendChild(chip);
-      if(i<seq.length-1){
-        const gap=document.createElement("button");
-        gap.className="ghost"; gap.style.cssText="min-width:34px;padding:8px 6px";
-        gap.textContent="·";
-        gap.onclick=()=>{
-          if(placed.has(i)) return;
-          if(needed.has(i)){
-            placed.add(i); gap.textContent="│"; gap.style.fontWeight="800"; gap.disabled=true;
-            MFAudio.tone(76,.3);
-            if(placed.size===needed.size){
-              const items=[]; seq.forEach((dd,j)=>{ items.push({p:"B4",d:dd}); if(placed.has(j)) items.push({bar:"single"}); });
-              items.push({bar:"final"});
-              const spec={clef:"treble",tempo:90,notes:items,width:420};
-              const api=Staff.render(st,spec);
-              Staff.play(spec,api);
-              r++;
-              if(r>=rounds.length){ row.querySelectorAll("button").forEach(b=>b.disabled=true); q.textContent="All organized!"; fb(true,doneMsg); }
-              else { fb(true,"✓ Perfectly organized — every measure holds exactly 4 beats! Listen… then the next round."); setTimeout(build,3800); }
-            } else fb(true,`✓ Bar line placed! ${needed.size-placed.size} more to go — keep counting beats.`);
-          } else {
-            MFAudio.tone(40,.25);
-            fb(false,"Not there — add up the beats from the last bar line. A bar line goes exactly where the count reaches 4.");
-          }
-        };
-        row.appendChild(gap);
-      }
+/* worksheet-style bar-spot activity (unique L7 prefix: safe for check.html batch load)
+   A real melody with NO bar lines; four candidate spots marked A–D with arrows
+   (like the instructor's worksheet). Student clicks the TWO spots where the
+   beats reach 4 — bar lines appear on the staff, then the result plays. */
+function MF_L7_barSpots(container,fb){
+  const seq=[{p:"G4",d:"h"},{p:"E4",d:"q"},{p:"F4",d:"q"},{p:"G4",d:"w"},{p:"F4",d:"q"},{p:"E4",d:"q"},{p:"F4",d:"h"}];
+  const cand=[{g:1,letter:"A"},{g:2,letter:"B"},{g:3,letter:"C"},{g:5,letter:"D"}]; /* bar goes AFTER note g */
+  const correct=new Set([2,3]); /* beats reach 4 after note 2 (2+1+1) and 8 after note 3 (+4) */
+  const placed=new Set(), W=460, NS="http://www.w3.org/2000/svg";
+  container.innerHTML=`<div class="bs2-staff"></div><div class="choices chips bs2-ch"></div>`;
+  const st=container.querySelector(".bs2-staff"), ch=container.querySelector(".bs2-ch");
+  cand.forEach(c=>{ const b=document.createElement("button"); b.textContent=c.letter;
+    b.onclick=()=>pick(c,b); ch.appendChild(b); });
+  function items(){
+    const out=[]; seq.forEach((n,j)=>{ out.push(n); if(placed.has(j)) out.push({bar:"single"}); });
+    if(placed.size===correct.size) out.push({bar:"final"});
+    return out;
+  }
+  function draw(){
+    const its=items();
+    Staff.render(st,{clef:"treble",notes:its,width:W});
+    const svg=st.querySelector("svg");
+    const startX=80, L=its.length;
+    const xAt=i=> L===1? (startX+W-40)/2 : startX+i*((W-40-startX)/(L-1));
+    const idxMap=[]; let k=0;
+    seq.forEach((n,j)=>{ idxMap[j]=k; k++; if(placed.has(j)) k++; });
+    cand.forEach(c=>{
+      if(placed.has(c.g)) return;
+      const xa=xAt(idxMap[c.g]), xb=c.g+1<seq.length? xAt(idxMap[c.g+1]) : W-16;
+      const x=(xa+xb)/2;
+      const ln=document.createElementNS(NS,"line");
+      ln.setAttribute("x1",x);ln.setAttribute("y1",112);ln.setAttribute("x2",x);ln.setAttribute("y2",96);
+      ln.setAttribute("stroke","#33415c");ln.setAttribute("stroke-width","2");
+      const hd=document.createElementNS(NS,"polygon");
+      hd.setAttribute("points",`${x-4},99 ${x+4},99 ${x},91`);
+      hd.setAttribute("fill","#33415c");
+      const tx=document.createElementNS(NS,"text");
+      tx.setAttribute("x",x);tx.setAttribute("y",127);tx.setAttribute("text-anchor","middle");
+      tx.setAttribute("class","lbl");tx.setAttribute("font-weight","800");tx.textContent=c.letter;
+      svg.appendChild(ln);svg.appendChild(hd);svg.appendChild(tx);
     });
   }
-  build();
+  function pick(c,b){
+    if(placed.has(c.g)||b.disabled) return;
+    if(correct.has(c.g)){
+      placed.add(c.g); b.disabled=true; MFAudio.tone(76,.3);
+      draw();
+      if([...correct].every(g=>placed.has(g))){
+        ch.style.display="none";
+        const spec={clef:"treble",tempo:90,notes:items(),width:W};
+        const api=Staff.render(st,spec); Staff.play(spec,api);
+        fb(true,"✓ B and C — exactly where the beats reach 4 and 8! Every measure now holds 4 beats. Listen…");
+      } else fb(true,"✓ A bar line belongs there! Now find the other spot…");
+    } else {
+      MFAudio.tone(40,.25);
+      fb(false,"Not there — add the beats from the last bar line (Half = 2, Quarter = 1, Whole = 4). A bar line belongs exactly where the count reaches 4.");
+    }
+  }
+  draw();
 }
 
 LESSON_CONTENT[7]={
@@ -118,21 +125,13 @@ LESSON_CONTENT[7]={
         success:"✓ Number 3 — thin + thick, the official “the end” sign. (1 is a single bar line, 2 is just a quarter note.)",
         fail:"Look for TWO lines together — one thin, one thick.",
         hint:"The double bar has two lines; the thick one comes last." } },
-    /* Step 4 — bar = measure (QA suggestion) */
-    { say:"One more thing before we build: musicians use two words for the same container. In America you'll mostly hear <b>measure</b>, but plenty of musicians and books say <b>bar</b>. \u{1F447} <b>Your friend says: “this piece has 8 bars!” What do they mean?</b>",
-      try:{ type:"mc",
-        choices:["8 measures — bar means the same thing","8 bar lines","8 double bars"], answer:0,
-        success:"✓ Exactly — “8 bars” = “8 measures.” Two words, one idea. You'll hear both for the rest of your musical life!",
-        fail:"Think about it — bar and measure are two names for the same container.",
-        hint:"Bar = Measure. Same thing, different word." } },
-    /* Step 5 — organize the music (Activities 3+5) */
-    { say:"Now be the organizer! Below is a row of notes with NO bar lines. Click the gaps where a bar line belongs — <b>every time the beats add up to 4</b>. (The double bar appears at the end automatically.) \u{1F447}",
+    /* Step 4 — bar = measure (QA suggestion; quiz question removed at instructor request) */
+    { say:"One more thing before we build: musicians use two words for the same container. In America you'll mostly hear <b>measure</b>, but plenty of musicians and books say <b>bar</b> — same container, two names. When a friend says \u201cthis piece has 8 bars,\u201d they mean 8 measures. You'll hear both words for the rest of your musical life!" },
+    /* Step 5 — organize the music (Activities 3+5, worksheet style) */
+    { say:"Now be the organizer! Here is a melody with <b>no bar lines</b> — four spots are marked <b>A, B, C, D</b>. Bar lines are needed at exactly <b>TWO</b> of them, every time the beats add up to 4. \u{1F447} <b>Click the two correct spots:</b>",
       try:{ type:"custom",
-        hint:"Add the beat numbers left to right — 4 beats = time for a bar line. Whole = 4, Half = 2, Quarter = 1.",
-        mount:(container,fb)=>MF_L7_organize(container,fb,
-          [["q","q","q","q","q","q","q","q"],
-           ["h","q","q","w","q","q","h"]],
-          "✓ You organized real music — twice! Bar lines every 4 beats, double bar at the end. That's a music editor's job, done by YOU.") } }
+        hint:"Add beats from the start: Half (2) + Quarter (1) + Quarter (1) = 4 \u2192 first bar line. Keep adding to 8 for the second.",
+        mount:(container,fb)=>MF_L7_barSpots(container,fb) } }
   ],
   examples:[
     { caption:"Four beats, bar line, four beats, bar line… hear how the counting restarts at every bar line: 1-2-3-4 | 1-2-3-4.",
@@ -249,13 +248,7 @@ LESSON_CONTENT[7]={
     {term:"Double Bar", def:"Two lines (thin and thick) signifying the end of a piece"},
     {term:"Beat", def:"The steady pulse each measure holds"}
   ],
-  mistakes:[
-    "<b>Counting bar lines instead of measures</b> — count the SPACES between the lines.",
-    "<b>Thinking the double bar means “repeat”</b> — it means THE END. (Repeats come in Lesson 14.)",
-    "<b>Treating “bar” and “measure” as different things</b> — they're the same container.",
-    "<b>Stopping the count at a bar line</b> — the count restarts: …3, 4 | 1, 2…",
-    "<b>Expecting double bars in the middle</b> — the thin+thick double bar lives at the end."
-  ],
+  mistakes:[], /* Oops section removed at instructor request (Session 15h) */
   summary:[
     "✔ <b>Bar Lines</b> are vertical lines that divide the staff into equal sections.",
     "✔ The space between two bar lines = a <b>Measure</b> (also called a <b>Bar</b>).",
