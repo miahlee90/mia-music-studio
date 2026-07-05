@@ -12,6 +12,9 @@
    v4.4 (instructor rule, DD-24): treble clef drawn as SVG STROKE PATHS (no font
    glyph): spiral wraps the G line; the curve crosses the straight stem at the
    D line (4th line); same stroke geometry as the L2 pencil animation.
+   v4.5 (instructor fix): time-signature digits sized/positioned so the top number
+   sits fully in the upper two spaces and the bottom number in the lower two —
+   neither touches the middle line.
    NOTE (maintenance): edit by FULL-FILE REWRITE only. */
 const MFAudio=(()=>{
   let ctx=null;
@@ -97,9 +100,9 @@ const Staff=(()=>{
       parts.push(`<text class="tsig" x="${x}" y="${y0+2*GAP+GAP*0.95}" font-size="${GAP*2.9}" text-anchor="middle">C</text>`);
       return;
     }
-    const fs=GAP*2.35;
-    parts.push(`<text class="tsig" x="${x}" y="${y0+2*GAP-1.5}" font-size="${fs}" text-anchor="middle">${ts.top}</text>`);
-    parts.push(`<text class="tsig" x="${x}" y="${y0+4*GAP-1.5}" font-size="${fs}" text-anchor="middle">${ts.bottom}</text>`);
+    const fs=GAP*1.9; /* digits clear the middle line (top number in the upper half, bottom in the lower) */
+    parts.push(`<text class="tsig" x="${x}" y="${y0+2*GAP-3}" font-size="${fs}" text-anchor="middle">${ts.top}</text>`);
+    parts.push(`<text class="tsig" x="${x}" y="${y0+4*GAP-3}" font-size="${fs}" text-anchor="middle">${ts.bottom}</text>`);
   }
 
   function noteSVG(x,y,d,extra,y0){

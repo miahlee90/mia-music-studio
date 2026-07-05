@@ -127,24 +127,25 @@ LESSON_CONTENT[8]={
           });
           ask();
         } } },
-    /* Step 6 — build measures (Activity 2, QA: repeated build practice) */
-    { say:"Now BUILD. Fill the 4/4 measure with exactly <b>4 beats</b> — then do it again a <b>different</b> way. (You'll get even more building practice in the games!) \u{1F447}",
+    /* Step 6 — build measures (Activity 2, QA: repeated build practice).
+       Options drawn as notation CARDS per instructor sketch — incl. a CLEF trap card. */
+    { say:"Now BUILD. Fill the 4/4 measure with exactly <b>4 beats</b> — then do it again a <b>different</b> way. Click the note cards below. (Careful — one card is not a note value at all!) \u{1F447}",
       try:{ type:"custom",
-        hint:"Whole = 4, Half = 2, Quarter = 1 — total must be exactly 4.",
+        hint:"Whole = 4, Half = 2, Quarter = 1 — total must be exactly 4. And a clef has no beats!",
         mount:(container,fb)=>{
           const B={w:4,h:2,q:1};
           let cur=[],sum=0,found=[];
           container.innerHTML=`<div class="bf-staff"></div>
             <div class="big-q bf-q" style="text-align:center"></div>
-            <div class="choices bf-ch"><button data-v="w">Whole (4)</button><button data-v="h">Half (2)</button><button data-v="q">Quarter (1)</button><button class="ghost" data-v="x">↺ Clear</button></div>`;
-          const st=container.querySelector(".bf-staff"), q=container.querySelector(".bf-q");
+            <div class="bf-cards" style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:8px"></div>
+            <div style="text-align:center;margin-top:8px"><button class="ghost bf-clear">↺ Clear</button></div>`;
+          const st=container.querySelector(".bf-staff"), q=container.querySelector(".bf-q"),
+                grid=container.querySelector(".bf-cards");
           function draw(){
             Staff.render(st,{clef:"treble",time:"4/4",notes:[...cur.map(d=>({p:"B4",d})),{bar:"final"}],width:320});
             q.textContent=`Beats: ${sum} of 4 · Measures built: ${found.length} of 2`;
           }
-          [...container.querySelectorAll(".bf-ch button")].forEach(b=>b.onclick=()=>{
-            const v=b.dataset.v;
-            if(v==="x"){ cur=[];sum=0;draw(); return; }
+          function add(v){
             if(sum+B[v]>4){ fb(false,`That would make ${sum+B[v]} beats — the top number says exactly 4! Clear or choose smaller.`); return; }
             cur.push(v); sum+=B[v]; MFAudio.tone(71,B[v]*.4); draw();
             if(sum===4){
@@ -152,11 +153,29 @@ LESSON_CONTENT[8]={
               if(found.includes(key)){ fb(false,"Same combination as before — clear and build a DIFFERENT one!"); cur=[];sum=0; setTimeout(draw,900); return; }
               found.push(key);
               let t=0; cur.forEach(d=>{ MFAudio.tone(71,B[d]*.45,t); t+=B[d]*.5; });
-              if(found.length>=2){ container.querySelector(".bf-ch").style.display="none"; q.textContent="Two measures composed!";
+              if(found.length>=2){ grid.style.display="none"; container.querySelector(".bf-clear").style.display="none";
+                q.textContent="Two measures composed!";
                 fb(true,"✓ Two different complete measures — the top number is satisfied, and so is Mia!"); }
               else { fb(true,"✓ Exactly 4 beats! Now build a DIFFERENT combination…"); cur=[];sum=0; setTimeout(draw,1200); }
             }
+          }
+          const CARDS=[["A","Whole","w",[{p:"B4",d:"w"}]],
+                       ["B","Half","h",[{p:"B4",d:"h"}]],
+                       ["C","Quarter","q",[{p:"B4",d:"q"}]],
+                       ["D","Clef",null,[]]];
+          CARDS.forEach(([L,name,v,notes])=>{
+            const bcard=document.createElement("button");
+            bcard.style.cssText="border-radius:10px;padding:8px 10px;min-width:118px";
+            const tag=document.createElement("div"); tag.style.cssText="font-weight:800;font-size:12px;color:var(--muted)"; tag.textContent=L;
+            const dd=document.createElement("div");
+            const nm=document.createElement("div"); nm.style.cssText="font-weight:800;color:var(--primary)"; nm.textContent=name;
+            bcard.appendChild(tag); bcard.appendChild(dd); bcard.appendChild(nm);
+            Staff.render(dd,{clef:"treble",notes,width:110});
+            bcard.onclick=()=>{ if(v) add(v);
+              else { MFAudio.tone(40,.25); fb(false,"That's the CLEF — it names the notes but has NO duration, so it can't fill any beats. Pick a note value!"); } };
+            grid.appendChild(bcard);
           });
+          container.querySelector(".bf-clear").onclick=()=>{ cur=[];sum=0;draw(); };
           draw();
         } } }
   ],
