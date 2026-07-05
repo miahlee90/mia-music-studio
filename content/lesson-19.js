@@ -189,7 +189,11 @@ LESSON_CONTENT[19]={
     { type:"truefalse", q:"Tempo markings tell you how LOUD to play.", answer:false,
       explain:"That's dynamics! Tempo = speed." },
     { type:"mc", q:"Largo and Presto are…", choices:["the extreme ends of the tempo line","dynamic markings","kinds of rests"], answer:0,
-      explain:"Very slow and very fast — the outer edges." }
+      explain:"Very slow and very fast — the outer edges." },
+    /* — from the unit review sheet — */
+    { type:"mc", q:"Ritardando (ritard. or rit.) means…", choices:["gradually slowing down","gradually speeding up","suddenly loud"], answer:0, explain:"The tempo relaxes gradually." },
+    { type:"mc", q:"Accelerando (accel.) means…", choices:["gradually speeding up","gradually slowing down","moderately soft"], answer:0, explain:"The tempo pushes forward gradually." },
+    { type:"truefalse", q:"Allegro moderato is slightly slower than Allegro but quicker than Moderato.", answer:true, explain:"A blended marking sitting between the two." }
   ],
   miaQuizIntro:"Quiz time! Walk, run, crawl or fly — pick the right Italian every time!",
   quiz:[

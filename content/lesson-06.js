@@ -240,7 +240,11 @@ LESSON_CONTENT[6]={
     { type:"mc", q:"Duration means…", choices:["how high a note sounds","how long a sound lasts","how loud a note is"], answer:1,
       explain:"Duration = length in time. Note values are music's way of writing duration." },
     { type:"truefalse", q:"The stem direction changes how long a note lasts.", answer:false,
-      explain:"Stem direction is only about neat notation — up or down, the duration is identical." }
+      explain:"Stem direction is only about neat notation — up or down, the duration is identical." },
+    /* — from the unit review sheet — */
+    { type:"mc", q:"Fill in the correct number: ____ half notes = 1 whole note.", choices:["2","3","4"], answer:0, explain:"2 + 2 = 4 beats." },
+    { type:"mc", q:"Fill in the correct number: ____ quarter notes = 1 half note.", choices:["2","3","4"], answer:0, explain:"1 + 1 = 2 beats." },
+    { type:"mc", q:"The duration of a half note is ______ than a quarter note.", choices:["longer","shorter"], answer:0, explain:"2 beats versus 1 beat." }
   ],
   miaQuizIntro:"Quiz time! Whole-half-quarter, beats, stems, and beat math — everything you just played with. You're ready!",
   quiz:[

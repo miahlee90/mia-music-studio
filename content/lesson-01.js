@@ -186,7 +186,9 @@ LESSON_CONTENT[1]={
       explain:"Notes live on lines AND in spaces — every position is a different pitch." },
     { type:"mc", q:"A note placed higher on the staff sounds…",
       choices:["higher","lower","the same"], answer:0,
-      explain:"Higher position = higher pitch, like climbing the mountain." }
+      explain:"Higher position = higher pitch, like climbing the mountain." },
+    /* — from the unit review sheet — */
+    { type:"mc", q:"Is the 5th line at the bottom or the top of the staff?", choices:["The top","The bottom"], answer:0, explain:"Lines are numbered from the bottom up — line 5 is the highest." }
   ],
   /* Final Quiz — 20 questions, difficulty gradually increasing */
   miaQuizIntro:"The final quiz — 20 questions, easy ones first. Take your time; accuracy beats speed!",

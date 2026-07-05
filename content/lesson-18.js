@@ -198,7 +198,10 @@ LESSON_CONTENT[18]={
     { type:"mc", q:"Softest to loudest:", choices:["pp p mp mf f ff","ff f mf mp p pp","p pp mp mf ff f"], answer:0,
       explain:"The complete ladder in order." },
     { type:"truefalse", q:"Dynamics change WHICH notes you play.", answer:false,
-      explain:"Same notes — different volume!" }
+      explain:"Same notes — different volume!" },
+    /* — from the unit review sheet — */
+    { type:"mc", q:"The Italian ending “-issimo” means…", choices:["very","moderately","gradually"], answer:0, explain:"pianISSIMO = VERY soft; fortISSIMO = VERY loud." },
+    { type:"mc", q:"Diminuendo (dim.) is another name for…", choices:["decrescendo — gradually softer","crescendo — gradually louder","fortissimo"], answer:0, explain:"Two words for the same fading wedge." }
   ],
   miaQuizIntro:"Quiz time! Whisper the p's, shout the f's — go!",
   quiz:[

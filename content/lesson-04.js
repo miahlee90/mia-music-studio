@@ -234,7 +234,9 @@ LESSON_CONTENT[4]={
     { type:"mc", q:"In the treble staff, the note one step ABOVE Middle C is…", choices:["B","D","E"], answer:1,
       explain:"C4 (ledger line) → D4 hangs just below the staff — one step up." },
     { type:"truefalse", q:"Middle C written in the treble clef sounds different from Middle C written in the bass clef.", answer:false,
-      explain:"Same pitch, same piano key — only the notation viewpoint changes." }
+      explain:"Same pitch, same piano key — only the notation viewpoint changes." },
+    /* — from the unit review sheet — */
+    { type:"mc", q:"The short line through Middle C is called a ______ line.", choices:["ledger","bar","double bar"], answer:0, explain:"A ledger line — it extends the staff for that one note." }
   ],
   miaQuizIntro:"The final quiz — 20 questions, easy ones first. Remember the bridge: Middle C connects everything!",
   quiz:[

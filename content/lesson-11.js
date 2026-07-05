@@ -267,7 +267,10 @@ LESSON_CONTENT[11]={
     { type:"mc", q:"Counting in 3/4 is written…", choices:["1 2 3 | 1 2 3","1 2 | 1 2","1 2 3 4"], answer:0,
       explain:"Three counts per measure, restarting at each bar line." },
     { type:"truefalse", q:"Two quarter rests equal 2 beats in 3/4 time.", answer:true,
-      explain:"1 + 1 = 2 — rests count exactly like notes." }
+      explain:"1 + 1 = 2 — rests count exactly like notes." },
+    /* — from the unit review sheet — */
+    { type:"mc", q:"In 3/4 time, a whole rest receives ____ beats.", choices:["3 — it fills the whole measure","4","2"], answer:0, explain:"The whole rest always fills the FULL measure — in 3/4 that is 3 beats." },
+    { type:"mc", q:"Which time signature fits a measure containing three quarter notes only?", choices:["3/4","2/4","4/4"], answer:0, explain:"1 + 1 + 1 = 3 beats — a 3/4 measure." }
   ],
   miaQuizIntro:"Quiz time — twenty questions on 3/4. Count precisely.",
   quiz:[

@@ -203,7 +203,10 @@ LESSON_CONTENT[16]={
     { type:"truefalse", q:"“1-and-2-(and)” means the second “and” is silent.", answer:true,
       explain:"Parentheses = keep counting, skip the sound." },
     { type:"mc", q:"Why do composers use eighth rests?", choices:["for crisp, quick silences inside the beat","to slow the music down","to save ink"], answer:0,
-      explain:"Tiny gaps make rhythms sparkle and dance." }
+      explain:"Tiny gaps make rhythms sparkle and dance." },
+    /* — from the unit review sheet — */
+    { type:"mc", q:"Fill in the correct number: ____ eighth rests = 1 quarter rest.", choices:["2","3","4"], answer:0, explain:"½ + ½ = 1 beat." },
+    { type:"mc", q:"In 4/4 time, ____ eighth rests = 1 whole rest.", choices:["8","4","6"], answer:0, explain:"8 × ½ = 4 beats." }
   ],
   miaQuizIntro:"Quiz time! Count through every silence — even the half-beat ones!",
   quiz:[

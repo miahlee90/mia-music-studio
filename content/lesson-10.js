@@ -260,7 +260,10 @@ LESSON_CONTENT[10]={
     { type:"mc", q:"Counting in 2/4 is written…", choices:["1 2 | 1 2","1 2 3 | 1 2 3","1 2 3 4"], answer:0,
       explain:"Two counts per measure, restarting after each bar line." },
     { type:"mc", q:"Which fills one complete 2/4 measure?", choices:["Half note","Whole note","Half note + quarter note"], answer:0,
-      explain:"Exactly 2 beats. The others give 4 and 3." }
+      explain:"Exactly 2 beats. The others give 4 and 3." },
+    /* — from the unit review sheet — */
+    { type:"mc", q:"In 2/4 time, a whole rest receives ____ beats.", choices:["2 — it fills the whole measure","4","1"], answer:0, explain:"The whole rest always fills the FULL measure — in 2/4 that is 2 beats." },
+    { type:"mc", q:"Which time signature fits a measure containing two quarter notes only?", choices:["2/4","3/4","4/4"], answer:0, explain:"1 + 1 = 2 beats — a 2/4 measure." }
   ],
   miaQuizIntro:"Quiz time — twenty questions on 2/4. Count carefully.",
   quiz:[

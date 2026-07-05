@@ -214,7 +214,9 @@ LESSON_CONTENT[12]={
     { type:"truefalse", q:"Half note (2) + quarter note (1) lasts the same as a dotted half note.", answer:true,
       explain:"Both total 3 beats — different slicing, same time." },
     { type:"mc", q:"Count a dotted half note in 3/4 as…", choices:["ONE-two-three, held","ONE, then silence","ONE-two, stop"], answer:0,
-      explain:"One sound sustained through all three counts." }
+      explain:"One sound sustained through all three counts." },
+    /* — from the unit review sheet — */
+    { type:"mc", q:"In 4/4 time, a dotted half note receives ____ beats.", choices:["3","4","2"], answer:0, explain:"2 + 1 = 3 beats — the same value in any time signature." }
   ],
   miaQuizIntro:"Quiz time! Remember the golden equation: 2 + 1 = 3. Go!",
   quiz:[

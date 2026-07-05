@@ -183,7 +183,14 @@ LESSON_CONTENT[25]={
     { type:"mc", q:"C♯ and D♭ are…", choices:["the same key with two names","two different keys","an octave apart"], answer:0,
       explain:"Enharmonic — one key, two spellings." },
     { type:"truefalse", q:"Enharmonic notes sound exactly the same on the piano.", answer:true,
-      explain:"Identical sound, different name tags." }
+      explain:"Identical sound, different name tags." },
+    /* — from the unit review sheet — */
+    { type:"mc", q:"The note F is ____ half step(s) above E.", choices:["1","2","½"], answer:0, explain:"E–F is a natural half step — no key between." },
+    { type:"mc", q:"The note D is ____ whole step(s) above C.", choices:["1","2","½"], answer:0, explain:"C–D skips C♯: one whole step." },
+    { type:"mc", q:"The note F is ____ whole step(s) below G.", choices:["1","2","½"], answer:0, explain:"G down to F skips F♯/G♭: one whole step." },
+    { type:"mc", q:"Name two notes that are a half step away from A.", choices:["G♯ (below) and B♭ (above)","G and B","F and C"], answer:0, explain:"One key left = G♯/A♭; one key right = A♯/B♭." },
+    { type:"mc", q:"The enharmonic note for E♯ is…", choices:["F","D♯","G♭"], answer:0, explain:"E♯ is a half step above E — the very key F. White-key enharmonics exist too!" },
+    { type:"mc", q:"The enharmonic note for C♭ is…", choices:["B","D♭","C♯"], answer:0, explain:"C♭ is a half step below C — the key B." }
   ],
   miaQuizIntro:"The FINAL quiz of Book 1! Half steps, whole steps, twins — finish strong!",
   quiz:[
@@ -218,6 +225,10 @@ LESSON_CONTENT[25]={
       choices:["C♯ and D♭ are different piano keys","A whole step equals one half step","The distance from E to F is a half step because there is no key between them","Enharmonic notes always have different sounds"], answer:2,
       explain:"E–F: white neighbors with no black key between — a natural half step.",
       hint:"The white-key surprise." },
+    { type:"mc", q:"The enharmonic note for B♯ is…", choices:["C","A♯","B♭"], answer:0,
+      explain:"A half step above B is C — enharmonic pairs can sit on white keys.", hint:"B–C is already a half step." },
+    { type:"mc", q:"The enharmonic note for F♭ is…", choices:["E","G♭","F♯"], answer:0,
+      explain:"A half step below F is E.", hint:"E–F is already a half step." },
     /* generated */
     { gen:"step-type", params:{}, count:4 },
     { gen:"enharmonic", params:{}, count:3 },

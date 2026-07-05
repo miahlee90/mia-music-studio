@@ -237,7 +237,10 @@ LESSON_CONTENT[8]={
     { type:"mc", q:"In 4/4 time, a Half Note lasts…", choices:["2 of the 4 beats","all 4 beats","half a beat"], answer:0,
       explain:"The quarter gets 1 beat, so the half note takes 2 of them." },
     { type:"truefalse", q:"Counting in 4/4 goes “1 - 2 - 3 - 4” in every measure.", answer:true,
-      explain:"Like a heartbeat — and beat 1 feels the strongest." }
+      explain:"Like a heartbeat — and beat 1 feels the strongest." },
+    /* — from the unit review sheet — */
+    { type:"mc", q:"When a time signature contains a 4 as the TOP number, it means…", choices:["4 beats in each measure","the quarter note receives one beat","4 measures per line"], answer:0, explain:"The top number counts the beats per measure." },
+    { type:"mc", q:"When a time signature contains a 4 as the BOTTOM number, it means…", choices:["a quarter note receives one beat","4 beats in each measure","play at a moderate tempo"], answer:0, explain:"The bottom number names the note that receives one beat." }
   ],
   miaQuizIntro:"Quiz time! Top number, bottom number, the big C, and plenty of beat math. Count like a heartbeat — go!",
   quiz:[

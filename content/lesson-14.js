@@ -188,7 +188,10 @@ LESSON_CONTENT[14]={
     { type:"truefalse", q:"A repeat sign and the final double bar look exactly the same.", answer:false,
       explain:"The repeat sign has DOTS — the final bar doesn't." },
     { type:"mc", q:"Why do composers use 1st and 2nd endings?", choices:["so the repeat can END differently the second time","to make the piece longer to write","to change the tempo"], answer:0,
-      explain:"Same section, different exit — without rewriting everything." }
+      explain:"Same section, different exit — without rewriting everything." },
+    /* — from the unit review sheet — */
+    { type:"mc", q:"Repeat signs are two dots placed before or after a ______.", choices:["double bar","clef","time signature"], answer:0, explain:"Dots + double bar = the repeat sign." },
+    { type:"mc", q:"A 4-measure section ends with a repeat sign. How many measures does the performer play in total?", choices:["8","4","6"], answer:0, explain:"The section is played twice: 4 × 2 = 8." }
   ],
   miaQuizIntro:"Quiz time! First trip, exit 1 — second trip, exit 2. Navigate!",
   quiz:[

@@ -180,7 +180,12 @@ LESSON_CONTENT[13]={
     { type:"truefalse", q:"A tie can cross a bar line.", answer:true,
       explain:"That's one of its favorite jobs — holding a sound into the next measure." },
     { type:"mc", q:"A quarter note tied to a quarter note sounds like…", choices:["one half note","two staccato notes","one whole note"], answer:0,
-      explain:"1 + 1 = 2 beats of one sound — same as a half note." }
+      explain:"1 + 1 = 2 beats of one sound — same as a half note." },
+    /* — from the unit review sheet — */
+    { type:"truefalse", q:"On wind instruments, only the FIRST note of a slurred group is tongued.", answer:true, explain:"The slur means one breath impulse — the rest of the notes connect smoothly." },
+    { type:"mc", q:"On a string instrument, the bow changes direction…", choices:["at the start of each new slur","on every single note","only at bar lines"], answer:0, explain:"Notes under one slur share one bow stroke." },
+    { type:"mc", q:"A dotted half note tied to a quarter note lasts ____ beats.", choices:["4","3","5"], answer:0, explain:"3 + 1 = 4 — ties ADD the values." },
+    { type:"mc", q:"A whole note tied to a half note lasts ____ beats.", choices:["6","5","4"], answer:0, explain:"4 + 2 = 6 beats of one sound." }
   ],
   miaQuizIntro:"Quiz time! One question rules them all: SAME pitch or DIFFERENT? Go!",
   quiz:[

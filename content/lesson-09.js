@@ -215,7 +215,10 @@ LESSON_CONTENT[9]={
     { type:"mc", q:"Why are rests important?", choices:["silence shapes the music as much as sound","they give the pianist time to wave","they make the piece shorter"], answer:0,
       explain:"Silence creates drama, breath, and rhythm — it's part of the music." },
     { type:"truefalse", q:"The whole rest and half rest look similar, so their position on the staff is how you tell them apart.", answer:true,
-      explain:"Same rectangle — but hole hangs below the 4th line, hat sits on the 3rd." }
+      explain:"Same rectangle — but hole hangs below the 4th line, hat sits on the 3rd." },
+    /* — from the unit review sheet — */
+    { type:"mc", q:"In 4/4 time, a whole rest means rest for ____ beats.", choices:["4","2","1"], answer:0, explain:"In 4/4 the whole rest fills all four beats." },
+    { type:"mc", q:"In 4/4 time, a half rest means rest for ____ beats.", choices:["2","4","1"], answer:0, explain:"The half rest matches the half note: 2 beats." }
   ],
   miaQuizIntro:"Quiz time! Hats, holes, squiggles, and silent beat math. Keep counting — even through the silence!",
   quiz:[

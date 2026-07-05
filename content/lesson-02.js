@@ -203,7 +203,9 @@ LESSON_CONTENT[2]={
     { type:"mc", q:"What is the FIRST step when identifying any note?", choices:["Count from the top","Find the clef","Guess quickly"], answer:1,
       explain:"The clef determines every note name — always check it first." },
     { type:"mc", q:"Space 2 of the treble staff is the note…", choices:["A","C","G"], answer:0,
-      explain:"F-A-C-E from the bottom: space 2 is A." }
+      explain:"F-A-C-E from the bottom: space 2 is A." },
+    /* — from the unit review sheet — */
+    { type:"mc", q:"Which clef is also known as the G clef?", choices:["Treble clef","Bass clef","No clef"], answer:0, explain:"Its spiral circles the G line — hence “G clef.”" }
   ],
   miaQuizIntro:"The final quiz — 20 questions, easy ones first. Say the sayings from the bottom and you'll be fine!",
   quiz:[

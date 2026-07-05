@@ -196,7 +196,9 @@ LESSON_CONTENT[3]={
     { type:"truefalse", q:"A note on line 2 has the same name in treble and bass clef.", answer:false,
       explain:"Treble line 2 is G; bass line 2 is B. The clef decides the name!" },
     { type:"mc", q:"Line 3 of the bass staff is the note…", choices:["B","D","F"], answer:1,
-      explain:"G(1) B(2) D(3) — line 3 is D, the middle line." }
+      explain:"G(1) B(2) D(3) — line 3 is D, the middle line." },
+    /* — from the unit review sheet — */
+    { type:"mc", q:"Which clef is also known as the F clef?", choices:["Bass clef","Treble clef","No clef"], answer:0, explain:"Its two dots surround the F line — hence “F clef.”" }
   ],
   miaQuizIntro:"The final quiz — 20 questions, easy ones first. Good Boys Do Fine Always… and so will you!",
   quiz:[

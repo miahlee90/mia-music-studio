@@ -193,7 +193,10 @@ LESSON_CONTENT[7]={
     { type:"mc", q:"In the double bar, the THICK line comes…", choices:["last — on the outside","first — on the inside","there is no thick line"], answer:0,
       explain:"Thin then thick, with the thick line finishing the piece." },
     { type:"truefalse", q:"You stop counting beats when you cross a bar line.", answer:false,
-      explain:"You RESTART the count: …3, 4 | 1, 2… The beat never stops." }
+      explain:"You RESTART the count: …3, 4 | 1, 2… The beat never stops." },
+    /* — from the unit review sheet — */
+    { type:"mc", q:"Music is divided into equal parts by ______.", choices:["bar lines","clefs","ledger lines"], answer:0, explain:"Bar lines divide the staff into measures of equal beats." },
+    { type:"mc", q:"A ______ is written at the end of a piece of music.", choices:["double bar","repeat sign","treble clef"], answer:0, explain:"The double bar marks the end." }
   ],
   miaQuizIntro:"Quiz time! Bar lines, measures (a.k.a. bars!), and the double bar. Count your containers and go!",
   quiz:[
