@@ -75,7 +75,7 @@ LESSON_CONTENT[6]={
   ],
   steps:[
     /* Step 1 — the three note values: listen & compare (Activity 1) */
-    { say:"One quick note before we begin: in this lesson we count note values using <b>4/4 time</b> — the most common counting system in music (you’ll officially meet the time signature in Lesson 8). In 4/4: <b>1 Whole note = 2 Half notes = 4 Quarter notes</b>. Later you’ll discover that different time signatures can change how we count!<br><br>Meet today's three notes. The <b>Whole Note</b> is a hollow oval with no stem — the LONGEST sound. Cut it in half and you get the <b>Half Note</b> (a stem appears). Cut again and you get the <b>Quarter Note</b> (the head fills in). <b>1 Whole note = 2 Half notes = 4 Quarter notes!</b> \u{1F447} <b>Click each one and HEAR how long it lasts:</b>",
+    { say:"Before we begin, here's something important.<br>In this lesson, we'll use <b>4/4 Time</b> to learn note values.<br>In 4/4 Time:<br>• 1 Whole Note = <b>4 beats</b><br>• 1 Half Note = <b>2 beats</b><br>• 1 Quarter Note = <b>1 beat</b><br>You'll learn more about the Time Signature in Lesson 8.<br><br>Meet today's three notes.<br>The <b>Whole Note</b> has a hollow notehead with no stem and lasts the longest.<br>Add a stem and you get the <b>Half Note</b>.<br>Fill in the note head and you get the <b>Quarter Note</b>.<br>\u{1F447} <b>Click each note and compare how long each sound lasts:</b>",
       try:{ type:"custom",
         hint:"Hollow + no stem = longest. Filled + stem = shortest.",
         mount:(container,fb)=>{
