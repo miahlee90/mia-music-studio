@@ -101,7 +101,7 @@ LESSON_CONTENT[9]={
         fail:"The quarter rest is the squiggly one — not a rectangle at all.",
         hint:"No hat, no hole — just a squiggle." } },
     /* Step 4 — Fill in the correct number (book-style: AEMT1 p.13, Exercise 2) */
-    { say:"Now a page straight from your book: <b>fill in the correct number</b>! How many of the FIRST rest equal the SECOND? \u{1F447}",
+    { say:"<b>Fill in the correct number!</b> How many of the FIRST rest equal the SECOND? \u{1F447}",
       try:{ type:"custom",
         hint:"Think in beats: whole rest = 4, half rest = 2, quarter rest = 1.",
         mount:(container,fb)=>{
@@ -125,7 +125,7 @@ LESSON_CONTENT[9]={
             b2.onclick=()=>{
               const cur=rounds[i];
               if(nv===cur.count){ MFAudio.click(0,.4,true); i++;
-                if(i>=rounds.length){ ch.style.display="none"; q.textContent="Exercise complete — just like the book!";
+                if(i>=rounds.length){ ch.style.display="none"; q.textContent="Exercise complete!";
                   fb(true,"✓ All four equations solved! Rests trade exactly like their twin notes: 2 halves = a whole, 2 quarters = a half."); }
                 else { fb(true,`✓ ${cur.count} ${cur.leftName} = ${cur.rightName} (${cur.math}). Next equation…`); ask(); } }
               else { MFAudio.tone(40,.25); fb(false,`Add the beats: each ${cur.leftName.replace(/s$/,"")} is worth ${cur.left==="h"?2:1} — how many reach ${cur.right[0]==="w"?4:cur.rightName}?`); }
