@@ -203,7 +203,9 @@ const Staff=(()=>{
     } else drawOneStaff(parts,y0t,W,spec.clef||"treble",opts);
 
     const items=spec.notes||[];
-    const startX=(grand?70:80)+(ts?30:0);
+    /* clef:"none" (symbol cards) has no clef taking space — start items further left
+       so a single symbol sits visually centered in the card */
+    const startX=(grand?70:(spec.clef==="none"?30:80))+(ts?30:0);
     const beamSet=new Set();
     (spec.beams||[]).forEach(([a,b])=>{ for(let i=a;i<=b;i++) beamSet.add(i); });
     const placed=[];

@@ -319,3 +319,5 @@ button.notecard{background:#fff !important;background-image:none !important;colo
   border:1.5px solid #c9d4e3 !important;box-shadow:0 2px 6px rgba(13,37,61,.08) !important}
 button.notecard:hover{border-color:var(--primary) !important;background:#f8f9ff !important}
 button.notecard div{color:inherit}
+/* center the drawn symbol inside notation cards */
+button.notecard svg.mf-staff{height:46px;width:auto;max-width:100%;display:block;margin:0 auto}
