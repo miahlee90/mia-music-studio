@@ -63,7 +63,7 @@ LESSON_CONTENT[9]={
   steps:[
     /* Step 1 — silent twins (Activity 2: match) */
     { say:"Every note has a <b>silent partner</b> called a <b>rest</b> — it lasts for the same amount of time but makes no sound.<br>• Whole note ↔ Whole rest (<b>4 beats</b>)<br>• Half note ↔ Half rest (<b>2 beats</b>)<br>• Quarter note ↔ Quarter rest (<b>1 beat</b>)<br>\u{1F447} <b>Match each note with its matching rest!</b>",
-      show:{ type:"staff", spec:{clef:"treble",notes:[{p:"B4",d:"w",label:"whole note"},{rest:"w",label:"whole rest"},{p:"B4",d:"h",label:"half note"},{rest:"h",label:"half rest"},{p:"B4",d:"q",label:"quarter note"},{rest:"q",label:"quarter rest"}],width:460} },
+      show:{ type:"staff", spec:{clef:"treble",notes:[{p:"B4",d:"w",label:"whole note"},{rest:"w"},{p:"B4",d:"h",label:"half note"},{rest:"h"},{p:"B4",d:"q",label:"quarter note"},{rest:"q"}],width:480} },
       try:{ type:"custom",
         hint:"The twin lasts the same number of beats — whole 4, half 2, quarter 1.",
         mount:(container,fb)=>{
@@ -71,7 +71,7 @@ LESSON_CONTENT[9]={
           const RN={w:"Whole Rest",h:"Half Rest",q:"Quarter Rest"};
           let i=0;
           container.innerHTML=`<div class="big-q tw-q" style="text-align:center"></div><div class="tw-staff"></div>
-            <div class="choices tw-ch"><button data-v="w">Whole Rest (4)</button><button data-v="h">Half Rest (2)</button><button data-v="q">Quarter Rest (1)</button></div>`;
+            <div class="choices tw-ch"><button data-v="w">Whole Rest</button><button data-v="h">Half Rest</button><button data-v="q">Quarter Rest</button></div>`;
           const q=container.querySelector(".tw-q"), st=container.querySelector(".tw-staff");
           function ask(){
             Staff.render(st,{clef:"treble",notes:[{p:"B4",d:rounds[i].d}],width:240});
@@ -100,47 +100,44 @@ LESSON_CONTENT[9]={
         success:"✓ The squiggle! 1 beat of silence. (1 is the hole — whole rest; 2 is the hat — half rest.)",
         fail:"The quarter rest is the squiggly one — not a rectangle at all.",
         hint:"No hat, no hole — just a squiggle." } },
-    /* Step 4 — count the silence (Activity 4) */
-    { say:"Here's the golden rule: <b>you keep counting during rests</b> — your voice goes quiet but the count never stops. \u{1F447} <b>Press play, count with the clicks, and answer — how many beats were SILENT?</b>",
+    /* Step 4 — Fill in the correct number (book-style: AEMT1 p.13, Exercise 2) */
+    { say:"Now a page straight from your book: <b>fill in the correct number</b>! How many of the FIRST rest equal the SECOND? \u{1F447}",
       try:{ type:"custom",
-        hint:"Count all 4 clicks; the silent beats are the ones with no tone playing.",
+        hint:"Think in beats: whole rest = 4, half rest = 2, quarter rest = 1.",
         mount:(container,fb)=>{
           const rounds=[
-            {rest:"w",items:[{rest:"w"}],silent:4,desc:"a whole rest — the entire measure is silent"},
-            {rest:"h",items:[{p:"G4",d:"h"},{rest:"h"}],silent:2,desc:"a half note then a half rest — sound for 2, silence for 2"},
-            {rest:"q",items:[{p:"G4",d:"h"},{rest:"q"},{p:"G4",d:"q"}],silent:1,desc:"the squiggle steals exactly one beat"}];
-          let i=0,played=false;
-          container.innerHTML=`<div class="big-q cs-q" style="text-align:center"></div><div class="cs-staff"></div>
-            <div style="text-align:center"><button class="play cs-play">▶ Play with the beat</button></div>
-            <div class="choices chips cs-ch"></div>`;
-          const q=container.querySelector(".cs-q"), st=container.querySelector(".cs-staff"), btn=container.querySelector(".cs-play"), ch=container.querySelector(".cs-ch");
-          [1,2,4].forEach(n=>{
-            const b=document.createElement("button"); b.textContent=n;
-            b.onclick=()=>{
-              if(!played){ fb(false,"Play it first — count the clicks and listen for the quiet ones!"); return; }
+            {count:2,left:"h",right:["w"],leftName:"half rests",rightName:"1 whole rest",math:"2 + 2 = 4"},
+            {count:2,left:"q",right:["h"],leftName:"quarter rests",rightName:"1 half rest",math:"1 + 1 = 2"},
+            {count:4,left:"q",right:["w"],leftName:"quarter rests",rightName:"1 whole rest",math:"1+1+1+1 = 4"},
+            {count:2,left:"h",right:["q","q","q","q"],leftName:"half rests",rightName:"4 quarter rests",math:"2 + 2 = 1+1+1+1"}];
+          let i=0;
+          container.innerHTML=`<div class="big-q fx-q" style="text-align:center"></div>
+            <div style="display:flex;align-items:center;gap:10px;justify-content:center;flex-wrap:wrap">
+              <div class="fx-n" style="font-size:2.2rem;font-weight:800;color:var(--primary)">?</div>
+              <div style="font-size:1.4rem;font-weight:800">×</div>
+              <div class="fx-left" style="min-width:120px"></div>
+              <div style="font-size:1.8rem;font-weight:800">=</div>
+              <div class="fx-right" style="min-width:150px"></div></div>
+            <div class="choices chips fx-ch"></div>`;
+          const q=container.querySelector(".fx-q"), ch=container.querySelector(".fx-ch");
+          [1,2,3,4].forEach(nv=>{
+            const b2=document.createElement("button"); b2.textContent=nv;
+            b2.onclick=()=>{
               const cur=rounds[i];
-              if(n===cur.silent){ i++; played=false;
-                if(i>=rounds.length){ q.textContent="Silence counted!"; st.innerHTML=""; ch.style.display="none"; btn.style.display="none";
-                  fb(true,"✓ 4, 2, 1 — you counted straight through every silence. That's what professionals do: the beat NEVER stops."); }
-                else { fb(true,`✓ Yes — ${cur.desc}. Next…`); ask(); } }
-              else fb(false,"Count again: which clicks had NO tone with them?");
+              if(nv===cur.count){ MFAudio.click(0,.4,true); i++;
+                if(i>=rounds.length){ ch.style.display="none"; q.textContent="Exercise complete — just like the book!";
+                  fb(true,"✓ All four equations solved! Rests trade exactly like their twin notes: 2 halves = a whole, 2 quarters = a half."); }
+                else { fb(true,`✓ ${cur.count} ${cur.leftName} = ${cur.rightName} (${cur.math}). Next equation…`); ask(); } }
+              else { MFAudio.tone(40,.25); fb(false,`Add the beats: each ${cur.leftName.replace(/s$/,"")} is worth ${cur.left==="h"?2:1} — how many reach ${cur.right[0]==="w"?4:cur.rightName}?`); }
             };
-            ch.appendChild(b);
+            ch.appendChild(b2);
           });
           function ask(){
             const cur=rounds[i];
-            Staff.render(st,{clef:"treble",time:"4/4",notes:[...cur.items,{bar:"final"}],width:300});
-            q.textContent=`Measure ${i+1} of 3: how many beats are SILENT?`;
+            q.textContent=`Equation ${String.fromCharCode(97+i)}. of ${rounds.length}: how many ${cur.leftName} equal ${cur.rightName}?`;
+            Staff.render(container.querySelector(".fx-left"),{clef:"none",notes:[{rest:cur.left}],width:120});
+            Staff.render(container.querySelector(".fx-right"),{clef:"none",notes:cur.right.map(r=>({rest:r})),width:cur.right.length>1?200:120});
           }
-          btn.onclick=()=>{
-            const cur=rounds[i], spb=60/80;
-            for(let k=0;k<4;k++) MFAudio.click(k*spb,.5,k===0);
-            let t=0;
-            cur.items.forEach(it=>{ const b={w:4,h:2,q:1}[it.d||it.rest];
-              if(it.p) MFAudio.tone(MFAudio.midi(it.p),b*spb*.9,t*spb); t+=b; });
-            played=true;
-            q.textContent="Count the clicks — which beats had no sound?";
-          };
           ask();
         } } },
     /* Step 5 (was 6) — read through the silence; the sound-and-silence builder step was REMOVED at instructor request (Session 15o) — the Sound & Silence Builder GAME still covers it */
