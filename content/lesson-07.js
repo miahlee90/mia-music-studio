@@ -128,7 +128,7 @@ LESSON_CONTENT[7]={
     /* Step 4 — bar = measure (QA suggestion; quiz question removed at instructor request) */
     { say:"One more thing before we build: musicians use two words for the same container. In America you'll mostly hear <b>measure</b>, but plenty of musicians and books say <b>bar</b> — same container, two names. When a friend says \u201cthis piece has 8 bars,\u201d they mean 8 measures. You'll hear both words for the rest of your musical life!" },
     /* Step 5 — organize the music (Activities 3+5, worksheet style) */
-    { say:"Now be the organizer! Here is a melody with <b>no bar lines</b> — four spots are marked <b>A, B, C, D</b>. Bar lines are needed at exactly <b>TWO</b> of them, every time the beats add up to 4. \u{1F447} <b>Click the two correct spots:</b>",
+    { say:"Let's organize the melody!<br>Count the beats from left to right.<br>Every time you reach <b>4 beats</b>, place a bar line.<br>There are only <b>TWO</b> correct places.<br>\u{1F447} <b>Click the correct two positions:</b>",
       try:{ type:"custom",
         hint:"Add beats from the start: Half (2) + Quarter (1) + Quarter (1) = 4 \u2192 first bar line. Keep adding to 8 for the second.",
         mount:(container,fb)=>MF_L7_barSpots(container,fb) } }
