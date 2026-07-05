@@ -79,7 +79,7 @@ LESSON_CONTENT[6]={
       try:{ type:"custom",
         hint:"Hollow + no stem = longest. Filled + stem = shortest.",
         mount:(container,fb)=>{
-          const items=[{d:"w",name:"Whole Note",beats:4,rel:"= 2 Half Notes = 4 Quarter Notes",relSay:"the longest — as long as 2 halves or 4 quarters"},{d:"h",name:"Half Note",beats:2,rel:"= 2 Quarter Notes (half of a Whole)",relSay:"half as long as a Whole"},{d:"q",name:"Quarter Note",beats:1,rel:"a quarter of a Whole",relSay:"a quarter of a Whole — the shortest of the three"}];
+          const items=[{d:"w",n:1,w:170,name:"1 Whole Note",beats:4,rel:"= 2 Half Notes = 4 Quarter Notes",relSay:"one sound filling the whole measure"},{d:"h",n:2,w:200,name:"2 Half Notes",beats:2,rel:"= 1 Whole Note",relSay:"two sounds sharing the same time as one Whole"},{d:"q",n:4,w:240,name:"4 Quarter Notes",beats:1,rel:"= 1 Whole Note",relSay:"four quick sounds — same total time again"}];
           const heard=new Set();
           container.innerHTML=`<div class="vocab lc-row"></div>`;
           const row=container.querySelector(".lc-row");
@@ -87,11 +87,11 @@ LESSON_CONTENT[6]={
             const card=document.createElement("div");
             card.className="flashcard"; card.style.cursor="pointer"; card.style.textAlign="center";
             card.innerHTML=`<div class="fc-title">${it.name}</div><div class="lc-staff"></div><div style="font-weight:800;color:var(--primary)">${it.rel}</div>`;
-            Staff.render(card.querySelector(".lc-staff"),{clef:"treble",notes:[{p:"B4",d:it.d}],width:170});
+            Staff.render(card.querySelector(".lc-staff"),{clef:"treble",notes:Array.from({length:it.n},()=>({p:"B4",d:it.d})),width:it.w});
             card.onclick=()=>{
               const spb=60/80;
-              for(let k=0;k<it.beats;k++) MFAudio.click(k*spb,.4,k===0);
-              MFAudio.tone(71,it.beats*spb*0.95,0);
+              for(let k=0;k<4;k++) MFAudio.click(k*spb,.4,k===0);
+              for(let j=0;j<it.n;j++) MFAudio.tone(71,it.beats*spb*0.95,j*it.beats*spb);
               heard.add(it.d);
               if(heard.size===3) fb(true,"✓ You heard all three — 1 Whole = 2 Halves = 4 Quarters. Same pitch, different DURATION!");
               else fb(true,`✓ ${it.name}: ${it.relSay}. ${3-heard.size} more to hear…`);
