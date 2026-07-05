@@ -6,6 +6,8 @@
    play() spec.tempo (beat-accurate, rests silent), MFAudio.click(), highlight on rests
    v4.1 (Milestone 3b): Common Time (spec.time:"C"), labels on bar items,
    spec.clickBars + onBar(i,kind) for click-the-bar-line activities
+   v4.2 (instructor fix): a bar item that is the LAST item in notes[] is drawn
+   at the RIGHT EDGE of the staff (like engraved music), not at the spread position
    NOTE (maintenance): edit by FULL-FILE REWRITE only. */
 const MFAudio=(()=>{
   let ctx=null;
@@ -156,7 +158,8 @@ const Staff=(()=>{
     items.forEach((n,i)=>{
       const clef = n.clef || (grand? "treble" : (spec.clef||"treble"));
       const y0 = clef==="bass"? y0b : y0t;
-      const x = n.x || startX+i*((W-40-startX)/Math.max(1,(items.length-1)||1));
+      const spreadX = startX+i*((W-40-startX)/Math.max(1,(items.length-1)||1));
+      const x = n.x || ((n.bar!==undefined && i===items.length-1)? W-16 : spreadX);
       if(n.label) hasLabel=true;
       if(n.bar!==undefined){ placed.push({n,i,clef,y0,x,kind:"bar"}); return; }
       if(n.rest){

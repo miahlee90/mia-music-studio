@@ -147,6 +147,7 @@
         break; }
       case "mc":{
         const ch=document.createElement("div"); ch.className="choices"; container.appendChild(ch);
+        if(cfg.choices.every(c=>String(c).length<=14)) ch.classList.add("chips");
         cfg.choices.forEach((c,i)=>{ const b=document.createElement("button"); b.textContent=c;
           b.onclick=()=>{ if(i===cfg.answer){ [...ch.children].forEach(x=>x.disabled=true); b.classList.add("right"); fb(fbId,true,cfg.success||"✓ Correct!"); }
             else { b.classList.add("wrongpick"); b.disabled=true; fb(fbId,false,cfg.fail||"Not quite — try another."); onWrong(); } };

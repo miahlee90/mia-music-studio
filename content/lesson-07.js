@@ -106,7 +106,7 @@ LESSON_CONTENT[7]={
     { say:"The space BETWEEN two bar lines is called a <b>Measure</b> — or a <b>Bar</b> (both words mean exactly the same thing!). Think of each measure as a small musical container that holds a specific number of beats. \u{1F447} <b>Count the containers:</b>",
       show:{ type:"staff", spec:{clef:"treble",notes:[{p:"C4",d:"h"},{p:"E4",d:"h"},{bar:"single"},{p:"G4",d:"w"},{bar:"single"},{p:"E4",d:"q"},{p:"D4",d:"q"},{p:"C4",d:"h"},{bar:"final"}],width:440} },
       try:{ type:"mc",
-        choices:["2 measures","3 measures","4 measures"], answer:1,
+        choices:["2","3","4"], answer:1,
         success:"✓ Three! Count the SPACES between bar lines, not the lines themselves.",
         fail:"Count the containers, not the lines — the double bar closes the last one.",
         hint:"The music between two bar lines = one measure." } },

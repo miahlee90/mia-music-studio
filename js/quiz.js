@@ -5,6 +5,8 @@
    and "rhythm-count" (count the total beats of a short rhythm) generators.
    v4.1 (Milestone 3b): note-value supports params.kind:"rest"; adds
    "measure-complete" (is this measure full?) and "measure-count" (count measures).
+   v4.2 (instructor fix): compact chip layout for ALL short answers (<=14 chars,
+   was <=3) so answer choices stay scannable; beat-count questions say "in 4/4 time".
    NOTE (maintenance): edit by FULL-FILE REWRITE only. */
 const Quiz=(()=>{
   const SALT="MF-MIA-2026";
@@ -71,7 +73,7 @@ const Quiz=(()=>{
         :{w:"hollow head with NO stem",h:"hollow head WITH a stem",q:"filled head with a stem"};
       let choices,correct,q;
       if(askBeats){
-        q=isRest?"How many beats of SILENCE does this rest receive?":"How many beats does this note receive?";
+        q=isRest?"In 4/4 time, how many beats of SILENCE does this rest receive?":"In 4/4 time, how many beats does this note receive?";
         choices=shuffle(["1 beat","2 beats","4 beats"]);
         correct=VAL_BEATS[v]+" beat"+(VAL_BEATS[v]>1?"s":"");
       } else {
@@ -189,7 +191,7 @@ const Quiz=(()=>{
       const media=$(".q-media"); media.innerHTML="";
       $(".explain").style.display="none"; $(".qnext").style.display="none";
       const ch=$(".choices"); ch.innerHTML="";
-      const cs=choicesOf(q); ch.classList.toggle("chips", cs.length>0 && cs.every(c=>String(c).length<=3));
+      const cs=choicesOf(q); ch.classList.toggle("chips", cs.length>0 && cs.every(c=>String(c).length<=14));
       if(q.staff){ const d=document.createElement("div"); media.appendChild(d); Staff.render(d,q.staff); }
       if(q.type==="listen"){
         const b=document.createElement("button"); b.className="play"; b.textContent="▶ Play"; b.onclick=q.play; media.appendChild(b);
@@ -278,7 +280,7 @@ const Quiz=(()=>{
       const q=g.gen? generators[g.gen](g.params||{}) : g.fixedQ;
       const choices=q.choices||(q.type==="truefalse"?["True","False"]:[]);
       const rightIdx=q.type==="truefalse"?(typeof q.answer==="boolean"?(q.answer?0:1):q.answer):q.answer;
-      const chips=choices.length>0 && choices.every(c=>String(c).length<=3);
+      const chips=choices.length>0 && choices.every(c=>String(c).length<=14);
       body.innerHTML=`<div class="big-q" style="text-align:left">${q.q}</div><div class="p-media"></div><div class="choices${chips?" chips":""}"></div><div class="explain" style="display:none"></div>`;
       const media=body.querySelector(".p-media");
       if(q.staff){ const d=document.createElement("div"); media.appendChild(d); Staff.render(d,q.staff); }

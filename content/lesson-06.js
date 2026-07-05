@@ -75,7 +75,7 @@ LESSON_CONTENT[6]={
   ],
   steps:[
     /* Step 1 — the three note values: listen & compare (Activity 1) */
-    { say:"Meet today's three notes. The <b>Whole Note</b> is a hollow oval with no stem — it lasts <b>4 beats</b>. The <b>Half Note</b> adds a stem — <b>2 beats</b>. The <b>Quarter Note</b> fills in the head — <b>1 beat</b>. \u{1F447} <b>Click each one and HEAR how long it lasts:</b>",
+    { say:"One quick note before we begin: in this lesson we count note values using <b>4/4 time</b> — the most common counting system in music (you’ll officially meet the time signature in Lesson 8). In 4/4: <b>Whole = 4 · Half = 2 · Quarter = 1</b>. Later you’ll discover that different time signatures can change how we count!<br><br>Meet today's three notes. The <b>Whole Note</b> is a hollow oval with no stem — it lasts <b>4 beats</b>. The <b>Half Note</b> adds a stem — <b>2 beats</b>. The <b>Quarter Note</b> fills in the head — <b>1 beat</b>. \u{1F447} <b>Click each one and HEAR how long it lasts:</b>",
       try:{ type:"custom",
         hint:"Hollow + no stem = longest. Filled + stem = shortest.",
         mount:(container,fb)=>{
@@ -275,11 +275,11 @@ LESSON_CONTENT[6]={
   miaQuizIntro:"Quiz time! Whole-half-quarter, beats, stems, and beat math — everything you just played with. You're ready!",
   quiz:[
     /* draft Q1–Q12, adapted */
-    { type:"mc", q:"How many beats does a Whole Note receive?", choices:["1","2","4","8"], answer:2,
+    { type:"mc", q:"In 4/4 time, how many beats does a Whole Note receive?", choices:["1","2","4","8"], answer:2,
       explain:"The whole note fills a whole 4/4 measure — 4 beats.", hint:"Think of the whole pizza." },
-    { type:"mc", q:"How many beats does a Half Note receive?", choices:["1","2","3","4"], answer:1,
+    { type:"mc", q:"In 4/4 time, how many beats does a Half Note receive?", choices:["1","2","3","4"], answer:1,
       explain:"Half of a whole measure — 2 beats.", hint:"Cut the pizza once." },
-    { type:"mc", q:"How many beats does a Quarter Note receive?", choices:["1","2","3","4"], answer:0,
+    { type:"mc", q:"In 4/4 time, how many beats does a Quarter Note receive?", choices:["1","2","3","4"], answer:0,
       explain:"A quarter of the measure — exactly 1 beat.", hint:"Four of them fill a measure." },
     { type:"truefalse", q:"Two Quarter Notes equal one Half Note.", answer:true,
       explain:"1 + 1 = 2 beats — the same as one half note.", hint:"Add the beats." },
@@ -293,7 +293,7 @@ LESSON_CONTENT[6]={
     { type:"mc", q:"Which matching is correct?",
       choices:["Whole → 4 · Half → 2 · Quarter → 1","Whole → 2 · Half → 4 · Quarter → 1","Whole → 4 · Half → 1 · Quarter → 2"], answer:0,
       explain:"Whole 4, half 2, quarter 1 — each cut halves the value.", hint:"Each pizza cut halves the piece." },
-    { type:"mc", q:"A Whole Note lasts ____ beats.", choices:["1","2","3","4"], answer:3,
+    { type:"mc", q:"In 4/4 time, a Whole Note lasts ____ beats.", choices:["1","2","3","4"], answer:3,
       explain:"Four — it fills the entire 4/4 measure.", hint:"Its name says it all." },
     { type:"mc", q:"This note sits BELOW the middle line. Which way should its stem point?",
       staff:{clef:"treble",notes:[{p:"G4",d:"w"}],width:240},
@@ -336,7 +336,7 @@ LESSON_CONTENT[6]={
   ],
   summary:[
     "✔ Music tells you <b>what</b> to play AND <b>how long</b>.",
-    "✔ Whole = <b>4</b> beats · Half = <b>2</b> · Quarter = <b>1</b>.",
+    "✔ In <b>4/4 time</b>: Whole = <b>4</b> beats · Half = <b>2</b> · Quarter = <b>1</b>.",
     "✔ 1 whole = 2 halves = 4 quarters — <b>the pizza rule</b>.",
     "✔ A note = <b>notehead + stem</b> (whole notes skip the stem).",
     "✔ Below the middle line → stem <b>up-right</b>; on or above → <b>down-left</b>."
@@ -344,6 +344,7 @@ LESSON_CONTENT[6]={
   tips:[
     "Count OUT LOUD — “1-2-3-4” — while you clap note values. Your voice locks in the beat better than silent counting.",
     "Reading a new note? Ask two questions in order: hollow or filled? stem or no stem?",
+    "Today’s counts (4-2-1) come from 4/4 time — the most common. Lesson 8 introduces the time signature itself, and later you’ll meet signatures that count differently!",
     "Long notes are held, not re-played — let the whole note RING while you keep counting.",
     "\u{1F355} Next lesson: measures and bar lines — the boxes that keep all these beats organized!"
   ],
