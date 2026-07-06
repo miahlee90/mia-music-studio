@@ -337,3 +337,4 @@ button.notecard svg.mf-staff{height:46px;width:auto;max-width:100%;display:block
 /* FIX: the back face must be pre-rotated so it shows when the card flips
    (without this, flipping hid BOTH faces and the card vanished) */
 .vface.vback{transform:rotateY(180deg)}
+.vface{-webkit-backface-visibility:hidden}
