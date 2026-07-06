@@ -54,7 +54,11 @@ LESSON_CONTENT[21]={
   ],
   steps:[
     { say:"Four road signs, one at a time: \u{1F3E0} <b>D.C. (Da Capo)</b> = “from the beginning” — go back to the start. \u{1F516} <b>D.S. (Dal Segno)</b> = “from the sign” — go back to the <b>Segno</b> symbol. \u{1F6D1} <b>Fine</b> = “the end” — stop here. \u{1F3C1} <b>Coda</b> = a special ending you JUMP to. \u{1F447} <b>What does D.C. (Da Capo) tell you to do?</b>",
-      show:{ type:"staff", spec:{clef:"treble",notes:[{mark:"segno",label:"Segno"},{p:"G4",d:"q"},{mark:"fine",label:"Fine"},{p:"E4",d:"q"},{mark:"coda",label:"Coda"}],width:440} },
+      show:{ type:"staff", spec:{clef:"treble",time:"4/4",notes:[
+        {mark:"segno",label:"Segno"},{p:"C4",d:"h"},{p:"E4",d:"h"},{bar:"single"},
+        {p:"G4",d:"h"},{p:"E4",d:"h"},{mark:"fine",label:"Fine"},{bar:"double"},
+        {p:"F4",d:"h"},{p:"D4",d:"h"},{mark:"dc",label:"D.C."},{bar:"single"},
+        {mark:"coda",label:"Coda"},{p:"C5",d:"w"},{bar:"final"}],width:470} },
       try:{ type:"mc",
         choices:["Go back to the beginning","Go to the Segno","Stop playing"], answer:0,
         success:"✓ Da Capo — literally “from the head.” Back to bar one!",
