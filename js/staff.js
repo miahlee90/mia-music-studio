@@ -215,15 +215,20 @@ const Staff=(()=>{
     (spec.beams||[]).forEach(([a,b])=>{ for(let i=a;i<=b;i++) beamSet.add(i); });
     const placed=[];
     let minEl=0, maxEl=H0, maxNoteBottom=-Infinity, hasLabel=false, hasDyn=false;
+    /* marks adjacent to a bar line align WITH that bar (terms above bar lines) and take no layout slot */
+    const attachedMark=items.map((n,i)=> n.mark!==undefined &&
+      ((items[i+1]&&items[i+1].bar!==undefined) || (i>0&&items[i-1].bar!==undefined)));
+    const slotOf=[]; let SC=0;
+    items.forEach((n,i)=>{ slotOf[i]=attachedMark[i]? -1 : SC++; });
     items.forEach((n,i)=>{
       const clef = n.clef || (grand? "treble" : (spec.clef||"treble"));
       const y0 = clef==="bass"? y0b : y0t;
       /* few items should GATHER toward the center instead of spreading full-width */
       const avail=W-40-startX;
-      const span=Math.min(avail,(items.length-1)*92);
+      const span=Math.min(avail,(SC-1)*92);
       const off=startX+(avail-span)/2;
-      const spreadX = items.length===1? (startX+W-40)/2
-        : off+i*(span/Math.max(1,(items.length-1)||1));
+      const spreadX = SC<=1? (startX+W-40)/2
+        : off+Math.max(0,slotOf[i])*(span/Math.max(1,SC-1));
       const x = n.x || ((n.bar!==undefined && i===items.length-1)? W-16 : spreadX);
       if(n.label) hasLabel=true;
       if(n.dyn) hasDyn=true;
@@ -261,6 +266,17 @@ const Staff=(()=>{
       if(!A||!B||A.y===undefined||B.y===undefined) return;
       const stemsUp=((A.y+B.y)/2) > (A.y0+2*GAP);
       if(stemsUp) maxNoteBottom=Math.max(maxNoteBottom, Math.max(A.y,B.y)+28);
+    });
+    /* snap bar-adjacent marks onto the bar line itself */
+    placed.forEach((pl,pi)=>{
+      if(pl.kind!=="mark"||pl.n.x) return;
+      const nxt=placed[pi+1], prv=placed[pi-1];
+      const TXTW={fine:24,dc:24,ds:24,"dc-fine":64,"ds-fine":64,"dc-coda":68,"ds-coda":68}[pl.n.mark]||0;
+      if(nxt&&nxt.kind==="bar"){
+        pl.x = (pi+1===placed.length-1 && TXTW)? nxt.x-6-TXTW/2 : nxt.x;
+      } else if(prv&&prv.kind==="bar"){
+        pl.x = prv.x+16;
+      }
     });
     const dynY = hasDyn? Math.max(staffBottom+20, maxNoteBottom+16) : 0;
     if(hasDyn) maxEl=Math.max(maxEl,dynY+8);
