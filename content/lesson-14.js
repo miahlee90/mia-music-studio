@@ -132,7 +132,7 @@ LESSON_CONTENT[14]={
         {p:"F4",d:"h"},{p:"D4",d:"h"},{bar:"single"},
         {p:"E4",d:"q"},{p:"G4",d:"q"},{p:"C5",d:"h"},{bar:"single"},
         {p:"E4",d:"h"},{p:"C4",d:"h"},{bar:"repeat-end"}],
-        playOrder:[0,1,3,4,6,7,9,10, 0,1,3,4,6,7,9,10],width:470} },
+        playOrder:[0,1,2,4,5,7,8,9,11,12, 0,1,2,4,5,7,8,9,11,12],width:470} },
     { caption:"1st and 2nd endings: trip one takes bracket 1 and repeats; trip two skips to bracket 2 and finishes. Press play and follow BOTH trips.",
       staff:{clef:"treble",tempo:100,time:"4/4",notes:[{p:"C4",d:"h",label:"A"},{p:"E4",d:"h",label:"B"},{bar:"single"},{p:"G4",d:"w",label:"1st"},{bar:"repeat-end"},{p:"C5",d:"w",label:"2nd"},{bar:"final"}],endings:[{from:3,to:3,n:1},{from:5,to:5,n:2}],
       playOrder:[0,1,3, 0,1,5],width:460} }
