@@ -220,14 +220,17 @@ const Staff=(()=>{
       ((items[i+1]&&items[i+1].bar!==undefined) || (i>0&&items[i-1].bar!==undefined)));
     const slotOf=[]; let SC=0;
     items.forEach((n,i)=>{ slotOf[i]=attachedMark[i]? -1 : SC++; });
+    const endsWithBar = items.length>1 && items[items.length-1].bar!==undefined;
     items.forEach((n,i)=>{
       const clef = n.clef || (grand? "treble" : (spec.clef||"treble"));
       const y0 = clef==="bass"? y0b : y0t;
-      /* few items should GATHER toward the center instead of spreading full-width */
+      /* lines that CLOSE with a bar spread evenly from start to that bar (equal measures);
+         otherwise few items gather toward the center */
       const avail=W-40-startX;
       const span=Math.min(avail,(SC-1)*92);
       const off=startX+(avail-span)/2;
       const spreadX = SC<=1? (startX+W-40)/2
+        : endsWithBar? startX + Math.max(0,slotOf[i])*((W-16-startX)/Math.max(1,SC-1))
         : off+Math.max(0,slotOf[i])*(span/Math.max(1,SC-1));
       const x = n.x || ((n.bar!==undefined && i===items.length-1)? W-16 : spreadX);
       if(n.label) hasLabel=true;
