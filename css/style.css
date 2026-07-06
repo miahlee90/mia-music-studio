@@ -349,7 +349,7 @@ button.notecard svg.mf-staff{height:46px;width:auto;max-width:100%;display:block
 .vox{display:flex;gap:12px;flex-wrap:wrap}
 .vox-card{flex:0 0 172px;min-height:126px;border-radius:12px;cursor:pointer;user-select:none;
   display:flex;align-items:center;justify-content:center;padding:12px;text-align:center;
-  background:#fff;border:1px solid #c9d4e3;box-shadow:var(--shadow);
+  background:#ffd166;border:1px solid #eab63e;box-shadow:0 3px 10px rgba(232,163,61,.3);
   transition:transform .15s,box-shadow .15s,background .25s}
 .vox-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-2)}
 .vox-front{display:flex;flex-direction:column;gap:4px;align-items:center;width:100%;
