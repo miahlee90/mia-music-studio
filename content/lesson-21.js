@@ -83,24 +83,39 @@ LESSON_CONTENT[21]={
     "Perform music in the correct order"
   ],
   steps:[
-    { say:"Four road signs, one at a time: \u{1F3E0} <b>D.C. (Da Capo)</b> = “from the beginning” — go back to the start. \u{1F516} <b>D.S. (Dal Segno)</b> = “from the sign” — go back to the <b>Segno</b> symbol. \u{1F6D1} <b>Fine</b> = “the end” — stop here. \u{1F3C1} <b>Coda</b> = a special ending you JUMP to. \u{1F447} <b>What does D.C. (Da Capo) tell you to do?</b>",
-      show:{ type:"staff", spec:{clef:"treble",time:"4/4",notes:[
-        {mark:"segno",label:"Segno"},{p:"C4",d:"h"},{p:"E4",d:"h"},{bar:"single"},
-        {p:"G4",d:"h"},{p:"E4",d:"h"},{mark:"fine",label:"Fine"},{bar:"double"},
-        {p:"F4",d:"h"},{p:"D4",d:"h"},{mark:"dc",label:"D.C."},{bar:"single"},
-        {mark:"coda",label:"Coda"},{p:"C5",d:"w"},{bar:"final"}],width:470} },
-      try:{ type:"mc",
-        choices:["Go back to the beginning","Go to the Segno","Stop playing"], answer:0,
-        success:"✓ Da Capo — literally “from the head.” Back to bar one!",
-        fail:"Capo means “head” — the HEAD of the piece is its…?",
-        hint:"\u{1F3E0} home = the start." } },
-    { say:"Learn the two special SYMBOLS: the <b>Segno</b> (an S with a slash and dots — your bookmark \u{1F516}) and the <b>Coda</b> (a circle with a cross — the finish flag \u{1F3C1}). \u{1F447} <b>Which is which?</b>",
-      show:{ type:"staff", spec:{clef:"treble",notes:[{mark:"segno",label:"1"},{mark:"coda",label:"2"}],width:340} },
-      try:{ type:"mc",
-        choices:["1 = Segno, 2 = Coda","1 = Coda, 2 = Segno","They're the same symbol"], answer:0,
-        success:"✓ The slashed S is the Segno bookmark; the crossed circle is the Coda target.",
-        fail:"S-shape = Segno (S for Sign!); circle+cross = Coda.",
-        hint:"S is for Segno." } },
+    { say:"Four road signs run the musical map. \u{1F447} <b>Tap each block to reveal what it means:</b>",
+      try:{ type:"custom",
+        hint:"Tap all four blocks.",
+        mount:(container,fb)=>{
+          const CODA_SVG='<svg viewBox="0 0 40 40" width="36" height="36" style="display:block;margin:0 auto"><circle cx="20" cy="20" r="9" fill="none" stroke="currentColor" stroke-width="2.2"/><line x1="20" y1="6" x2="20" y2="34" stroke="currentColor" stroke-width="2.2"/><line x1="6" y1="20" x2="34" y2="20" stroke="currentColor" stroke-width="2.2"/></svg>';
+          const DATA=[
+            ["D.C.","Da Capo","Repeat from the beginning"],
+            ["D.S.","Dal Segno","Repeat from the segno sign"],
+            ["Fine","Fine","The end"],
+            [CODA_SVG,"Coda","Skip to the coda, which is an added ending"]];
+          const opened=new Set();
+          container.innerHTML=`<div class="rb-grid" style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap"></div>
+            <div class="rb-out" style="margin-top:12px"></div>`;
+          const grid=container.querySelector(".rb-grid"), out=container.querySelector(".rb-out");
+          DATA.forEach(([sign,name,meaning],i)=>{
+            const b=document.createElement("button");
+            b.className="notecard";
+            b.style.cssText="border-radius:10px;padding:14px 10px;min-width:110px;min-height:76px";
+            b.innerHTML=`<div style="font-size:1.3rem;font-weight:800;font-style:italic">${sign}</div>`;
+            b.onclick=()=>{
+              if(opened.has(i)) return;
+              opened.add(i); MFAudio.tone(64+i*3,.3);
+              b.style.borderColor="var(--primary)";
+              const line=document.createElement("div");
+              line.className="explain"; line.style.display="block"; line.style.marginTop="8px";
+              line.innerHTML=`<b>${i+1}. ${i===3?"\u2295":sign.replace(/<[^>]+>/g,"")||"Coda"}</b> \u2014 <b>${name}</b> \u2014 ${meaning}`;
+              out.appendChild(line);
+              if(opened.size===DATA.length)
+                fb(true,"\u2713 All four signs revealed \u2014 now see each one in action below.");
+            };
+            grid.appendChild(b);
+          });
+        } } },
     { say:"<b>Case 1 — D.C. al Fine.</b> Steps: \u2460 play through to the end \u2461 return to the BEGINNING \u2462 play to <b>Fine</b> and stop. Each measure below is lettered instead of notated. \u{1F447} <b>Follow the route, then name the order:</b>",
       try:{ type:"custom",
         hint:"Through the whole line first — D.C. only acts when you reach it.",
