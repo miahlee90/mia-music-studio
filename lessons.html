@@ -39,7 +39,7 @@
       const open = filter? " open" : (u.unit===1?" open":"");
       html+=`<div class="unit-group${open}">
         <div class="unit-head" onclick="this.parentElement.classList.toggle('open')">
-          <span>Book ${u.book} · Unit ${u.unit} — ${u.name}</span><span>▾</span></div>
+          <span>Unit ${u.unit} — ${u.name}</span><span>▾</span></div>
         <div class="unit-body">`+
         ls.map(l=>{
           const built=l.n<=BUILT_THROUGH;
