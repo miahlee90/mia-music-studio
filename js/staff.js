@@ -256,9 +256,10 @@ const Staff=(()=>{
       const stemsUp=((A.y+B.y)/2) > (A.y0+2*GAP);
       if(stemsUp) maxNoteBottom=Math.max(maxNoteBottom, Math.max(A.y,B.y)+28);
     });
-    if(hasDyn) maxEl=Math.max(maxEl,staffBottom+26);
+    const dynY = hasDyn? Math.max(staffBottom+20, maxNoteBottom+16) : 0;
+    if(hasDyn) maxEl=Math.max(maxEl,dynY+8);
     if(hasLabel&&maxNoteBottom===-Infinity) maxNoteBottom=staffBottom;
-    const labelY = hasLabel? Math.max(staffBottom+22, maxNoteBottom+18, hasDyn?staffBottom+38:0) : 0;
+    const labelY = hasLabel? Math.max(staffBottom+22, maxNoteBottom+18, hasDyn?dynY+16:0) : 0;
     if(hasLabel) maxEl=Math.max(maxEl,labelY+6);
     placed.forEach(({n,i,clef,y0,x,y,kind})=>{
       if(kind==="bar"){
@@ -279,7 +280,7 @@ const Staff=(()=>{
         if(accCh) inner=accSVG(x-18,y,accCh==="n"?"nat":accCh)+inner;
         if(n.artic) inner+=articSVG(x,y,y0,n.artic,W);
         parts.push(`<g class="notegroup" data-i="${i}" data-p="${n.p}">${inner}</g>`);
-        if(n.dyn) parts.push(`<text class="dyn" x="${x}" y="${y0+4*GAP+20}" text-anchor="middle">${n.dyn}</text>`);
+        if(n.dyn) parts.push(`<text class="dyn" x="${x}" y="${dynY}" text-anchor="middle">${n.dyn}</text>`);
       }
       if(n.label){ const hw=Math.min(W/2-4, 4+String(n.label).length*3.4);
         const lx=Math.max(hw+4, Math.min(W-hw-4, x));
@@ -307,11 +308,14 @@ const Staff=(()=>{
     /* hairpins (crescendo / decrescendo wedges below the staff) */
     (spec.hairpins||[]).forEach(hp=>{
       const A=placed[hp.from], B=placed[hp.to]; if(!A||!B) return;
-      const y=staffBottom+22; maxEl=Math.max(maxEl,y+10);
+      /* the wedge sits BETWEEN the dynamic letters, never through them */
+      const y=(hasDyn? dynY : staffBottom+22)-4;
+      const x1=A.x+(A.n&&A.n.dyn?16:0), x2=B.x-(B.n&&B.n.dyn?16:0);
+      maxEl=Math.max(maxEl,y+10);
       if(hp.type==="decresc")
-        parts.push(`<line class="acc" x1="${A.x}" y1="${y-5}" x2="${B.x}" y2="${y}"/><line class="acc" x1="${A.x}" y1="${y+5}" x2="${B.x}" y2="${y}"/>`);
+        parts.push(`<line class="acc" x1="${x1}" y1="${y-5}" x2="${x2}" y2="${y}"/><line class="acc" x1="${x1}" y1="${y+5}" x2="${x2}" y2="${y}"/>`);
       else
-        parts.push(`<line class="acc" x1="${A.x}" y1="${y}" x2="${B.x}" y2="${y-5}"/><line class="acc" x1="${A.x}" y1="${y}" x2="${B.x}" y2="${y+5}"/>`);
+        parts.push(`<line class="acc" x1="${x1}" y1="${y}" x2="${x2}" y2="${y-5}"/><line class="acc" x1="${x1}" y1="${y}" x2="${x2}" y2="${y+5}"/>`);
     });
     /* 1st / 2nd ending brackets */
     (spec.endings||[]).forEach(e=>{

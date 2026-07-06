@@ -66,7 +66,7 @@
   S.secReview=`<section class="card step" id="secReview"><h2>Remember!</h2>
     <ul class="summary">${C.summary.map(s=>`<li>${s}</li>`).join("")}</ul>
     <h2 style="margin-top:18px">Vocabulary <span style="font-weight:400;font-size:13px;color:var(--muted)">(tap to flip)</span></h2>
-    <div class="vocab">${C.vocabulary.map((v,vi)=>`<div class="vcard"><div class="vin"><div class="vface vfront">${v.def}</div><div class="vface vback"><b>${v.term}</b>${v.staff?`<div class="vstaff" data-vi="${vi}"></div>`:""}</div></div></div>`).join("")}</div>
+    <div class="vocab">${C.vocabulary.map((v,vi)=>`<div class="vcard"><div class="vin"><div class="vface vfront"><b>${v.term}</b>${v.staff?`<div class="vstaff" data-vi="${vi}"></div>`:""}</div><div class="vface vback">${v.def}</div></div></div>`).join("")}</div>
     ${(C.mistakes&&C.mistakes.length)?`<h2 style="margin-top:18px">Oops! Watch out for…</h2>
     <ul class="mistakes">${C.mistakes.map(m=>`<li class="oops">${m}</li>`).join("")}</ul>`:""}</section>`;
 

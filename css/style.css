@@ -321,3 +321,13 @@ button.notecard:hover{border-color:var(--primary) !important;background:#f8f9ff 
 button.notecard div{color:inherit}
 /* center the drawn symbol inside notation cards */
 button.notecard svg.mf-staff{height:46px;width:auto;max-width:100%;display:block;margin:0 auto}
+
+/* Vocabulary cards v3 (instructor 2026-07-05): FRONT = term + drawn symbol (light card),
+   BACK = definition (navy). Equal card sizes — no full-width stretching on the last row. */
+.vocab .vcard{flex:0 0 172px}
+.vface.vfront{background:var(--card,#fff);color:var(--ink,#0d253d);border:1px solid #c9d4e3;
+  flex-direction:column;gap:2px;font-weight:800;font-size:14.5px;line-height:1.25}
+.vface.vback{background:linear-gradient(135deg,#1c1e54,#4434d4);color:#fff;border:none;
+  font-size:13px;line-height:1.35;font-weight:600}
+.vfront .vstaff{width:100%}
+.vfront svg.mf-staff{height:56px;width:auto;margin:0 auto;display:block}
