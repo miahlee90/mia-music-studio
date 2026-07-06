@@ -91,7 +91,7 @@ LESSON_CONTENT[21]={
           const SEGNO_SVG='<svg viewBox="0 0 40 40" width="24" height="24" style="vertical-align:-6px;margin-left:4px"><path d="M 27 9 C 17 4, 9 10, 14 17 C 17 21, 23 19, 26 23 C 31 30, 23 36, 13 31" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><line x1="9" y1="35" x2="31" y2="5" stroke="currentColor" stroke-width="2.2"/><circle cx="6" cy="25" r="2.6" fill="currentColor"/><circle cx="34" cy="15" r="2.6" fill="currentColor"/></svg>';
           const DATA=[
             ["D.C.","Da Capo","Repeat from the beginning"],
-            ["D.S.","Dal Segno","Repeat from the segno sign"+SEGNO_SVG],
+            ["D.S. "+SEGNO_SVG,"Dal Segno","Repeat from the segno sign"+SEGNO_SVG],
             ["Fine","Fine","The end"],
             [CODA_SVG,"Coda","Skip to the coda, which is an added ending"]];
           const opened=new Set();

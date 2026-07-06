@@ -63,7 +63,7 @@ LESSON_CONTENT[20]={
   ],
   steps:[
     { say:"<b>Articulation</b> tells us <b>HOW</b> to play a note — not how long, not how loud, but the <b>style</b> of the sound. Meet the five: \u{1F3C0} <b>Staccato (•)</b> short & detached · \u{1F4E2} <b>Accent (&gt;)</b> extra emphasis · \u{1F4A5} <b>Sforzando (sfz)</b> sudden strong accent · \u{23F3} <b>Tenuto (—)</b> hold full value · \u{1F426} <b>Fermata</b> hold LONGER than written. \u{1F447} <b>What does articulation describe?</b>",
-      show:{ type:"staff", spec:{clef:"treble",notes:[{p:"E5",d:"q",artic:"staccato",articPos:"above",label:"staccato"},{p:"E5",d:"q",artic:"accent",articPos:"above",label:"accent"},{p:"E5",d:"q",artic:"tenuto",articPos:"above",label:"tenuto"},{p:"E5",d:"q",artic:"fermata",label:"fermata"}],width:440} },
+      show:{ type:"staff", spec:{clef:"treble",notes:[{p:"E5",d:"q",artic:"staccato",articPos:"above",label:"staccato"},{p:"E5",d:"q",artic:"accent",articPos:"above",label:"accent"},{p:"E5",d:"q",artic:"tenuto",articPos:"above",label:"tenuto"},{p:"E5",d:"q",artic:"sfz"},{p:"E5",d:"q",artic:"fermata",label:"fermata"}],width:470} },
       try:{ type:"mc",
         choices:["HOW a note is performed — its style","How loud a note is","How many beats a note gets"], answer:0,
         success:"✓ Style! Volume is dynamics, length is note values — articulation is the personality.",
