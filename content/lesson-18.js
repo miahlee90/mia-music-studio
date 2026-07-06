@@ -242,12 +242,12 @@ LESSON_CONTENT[18]={
     { gen:"note-value", params:{values:["q","q.","8","h"], ask:"beats"}, count:2 }
   ],
   vocabulary:[
-    {def:"Symbols that tell how LOUD or SOFT to play", term:"Dynamics"},
-    {def:"Soft", term:"piano (p)", staff:{clef:"none",notes:[{p:"B4",d:"q",dyn:"p"}],width:140}},
-    {def:"Loud", term:"forte (f)", staff:{clef:"none",notes:[{p:"B4",d:"q",dyn:"f"}],width:140}},
-    {def:"Moderately — as in mp (mod. soft) and mf (mod. loud)", term:"mezzo (m)"},
-    {def:"Gradually louder — the opening wedge <", term:"Crescendo", staff:{clef:"none",notes:[{p:"B4",d:"q"},{p:"B4",d:"q"},{p:"B4",d:"q"}],hairpins:[{from:0,to:2,type:"cresc"}],width:150}},
-    {def:"Gradually softer — the closing wedge >", term:"Decrescendo", staff:{clef:"none",notes:[{p:"B4",d:"q"},{p:"B4",d:"q"},{p:"B4",d:"q"}],hairpins:[{from:0,to:2,type:"decresc"}],width:150}}
+    {def:"Dynamic signs indicate the volume — how soft or loud the music should be played.", term:"Dynamics"},
+    {def:"Soft.", term:"piano (p)", staff:{clef:"none",notes:[{p:"B4",d:"q",dyn:"p"}],width:140}},
+    {def:"Loud.", term:"forte (f)", staff:{clef:"none",notes:[{p:"B4",d:"q",dyn:"f"}],width:140}},
+    {def:"Moderately — mp is moderately soft, mf is moderately loud.", term:"mezzo (m)"},
+    {def:"Gradually louder.", term:"Crescendo", staff:{clef:"none",notes:[{p:"B4",d:"q"},{p:"B4",d:"q"},{p:"B4",d:"q"}],hairpins:[{from:0,to:2,type:"cresc"}],width:150}},
+    {def:"Gradually softer.", term:"Decrescendo", staff:{clef:"none",notes:[{p:"B4",d:"q"},{p:"B4",d:"q"},{p:"B4",d:"q"}],hairpins:[{from:0,to:2,type:"decresc"}],width:150}}
   ],
   mistakes:[],
   summary:[

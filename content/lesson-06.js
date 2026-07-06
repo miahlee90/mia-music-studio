@@ -292,11 +292,11 @@ LESSON_CONTENT[6]={
     { gen:"note-name", params:{clef:"treble"}, count:1 }
   ],
   vocabulary:[
-    {def:"How LONG a sound lasts", term:"Duration"},
-    {def:"The steady pulse of music — like a heartbeat", term:"Beat"},
-    {def:"Hollow head, no stem — 4 beats in 4/4", term:"Whole Note", staff:{clef:"none",notes:[{p:"B4",d:"w"}],width:140}},
-    {def:"Hollow head with a stem — 2 beats in 4/4", term:"Half Note", staff:{clef:"none",notes:[{p:"B4",d:"h"}],width:140}},
-    {def:"Filled head with a stem — 1 beat in 4/4", term:"Quarter Note", staff:{clef:"none",notes:[{p:"B4",d:"q"}],width:140}}
+    {def:"The length of time a note is held.", term:"Duration"},
+    {def:"The steady, even pulse of the music.", term:"Beat"},
+    {def:"An open notehead with no stem. In time signatures with 4 as the bottom number, it receives 4 beats.", term:"Whole Note", staff:{clef:"none",notes:[{p:"B4",d:"w"}],width:140}},
+    {def:"An open notehead with a stem. In time signatures with 4 as the bottom number, it receives 2 beats.", term:"Half Note", staff:{clef:"none",notes:[{p:"B4",d:"h"}],width:140}},
+    {def:"A filled-in notehead with a stem. In time signatures with 4 as the bottom number, it receives 1 beat.", term:"Quarter Note", staff:{clef:"none",notes:[{p:"B4",d:"q"}],width:140}}
   ],
   mistakes:[
     "<b>Mixing up half and quarter notes</b> — check the head first: hollow = half, filled = quarter.",

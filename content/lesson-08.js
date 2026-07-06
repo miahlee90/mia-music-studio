@@ -289,10 +289,10 @@ LESSON_CONTENT[8]={
     { gen:"measure-count", params:{min:2,max:4}, count:1 }
   ],
   vocabulary:[
-    {def:"Two numbers at the beginning of a staff — the rhythmic roadmap", term:"Time Signature", staff:{clef:"none",time:"4/4",notes:[],width:140}},
-    {def:"How many beats in every measure", term:"Top Number"},
-    {def:"Which note value receives one beat", term:"Bottom Number"},
-    {def:"A large C — exactly the same as 4/4", term:"Common Time", staff:{clef:"none",time:"C",notes:[],width:140}}
+    {def:"Appears at the beginning of the music after the clef sign. It contains two numbers.", term:"Time Signature", staff:{clef:"none",time:"4/4",notes:[],width:140}},
+    {def:"Tells how many beats are in each measure.", term:"Top Number"},
+    {def:"Indicates what type of note receives 1 beat.", term:"Bottom Number"},
+    {def:"The sign C — it means the same as 4/4 time.", term:"Common Time", staff:{clef:"none",time:"C",notes:[],width:140}}
   ],
   mistakes:[
     "<b>Swapping the two numbers</b> — top counts the beats, bottom names the beat note.",

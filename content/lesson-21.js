@@ -275,11 +275,11 @@ LESSON_CONTENT[21]={
     { gen:"note-name", params:{clef:"treble"}, count:1 }
   ],
   vocabulary:[
-    {def:"“From the beginning” — return to the start", term:"Da Capo (D.C.)"},
-    {def:"“From the sign” — return to the Segno", term:"Dal Segno (D.S.)"},
-    {def:"The bookmark symbol D.S. returns to", term:"Segno", staff:{clef:"none",notes:[{mark:"segno"}],width:140}},
-    {def:"“The end” — stop here when directed", term:"Fine", staff:{clef:"none",notes:[{mark:"fine"}],width:140}},
-    {def:"A special ending section you JUMP to", term:"Coda", staff:{clef:"none",notes:[{mark:"coda"}],width:140}}
+    {def:"Repeat from the beginning.", term:"Da Capo (D.C.)"},
+    {def:"Repeat from the sign.", term:"Dal Segno (D.S.)"},
+    {def:"The sign that Dal Segno returns to.", term:"Segno", staff:{clef:"none",notes:[{mark:"segno"}],width:140}},
+    {def:"The end.", term:"Fine", staff:{clef:"none",notes:[{mark:"fine"}],width:140}},
+    {def:"An added ending.", term:"Coda", staff:{clef:"none",notes:[{mark:"coda"}],width:140}}
   ],
   mistakes:[],
   summary:[

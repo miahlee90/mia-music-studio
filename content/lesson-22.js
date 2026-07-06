@@ -216,10 +216,10 @@ LESSON_CONTENT[22]={
     { gen:"note-name", params:{clef:"treble"}, count:2 }
   ],
   vocabulary:[
-    {def:"A sign that changes a note's pitch: ♯, ♭ or ♮", term:"Accidental"},
-    {def:"Lowers a note by ONE HALF STEP — one key to the left", term:"Flat (♭)", staff:{clef:"none",notes:[{p:"Bb4",d:"q"}],width:140}},
-    {def:"The smallest distance — from one key to the VERY next key", term:"Half Step"},
-    {def:"An accidental lasts only until the next bar line", term:"One-Measure Rule"}
+    {def:"A flat, sharp or natural sign that appears within a piece of music.", term:"Accidental"},
+    {def:"Lowers the pitch by one half step.", term:"Flat (♭)", staff:{clef:"none",notes:[{p:"Bb4",d:"q"}],width:140}},
+    {def:"The distance from any key on the keyboard to the very next key above or below, whether black or white.", term:"Half Step"},
+    {def:"An accidental affects the notes on the same line or space following it, for that measure only.", term:"One-Measure Rule"}
   ],
   mistakes:[],
   summary:[

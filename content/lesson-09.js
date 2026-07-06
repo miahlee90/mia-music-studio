@@ -266,10 +266,10 @@ LESSON_CONTENT[9]={
     { gen:"note-name", params:{clef:"treble"}, count:1 }
   ],
   vocabulary:[
-    {def:"A symbol for silence — same length as its note, no sound", term:"Rest"},
-    {def:"Hangs DOWN from the 4th line (the hole) — 4 silent beats", term:"Whole Rest", staff:{clef:"none",notes:[{rest:"w"}],width:140}},
-    {def:"Sits ON the 3rd line (the hat) — 2 silent beats", term:"Half Rest", staff:{clef:"none",notes:[{rest:"h"}],width:140}},
-    {def:"The squiggly symbol — 1 silent beat", term:"Quarter Rest", staff:{clef:"none",notes:[{rest:"q"}],width:140}}
+    {def:"A sign for silence. Each note value has a matching rest of the same length.", term:"Rest"},
+    {def:"Hangs below the 4th line. In 4/4, it receives 4 beats of silence.", term:"Whole Rest", staff:{clef:"none",notes:[{rest:"w"}],width:140}},
+    {def:"Sits on the 3rd line. It receives 2 beats of silence.", term:"Half Rest", staff:{clef:"none",notes:[{rest:"h"}],width:140}},
+    {def:"It receives 1 beat of silence.", term:"Quarter Rest", staff:{clef:"none",notes:[{rest:"q"}],width:140}}
   ],
   mistakes:[], /* Oops section removed at instructor request (Session 15o) */
   summary:[

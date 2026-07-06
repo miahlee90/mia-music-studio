@@ -261,9 +261,9 @@ LESSON_CONTENT[17]={
     { gen:"note-name", params:{clef:"treble"}, count:1 }
   ],
   vocabulary:[
-    {def:"A quarter note plus a dot — 1 + ½ = 1½ beats", term:"Dotted Quarter Note", staff:{clef:"none",notes:[{p:"B4",d:"q",dot:true}],width:140}},
-    {def:"Adds HALF of the note's original value", term:"Dot", staff:{clef:"none",notes:[{p:"B4",d:"q",dot:true}],width:140}},
-    {def:"The famous LONG–short cell: 1½ + ½ = 2 beats, counted “1-and-2, and”", term:"Dotted Quarter + Eighth", staff:{clef:"none",notes:[{p:"B4",d:"q",dot:true},{p:"B4",d:"8"}],width:150}}
+    {def:"In time signatures with 4 as the bottom number, it receives 1½ beats.", term:"Dotted Quarter Note", staff:{clef:"none",notes:[{p:"B4",d:"q",dot:true}],width:140}},
+    {def:"Increases the note's duration by half the original value.", term:"Dot", staff:{clef:"none",notes:[{p:"B4",d:"q",dot:true}],width:140}},
+    {def:"A two-beat pattern: 1½ + ½, counted “1-and-2, and.”", term:"Dotted Quarter + Eighth", staff:{clef:"none",notes:[{p:"B4",d:"q",dot:true},{p:"B4",d:"8"}],width:150}}
   ],
   mistakes:[],
   summary:[

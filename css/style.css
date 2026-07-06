@@ -342,3 +342,22 @@ button.notecard svg.mf-staff{height:46px;width:auto;max-width:100%;display:block
 .vface{transition:opacity .2s .15s}
 .vcard:not(.flip) .vface.vback{opacity:0}
 .vcard.flip .vface.vfront{opacity:0}
+
+/* ===== Vocabulary cards v4 — REBUILT from scratch (instructor 2026-07-06).
+   No 3D, no backface, no absolute stacking: one card, two faces, class toggle.
+   FRONT: term + drawn symbol on white. TAP -> BACK: definition on navy. ===== */
+.vox{display:flex;gap:12px;flex-wrap:wrap}
+.vox-card{flex:0 0 172px;min-height:126px;border-radius:12px;cursor:pointer;user-select:none;
+  display:flex;align-items:center;justify-content:center;padding:12px;text-align:center;
+  background:#fff;border:1px solid #c9d4e3;box-shadow:var(--shadow);
+  transition:transform .15s,box-shadow .15s,background .25s}
+.vox-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-2)}
+.vox-front{display:flex;flex-direction:column;gap:4px;align-items:center;width:100%;
+  font-weight:800;font-size:14.5px;line-height:1.25;color:var(--ink,#0d253d)}
+.vox-sym{width:100%}
+.vox-sym svg.mf-staff{height:56px;width:auto;max-width:100%;margin:0 auto;display:block}
+.vox-back{display:none;font-size:13px;line-height:1.45;font-weight:600;color:#fff}
+.vox-card.back{background:linear-gradient(135deg,#1c1e54,#4434d4);border-color:transparent}
+.vox-card.back .vox-front{display:none}
+.vox-card.back .vox-back{display:block}
+@media (max-width:600px){ .vox-card{flex:1 1 45%} }

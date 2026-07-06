@@ -205,9 +205,9 @@ LESSON_CONTENT[24]={
     { gen:"note-name", params:{clef:"treble"}, count:2 }
   ],
   vocabulary:[
-    {def:"Cancels a previous sharp or flat — back to the original pitch", term:"Natural (♮)", staff:{clef:"none",notes:[{p:"F4",acc:"n",d:"q"}],width:140}},
-    {def:"The three pitch-changers: ♯ raise · ♭ lower · ♮ cancel", term:"Accidentals"},
-    {def:"Every accidental — naturals included — expires at the bar line", term:"One-Measure Rule"}
+    {def:"A natural sign before a note cancels a previous flat or sharp.", term:"Natural (♮)", staff:{clef:"none",notes:[{p:"F4",acc:"n",d:"q"}],width:140}},
+    {def:"Flat, sharp and natural signs that appear within a piece of music.", term:"Accidentals"},
+    {def:"An accidental affects the notes following it, for that measure only.", term:"One-Measure Rule"}
   ],
   mistakes:[],
   summary:[

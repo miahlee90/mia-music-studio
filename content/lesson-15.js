@@ -277,10 +277,10 @@ LESSON_CONTENT[15]={
     { gen:"note-name", params:{clef:"treble"}, count:1 }
   ],
   vocabulary:[
-    {def:"A note worth ½ beat — two of them share one beat", term:"Eighth Note", staff:{clef:"none",notes:[{p:"B4",d:"8"}],width:140}},
-    {def:"The curved line on a single eighth note's stem", term:"Flag", staff:{clef:"none",notes:[{p:"B4",d:"8"}],width:140}},
-    {def:"The horizontal line connecting a group of eighth notes", term:"Beam", staff:{clef:"none",notes:[{p:"A4",d:"8"},{p:"B4",d:"8"}],beams:[[0,1]],width:150}},
-    {def:"How we count eighth notes: 1-and-2-and-3-and-4-and", term:"“And” Counting"}
+    {def:"In time signatures with 4 as the bottom number, it receives ½ beat.", term:"Eighth Note", staff:{clef:"none",notes:[{p:"B4",d:"8"}],width:140}},
+    {def:"The small curved stroke on the stem of a single eighth note.", term:"Flag", staff:{clef:"none",notes:[{p:"B4",d:"8"}],width:140}},
+    {def:"The thick line that joins the stems of two or more eighth notes.", term:"Beam", staff:{clef:"none",notes:[{p:"A4",d:"8"},{p:"B4",d:"8"}],beams:[[0,1]],width:150}},
+    {def:"Eighth notes divide the beat: counted 1-and 2-and 3-and 4-and.", term:"“And” Counting"}
   ],
   mistakes:[],
   summary:[

@@ -245,9 +245,9 @@ LESSON_CONTENT[7]={
     { gen:"note-name", params:{clef:"bass"}, count:1 }
   ],
   vocabulary:[
-    {def:"A vertical line dividing the staff into measures", term:"Bar Line", staff:{clef:"none",notes:[{bar:"single"}],width:140}},
-    {def:"The space between two bar lines — also called a Bar", term:"Measure", staff:{clef:"none",notes:[{bar:"single"},{p:"B4",d:"w"},{bar:"single"}],width:150}},
-    {def:"Thin + thick lines marking the END of a piece", term:"Double Bar", staff:{clef:"none",notes:[{bar:"final"}],width:140}}
+    {def:"The lines which cross the staff and divide it into measures or bars.", term:"Bar Line", staff:{clef:"none",notes:[{bar:"single"}],width:140}},
+    {def:"The area between two bar lines; also called a bar.", term:"Measure", staff:{clef:"none",notes:[{bar:"single"},{p:"B4",d:"w"},{bar:"single"}],width:150}},
+    {def:"Written at the end of a piece of music — a thin line followed by a thick line.", term:"Double Bar", staff:{clef:"none",notes:[{bar:"final"}],width:140}}
   ],
   mistakes:[], /* Oops section removed at instructor request (Session 15h) */
   summary:[

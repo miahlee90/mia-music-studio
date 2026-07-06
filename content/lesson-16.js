@@ -256,9 +256,9 @@ LESSON_CONTENT[16]={
     { gen:"note-name", params:{clef:"treble"}, count:1 }
   ],
   vocabulary:[
-    {def:"½ beat of silence — a little 7 with a dot", term:"Eighth Rest", staff:{clef:"none",notes:[{rest:"8"}],width:140}},
-    {def:"½ beat of sound — flag alone, beam in groups", term:"Eighth Note", staff:{clef:"none",notes:[{p:"B4",d:"8"}],width:140}},
-    {def:"Every rest lasts exactly as long as its matching note", term:"Silent Twin Rule"}
+    {def:"In time signatures with 4 as the bottom number, it receives ½ beat of silence.", term:"Eighth Rest", staff:{clef:"none",notes:[{rest:"8"}],width:140}},
+    {def:"In time signatures with 4 as the bottom number, it receives ½ beat.", term:"Eighth Note", staff:{clef:"none",notes:[{p:"B4",d:"8"}],width:140}},
+    {def:"Each note value has a matching rest of exactly the same length.", term:"Silent Twin Rule"}
   ],
   mistakes:[],
   summary:[

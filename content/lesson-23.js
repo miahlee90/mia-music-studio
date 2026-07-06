@@ -217,10 +217,10 @@ LESSON_CONTENT[23]={
     { gen:"note-name", params:{clef:"treble"}, count:2 }
   ],
   vocabulary:[
-    {def:"Raises a note by ONE HALF STEP — one key to the right", term:"Sharp (♯)", staff:{clef:"none",notes:[{p:"F#4",d:"q"}],width:140}},
-    {def:"Lowers a note by one half step (last lesson's twin)", term:"Flat (♭)", staff:{clef:"none",notes:[{p:"Bb4",d:"q"}],width:140}},
-    {def:"A sign that changes a note's pitch", term:"Accidental"},
-    {def:"An accidental lasts only until the next bar line", term:"One-Measure Rule"}
+    {def:"Raises the pitch by one half step.", term:"Sharp (♯)", staff:{clef:"none",notes:[{p:"F#4",d:"q"}],width:140}},
+    {def:"Lowers the pitch by one half step.", term:"Flat (♭)", staff:{clef:"none",notes:[{p:"Bb4",d:"q"}],width:140}},
+    {def:"A flat, sharp or natural sign that appears within a piece of music.", term:"Accidental"},
+    {def:"An accidental affects the notes on the same line or space following it, for that measure only.", term:"One-Measure Rule"}
   ],
   mistakes:[],
   summary:[

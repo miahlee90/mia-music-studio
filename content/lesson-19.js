@@ -234,12 +234,12 @@ LESSON_CONTENT[19]={
     { gen:"note-name", params:{clef:"treble"}, count:1 }
   ],
   vocabulary:[
-    {def:"The speed or pace of the music — its heartbeat", term:"Tempo"},
-    {def:"Slow \u{1F422}", term:"Adagio"},
-    {def:"At a walking pace \u{1F6B6}", term:"Andante"},
-    {def:"At a moderate speed \u{1F642}", term:"Moderato"},
-    {def:"Fast, lively and cheerful \u{1F3C3}", term:"Allegro"},
-    {def:"Very lively and fast \u{26A1}", term:"Vivace"}
+    {def:"A word meaning “rate of speed.” It tells how fast or slow to play the music.", term:"Tempo"},
+    {def:"Slow.", term:"Adagio"},
+    {def:"Moving along (walking speed).", term:"Andante"},
+    {def:"Moderately.", term:"Moderato"},
+    {def:"Quickly, cheerfully.", term:"Allegro"},
+    {def:"Lively and fast.", term:"Vivace"}
   ],
   mistakes:[],
   summary:[

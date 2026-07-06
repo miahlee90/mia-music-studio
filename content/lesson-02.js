@@ -244,11 +244,11 @@ LESSON_CONTENT[2]={
       hint:"How many letters does ALL of music use?" }
   ],
   vocabulary:[
-    {def:"The “key” at the start of a staff that names every note", term:"Clef"},
-    {def:"Its spiral wraps line 2 and names it G — used for higher notes", term:"Treble Clef (G Clef)", staff:{clef:"treble",notes:[],width:150}},
-    {def:"Music’s seven letters, repeating forever", term:"A-B-C-D-E-F-G"},
-    {def:"Every Good Boy Does Fine — the treble LINE notes, bottom to top", term:"E-G-B-D-F"},
-    {def:"The treble SPACE notes spell a word, bottom to top", term:"F-A-C-E"}
+    {def:"A sign that helps organize the staff so notes can be easily read.", term:"Clef"},
+    {def:"The clef used for notes in the higher pitch ranges. The curl of the clef circles the line on which the note G is placed.", term:"Treble Clef (G Clef)", staff:{clef:"treble",notes:[],width:150}},
+    {def:"The musical alphabet: the first seven letters, used over and over to name notes.", term:"A-B-C-D-E-F-G"},
+    {def:"The treble line notes, bottom to top: Every Good Boy Does Fine.", term:"E-G-B-D-F"},
+    {def:"The treble space notes, bottom to top — they spell FACE.", term:"F-A-C-E"}
   ],
   mistakes:[
     "<b>Counting from the top</b> — the sayings only work from the BOTTOM.",

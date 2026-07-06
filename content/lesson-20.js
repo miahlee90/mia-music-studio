@@ -239,12 +239,12 @@ LESSON_CONTENT[20]={
     { gen:"note-name", params:{clef:"treble"}, count:1 }
   ],
   vocabulary:[
-    {def:"Symbols that tell HOW to play or sing each note", term:"Articulation"},
-    {def:"Short and detached — the bouncing dot", term:"Staccato (•)", staff:{clef:"none",notes:[{p:"E5",d:"q",artic:"staccato",articPos:"above"}],width:140}},
-    {def:"Extra emphasis on a note", term:"Accent (>)", staff:{clef:"none",notes:[{p:"E5",d:"q",artic:"accent",articPos:"above"}],width:140}},
-    {def:"A sudden, strong accent", term:"Sforzando (sfz)"},
-    {def:"Hold the note for its FULL written value", term:"Tenuto (—)", staff:{clef:"none",notes:[{p:"E5",d:"q",artic:"tenuto",articPos:"above"}],width:140}},
-    {def:"Hold LONGER than written — the bird's eye", term:"Fermata", staff:{clef:"none",notes:[{p:"E5",d:"q",artic:"fermata"}],width:140}}
+    {def:"The manner in which a note is performed.", term:"Articulation"},
+    {def:"Play the note short and detached.", term:"Staccato (•)", staff:{clef:"none",notes:[{p:"E5",d:"q",artic:"staccato",articPos:"above"}],width:140}},
+    {def:"Play the note louder, with a special emphasis.", term:"Accent (>)", staff:{clef:"none",notes:[{p:"E5",d:"q",artic:"accent",articPos:"above"}],width:140}},
+    {def:"A sudden, strong accent.", term:"Sforzando (sfz)"},
+    {def:"Hold the note for its full value.", term:"Tenuto (—)", staff:{clef:"none",notes:[{p:"E5",d:"q",artic:"tenuto",articPos:"above"}],width:140}},
+    {def:"Hold the note for longer than its normal value.", term:"Fermata", staff:{clef:"none",notes:[{p:"E5",d:"q",artic:"fermata"}],width:140}}
   ],
   mistakes:[],
   summary:[

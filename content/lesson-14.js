@@ -244,10 +244,10 @@ LESSON_CONTENT[14]={
     { gen:"note-name", params:{clef:"treble"}, count:1 }
   ],
   vocabulary:[
-    {def:"A double bar with two dots — play the section again", term:"Repeat Sign", staff:{clef:"none",notes:[{bar:"repeat-end"}],width:140}},
-    {def:"The ending played only the FIRST time through", term:"1st Ending", staff:{clef:"none",notes:[{p:"B4",d:"w"},{bar:"repeat-end"}],endings:[{from:0,to:0,n:1}],width:150}},
-    {def:"The ending played AFTER the repeat, replacing the first", term:"2nd Ending"},
-    {def:"Performance directions telling musicians where to go next", term:"Roadmap"}
+    {def:"Return to the beginning, or to the previous repeat sign at the beginning of the section.", term:"Repeat Sign", staff:{clef:"none",notes:[{bar:"repeat-end"}],width:140}},
+    {def:"Play through the 1st ending to the repeat sign, then go back.", term:"1st Ending", staff:{clef:"none",notes:[{p:"B4",d:"w"},{bar:"repeat-end"}],endings:[{from:0,to:0,n:1}],width:150}},
+    {def:"When repeating, skip the 1st ending and play the 2nd ending.", term:"2nd Ending"},
+    {def:"Signs that tell the performer the order in which the music is played.", term:"Roadmap"}
   ],
   mistakes:[],
   summary:[

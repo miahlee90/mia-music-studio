@@ -263,9 +263,9 @@ LESSON_CONTENT[12]={
     { gen:"note-name", params:{clef:"treble"}, count:1 }
   ],
   vocabulary:[
-    {def:"A symbol after a note that adds HALF of the note's original value", term:"Dot", staff:{clef:"none",notes:[{p:"B4",d:"h",dot:true}],width:140}},
-    {def:"A half note with a dot — 2 + 1 = 3 beats", term:"Dotted Half Note", staff:{clef:"none",notes:[{p:"B4",d:"h",dot:true}],width:140}},
-    {def:"The length of time a note is held", term:"Duration"}
+    {def:"A dot after a note increases the note's duration by half the original value.", term:"Dot", staff:{clef:"none",notes:[{p:"B4",d:"h",dot:true}],width:140}},
+    {def:"In 3/4 and 4/4 time signatures, it receives 3 beats (2 + 1).", term:"Dotted Half Note", staff:{clef:"none",notes:[{p:"B4",d:"h",dot:true}],width:140}},
+    {def:"The length of time a note is held.", term:"Duration"}
   ],
   mistakes:[],
   summary:[

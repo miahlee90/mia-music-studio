@@ -224,9 +224,9 @@ LESSON_CONTENT[1]={
       explain:"Space 4 is the top space — the highest of the three.", hint:"Count each one from the bottom and compare." }
   ],
   vocabulary:[
-    {def:"5 lines and 4 spaces where music is written", term:"Staff", staff:{clef:"none",notes:[],width:150}},
-    {def:"The symbol that represents one musical sound", term:"Note", staff:{clef:"none",notes:[{p:"B4",d:"q"}],width:140}},
-    {def:"How HIGH or LOW a sound is", term:"Pitch"}
+    {def:"The five lines and the four spaces between them on which music notes and other symbols are written.", term:"Staff", staff:{clef:"none",notes:[],width:150}},
+    {def:"An oval-shaped symbol placed on a line or in a space of the staff. It represents a musical sound, called a pitch.", term:"Note", staff:{clef:"none",notes:[{p:"B4",d:"q"}],width:140}},
+    {def:"A musical sound.", term:"Pitch"}
   ],
   mistakes:[
     "<b>Counting from the top</b> — always start at the BOTTOM line.",

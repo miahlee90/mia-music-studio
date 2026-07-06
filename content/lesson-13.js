@@ -229,9 +229,9 @@ LESSON_CONTENT[13]={
     { gen:"note-name", params:{clef:"treble"}, count:1 }
   ],
   vocabulary:[
-    {def:"A curved line joining two notes of the SAME pitch — play once, hold", term:"Tie", staff:{clef:"none",notes:[{p:"B4",d:"h"},{p:"B4",d:"h"}],arcs:[{from:0,to:1,type:"tie"}],width:150}},
-    {def:"A curved line over DIFFERENT pitches — play all, smoothly", term:"Slur", staff:{clef:"none",notes:[{p:"A4",d:"q"},{p:"C5",d:"q"},{p:"B4",d:"q"}],arcs:[{from:0,to:2,type:"slur"}],width:150}},
-    {def:"Playing smoothly with no gaps between notes", term:"Legato"}
+    {def:"Two notes of the same pitch joined by a curved line. Each note is held for its full value, but only the first is played or sung.", term:"Tie", staff:{clef:"none",notes:[{p:"B4",d:"h"},{p:"B4",d:"h"}],arcs:[{from:0,to:1,type:"tie"}],width:150}},
+    {def:"Smoothly connects two or more notes of DIFFERENT pitches with a curved line over or under the notes.", term:"Slur", staff:{clef:"none",notes:[{p:"A4",d:"q"},{p:"C5",d:"q"},{p:"B4",d:"q"}],arcs:[{from:0,to:2,type:"slur"}],width:150}},
+    {def:"To play or sing two or more notes smoothly connected.", term:"Legato"}
   ],
   mistakes:[],
   summary:[

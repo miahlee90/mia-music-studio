@@ -314,10 +314,10 @@ LESSON_CONTENT[11]={
     { gen:"note-name", params:{clef:"treble"}, count:1 }
   ],
   vocabulary:[
-    {def:"Three beats per measure; the quarter note receives one beat", term:"3/4 Time", staff:{clef:"none",time:"3/4",notes:[],width:140}},
-    {def:"Two beats per measure; the quarter note receives one beat", term:"2/4 Time", staff:{clef:"none",time:"2/4",notes:[],width:140}},
-    {def:"Used for a FULL measure of rest — in any time signature", term:"Whole Rest", staff:{clef:"none",notes:[{rest:"w"}],width:140}},
-    {def:"Never written in 3/4 time", term:"Half Rest · Whole Note"}
+    {def:"Three beats per measure; the quarter note receives one beat.", term:"3/4 Time", staff:{clef:"none",time:"3/4",notes:[],width:140}},
+    {def:"Two beats per measure; the quarter note receives one beat.", term:"2/4 Time", staff:{clef:"none",time:"2/4",notes:[],width:140}},
+    {def:"Means to rest for a whole measure — in 3/4 it receives 3 beats.", term:"Whole Rest", staff:{clef:"none",notes:[{rest:"w"}],width:140}},
+    {def:"Not used in 3/4 time.", term:"Half Rest · Whole Note"}
   ],
   mistakes:[],
   summary:[

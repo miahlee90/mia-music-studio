@@ -235,11 +235,11 @@ LESSON_CONTENT[25]={
     { gen:"note-name", params:{clef:"treble"}, count:1 }
   ],
   vocabulary:[
-    {def:"The distance from one key to the VERY next key — music's smallest interval", term:"Half Step (H)"},
-    {def:"Two half steps — one key is skipped", term:"Whole Step (W)"},
-    {def:"Two notes that SOUND the same but have different names (C♯ = D♭)", term:"Enharmonic Notes"},
-    {def:"The distance between two notes", term:"Interval"},
-    {def:"The two white-key half steps — no black key between them", term:"E–F and B–C"}
+    {def:"The distance from any key on the keyboard to the very next key above or below, whether black or white.", term:"Half Step (H)"},
+    {def:"The distance from any key on the keyboard to two keys above or below.", term:"Whole Step (W)"},
+    {def:"Two notes that sound the same but are written differently.", term:"Enharmonic Notes"},
+    {def:"The distance between two notes.", term:"Interval"},
+    {def:"The two natural half steps on the keyboard — no black key in between.", term:"E–F and B–C"}
   ],
   mistakes:[],
   summary:[

@@ -66,7 +66,7 @@
   S.secReview=`<section class="card step" id="secReview"><h2>Remember!</h2>
     <ul class="summary">${C.summary.map(s=>`<li>${s}</li>`).join("")}</ul>
     <h2 style="margin-top:18px">Vocabulary <span style="font-weight:400;font-size:13px;color:var(--muted)">(tap to flip)</span></h2>
-    <div class="vocab">${C.vocabulary.map((v,vi)=>`<div class="vcard"><div class="vin"><div class="vface vfront"><b>${v.term}</b>${v.staff?`<div class="vstaff" data-vi="${vi}"></div>`:""}</div><div class="vface vback">${v.def}</div></div></div>`).join("")}</div>
+    <div class="vox">${C.vocabulary.map((v,vi)=>`<div class="vox-card" role="button" tabindex="0"><div class="vox-front"><b>${v.term}</b>${v.staff?`<div class="vox-sym" data-vi="${vi}"></div>`:""}</div><div class="vox-back">${v.def}</div></div>`).join("")}</div>
     ${(C.mistakes&&C.mistakes.length)?`<h2 style="margin-top:18px">Oops! Watch out for…</h2>
     <ul class="mistakes">${C.mistakes.map(m=>`<li class="oops">${m}</li>`).join("")}</ul>`:""}</section>`;
 
@@ -218,9 +218,13 @@
       else if(pass) Teacher.say(C.miaPass||"You passed! Review below, or try again for a perfect run.",{pose:"wave",proactive:true});
       else Teacher.say(C.miaRetry||"Good effort! Peek at the review below, then try again — fresh questions every time.",{pose:"wave",proactive:true});
     }});
-  /* vocab flip + symbol drawings on the back (DD-25) */
-  document.querySelectorAll(".vcard").forEach(v=>v.onclick=()=>v.classList.toggle("flip"));
-  document.querySelectorAll(".vstaff").forEach(el=>{ const v=C.vocabulary[+el.dataset.vi]; if(v&&v.staff) Staff.render(el,v.staff); });
+  /* vocabulary cards v4 (rebuilt): front = term + symbol, tap swaps to definition */
+  document.querySelectorAll(".vox-card").forEach(v=>{
+    const go=()=>v.classList.toggle("back");
+    v.onclick=go;
+    v.onkeydown=e=>{ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); go(); } };
+  });
+  document.querySelectorAll(".vox-sym").forEach(el=>{ const v=C.vocabulary[+el.dataset.vi]; if(v&&v.staff) Staff.render(el,v.staff); });
 
   /* ---------- Ask-Mia contexts ---------- */
   Teacher.init();
