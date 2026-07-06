@@ -142,7 +142,10 @@ LESSON_CONTENT[8]={
           const st=container.querySelector(".bf-staff"), q=container.querySelector(".bf-q"),
                 grid=container.querySelector(".bf-cards");
           function draw(){
-            Staff.render(st,{clef:"treble",time:"4/4",notes:[...doneItems,...cur.map(d=>({p:"B4",d}))],width:440});
+            const items=[...doneItems,...cur.map(d=>({p:"B4",d}))];
+            if(found.length>=2&&items.length&&items[items.length-1].bar==="single") items[items.length-1]={bar:"final"};
+            for(let m=found.length;m<2;m++) items.push({bar: m===1? "final":"single"});
+            Staff.render(st,{clef:"treble",time:"4/4",notes:items,width:440});
             q.textContent=`Beats: ${sum} of 4 · Measures built: ${found.length} of 2`;
           }
           function add(v){
@@ -153,8 +156,7 @@ LESSON_CONTENT[8]={
               if(found.includes(key)){ fb(false,"Same combination as before — clear and build a DIFFERENT one!"); cur=[];sum=0; setTimeout(draw,900); return; }
               found.push(key);
               let t=0; cur.forEach(d=>{ MFAudio.tone(71,B[d]*.45,t); t+=B[d]*.5; });
-              doneItems.push(...cur.map(d=>({p:"B4",d})));
-              doneItems.push({bar: found.length>=2? "final":"single"});
+              doneItems.push(...cur.map(d=>({p:"B4",d})), {bar:"single"});
               cur=[]; sum=0; draw();
               if(found.length>=2){ grid.style.display="none"; container.querySelector(".bf-clear").style.display="none";
                 q.textContent="Two measures composed!";

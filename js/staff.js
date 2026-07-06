@@ -111,7 +111,7 @@ const Staff=(()=>{
       out+= up? `<line class="stem" x1="${x+8.4}" y1="${y-2}" x2="${x+8.4}" y2="${y-38}"/>`
               : `<line class="stem" x1="${x-8.4}" y1="${y+2}" x2="${x-8.4}" y2="${y+38}"/>`;
       if(s.flag&&!noFlag) out+= up? `<path class="stem" d="M${x+8.4} ${y-38} q12 6 8 20" fill="none"/>`
-                                  : `<path class="stem" d="M${x-8.4} ${y+38} q-12 -6 -8 -20" fill="none"/>`;
+                                  : `<path class="stem" d="M${x-8.4} ${y+38} q12 -6 8 -20" fill="none"/>`;
     }
     if(dot) out+=`<circle class="artic" cx="${x+rx+6}" cy="${onLine? y-6 : y}" r="2.7"/>`;
     return out;

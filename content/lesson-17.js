@@ -121,7 +121,10 @@ LESSON_CONTENT[17]={
           const clr=document.createElement("button"); clr.className="ghost"; clr.textContent="↺ Clear";
           clr.onclick=()=>{ cur=[];sum=0;draw(); }; ch.appendChild(clr);
           function draw(){
-            Staff.render(st,{clef:"treble",time:"2/4",notes:[...doneItems,...cur.map(bt=>bt.item)],width:470});
+            const items=[...doneItems,...cur.map(bt=>bt.item)];
+            if(found.length>=3&&items.length&&items[items.length-1].bar==="single") items[items.length-1]={bar:"final"};
+            for(let m=found.length;m<3;m++) items.push({bar: m===3-1? "final":"single"});
+            Staff.render(st,{clef:"treble",time:"2/4",notes:items,width:470});
             q.textContent=`Beats: ${sum} of 2 · Ways found: ${found.length} of 3`;
           }
           function add(bt){
@@ -132,8 +135,7 @@ LESSON_CONTENT[17]={
               if(found.includes(key)){ fb(false,"Found that one already — a NEW combination, please!"); cur=[];sum=0; setTimeout(draw,900); return; }
               found.push(key);
               let t=0; cur.forEach(bt=>{ MFAudio.tone(71,Math.max(.2,bt.beats*.45),t); t+=bt.beats*.5; });
-              doneItems.push(...cur.map(bt=>bt.item));
-              doneItems.push({bar: found.length>=3? "final":"single"});
+              doneItems.push(...cur.map(bt=>bt.item), {bar:"single"});
               cur=[]; sum=0; draw();
               if(found.length>=3){ ch.style.display="none"; q.textContent="All three ways!";
                 fb(true,"✓ Dotted-quarter+eighth, quarter+two-eighths, two quarters — three recipes for 2 beats, and the first is the famous one!"); }

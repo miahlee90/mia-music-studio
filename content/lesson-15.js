@@ -134,7 +134,10 @@ LESSON_CONTENT[15]={
           const clr=document.createElement("button"); clr.className="ghost"; clr.textContent="↺ Clear";
           clr.onclick=()=>{ cur=[];sum=0;draw(); }; ch.appendChild(clr);
           function draw(){
-            Staff.render(st,{clef:"treble",time:"4/4",notes:[...doneItems,...cur.map(bt=>bt.item)],width:470});
+            const items=[...doneItems,...cur.map(bt=>bt.item)];
+            if(found.length>=2&&items.length&&items[items.length-1].bar==="single") items[items.length-1]={bar:"final"};
+            for(let m=found.length;m<2;m++) items.push({bar: m===2-1? "final":"single"});
+            Staff.render(st,{clef:"treble",time:"4/4",notes:items,width:470});
             q.textContent=`Beats: ${sum} of 4 · Measures built: ${found.length} of 2`;
           }
           function add(bt){
@@ -145,8 +148,7 @@ LESSON_CONTENT[15]={
               if(found.includes(key)){ fb(false,"Same recipe — clear and invent a different one!"); cur=[];sum=0; setTimeout(draw,900); return; }
               found.push(key);
               let t=0; cur.forEach(bt=>{ MFAudio.tone(71,Math.max(.2,bt.beats*.45),t); t+=bt.beats*.5; });
-              doneItems.push(...cur.map(bt=>bt.item));
-              doneItems.push({bar: found.length>=2? "final":"single"});
+              doneItems.push(...cur.map(bt=>bt.item), {bar:"single"});
               cur=[]; sum=0; draw();
               if(found.length>=2){ ch.style.display="none"; q.textContent="Two measures with eighths!";
                 fb(true,"✓ Half-beats and whole beats adding to exactly 4 — you're building with the full toolbox now!"); }

@@ -689,8 +689,11 @@ const Games=(()=>{
       const clr=document.createElement("button"); clr.className="ghost"; clr.textContent="↺ Clear";
       clr.onclick=()=>{ if(running){ cur=[];sum=0;draw(); } }; row.appendChild(clr);
       function draw(){
+        const items=[...doneItems,...cur.map(bt=>bt.item)];
+        if(found.length>=rounds&&items.length&&items[items.length-1].bar==="single") items[items.length-1]={bar:"final"};
+        for(let m=found.length;m<rounds;m++) items.push({bar: m===rounds-1? "final":"single"});
         Staff.render($(".gstaff"),{clef:"treble",time:target+"/4",
-          notes:[...doneItems,...cur.map(bt=>bt.item)],width:rounds>1?470:340});
+          notes:items,width:rounds>1?470:340});
         $(".gs").textContent=`Beats so far: ${sum} of ${target}`+(rounds>1?` · Built: ${found.length} of ${rounds}`:"");
       }
       function add(bt){
@@ -713,8 +716,7 @@ const Games=(()=>{
           }
           found.push(key);
           let t=0; cur.forEach(bt=>{ if(!bt.isRest) MFAudio.tone(71, Math.max(.2,bt.beats*0.45), t); t+=bt.beats*0.5; });
-          doneItems.push(...cur.map(bt=>bt.item));
-          doneItems.push({bar: found.length>=rounds? "final" : "single"});
+          doneItems.push(...cur.map(bt=>bt.item), {bar:"single"});
           cur=[]; sum=0; draw();
           if(found.length>=rounds){
             running=false;
