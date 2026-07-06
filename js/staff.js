@@ -406,7 +406,7 @@ const Staff=(()=>{
         let v=vol, dd=full;
         if(n.artic==="staccato") dd=Math.max(.12,full*0.4);
         if(n.artic==="accent"||n.artic==="sfz") v=Math.min(.95,vol*1.7);
-        MFAudio.tone(MFAudio.midi(n.p), tempo? Math.max(0.18,dd*0.92):Math.min(dd,1.8), t, v);
+        MFAudio.tone(MFAudio.midi(n.sound||n.p), tempo? Math.max(0.18,dd*0.92):Math.min(dd,1.8), t, v);
       }
       if(api) setTimeout(()=>api.highlight(i), t*1000);
       t+= tempo? dur : dur+0.08;

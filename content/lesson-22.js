@@ -67,7 +67,7 @@ LESSON_CONTENT[22]={
         hint:"Start on the marked key, slide ONE key left.",
         mount:(container,fb)=>MF_L22_flatKey(container,fb) } },
     { say:"THE BIG RULE: an accidental affects <b>every note of the same letter on the same line or space</b> for the <b>rest of the measure</b> — then the <b>bar line cancels it</b>. \u{1F447} <b>Look at this measure — which notes does the printed ♭ affect?</b>",
-      show:{ type:"staff", spec:{clef:"treble",time:"4/4",notes:[{p:"Bb4",d:"q",label:"B♭ (flag raised!)"},{p:"G4",d:"q",label:"G"},{p:"B4",d:"q",label:"still B♭!"},{p:"B4",d:"q",label:"still B♭!"},{bar:"single"},{p:"B4",d:"w",label:"B again (new measure)"},{bar:"final"}],width:470} },
+      show:{ type:"staff", spec:{clef:"treble",time:"4/4",notes:[{p:"Bb4",d:"q",label:"B♭ (flat sign!)"},{p:"G4",d:"q",label:"G"},{p:"B4",d:"q",sound:"Bb4",label:"still B♭!"},{p:"B4",d:"q",sound:"Bb4",label:"still B♭!"},{bar:"single"},{p:"B4",d:"w",label:"B natural (new measure)"},{bar:"final"}],width:470} },
       try:{ type:"mc",
         choices:["Every B until the bar line","Only the note it's printed on","Every B in the whole piece"], answer:0,
         success:"✓ The flat stays “switched on” for all matching notes until the bar line resets everything.",
@@ -79,7 +79,7 @@ LESSON_CONTENT[22]={
         mount:(container,fb)=>{
           const rounds=[
             {q:"A B♭ appears on beat 1. Beat 3 has another B in the SAME measure. Is it flat?",a:true,why:"Same measure, same letter — the flat still applies."},
-            {q:"A B♭ appears in measure 1. Measure 2 has a B (no sign). Is it flat?",a:false,why:"The bar line canceled it — plain B again."},
+            {q:"A B♭ appears in measure 1. Measure 2 has a B (no sign). Is it flat?",a:false,why:"The bar line canceled it — B natural again."},
             {q:"An E♭ appears on beat 2. Beat 4 has another E, same measure. Is it flat?",a:true,why:"Still inside the measure — still E♭."},
             {q:"An E♭ appears in one measure. THREE measures later there's an E. Is it flat?",a:false,why:"Long gone — each bar line resets accidentals."}];
           let i=0;
@@ -121,7 +121,7 @@ LESSON_CONTENT[22]={
     { caption:"B and B♭ side by side — the flat sign sits before the notehead and pulls the pitch a half step down.",
       staff:{clef:"treble",tempo:80,notes:[{p:"B4",d:"h",label:"B"},{p:"Bb4",d:"h",label:"B♭"},{p:"E4",d:"h",label:"E"},{p:"Eb4",d:"h",label:"E♭"}],width:440} },
     { caption:"The one-measure rule in action: one printed ♭, TWO flat B's — then the bar line resets everything.",
-      staff:{clef:"treble",tempo:92,time:"4/4",notes:[{p:"Bb4",d:"h",label:"B♭"},{p:"B4",d:"h",label:"(still B♭)"},{bar:"single"},{p:"B4",d:"w",label:"B natural again"},{bar:"final"}],width:440} }
+      staff:{clef:"treble",tempo:92,time:"4/4",notes:[{p:"Bb4",d:"h",label:"B♭"},{p:"B4",d:"h",sound:"Bb4",label:"(still B♭)"},{bar:"single"},{p:"B4",d:"w",label:"B natural again"},{bar:"final"}],width:440} }
   ],
   games:[
     { type:"symbol-hunt", title:"Game 1 · Spot the Flat",

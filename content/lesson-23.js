@@ -67,7 +67,7 @@ LESSON_CONTENT[23]={
         hint:"Marked key, then ONE key right.",
         mount:(container,fb)=>MF_L23_sharpKey(container,fb) } },
     { say:"The <b>one-measure rule</b> works exactly the same for sharps: one printed ♯ rules every matching note until the <b>bar line</b>. \u{1F447} <b>How does the THIRD F (no sign) sound in this measure?</b>",
-      show:{ type:"staff", spec:{clef:"treble",time:"4/4",notes:[{p:"F#4",d:"q",label:"F♯"},{p:"A4",d:"q",label:"A"},{p:"F4",d:"q",label:"still F♯!"},{p:"A4",d:"q",label:"A"},{bar:"single"},{p:"F4",d:"w",label:"plain F again"},{bar:"final"}],width:470} },
+      show:{ type:"staff", spec:{clef:"treble",time:"4/4",notes:[{p:"F#4",d:"q",label:"F♯"},{p:"A4",d:"q",label:"A"},{p:"F4",d:"q",sound:"F#4",label:"still F♯!"},{p:"A4",d:"q",label:"A"},{bar:"single"},{p:"F4",d:"w",label:"F natural again"},{bar:"final"}],width:470} },
       try:{ type:"mc",
         choices:["F♯ — the sharp still applies in this measure","Plain F — sharps affect only one note","F♭"], answer:0,
         success:"✓ Same letter, same measure — the sharp is still switched on until the bar line.",
@@ -119,7 +119,7 @@ LESSON_CONTENT[23]={
     { caption:"C and C♯, F and F♯ — each sharp climbs one half step to the black key on the right.",
       staff:{clef:"treble",tempo:80,notes:[{p:"C4",d:"h",label:"C"},{p:"C#4",d:"h",label:"C♯"},{p:"F4",d:"h",label:"F"},{p:"F#4",d:"h",label:"F♯"}],width:440} },
     { caption:"One printed ♯, two sharp F's — then the bar line resets. The one-measure rule never changes.",
-      staff:{clef:"treble",tempo:96,time:"4/4",notes:[{p:"F#4",d:"h",label:"F♯"},{p:"F4",d:"h",label:"(still F♯)"},{bar:"single"},{p:"F4",d:"w",label:"plain F"},{bar:"final"}],width:440} }
+      staff:{clef:"treble",tempo:96,time:"4/4",notes:[{p:"F#4",d:"h",label:"F♯"},{p:"F4",d:"h",sound:"F#4",label:"(still F♯)"},{bar:"single"},{p:"F4",d:"w",label:"F natural"},{bar:"final"}],width:440} }
   ],
   games:[
     { type:"symbol-hunt", title:"Game 1 · Spot the Sharp",

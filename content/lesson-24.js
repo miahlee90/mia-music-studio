@@ -9,7 +9,7 @@ function MF_L24_whichAcc(container,fb){
   const rounds=[
     {q:"You want F to become the black key to its RIGHT.",a:0},
     {q:"You want B to become the black key to its LEFT.",a:1},
-    {q:"An F♯ appeared earlier this measure — you want plain F again NOW.",a:2},
+    {q:"An F♯ appeared earlier this measure — you want F natural again NOW.",a:2},
     {q:"You want E one half step LOWER.",a:1},
     {q:"A B♭ appeared this measure — you want the original B back.",a:2},
     {q:"You want C one half step HIGHER.",a:0}];
@@ -36,7 +36,7 @@ LESSON_CONTENT[24]={
     interact:{ type:"custom",
       mount:(container,fb)=>{
         container.innerHTML=`<div style="text-align:center"><button class="play hk-play">▶ Sharp, sharp… cancel!</button></div>
-          <div class="choices hk-ch" style="display:none"><button>The last note returned to plain F</button><button>The last note went even higher</button><button>Nothing changed</button></div>`;
+          <div class="choices hk-ch" style="display:none"><button>The last note returned to F natural</button><button>The last note went even higher</button><button>Nothing changed</button></div>`;
         const ch=container.querySelector(".hk-ch");
         container.querySelector(".hk-play").onclick=()=>{
           MFAudio.tone(66,.6,0); MFAudio.tone(66,.6,.7); MFAudio.tone(65,.9,1.4);
@@ -150,7 +150,7 @@ LESSON_CONTENT[24]={
       explain:"Back to the original — the undo button." },
     { type:"truefalse", q:"After a natural, the note sounds at its original (white-key) pitch.", answer:true,
       explain:"Restored exactly." },
-    { type:"mc", q:"F♯ appeared on beat 1. On beat 3 you see F♮. Beat 4 has another F. It sounds…", choices:["plain F — the natural still applies","F♯ again","F♭"], answer:0,
+    { type:"mc", q:"F♯ appeared on beat 1. On beat 3 you see F♮. Beat 4 has another F. It sounds…", choices:["F natural — the natural still applies","F♯ again","F♭"], answer:0,
       explain:"The natural ALSO lasts until the bar line." },
     { type:"truefalse", q:"Naturals can cancel flats as well as sharps.", answer:true,
       explain:"Both directions — one undo button." },
@@ -167,9 +167,9 @@ LESSON_CONTENT[24]={
   quiz:[
     { type:"mc", q:"What does a natural (♮) do?", choices:["Raises the pitch","Lowers the pitch","Cancels a previous sharp or flat","Repeats the note"], answer:2,
       explain:"The undo button — original pitch restored.", hint:"\u{1F504}" },
-    { type:"mc", q:"F♯ → F♮ means the pitch…", choices:["went back DOWN to plain F","went even higher","stayed sharp"], answer:0,
+    { type:"mc", q:"F♯ → F♮ means the pitch…", choices:["went back DOWN to F natural","went even higher","stayed sharp"], answer:0,
       explain:"Cancel the sharp, restore the original.", hint:"Undo!" },
-    { type:"mc", q:"B♭ → B♮ means the pitch…", choices:["went back UP to plain B","went even lower","stayed flat"], answer:0,
+    { type:"mc", q:"B♭ → B♮ means the pitch…", choices:["went back UP to B natural","went even lower","stayed flat"], answer:0,
       explain:"Canceling a flat brings the note back UP.", hint:"Undo works both ways." },
     { type:"truefalse", q:"A natural can cancel both sharps and flats.", answer:true,
       explain:"One button, both directions.", hint:"Universal undo." },
