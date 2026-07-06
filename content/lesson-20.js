@@ -63,7 +63,7 @@ LESSON_CONTENT[20]={
   ],
   steps:[
     { say:"<b>Articulation</b> tells us <b>HOW</b> to play a note — not how long, not how loud, but the <b>style</b> of the sound. Meet the five: \u{1F3C0} <b>Staccato (•)</b> short & detached · \u{1F4E2} <b>Accent (&gt;)</b> extra emphasis · \u{1F4A5} <b>Sforzando (sfz)</b> sudden strong accent · \u{23F3} <b>Tenuto (—)</b> hold full value · \u{1F426} <b>Fermata</b> hold LONGER than written. \u{1F447} <b>What does articulation describe?</b>",
-      show:{ type:"staff", spec:{clef:"treble",notes:[{p:"E4",d:"q",artic:"staccato",articPos:"above",label:"staccato"},{p:"E4",d:"q",artic:"accent",articPos:"above",label:"accent"},{p:"E4",d:"q",artic:"tenuto",articPos:"above",label:"tenuto"},{p:"E4",d:"q",artic:"fermata",label:"fermata"}],width:440} },
+      show:{ type:"staff", spec:{clef:"treble",notes:[{p:"E5",d:"q",artic:"staccato",articPos:"above",label:"staccato"},{p:"E5",d:"q",artic:"accent",articPos:"above",label:"accent"},{p:"E5",d:"q",artic:"tenuto",articPos:"above",label:"tenuto"},{p:"E5",d:"q",artic:"fermata",label:"fermata"}],width:440} },
       try:{ type:"mc",
         choices:["HOW a note is performed — its style","How loud a note is","How many beats a note gets"], answer:0,
         success:"✓ Style! Volume is dynamics, length is note values — articulation is the personality.",
@@ -87,7 +87,7 @@ LESSON_CONTENT[20]={
           });
         } } },
     { say:"\u{1F4E2} <b>Accent (&gt;)</b> gives one note extra <b>punch</b>; \u{1F4A5} <b>sforzando (sfz)</b> is that punch turned up to a <b>sudden surprise</b>; \u{23F3} <b>tenuto (—)</b> says “hold me for my FULL value, with a little weight.” \u{1F447} <b>Which note gets the punch?</b>",
-      show:{ type:"staff", spec:{clef:"treble",tempo:92,notes:[{p:"C4",d:"q",label:"1"},{p:"E4",d:"q",artic:"accent",label:"2"},{p:"G4",d:"q",label:"3"},{p:"C5",d:"q",label:"4"}],width:400} },
+      show:{ type:"staff", spec:{clef:"treble",tempo:92,notes:[{p:"C4",d:"q",label:"1"},{p:"E5",d:"q",artic:"accent",label:"2"},{p:"G4",d:"q",label:"3"},{p:"C5",d:"q",label:"4"}],width:400} },
       try:{ type:"mc",
         choices:["Note 2 — it wears the > accent","Note 1","Note 4"], answer:0,
         success:"✓ The > mark gives note 2 the extra emphasis — press play in the example section to hear it POP.",
@@ -123,7 +123,7 @@ LESSON_CONTENT[20]={
   ],
   examples:[
     { caption:"Staccato dots vs tenuto dashes: bouncing balls, then full-weight steps. Same pitches, opposite personalities.",
-      staff:{clef:"treble",tempo:96,time:"4/4",notes:[{p:"E4",d:"q",artic:"staccato"},{p:"E4",d:"q",artic:"staccato"},{p:"E4",d:"q",artic:"tenuto"},{p:"E4",d:"q",artic:"tenuto"},{bar:"final"}],width:420} },
+      staff:{clef:"treble",tempo:96,time:"4/4",notes:[{p:"E5",d:"q",artic:"staccato"},{p:"E5",d:"q",artic:"staccato"},{p:"E5",d:"q",artic:"tenuto"},{p:"E5",d:"q",artic:"tenuto"},{bar:"final"}],width:420} },
     { caption:"An accent punches beat 1, and the fermata stretches the final note — listen for both!",
       staff:{clef:"treble",tempo:96,time:"4/4",notes:[{p:"G4",d:"q",artic:"accent"},{p:"E4",d:"q"},{p:"F4",d:"q"},{p:"G4",d:"q",artic:"fermata"},{bar:"final"}],width:420} }
   ],
@@ -143,10 +143,10 @@ LESSON_CONTENT[20]={
       intro:"Click the articulation Mia names — dots, dashes, wedges and bird's eyes on real notes!",
       miaIntro:"Detective work — find each tiny mark! \u{1F50D}",
       spec:{rounds:6, pool:[
-        {label:"Staccato", spec:{clef:"treble",notes:[{p:"E4",d:"q",artic:"staccato",articPos:"above"}]}},
-        {label:"Accent", spec:{clef:"treble",notes:[{p:"E4",d:"q",artic:"accent",articPos:"above"}]}},
-        {label:"Tenuto", spec:{clef:"treble",notes:[{p:"E4",d:"q",artic:"tenuto",articPos:"above"}]}},
-        {label:"Fermata", spec:{clef:"treble",notes:[{p:"E4",d:"q",artic:"fermata"}]}},
+        {label:"Staccato", spec:{clef:"treble",notes:[{p:"E5",d:"q",artic:"staccato",articPos:"above"}]}},
+        {label:"Accent", spec:{clef:"treble",notes:[{p:"E5",d:"q",artic:"accent",articPos:"above"}]}},
+        {label:"Tenuto", spec:{clef:"treble",notes:[{p:"E5",d:"q",artic:"tenuto",articPos:"above"}]}},
+        {label:"Fermata", spec:{clef:"treble",notes:[{p:"E5",d:"q",artic:"fermata"}]}},
         {label:"Sforzando (sfz)", html:"<i>sfz</i>"}]},
       result:(score)=>score>=5?"No mark too small for your eyes!":null },
     { type:"rhythm-tap", title:"Game 3 · Crisp Staccato Tap",
@@ -213,7 +213,7 @@ LESSON_CONTENT[20]={
     { type:"mc", q:"The articulation that means short and detached is ____.", choices:["staccato","tenuto","sforzando"], answer:0,
       explain:"Staccato!", hint:"The dot." },
     { type:"mc", q:"Which note carries the ACCENT?",
-      staff:{clef:"treble",notes:[{p:"C4",d:"q",artic:"staccato",label:"1"},{p:"E4",d:"q",artic:"accent",label:"2"},{p:"G4",d:"q",artic:"tenuto",label:"3"},{p:"C5",d:"q",artic:"fermata",label:"4"}],width:420},
+      staff:{clef:"treble",notes:[{p:"C4",d:"q",artic:"staccato",label:"1"},{p:"E5",d:"q",artic:"accent",label:"2"},{p:"G4",d:"q",artic:"tenuto",label:"3"},{p:"C5",d:"q",artic:"fermata",label:"4"}],width:420},
       choices:["1","2","3","4"], answer:1,
       explain:"The > wedge on note 2. (1 = staccato dot, 3 = tenuto dash, 4 = fermata.)",
       hint:"Find the sideways V." },
@@ -227,11 +227,11 @@ LESSON_CONTENT[20]={
   ],
   vocabulary:[
     {def:"Symbols that tell HOW to play or sing each note", term:"Articulation"},
-    {def:"Short and detached — the bouncing dot", term:"Staccato (•)", staff:{clef:"none",notes:[{p:"E4",d:"q",artic:"staccato",articPos:"above"}],width:140}},
-    {def:"Extra emphasis on a note", term:"Accent (>)", staff:{clef:"none",notes:[{p:"E4",d:"q",artic:"accent",articPos:"above"}],width:140}},
+    {def:"Short and detached — the bouncing dot", term:"Staccato (•)", staff:{clef:"none",notes:[{p:"E5",d:"q",artic:"staccato",articPos:"above"}],width:140}},
+    {def:"Extra emphasis on a note", term:"Accent (>)", staff:{clef:"none",notes:[{p:"E5",d:"q",artic:"accent",articPos:"above"}],width:140}},
     {def:"A sudden, strong accent", term:"Sforzando (sfz)"},
-    {def:"Hold the note for its FULL written value", term:"Tenuto (—)", staff:{clef:"none",notes:[{p:"E4",d:"q",artic:"tenuto",articPos:"above"}],width:140}},
-    {def:"Hold LONGER than written — the bird's eye", term:"Fermata", staff:{clef:"none",notes:[{p:"E4",d:"q",artic:"fermata"}],width:140}}
+    {def:"Hold the note for its FULL written value", term:"Tenuto (—)", staff:{clef:"none",notes:[{p:"E5",d:"q",artic:"tenuto",articPos:"above"}],width:140}},
+    {def:"Hold LONGER than written — the bird's eye", term:"Fermata", staff:{clef:"none",notes:[{p:"E5",d:"q",artic:"fermata"}],width:140}}
   ],
   mistakes:[],
   summary:[
