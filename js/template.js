@@ -63,10 +63,11 @@
     <div id="quizBody"></div>
     ${C.rewards?`<div id="rewardBox" class="score-box" style="display:none"></div>`:""}</section>`;
 
+  S.secVocab=`<section class="card" id="secVocab"><h2>Vocabulary <span style="font-weight:400;font-size:13px;color:var(--muted)">(tap a card to flip it)</span></h2>
+    <div class="vox">${C.vocabulary.map((v,vi)=>`<div class="vox-card" role="button" tabindex="0"><div class="vox-front"><b>${v.term}</b>${v.staff?`<div class="vox-sym" data-vi="${vi}"></div>`:""}</div><div class="vox-back">${v.def}</div></div>`).join("")}</div></section>`;
+
   S.secReview=`<section class="card step" id="secReview"><h2>Remember!</h2>
     <ul class="summary">${C.summary.map(s=>`<li>${s}</li>`).join("")}</ul>
-    <h2 style="margin-top:18px">Vocabulary <span style="font-weight:400;font-size:13px;color:var(--muted)">(tap to flip)</span></h2>
-    <div class="vox">${C.vocabulary.map((v,vi)=>`<div class="vox-card" role="button" tabindex="0"><div class="vox-front"><b>${v.term}</b>${v.staff?`<div class="vox-sym" data-vi="${vi}"></div>`:""}</div><div class="vox-back">${v.def}</div></div>`).join("")}</div>
     ${(C.mistakes&&C.mistakes.length)?`<h2 style="margin-top:18px">Oops! Watch out for…</h2>
     <ul class="mistakes">${C.mistakes.map(m=>`<li class="oops">${m}</li>`).join("")}</ul>`:""}</section>`;
 
@@ -75,10 +76,12 @@
 
   S.secNext=`<div class="step" id="secNext">${Nav.nextInvite(n)}</div>`;
 
-  const defaultOrder=[...(C.hook?["secHook"]:[]),"secObjectives","secLearn","secExample",
+  const defaultOrder=[...(C.hook?["secHook"]:[]),"secObjectives","secVocab","secLearn","secExample",
     ...(C.keyboard?["secKb"]:[]),...(C.practice?["secPractice"]:[]),
     ...GAMES.map((_,i)=>"secGame"+i),"secQuiz","secReview",...(C.tips?["secTips"]:[]),"secNext"];
-  const ORDER=(C.sectionOrder||defaultOrder).filter(id=>S[id]);
+  let baseOrder=C.sectionOrder?[...C.sectionOrder]:defaultOrder;
+  if(C.sectionOrder&&!baseOrder.includes("secVocab")){ const vi2=baseOrder.indexOf("secObjectives"); baseOrder.splice(vi2>=0?vi2+1:1,0,"secVocab"); }
+  const ORDER=baseOrder.filter(id=>S[id]);
 
   let html=Nav.header(n)+`<div class="lesson-progress"><div class="lesson-progress-fill" id="lpFill"></div></div><main>`;
   if(warns.length) html+=`<div class="mf-warn"><b>Content check:</b> ${warns.join(" · ")}</div>`;
@@ -86,7 +89,7 @@
   app.innerHTML=html;
 
   /* ---------- progress bar ---------- */
-  const revealable=ORDER.filter(id=>id!=="secHook"&&id!=="secObjectives");
+  const revealable=ORDER.filter(id=>id!=="secHook"&&id!=="secObjectives"&&id!=="secVocab");
   let revealed=1;
   function updateProgress(extra){
     const total=revealable.length+1;
@@ -168,7 +171,7 @@
   });
 
   /* progressive reveal */
-  const reveal=[...C.steps.map((_,i)=>"step"+i).slice(1),...ORDER.filter(id=>!["secHook","secObjectives","secLearn"].includes(id))];
+  const reveal=[...C.steps.map((_,i)=>"step"+i).slice(1),...ORDER.filter(id=>!["secHook","secObjectives","secVocab","secLearn"].includes(id))];
   let oi=0;
   const INTROS={};
   GAMES.forEach((g,gi)=>{ if(g.miaIntro) INTROS["secGame"+gi]=g.miaIntro; });
