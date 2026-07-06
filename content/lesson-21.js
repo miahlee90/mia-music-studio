@@ -69,7 +69,7 @@ LESSON_CONTENT[21]={
         hint:"Watch the highlight — it plays A, B, C, hits D.C. al Fine, restarts, and STOPS at Fine.",
         mount:(container,fb)=>{
           const spec={clef:"treble",time:"4/4",tempo:112,
-            notes:[{p:"C4",d:"h",label:"A"},{p:"E4",d:"h",label:"B (Fine)"},{mark:"fine"},{p:"G4",d:"h",label:"C"},{p:"E4",d:"h",label:"D"},{mark:"dc-fine"},{bar:"final"}],width:470};
+            notes:[{p:"C4",d:"h",label:"A"},{p:"E4",d:"h",label:"B (Fine)"},{mark:"fine"},{bar:"single"},{p:"G4",d:"h",label:"C"},{p:"E4",d:"h",label:"D"},{mark:"dc-fine"},{bar:"final"}],width:470};
           container.innerHTML=`<div class="gps-staff"></div>
             <div style="text-align:center"><button class="play gps-play">▶ Follow the map</button></div>
             <div class="big-q gps-q" style="text-align:center;min-height:32px"></div>`;
@@ -77,7 +77,7 @@ LESSON_CONTENT[21]={
           const q=container.querySelector(".gps-q");
           container.querySelector(".gps-play").onclick=()=>{
             const spb=60/112;
-            const trip=[[0,0,"A…"],[1,2,"B…"],[3,4,"C…"],[4,6,"D — “D.C. al Fine!”"],[0,8,"back to A…"],[1,10,"B — Fine: STOP."]];
+            const trip=[[0,0,"A…"],[1,2,"B…"],[4,4,"C…"],[5,6,"D — “D.C. al Fine!”"],[0,8,"back to A…"],[1,10,"B — Fine: STOP."]];
             trip.forEach(([idx,beat,txt])=>{
               const n=spec.notes[idx];
               setTimeout(()=>{ api.highlight(idx); q.textContent=txt; }, beat*spb*1000);
@@ -88,9 +88,9 @@ LESSON_CONTENT[21]={
           };
         } } },
     { say:"Learn the two special SYMBOLS: the <b>Segno</b> (an S with a slash and dots — your bookmark \u{1F516}) and the <b>Coda</b> (a circle with a cross — the finish flag \u{1F3C1}). \u{1F447} <b>Which is which?</b>",
-      show:{ type:"staff", spec:{clef:"treble",notes:[{mark:"segno",label:"1"},{p:"B4",d:"q",label:"2"},{mark:"coda",label:"3"}],width:360} },
+      show:{ type:"staff", spec:{clef:"treble",notes:[{mark:"segno",label:"1"},{mark:"coda",label:"2"}],width:340} },
       try:{ type:"mc",
-        choices:["1 = Segno, 3 = Coda","1 = Coda, 3 = Segno","They're the same symbol"], answer:0,
+        choices:["1 = Segno, 2 = Coda","1 = Coda, 2 = Segno","They're the same symbol"], answer:0,
         success:"✓ The slashed S is the Segno bookmark; the crossed circle is the Coda target.",
         fail:"S-shape = Segno (S for Sign!); circle+cross = Coda.",
         hint:"S is for Segno." } },
@@ -123,9 +123,9 @@ LESSON_CONTENT[21]={
   ],
   examples:[
     { caption:"A map with every landmark: Segno bookmark, Fine stop sign, To-Coda jump point, and the Coda flag.",
-      staff:{clef:"treble",notes:[{mark:"segno"},{p:"C4",d:"q",label:"music…"},{mark:"fine"},{p:"E4",d:"q",label:"more…"},{mark:"tocoda"},{p:"G4",d:"q",label:"…"},{mark:"coda",label:"special ending"},{bar:"final"}],width:470} },
-    { caption:"D.C. al Fine written where you'd meet it — at the END of the music, sending you back to the top.",
-      staff:{clef:"treble",tempo:112,time:"4/4",notes:[{p:"C4",d:"h",label:"A"},{p:"E4",d:"h",label:"B (Fine)"},{mark:"fine"},{p:"G4",d:"h",label:"C"},{mark:"dc-fine"},{bar:"final"}],width:460} }
+      staff:{clef:"treble",time:"4/4",notes:[{mark:"segno"},{p:"C4",d:"h",label:"music…"},{p:"E4",d:"h"},{mark:"fine"},{bar:"single"},{p:"G4",d:"h",label:"more…"},{p:"E4",d:"h"},{mark:"tocoda"},{bar:"double"},{mark:"coda"},{p:"C5",d:"w",label:"special ending"},{bar:"final"}],width:470} },
+    { caption:"D.C. al Fine written where you'd meet it — at the END of the music. Press play: through the line, back to the top, stop at Fine.",
+      staff:{clef:"treble",tempo:112,time:"4/4",notes:[{p:"C4",d:"h",label:"A"},{p:"E4",d:"h",label:"B (Fine)"},{mark:"fine"},{bar:"single"},{p:"G4",d:"h",label:"C"},{p:"E4",d:"h",label:"D"},{mark:"dc-fine"},{bar:"final"}],playOrder:[0,1,4,5, 0,1],width:470} }
   ],
   games:[
     { type:"term-race", title:"Game 1 · GPS Term Dash",

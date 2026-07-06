@@ -174,8 +174,12 @@ const Staff=(()=>{
       const lbl=kind==="tocoda"? `<text class="mark-txt" x="${x}" y="${y-16}" text-anchor="middle">To</text>`:"";
       return lbl+`<circle class="acc" fill="none" cx="${x}" cy="${y-4}" r="6"/><line class="acc" x1="${x}" y1="${y-14}" x2="${x}" y2="${y+6}"/><line class="acc" x1="${x-9}" y1="${y-4}" x2="${x+9}" y2="${y-4}"/>`;
     }
-    if(kind==="segno")
-      return `<text class="mark-txt seg" x="${x}" y="${y+2}" text-anchor="middle" font-size="21">S</text><line class="acc" x1="${x-6}" y1="${y+5}" x2="${x+6}" y2="${y-17}"/><circle class="artic" cx="${x-9}" cy="${y-10}" r="1.8"/><circle class="artic" cx="${x+9}" cy="${y-2}" r="1.8"/>`;
+    if(kind==="segno"){
+      const ys=y-6;
+      return `<path class="acc" fill="none" d="M ${x+5} ${ys-8} C ${x-2} ${ys-11}, ${x-7} ${ys-7}, ${x-4} ${ys-3} C ${x-2} ${ys-1}, ${x+2} ${ys+1}, ${x+4} ${ys+3} C ${x+7} ${ys+7}, ${x+2} ${ys+11}, ${x-5} ${ys+8}"/>`+
+        `<line class="acc" x1="${x-8}" y1="${ys+11}" x2="${x+8}" y2="${ys-11}"/>`+
+        `<circle class="artic" cx="${x-9}" cy="${ys+4}" r="2"/><circle class="artic" cx="${x+9}" cy="${ys-4}" r="2"/>`;
+    }
     const TXT={fine:"Fine","dc":"D.C.","ds":"D.S.","dc-fine":"D.C. al Fine","ds-fine":"D.S. al Fine","dc-coda":"D.C. al Coda","ds-coda":"D.S. al Coda"};
     return `<text class="mark-txt" x="${x}" y="${y}" text-anchor="middle">${TXT[kind]||kind}</text>`;
   }
