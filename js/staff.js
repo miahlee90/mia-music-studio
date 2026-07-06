@@ -156,9 +156,10 @@ const Staff=(()=>{
     return L(x-2.5,y-10,x-2.5,y+5)+L(x+2.5,y-5,x+2.5,y+10)
       +L(x-2.5,y-3.5,x+2.5,y-5.5)+L(x-2.5,y+5.5,x+2.5,y+3.5);
   }
-  function articSVG(x,y,y0,artic,W){
+  function articSVG(x,y,y0,artic,pos){
     const up = y > y0+2*GAP; /* stem up → mark below the notehead */
-    const yy = up? y+14 : y-14;
+    let yy = up? y+14 : y-14;
+    if(pos==="above"&&artic!=="fermata"&&artic!=="sfz") yy=y0-10; /* clear space above the staff */
     if(artic==="staccato") return `<circle class="artic" cx="${x}" cy="${yy}" r="2.6"/>`;
     if(artic==="tenuto") return `<line class="acc" x1="${x-7}" y1="${yy}" x2="${x+7}" y2="${yy}"/>`;
     if(artic==="accent") return `<path class="acc" fill="none" d="M ${x-8} ${yy-4} L ${x+8} ${yy} L ${x-8} ${yy+4}"/>`;
@@ -234,7 +235,7 @@ const Staff=(()=>{
       let top=y-8, bottom=y+8;
       if(s.stem){ if(y > y0+2*GAP) top=Math.min(top,y-40); else bottom=Math.max(bottom,y+40); }
       if(n.artic==="fermata") top=Math.min(top,y0-24);
-      if(n.artic) { top=Math.min(top,y-18); bottom=Math.max(bottom,y+18); }
+      if(n.artic) { top=Math.min(top, n.articPos==="above"? y0-22 : y-18); bottom=Math.max(bottom,y+18); }
       minEl=Math.min(minEl,top-6); maxEl=Math.max(maxEl,bottom+6);
       maxNoteBottom=Math.max(maxNoteBottom,bottom);
       placed.push({n,i,clef,y0,x,y,kind:"note"});
@@ -278,7 +279,7 @@ const Staff=(()=>{
         const onLine=idx%2===0;
         let inner=noteSVG(x,y,normD(n.d),(spec.clickNotes?" clickable":""),y0,beamSet.has(i),isDotted(n),onLine);
         if(accCh) inner=accSVG(x-18,y,accCh==="n"?"nat":accCh)+inner;
-        if(n.artic) inner+=articSVG(x,y,y0,n.artic,W);
+        if(n.artic) inner+=articSVG(x,y,y0,n.artic,n.articPos);
         parts.push(`<g class="notegroup" data-i="${i}" data-p="${n.p}">${inner}</g>`);
         if(n.dyn) parts.push(`<text class="dyn" x="${x}" y="${dynY}" text-anchor="middle">${n.dyn}</text>`);
       }
