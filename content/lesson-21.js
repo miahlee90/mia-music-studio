@@ -88,9 +88,10 @@ LESSON_CONTENT[21]={
         hint:"Tap all four blocks.",
         mount:(container,fb)=>{
           const CODA_SVG='<svg viewBox="0 0 40 40" width="36" height="36" style="display:block;margin:0 auto"><circle cx="20" cy="20" r="9" fill="none" stroke="currentColor" stroke-width="2.2"/><line x1="20" y1="6" x2="20" y2="34" stroke="currentColor" stroke-width="2.2"/><line x1="6" y1="20" x2="34" y2="20" stroke="currentColor" stroke-width="2.2"/></svg>';
+          const SEGNO_SVG='<svg viewBox="0 0 40 40" width="24" height="24" style="vertical-align:-6px;margin-left:4px"><path d="M 27 9 C 17 4, 9 10, 14 17 C 17 21, 23 19, 26 23 C 31 30, 23 36, 13 31" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><line x1="9" y1="35" x2="31" y2="5" stroke="currentColor" stroke-width="2.2"/><circle cx="6" cy="25" r="2.6" fill="currentColor"/><circle cx="34" cy="15" r="2.6" fill="currentColor"/></svg>';
           const DATA=[
             ["D.C.","Da Capo","Repeat from the beginning"],
-            ["D.S.","Dal Segno","Repeat from the segno sign"],
+            ["D.S.","Dal Segno","Repeat from the segno sign"+SEGNO_SVG],
             ["Fine","Fine","The end"],
             [CODA_SVG,"Coda","Skip to the coda, which is an added ending"]];
           const opened=new Set();
