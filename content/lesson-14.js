@@ -36,7 +36,7 @@ LESSON_CONTENT[14]={
         container.innerHTML=`<div class="hk-staff"></div>
           <div class="choices hk-ch"><button>1</button><button>2</button></div>`;
         Staff.render(container.querySelector(".hk-staff"),{clef:"treble",
-          notes:[{bar:"final",label:"1"},{p:"G4",d:"h"},{bar:"repeat-end",label:"2"}],width:380});
+          notes:[{bar:"final",label:"1",x:232},{bar:"repeat-end",label:"2"}],width:420});
         const ch=container.querySelector(".hk-ch"); ch.classList.add("chips");
         [...ch.children].forEach((b,i)=>b.onclick=()=>{
           if(i===1) fb(true,"✓ Number 2 — the two DOTS make it a repeat sign: “go back and play the section again!” (Number 1, with no dots, just means the end.)");
