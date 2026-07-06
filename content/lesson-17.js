@@ -1,7 +1,7 @@
 /* Lesson 17 — The Dotted Quarter Note (AEMT Book 1, Unit 4)
    Built from drafts/UNIT 4 – Lesson 17.md.
    QA note honored: "dot adds HALF, not a full beat" + the famous pattern
-   "dotted quarter + eighth = 2 beats, counted 1-and 2, LONG–short" everywhere.
+   "dotted quarter + eighth = 2 beats, counted 1-and-2 / and (eighth on the off-beat), LONG–short" everywhere. Counting corrected per instructor sketch (Session 16t).
    NOTE: edit by FULL-FILE REWRITE only. */
 
 /* long-or-short drill (unique L17 prefix) */
@@ -64,16 +64,16 @@ LESSON_CONTENT[17]={
         success:"✓ 1 + ½ = 1½. The dot is proportional — half of whatever the note is worth.",
         fail:"Half of 1 beat is ½ — add it to the original 1.",
         hint:"Same rule as the dotted half: add HALF." } },
-    { say:"The dotted quarter almost always travels with a friend: a single <b>eighth note</b>. Together: <b>1½ + ½ = 2 beats</b>, counted <b>“1-and 2”</b> — the dotted quarter holds through “1-and,” the eighth lands on “2.” \u{1F447} <b>Hear it:</b>",
+    { say:"The dotted quarter almost always travels with a friend: a single <b>eighth note</b>. Together: <b>1½ + ½ = 2 beats</b>, counted <b>“1-and-2 and”</b> — the dotted quarter holds through <b>“1-and-2,”</b> and the eighth lands on the <b>“and” of beat 2</b>. \u{1F447} <b>Hear it:</b>",
       try:{ type:"custom",
         hint:"Long note first, quick note snapping after.",
         mount:(container,fb)=>{
           let played=false;
           container.innerHTML=`<div class="dq-staff"></div>
-            <div style="text-align:center"><button class="play dq-play">▶ Play “1-and 2”</button></div>
-            <div class="choices dq-ch" style="display:none"><button>The dotted quarter holds “1-and”, the eighth plays on “2”</button><button>Both notes are equally long</button></div>`;
+            <div style="text-align:center"><button class="play dq-play">▶ Play “1-and-2, and”</button></div>
+            <div class="choices dq-ch" style="display:none"><button>The dotted quarter holds “1-and-2”, the eighth plays on the “and”</button><button>Both notes are equally long</button></div>`;
           Staff.render(container.querySelector(".dq-staff"),{clef:"treble",time:"4/4",
-            notes:[{p:"G4",d:"q",dot:true,label:"1-and"},{p:"E4",d:"8",label:"2"},{p:"G4",d:"q",dot:true,label:"3-and"},{p:"E4",d:"8",label:"4"},{bar:"final"}],width:420});
+            notes:[{p:"G4",d:"q",dot:true,label:"1-and-2"},{p:"E4",d:"8",label:"and"},{p:"G4",d:"q",dot:true,label:"3-and-4"},{p:"E4",d:"8",label:"and"},{bar:"final"}],width:420});
           const ch=container.querySelector(".dq-ch");
           container.querySelector(".dq-play").onclick=()=>{
             const spb=60/88;
@@ -84,7 +84,7 @@ LESSON_CONTENT[17]={
           };
           [...ch.children].forEach((b,i)=>b.onclick=()=>{
             if(!played){ fb(false,"Play it first!"); return; }
-            if(i===0) fb(true,"✓ Exactly — LONG through “1-and”, then the quick eighth on “2”. That pair fills 2 beats perfectly.");
+            if(i===0) fb(true,"✓ Exactly — LONG through “1-and-2”, then the quick eighth on the “and”. That pair fills 2 beats perfectly.");
             else fb(false,"Listen again — one note clearly outlasts the other. 1½ vs ½!");
           });
         } } },
@@ -144,12 +144,12 @@ LESSON_CONTENT[17]={
           }
           draw();
         } } },
-    { say:"Read it in real music — count <b>“1-and 2, 3-and 4”</b> and let the long notes SING. \u{1F447}",
+    { say:"Read it in real music — count <b>“1-and-2 and, 3, 4”</b> and let the long notes SING. \u{1F447}",
       try:{ type:"custom",
-        hint:"Hold through “1-and”, snap the eighth on “2”.",
+        hint:"Hold through “1-and-2”, snap the eighth on the “and”.",
         mount:(container,fb)=>{
           const spec={clef:"treble",time:"4/4",tempo:88,
-            notes:[{p:"C4",d:"q",dot:true,label:"1-and"},{p:"D4",d:"8",label:"2"},{p:"E4",d:"q",label:"3"},{p:"G4",d:"q",label:"4"},{bar:"single"},{p:"E4",d:"q",dot:true,label:"1-and"},{p:"D4",d:"8",label:"2"},{p:"C4",d:"h",label:"3-4"},{bar:"final"}],width:470};
+            notes:[{p:"C4",d:"q",dot:true,label:"1-and-2"},{p:"D4",d:"8",label:"and"},{p:"E4",d:"q",label:"3"},{p:"G4",d:"q",label:"4"},{bar:"single"},{p:"E4",d:"q",dot:true,label:"1-and-2"},{p:"D4",d:"8",label:"and"},{p:"C4",d:"h",label:"3-4"},{bar:"final"}],width:470};
           container.innerHTML=`<div class="rq-staff"></div><div style="text-align:center"><button class="play rq-play">▶ Play & count along</button></div>`;
           const api=Staff.render(container.querySelector(".rq-staff"),spec);
           container.querySelector(".rq-play").onclick=()=>{
@@ -159,8 +159,8 @@ LESSON_CONTENT[17]={
         } } }
   ],
   examples:[
-    { caption:"The signature cell: dotted quarter + eighth = 2 beats. Count “1-and 2” — hold, then snap.",
-      staff:{clef:"treble",tempo:88,time:"4/4",notes:[{p:"G4",d:"q",dot:true,label:"1-and"},{p:"E4",d:"8",label:"2"},{p:"G4",d:"q",dot:true,label:"3-and"},{p:"E4",d:"8",label:"4"},{bar:"final"}],width:440} },
+    { caption:"The signature cell: dotted quarter + eighth = 2 beats. Count “1-and-2, and” — hold through the beat, snap on the off-beat.",
+      staff:{clef:"treble",tempo:88,time:"4/4",notes:[{p:"G4",d:"q",dot:true,label:"1-and-2"},{p:"E4",d:"8",label:"and"},{p:"G4",d:"q",dot:true,label:"3-and-4"},{p:"E4",d:"8",label:"and"},{bar:"final"}],width:440} },
     { caption:"Three ways to slice 2 beats — the dotted pair, running eighths, and steady quarters. Same total, different characters.",
       staff:{clef:"treble",tempo:88,time:"2/4",notes:[{p:"C4",d:"q",dot:true},{p:"D4",d:"8"},{bar:"single"},{p:"E4",d:"8"},{p:"F4",d:"8"},{p:"G4",d:"q"},{bar:"single"},{p:"E4",d:"q"},{p:"C4",d:"q"},{bar:"final"}],beams:[[3,4]],width:460} }
   ],
@@ -171,7 +171,7 @@ LESSON_CONTENT[17]={
       spec:{rounds:10, ask:"beats", values:["q","q.","8","h"]},
       result:(score)=>score>=9?"1½ never fooled you once!":null },
     { type:"rhythm-tap", title:"Game 2 · LONG–short Tap",
-      intro:"Tap the famous pattern: hold the LONG, snap the short. “1-and 2” in your head!",
+      intro:"Tap the famous pattern: hold the LONG, snap the short. “1-and-2, and” in your head!",
       miaIntro:"The rhythm every musician knows — make it yours! \u{1F44F}",
       spec:{tempo:88, rounds:3, patterns:[["q.","8","q","q"],["q.","8","h"],["q","q.","8","q"],["q.","8","q.","8"]]},
       result:(score)=>score>=9?"LONG–short, right in the pocket!":null },
@@ -208,8 +208,8 @@ LESSON_CONTENT[17]={
       explain:"The famous pair — together exactly 2 beats." },
     { type:"mc", q:"Dotted quarter + eighth =", choices:["2 beats","1½ beats","3 beats"], answer:0,
       explain:"1½ + ½ = 2." },
-    { type:"mc", q:"The pair is counted…", choices:["“1-and 2”","“1, 2, 3”","“1-e-and-a”"], answer:0,
-      explain:"Hold through “1-and”, eighth lands on “2”." },
+    { type:"mc", q:"The pair is counted…", choices:["“1-and-2, and”","“1, 2, 3”","“1-e-and-a”"], answer:0,
+      explain:"Hold through “1-and-2”; the eighth lands on the “and” of beat 2." },
     { type:"truefalse", q:"A dotted quarter equals three eighth notes.", answer:true,
       explain:"½ × 3 = 1½." },
     { type:"truefalse", q:"The dot always adds exactly one beat.", answer:false,
@@ -218,7 +218,7 @@ LESSON_CONTENT[17]={
       explain:"1½ beats vs ½ — the dot wins." },
     { type:"truefalse", q:"Dotted half = 3 beats, dotted quarter = 1½ beats — the same rule at two sizes.", answer:true,
       explain:"Add half the original: 2+1=3, 1+½=1½." },
-    { type:"mc", q:"Which pattern would you count “1-and 2”?", choices:["dotted quarter + eighth","two half notes","four quarters"], answer:0,
+    { type:"mc", q:"Which pattern would you count “1-and-2, and”?", choices:["dotted quarter + eighth","two half notes","four quarters"], answer:0,
       explain:"The signature LONG–short cell." }
   ],
   miaQuizIntro:"Quiz time! 1 + ½ = 1½ — hold the long, snap the short, and go!",
@@ -263,13 +263,13 @@ LESSON_CONTENT[17]={
   vocabulary:[
     {def:"A quarter note plus a dot — 1 + ½ = 1½ beats", term:"Dotted Quarter Note", staff:{clef:"none",notes:[{p:"B4",d:"q",dot:true}],width:140}},
     {def:"Adds HALF of the note's original value", term:"Dot", staff:{clef:"none",notes:[{p:"B4",d:"q",dot:true}],width:140}},
-    {def:"The famous LONG–short cell: 1½ + ½ = 2 beats, counted “1-and 2”", term:"Dotted Quarter + Eighth", staff:{clef:"none",notes:[{p:"B4",d:"q",dot:true},{p:"B4",d:"8"}],width:150}}
+    {def:"The famous LONG–short cell: 1½ + ½ = 2 beats, counted “1-and-2, and”", term:"Dotted Quarter + Eighth", staff:{clef:"none",notes:[{p:"B4",d:"q",dot:true},{p:"B4",d:"8"}],width:150}}
   ],
   mistakes:[],
   summary:[
     "✔ Dotted Quarter Note = <b>1 + ½ = 1½ beats</b>.",
     "✔ Its favorite partner: a single <b>eighth note</b> — together <b>2 beats</b>.",
-    "✔ Count the pair <b>“1-and 2”</b>: hold the long, snap the short.",
+    "✔ Count the pair <b>“1-and-2, and”</b>: hold through the beat, snap on the off-beat.",
     "✔ Dotted quarter = <b>three eighth notes</b> in length.",
     "✔ The dot rule is universal: <b>always add half the original value</b>."
   ],
@@ -289,8 +289,8 @@ LESSON_CONTENT[17]={
       explain:"The dotted-quarter-plus-eighth cell is one of music's most-used rhythms: a 1½-beat hold followed by a quick ½-beat note.",
       play:()=>{const s=.68;[[0,1.5],[1.5,.5],[2,1.5],[3.5,.5]].forEach(([b,l])=>MFAudio.tone(67,l*s*.9,b*s));} },
     learn:{ label:"the dotted quarter",
-      explain:"Dot = +half: 1 + ½ = 1½ beats. Pair it with an eighth for exactly 2 beats, counted “1-and 2” — LONG then short.",
-      hint:"Hold through “1-and”; the eighth lands on “2.”",
+      explain:"Dot = +half: 1 + ½ = 1½ beats. Pair it with an eighth for exactly 2 beats, counted “1-and-2, and” — LONG then short.",
+      hint:"Hold through “1-and-2”; the eighth lands on the “and.”",
       play:()=>{const s=.68;MFAudio.tone(67,1.5*s*.9,0);MFAudio.tone(64,.5*s*.9,1.5*s);} },
     example:{ label:"the examples",
       explain:"Feel the hold-then-snap in example 1, then compare all three 2-beat recipes in example 2." },
