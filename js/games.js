@@ -674,7 +674,7 @@ const Games=(()=>{
         <div class="streak gs"></div></div>`;
       const $=s=>el.querySelector(s);
       const row=$(".gvals");
-      let cur=[],sum=0,found=[],mistakes=0,running=false;
+      let cur=[],sum=0,found=[],doneItems=[],mistakes=0,running=false;
       /* DD-27: option buttons are NOTATION CARDS — symbol drawn on a mini staff + name */
       BTNS.forEach(bt=>{ const b=document.createElement("button");
         if(bt.item){
@@ -690,7 +690,7 @@ const Games=(()=>{
       clr.onclick=()=>{ if(running){ cur=[];sum=0;draw(); } }; row.appendChild(clr);
       function draw(){
         Staff.render($(".gstaff"),{clef:"treble",time:target+"/4",
-          notes:[...cur.map(bt=>bt.item),{bar:"final"}],width:340});
+          notes:[...doneItems,...cur.map(bt=>bt.item)],width:rounds>1?470:340});
         $(".gs").textContent=`Beats so far: ${sum} of ${target}`+(rounds>1?` · Built: ${found.length} of ${rounds}`:"");
       }
       function add(bt){
@@ -713,6 +713,9 @@ const Games=(()=>{
           }
           found.push(key);
           let t=0; cur.forEach(bt=>{ if(!bt.isRest) MFAudio.tone(71, Math.max(.2,bt.beats*0.45), t); t+=bt.beats*0.5; });
+          doneItems.push(...cur.map(bt=>bt.item));
+          doneItems.push({bar: found.length>=rounds? "final" : "single"});
+          cur=[]; sum=0; draw();
           if(found.length>=rounds){
             running=false;
             const stars=mistakes===0?3:mistakes<=2?2:1;
@@ -721,13 +724,12 @@ const Games=(()=>{
             $(".gstart").style.display="inline-block"; $(".gstart").textContent="▶ Play again";
             if(onFinish)onFinish(stars,3);
           } else {
-            $(".gq").textContent=`✓ Exactly ${target} beats! ${unique?"Now find a DIFFERENT combination…":"Next measure…"}`;
-            cur=[];sum=0; setTimeout(draw,1200);
+            $(".gq").textContent=`✓ Exactly ${target} beats! ${unique?"Now find a DIFFERENT combination — it joins the staff as the next measure…":"Next measure…"}`;
           }
         }
       }
       $(".gstart").onclick=function(){
-        this.style.display="none"; cur=[];sum=0;found=[];mistakes=0;running=true;
+        this.style.display="none"; cur=[];sum=0;found=[];doneItems=[];mistakes=0;running=true;
         row.style.display="block";
         $(".gq").textContent=`Fill the measure with EXACTLY ${target} beats${unique&&rounds>1?" — then find another way":""}${needRest?" (each measure needs at least one rest)":""}!`;
         draw();

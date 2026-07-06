@@ -119,7 +119,7 @@ LESSON_CONTENT[15]={
           const BT=[{t:"8",label:"Eighth Note",beats:.5,item:{p:"B4",d:"8"}},
                     {t:"q",label:"Quarter Note",beats:1,item:{p:"B4",d:"q"}},
                     {t:"h",label:"Half Note",beats:2,item:{p:"B4",d:"h"}}];
-          let cur=[],sum=0,found=[];
+          let cur=[],sum=0,found=[],doneItems=[];
           container.innerHTML=`<div class="be-staff"></div><div class="big-q be-q" style="text-align:center"></div>
             <div class="choices be-ch"></div>`;
           const st=container.querySelector(".be-staff"), q=container.querySelector(".be-q"), ch=container.querySelector(".be-ch");
@@ -134,7 +134,7 @@ LESSON_CONTENT[15]={
           const clr=document.createElement("button"); clr.className="ghost"; clr.textContent="↺ Clear";
           clr.onclick=()=>{ cur=[];sum=0;draw(); }; ch.appendChild(clr);
           function draw(){
-            Staff.render(st,{clef:"treble",time:"4/4",notes:[...cur.map(bt=>bt.item),{bar:"final"}],width:380});
+            Staff.render(st,{clef:"treble",time:"4/4",notes:[...doneItems,...cur.map(bt=>bt.item)],width:470});
             q.textContent=`Beats: ${sum} of 4 · Measures built: ${found.length} of 2`;
           }
           function add(bt){
@@ -145,9 +145,12 @@ LESSON_CONTENT[15]={
               if(found.includes(key)){ fb(false,"Same recipe — clear and invent a different one!"); cur=[];sum=0; setTimeout(draw,900); return; }
               found.push(key);
               let t=0; cur.forEach(bt=>{ MFAudio.tone(71,Math.max(.2,bt.beats*.45),t); t+=bt.beats*.5; });
+              doneItems.push(...cur.map(bt=>bt.item));
+              doneItems.push({bar: found.length>=2? "final":"single"});
+              cur=[]; sum=0; draw();
               if(found.length>=2){ ch.style.display="none"; q.textContent="Two measures with eighths!";
                 fb(true,"✓ Half-beats and whole beats adding to exactly 4 — you're building with the full toolbox now!"); }
-              else { fb(true,"✓ Exactly 4! One more, different mix…"); cur=[];sum=0; setTimeout(draw,1100); }
+              else fb(true,"✓ Exactly 4 — it stays as measure 1. One more, different mix…");
             }
           }
           draw();

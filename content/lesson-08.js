@@ -134,7 +134,7 @@ LESSON_CONTENT[8]={
         hint:"Whole = 4, Half = 2, Quarter = 1 — total must be exactly 4. And a clef has no beats!",
         mount:(container,fb)=>{
           const B={w:4,h:2,q:1};
-          let cur=[],sum=0,found=[];
+          let cur=[],sum=0,found=[],doneItems=[];
           container.innerHTML=`<div class="bf-staff"></div>
             <div class="big-q bf-q" style="text-align:center"></div>
             <div class="bf-cards" style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:8px"></div>
@@ -142,7 +142,7 @@ LESSON_CONTENT[8]={
           const st=container.querySelector(".bf-staff"), q=container.querySelector(".bf-q"),
                 grid=container.querySelector(".bf-cards");
           function draw(){
-            Staff.render(st,{clef:"treble",time:"4/4",notes:[...cur.map(d=>({p:"B4",d})),{bar:"final"}],width:320});
+            Staff.render(st,{clef:"treble",time:"4/4",notes:[...doneItems,...cur.map(d=>({p:"B4",d}))],width:440});
             q.textContent=`Beats: ${sum} of 4 · Measures built: ${found.length} of 2`;
           }
           function add(v){
@@ -153,10 +153,13 @@ LESSON_CONTENT[8]={
               if(found.includes(key)){ fb(false,"Same combination as before — clear and build a DIFFERENT one!"); cur=[];sum=0; setTimeout(draw,900); return; }
               found.push(key);
               let t=0; cur.forEach(d=>{ MFAudio.tone(71,B[d]*.45,t); t+=B[d]*.5; });
+              doneItems.push(...cur.map(d=>({p:"B4",d})));
+              doneItems.push({bar: found.length>=2? "final":"single"});
+              cur=[]; sum=0; draw();
               if(found.length>=2){ grid.style.display="none"; container.querySelector(".bf-clear").style.display="none";
                 q.textContent="Two measures composed!";
                 fb(true,"✓ Two different complete measures — the top number is satisfied, and so is Mia!"); }
-              else { fb(true,"✓ Exactly 4 beats! Now build a DIFFERENT combination…"); cur=[];sum=0; setTimeout(draw,1200); }
+              else fb(true,"✓ Exactly 4 beats — it stays on the staff as measure 1. Now build a DIFFERENT combination…");
             }
           }
           const CARDS=[["A","Whole","w",[{p:"B4",d:"w"}]],

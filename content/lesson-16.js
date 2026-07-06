@@ -103,7 +103,7 @@ LESSON_CONTENT[16]={
                     {t:"q",label:"Quarter Note",beats:1,item:{p:"B4",d:"q"}},
                     {t:"Q",label:"Quarter Rest",beats:1,item:{rest:"q"},isRest:true},
                     {t:"h",label:"Half Note",beats:2,item:{p:"B4",d:"h"}}];
-          let cur=[],sum=0,found=[];
+          let cur=[],sum=0,found=[],doneItems=[];
           container.innerHTML=`<div class="br-staff"></div><div class="big-q br-q" style="text-align:center"></div>
             <div class="choices br-ch"></div>`;
           const st=container.querySelector(".br-staff"), q=container.querySelector(".br-q"), ch=container.querySelector(".br-ch");
@@ -118,7 +118,7 @@ LESSON_CONTENT[16]={
           const clr=document.createElement("button"); clr.className="ghost"; clr.textContent="↺ Clear";
           clr.onclick=()=>{ cur=[];sum=0;draw(); }; ch.appendChild(clr);
           function draw(){
-            Staff.render(st,{clef:"treble",time:"4/4",notes:[...cur.map(bt=>bt.item),{bar:"final"}],width:400});
+            Staff.render(st,{clef:"treble",time:"4/4",notes:[...doneItems,...cur.map(bt=>bt.item)],width:470});
             q.textContent=`Beats: ${sum} of 4 · Measures built: ${found.length} of 2`;
           }
           function add(bt){
@@ -132,9 +132,12 @@ LESSON_CONTENT[16]={
               if(found.includes(key)){ fb(false,"Same recipe — clear and mix a new one!"); cur=[];sum=0; setTimeout(draw,900); return; }
               found.push(key);
               let t=0; cur.forEach(bt=>{ if(!bt.isRest) MFAudio.tone(71,Math.max(.2,bt.beats*.45),t); t+=bt.beats*.5; });
+              doneItems.push(...cur.map(bt=>bt.item));
+              doneItems.push({bar: found.length>=2? "final":"single"});
+              cur=[]; sum=0; draw();
               if(found.length>=2){ ch.style.display="none"; q.textContent="Two measures with quick silences!";
                 fb(true,"✓ Half-beat silences placed like a pro — sound and silence in perfect balance!"); }
-              else { fb(true,"✓ Exactly 4, eighth rest included! One more, different mix…"); cur=[];sum=0; setTimeout(draw,1200); }
+              else fb(true,"✓ Exactly 4, eighth rest included — it stays as measure 1. One more, different mix…");
             }
           }
           draw();

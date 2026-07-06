@@ -112,7 +112,7 @@ LESSON_CONTENT[12]={
           const BT=[{t:"D",label:"Dotted Half Note",beats:3,item:{p:"B4",d:"h",dot:true}},
                     {t:"h",label:"Half Note",beats:2,item:{p:"B4",d:"h"}},
                     {t:"q",label:"Quarter Note",beats:1,item:{p:"B4",d:"q"}}];
-          let cur=[],sum=0,found=[];
+          let cur=[],sum=0,found=[],doneItems=[];
           container.innerHTML=`<div class="b3-staff"></div><div class="big-q b3-q" style="text-align:center"></div>
             <div class="choices b3-ch"></div>`;
           const st=container.querySelector(".b3-staff"), q=container.querySelector(".b3-q"), ch=container.querySelector(".b3-ch");
@@ -127,7 +127,7 @@ LESSON_CONTENT[12]={
           const clr=document.createElement("button"); clr.className="ghost"; clr.textContent="↺ Clear";
           clr.onclick=()=>{ cur=[];sum=0;draw(); }; ch.appendChild(clr);
           function draw(){
-            Staff.render(st,{clef:"treble",time:"3/4",notes:[...cur.map(bt=>bt.item),{bar:"final"}],width:320});
+            Staff.render(st,{clef:"treble",time:"3/4",notes:[...doneItems,...cur.map(bt=>bt.item)],width:470});
             q.textContent=`Beats: ${sum} of 3 · Ways found: ${found.length} of 3`;
           }
           function add(bt){
@@ -138,9 +138,12 @@ LESSON_CONTENT[12]={
               if(found.includes(key)){ fb(false,"Already found that way — clear and discover another!"); cur=[];sum=0; setTimeout(draw,900); return; }
               found.push(key);
               let t=0; cur.forEach(bt=>{ MFAudio.tone(71,bt.beats*.45,t); t+=bt.beats*.5; });
+              doneItems.push(...cur.map(bt=>bt.item));
+              doneItems.push({bar: found.length>=3? "final":"single"});
+              cur=[]; sum=0; draw();
               if(found.length>=3){ ch.style.display="none"; q.textContent="All three ways found!";
                 fb(true,"✓ Dotted half · half+quarter · three quarters — every way to fill 3/4. The dotted half does it with ONE sound!"); }
-              else { fb(true,`✓ Exactly 3 beats! ${3-found.length} more way${3-found.length>1?"s":""} to find…`); cur=[];sum=0; setTimeout(draw,1100); }
+              else fb(true,`✓ Exactly 3 beats — it stays on the staff. ${3-found.length} more way${3-found.length>1?"s":""} to find…`);
             }
           }
           draw();

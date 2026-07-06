@@ -106,7 +106,7 @@ LESSON_CONTENT[17]={
           const BT=[{t:"j",label:"Dotted Quarter Note",beats:1.5,item:{p:"B4",d:"q",dot:true}},
                     {t:"8",label:"Eighth Note",beats:.5,item:{p:"B4",d:"8"}},
                     {t:"q",label:"Quarter Note",beats:1,item:{p:"B4",d:"q"}}];
-          let cur=[],sum=0,found=[];
+          let cur=[],sum=0,found=[],doneItems=[];
           container.innerHTML=`<div class="b2-staff"></div><div class="big-q b2-q" style="text-align:center"></div>
             <div class="choices b2-ch"></div>`;
           const st=container.querySelector(".b2-staff"), q=container.querySelector(".b2-q"), ch=container.querySelector(".b2-ch");
@@ -121,7 +121,7 @@ LESSON_CONTENT[17]={
           const clr=document.createElement("button"); clr.className="ghost"; clr.textContent="↺ Clear";
           clr.onclick=()=>{ cur=[];sum=0;draw(); }; ch.appendChild(clr);
           function draw(){
-            Staff.render(st,{clef:"treble",time:"2/4",notes:[...cur.map(bt=>bt.item),{bar:"final"}],width:320});
+            Staff.render(st,{clef:"treble",time:"2/4",notes:[...doneItems,...cur.map(bt=>bt.item)],width:470});
             q.textContent=`Beats: ${sum} of 2 · Ways found: ${found.length} of 3`;
           }
           function add(bt){
@@ -132,9 +132,12 @@ LESSON_CONTENT[17]={
               if(found.includes(key)){ fb(false,"Found that one already — a NEW combination, please!"); cur=[];sum=0; setTimeout(draw,900); return; }
               found.push(key);
               let t=0; cur.forEach(bt=>{ MFAudio.tone(71,Math.max(.2,bt.beats*.45),t); t+=bt.beats*.5; });
+              doneItems.push(...cur.map(bt=>bt.item));
+              doneItems.push({bar: found.length>=3? "final":"single"});
+              cur=[]; sum=0; draw();
               if(found.length>=3){ ch.style.display="none"; q.textContent="All three ways!";
                 fb(true,"✓ Dotted-quarter+eighth, quarter+two-eighths, two quarters — three recipes for 2 beats, and the first is the famous one!"); }
-              else { fb(true,`✓ Exactly 2! ${3-found.length} more way${3-found.length>1?"s":""}…`); cur=[];sum=0; setTimeout(draw,1100); }
+              else fb(true,`✓ Exactly 2 — it stays on the staff. ${3-found.length} more way${3-found.length>1?"s":""}…`);
             }
           }
           draw();
