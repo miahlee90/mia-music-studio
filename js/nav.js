@@ -6,7 +6,7 @@ const Nav=(()=>{
   function header(n){
     const L=lesson(n),U=unitOf(n);
     return `<header class="lesson-header"><div class="inner">
-      <div class="crumb"><a href="../lessons.html">Book ${L.book}</a> › Unit ${U.unit}: ${U.name} › Lesson ${L.n}</div>
+      <div class="crumb"><a href="../lessons.html">All Lessons</a> › Unit ${U.unit}: ${U.name} › Lesson ${L.n}</div>
       <h1>Lesson ${L.n} — ${L.title}</h1>
       <span class="time-badge">⏱ about ${L.time} minutes</span>
     </div></header>`;
