@@ -346,7 +346,11 @@ const Staff=(()=>{
     const arcs=(spec.arcs||[]).filter(a=>(a.type||"tie")==="tie");
     const tiedTo=new Set(arcs.map(a=>a.to));
     let vol=.5;
-    (spec.notes||[]).forEach((n,i)=>{
+    /* spec.playOrder: explicit item order — lets repeats and 1st/2nd endings actually PLAY */
+    const seq=spec.playOrder
+      ? spec.playOrder.map(ix=>[spec.notes[ix],ix])
+      : (spec.notes||[]).map((n,i)=>[n,i]);
+    seq.forEach(([n,i])=>{
       if(n.bar!==undefined||n.mark!==undefined) return;
       if(n.dyn&&VOLS[n.dyn]!==undefined) vol=VOLS[n.dyn];
       const base=tempo? beatsOf(n)*spb : DURSEC[normD(n.d||n.rest)]*(isDotted(n)?1.5:1);
