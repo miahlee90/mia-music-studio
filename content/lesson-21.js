@@ -30,6 +30,36 @@ function MF_L21_whereGo(container,fb){
   ask();
 }
 
+/* four-roadmap-case player (instructor's design: measures lettered A-D, no notes) */
+function MF_L21_case(container,fb,cfg){
+  let played=false;
+  container.innerHTML=`<div class="c21-staff"></div>
+    <div style="text-align:center"><button class="play c21-play">▶ Follow the route</button></div>
+    <div class="big-q c21-q" style="text-align:center;min-height:30px"></div>
+    <div class="choices c21-ch" style="display:none"></div>`;
+  const api=Staff.render(container.querySelector(".c21-staff"),{clef:"treble",time:"4/4",notes:cfg.items,width:470});
+  const ch=container.querySelector(".c21-ch"), q=container.querySelector(".c21-q");
+  [cfg.answer,...cfg.wrong].sort(()=>Math.random()-.5).forEach(o2=>{
+    const b=document.createElement("button"); b.textContent=o2;
+    b.onclick=()=>{
+      if(!played){ fb(false,"Play the route first and follow the highlight!"); return; }
+      if(o2===cfg.answer) fb(true,"✓ "+cfg.explain);
+      else fb(false,"Follow the signs once more — "+cfg.explain);
+    };
+    ch.appendChild(b);
+  });
+  container.querySelector(".c21-play").onclick=()=>{
+    const LP={A:60,B:64,C:67,D:72}, step=1.0;
+    cfg.route.forEach((idx,k)=>{
+      const L=cfg.items[idx].letter;
+      MFAudio.tone(LP[L]||60,step*.9,k*step,.45);
+      setTimeout(()=>{ api.highlight(idx); q.textContent="Playing: "+cfg.route.slice(0,k+1).map(x=>cfg.items[x].letter).join("–"); },k*step*1000);
+    });
+    setTimeout(()=>{ api.highlight(null); played=true; ch.style.display="";
+      q.textContent="Now — what was the performance order?"; },cfg.route.length*step*1000+250);
+  };
+}
+
 LESSON_CONTENT[21]={
   welcome:"Grab the map — music has GPS! \u{1F5FA}\u{FE0F}",
   hook:{
@@ -64,29 +94,6 @@ LESSON_CONTENT[21]={
         success:"✓ Da Capo — literally “from the head.” Back to bar one!",
         fail:"Capo means “head” — the HEAD of the piece is its…?",
         hint:"\u{1F3E0} home = the start." } },
-    { say:"Signs combine into instructions: <b>D.C. al Fine</b> = back to the beginning, play until <b>Fine</b>, stop. <b>D.S. al Fine</b> = back to the <b>Segno</b>, stop at Fine. <b>D.C. al Coda</b> = back to the start, play to “To Coda,” then JUMP to the Coda. \u{1F447} <b>Follow this map with your ears:</b>",
-      try:{ type:"custom",
-        hint:"Watch the highlight — it plays A, B, C, hits D.C. al Fine, restarts, and STOPS at Fine.",
-        mount:(container,fb)=>{
-          const spec={clef:"treble",time:"4/4",tempo:112,
-            notes:[{p:"C4",d:"h",label:"A"},{p:"E4",d:"h",label:"B (Fine)"},{mark:"fine"},{bar:"single"},{p:"G4",d:"h",label:"C"},{p:"E4",d:"h",label:"D"},{mark:"dc-fine"},{bar:"final"}],width:470};
-          container.innerHTML=`<div class="gps-staff"></div>
-            <div style="text-align:center"><button class="play gps-play">▶ Follow the map</button></div>
-            <div class="big-q gps-q" style="text-align:center;min-height:32px"></div>`;
-          const api=Staff.render(container.querySelector(".gps-staff"),spec);
-          const q=container.querySelector(".gps-q");
-          container.querySelector(".gps-play").onclick=()=>{
-            const spb=60/112;
-            const trip=[[0,0,"A…"],[1,2,"B…"],[4,4,"C…"],[5,6,"D — “D.C. al Fine!”"],[0,8,"back to A…"],[1,10,"B — Fine: STOP."]];
-            trip.forEach(([idx,beat,txt])=>{
-              const n=spec.notes[idx];
-              setTimeout(()=>{ api.highlight(idx); q.textContent=txt; }, beat*spb*1000);
-              MFAudio.tone(MFAudio.midi(n.p), 2*spb*.9, beat*spb);
-            });
-            setTimeout(()=>{ api.highlight(null); q.textContent="";
-              fb(true,"✓ You followed D.C. al Fine: play through, restart from the top, and stop exactly at Fine."); }, 12.5*spb*1000);
-          };
-        } } },
     { say:"Learn the two special SYMBOLS: the <b>Segno</b> (an S with a slash and dots — your bookmark \u{1F516}) and the <b>Coda</b> (a circle with a cross — the finish flag \u{1F3C1}). \u{1F447} <b>Which is which?</b>",
       show:{ type:"staff", spec:{clef:"treble",notes:[{mark:"segno",label:"1"},{mark:"coda",label:"2"}],width:340} },
       try:{ type:"mc",
@@ -94,38 +101,50 @@ LESSON_CONTENT[21]={
         success:"✓ The slashed S is the Segno bookmark; the crossed circle is the Coda target.",
         fail:"S-shape = Segno (S for Sign!); circle+cross = Coda.",
         hint:"S is for Segno." } },
+    { say:"<b>Case 1 — D.C. al Fine.</b> Steps: \u2460 play through to the end \u2461 return to the BEGINNING \u2462 play to <b>Fine</b> and stop. Each measure below is lettered instead of notated. \u{1F447} <b>Follow the route, then name the order:</b>",
+      try:{ type:"custom",
+        hint:"Through the whole line first — D.C. only acts when you reach it.",
+        mount:(container,fb)=>MF_L21_case(container,fb,{
+          items:[{letter:"A"},{bar:"single"},{letter:"B"},{mark:"fine"},{bar:"double"},{letter:"C"},{bar:"single"},{letter:"D"},{mark:"dc-fine"},{bar:"final"}],
+          route:[0,2,5,7,0,2], answer:"A–B–C–D–A–B",
+          wrong:["A–B–C–D","A–B–A–B–C–D"],
+          explain:"Play A-B-C-D, Da Capo to the beginning, and stop at Fine: A–B–C–D–A–B."}) } },
+    { say:"<b>Case 2 — D.S. al Fine.</b> Same idea, but return to the <b>Segno</b> \u{1D10B} instead of the beginning, then stop at Fine. \u{1F447} <b>Follow the route, then name the order:</b>",
+      try:{ type:"custom",
+        hint:"The Segno sits over B — that's where the return lands.",
+        mount:(container,fb)=>MF_L21_case(container,fb,{
+          items:[{letter:"A"},{bar:"single"},{mark:"segno"},{letter:"B"},{mark:"fine"},{bar:"double"},{letter:"C"},{bar:"single"},{letter:"D"},{mark:"ds-fine"},{bar:"final"}],
+          route:[0,3,6,8,3], answer:"A–B–C–D–B",
+          wrong:["A–B–C–D–A–B","A–B–C–D"],
+          explain:"Play A-B-C-D, return to the SEGNO (B), and stop at Fine: A–B–C–D–B."}) } },
+    { say:"<b>Case 3 — D.C. al Coda.</b> Return to the beginning, play until <b>To Coda</b> \u2295, then JUMP to the <b>Coda</b>. \u{1F447} <b>Follow the route, then name the order:</b>",
+      try:{ type:"custom",
+        hint:"On the second trip, A ends at the To-Coda sign — leap!",
+        mount:(container,fb)=>MF_L21_case(container,fb,{
+          items:[{letter:"A"},{mark:"tocoda"},{bar:"single"},{letter:"B"},{bar:"single"},{letter:"C"},{mark:"dc-coda"},{bar:"double"},{mark:"coda"},{letter:"D"},{bar:"final"}],
+          route:[0,3,5,0,9], answer:"A–B–C–A–D",
+          wrong:["A–B–C–D","A–B–C–A–B–D"],
+          explain:"Play A-B-C, Da Capo to A, jump at To-Coda to the Coda (D): A–B–C–A–D."}) } },
+    { say:"<b>Case 4 — D.S. al Coda.</b> Return to the <b>Segno</b>, play until <b>To Coda</b>, then jump to the <b>Coda</b>. \u{1F447} <b>Follow the route, then name the order:</b>",
+      try:{ type:"custom",
+        hint:"Return lands on B; B ends at the To-Coda sign.",
+        mount:(container,fb)=>MF_L21_case(container,fb,{
+          items:[{letter:"A"},{bar:"single"},{mark:"segno"},{letter:"B"},{mark:"tocoda"},{bar:"single"},{letter:"C"},{mark:"ds-coda"},{bar:"double"},{mark:"coda"},{letter:"D"},{bar:"final"}],
+          route:[0,3,6,3,10], answer:"A–B–C–B–D",
+          wrong:["A–B–C–A–D","A–B–C–D–B"],
+          explain:"Play A-B-C, Dal Segno to B, jump at To-Coda to the Coda (D): A–B–C–B–D."}) } },
     { say:"Where do you go? Test every sign. \u{1F447}",
       try:{ type:"custom",
-        hint:"Beginning · Sign · Stop · Special ending.",
-        mount:(container,fb)=>MF_L21_whereGo(container,fb) } },
-    { say:"Final mission: assemble a <b>D.C. al Fine</b> performance from start to stop. \u{1F447} <b>Tap the steps in order:</b>",
-      try:{ type:"custom",
-        hint:"Play everything once, see the instruction, restart, stop at Fine.",
-        mount:(container,fb)=>{
-          const seq=["Play section A","Play section B (Fine is here)","Play to the end — see “D.C. al Fine”","Return to the beginning","Play section A again","STOP at Fine"];
-          let next=0;
-          container.innerHTML=`<div class="big-q ro-q" style="text-align:center">Build the D.C. al Fine journey:</div>
-            <div class="ro-done" style="text-align:center;font-weight:700;min-height:30px;color:var(--primary)"></div>
-            <div class="choices ro-ch"></div>`;
-          const done=container.querySelector(".ro-done"), ch=container.querySelector(".ro-ch");
-          [...seq].sort(()=>Math.random()-.5).forEach(s=>{
-            const b=document.createElement("button"); b.textContent=s;
-            b.onclick=()=>{
-              if(s===seq[next]){ next++; b.disabled=true; MFAudio.tone(58+next*3,.25);
-                done.textContent=seq.slice(0,next).map((x,i)=>i+1).join("·");
-                if(next===seq.length){ ch.style.display="none"; done.textContent=seq.join(" → ");
-                  fb(true,"✓ A complete D.C. al Fine journey — play, return, and stop at the sign that says “the end.”"); } }
-              else { MFAudio.tone(40,.25); fb(false,`What happens ${next===0?"first":"after “"+seq[next-1]+"”"}?`); }
-            };
-            ch.appendChild(b);
-          });
-        } } }
+        hint:"Beginning \u00b7 Sign \u00b7 Stop \u00b7 Special ending.",
+        mount:(container,fb)=>MF_L21_whereGo(container,fb) } }
   ],
   examples:[
-    { caption:"A map with every landmark: Segno bookmark, Fine stop sign, To-Coda jump point, and the Coda flag.",
-      staff:{clef:"treble",time:"4/4",notes:[{mark:"segno"},{p:"C4",d:"h",label:"music…"},{p:"E4",d:"h"},{mark:"fine"},{bar:"single"},{p:"G4",d:"h",label:"more…"},{p:"E4",d:"h"},{mark:"tocoda"},{bar:"double"},{mark:"coda"},{p:"C5",d:"w",label:"special ending"},{bar:"final"}],width:470} },
-    { caption:"D.C. al Fine written where you'd meet it — at the END of the music. Press play: through the line, back to the top, stop at Fine.",
-      staff:{clef:"treble",tempo:112,time:"4/4",notes:[{p:"C4",d:"h",label:"A"},{p:"E4",d:"h",label:"B (Fine)"},{mark:"fine"},{bar:"single"},{p:"G4",d:"h",label:"C"},{p:"E4",d:"h",label:"D"},{mark:"dc-fine"},{bar:"final"}],playOrder:[0,1,4,5, 0,1],width:470} }
+    { caption:"D.C. al Fine — press play: A-B-C-D, back to the top, stop at Fine (A–B–C–D–A–B).",
+      staff:{clef:"treble",time:"4/4",tempo:150,notes:[{letter:"A"},{bar:"single"},{letter:"B"},{mark:"fine"},{bar:"double"},{letter:"C"},{bar:"single"},{letter:"D"},{mark:"dc-fine"},{bar:"final"}],
+        playOrder:[0,2,5,7,0,2],width:470} },
+    { caption:"D.S. al Coda — press play: A-B-C, back to the Segno (B), jump at To-Coda to the Coda (A–B–C–B–D).",
+      staff:{clef:"treble",time:"4/4",tempo:150,notes:[{letter:"A"},{bar:"single"},{mark:"segno"},{letter:"B"},{mark:"tocoda"},{bar:"single"},{letter:"C"},{mark:"ds-coda"},{bar:"double"},{mark:"coda"},{letter:"D"},{bar:"final"}],
+        playOrder:[0,3,6,3,10],width:470} }
   ],
   games:[
     { type:"term-race", title:"Game 1 · GPS Term Dash",
@@ -154,7 +173,7 @@ LESSON_CONTENT[21]={
       intro:"The trickiest route: tap the D.S. al Coda journey in perfect order!",
       miaIntro:"Advanced navigation — sign to coda! \u{1F3C1}",
       spec:{title:"Run the D.S. al Coda route in order!",
-        sequence:["Play from the start","Pass the Segno","See “D.S. al Coda”","Return to the Segno","Play to “To Coda”","Jump to the Coda","Finish!"]},
+        sequence:["Play A","Play B (the Segno sits here)","Play C — see “D.S. al Coda”","Return to the Segno: play B","At “To Coda” — jump!","Play the Coda: D"]},
       result:(stars)=>stars>=3?"D.S. al Coda — the expert route, aced!":null },
     { type:"term-race", title:"Game 4 · Reverse GPS (45s)",
       intro:"Mia names the destination, YOU name the sign — 45 seconds on the clock!",
@@ -222,6 +241,18 @@ LESSON_CONTENT[21]={
     { type:"mc", q:"Which statement is correct?",
       choices:["Fine means repeat from the beginning","D.S. means return to the Segno sign","Coda means stop immediately","D.C. means play louder"], answer:1,
       explain:"Dal Segno = from the sign.", hint:"Check each translation." },
+    { type:"mc", q:"Measures A B(Fine) C D(D.C. al Fine): the performance order is…",
+      choices:["A–B–C–D–A–B","A–B–C–D","A–B–A–B"], answer:0,
+      explain:"Through to the end, back to the beginning, stop at Fine.", hint:"Case 1." },
+    { type:"mc", q:"Measures A B(Segno…Fine) C D(D.S. al Fine): the performance order is…",
+      choices:["A–B–C–D–B","A–B–C–D–A–B","A–B–C–B–D"], answer:0,
+      explain:"Return to the Segno (B), stop at Fine.", hint:"Case 2." },
+    { type:"mc", q:"Measures A(To Coda) B C(D.C. al Coda) D(Coda): the performance order is…",
+      choices:["A–B–C–A–D","A–B–C–D","A–B–C–A–B–D"], answer:0,
+      explain:"Back to the top, jump at To-Coda into the Coda.", hint:"Case 3." },
+    { type:"mc", q:"Measures A B(Segno, To Coda) C(D.S. al Coda) D(Coda): the performance order is…",
+      choices:["A–B–C–B–D","A–B–C–A–D","A–B–C–D–B"], answer:0,
+      explain:"Back to the Segno (B), jump at To-Coda into the Coda.", hint:"Case 4." },
     /* generated */
     { gen:"term-match", params:{subject:"roadmap marking", pool:[["D.C.","Return to the beginning"],["D.S.","Return to the Segno sign"],["Fine","The end — stop here"],["Coda","A special ending section"],["To Coda","Jump to the Coda"]], reverse:true}, count:5 },
     { gen:"note-value", params:{values:["q","q.","8","h"], ask:"beats"}, count:2 },

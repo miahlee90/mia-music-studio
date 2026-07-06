@@ -229,6 +229,7 @@ const Staff=(()=>{
       if(n.dyn) hasDyn=true;
       if(n.bar!==undefined){ placed.push({n,i,clef,y0,x,kind:"bar"}); return; }
       if(n.mark!==undefined){ minEl=Math.min(minEl,y0-38); placed.push({n,i,clef,y0,x,kind:"mark"}); return; }
+      if(n.letter!==undefined){ placed.push({n,i,clef,y0,x,kind:"letter"}); return; }
       if(n.rest){
         minEl=Math.min(minEl,y0+4); maxEl=Math.max(maxEl,y0+54);
         maxNoteBottom=Math.max(maxNoteBottom,y0+50);
@@ -274,6 +275,8 @@ const Staff=(()=>{
         if(spec.clickBars) parts.push(`<rect class="clickbar" data-bar="${i}" data-kind="${bk}" x="${x-11}" y="${yTop-6}" width="22" height="${yBot-yTop+12}"/>`);
       } else if(kind==="mark"){
         parts.push(`<g class="notegroup" data-i="${i}" data-mark="${n.mark}">${markSVG(x,y0,n.mark)}</g>`);
+      } else if(kind==="letter"){
+        parts.push(`<g class="notegroup" data-i="${i}" data-letter="${n.letter}"><text class="mtxt" x="${x}" y="${y0+2*GAP+8}" text-anchor="middle">${n.letter}</text></g>`);
       } else if(kind==="rest"){
         parts.push(`<g class="notegroup" data-i="${i}" data-rest="${n.rest}">${restSVG(x,y0,normD(n.rest),(spec.clickNotes?" clickable":""))}${n.dot?`<circle class="artic" cx="${x+13}" cy="${y0+2*GAP-7}" r="2.7"/>`:""}</g>`);
       } else {
@@ -344,8 +347,8 @@ const Staff=(()=>{
     if(spec.onBar) svg.querySelectorAll(".clickbar").forEach(b=>b.addEventListener("click",()=>spec.onBar(+b.dataset.bar,b.dataset.kind)));
     return {
       svg,
-      highlight(i){ svg.querySelectorAll(".notegroup .note, .notegroup .rest").forEach(n=>n.classList.remove("hl"));
-        if(i!=null){ const g=svg.querySelector(`.notegroup[data-i="${i}"] .note, .notegroup[data-i="${i}"] .rest`); if(g)g.classList.add("hl"); } }
+      highlight(i){ svg.querySelectorAll(".notegroup .note, .notegroup .rest, .notegroup .mtxt").forEach(n=>n.classList.remove("hl"));
+        if(i!=null){ const g=svg.querySelector(`.notegroup[data-i="${i}"] .note, .notegroup[data-i="${i}"] .rest, .notegroup[data-i="${i}"] .mtxt`); if(g)g.classList.add("hl"); } }
     };
   }
   const DURSEC={w:1.6,h:1.0,q:0.55,"8":0.3};
@@ -359,8 +362,16 @@ const Staff=(()=>{
     const seq=spec.playOrder
       ? spec.playOrder.map(ix=>[spec.notes[ix],ix])
       : (spec.notes||[]).map((n,i)=>[n,i]);
+    const LETTER_MIDI={A:60,B:64,C:67,D:72};
     seq.forEach(([n,i])=>{
       if(n.bar!==undefined||n.mark!==undefined) return;
+      if(n.letter!==undefined){
+        const dur=tempo? 4*spb : 1.6;
+        MFAudio.tone(LETTER_MIDI[n.letter]||60, Math.max(.3,dur*.9), t, .45);
+        if(api) setTimeout(()=>api.highlight(i), t*1000);
+        t+=tempo? dur : dur+0.08;
+        return;
+      }
       if(n.dyn&&VOLS[n.dyn]!==undefined) vol=VOLS[n.dyn];
       const base=tempo? beatsOf(n)*spb : DURSEC[normD(n.d||n.rest)]*(isDotted(n)?1.5:1);
       const dur=n.artic==="fermata"? base*1.8 : base;

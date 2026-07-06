@@ -331,3 +331,6 @@ button.notecard svg.mf-staff{height:46px;width:auto;max-width:100%;display:block
   font-size:13px;line-height:1.35;font-weight:600}
 .vfront .vstaff{width:100%}
 .vfront svg.mf-staff{height:56px;width:auto;margin:0 auto;display:block}
+/* roadmap letter-measures (instructor's L21 design) */
+.mf-staff text.mtxt{fill:var(--primary-dark);font-weight:800;font-size:22px}
+.mf-staff text.mtxt.hl{fill:var(--accent)}
