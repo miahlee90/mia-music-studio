@@ -338,3 +338,7 @@ button.notecard svg.mf-staff{height:46px;width:auto;max-width:100%;display:block
    (without this, flipping hid BOTH faces and the card vanished) */
 .vface.vback{transform:rotateY(180deg)}
 .vface{-webkit-backface-visibility:hidden}
+/* Belt-and-suspenders: even if 3D backface support fails, always show the correct face */
+.vface{transition:opacity .2s .15s}
+.vcard:not(.flip) .vface.vback{opacity:0}
+.vcard.flip .vface.vfront{opacity:0}
