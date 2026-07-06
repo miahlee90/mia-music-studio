@@ -105,7 +105,7 @@ LESSON_CONTENT[21]={
       try:{ type:"custom",
         hint:"Through the whole line first — D.C. only acts when you reach it.",
         mount:(container,fb)=>MF_L21_case(container,fb,{
-          items:[{letter:"A"},{bar:"single"},{letter:"B"},{mark:"fine"},{bar:"double"},{letter:"C"},{bar:"single"},{letter:"D"},{mark:"dc-fine"},{bar:"final"}],
+          items:[{letter:"A"},{bar:"single"},{letter:"B"},{mark:"fine"},{bar:"final"},{letter:"C"},{bar:"single"},{letter:"D"},{mark:"dc-fine"},{bar:"double"}],
           route:[0,2,5,7,0,2], answer:"A–B–C–D–A–B",
           wrong:["A–B–C–D","A–B–A–B–C–D"],
           explain:"Play A-B-C-D, Da Capo to the beginning, and stop at Fine: A–B–C–D–A–B."}) } },
@@ -113,7 +113,7 @@ LESSON_CONTENT[21]={
       try:{ type:"custom",
         hint:"The Segno sits over B — that's where the return lands.",
         mount:(container,fb)=>MF_L21_case(container,fb,{
-          items:[{letter:"A"},{bar:"single"},{mark:"segno"},{letter:"B"},{mark:"fine"},{bar:"double"},{letter:"C"},{bar:"single"},{letter:"D"},{mark:"ds-fine"},{bar:"final"}],
+          items:[{letter:"A"},{bar:"single"},{mark:"segno"},{letter:"B"},{mark:"fine"},{bar:"final"},{letter:"C"},{bar:"single"},{letter:"D"},{mark:"ds-fine"},{bar:"double"}],
           route:[0,3,6,8,3], answer:"A–B–C–D–B",
           wrong:["A–B–C–D–A–B","A–B–C–D"],
           explain:"Play A-B-C-D, return to the SEGNO (B), and stop at Fine: A–B–C–D–B."}) } },
@@ -140,7 +140,7 @@ LESSON_CONTENT[21]={
   ],
   examples:[
     { caption:"D.C. al Fine — press play: A-B-C-D, back to the top, stop at Fine (A–B–C–D–A–B).",
-      staff:{clef:"treble",time:"4/4",tempo:150,notes:[{letter:"A"},{bar:"single"},{letter:"B"},{mark:"fine"},{bar:"double"},{letter:"C"},{bar:"single"},{letter:"D"},{mark:"dc-fine"},{bar:"final"}],
+      staff:{clef:"treble",time:"4/4",tempo:150,notes:[{letter:"A"},{bar:"single"},{letter:"B"},{mark:"fine"},{bar:"final"},{letter:"C"},{bar:"single"},{letter:"D"},{mark:"dc-fine"},{bar:"double"}],
         playOrder:[0,2,5,7,0,2],width:470} },
     { caption:"D.S. al Coda — press play: A-B-C, back to the Segno (B), jump at To-Coda to the Coda (A–B–C–B–D).",
       staff:{clef:"treble",time:"4/4",tempo:150,notes:[{letter:"A"},{bar:"single"},{mark:"segno"},{letter:"B"},{mark:"tocoda"},{bar:"single"},{letter:"C"},{mark:"ds-coda"},{bar:"double"},{mark:"coda"},{letter:"D"},{bar:"final"}],
