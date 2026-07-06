@@ -249,6 +249,13 @@ const Staff=(()=>{
       if(k<placed.length) segEnd=placed[k].x;
       if(alone) pl.x=(segStart+segEnd)/2;
     });
+    /* ties/slurs sit on the NOTEHEAD side (opposite the stems) — reserve label room below */
+    (spec.arcs||[]).forEach(a=>{
+      const A=placed[a.from], B=placed[a.to];
+      if(!A||!B||A.y===undefined||B.y===undefined) return;
+      const stemsUp=((A.y+B.y)/2) > (A.y0+2*GAP);
+      if(stemsUp) maxNoteBottom=Math.max(maxNoteBottom, Math.max(A.y,B.y)+28);
+    });
     if(hasDyn) maxEl=Math.max(maxEl,staffBottom+26);
     if(hasLabel&&maxNoteBottom===-Infinity) maxNoteBottom=staffBottom;
     const labelY = hasLabel? Math.max(staffBottom+22, maxNoteBottom+18, hasDyn?staffBottom+38:0) : 0;
@@ -291,9 +298,9 @@ const Staff=(()=>{
     (spec.arcs||[]).forEach(a=>{
       const A=placed[a.from], B=placed[a.to];
       if(!A||!B||A.y===undefined||B.y===undefined) return;
-      const up=((A.y+B.y)/2) > (A.y0+2*GAP); /* stems up → curve above the noteheads */
-      const s=up? -1 : 1;
-      const y1=A.y+s*11, y2=B.y+s*11, cy=(up? Math.min(y1,y2) : Math.max(y1,y2))+s*15;
+      const stemsUp=((A.y+B.y)/2) > (A.y0+2*GAP);
+      const s=stemsUp? 1 : -1; /* curve on the NOTEHEAD side, opposite the stems */
+      const y1=A.y+s*11, y2=B.y+s*11, cy=(stemsUp? Math.max(y1,y2) : Math.min(y1,y2))+s*15;
       minEl=Math.min(minEl,cy-4); maxEl=Math.max(maxEl,cy+4);
       parts.push(`<path class="arc" d="M ${A.x+3} ${y1} C ${(A.x+B.x)/2} ${cy}, ${(A.x+B.x)/2} ${cy}, ${B.x-3} ${y2}"/>`);
     });
