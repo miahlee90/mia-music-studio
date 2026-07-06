@@ -276,7 +276,10 @@ const Staff=(()=>{
       const nxt=placed[pi+1], prv=placed[pi-1];
       const TXTW={fine:24,dc:24,ds:24,"dc-fine":64,"ds-fine":64,"dc-coda":68,"ds-coda":68}[pl.n.mark]||0;
       if(nxt&&nxt.kind==="bar"){
-        pl.x = (pi+1===placed.length-1 && TXTW)? nxt.x-6-TXTW/2 : nxt.x;
+        /* if another mark hangs on the SAME bar from the right (e.g. the Coda sign),
+           pull this text left so they never overlap */
+        const shares = placed[pi+2] && placed[pi+2].kind==="mark";
+        pl.x = ((pi+1===placed.length-1||shares) && TXTW)? nxt.x-12-TXTW/2 : nxt.x;
       } else if(prv&&prv.kind==="bar"){
         pl.x = prv.x+16;
       }
