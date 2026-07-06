@@ -66,7 +66,10 @@ LESSON_CONTENT[15]={
   ],
   steps:[
     { say:"An <b>eighth note</b> is worth <b>½ beat</b> — half a quarter note. Alone, it wears a <b>flag</b>; in groups, the flags fuse into a <b>beam</b>. \u{1F447} <b>How many beats does one eighth note receive?</b>",
-      show:{ type:"staff", spec:{clef:"treble",notes:[{p:"G4",d:"8",label:"flag (alone)"},{p:"E4",d:"8",label:"beam"},{p:"F4",d:"8",label:"(group)"},{p:"G4",d:"q",label:"quarter = 2 eighths"}],beams:[[1,2]],width:440} },
+      show:{ type:"staff", spec:{clef:"treble",notes:[
+        {p:"E4",d:"8",label:"a pair joined by a BEAM"},{p:"F4",d:"8"},
+        {p:"A4",d:"8",label:"single —"},{p:"B4",d:"8",label:"with a FLAG"}],
+        beams:[[0,1]],width:420} },
       try:{ type:"mc",
         choices:["½ beat","1 beat","2 beats"], answer:0,
         success:"✓ Half a beat — two of them share one quarter note's time.",
