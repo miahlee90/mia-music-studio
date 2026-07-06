@@ -73,7 +73,7 @@ LESSON_CONTENT[13]={
         fail:"The tie is glue — the second note is held, not played again.",
         hint:"Tie = play ONCE." } },
     { say:"A <b>SLUR</b> connects notes of <b>DIFFERENT pitches</b> — a musical <b>bridge</b> \u{1F309}. Play EVERY note, but smoothly connected, with no gaps. That style is called <b>legato</b>. \u{1F447} <b>Under a slur, what do you do?</b>",
-      show:{ type:"staff", spec:{clef:"treble",notes:[{p:"C4",d:"q",label:"C"},{p:"D4",d:"q",label:"D"},{p:"E4",d:"q",label:"E"},{p:"F4",d:"h",label:"F — all smooth!"}],arcs:[{from:0,to:3,type:"slur"}],width:420} },
+      show:{ type:"staff", spec:{clef:"treble",notes:[{p:"C4",d:"q"},{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"F4",d:"h"}],arcs:[{from:0,to:3,type:"slur"}],width:420} },
       try:{ type:"mc",
         choices:["Play every note, smoothly connected","Play only the first note","Skip the notes under the curve"], answer:0,
         success:"✓ Every note sounds — the slur just removes the gaps between them. Smooth = legato!",
