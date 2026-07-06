@@ -53,8 +53,12 @@ LESSON_CONTENT[14]={
     "Perform repeated sections accurately"
   ],
   steps:[
-    { say:"A <b>repeat sign</b> is a double bar with <b>two dots facing the music</b>. When you reach it: go back to the beginning (or to a facing repeat sign) and <b>play the section again</b>. \u{1F447} <b>What does a repeat sign tell you to do?</b>",
-      show:{ type:"staff", spec:{clef:"treble",time:"4/4",notes:[{bar:"repeat-start",label:"start repeat"},{p:"C4",d:"h"},{p:"E4",d:"h"},{bar:"single"},{p:"G4",d:"w"},{bar:"repeat-end",label:"go back!"}],width:460} },
+    { say:"A <b>repeat sign</b> is a double bar with <b>two dots facing the music</b>. When you reach it, go back and <b>play the section again</b>. If there is <b>no facing repeat sign earlier</b>, return to the <b>very beginning</b> — notice the front of this line has no repeat sign at all. \u{1F447} <b>What does a repeat sign tell you to do?</b>",
+      show:{ type:"staff", spec:{clef:"treble",time:"4/4",notes:[
+        {p:"C4",d:"h",label:"1"},{p:"E4",d:"h"},{bar:"single"},
+        {p:"G4",d:"h",label:"2"},{p:"E4",d:"h"},{bar:"single"},
+        {p:"F4",d:"h",label:"3"},{p:"D4",d:"h"},{bar:"single"},
+        {p:"E4",d:"h",label:"4"},{p:"C4",d:"h"},{bar:"repeat-end"}],width:470} },
       try:{ type:"mc",
         choices:["Go back and play the section again","Stop playing","Play louder"], answer:0,
         success:"✓ The dots say “again!” — one more trip through the section.",
@@ -122,8 +126,12 @@ LESSON_CONTENT[14]={
         } } }
   ],
   examples:[
-    { caption:"A section wrapped in repeat signs — play it, then play it again. The dots face the music they repeat.",
-      staff:{clef:"treble",tempo:100,time:"4/4",notes:[{bar:"repeat-start"},{p:"C4",d:"q"},{p:"E4",d:"q"},{p:"G4",d:"h"},{bar:"single"},{p:"E4",d:"h"},{p:"C4",d:"h"},{bar:"repeat-end"}],width:460} },
+    { caption:"Four measures ending with a repeat sign. There is no facing sign at the front, so the performer returns to the very BEGINNING and plays all four measures again.",
+      staff:{clef:"treble",tempo:100,time:"4/4",notes:[
+        {p:"C4",d:"q"},{p:"E4",d:"q"},{p:"G4",d:"h"},{bar:"single"},
+        {p:"F4",d:"h"},{p:"D4",d:"h"},{bar:"single"},
+        {p:"E4",d:"q"},{p:"G4",d:"q"},{p:"C5",d:"h"},{bar:"single"},
+        {p:"E4",d:"h"},{p:"C4",d:"h"},{bar:"repeat-end"}],width:470} },
     { caption:"1st and 2nd endings: trip one takes bracket 1 and repeats; trip two skips to bracket 2 and finishes.",
       staff:{clef:"treble",tempo:100,time:"4/4",notes:[{p:"C4",d:"h",label:"A"},{p:"E4",d:"h",label:"B"},{bar:"single"},{p:"G4",d:"w",label:"1st"},{bar:"repeat-end"},{p:"C5",d:"w",label:"2nd"},{bar:"final"}],endings:[{from:3,to:3,n:1},{from:5,to:5,n:2}],width:460} }
   ],

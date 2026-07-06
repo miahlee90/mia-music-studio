@@ -316,9 +316,13 @@ const Staff=(()=>{
     /* 1st / 2nd ending brackets */
     (spec.endings||[]).forEach(e=>{
       const A=placed[e.from], B=placed[e.to]; if(!A||!B) return;
-      const y=y0t-18, x1=A.x-12, x2=B.x+12;
+      /* bracket spans the FULL measure: from the preceding bar line to the following one */
+      let x1=startX-24, x2=W-16;
+      for(let j=e.from-1;j>=0;j--) if(placed[j].kind==="bar"){ x1=placed[j].x; break; }
+      for(let j=e.to+1;j<placed.length;j++) if(placed[j].kind==="bar"){ x2=placed[j].x; break; }
+      const y=y0t-18;
       minEl=Math.min(minEl,y-14);
-      parts.push(`<line class="acc" x1="${x1}" y1="${y}" x2="${x2}" y2="${y}"/><line class="acc" x1="${x1}" y1="${y}" x2="${x1}" y2="${y+12}"/>${e.n<2?`<line class="acc" x1="${x2}" y1="${y}" x2="${x2}" y2="${y+12}"/>`:""}<text class="lbl" x="${x1+8}" y="${y+12}" text-anchor="middle">${e.n}.</text>`);
+      parts.push(`<line class="acc" x1="${x1}" y1="${y}" x2="${x2}" y2="${y}"/><line class="acc" x1="${x1}" y1="${y}" x2="${x1}" y2="${y+12}"/>${e.n<2?`<line class="acc" x1="${x2}" y1="${y}" x2="${x2}" y2="${y+12}"/>`:""}<text class="lbl" x="${x1+9}" y="${y+12}" text-anchor="middle">${e.n}.</text>`);
     });
 
     const yTop=Math.floor(minEl), vH=Math.ceil(maxEl)-yTop;
