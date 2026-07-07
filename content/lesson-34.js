@@ -141,12 +141,12 @@ LESSON_CONTENT[34]={
     "Use the circle to identify key signatures"
   ],
   steps:[
-    { say:"The <b>CIRCLE OF FIFTHS</b> shows the relationship of one key to another by the <b>number of sharps or flats</b> in the key signature and the <b>order</b> in which they occur. <b>C sits at the top</b> with an empty signature; each neighbor differs by exactly one accidental. \u{1F447} <b>What does the Circle of Fifths show?</b>",
+    { say:"First, <b>HOW the circle is BUILT</b>. Put <b>C at the top</b> (no sharps or flats). Now stack <b>PERFECT 5THS</b>: go up a 5th from C and you get G (1♯); up a 5th again, D (2♯); again, A (3♯) — every <b>clockwise</b> step climbs a perfect 5th and adds <b>one sharp</b>: C→G→D→A→E→B→F♯→C♯. Build the other direction and every <b>counterclockwise</b> step adds <b>one flat</b>: C→F→B♭→E♭→A♭→D♭→G♭→C♭. That construction is exactly what the finished circle shows: the relationship of one key to another by the <b>number of sharps or flats</b> and the <b>order</b> in which they occur. \u{1F447} <b>The circle is built by stacking which interval clockwise from C?</b>",
       show:{ type:"custom", mount:(el)=>{ const c=document.createElement("div"); el.appendChild(c); MF_L34_circle(c,{}); } },
-      try:{ type:"mc", choices:["The relationship among keys and their signatures","Rhythm patterns","Dynamic markings","Time signatures"], answer:0,
-        success:"✓ A map of every key, organized by its sharps and flats.",
-        fail:"Look at what labels the wheel — keys and accidental counts.",
-        hint:"It's a road map of KEYS." } },
+      try:{ type:"mc", choices:["Perfect 5ths","Half steps","Octaves","3rds"], answer:0,
+        success:"✓ Perfect 5ths, one per step — that's why it's called the Circle of FIFTHS, and why each step gains exactly one sharp (or, backwards, one flat).",
+        fail:"Count C up to G: C(1) D(2) E(3) F(4) G(5)…",
+        hint:"The interval is in the circle's NAME." } },
     { say:"Drive it <b>CLOCKWISE ↻</b>: each step moves UP a <b>perfect 5th</b> and adds <b>one sharp</b>: C → G → D → A → E… \u{1F447} <b>Step around the wheel yourself and watch the sharps pile up:</b>",
       try:{ type:"custom",
         hint:"Five letters up each time: C→G→D→A→E — and +1♯ per step.",
