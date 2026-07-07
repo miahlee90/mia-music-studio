@@ -17,6 +17,8 @@
    clickable via spec.onKeysig(i); each accidental wrapped in g.ksgroup[data-ks]),
    W/H step carets above the staff (spec.steps:[{from,to,label:"W"|"H"}]),
    labeled under-brackets for tetrachord grouping (spec.brackets:[{from,to,label}]).
+   v7.4 (Unit 8): HARMONIC INTERVALS — {chord:true} stacks a note on the previous
+   one (same x; 2nds/unisons offset 13px) and plays it SIMULTANEOUSLY.
    NOTE (maintenance): edit by FULL-FILE REWRITE only. */
 const MFAudio=(()=>{
   let ctx=null;
@@ -246,7 +248,7 @@ const Staff=(()=>{
     const attachedMark=items.map((n,i)=> n.mark!==undefined &&
       ((items[i+1]&&items[i+1].bar!==undefined) || (i>0&&items[i-1].bar!==undefined)));
     const slotOf=[]; let SC=0;
-    items.forEach((n,i)=>{ slotOf[i]=attachedMark[i]? -1 : SC++; });
+    items.forEach((n,i)=>{ slotOf[i]=(attachedMark[i]||n.chord)? -1 : SC++; });
     const endsWithBar = items.length>1 && items[items.length-1].bar!==undefined;
     items.forEach((n,i)=>{
       const clef = n.clef || (grand? "treble" : (spec.clef||"treble"));
@@ -259,7 +261,9 @@ const Staff=(()=>{
       const spreadX = SC<=1? (startX+W-40)/2
         : endsWithBar? startX + Math.max(0,slotOf[i])*((W-16-startX)/Math.max(1,SC-1))
         : off+Math.max(0,slotOf[i])*(span/Math.max(1,SC-1));
-      const x = n.x || ((n.bar!==undefined && i===items.length-1)? W-16 : spreadX);
+      let x = n.x || ((n.bar!==undefined && i===items.length-1)? W-16 : spreadX);
+      if(n.chord && placed.length){ const prev=placed[placed.length-1];
+        if(prev && prev.n.p){ const dd=Math.abs(dia(n.p)-dia(prev.n.p)); x=prev.x+(dd<=1?13:0); } }
       if(n.label) hasLabel=true;
       if(n.dyn) hasDyn=true;
       if(n.bar!==undefined){ placed.push({n,i,clef,y0,x,kind:"bar"}); return; }
@@ -448,6 +452,7 @@ const Staff=(()=>{
       ? spec.playOrder.map(ix=>[spec.notes[ix],ix])
       : (spec.notes||[]).map((n,i)=>[n,i]);
     const LETTER_MIDI={A:60,B:64,C:67,D:72};
+    let lastStart=0, lastDur=0;
     seq.forEach(([n,i])=>{
       if(n.bar!==undefined||n.mark!==undefined) return;
       if(n.letter!==undefined){
@@ -460,6 +465,11 @@ const Staff=(()=>{
       if(n.dyn&&VOLS[n.dyn]!==undefined) vol=VOLS[n.dyn];
       const base=tempo? beatsOf(n)*spb : DURSEC[normD(n.d||n.rest)]*(isDotted(n)?1.5:1);
       const dur=n.artic==="fermata"? base*1.8 : base;
+      if(n.chord&&!n.rest){ /* harmonic interval: sound with the previous note */
+        MFAudio.tone(MFAudio.midi(n.sound||n.p), lastDur||Math.min(dur,1.8), lastStart, vol*.9);
+        if(api) setTimeout(()=>api.highlight(i), lastStart*1000);
+        return;
+      }
       if(!n.rest&&!tiedTo.has(i)){
         /* extend through tied notes */
         let full=dur, j=i, guard=0;
@@ -470,6 +480,7 @@ const Staff=(()=>{
         if(n.artic==="staccato") dd=Math.max(.12,full*0.4);
         if(n.artic==="accent"||n.artic==="sfz") v=Math.min(.95,vol*1.7);
         MFAudio.tone(MFAudio.midi(n.sound||n.p), tempo? Math.max(0.18,dd*0.92):Math.min(dd,1.8), t, v);
+        lastStart=t; lastDur=tempo? Math.max(0.18,dd*0.92):Math.min(dd,1.8);
       }
       if(api) setTimeout(()=>api.highlight(i), t*1000);
       t+= tempo? dur : dur+0.08;

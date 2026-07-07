@@ -31,10 +31,10 @@ const LESSONS=[
  {n:28, title:"The Flat Scales — F and B♭ Major", unit:7, book:2, time:15, kw:["F major","Bb major","flat scales"]},
  {n:29, title:"Key Signatures — The Sharp Keys", unit:7, book:2, time:15, kw:["key signature","sharp keys"]},
  {n:30, title:"Key Signatures — The Flat Keys", unit:7, book:2, time:15, kw:["key signature","flat keys"]},
- {n:31, title:"The Remaining Major Scales with Key Signatures", unit:8, book:2, time:13, kw:["major scales","key signatures"]},
- {n:32, title:"Chromatic Scale", unit:8, book:2, time:11, kw:["chromatic","half steps"]},
- {n:33, title:"Intervals", unit:8, book:2, time:12, kw:["interval","2nd","3rd","distance"]},
- {n:34, title:"Circle of Fifths", unit:8, book:2, time:12, kw:["circle of fifths"]},
+ {n:31, title:"The Remaining Major Scales with Key Signatures", unit:8, book:2, time:15, kw:["major scales","key signatures"]},
+ {n:32, title:"Chromatic Scale", unit:8, book:2, time:15, kw:["chromatic","half steps"]},
+ {n:33, title:"Intervals", unit:8, book:2, time:15, kw:["interval","2nd","3rd","distance"]},
+ {n:34, title:"Circle of Fifths", unit:8, book:2, time:15, kw:["circle of fifths"]},
  {n:35, title:"Perfect and Major Intervals", unit:9, book:2, time:13, kw:["perfect","major","interval quality"]},
  {n:36, title:"Minor Intervals", unit:9, book:2, time:12, kw:["minor interval"]},
  {n:37, title:"Augmented and Diminished Intervals", unit:9, book:2, time:13, kw:["augmented","diminished","interval"]},
@@ -98,5 +98,5 @@ const UNITS=[
  {unit:18, book:3, name:"Form", lessons:[72,75]}
 ];
 /* built lessons so far (index pages link only these) */
-const BUILT_THROUGH=30;
+const BUILT_THROUGH=34;
 const LESSON_CONTENT={}; /* filled by content/lesson-NN.js */

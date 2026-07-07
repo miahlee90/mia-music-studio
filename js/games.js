@@ -962,6 +962,91 @@ const Games=(()=>{
       $(".gstart").onclick=function(){ this.style.display="none"; $(".gq").textContent=spec.title||"Tap the items in the correct order!"; setup(); };
     },
 
+    /* v7.4 — GEN-RACE: turns ANY mc quiz generator into a timed arcade round.
+       spec:{gen:"keysig-id"|"interval-id"|"circle-nav"|…, params:{}, seconds:45, rounds:10} */
+    "gen-race":(el,spec,onFinish)=>{
+      const rounds=spec.rounds||10, secs=spec.seconds||0;
+      el.innerHTML=`<div class="game-arena">
+        <button class="play gstart">▶ ${secs?`Start the ${secs}-second challenge`:"Start"}</button>
+        <div class="big-q gq"></div><div class="gr-media"></div>
+        <div class="gbtns gr-ch" style="display:none"></div>
+        <div class="streak gs"></div></div>`;
+      const $=s=>el.querySelector(s);
+      let cur=null,score=0,asked=0,streak=0,left=secs,tick=null,running=false,waiting=false;
+      function makeQ(){ let q,guard=0;
+        do{ q=Quiz.generators[spec.gen](spec.params||{}); }while(q.type!=="mc"&&guard++<6);
+        return q; }
+      function ask(){
+        if(!running) return;
+        if(!secs&&asked>=rounds){ end(); return; }
+        cur=makeQ(); waiting=false;
+        $(".gq").textContent=(secs?"":"Round "+(asked+1)+" of "+rounds+": ")+cur.q;
+        const m=$(".gr-media"); m.innerHTML="";
+        if(cur.staff) Staff.render(m,cur.staff);
+        const ch=$(".gr-ch"); ch.innerHTML=""; ch.style.display="block";
+        if(cur.choices.every(c=>String(c).length<=14)) ch.classList.add("chips");
+        cur.choices.forEach((c,i)=>{ const b=document.createElement("button"); b.innerHTML=c;
+          b.onclick=()=>ans(i); ch.appendChild(b); });
+      }
+      function ans(i){
+        if(!running||waiting) return;
+        waiting=true; asked++;
+        const ok=i===cur.answer;
+        if(ok){ score++; streak++; MFAudio.tone(76,.3); $(".gq").innerHTML="✓ "+cur.explain; }
+        else { streak=0; MFAudio.tone(40,.25); $(".gq").innerHTML="✗ "+cur.explain; }
+        $(".gs").textContent=(secs?`⏱ ${left}s · `:"")+`Score: ${score} · Streak: ${streak}`;
+        setTimeout(ask, ok?800:2200);
+      }
+      function end(){
+        running=false; clearInterval(tick); $(".gr-ch").style.display="none"; $(".gr-media").innerHTML="";
+        $(".gq").innerHTML=secs?`⏰ Time! <b>${score}</b> correct 🎉`:`Done! <b>${score}</b> of ${rounds} 🎉`;
+        $(".gstart").style.display="inline-block"; $(".gstart").textContent="▶ Play again";
+        if(onFinish)onFinish(score,secs||rounds);
+      }
+      $(".gstart").onclick=function(){
+        this.style.display="none"; score=0;asked=0;streak=0;left=secs;running=true;
+        $(".gs").textContent=secs?`⏱ ${left}s`:"";
+        if(secs){ clearInterval(tick); tick=setInterval(()=>{ left--;
+          $(".gs").textContent=`⏱ ${left}s · Score: ${score} · Streak: ${streak}`;
+          if(left<=0) end(); },1000); }
+        ask();
+      };
+    },
+
+    /* v7.4 — KEY-CLIMB: play a keyboard sequence in order, against the clock.
+       spec:{seq:[midis], names:[labels], start:60, octaves:2, title} */
+    "key-climb":(el,spec,onFinish)=>{
+      const seq=spec.seq||[], names=spec.names||[];
+      el.innerHTML=`<div class="game-arena">
+        <div class="big-q gq">${spec.title||"Play the keys in order — fast and clean!"}</div>
+        <div class="gkb"></div>
+        <div class="streak gs"></div>
+        <button class="play gstart">▶ Start the climb</button></div>`;
+      const $=s=>el.querySelector(s);
+      let i=0,misses=0,t0=0,timer=null,running=false,kb=null;
+      kb=Keyboard.create($(".gkb"),{start:spec.start??60,octaves:spec.octaves??2,labels:true,
+        onKey:m=>{
+          if(!running) return;
+          if(m===seq[i]){ i++;
+            if(i>=seq.length){ running=false; clearInterval(timer); kb.mark([]);
+              const secs=((Date.now()-t0)/1000).toFixed(1);
+              const stars=misses===0?3:misses<=2?2:1;
+              $(".gq").innerHTML=`🏁 Climb complete in <b>${secs}s</b> with ${misses} miss${misses===1?"":"es"}! ${"⭐".repeat(stars)}`;
+              $(".gstart").style.display="inline-block"; $(".gstart").textContent="▶ Climb again";
+              if(onFinish)onFinish(stars,3);
+            } else { kb.mark([seq[i]]);
+              $(".gq").innerHTML=`✓ ${names[i-1]||""} — next: <b>${names[i]||"follow the marked key"}</b> (${i}/${seq.length})`; } }
+          else { misses++; MFAudio.tone(40,.2);
+            $(".gs").textContent=`⏱ climbing… · misses: ${misses}`; }
+        }});
+      $(".gstart").onclick=function(){
+        this.style.display="none"; i=0; misses=0; running=true; t0=Date.now();
+        kb.mark([seq[0]]);
+        $(".gq").innerHTML=`GO! Start on the marked key${names[0]?` — <b>${names[0]}</b>`:""}.`;
+        clearInterval(timer); timer=setInterval(()=>{ if(running) $(".gs").textContent=`⏱ ${((Date.now()-t0)/1000).toFixed(0)}s · misses: ${misses}`; },500);
+      };
+    },
+
     /* v7.3 — Key-Signature Match-Up (instructor 2026-07-06): signature cards on top,
        DRAG each key-name block onto its signature (tap-to-pick, tap-to-place on phones).
        spec:{rounds:3, perRound:4, pool:[{key,label}], clefs:["treble","bass"]}

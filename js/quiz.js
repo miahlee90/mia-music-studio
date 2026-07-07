@@ -183,17 +183,17 @@ const Quiz=(()=>{
     /* v5.2 — name the major key from a key signature
        (params:{kind:"sharp"|"flat"|"both", max:1..4, clef:"treble"|"bass"|"both"}) */
     "keysig-id": p=>{
-      const SH=[["G",1],["D",2],["A",3],["E",4]], FL=[["F",1],["Bb",2],["Eb",3],["Ab",4]];
+      const SH=[["G",1],["D",2],["A",3],["E",4],["B",5],["F#",6],["C#",7]], FL=[["F",1],["Bb",2],["Eb",3],["Ab",4],["Db",5],["Gb",6],["Cb",7]];
       const kind=(p&&p.kind)||"both", max=(p&&p.max)||4;
       const pool=(kind==="sharp"?SH:kind==="flat"?FL:[...SH,...FL]).filter(k=>k[1]<=max);
       const [key,n]=pick(pool);
       const isFlat=FL.some(k=>k[0]===key);
-      const disp=k=>k.replace("b","\u266d")+" Major";
+      const disp=k=>k.replace("b","\u266d").replace("#","\u266f")+" Major";
       const clef=(p&&p.clef&&p.clef!=="both")? p.clef : pick(["treble","bass"]);
       const all=[...new Set((kind==="sharp"?SH:kind==="flat"?FL:[...SH,...FL]).map(k=>disp(k[0])))];
       const correct=disp(key);
       const choices=shuffle([correct,...shuffle(all.filter(c=>c!==correct)).slice(0,3)]);
-      const ORDS=["F\u266f","C\u266f","G\u266f","D\u266f"], ORDF=["B\u266d","E\u266d","A\u266d","D\u266d"];
+      const ORDS=["F\u266f","C\u266f","G\u266f","D\u266f","A\u266f","E\u266f","B\u266f"], ORDF=["B\u266d","E\u266d","A\u266d","D\u266d","G\u266d","C\u266d","F\u266d"];
       const expl=isFlat
         ? (n===1? "One flat (B\u266d) alone is the exception — it is always F Major."
                 : `The flats are ${ORDF.slice(0,n).join(", ")} — the NEXT-TO-LAST flat (${ORDF[n-2]}) names the key: ${correct}.`)
@@ -204,6 +204,59 @@ const Quiz=(()=>{
         explain:expl,
         hint:isFlat? "Next-to-last flat = the key name (one flat alone = F Major)."
                    : "Find the last sharp, then go up one half step." };
+    },
+    /* v5.3 — name the interval between two notes (Unit 8, L33)
+       (params:{min:1,max:8, kind:"melodic"|"harmonic"|"both", ask:"number"|"kind", clef}) */
+    "interval-id": p=>{
+      const NAMES={1:"Unison",2:"2nd",3:"3rd",4:"4th",5:"5th",6:"6th",7:"7th",8:"Octave"};
+      const min=(p&&p.min)||1, max=(p&&p.max)||8;
+      const kind=(p&&p.kind)||"both";
+      const num=min+Math.floor(Math.random()*(max-min+1));
+      const L=["C","D","E","F","G","A","B"];
+      const clef=(p&&p.clef)||"treble";
+      const roots=clef==="bass"? ["C3","D3","E3","F3","G3"] : ["C4","D4","E4","F4","G4"];
+      const root=pick(roots);
+      const ri=L.indexOf(root[0]), oct=+root[1];
+      const ui=ri+num-1, upper=L[ui%7]+(oct+Math.floor(ui/7));
+      const harm=kind==="harmonic"||(kind==="both"&&Math.random()<.5);
+      const notes=harm? [{p:root,d:"w"},{p:upper,d:"w",chord:true}] : [{p:root,d:"h"},{p:upper,d:"h"}];
+      const staff={clef,notes,width:220};
+      const countTxt=L.slice(ri,ri+num).map((l,i2)=>`${L[(ri+i2)%7]}(${i2+1})`).join(" ");
+      if((p&&p.ask)==="kind"){
+        const correct=harm?"Harmonic":"Melodic";
+        const choices=shuffle(["Melodic","Harmonic"]);
+        return { type:"mc", q:"Is this interval MELODIC or HARMONIC?",
+          staff, choices, answer:choices.indexOf(correct),
+          explain:harm? "The notes are stacked and sound TOGETHER — a harmonic interval."
+                      : "The notes come one AFTER another — a melodic interval.",
+          hint:"Stacked = together = harmonic; side by side = one after another = melodic." };
+      }
+      const correct=NAMES[num];
+      const all=Object.values(NAMES);
+      const choices=shuffle([correct,...shuffle(all.filter(c=>c!==correct)).slice(0,3)]);
+      return { type:"mc", q:"Name this interval. (Count BOTH notes!)",
+        staff, choices, answer:choices.indexOf(correct),
+        explain:`${countTxt} — a ${correct}${num===1?" (both notes identical)":num===8?" (same letter, an octave apart)":""}.`,
+        hint:"Start on the lower note as 1 and count every letter name up to the top note." };
+    },
+    /* v5.3 — navigate the circle of fifths (Unit 8, L34)
+       (params:{maxMove:3}) */
+    "circle-nav": p=>{
+      const CW=["C","G","D","A","E","B","F\u266f","C\u266f"], CCW=["C","F","B\u266d","E\u266d","A\u266d","D\u266d","G\u266d","C\u266d"];
+      const cw=Math.random()<.5;
+      const seq=cw?CW:CCW, dir=cw?"CLOCKWISE":"COUNTERCLOCKWISE";
+      const maxMove=(p&&p.maxMove)||3;
+      const move=1+Math.floor(Math.random()*maxMove);
+      const start=Math.floor(Math.random()*(seq.length-move));
+      const target=seq[start+move];
+      const path=seq.slice(start,start+move+1);
+      const wrongs=shuffle([...CW.slice(1),...CCW.slice(1)].filter(k=>k!==target)).slice(0,3);
+      const choices=shuffle([target+" Major",...wrongs.map(w=>w+" Major")]);
+      return { type:"mc",
+        q:`Circle of fifths: start at ${seq[start]} Major and move ${move} step${move>1?"s":""} ${dir}. Where do you land?`,
+        choices, answer:choices.indexOf(target+" Major"),
+        explain:`${dir.toLowerCase()} adds one ${cw?"sharp":"flat"} per step: ${path.join(" \u2192 ")}.`,
+        hint:cw? "Clockwise = up a 5th, +1 sharp each step." : "Counterclockwise = +1 flat each step." };
     },
     /* v5 — enharmonic pairs */
     "enharmonic": ()=>{
