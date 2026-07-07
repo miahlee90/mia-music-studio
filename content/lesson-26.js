@@ -123,7 +123,7 @@ LESSON_CONTENT[26]={
       try:{ type:"custom",
         hint:"Wide, wide, then narrow: W – W – H.",
         mount:(container,fb)=>MF_L26_blueprint(container,fb) } },
-    { say:"Now the big idea: a <b>MAJOR SCALE</b> is <b>eight notes — two tetrachords joined by one whole step</b>. C–D–E–F is the C tetrachord; step up a whole step to G, and G–A–B–C is the G tetrachord. The first and last note share the same name: the <b>KEYNOTE</b>. A scale can begin on any note. \u{1F447} <b>What joins the two tetrachords of a major scale?</b>",
+    { say:"Now the big idea: a <b>MAJOR SCALE</b> is <b>eight notes — two tetrachords joined by one whole step</b>. C–D–E–F is the C tetrachord; step up a whole step to G, and G–A–B–C is the G tetrachord. The first and last note share the same name: the <b>KEYNOTE</b> — so the eight written notes contain <b>7 different pitches</b>, with the keynote appearing twice. A scale can begin on any note. \u{1F447} <b>What joins the two tetrachords of a major scale?</b>",
       show:{ type:"custom", mount:(el)=>MF_L26_staffKb(el,
         {clef:"treble",notes:[{p:"C4",d:"q",label:"1"},{p:"D4",d:"q",label:"2"},{p:"E4",d:"q",label:"3"},{p:"F4",d:"q",label:"4"},{p:"G4",d:"q",label:"5"},{p:"A4",d:"q",label:"6"},{p:"B4",d:"q",label:"7"},{p:"C5",d:"q",label:"8"}],steps:[{from:3,to:4,label:"Whole Step"}],brackets:[{from:0,to:3,label:"C tetrachord"},{from:4,to:7,label:"G tetrachord"}],width:520},
         {start:60,octaves:1,labels:true,marks:[60,62,64,65,67,69,71,72]}) },

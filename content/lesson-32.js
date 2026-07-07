@@ -96,7 +96,7 @@ LESSON_CONTENT[32]={
     "Perform a chromatic scale on the keyboard"
   ],
   steps:[
-    { say:"The <b>CHROMATIC SCALE</b> is made up entirely of <b>half steps in consecutive order</b> — on a keyboard it uses <b>every key, black and white</b>. It may begin on any note, and within one octave there are <b>12 tones</b>. \u{1F447} <b>How many different pitches are inside one octave of a chromatic scale?</b>",
+    { say:"The <b>CHROMATIC SCALE</b> is made up entirely of <b>half steps in consecutive order</b> — on a keyboard it uses <b>every key, black and white</b>. It may begin on any note, and within one octave there are <b>12 tones</b>. (Careful counting: the MAJOR scale from Lesson 26 is written with 8 notes but contains only <b>7 different pitches</b> — its 8th note repeats the keynote an octave higher. The chromatic scale contains all <b>12</b>.) \u{1F447} <b>How many different pitches are inside one octave of a chromatic scale?</b>",
       show:{ type:"custom", mount:(el)=>MF_L32_staffKb(el,
         {clef:"treble",notes:[{p:"C4",d:"q",label:"C"},{p:"C#4",d:"q",label:"C♯"},{p:"D4",d:"q",label:"D"},{p:"D#4",d:"q",label:"D♯"},{p:"E4",d:"q",label:"E"},{p:"F4",d:"q",label:"F"},{p:"F#4",d:"q",label:"F♯"},{p:"G4",d:"q",label:"G"},{p:"G#4",d:"q",label:"G♯"},{p:"A4",d:"q",label:"A"},{p:"A#4",d:"q",label:"A♯"},{p:"B4",d:"q",label:"B"},{p:"C5",d:"q",label:"C"}],width:560},
         {start:60,octaves:1,labels:true,marks:[60,61,62,63,64,65,66,67,68,69,70,71,72]}) },
@@ -118,11 +118,17 @@ LESSON_CONTENT[32]={
       try:{ type:"custom",
         hint:"Half step = the VERY next key, black or white. E–F and B–C count too!",
         mount:(container,fb)=>MF_L32_detective(container,fb) } },
-    { say:"Chromatic vs major, side by side: the <b>major scale</b> follows W–W–H–W–W–W–H and SKIPS keys; the <b>chromatic scale</b> takes every key with no skips. \u{1F447} <b>Which scale contains every pitch within the octave?</b>",
-      try:{ type:"mc", choices:["The chromatic scale","The major scale","Both","Neither"], answer:0,
-        success:"✓ Only the chromatic scale — twelve pitches, nothing left out.",
-        fail:"Which one had a black-and-white keyboard fully marked?",
-        hint:"'Chromatic = every key.'" } }
+    { say:"Side by side, precisely: the <b>MAJOR SCALE</b> is a seven-note (diatonic) scale in the pattern <b>W–W–H–W–W–W–H</b> — <b>7 different pitches</b> plus the repeated keynote — and its job is to <b>establish a key center</b> that melodies and chords are built around. The <b>CHROMATIC SCALE</b> contains <b>all 12 pitches</b> in half steps — <b>no key center, no hierarchy</b>: its job is <b>color</b>, smooth connecting motion between notes, and travel between keys. \u{1F447} <b>How many DIFFERENT pitches does each scale contain within one octave?</b>",
+      show:{ type:"html", html:`<div style="max-width:520px;margin:0 auto"><table style="width:100%;border-collapse:collapse;font-size:14px;text-align:center">
+        <tr style="color:var(--muted)"><th style="padding:4px"></th><th>Major scale</th><th>Chromatic scale</th></tr>
+        <tr><td style="text-align:left;color:var(--muted)">Different pitches</td><td><b>7</b> (+ repeated keynote)</td><td><b>12</b> (every key)</td></tr>
+        <tr><td style="text-align:left;color:var(--muted)">Pattern</td><td>W–W–H–W–W–W–H</td><td>all half steps</td></tr>
+        <tr><td style="text-align:left;color:var(--muted)">Job</td><td>establishes the KEY CENTER</td><td>color &amp; connection — no center</td></tr>
+      </table></div>` },
+      try:{ type:"mc", choices:["Major 7 · Chromatic 12","Major 8 · Chromatic 13","Both contain 12","Major 7 · Chromatic 10"], answer:0,
+        success:"✓ 7 vs 12 — the written 8th and 13th notes simply repeat the keynote an octave higher.",
+        fail:"Don't count the repeated keynote at the top of either scale.",
+        hint:"Different PITCHES, not written notes." } }
   ],
   examples:[
     { caption:"Ascending chromatic scale from C — sharps on the way up. Every neighboring note is one half step.",
@@ -180,6 +186,8 @@ LESSON_CONTENT[32]={
       explain:"Ascending = sharps: D♯." },
     { type:"mc", q:"Complete the descending spelling: C – B – ____ – A", choices:["B♭","A♯","G"], answer:0,
       explain:"Descending = flats: B♭." },
+    { type:"mc", q:"Within one octave, the major scale has ____ different pitches; the chromatic scale has ____.", choices:["7 · 12","8 · 13","8 · 12"], answer:0,
+      explain:"Both scales END on the repeated keynote — it doesn't count twice." },
     /* — from the unit review sheet — */
     { type:"mc", q:"The chromatic scale is made up entirely of ____ in consecutive order.", choices:["half steps","whole steps","thirds"], answer:0,
       explain:"Review-sheet wording — half steps, one after another." },
@@ -207,6 +215,11 @@ LESSON_CONTENT[32]={
       explain:"Twelve — the 13th written note repeats the keynote.", hint:"Don't double-count the top note." },
     { type:"mc", q:"Every interval in a chromatic scale is a ____ step.", choices:["half","whole","skipped"], answer:0,
       explain:"Half steps only.", hint:"The definition itself." },
+    { type:"mc", q:"Which comparison is correct?",
+      choices:["Major: 7 different pitches, establishes a key center · Chromatic: all 12, adds color with no key center",
+               "Major: 12 pitches · Chromatic: 7 pitches",
+               "Both scales establish a key center"], answer:0,
+      explain:"The major scale builds a home key; the chromatic scale supplies every color without one.", hint:"Which scale has a 'home'?" },
     { type:"mc", q:"Complete the ascending chromatic scale: C  C♯  D  ____  E  F  F♯  G  ____  A  A♯  B  C",
       choices:["D♯ · G♯","E♭ · A♭","D · G"], answer:0,
       explain:"Ascending uses sharps: D♯ and G♯.", hint:"One half step above D, one above G." },
@@ -237,7 +250,8 @@ LESSON_CONTENT[32]={
     "✔ On the keyboard: <b>every key, black and white</b>.",
     "✔ Spelling convention: <b>ascending → sharps</b>, <b>descending → flats</b>.",
     "✔ It may begin on <b>any note</b>.",
-    "✔ Major scale = a PATTERN with skips; chromatic scale = the full staircase."
+    "✔ Count carefully: <b>major = 7 different pitches</b> (the 8th written note repeats the keynote) · <b>chromatic = all 12</b>.",
+    "✔ Jobs differ: the major scale <b>establishes a key center</b>; the chromatic scale adds <b>color and connection</b> with no center."
   ],
   tips:[
     "The chromatic scale is your interval ruler: ANY interval can be measured by counting its half steps.",
