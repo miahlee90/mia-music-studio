@@ -39,7 +39,7 @@ function MF_L43_chart(container,fb){
 function MF_L43_pulse(container,fb){
   const SPB=.34, SEQ=[79,72,72,76,72,72], NAME={79:"G",76:"E",72:"C"};
   let playing=false, taps=[], t0=0, timers=[];
-  container.innerHTML=`<div class="big-q" style="text-align:center">6/8 pulses in TWO groups of three: <b>1</b>-2-3-<b>4</b>-5-6. Press play — after the <b>READY… GO!</b> count-in, tap the drum on beats <b>1</b> and <b>4</b> of each measure — the repeat sign plays the set twice!</div>
+  container.innerHTML=`<div class="big-q" style="text-align:center">6/8 pulses in TWO groups of three: <b>1</b>-2-3-<b>4</b>-5-6. Press play — after the <b>4-3-2-1</b> count-in, tap the drum on beats <b>1</b> and <b>4</b> of each measure — the repeat sign plays the set twice!</div>
     <div class="l43-ready" style="text-align:center;font-weight:800;font-size:1.35rem;min-height:32px;color:#e11d48"></div>
     <div class="l43-dots" style="display:flex;justify-content:center;align-items:center;gap:7px;margin:10px 0;flex-wrap:wrap"></div>
     <div style="text-align:center">
@@ -62,14 +62,14 @@ function MF_L43_pulse(container,fb){
   rep.style.cssText="display:flex;align-items:center;gap:3px;margin-left:8px;height:36px";
   rep.innerHTML=`<div style="display:flex;flex-direction:column;gap:6px;justify-content:center"><div style="width:5px;height:5px;border-radius:50%;background:#23263e"></div><div style="width:5px;height:5px;border-radius:50%;background:#23263e"></div></div><div style="width:2.5px;height:36px;background:#23263e"></div><div style="width:6px;height:36px;background:#23263e"></div>`;
   dotRow.appendChild(rep);
-  const IN=6*SPB; /* one silent count-in measure: READY on 1, GO on 4 */
+  const IN=12*SPB; /* two silent count-in measures: 4-3-2-1 on the big pulses */
   container.querySelector(".l43-pp").onclick=function(){
     if(playing) return; playing=true; taps=[]; this.disabled=true; msg.textContent="";
     timers.forEach(clearTimeout); timers=[];
     dots.forEach(d=>d.style.background="#fff");
-    MFAudio.tone(45,.14,0,.6);        timers.push(setTimeout(()=>ready.textContent="READY\u2026",0));
-    MFAudio.tone(45,.14,3*SPB,.65);   timers.push(setTimeout(()=>ready.textContent="GO!",3*SPB*1000));
-    timers.push(setTimeout(()=>ready.textContent="",IN*1000+600));
+    [0,1,2,3].forEach(c=>{ MFAudio.tone(45,.14,c*3*SPB,c===3?.7:.55);
+      timers.push(setTimeout(()=>ready.textContent=String(4-c),c*3*SPB*1000)); });
+    timers.push(setTimeout(()=>ready.textContent="",IN*1000+250));
     for(let pass=0;pass<2;pass++){
       const base=IN+pass*12*SPB;
       if(pass===1) timers.push(setTimeout(()=>{ dots.forEach(d=>d.style.background="#fff"); ready.textContent="REPEAT!"; timers.push(setTimeout(()=>ready.textContent="",900)); },base*1000-40));
@@ -86,7 +86,7 @@ function MF_L43_pulse(container,fb){
       const extra=taps.length-hit;
       if(hit>=6&&extra<=2){ msg.textContent="\u2713 Strong beats nailed!";
         fb(true,`\u2713 ${hit} of 8 strong beats across the repeat — you tapped WITH the big pulses (the G and the E). That two-pulse swing is the feel of 6/8!`); }
-      else { msg.textContent="Try again — wait for GO!, then tap the big red circles' beats (the set repeats once).";
+      else { msg.textContent="Try again — count down with the clicks, then tap the big red circles' beats (the set repeats once).";
         fb(false,"Tap only when the BIG circles light: beat 1 (G) and beat 4 (E) of each measure — through BOTH passes."); }
     },(IN+24*SPB)*1000+400));
   };

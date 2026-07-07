@@ -35,28 +35,51 @@ function MF_L45_ear(container,fb){
   ask();
 }
 
-/* triplet tap: tap 3 evenly against the played beat */
+/* triplet tap v2 (instructor): 4-3-2-1 count-in (예비박), six circles in two
+   beat-groups (tri-po-let x2) that light at the ideal moments, then score. */
 function MF_L45_tap(container,fb){
-  let taps=[], playing=false, t0=0;
-  container.innerHTML=`<div class="big-q" style="text-align:center">Your turn to PLAY a triplet: press start, then tap the drum THREE times, evenly, inside each beat — “1-trip-let, 2-trip-let”!</div>
+  const BPS=.9, CIN=4, SYL=["tri","po","let"];
+  let taps=[], playing=false, t0=0, timers=[];
+  container.innerHTML=`<div class="big-q" style="text-align:center">Your turn to PLAY a triplet: press start, count down <b>4-3-2-1</b> with the clicks, then tap the drum THREE times, evenly, inside each beat — \u201ctri-po-let, tri-po-let\u201d!</div>
+    <div class="l45-cd" style="text-align:center;font-weight:800;font-size:1.5rem;min-height:34px;color:#e11d48"></div>
+    <div class="l45-dots" style="display:flex;justify-content:center;align-items:center;gap:7px;margin:8px 0"></div>
     <div style="text-align:center">
-      <button class="play l45-tp">▶ Start (2 beats)</button>
+      <button class="play l45-tp">\u25b6 Start</button>
       <button class="play l45-td" style="font-size:1.4rem">\u{1F941} TAP</button></div>
     <div class="l45-tm" style="text-align:center;font-weight:800;min-height:24px;color:var(--correct)"></div>`;
-  const msg=container.querySelector(".l45-tm");
-  const BPS=.9; /* seconds per beat */
+  const cd=container.querySelector(".l45-cd"), msg=container.querySelector(".l45-tm"),
+        dotRow=container.querySelector(".l45-dots"), dots=[];
+  for(let b=0;b<2;b++){
+    if(b){ const gap=document.createElement("div"); gap.style.cssText="width:3px;height:32px;background:#23263e;margin:0 8px;border-radius:2px"; dotRow.appendChild(gap); }
+    for(let k=0;k<3;k++){
+      const strong=k===0, d=document.createElement("div");
+      d.textContent=SYL[k];
+      d.style.cssText=`width:${strong?36:29}px;height:${strong?36:29}px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:11px;border:${strong?3:2}px solid ${strong?"#e11d48":"#4434d4"};color:#1c1e54;background:#fff;transition:background .12s`;
+      dotRow.appendChild(d); dots.push(d);
+    }
+  }
   container.querySelector(".l45-tp").onclick=function(){
-    if(playing) return; playing=true; taps=[]; this.disabled=true; msg.textContent="…tap tri-po-let on each beat!";
-    [0,1].forEach(k=>MFAudio.tone(48,.12,k*BPS,.65));
+    if(playing) return; playing=true; taps=[]; this.disabled=true; msg.textContent="";
+    timers.forEach(clearTimeout); timers=[];
+    dots.forEach(d=>d.style.background="#fff");
+    for(let c=0;c<CIN;c++){ MFAudio.tone(45,.12,c*BPS,c===CIN-1?.68:.55);
+      timers.push(setTimeout(()=>cd.textContent=String(CIN-c),c*BPS*1000)); }
+    const IN=CIN*BPS;
+    timers.push(setTimeout(()=>cd.textContent="",IN*1000+250));
+    [0,1].forEach(b=>MFAudio.tone(48,.12,IN+b*BPS,.68));
+    for(let b=0;b<2;b++) for(let k=0;k<3;k++){
+      const t=IN+(b+k/3)*BPS, ix=b*3+k;
+      timers.push(setTimeout(()=>{ dots[ix].style.background = k===0? "#ffd9e1" : "#e3e1fd"; },t*1000));
+    }
     t0=performance.now();
-    setTimeout(()=>{ playing=false; this.disabled=false;
-      const targets=[]; [0,1].forEach(b=>[0,1,2].forEach(k=>targets.push((b+k/3)*BPS*1000)));
-      let hit=0; targets.forEach(tt=>{ if(taps.some(tp=>Math.abs(tp-tt)<170)) hit++; });
-      if(hit>=4&&taps.length<=8){ msg.textContent=`✓ ${hit} of 6 triplet slots hit!`;
-        fb(true,`✓ You fit three even taps inside the beats — a real performed triplet. Smooth, not lumpy: that's the triplet feel of jazz, blues, and lullabies.`); }
+    timers.push(setTimeout(()=>{ playing=false; this.disabled=false;
+      const targets=[]; for(let b=0;b<2;b++) for(let k=0;k<3;k++) targets.push((IN+(b+k/3)*BPS)*1000);
+      let hit=0; targets.forEach(tt=>{ if(taps.some(tp=>Math.abs(tp-tt)<180)) hit++; });
+      if(hit>=4&&taps.length<=8){ msg.textContent=`\u2713 ${hit} of 6 triplet slots hit!`;
+        fb(true,`\u2713 You fit three even taps inside the beats — a real performed triplet. Smooth, not lumpy: that's the triplet feel of jazz, blues, and lullabies.`); }
       else { msg.textContent="Keep the three taps EVEN — try again!";
         fb(false,"Chant 'tri-po-let' out loud as you tap — three equal syllables, three equal taps."); }
-    }, 2*BPS*1000+500);
+    },(IN+2*BPS)*1000+500));
   };
   container.querySelector(".l45-td").onclick=()=>{ if(!playing) return; MFAudio.tone(72,.1,0,.5); taps.push(performance.now()-t0); };
 }
