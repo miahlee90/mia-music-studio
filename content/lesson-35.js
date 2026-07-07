@@ -52,7 +52,7 @@ function MF_L35_build(container,fb){
   container.innerHTML=`<div class="big-q l35-bq" style="text-align:center"></div><div class="l35-bkb"></div>
     <p style="text-align:center;font-size:13.5px;color:var(--primary);font-weight:700;margin:6px 0 0">C is Do, the keynote. Every answer today lives inside the C major scale!</p>`;
   const q=container.querySelector(".l35-bq"), kbHolder=container.querySelector(".l35-bkb");
-  function ask(){
+  function ask(cueC){
     q.innerHTML=`Build ${i+1} of ${ROUNDS.length}: press the key a <b>${ROUNDS[i].name}</b> above C.`;
     kbHolder.innerHTML="";
     kb=Keyboard.create(kbHolder,{start:60,octaves:1,labels:true,
@@ -61,10 +61,11 @@ function MF_L35_build(container,fb){
         if(m===cur.m){ kb.mark([60,m]); MFAudio.tone(60,.7,0,.4); MFAudio.tone(m,.7,0,.4); i++;
           if(i>=ROUNDS.length){ q.textContent="Every quality built!";
             fb(true,`✓ C→${cur.letter} = ${cur.name}. The whole Perfect and Major team, built by hand!`); }
-          else { fb(true,`✓ C→${cur.letter} = ${cur.name} (${cur.hs} half steps). Next…`); setTimeout(ask,1300); } }
+          else { fb(true,`✓ C→${cur.letter} = ${cur.name} (${cur.hs} half steps). Next…`); setTimeout(()=>ask(true),1300); } }
         else { MFAudio.tone(40,.2); fb(false,`Count up the C major scale from C as 1 — the ${cur.name.split(" ")[1]} scale note is the answer.`); }
       }});
-    setTimeout(()=>{ /* hear the root C - flash it purple WITHOUT triggering the answer handler */
+    if(cueC) setTimeout(()=>{ /* hear the root C - flash it purple WITHOUT triggering the answer handler.
+      DD-31: never at page load - only after the student's own action brought us here. */
       MFAudio.tone(60,.5); const ke=kb.el.children[0];
       if(ke){ ke.classList.add("on"); setTimeout(()=>ke.classList.remove("on"),420); } },350);
   }

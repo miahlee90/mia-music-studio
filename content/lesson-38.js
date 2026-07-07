@@ -130,7 +130,7 @@ LESSON_CONTENT[38]={
         success:"✓ Do(1) Re(2) Mi(3) Fa(4) SOL(5). Sing the ladder until it's automatic!",
         fail:"Count up: Do, Re, Mi, Fa…",
         hint:"Do-Re-Mi-Fa-?" } },
-    { say:"The magic ingredient is <b>MOVABLE DO</b>: Do is always the tonic (keynote) of the current key. In C major, Do = C. In G major, Do = G, so F♯ is Ti. The note names stay the same. Only the solfège syllables (Do, Re, Mi...) change. \u{1F447} <b>In F major, which note is Do?</b>",
+    { say:"The magic ingredient is <b>MOVABLE DO</b>: Do is always the tonic (keynote) of the current key. In C major, Do = C. In G major, Do = G. The note names stay the same. Only the solfège syllables (Do, Re, Mi...) change. \u{1F447} <b>In F major, which note is Do?</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:110,keysig:"F",notes:[
         {p:"F4",d:"q",label:"Do"},{p:"G4",d:"q",label:"Re"},{p:"A4",d:"q",label:"Mi"},{p:"Bb4",d:"q",acc:"none",label:"Fa"},{p:"C5",d:"q",label:"Sol"},{p:"D5",d:"q",label:"La"},{p:"E5",d:"q",label:"Ti"},{p:"F5",d:"q",label:"Do"}],width:520} },
       try:{ type:"mc", choices:["F — the keynote","C — always C","B♭ — the flat"], answer:0,
