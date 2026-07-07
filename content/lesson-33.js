@@ -6,36 +6,47 @@
    Game-forward: count-up climber, Interval Sprint (gen-race), ear rounds, interval hunt.
    NOTE: edit by FULL-FILE REWRITE only. */
 
-/* count-up climber: tap up the alphabet from the lower note, counting both ends */
+/* count-up climber v2 (instructor): notes + KEYBOARD — the student PRESSES every key
+   from the lower note to the upper one; each pressed key stays colored and shows its
+   count number, so the interval number appears right on the keys. */
 function MF_L33_countUp(container,fb){
   const ROUNDS=[{lo:"C",hi:"F",num:4},{lo:"D",hi:"G",num:4},{lo:"C",hi:"G",num:5},{lo:"E",hi:"G",num:3}];
   const NAMES={2:"2nd",3:"3rd",4:"4th",5:"5th"};
+  const MID={C:60,D:62,E:64,F:65,G:67,A:69,B:71};
+  const WH=[60,62,64,65,67,69,71,72];
   const L=["C","D","E","F","G","A","B"];
-  let r=0,k=0;
+  let r=0,k=0,kb=null,pressed=[];
   container.innerHTML=`<div class="big-q l33-q" style="text-align:center"></div>
     <div class="l33-staff"></div>
     <div class="l33-count" style="text-align:center;font-weight:800;font-size:1.15rem;min-height:26px;color:var(--correct)"></div>
-    <div class="choices chips l33-ch"></div>`;
+    <div class="l33-kb"></div>
+    <p style="text-align:center;font-size:13.5px;color:var(--primary);font-weight:700;margin:6px 0 0">Count EVERY key from the lower note to the higher one — and include BOTH notes. The lower note is 1!</p>`;
   const q=container.querySelector(".l33-q"), holder=container.querySelector(".l33-staff"),
-        cnt=container.querySelector(".l33-count"), ch=container.querySelector(".l33-ch");
+        cnt=container.querySelector(".l33-count"), kbHolder=container.querySelector(".l33-kb");
   function path(){ const cur=ROUNDS[r], s=L.indexOf(cur.lo); return L.slice(s,s+cur.num); }
+  function badge(m,n){
+    const wi=WH.indexOf(m); if(wi<0) return;
+    const keyEl=kb.el.children[wi]; if(!keyEl) return;
+    keyEl.insertAdjacentHTML("beforeend",`<div style="position:absolute;top:6px;left:0;width:100%;text-align:center;font-weight:800;font-size:16px;color:var(--primary);pointer-events:none">${n}</div>`);
+  }
   function ask(){
-    const cur=ROUNDS[r]; k=0; cnt.textContent="";
-    q.innerHTML=`Climb ${r+1} of ${ROUNDS.length}: from <b>${cur.lo}</b> up to <b>${cur.hi}</b> — tap every letter on the way, starting with ${cur.lo} itself!`;
+    const cur=ROUNDS[r]; k=0; pressed=[]; cnt.textContent="";
+    q.innerHTML=`Climb ${r+1} of ${ROUNDS.length}: from <b>${cur.lo}</b> up to <b>${cur.hi}</b> — press every key on the way, starting with <b>${cur.lo}</b> itself!`;
     Staff.render(holder,{clef:"treble",notes:[{p:cur.lo+"4",d:"h"},{p:cur.hi+"4",d:"h"}],brackets:[{from:0,to:1,label:"?"}],width:260});
-    ch.innerHTML="";
-    L.forEach(l=>{ const b=document.createElement("button"); b.textContent=l;
-      b.onclick=()=>{
-        const p=path();
-        if(l===p[k]){ k++; MFAudio.tone(60+"CDEFGAB".indexOf(l)*2,.25);
+    kbHolder.innerHTML="";
+    kb=Keyboard.create(kbHolder,{start:60,octaves:1,labels:true,marks:[MID[cur.lo]],
+      onKey:m=>{
+        const p=path(), pathM=p.map(x=>MID[x]);
+        if(m===pathM[k]){
+          k++; pressed.push(m); kb.mark(pressed); badge(m,k);
           cnt.textContent=p.slice(0,k).map((x,i2)=>`${x}(${i2+1})`).join("  ");
-          if(k>=p.length){ r++;
-            if(r>=ROUNDS.length){ ch.style.display="none";
-              fb(true,`✓ ${cur.lo}→${cur.hi} counts ${cur.num} letters — a ${NAMES[cur.num]}! You always count BOTH the bottom and the top note.`); q.textContent="Interval counting mastered!"; }
-            else { fb(true,`✓ ${p.map((x,i2)=>`${x}(${i2+1})`).join(" ")} — a ${NAMES[cur.num]}! Next climb…`); ask(); } } }
-        else { MFAudio.tone(40,.2); fb(false, k===0? `Start on the LOWER note itself — ${p[0]} counts as 1!` : `Go letter by letter — after ${p[k-1]} comes ${p[k]}.`); }
-      };
-      ch.appendChild(b); });
+          if(k>=p.length){ const cur2=ROUNDS[r]; r++;
+            if(r>=ROUNDS.length){ q.textContent="Interval counting mastered!";
+              fb(true,`✓ ${cur2.lo}→${cur2.hi}: ${cur2.num} keys pressed, both notes included — a ${NAMES[cur2.num]}!`); }
+            else { fb(true,`✓ ${p.map((x,i2)=>`${x}(${i2+1})`).join(" ")} — ${cur2.num} keys = a ${NAMES[cur2.num]}! Next climb…`); setTimeout(ask,1300); } } }
+        else if(WH.indexOf(m)<0){ fb(false,"Interval NUMBERS count letter names — stay on the white keys for these notes."); }
+        else { MFAudio.tone(40,.2); fb(false, k===0? `Start on the LOWER note itself — press ${p[0]} first, it counts as 1!` : `Press the very NEXT key — after ${p[k-1]} comes ${p[k]}.`); }
+      }});
   }
   ask();
 }
@@ -133,9 +144,9 @@ LESSON_CONTENT[33]={
     "Name common intervals from the staff"
   ],
   steps:[
-    { say:"An <b>INTERVAL</b> is the distance in pitch between two notes. It is counted from the <b>lower note</b> to the higher one, <b>with the lower note counted as 1</b>. C→D = 2nd, C→E = 3rd, C→F = 4th, C→G = 5th. \u{1F447} <b>Climb each interval yourself — tap every letter, counting both ends:</b>",
+    { say:"An <b>INTERVAL</b> is the distance in pitch between two notes. It is counted from the <b>lower note</b> to the higher one, <b>with the lower note counted as 1</b>. C→D = 2nd, C→E = 3rd, C→F = 4th, C→G = 5th. \u{1F447} <b>Climb each interval on the KEYBOARD — press every key from the bottom note to the top:</b>",
       try:{ type:"custom",
-        hint:"The bottom note is 1! C→F: C(1) D(2) E(3) F(4) = a 4th.",
+        hint:"Count every key between the two notes AND both notes themselves — the lower note is 1. C→F: C(1) D(2) E(3) F(4) = a 4th.",
         mount:(container,fb)=>MF_L33_countUp(container,fb) } },
     { say:"Two special names: notes that are <b>identical</b> form a <b>UNISON</b> (also called a prime interval), and the interval of an <b>8th</b> is called an <b>OCTAVE</b>. \u{1F447} <b>The interval of an 8th has which special name?</b>",
       show:{ type:"staff", spec:{clef:"treble",notes:[{p:"C4",d:"w"},{p:"C4",d:"w",chord:true},{p:"E4",d:"w"},{p:"E5",d:"w",chord:true}],brackets:[{from:0,to:1,label:"unison"},{from:2,to:3,label:"octave"}],width:320} },
