@@ -47,10 +47,10 @@ const LESSONS=[
  {n:44, title:"3/8 and 6/8 Time Signatures at Fast Tempos", unit:11, book:2, time:15, kw:["6/8 fast","compound"]},
  {n:45, title:"Eighth Note Triplets", unit:11, book:2, time:15, kw:["triplet"]},
  {n:46, title:"Incomplete Measures (Pick-up Notes) and Syncopation", unit:11, book:2, time:15, kw:["pickup","anacrusis","syncopation"]},
- {n:47, title:"Triads", unit:12, book:2, time:13, kw:["triad","chord","root third fifth"]},
- {n:48, title:"Primary and Major Triads", unit:12, book:2, time:12, kw:["primary triads","I IV V"]},
- {n:49, title:"Scale Degree Names", unit:12, book:2, time:11, kw:["tonic","dominant","subdominant","scale degrees"]},
- {n:50, title:"The V7 (Dominant 7th) Chord", unit:12, book:2, time:12, kw:["V7","dominant seventh"]},
+ {n:47, title:"Triads", unit:12, book:2, time:15, kw:["triad","chord","root third fifth"]},
+ {n:48, title:"Primary and Major Triads", unit:12, book:2, time:15, kw:["primary triads","I IV V"]},
+ {n:49, title:"Scale Degree Names", unit:12, book:2, time:15, kw:["tonic","dominant","subdominant","scale degrees"]},
+ {n:50, title:"The V7 (Dominant 7th) Chord", unit:12, book:2, time:15, kw:["V7","dominant seventh"]},
  {n:51, title:"Triads — 1st Inversion", unit:13, book:3, time:12, kw:["inversion","first inversion"]},
  {n:52, title:"Triads — 2nd Inversion", unit:13, book:3, time:12, kw:["second inversion"]},
  {n:53, title:"V7 Chord — 1st, 2nd and 3rd Inversions", unit:13, book:3, time:13, kw:["V7 inversions"]},
@@ -98,5 +98,5 @@ const UNITS=[
  {unit:18, book:3, name:"Form", lessons:[72,75]}
 ];
 /* built lessons so far (index pages link only these) */
-const BUILT_THROUGH=46;
+const BUILT_THROUGH=50;
 const LESSON_CONTENT={}; /* filled by content/lesson-NN.js */

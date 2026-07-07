@@ -352,6 +352,59 @@ const Quiz=(()=>{
         explain:`${SYL[i]} is scale degree ${i+1} of ${key} Major → ${correct}.`,
         hint:`Do = ${key}. Step up the ${key} major scale one syllable at a time.` };
     },
+    /* v5.5 — root-position triads (Unit 12, L47-48)
+       (params:{ask:"root"|"numeral", clef:"treble"|"bass"}) — C-major diatonic triads */
+    "triad-id": p=>{
+      const L=["C","D","E","F","G","A","B"];
+      const ROMAN={C:"I",D:"ii",E:"iii",F:"IV",G:"V",A:"vi",B:"vii"};
+      const clef=(p&&p.clef)||"treble";
+      const roots=clef==="bass"? ["C3","D3","E3","F3","G3"] : ["C4","D4","E4","F4","G4","A4"];
+      const root=roots[Math.floor(Math.random()*roots.length)];
+      const ri=L.indexOf(root[0]), oct=+root[1];
+      const third=L[(ri+2)%7]+(oct+Math.floor((ri+2)/7));
+      const fifth=L[(ri+4)%7]+(oct+Math.floor((ri+4)/7));
+      const staff={clef,notes:[{p:root,d:"w"},{p:third,d:"w",chord:true},{p:fifth,d:"w",chord:true}],width:200};
+      if((p&&p.ask)==="numeral"){
+        const correct=ROMAN[root[0]];
+        const wrongs=Object.values(ROMAN).filter(r=>r!==correct).sort(()=>Math.random()-.5).slice(0,3);
+        const choices=[correct,...wrongs].sort(()=>Math.random()-.5);
+        return { type:"mc", q:"In the key of C major, which ROMAN NUMERAL names this triad?",
+          staff, choices, answer:choices.indexOf(correct),
+          explain:`Root ${root[0]} = scale degree ${ri+1} of C major → ${correct}.`,
+          hint:"Count the root's scale degree from C, then use the matching numeral." };
+      }
+      const correct=root[0];
+      const wrongs=L.filter(x=>x!==correct).sort(()=>Math.random()-.5).slice(0,3);
+      const choices=[correct,...wrongs].sort(()=>Math.random()-.5);
+      return { type:"mc", q:"Name the ROOT of this root-position triad.",
+        staff, choices, answer:choices.indexOf(correct),
+        explain:`Bottom note of a root-position triad = the root: ${correct} (${correct}-${third[0]}-${fifth[0]}).`,
+        hint:"In root position, the root is the LOWEST note." };
+    },
+    /* v5.5 — scale degree names (Unit 12, L49)
+       (params:{ask:"name"|"note"|"both"}) — C major */
+    "degree-name": p=>{
+      const DEG=[["Tonic","I",1,"C"],["Supertonic","ii",2,"D"],["Mediant","iii",3,"E"],
+        ["Subdominant","IV",4,"F"],["Dominant","V",5,"G"],["Submediant","vi",6,"A"],["Leading Tone","vii",7,"B"]];
+      const d=DEG[Math.floor(Math.random()*7)];
+      const mode=(p&&p.ask)==="both"? (Math.random()<.5?"name":"note") : ((p&&p.ask)||"name");
+      if(mode==="name"){
+        const correct=d[0];
+        const wrongs=DEG.map(x=>x[0]).filter(x=>x!==correct).sort(()=>Math.random()-.5).slice(0,3);
+        const choices=[correct,...wrongs].sort(()=>Math.random()-.5);
+        return { type:"mc", q:`Scale degree ${d[2]} (${d[1]}) is called the…`,
+          choices, answer:choices.indexOf(correct),
+          explain:`Degree ${d[2]} = ${d[0]} (${d[1]}). In C major, that's ${d[3]}.`,
+          hint:"Tonic-Supertonic-Mediant-Subdominant-Dominant-Submediant-Leading Tone." };
+      }
+      const correct=d[3];
+      const wrongs=DEG.map(x=>x[3]).filter(x=>x!==correct).sort(()=>Math.random()-.5).slice(0,3);
+      const choices=[correct,...wrongs].sort(()=>Math.random()-.5);
+      return { type:"mc", q:`In C major, which NOTE is the ${d[0]} (${d[1]})?`,
+        choices, answer:choices.indexOf(correct),
+        explain:`${d[0]} = degree ${d[2]} of C major = ${d[3]}.`,
+        hint:`Count up from C: degree ${d[2]}.` };
+    },
     /* v5 — enharmonic pairs */
     "enharmonic": ()=>{
       const PAIRS=[["C\u266f","D\u266d"],["D\u266f","E\u266d"],["F\u266f","G\u266d"],["G\u266f","A\u266d"],["A\u266f","B\u266d"]];
