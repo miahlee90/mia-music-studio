@@ -8,19 +8,29 @@
 
 /* the circle data: 12 positions clockwise from the top */
 const MF_L34_POS=[
-  {k:"C",  n:"0",  rel:"Am"},  {k:"G", n:"1♯", rel:"Em"}, {k:"D",n:"2♯",rel:"Bm"}, {k:"A",n:"3♯",rel:"F♯m"},
-  {k:"E",  n:"4♯", rel:"C♯m"}, {k:"B", alt:"C♭", n:"5♯", rel:"G♯m"}, {k:"F♯", alt:"G♭", n:"6♯", rel:"E♭m"},
-  {k:"C♯", alt:"D♭", n:"7♯", rel:"B♭m"}, {k:"A♭",n:"4♭",rel:"Fm"}, {k:"E♭",n:"3♭",rel:"Cm"}, {k:"B♭",n:"2♭",rel:"Gm"}, {k:"F",n:"1♭",rel:"Dm"}];
+  {k:"C",  n:"0",  rel:"Am",  cnt:"0"},
+  {k:"G",  n:"1♯", rel:"Em",  cnt:"1♯"},
+  {k:"D",  n:"2♯", rel:"Bm",  cnt:"2♯"},
+  {k:"A",  n:"3♯", rel:"F♯m", cnt:"3♯"},
+  {k:"E",  n:"4♯", rel:"C♯m", cnt:"4♯"},
+  {k:"B",  alt:"C♭", n:"5♯", rel:"G♯m", cnt:"5♯/7♭"},
+  {k:"F♯", alt:"G♭", n:"6♯", rel:"E♭m", relAlt:"D♯m", cnt:"6♯/6♭"},
+  {k:"C♯", alt:"D♭", n:"7♯", rel:"B♭m", cnt:"7♯/5♭"},
+  {k:"A♭", n:"4♭", rel:"Fm", cnt:"4♭"},
+  {k:"E♭", n:"3♭", rel:"Cm", cnt:"3♭"},
+  {k:"B♭", n:"2♭", rel:"Gm", cnt:"2♭"},
+  {k:"F",  n:"1♭", rel:"Dm", cnt:"1♭"}];
 function MF_L34_ks(label){ return label.replace("♯","#").replace("♭","b"); }
 
-/* draw the circle. opts:{blank:[indexes], hot:true(clickable), onKey(i,node), mark:[indexes],
-   minors:true → fills the inner ring with the relative minors (나란한조, Book 3)}
-   v2 (instructor 2026-07-07): COLOR two-ring design like classic charts — green outer
-   band = Major keys, warm inner band reserved for the relative minors; BIG clockwise /
-   counterclockwise arrows OUTSIDE the wheel. API unchanged (walk/build/explorer reuse). */
+/* draw the circle. opts:{blank:[indexes], hot:true(clickable), onKey(i,node), mark:[indexes]}
+   v3 (instructor 2026-07-07): TRIPLE-ring layout matching classic charts —
+   outermost ring = sharp/flat counts with NO lines (floating text), middle
+   green band = Major keys, inner amber band = relative minors (나란한조,
+   now filled in). Big clockwise/counterclockwise arrows stay OUTSIDE.
+   API unchanged (walk/build/explorer reuse; wedge clicks = the Major band). */
 function MF_L34_circle(el,opts){
   opts=opts||{};
-  const W=440,H=424,cx=220,cy=252,R2=150,R1=108,R0=64;
+  const W=460,H=452,cx=230,cy=254,R2=150,R1=108,R0=64;
   const blank=new Set(opts.blank||[]);
   const P=(r,d)=>{const a=d*Math.PI/180;return [cx+r*Math.cos(a),cy+r*Math.sin(a)];};
   const F=n=>n.toFixed(1);
@@ -30,28 +40,39 @@ function MF_L34_circle(el,opts){
   }
   let svg=`<svg viewBox="0 0 ${W} ${H}" width="100%" style="max-width:${W}px;display:block;margin:0 auto" xmlns="http://www.w3.org/2000/svg">`;
   svg+=`<defs><marker id="cofAG" markerWidth="9" markerHeight="9" refX="4.5" refY="4.5" orient="auto"><path d="M0 0 L9 4.5 L0 9 Z" fill="#2E8B57"/></marker><marker id="cofAP" markerWidth="9" markerHeight="9" refX="4.5" refY="4.5" orient="auto"><path d="M0 0 L9 4.5 L0 9 Z" fill="#533afd"/></marker></defs>`;
-  /* BIG direction arrows OUTSIDE the wheel */
-  const rA=R2+20;
+  /* BIG direction arrows OUTSIDE everything */
+  const rA=R2+38;
   const [ax1,ay1]=P(rA,-76),[ax2,ay2]=P(rA,-14);
   svg+=`<path d="M ${F(ax1)} ${F(ay1)} A ${rA} ${rA} 0 0 1 ${F(ax2)} ${F(ay2)}" fill="none" stroke="#2E8B57" stroke-width="5" marker-end="url(#cofAG)"/>`;
   const [bx1,by1]=P(rA,-104),[bx2,by2]=P(rA,-166);
   svg+=`<path d="M ${F(bx1)} ${F(by1)} A ${rA} ${rA} 0 0 0 ${F(bx2)} ${F(by2)}" fill="none" stroke="#533afd" stroke-width="5" marker-end="url(#cofAP)"/>`;
-  svg+=`<text x="${cx+118}" y="30" text-anchor="middle" style="font-weight:800;font-size:15px" fill="#2E8B57">CLOCKWISE \u21bb</text>`;
-  svg+=`<text x="${cx+118}" y="48" text-anchor="middle" style="font-weight:700;font-size:13px" fill="#2E8B57">up a 5th \u00b7 +1\u266f</text>`;
-  svg+=`<text x="${cx-118}" y="30" text-anchor="middle" style="font-weight:800;font-size:15px" fill="#533afd">\u21ba COUNTERCLOCKWISE</text>`;
-  svg+=`<text x="${cx-118}" y="48" text-anchor="middle" style="font-weight:700;font-size:13px" fill="#533afd">up a 4th \u00b7 +1\u266d</text>`;
-  /* inner ring — reserved for the relative minors (Book 3) */
+  svg+=`<text x="${cx+120}" y="30" text-anchor="middle" style="font-weight:800;font-size:15px" fill="#2E8B57">CLOCKWISE \u21bb</text>`;
+  svg+=`<text x="${cx+120}" y="48" text-anchor="middle" style="font-weight:700;font-size:13px" fill="#2E8B57">up a 5th \u00b7 +1\u266f</text>`;
+  svg+=`<text x="${cx-120}" y="30" text-anchor="middle" style="font-weight:800;font-size:15px" fill="#533afd">\u21ba COUNTERCLOCKWISE</text>`;
+  svg+=`<text x="${cx-120}" y="48" text-anchor="middle" style="font-weight:700;font-size:13px" fill="#533afd">up a 4th \u00b7 +1\u266d</text>`;
+  /* outermost ring: sharp/flat counts — NO lines, floating text */
+  MF_L34_POS.forEach((p,i)=>{
+    const [tx,ty]=P(R2+17,-90+i*30);
+    svg+=`<text x="${F(tx)}" y="${F(ty+4)}" text-anchor="middle" style="font-weight:700;font-size:12px" fill="#4a5568">${p.cnt}</text>`;
+  });
+  /* inner ring: the relative minors (나란한조) */
   MF_L34_POS.forEach((p,i)=>{
     const d0=-90+i*30, d1=d0-15, d2=d0+15;
-    svg+=`<path d="${sector(R1-2,R0,d1,d2)}" fill="#fbe9d3" stroke="#E8A33D" stroke-width="1" opacity="${opts.minors?".95":".55"}"/>`;
-    if(opts.minors&&p.rel){ const [tx,ty]=P((R1+R0)/2-1,d0);
-      svg+=`<text x="${F(tx)}" y="${F(ty+4)}" text-anchor="middle" style="font-weight:700;font-size:11px" fill="#8a5300">${p.rel}</text>`; }
+    svg+=`<path d="${sector(R1-2,R0,d1,d2)}" fill="#fbe9d3" stroke="#E8A33D" stroke-width="1"/>`;
+    const [tx,ty]=P((R1+R0)/2-1,d0);
+    if(p.relAlt){
+      svg+=`<text x="${F(tx)}" y="${F(ty)}" text-anchor="middle" style="font-weight:700;font-size:10.5px" fill="#8a5300">${p.rel}</text>`;
+      svg+=`<text x="${F(tx)}" y="${F(ty+11)}" text-anchor="middle" style="font-weight:600;font-size:9px" fill="#b07a2a">${p.relAlt}</text>`;
+    } else {
+      svg+=`<text x="${F(tx)}" y="${F(ty+4)}" text-anchor="middle" style="font-weight:700;font-size:11.5px" fill="#8a5300">${p.rel}</text>`;
+    }
+    if(i===0) svg+=`<text x="${F(tx)}" y="${F(ty+16)}" text-anchor="middle" style="font-size:8.5px;font-weight:600" fill="#b07a2a">Minor</text>`;
   });
   /* center hub */
   svg+=`<circle cx="${cx}" cy="${cy}" r="${R0-6}" fill="#eef6fb" stroke="#9fc2d8" stroke-width="2"/>`;
   svg+=`<text x="${cx}" y="${cy-6}" text-anchor="middle" style="font-weight:800;font-size:15px" fill="#1c1e54">Circle</text>`;
   svg+=`<text x="${cx}" y="${cy+12}" text-anchor="middle" style="font-weight:800;font-size:15px" fill="#1c1e54">of 5ths</text>`;
-  /* outer ring — the Major keys */
+  /* middle ring: the Major keys */
   MF_L34_POS.forEach((p,i)=>{
     const d0=-90+i*30, d1=d0-15, d2=d0+15;
     const mark=(opts.mark||[]).includes(i);
@@ -65,7 +86,10 @@ function MF_L34_circle(el,opts){
       if(p.alt){
         svg+=`<text x="${F(tx)}" y="${F(ty-1)}" text-anchor="middle" style="font-weight:800;font-size:13px" fill="#14532d">${p.k}</text>`;
         svg+=`<text x="${F(tx)}" y="${F(ty+12)}" text-anchor="middle" style="font-size:10.5px;font-weight:600" fill="#3f6212">${p.alt}</text>`;
-      } else svg+=`<text x="${F(tx)}" y="${F(ty+6)}" text-anchor="middle" style="font-weight:800;font-size:16px" fill="#14532d">${p.k}</text>`;
+      } else {
+        svg+=`<text x="${F(tx)}" y="${F(ty+(i===0?2:6))}" text-anchor="middle" style="font-weight:800;font-size:16px" fill="#14532d">${p.k}</text>`;
+        if(i===0) svg+=`<text x="${F(tx)}" y="${F(ty+16)}" text-anchor="middle" style="font-size:9px;font-weight:600" fill="#3f6212">Major</text>`;
+      }
     } else svg+=`<text x="${F(tx)}" y="${F(ty+6)}" text-anchor="middle" style="font-weight:800;font-size:16px" fill="#b9b9f9">?</text>`;
     svg+=`</g>`;
   });
