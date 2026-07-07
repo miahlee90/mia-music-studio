@@ -4,6 +4,12 @@
    arbitrary notes to memorize; staff completion verified at the keyboard.
    NOTE: edit by FULL-FILE REWRITE only. */
 
+/* staff + keyboard side by side — the keyboard makes the half steps and the black key VISIBLE */
+function MF_L27_staffKb(el,staffSpec,kbOpts){
+  const s=document.createElement("div"); el.appendChild(s); Staff.render(s,staffSpec);
+  const k=document.createElement("div"); k.style.marginTop="10px"; el.appendChild(k); Keyboard.create(k,kbOpts);
+}
+
 /* click the note that must be raised */
 function MF_L27_fixTheScale(container,fb){
   const plain={clef:"treble",notes:[{p:"G4",d:"q",label:"G"},{p:"A4",d:"q",label:"A"},{p:"B4",d:"q",label:"B"},{p:"C5",d:"q",label:"C"},{p:"D5",d:"q",label:"D"},{p:"E5",d:"q",label:"E"},{p:"F5",d:"q",label:"F ?"},{p:"G5",d:"q",label:"G"}],width:480,clickNotes:true};
@@ -71,7 +77,9 @@ LESSON_CONTENT[27]={
   ],
   steps:[
     { say:"The interval pattern never changes: <b>W–W–H–W–W–W–H</b>. Build it on <b>G</b> and the natural notes fail at one spot — so <b>F must be raised to F♯</b> to create the whole step from E. (An F♯ is used instead of G♭ to stay in <b>alphabetical order</b>.) G is the 2nd tetrachord of the C major scale! \u{1F447} <b>Which note is sharped in the G major scale?</b>",
-      show:{ type:"staff", spec:{clef:"treble",notes:[{p:"G4",d:"q",label:"G"},{p:"A4",d:"q",label:"A"},{p:"B4",d:"q",label:"B"},{p:"C5",d:"q",label:"C"},{p:"D5",d:"q",label:"D"},{p:"E5",d:"q",label:"E"},{p:"F#5",d:"q",label:"F♯"},{p:"G5",d:"q",label:"G"}],steps:[{from:0,to:1,label:"W"},{from:1,to:2,label:"W"},{from:2,to:3,label:"H"},{from:3,to:4,label:"W"},{from:4,to:5,label:"W"},{from:5,to:6,label:"W"},{from:6,to:7,label:"H"}],brackets:[{from:0,to:3,label:"G tetrachord"},{from:4,to:7,label:"D tetrachord"}],width:540} },
+      show:{ type:"custom", mount:(el)=>MF_L27_staffKb(el,
+        {clef:"treble",notes:[{p:"G4",d:"q",label:"G"},{p:"A4",d:"q",label:"A"},{p:"B4",d:"q",label:"B"},{p:"C5",d:"q",label:"C"},{p:"D5",d:"q",label:"D"},{p:"E5",d:"q",label:"E"},{p:"F#5",d:"q",label:"F♯"},{p:"G5",d:"q",label:"G"}],steps:[{from:0,to:1,label:"W"},{from:1,to:2,label:"W"},{from:2,to:3,label:"H"},{from:3,to:4,label:"W"},{from:4,to:5,label:"W"},{from:5,to:6,label:"W"},{from:6,to:7,label:"H"}],brackets:[{from:0,to:3,label:"G tetrachord"},{from:4,to:7,label:"D tetrachord"}],width:540},
+        {start:60,octaves:2,labels:true,marks:[67,69,71,72,74,76,78,79]}) },
       try:{ type:"mc", choices:["C","D","F","G"], answer:2,
         success:"✓ F → F♯, the one change that keeps the pattern perfect.",
         fail:"Find the note with the sharp sign on the staff above.",
@@ -81,7 +89,9 @@ LESSON_CONTENT[27]={
         hint:"Degrees 6–7 must be a whole step; 7–8 a half step. The culprit is the 7th note.",
         mount:(container,fb)=>MF_L27_fixTheScale(container,fb) } },
     { say:"Build the same pattern on <b>D</b> and TWO notes must be raised: <b>F♯</b> and <b>C♯</b>. (A C♯ is used instead of D♭ to stay alphabetical.) \u{1F447} <b>Which notes are sharped in the D major scale?</b>",
-      show:{ type:"staff", spec:{clef:"treble",notes:[{p:"D4",d:"q",label:"D"},{p:"E4",d:"q",label:"E"},{p:"F#4",d:"q",label:"F♯"},{p:"G4",d:"q",label:"G"},{p:"A4",d:"q",label:"A"},{p:"B4",d:"q",label:"B"},{p:"C#5",d:"q",label:"C♯"},{p:"D5",d:"q",label:"D"}],steps:[{from:1,to:2,label:"W"},{from:2,to:3,label:"H"},{from:5,to:6,label:"W"},{from:6,to:7,label:"H"}],brackets:[{from:0,to:3,label:"D tetrachord"},{from:4,to:7,label:"A tetrachord"}],width:540} },
+      show:{ type:"custom", mount:(el)=>MF_L27_staffKb(el,
+        {clef:"treble",notes:[{p:"D4",d:"q",label:"D"},{p:"E4",d:"q",label:"E"},{p:"F#4",d:"q",label:"F♯"},{p:"G4",d:"q",label:"G"},{p:"A4",d:"q",label:"A"},{p:"B4",d:"q",label:"B"},{p:"C#5",d:"q",label:"C♯"},{p:"D5",d:"q",label:"D"}],steps:[{from:1,to:2,label:"W"},{from:2,to:3,label:"H"},{from:5,to:6,label:"W"},{from:6,to:7,label:"H"}],brackets:[{from:0,to:3,label:"D tetrachord"},{from:4,to:7,label:"A tetrachord"}],width:540},
+        {start:60,octaves:2,labels:true,marks:[62,64,66,67,69,71,73,74]}) },
       try:{ type:"mc", choices:["F♯ and C♯","F♯ and G♯","C♯ and D♯","B♯ and C♯"], answer:0,
         success:"✓ F♯ (from G major) stays, and C♯ joins it.",
         fail:"Look at the two sharp signs on the staff above.",

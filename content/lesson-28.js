@@ -4,6 +4,12 @@
    staff completion verified at the keyboard.
    NOTE: edit by FULL-FILE REWRITE only. */
 
+/* staff + keyboard side by side — the keyboard makes the half steps and the black key VISIBLE */
+function MF_L28_staffKb(el,staffSpec,kbOpts){
+  const s=document.createElement("div"); el.appendChild(s); Staff.render(s,staffSpec);
+  const k=document.createElement("div"); k.style.marginTop="10px"; el.appendChild(k); Keyboard.create(k,kbOpts);
+}
+
 /* click the note that must be lowered */
 function MF_L28_fixTheScale(container,fb){
   const plain={clef:"treble",notes:[{p:"F4",d:"q",label:"F"},{p:"G4",d:"q",label:"G"},{p:"A4",d:"q",label:"A"},{p:"B4",d:"q",label:"B ?"},{p:"C5",d:"q",label:"C"},{p:"D5",d:"q",label:"D"},{p:"E5",d:"q",label:"E"},{p:"F5",d:"q",label:"F"}],width:480,clickNotes:true};
@@ -71,7 +77,9 @@ LESSON_CONTENT[28]={
   ],
   steps:[
     { say:"Same pattern, new keynote: build <b>W–W–H–W–W–W–H</b> on <b>F</b> and the natural notes fail at degree 4 — so <b>B must be lowered to B♭</b> to create the half step from A. (A B♭ is used instead of A♯ to stay in <b>alphabetical order</b>.) Notice the upper tetrachord, C–D–E–F, is the 1st tetrachord of C major! \u{1F447} <b>Which note is flatted in the F major scale?</b>",
-      show:{ type:"staff", spec:{clef:"treble",notes:[{p:"F4",d:"q",label:"F"},{p:"G4",d:"q",label:"G"},{p:"A4",d:"q",label:"A"},{p:"Bb4",d:"q",label:"B♭"},{p:"C5",d:"q",label:"C"},{p:"D5",d:"q",label:"D"},{p:"E5",d:"q",label:"E"},{p:"F5",d:"q",label:"F"}],steps:[{from:0,to:1,label:"W"},{from:1,to:2,label:"W"},{from:2,to:3,label:"H"},{from:3,to:4,label:"W"},{from:4,to:5,label:"W"},{from:5,to:6,label:"W"},{from:6,to:7,label:"H"}],brackets:[{from:0,to:3,label:"F tetrachord"},{from:4,to:7,label:"C tetrachord"}],width:540} },
+      show:{ type:"custom", mount:(el)=>MF_L28_staffKb(el,
+        {clef:"treble",notes:[{p:"F4",d:"q",label:"F"},{p:"G4",d:"q",label:"G"},{p:"A4",d:"q",label:"A"},{p:"Bb4",d:"q",label:"B♭"},{p:"C5",d:"q",label:"C"},{p:"D5",d:"q",label:"D"},{p:"E5",d:"q",label:"E"},{p:"F5",d:"q",label:"F"}],steps:[{from:0,to:1,label:"W"},{from:1,to:2,label:"W"},{from:2,to:3,label:"H"},{from:3,to:4,label:"W"},{from:4,to:5,label:"W"},{from:5,to:6,label:"W"},{from:6,to:7,label:"H"}],brackets:[{from:0,to:3,label:"F tetrachord"},{from:4,to:7,label:"C tetrachord"}],width:540},
+        {start:60,octaves:2,labels:true,marks:[65,67,69,70,72,74,76,77]}) },
       try:{ type:"mc", choices:["A","B","C","D"], answer:1,
         success:"✓ B → B♭, the one change that keeps the pattern perfect.",
         fail:"Find the note with the flat sign on the staff above.",
@@ -81,7 +89,9 @@ LESSON_CONTENT[28]={
         hint:"Degrees 3–4 must be a half step. The culprit is the 4th note.",
         mount:(container,fb)=>MF_L28_fixTheScale(container,fb) } },
     { say:"Build the pattern on <b>B♭</b> and TWO notes must be lowered: <b>B♭</b> itself and <b>E♭</b>. (An E♭ is used instead of D♯ to stay alphabetical.) \u{1F447} <b>Which notes are flatted in the B♭ major scale?</b>",
-      show:{ type:"staff", spec:{clef:"treble",notes:[{p:"Bb3",d:"q",label:"B♭"},{p:"C4",d:"q",label:"C"},{p:"D4",d:"q",label:"D"},{p:"Eb4",d:"q",label:"E♭"},{p:"F4",d:"q",label:"F"},{p:"G4",d:"q",label:"G"},{p:"A4",d:"q",label:"A"},{p:"Bb4",d:"q",label:"B♭"}],steps:[{from:2,to:3,label:"H"},{from:6,to:7,label:"H"}],brackets:[{from:0,to:3,label:"B♭ tetrachord"},{from:4,to:7,label:"F tetrachord"}],width:540} },
+      show:{ type:"custom", mount:(el)=>MF_L28_staffKb(el,
+        {clef:"treble",notes:[{p:"Bb3",d:"q",label:"B♭"},{p:"C4",d:"q",label:"C"},{p:"D4",d:"q",label:"D"},{p:"Eb4",d:"q",label:"E♭"},{p:"F4",d:"q",label:"F"},{p:"G4",d:"q",label:"G"},{p:"A4",d:"q",label:"A"},{p:"Bb4",d:"q",label:"B♭"}],steps:[{from:2,to:3,label:"H"},{from:6,to:7,label:"H"}],brackets:[{from:0,to:3,label:"B♭ tetrachord"},{from:4,to:7,label:"F tetrachord"}],width:540},
+        {start:57,octaves:2,labels:true,marks:[58,60,62,63,65,67,69,70]}) },
       try:{ type:"mc", choices:["B♭ and E♭","B♭ and C♭","E♭ and A♭","A♭ and D♭"], answer:0,
         success:"✓ B♭ (from F major) stays, and E♭ joins it.",
         fail:"Look at the two flat signs on the staff above.",

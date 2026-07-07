@@ -4,23 +4,36 @@
    joined by one whole step (not just a memorized formula); review-style staff work included.
    NOTE: edit by FULL-FILE REWRITE only. */
 
-/* build-the-blueprint: tap the three distances of a tetrachord in order */
+/* build-the-blueprint (worksheet style, per instructor sketch):
+   four notes on a staff, a ∨ under each pair, and an empty box to fill with W or H */
 function MF_L26_blueprint(container,fb){
-  const seq=["Whole Step","Whole Step","Half Step"];
+  const seq=["W","W","H"], FULL={W:"Whole Step",H:"Half Step"};
   let i=0;
-  container.innerHTML=`<div class="l26-slots" style="text-align:center;font-weight:800;letter-spacing:4px;font-size:1.2rem;margin:8px 0">◻ ◻ ◻</div>
+  container.innerHTML=`<div class="l26-bp-staff"></div>
+    <div style="display:flex;justify-content:center;gap:56px;margin:0 0 10px">
+      ${seq.map(()=>`<div style="text-align:center">
+        <div style="font-size:22px;line-height:14px;color:var(--primary-dark);font-weight:700">∨</div>
+        <div class="l26-box" style="width:46px;height:46px;border:2.5px solid var(--primary-dark);border-radius:8px;font-weight:800;font-size:22px;display:flex;align-items:center;justify-content:center;margin:6px auto 0;background:#fff"></div>
+      </div>`).join("")}
+    </div>
     <div class="choices chips l26-ch"></div>`;
-  const slots=container.querySelector(".l26-slots"), ch=container.querySelector(".l26-ch");
+  Staff.render(container.querySelector(".l26-bp-staff"),{clef:"treble",notes:[{p:"C4",d:"q"},{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"F4",d:"q"}],width:340});
+  const boxes=[...container.querySelectorAll(".l26-box")], ch=container.querySelector(".l26-ch");
   ["Whole Step","Half Step"].forEach(lbl=>{ const b=document.createElement("button"); b.textContent=lbl;
     b.onclick=()=>{
       if(i>=seq.length) return;
-      if(lbl===seq[i]){ i++; MFAudio.tone(60+i*4,.3);
-        slots.textContent=seq.slice(0,i).map(s=>s==="Whole Step"?"W":"H").concat(Array(3-i).fill("◻")).join(" ");
+      if(lbl===FULL[seq[i]]){ boxes[i].textContent=seq[i]; i++; MFAudio.tone(60+i*4,.3);
         if(i>=seq.length) fb(true,"✓ W – W – H — the tetrachord blueprint. Both halves of every major scale follow it!");
         else fb(true,`✓ ${i===1?"Whole step first…":"…another whole step…"} keep going!`); }
       else { MFAudio.tone(40,.25); fb(false, i<2?"A tetrachord starts WIDE: whole step first.":"The last distance is the small one — a half step."); }
     };
     ch.appendChild(b); });
+}
+
+/* staff + keyboard side by side — the keyboard makes the half steps VISIBLE */
+function MF_L26_staffKb(el,staffSpec,kbOpts){
+  const s=document.createElement("div"); el.appendChild(s); Staff.render(s,staffSpec);
+  const k=document.createElement("div"); k.style.marginTop="10px"; el.appendChild(k); Keyboard.create(k,kbOpts);
 }
 
 /* keyboard scale builder: play C major from the keynote up */
@@ -69,7 +82,9 @@ LESSON_CONTENT[26]={
   ],
   steps:[
     { say:"The word <b>TETRA</b> means <b>four</b>. A <b>TETRACHORD</b> is a series of four notes with the pattern <b>whole step – whole step – half step</b> — and the four notes must be in <b>alphabetical order</b>. \u{1F447} Here is the C tetrachord. <b>A tetrachord is a series of how many notes?</b>",
-      show:{ type:"staff", spec:{clef:"treble",notes:[{p:"C4",d:"q",label:"C"},{p:"D4",d:"q",label:"D"},{p:"E4",d:"q",label:"E"},{p:"F4",d:"q",label:"F"}],steps:[{from:0,to:1,label:"W"},{from:1,to:2,label:"W"},{from:2,to:3,label:"H"}],width:360} },
+      show:{ type:"custom", mount:(el)=>MF_L26_staffKb(el,
+        {clef:"treble",notes:[{p:"C4",d:"q",label:"C"},{p:"D4",d:"q",label:"D"},{p:"E4",d:"q",label:"E"},{p:"F4",d:"q",label:"F"}],steps:[{from:0,to:1,label:"W"},{from:1,to:2,label:"W"},{from:2,to:3,label:"H"}],width:360},
+        {start:60,octaves:1,labels:true,marks:[60,62,64,65]}) },
       try:{ type:"mc", choices:["3","4","5","8"], answer:1,
         success:"✓ Four — TETRA means four, like a TETRApod has four legs.",
         fail:"Think of the word TETRA…",
@@ -79,7 +94,9 @@ LESSON_CONTENT[26]={
         hint:"Wide, wide, then narrow: W – W – H.",
         mount:(container,fb)=>MF_L26_blueprint(container,fb) } },
     { say:"Now the big idea: a <b>MAJOR SCALE</b> is <b>eight notes — two tetrachords joined by one whole step</b>. C–D–E–F is the C tetrachord; step up a whole step to G, and G–A–B–C is the G tetrachord. The first and last note share the same name: the <b>KEYNOTE</b>. A scale can begin on any note. \u{1F447} <b>What joins the two tetrachords of a major scale?</b>",
-      show:{ type:"staff", spec:{clef:"treble",notes:[{p:"C4",d:"q",label:"C"},{p:"D4",d:"q",label:"D"},{p:"E4",d:"q",label:"E"},{p:"F4",d:"q",label:"F"},{p:"G4",d:"q",label:"G"},{p:"A4",d:"q",label:"A"},{p:"B4",d:"q",label:"B"},{p:"C5",d:"q",label:"C"}],steps:[{from:3,to:4,label:"Whole Step"}],brackets:[{from:0,to:3,label:"C tetrachord"},{from:4,to:7,label:"G tetrachord"}],width:520} },
+      show:{ type:"custom", mount:(el)=>MF_L26_staffKb(el,
+        {clef:"treble",notes:[{p:"C4",d:"q",label:"1"},{p:"D4",d:"q",label:"2"},{p:"E4",d:"q",label:"3"},{p:"F4",d:"q",label:"4"},{p:"G4",d:"q",label:"5"},{p:"A4",d:"q",label:"6"},{p:"B4",d:"q",label:"7"},{p:"C5",d:"q",label:"8"}],steps:[{from:3,to:4,label:"Whole Step"}],brackets:[{from:0,to:3,label:"C tetrachord"},{from:4,to:7,label:"G tetrachord"}],width:520},
+        {start:60,octaves:1,labels:true,marks:[60,62,64,65,67,69,71,72]}) },
       try:{ type:"mc", choices:["A whole step","A half step","A rest","An octave"], answer:0,
         success:"✓ One whole step (F up to G) welds the two tetrachords into a scale.",
         fail:"Look at the labeled gap between the brackets.",
@@ -102,7 +119,7 @@ LESSON_CONTENT[26]={
   ],
   examples:[
     { caption:"The C major scale: two tetrachords (brackets) joined by one whole step. Follow the W–H carets as it plays.",
-      staff:{clef:"treble",tempo:100,notes:[{p:"C4",d:"q",label:"C"},{p:"D4",d:"q",label:"D"},{p:"E4",d:"q",label:"E"},{p:"F4",d:"q",label:"F"},{p:"G4",d:"q",label:"G"},{p:"A4",d:"q",label:"A"},{p:"B4",d:"q",label:"B"},{p:"C5",d:"q",label:"C"}],steps:[{from:0,to:1,label:"W"},{from:1,to:2,label:"W"},{from:2,to:3,label:"H"},{from:3,to:4,label:"W"},{from:4,to:5,label:"W"},{from:5,to:6,label:"W"},{from:6,to:7,label:"H"}],brackets:[{from:0,to:3,label:"C tetrachord"},{from:4,to:7,label:"G tetrachord"}],width:540} },
+      staff:{clef:"treble",tempo:100,notes:[{p:"C4",d:"q",label:"1"},{p:"D4",d:"q",label:"2"},{p:"E4",d:"q",label:"3"},{p:"F4",d:"q",label:"4"},{p:"G4",d:"q",label:"5"},{p:"A4",d:"q",label:"6"},{p:"B4",d:"q",label:"7"},{p:"C5",d:"q",label:"8"}],steps:[{from:0,to:1,label:"W"},{from:1,to:2,label:"W"},{from:2,to:3,label:"H"},{from:3,to:4,label:"W"},{from:4,to:5,label:"W"},{from:5,to:6,label:"W"},{from:6,to:7,label:"H"}],brackets:[{from:0,to:3,label:"C tetrachord"},{from:4,to:7,label:"G tetrachord"}],width:540} },
     { caption:"The eight DEGREES of the major scale — in bass clef this time. The half steps sit between 3–4 and 7–8.",
       staff:{clef:"bass",tempo:90,notes:[{p:"C3",d:"q",label:"1"},{p:"D3",d:"q",label:"2"},{p:"E3",d:"q",label:"3"},{p:"F3",d:"q",label:"4"},{p:"G3",d:"q",label:"5"},{p:"A3",d:"q",label:"6"},{p:"B3",d:"q",label:"7"},{p:"C4",d:"q",label:"8"}],steps:[{from:2,to:3,label:"H"},{from:6,to:7,label:"H"}],width:540} }
   ],
