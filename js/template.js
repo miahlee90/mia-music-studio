@@ -184,13 +184,19 @@
     if(oi>=reveal.length) this.parentElement.style.display="none";
   };
 
-  /* examples (v3.2: optional e.kb = Keyboard.create opts — marked keyboard under the staff,
-     so scale examples show their half steps and black keys on the piano too) */
+  /* examples (v3.2: optional e.kb = marked keyboard under the staff;
+     v3.3: during playback the keyboard LIGHTS UP in sync with the highlighted
+     staff note — each note flashes its matching key, instructor 2026-07-06) */
   C.examples.forEach((e,i)=>{
     const host=document.getElementById("ex"+i);
     const api=Staff.render(host,e.staff);
-    if(e.kb){ const k=document.createElement("div"); k.style.marginTop="10px"; host.appendChild(k); Keyboard.create(k,e.kb); }
-    const b=document.getElementById("exBtn"+i); if(b) b.onclick=()=>Staff.play(e.staff,api);
+    let kbApi=null;
+    if(e.kb){ const k=document.createElement("div"); k.style.marginTop="10px"; host.appendChild(k); kbApi=Keyboard.create(k,e.kb); }
+    const playApi=kbApi? { svg:api.svg,
+      highlight:(ix)=>{ api.highlight(ix);
+        if(ix!=null){ const n=e.staff.notes[ix];
+          if(n && n.rest===undefined && n.bar===undefined && (n.p||n.sound)) kbApi.press(MFAudio.midi(n.sound||n.p), true); } } } : api;
+    const b=document.getElementById("exBtn"+i); if(b) b.onclick=()=>Staff.play(e.staff,playApi);
   });
   /* keyboard */
   if(C.keyboard){
