@@ -1,7 +1,7 @@
 /* Lesson 45 — Eighth Note Triplets (AEMT Book 2, Unit 11)
    Built from drafts/UNIT 11 – Lesson 45.md; AEMT p.70 verified by render.
    Core: triplet = 3 notes in the time of 2 of the same value; marked with a 3;
-   count "1-trip-let" (or tri-po-let); famous in Nutcracker March & Arabesque.
+   count "tri-po-let" (primary; or 1-trip-let); famous in Nutcracker March & Arabesque.
    Uses staff.js v7.7 spec.tuplets:[{from,to}] (drawn 3 + 2/3-time playback).
    NOTE: edit by FULL-FILE REWRITE only. */
 
@@ -29,8 +29,8 @@ function MF_L45_ear(container,fb){
       if(i>=ROUNDS.length){ ch.style.display="none"; container.querySelector(".l45-p").style.display="none";
         q.textContent="Two vs three: mastered!";
         fb(true,"✓ Four for four! Two even eighths split the beat in half; a triplet melts it into three equal drops. Your ear can now tell duple from triple instantly."); }
-      else { fb(true,`✓ ${trip?"Triplet — trip-a-let!":"Even pair — 1 &."} Next beat…`); setTimeout(ask,900); } }
-    else { MFAudio.tone(40,.25); fb(false,"Count along: does '1 &' fit, or does it need '1-trip-let'?"); }
+      else { fb(true,`✓ ${trip?"Triplet — tri-po-let!":"Even pair — 1 &."} Next beat…`); setTimeout(ask,900); } }
+    else { MFAudio.tone(40,.25); fb(false,"Count along: does '1 &' fit, or does it need 'tri-po-let'?"); }
   });
   ask();
 }
@@ -46,7 +46,7 @@ function MF_L45_tap(container,fb){
   const msg=container.querySelector(".l45-tm");
   const BPS=.9; /* seconds per beat */
   container.querySelector(".l45-tp").onclick=function(){
-    if(playing) return; playing=true; taps=[]; this.disabled=true; msg.textContent="…tap trip-a-let on each beat!";
+    if(playing) return; playing=true; taps=[]; this.disabled=true; msg.textContent="…tap tri-po-let on each beat!";
     [0,1].forEach(k=>MFAudio.tone(48,.12,k*BPS,.65));
     t0=performance.now();
     setTimeout(()=>{ playing=false; this.disabled=false;
@@ -55,7 +55,7 @@ function MF_L45_tap(container,fb){
       if(hit>=4&&taps.length<=8){ msg.textContent=`✓ ${hit} of 6 triplet slots hit!`;
         fb(true,`✓ You fit three even taps inside the beats — a real performed triplet. Smooth, not lumpy: that's the triplet feel of jazz, blues, and lullabies.`); }
       else { msg.textContent="Keep the three taps EVEN — try again!";
-        fb(false,"Chant 'trip-a-let' out loud as you tap — three equal syllables, three equal taps."); }
+        fb(false,"Chant 'tri-po-let' out loud as you tap — three equal syllables, three equal taps."); }
     }, 2*BPS*1000+500);
   };
   container.querySelector(".l45-td").onclick=()=>{ if(!playing) return; MFAudio.tone(72,.1,0,.5); taps.push(performance.now()-t0); };
@@ -78,14 +78,14 @@ LESSON_CONTENT[45]={
         };
         [...ch.children].forEach((b,i)=>b.onclick=()=>{
           if(i===0) fb(true,"✓ That three-note swirl was an EIGHTH-NOTE TRIPLET — three notes squeezed into the time of two. Tchaikovsky, Debussy, every blues pianist: they all lean on it. Today it's yours.");
-          else fb(false,"Play it again — listen for the beat that goes 'trip-a-let'.");
+          else fb(false,"Play it again — listen for the beat that goes 'tri-po-let'.");
         });
       } }
   },
   objectives:[
     "Define a triplet (3 in the time of 2)",
     "Recognize the '3' marking on staff",
-    "Count triplets: 1-trip-let / tri-po-let",
+    "Count triplets: tri-po-let (or 1-trip-let)",
     "Hear duple vs triple beat divisions",
     "Perform even triplets against a beat",
     "Complete measures containing triplets"
@@ -100,23 +100,23 @@ LESSON_CONTENT[45]={
         success:"✓ Three-in-the-time-of-two: the trio squeezes into ONE quarter-note beat. The 3 is the warning label.",
         fail:"The definition: 3 notes in the time of 2 eighths…",
         hint:"2 eighths = 1 beat, and the triplet borrows exactly that." } },
-    { say:"Counting: instead of '1 &' you say '<b>1-trip-let</b>' (or '<b>tri-po-let</b>') — three even syllables spreading across the beat. '1-trip-let, 2-trip-let, 3 &, 4 &' mixes both worlds. \u{1F447} <b>Which count fits an eighth-note triplet on beat 2?</b>",
+    { say:"Counting: instead of '1 &' you say '<b>tri-po-let</b>' (or '<b>1-trip-let</b>') — three even syllables spreading across the beat. 'tri-po-let, tri-po-let, 3 &, 4 &' mixes both worlds. \u{1F447} <b>Which count fits an eighth-note triplet on beat 2?</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:80,time:"4/4",notes:[
         {p:"C5",d:"8",label:"1"},{p:"D5",d:"8",label:"&"},
-        {p:"E5",d:"8",label:"2"},{p:"F5",d:"8",label:"trip"},{p:"G5",d:"8",label:"let"},
+        {p:"E5",d:"8",label:"tri"},{p:"F5",d:"8",label:"po"},{p:"G5",d:"8",label:"let"},
         {p:"E5",d:"q",label:"3"},{p:"C5",d:"q",label:"4"},{bar:"final"}],
         beams:[[0,1],[2,4]],tuplets:[{from:2,to:4}],width:560} },
-      try:{ type:"mc", choices:["2-trip-let","2-e-&-a","2-&"], answer:0,
-        success:"✓ Three even syllables for three even notes: 2-trip-let. ('2-e-&-a' is FOUR sixteenths; '2-&' is two eighths.)",
+      try:{ type:"mc", choices:["tri-po-let","2-e-&-a","2-&"], answer:0,
+        success:"✓ Three even syllables for three even notes: tri-po-let. ('2-e-&-a' is FOUR sixteenths; '2-&' is two eighths.)",
         fail:"Count the notes in the group — three needs three syllables.",
         hint:"One syllable per note." } },
     { say:"Ear training — duple or triple? \u{1F447} <b>Two even eighths, or a triplet? Judge each beat:</b>",
       try:{ type:"custom",
-        hint:"'1 &' = two; '1-trip-let' = three smooth drops.",
+        hint:"'1 &' = two; 'tri-po-let' = three smooth drops.",
         mount:(container,fb)=>MF_L45_ear(container,fb) } },
     { say:"Now PERFORM one. \u{1F447} <b>Tap three even notes inside each beat:</b>",
       try:{ type:"custom",
-        hint:"Chant 'trip-a-let' aloud; your taps will follow your voice.",
+        hint:"Chant 'tri-po-let' aloud; your taps will follow your voice.",
         mount:(container,fb)=>MF_L45_tap(container,fb) } },
     { say:"Measure math: a triplet counts as <b>one beat</b> (in 2/4, 3/4, 4/4). So a 4/4 measure could hold: quarter + triplet + quarter + two eighths = 1+1+1+1 = 4. \u{1F447} <b>A 2/4 measure has one triplet. What else fits?</b>",
       try:{ type:"mc", choices:["One quarter note (1 beat)","Another two beats of notes","Nothing — it's full"], answer:0,
@@ -133,26 +133,26 @@ LESSON_CONTENT[45]={
     { caption:"Straight eighths vs triplets, side by side — play and feel the beat first split in two, then melt into three.",
       staff:{clef:"treble",tempo:70,time:"2/4",notes:[
         {p:"C5",d:"8",label:"1"},{p:"C5",d:"8",label:"&"},
-        {p:"C5",d:"8",label:"2"},{p:"C5",d:"8",label:"trip"},{p:"C5",d:"8",label:"let"},{bar:"single"},
-        {p:"D5",d:"8",label:"1"},{p:"D5",d:"8",label:"trip"},{p:"D5",d:"8",label:"let"},
+        {p:"C5",d:"8",label:"tri"},{p:"C5",d:"8",label:"po"},{p:"C5",d:"8",label:"let"},{bar:"single"},
+        {p:"D5",d:"8",label:"tri"},{p:"D5",d:"8",label:"po"},{p:"D5",d:"8",label:"let"},
         {p:"C5",d:"q",label:"2"},{bar:"final"}],
         beams:[[0,1],[2,4],[6,8]],tuplets:[{from:2,to:4},{from:6,to:8}],width:600} },
     { caption:"À la Nutcracker — quarter, then a triplet swirl, then a resolving note: the triplet as a burst of motion inside a march.",
       staff:{clef:"treble",tempo:90,time:"4/4",notes:[
         {p:"G5",d:"q",label:"1"},{p:"G5",d:"8",label:"2"},{p:"G5",d:"8",label:"&"},
-        {p:"E5",d:"8",label:"3"},{p:"F5",d:"8",label:"trip"},{p:"G5",d:"8",label:"let"},
+        {p:"E5",d:"8",label:"tri"},{p:"F5",d:"8",label:"po"},{p:"G5",d:"8",label:"let"},
         {p:"C6",d:"q",label:"4"},{bar:"final"}],
         beams:[[1,2],[3,5]],tuplets:[{from:3,to:5}],width:600} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Triplet Truths Sprint (45s)",
       intro:"Triplet facts and counts — match them before the clock!",
-      miaIntro:"Trip-a-let, trip-a-let! \u{1F3C3}",
+      miaIntro:"Tri-po-let, tri-po-let! \u{1F3C3}",
       spec:{gen:"term-match", params:{subject:"term", pool:[
         ["Triplet","3 notes in the time of 2 of the same value"],
         ["Eighth-note triplet","3 eighths in one quarter-note beat"],
         ["The small 3","the mark that labels a triplet group"],
-        ["1-trip-let","the triplet count"],
+        ["Tri-po-let","the triplet count"],
         ["Tuplet","the general term for irregular groupings"],
         ["Triplet's total value","one beat in simple meter"]], reverse:true}, seconds:45},
       result:(score)=>score>=8?score+" triplet truths — flowing!":null },
@@ -179,7 +179,7 @@ LESSON_CONTENT[45]={
         ["Triplet","three notes in the time of two"],
         ["Eighth-note triplet","fills one quarter-note beat"],
         ["Bracket + 3","marks an unbeamed triplet"],
-        ["Tri-po-let","an alternative triplet count"],
+        ["1-trip-let","an alternative triplet count"],
         ["Swing / shuffle","styles built on the triplet feel"],
         ["Nutcracker March","Tchaikovsky piece famous for triplets"]]},
       result:(score)=>score>=7?"Triplet vocabulary: complete!":null }
@@ -193,7 +193,7 @@ LESSON_CONTENT[45]={
       explain:"Two eighths' worth = 1 beat." },
     { type:"mc", q:"A triplet group is marked with…", choices:["a small 3","a dot","a fermata"], answer:0,
       explain:"Above or below the beam/bracket." },
-    { type:"mc", q:"Which count fits a triplet?", choices:["1-trip-let","1-e-&-a","1-&"], answer:0,
+    { type:"mc", q:"Which count fits a triplet?", choices:["tri-po-let","1-e-&-a","1-&"], answer:0,
       explain:"Three even syllables for three even notes." },
     { type:"mc", q:"In 4/4, a measure with two triplets has used…", choices:["2 beats","3 beats","6 beats"], answer:0,
       explain:"Each triplet = 1 beat." },
@@ -216,8 +216,8 @@ LESSON_CONTENT[45]={
       explain:"= two normal eighths.", hint:"What do 2 eighths fill?" },
     { type:"mc", q:"The number that marks a triplet is…", choices:["3","2","6","8"], answer:0,
       explain:"Above or below the group.", hint:"Count the notes." },
-    { type:"mc", q:"Triplets are counted…", choices:["1-trip-let","1-e-&-a","1-and-then","one-two"], answer:0,
-      explain:"Or 'tri-po-let' — three even syllables.", hint:"Three syllables." },
+    { type:"mc", q:"Triplets are counted…", choices:["tri-po-let","1-e-&-a","1-and-then","one-two"], answer:0,
+      explain:"Or '1-trip-let' — three even syllables.", hint:"Three syllables." },
     { type:"truefalse", q:"A triplet's three notes are spaced evenly across the beat.", answer:true,
       explain:"Equal thirds of the beat.", hint:"Smooth, not lumpy." },
     { type:"truefalse", q:"In 4/4, an eighth-note triplet counts as two beats.", answer:false,
@@ -228,7 +228,7 @@ LESSON_CONTENT[45]={
       explain:"Three beamed eighths under a 3.", hint:"See the little 3?" },
     { type:"mc", q:"Which fills a 2/4 measure?", choices:["triplet + quarter note","triplet + half note","three triplets"], answer:0,
       explain:"1 + 1 = 2 beats.", hint:"Triplet = 1 beat." },
-    { type:"mc", q:"'1 &' vs '1-trip-let' — the difference is…", choices:["two even notes vs three even notes in the beat","loud vs soft","short vs long beats"], answer:0,
+    { type:"mc", q:"'1 &' vs 'tri-po-let' — the difference is…", choices:["two even notes vs three even notes in the beat","loud vs soft","short vs long beats"], answer:0,
       explain:"Duple vs triple division of the SAME beat.", hint:"Count the attacks." },
     { type:"mc", q:"The general term for irregular groupings like triplets is…", choices:["tuplet","doublet","bracket","tie"], answer:0,
       explain:"Triplets, quintuplets… all tuplets.", hint:"Starts like 'tuple'." },
@@ -237,7 +237,7 @@ LESSON_CONTENT[45]={
     { type:"mc", q:"A triplet borrows the feel of…", choices:["6/8's three-per-pulse flow","cut time's two big beats","a whole rest"], answer:0,
       explain:"One beat of compound inside simple meter.", hint:"Last lesson's bundles." },
     /* generated */
-    { gen:"term-match", params:{subject:"term", pool:[["Triplet","3 notes in the time of 2 of the same value"],["Eighth-note triplet","3 eighths in one beat"],["1-trip-let","the triplet count"],["Tuplet","general term for irregular groupings"]], reverse:true}, count:4 },
+    { gen:"term-match", params:{subject:"term", pool:[["Triplet","3 notes in the time of 2 of the same value"],["Eighth-note triplet","3 eighths in one beat"],["Tri-po-let","the triplet count"],["Tuplet","general term for irregular groupings"]], reverse:true}, count:4 },
     { gen:"note-value", params:{values:["8","q","q."],ask:"beats"}, count:2 }
   ],
   vocabulary:[
@@ -251,12 +251,12 @@ LESSON_CONTENT[45]={
   summary:[
     "✔ <b>Triplet = 3 notes in the time of 2</b> of the same value, marked with a small <b>3</b>.",
     "✔ An eighth-note triplet fills exactly <b>one quarter-note beat</b>.",
-    "✔ Count '<b>1-trip-let</b>' (or tri-po-let) — three EVEN syllables.",
+    "✔ Count '<b>tri-po-let</b>' (or 1-trip-let) — three EVEN syllables.",
     "✔ Budget triplets as one beat in measure math.",
     "✔ The triplet rents one beat of compound (three-per-pulse) flow — the engine of swing and shuffle."
   ],
   tips:[
-    "Evenness drill: alternate one '1 &' beat with one '1-trip-let' beat, back and forth, until switching is effortless.",
+    "Evenness drill: alternate one '1 &' beat with one 'tri-po-let' beat, back and forth, until switching is effortless.",
     "Don't let triplets collapse into a dotted-8th+16th limp — three EQUAL notes, no swagger.",
     "Listen for triplets tonight: the Nutcracker March, Debussy's Arabesque No. 1, any slow blues.",
     "Next lesson finishes Unit 11: pick-up notes and syncopation — rhythm's grand entrance and its off-beat kick."
@@ -265,13 +265,13 @@ LESSON_CONTENT[45]={
   sectionOrder:["secHook","secObjectives","secLearn","secExample","secReview",
     "secGame0","secGame1","secGame2","secGame3","secPractice","secQuiz","secTips","secNext"],
   miaPerfect:"A perfect score — three-for-three on every beat! \u{1F54A}\u{1F389}",
-  miaPass:"Passed! Keep the chant: trip-a-let, smooth and even.",
+  miaPass:"Passed! Keep the chant: tri-po-let, smooth and even.",
   mia:{
     hook:{ label:"the welcome",
       explain:"The fragment split its beats in two — until one beat swirled in THREE: an eighth-note triplet, straight out of the Nutcracker March.",
       play:()=>{MFAudio.tone(79,.25,0,.5);MFAudio.tone(79,.25,.4,.5);[0,1,2].forEach(k=>MFAudio.tone(76+k*2,.15,.8+k*.267,.5));MFAudio.tone(84,.5,1.6,.55);} },
     learn:{ label:"triplets",
-      explain:"3 notes in the time of 2, marked with a 3, counted 1-trip-let, worth one beat. Even spacing is everything.",
+      explain:"3 notes in the time of 2, marked with a 3, counted tri-po-let, worth one beat. Even spacing is everything.",
       hint:"Three EQUAL drops per beat.",
       play:()=>{[0,1,2].forEach(k=>MFAudio.tone(72,.16,k*.27,.5));} },
     example:{ label:"the examples",
@@ -280,7 +280,7 @@ LESSON_CONTENT[45]={
       explain:"Sprint the truths, tap the shuffle, budget beats with the triplet button, then race the vocabulary.",
       hint:"Everything hangs on 3-in-the-time-of-2." },
     quiz:{ label:"this question",
-      explain:"One definition answers nearly all of it: three notes, time of two, one beat, counted 1-trip-let.",
+      explain:"One definition answers nearly all of it: three notes, time of two, one beat, counted tri-po-let.",
       play:()=>{[0,1,2].forEach(k=>MFAudio.tone(74,.15,k*.26,.5));} }
   }
 };
