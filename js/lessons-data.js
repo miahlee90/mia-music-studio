@@ -35,10 +35,10 @@ const LESSONS=[
  {n:32, title:"Chromatic Scale", unit:8, book:2, time:15, kw:["chromatic","half steps"]},
  {n:33, title:"Intervals", unit:8, book:2, time:15, kw:["interval","2nd","3rd","distance"]},
  {n:34, title:"Circle of Fifths", unit:8, book:2, time:15, kw:["circle of fifths"]},
- {n:35, title:"Perfect and Major Intervals", unit:9, book:2, time:13, kw:["perfect","major","interval quality"]},
- {n:36, title:"Minor Intervals", unit:9, book:2, time:12, kw:["minor interval"]},
- {n:37, title:"Augmented and Diminished Intervals", unit:9, book:2, time:13, kw:["augmented","diminished","interval"]},
- {n:38, title:"Solfège and Transposition", unit:9, book:2, time:12, kw:["solfege","do re mi","transposition"]},
+ {n:35, title:"Perfect and Major Intervals", unit:9, book:2, time:15, kw:["perfect","major","interval quality"]},
+ {n:36, title:"Minor Intervals", unit:9, book:2, time:15, kw:["minor interval"]},
+ {n:37, title:"Augmented and Diminished Intervals", unit:9, book:2, time:15, kw:["augmented","diminished","interval"]},
+ {n:38, title:"Solfège and Transposition", unit:9, book:2, time:15, kw:["solfege","do re mi","transposition"]},
  {n:39, title:"Sixteenth Notes", unit:10, book:2, time:12, kw:["sixteenth","semiquaver"]},
  {n:40, title:"Sixteenth Rests", unit:10, book:2, time:10, kw:["sixteenth rest"]},
  {n:41, title:"Dotted Eighth Notes", unit:10, book:2, time:12, kw:["dotted eighth","swing"]},
@@ -98,5 +98,5 @@ const UNITS=[
  {unit:18, book:3, name:"Form", lessons:[72,75]}
 ];
 /* built lessons so far (index pages link only these) */
-const BUILT_THROUGH=34;
+const BUILT_THROUGH=38;
 const LESSON_CONTENT={}; /* filled by content/lesson-NN.js */

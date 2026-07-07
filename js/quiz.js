@@ -258,6 +258,100 @@ const Quiz=(()=>{
         explain:`${dir.toLowerCase()} adds one ${cw?"sharp":"flat"} per step: ${path.join(" \u2192 ")}.`,
         hint:cw? "Clockwise = up a 5th, +1 sharp each step." : "Counterclockwise = +1 flat each step." };
     },
+    /* v5.4 — interval QUALITY (Unit 9, L35-37): P/M/m/A/d via half-step math
+       (params:{min:1,max:8, qualities:["P","M","m","A","d"], kind:"melodic"|"harmonic"|"both",
+                ask:"full"|"quality", clef:"treble"|"bass"}) */
+    "interval-quality": p=>{
+      const NAMES={1:"Unison",2:"2nd",3:"3rd",4:"4th",5:"5th",6:"6th",7:"7th",8:"Octave"};
+      const BASE=[0,0,2,4,5,7,9,11,12];           // natural (major-scale) semitones, index=number
+      const PERF=[1,4,5,8];
+      const QL={P:"Perfect",M:"Major",m:"Minor",A:"Augmented",d:"Diminished"};
+      const qs=(p&&p.qualities)||["P","M"];
+      const min=(p&&p.min)||2, max=(p&&p.max)||8;
+      const clef=(p&&p.clef)||"treble";
+      const L=["C","D","E","F","G","A","B"];
+      const roots=clef==="bass"? ["C3","D3","E3","F3","G3","A3"] : ["C4","D4","E4","F4","G4","A4"];
+      const NAT={C:0,D:2,E:4,F:5,G:7,A:9,B:11};
+      let num,q,root,upper,acc,tries=0;
+      while(tries++<60){
+        num=min+Math.floor(Math.random()*(max-min+1));
+        const isP=PERF.includes(num);
+        const ok=qs.filter(x=> isP? (x!=="M"&&x!=="m") : x!=="P");
+        if(!ok.length) continue;
+        q=ok[Math.floor(Math.random()*ok.length)];
+        if(num===1&&q==="d") continue;            // unison cannot shrink
+        root=roots[Math.floor(Math.random()*roots.length)];
+        const ri=L.indexOf(root[0]), oct=+root[1];
+        const ui=ri+num-1, ul=L[ui%7], uoct=oct+Math.floor(ui/7);
+        const natDist=(NAT[ul]+12*uoct)-(NAT[root[0]]+12*oct);
+        const target=BASE[num]+(q==="A"?1:q==="d"?(isP?-1:-2):q==="m"?-1:0);
+        acc=target-natDist;                        // accidental on the upper note
+        if(Math.abs(acc)>1) continue;              // avoid double sharps/flats on staff
+        upper=ul+(acc===1?"#":acc===-1?"b":"")+uoct;
+        break;
+      }
+      const harm=(p&&p.kind)==="harmonic"||(((p&&p.kind)||"both")==="both"&&Math.random()<.5);
+      const notes=harm? [{p:root,d:"w"},{p:upper,d:"w",chord:true}] : [{p:root,d:"h"},{p:upper,d:"h"}];
+      const abbr=(qq,nn)=>qq+nn;                   // e.g. M3, P5, m6, A4, d5
+      const full=`${QL[q]} ${NAMES[num]}`;
+      const disp=x=>x.replace(/(\d)/,"").replace("#","♯").replace("b","♭");
+      const halfSteps=BASE[num]+(q==="A"?1:q==="d"?(PERF.includes(num)?-1:-2):q==="m"?-1:0);
+      if((p&&p.ask)==="quality"){
+        const pool=[...new Set(qs.map(x=>QL[x]))];
+        while(pool.length<3){ const extra=Object.values(QL).find(v=>!pool.includes(v)); if(!extra)break; pool.push(extra); }
+        const others=pool.filter(v=>v!==QL[q]).sort(()=>Math.random()-.5).slice(0,3);
+        const choices=[QL[q],...others].sort(()=>Math.random()-.5);
+        return { type:"mc", q:`What is the QUALITY of this ${NAMES[num].toLowerCase()==="unison"?"unison":NAMES[num]}?`,
+          staff:{clef,notes,width:220}, choices, answer:choices.indexOf(QL[q]),
+          explain:`${disp(root)} → ${disp(upper)} spans ${halfSteps} half steps = ${full} (${abbr(q,num)}).`,
+          hint:"Count half steps on the keyboard, then compare with the major-scale size." };
+      }
+      const all=[];
+      qs.forEach(x=>{ for(let n2=min;n2<=max;n2++){
+        const isP2=PERF.includes(n2);
+        if(isP2&&(x==="M"||x==="m")) continue;
+        if(!isP2&&x==="P") continue;
+        if(n2===1&&x==="d") continue;
+        all.push(abbr(x,n2));
+      }});
+      const correct=abbr(q,num);
+      const wrongs=all.filter(c=>c!==correct).sort(()=>Math.random()-.5).slice(0,3);
+      const choices=[correct,...wrongs].sort(()=>Math.random()-.5);
+      return { type:"mc", q:"Name this interval — quality AND number.",
+        staff:{clef,notes,width:220}, choices, answer:choices.indexOf(correct),
+        explain:`${disp(root)} → ${disp(upper)}: count letters = ${NAMES[num]}; count half steps = ${halfSteps} = ${full} (${correct}).`,
+        hint:"First count the letter names for the NUMBER, then count half steps for the QUALITY." };
+    },
+    /* v5.4 — solfège syllables, movable Do (Unit 9, L38)
+       (params:{keys:["C","G","F"], ask:"syllable"|"note"|"both"}) */
+    "solfege-id": p=>{
+      const SYL=["Do","Re","Mi","Fa","Sol","La","Ti","Do"];
+      const SCALES={C:["C","D","E","F","G","A","B","C"],
+                    G:["G","A","B","C","D","E","F♯","G"],
+                    F:["F","G","A","B♭","C","D","E","F"],
+                    D:["D","E","F♯","G","A","B","C♯","D"]};
+      const keys=(p&&p.keys)||["C","G"];
+      const key=keys[Math.floor(Math.random()*keys.length)];
+      const sc=SCALES[key]||SCALES.C;
+      const i=Math.floor(Math.random()*7);        // degrees 1-7 (8 duplicates Do)
+      const mode=(p&&p.ask)==="both"? (Math.random()<.5?"syllable":"note") : ((p&&p.ask)||"syllable");
+      if(mode==="syllable"){
+        const correct=SYL[i];
+        const wrongs=[...new Set(SYL)].filter(s=>s!==correct).sort(()=>Math.random()-.5).slice(0,3);
+        const choices=[correct,...wrongs].sort(()=>Math.random()-.5);
+        return { type:"mc", q:`In ${key} Major (movable Do), which syllable is sung on ${sc[i]}?`,
+          choices, answer:choices.indexOf(correct),
+          explain:`${key} Major: ${sc.slice(0,7).map((n,j)=>`${n}=${SYL[j]}`).join(", ")}.`,
+          hint:`Do is always the keynote — here Do = ${key}. Count up from there.` };
+      }
+      const correct=sc[i];
+      const wrongs=sc.slice(0,7).filter(n=>n!==correct).sort(()=>Math.random()-.5).slice(0,3);
+      const choices=[correct,...wrongs].sort(()=>Math.random()-.5);
+      return { type:"mc", q:`In ${key} Major (movable Do), which NOTE is “${SYL[i]}”?`,
+        choices, answer:choices.indexOf(correct),
+        explain:`${SYL[i]} is scale degree ${i+1} of ${key} Major → ${correct}.`,
+        hint:`Do = ${key}. Step up the ${key} major scale one syllable at a time.` };
+    },
     /* v5 — enharmonic pairs */
     "enharmonic": ()=>{
       const PAIRS=[["C\u266f","D\u266d"],["D\u266f","E\u266d"],["F\u266f","G\u266d"],["G\u266f","A\u266d"],["A\u266f","B\u266d"]];
