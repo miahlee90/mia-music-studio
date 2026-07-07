@@ -29,11 +29,11 @@ function MF_L38_climb(container,fb){
     const cur=ROUNDS[r]; k=0; pressed=[]; cnt.textContent="";
     q.innerHTML=`Climb ${r+1} of ${ROUNDS.length}: sing the <b>${cur.key} major</b> scale in solfège — press each key, starting on <b>${cur.key} = Do</b>!`;
     kbHolder.innerHTML="";
-    kb=Keyboard.create(kbHolder,{start:cur.start,octaves:cur.octaves,labels:true,marks:[cur.seq[0]],
+    kb=Keyboard.create(kbHolder,{start:cur.start,octaves:cur.octaves,labels:true,point:cur.seq[0],
       onKey:m=>{
         const c=ROUNDS[r];
         if(m===c.seq[k]){
-          pressed.push(m); kb.mark(pressed); MFAudio.tone(m,.3); badge(m,SYL[k],c.start);
+          pressed.push(m); kb.mark(pressed); kb.point(null); MFAudio.tone(m,.3); badge(m,SYL[k],c.start);
           cnt.textContent=c.seq.slice(0,k+1).map((x,i2)=>`${c.names[i2]}=${SYL[i2]}`).join("  ");
           k++;
           if(k>=c.seq.length){ r++;
@@ -41,7 +41,7 @@ function MF_L38_climb(container,fb){
               fb(true,"✓ G major: G=Do A=Re B=Mi C=Fa D=Sol E=La F♯=Ti G=Do. The note names changed, the syllables never did — THAT is movable Do."); }
             else { fb(true,"✓ C major in solfège — complete! Now watch what happens when Do MOVES to G…"); setTimeout(ask,1500); } } }
         else { MFAudio.tone(40,.2);
-          fb(false, k===0? `Do first! In ${c.key} major, Do is ${c.key} — the marked key.` :
+          fb(false, k===0? `Do first! In ${c.key} major, Do is ${c.key} — the key with the red arrow.` :
             (c.key==="G"&&c.names[k]==="F♯")? "Careful — G major's 7th note (Ti) is the BLACK key F♯, not F!" :
             `Next syllable is ${SYL[k]} — one scale step up from ${c.names[k-1]}.`); }
       }});

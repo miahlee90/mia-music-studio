@@ -41,7 +41,17 @@ const Keyboard=(()=>{
       return seq.length? seq[seq.length-1].t+gap : 0;
     }
     function mark(midis){ Object.values(keyEls).forEach(k=>k.classList.remove("mark")); (midis||[]).forEach(m=>{ if(keyEls[m]) keyEls[m].classList.add("mark"); }); }
-    return {press,demo,mark,el};
+    /* v2 (DD-30) — GUIDE vs FEEDBACK colors: point(midi) drops a RED arrow on the key
+       the student should press; purple is reserved for keys that actually SOUND.
+       point(null) clears the arrow. */
+    function point(m){
+      el.querySelectorAll(".kpoint").forEach(a=>a.remove());
+      if(m==null||!keyEls[m]) return;
+      const a=document.createElement("div"); a.className="kpoint"; a.textContent="\u25bc";
+      keyEls[m].appendChild(a);
+    }
+    if(opts.point!=null) point(opts.point);
+    return {press,demo,mark,point,el};
   }
   return {create};
 })();

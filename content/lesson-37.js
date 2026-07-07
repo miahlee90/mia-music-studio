@@ -26,8 +26,9 @@ function MF_L37_lab(container,fb){
   function ask(){
     const cur=ROUNDS[r], step=cur.seq[k];
     q.innerHTML=`${cur.label} — press <b>${step.name.split(" — ")[0]}</b> above C to hear the <b>${step.short}</b>.`;
+    if(kb) kb.point(step.m);
     if(k===0){ kbHolder.innerHTML="";
-      kb=Keyboard.create(kbHolder,{start:60,octaves:1,labels:true,marks:[60],
+      kb=Keyboard.create(kbHolder,{start:60,octaves:1,labels:true,
         onKey:m=>{
           const c=ROUNDS[r], s=c.seq[k];
           if(m===s.m){ kb.mark([60,m]); MFAudio.tone(60,.8,0,.4); MFAudio.tone(m,.8,0,.4); k++;
@@ -37,7 +38,8 @@ function MF_L37_lab(container,fb){
               else { fb(true,`✓ ${s.name}. New family…`); setTimeout(ask,1500); } }
             else { fb(true,`✓ ${s.name}. Now the next size…`); setTimeout(ask,1200); } }
           else { MFAudio.tone(40,.2); fb(false, k===0? "Start with the NORMAL size — the plain scale note." : "One half step at a time — count carefully from the previous key."); }
-        }}); }
+        }});
+      kb.point(ROUNDS[r].seq[0].m); }
   }
   ask();
 }

@@ -20,10 +20,10 @@ function MF_L35_ruler(container,fb){
     <p style="text-align:center;font-size:13.5px;color:var(--primary);font-weight:700;margin:6px 0 0">A half step = ONE key to the very next key, black keys included. Count the MOVES, not the keys!</p>`;
   const q=container.querySelector(".l35-q"), cnt=container.querySelector(".l35-cnt"), kbHolder=container.querySelector(".l35-kb");
   function ask(){
-    cur=ROUNDS[r]; at=cur.loM; pressed=[cur.loM]; cnt.textContent="half steps so far: 0";
-    q.innerHTML=`Measure ${r+1} of ${ROUNDS.length}: start on <b>${cur.lo}</b> (already lit) and press EVERY key up to <b>${cur.hi}</b> — black keys too!`;
+    cur=ROUNDS[r]; at=cur.loM; pressed=[]; cnt.textContent="half steps so far: 0";
+    q.innerHTML=`Measure ${r+1} of ${ROUNDS.length}: start on <b>${cur.lo}</b> (the red arrow) and press EVERY key up to <b>${cur.hi}</b> — black keys too!`;
     kbHolder.innerHTML="";
-    kb=Keyboard.create(kbHolder,{start:60,octaves:1,labels:true,marks:[cur.loM],
+    kb=Keyboard.create(kbHolder,{start:60,octaves:1,labels:true,point:cur.loM,
       onKey:m=>{
         if(m===at+1){
           at=m; pressed.push(m); kb.mark(pressed); MFAudio.tone(m,.25);
@@ -55,7 +55,7 @@ function MF_L35_build(container,fb){
   function ask(){
     q.innerHTML=`Build ${i+1} of ${ROUNDS.length}: press the key a <b>${ROUNDS[i].name}</b> above C.`;
     kbHolder.innerHTML="";
-    kb=Keyboard.create(kbHolder,{start:60,octaves:1,labels:true,marks:[60],
+    kb=Keyboard.create(kbHolder,{start:60,octaves:1,labels:true,
       onKey:m=>{
         const cur=ROUNDS[i];
         if(m===cur.m){ kb.mark([60,m]); MFAudio.tone(60,.7,0,.4); MFAudio.tone(m,.7,0,.4); i++;
@@ -64,6 +64,9 @@ function MF_L35_build(container,fb){
           else { fb(true,`✓ C→${cur.letter} = ${cur.name} (${cur.hs} half steps). Next…`); setTimeout(ask,1300); } }
         else { MFAudio.tone(40,.2); fb(false,`Count up the C major scale from C as 1 — the ${cur.name.split(" ")[1]} scale note is the answer.`); }
       }});
+    setTimeout(()=>{ /* hear the root C - flash it purple WITHOUT triggering the answer handler */
+      MFAudio.tone(60,.5); const ke=kb.el.children[0];
+      if(ke){ ke.classList.add("on"); setTimeout(()=>ke.classList.remove("on"),420); } },350);
   }
   ask();
 }

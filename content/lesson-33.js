@@ -34,11 +34,11 @@ function MF_L33_countUp(container,fb){
     q.innerHTML=`Climb ${r+1} of ${ROUNDS.length}: from <b>${cur.lo}</b> up to <b>${cur.hi}</b> — press every key on the way, starting with <b>${cur.lo}</b> itself!`;
     Staff.render(holder,{clef:"treble",notes:[{p:cur.lo+"4",d:"h"},{p:cur.hi+"4",d:"h"}],brackets:[{from:0,to:1,label:"?"}],width:260});
     kbHolder.innerHTML="";
-    kb=Keyboard.create(kbHolder,{start:60,octaves:1,labels:true,marks:[MID[cur.lo]],
+    kb=Keyboard.create(kbHolder,{start:60,octaves:1,labels:true,point:MID[cur.lo],
       onKey:m=>{
         const p=path(), pathM=p.map(x=>MID[x]);
         if(m===pathM[k]){
-          k++; pressed.push(m); kb.mark(pressed); badge(m,k);
+          k++; pressed.push(m); kb.mark(pressed); kb.point(null); badge(m,k);
           cnt.textContent=p.slice(0,k).map((x,i2)=>`${x}(${i2+1})`).join("  ");
           if(k>=p.length){ const cur2=ROUNDS[r]; r++;
             if(r>=ROUNDS.length){ q.textContent="Interval counting mastered!";

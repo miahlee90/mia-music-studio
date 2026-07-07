@@ -22,12 +22,12 @@ function MF_L36_shrink(container,fb){
     const cur=ROUNDS[r]; phase=0;
     q.innerHTML=`Lab ${r+1} of ${ROUNDS.length}: first press <b>${cur.majKey}</b> to hear the <b>Major ${cur.name}</b> above C.`;
     kbHolder.innerHTML="";
-    kb=Keyboard.create(kbHolder,{start:60,octaves:1,labels:true,marks:[60],
+    kb=Keyboard.create(kbHolder,{start:60,octaves:1,labels:true,point:cur.majM,
       onKey:m=>{
         const c=ROUNDS[r];
         if(phase===0){
           if(m===c.majM){ phase=1; kb.mark([60,m]); MFAudio.tone(60,.8,0,.4); MFAudio.tone(m,.8,0,.4);
-            q.innerHTML=`That's the Major ${c.name} — bright. Now press <b>${c.minKey}</b>, ONE half step lower, and listen…`;
+            q.innerHTML=`That's the Major ${c.name} — bright. Now press <b>${c.minKey}</b>, ONE half step lower, and listen…`; kb.point(c.minM);
             fb(true,`✓ C–${c.majKey} = Major ${c.name}. Now shrink it by one half step…`); }
           else { MFAudio.tone(40,.2); fb(false,`First the Major version: press ${c.majKey}.`); } }
         else {

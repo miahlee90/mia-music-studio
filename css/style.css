@@ -133,7 +133,7 @@ hr.sep{border:none;border-top:1px solid var(--hairline);margin:20px 0}
   border-radius:0 0 8px 8px;box-shadow:var(--shadow)}
 .mf-kb .w{position:absolute;top:0;box-sizing:border-box;background:#fff;border:2px solid #23263e;border-left:none;border-radius:0 0 6px 6px;cursor:pointer;transition:background .1s}
 .mf-kb .w:first-child{border-left:2px solid #23263e}
-.mf-kb .w.on{background:#ffe2ae}
+.mf-kb .w.on{background:#cfc9fb} /* DD-30: sounding = purple */
 .mf-kb .w.mark{background:#e3e1fd}
 /* black keys look BLACK (instructor 2026-07-06): near-black fill + bold dark border;
    a marked black key (scale member, e.g. F♯) turns PURPLE but keeps the black-key border
@@ -375,3 +375,9 @@ button.notecard svg.mf-staff{height:46px;width:auto;max-width:100%;display:block
 
 /* v3.4 — auto-enlarged double sharp/flat glyphs (template.js walker) */
 .dbx{font-size:1.55em;line-height:1;vertical-align:-0.08em;font-weight:700}
+
+/* DD-30 — red guide arrow: "press THIS key"; purple stays = "this key is sounding" */
+.mf-kb .kpoint{position:absolute;top:-2px;left:0;width:100%;text-align:center;font-size:19px;line-height:1;
+  color:#e11d48;text-shadow:0 1px 2px rgba(0,0,0,.35);pointer-events:none;z-index:4;animation:kpt .9s ease-in-out infinite}
+.mf-kb .b .kpoint{color:#ff5a76;top:2px}
+@keyframes kpt{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}

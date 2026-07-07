@@ -1028,21 +1028,21 @@ const Games=(()=>{
         onKey:m=>{
           if(!running) return;
           if(m===seq[i]){ i++;
-            if(i>=seq.length){ running=false; clearInterval(timer); kb.mark([]);
+            if(i>=seq.length){ running=false; clearInterval(timer); kb.point(null);
               const secs=((Date.now()-t0)/1000).toFixed(1);
               const stars=misses===0?3:misses<=2?2:1;
               $(".gq").innerHTML=`🏁 Climb complete in <b>${secs}s</b> with ${misses} miss${misses===1?"":"es"}! ${"⭐".repeat(stars)}`;
               $(".gstart").style.display="inline-block"; $(".gstart").textContent="▶ Climb again";
               if(onFinish)onFinish(stars,3);
-            } else { kb.mark([seq[i]]);
-              $(".gq").innerHTML=`✓ ${names[i-1]||""} — next: <b>${names[i]||"follow the marked key"}</b> (${i}/${seq.length})`; } }
+            } else { kb.point(seq[i]);
+              $(".gq").innerHTML=`✓ ${names[i-1]||""} — next: <b>${names[i]||"follow the red arrow"}</b> (${i}/${seq.length})`; } }
           else { misses++; MFAudio.tone(40,.2);
             $(".gs").textContent=`⏱ climbing… · misses: ${misses}`; }
         }});
       $(".gstart").onclick=function(){
         this.style.display="none"; i=0; misses=0; running=true; t0=Date.now();
-        kb.mark([seq[0]]);
-        $(".gq").innerHTML=`GO! Start on the marked key${names[0]?` — <b>${names[0]}</b>`:""}.`;
+        kb.point(seq[0]);
+        $(".gq").innerHTML=`GO! Start on the key with the red arrow${names[0]?` — <b>${names[0]}</b>`:""}.`;
         clearInterval(timer); timer=setInterval(()=>{ if(running) $(".gs").textContent=`⏱ ${((Date.now()-t0)/1000).toFixed(0)}s · misses: ${misses}`; },500);
       };
     },
