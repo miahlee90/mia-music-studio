@@ -133,7 +133,7 @@ LESSON_CONTENT[37]={
         success:"✓ C–D would be a 2nd; C–E𝄫 stays a 3rd. Spelling preserves the interval's identity even when the keys look the same.",
         fail:"Count the letters: C→D is a 2nd, but we need a kind of 3rd…",
         hint:"The letter E keeps the count at 3." } },
-    { say:"One exception to memorize: the <b>perfect unison can never be diminished</b> — two identical notes have zero distance, and 'lowering' either note actually makes the interval BIGGER. It can only be augmented. \u{1F447} <b>Which quality can a perfect unison NEVER have?</b>",
+    { say:"One important exception: <b>A perfect unison can never be diminished.</b> Because two identical notes have zero distance, lowering either note actually makes the interval larger. A perfect unison can only be perfect or augmented. \u{1F447} <b>Which interval quality can a perfect unison never have?</b>",
       try:{ type:"mc", choices:["Diminished","Augmented","Perfect"], answer:0,
         success:"✓ You can't shrink zero! The unison can be perfect or augmented — never diminished.",
         fail:"A unison has NO distance — can it get smaller?",
