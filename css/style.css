@@ -370,3 +370,6 @@ button.notecard svg.mf-staff{height:46px;width:auto;max-width:100%;display:block
 .mf-staff .ksgroup.clickable{cursor:pointer}
 .mf-staff .ksgroup.clickable:hover .acc{stroke:var(--accent)}
 .mf-staff .ksgroup.hl .acc{stroke:var(--accent)}
+
+/* v3.4 — auto-enlarged double sharp/flat glyphs (template.js walker) */
+.dbx{font-size:1.55em;line-height:1;vertical-align:-0.08em;font-weight:700}

@@ -255,3 +255,37 @@
     Teacher.say(C.welcome||`Welcome to Lesson ${n}! Let's go!`,{pose:"wave",chime:false,proactive:true});
   },600));
 })();
+
+/* v3.4 — the 𝄪 and 𝄫 glyphs are unreadably small at text size (instructor:
+   "앞으로 나오는 더블샵을 키워줘"). Auto-enlarge them EVERYWHERE on lesson pages:
+   a walker wraps every occurrence in <span class="dbx"> (styled 1.55em in CSS),
+   and a MutationObserver keeps covering dynamically-built quiz/game buttons.
+   SVG text and already-wrapped glyphs are skipped. */
+(function(){
+  const RE=/[\u{1D12A}\u{1D12B}]/u;
+  function fix(root){
+    if(!root||root.nodeType!==1) return;
+    const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,null);
+    const hits=[];
+    while(w.nextNode()){
+      const t=w.currentNode, pe=t.parentElement;
+      if(!RE.test(t.nodeValue)) continue;
+      if(pe&&(pe.classList.contains("dbx")||pe.closest("svg"))) continue;
+      hits.push(t);
+    }
+    hits.forEach(t=>{
+      const span=document.createElement("span");
+      span.innerHTML=t.nodeValue.replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]))
+        .replace(/([\u{1D12A}\u{1D12B}])/gu,'<span class="dbx">$1</span>');
+      t.parentNode.replaceChild(span,t);
+    });
+  }
+  let mo=null;
+  function watch(){ mo=new MutationObserver(muts=>{
+    mo.disconnect();
+    muts.forEach(m=>fix(m.target.nodeType===3? m.target.parentElement : m.target));
+    mo.observe(document.body,{childList:true,subtree:true,characterData:true});
+  }); mo.observe(document.body,{childList:true,subtree:true,characterData:true}); }
+  if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",()=>{ fix(document.body); watch(); });
+  else setTimeout(()=>{ fix(document.body); watch(); },400);
+})();
