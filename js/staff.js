@@ -155,10 +155,15 @@ const Staff=(()=>{
       out+= up? `<line class="stem" x1="${x+8.4}" y1="${y-2}" x2="${x+8.4}" y2="${y-38}"/>`
               : `<line class="stem" x1="${x-8.4}" y1="${y+2}" x2="${x-8.4}" y2="${y+38}"/>`;
       if(s.flag&&!noFlag){
+        /* v7.9b (instructor) - flags are BOLD filled curves, engraving-style,
+           so a double flag reads instantly as two */
         const nf=s.flag16?2:1;
-        for(let k=0;k<nf;k++)
-          out+= up? `<path class="stem" d="M${x+8.4} ${y-38+k*9} q12 6 8 20" fill="none"/>`
-                  : `<path class="stem" d="M${x-8.4} ${y+38-k*9} q12 -6 8 -20" fill="none"/>`;
+        for(let k=0;k<nf;k++){
+          if(up){ const sx=x+8.4, sy=y-38+k*9;
+            out+=`<path class="note flag" d="M ${sx} ${sy} C ${sx+7.5} ${sy+4}, ${sx+9.5} ${sy+9}, ${sx+8} ${sy+15} C ${sx+7.2} ${sy+18}, ${sx+5.5} ${sy+20}, ${sx+4.5} ${sy+21} C ${sx+7} ${sy+14}, ${sx+4.5} ${sy+8}, ${sx} ${sy+5.5} Z"/>`; }
+          else { const sx=x-8.4, sy=y+38-k*9;
+            out+=`<path class="note flag" d="M ${sx} ${sy} C ${sx+7.5} ${sy-4}, ${sx+9.5} ${sy-9}, ${sx+8} ${sy-15} C ${sx+7.2} ${sy-18}, ${sx+5.5} ${sy-20}, ${sx+4.5} ${sy-21} C ${sx+7} ${sy-14}, ${sx+4.5} ${sy-8}, ${sx} ${sy-5.5} Z"/>`; }
+        }
       }
     }
     if(dot) out+=`<circle class="artic" cx="${x+rx+6}" cy="${onLine? y-6 : y}" r="2.7"/>`;

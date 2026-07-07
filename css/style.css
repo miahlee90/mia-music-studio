@@ -311,7 +311,7 @@ hr.sep{border:none;border-top:1px solid var(--hairline);margin:20px 0}
 .mf-staff .acc{stroke:var(--primary-dark);stroke-width:1.8;fill:none;stroke-linecap:round}
 .mf-staff .artic{fill:var(--primary-dark)}
 .mf-staff .arc{fill:none;stroke:var(--primary-dark);stroke-width:2}
-.mf-staff .beam{stroke:var(--primary-dark);stroke-width:5;stroke-linecap:round}
+.mf-staff .beam{stroke:var(--primary-dark);stroke-width:5;stroke-linecap:butt} /* v7.9b: butt caps meet the stems cleanly */
 .mf-staff .rest-line{fill:none;stroke:var(--primary-dark);stroke-width:2;stroke-linecap:round}
 .mf-staff text.dyn{fill:#33415c;font-weight:800;font-style:italic;font-size:15px;font-family:Georgia,serif}
 .mf-staff text.mark-txt{fill:#33415c;font-weight:800;font-style:italic;font-size:13px}

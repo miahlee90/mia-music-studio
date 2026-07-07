@@ -51,7 +51,10 @@ const Teacher=(()=>{
     document.addEventListener("click",e=>{ if(!menu.contains(e.target)&&e.target!==icon) closeMenu(); });
   }
   function miniAvatar(){ return `<svg class="mini" viewBox="0 0 120 140" aria-hidden="true"><use href="#miaShape"/></svg>`; }
-  function bubbleHTML(html){ return `<div class="say">${miniAvatar()}<div class="bub">${html}</div></div>`; }
+  function bubbleHTML(html){
+    /* instructor: the pointing-finger question always moves to its own line */
+    html=String(html).replace(/\s*\u{1F447}/gu,"<br>\u{1F447}");
+    return `<div class="say">${miniAvatar()}<div class="bub">${html}</div></div>`; }
 
   function say(text,{pose="neutral",sticky=false,chime=true,proactive=false}={}){
     init();
