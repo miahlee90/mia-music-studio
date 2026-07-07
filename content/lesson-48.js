@@ -135,7 +135,7 @@ LESSON_CONTENT[48]={
         {p:"F4",d:"h",label:"IV"},{p:"A4",d:"h",chord:true},{p:"C5",d:"h",chord:true},
         {p:"G4",d:"h",label:"V"},{p:"B4",d:"h",chord:true},{p:"D5",d:"h",chord:true},
         {p:"C4",d:"w",label:"I"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{bar:"final"}],width:600},
-      kb:{start:60,octaves:2,labels:true,marks:[60,65,67]} },
+      kb:{start:60,octaves:2,labels:true} },
     { caption:"Anatomy of the major triad: Major 3rd bottom floor + minor 3rd top floor = Perfect 5th roof.",
       staff:{clef:"bass",tempo:60,notes:[
         {p:"C3",d:"w"},{p:"E3",d:"w",chord:true},{p:"G3",d:"w",chord:true}],

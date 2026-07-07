@@ -132,7 +132,7 @@ LESSON_CONTENT[50]={
       staff:{clef:"treble",tempo:60,notes:[
         {p:"G4",d:"w",x:170,label:"V"},{p:"B4",d:"w",chord:true},{p:"D5",d:"w",chord:true},
         {p:"G4",d:"w",x:390,label:"V7"},{p:"B4",d:"w",chord:true},{p:"D5",d:"w",chord:true},{p:"F5",d:"w",chord:true}],width:520},
-      kb:{start:60,octaves:2,labels:true,marks:[67,71,74,77]} },
+      kb:{start:60,octaves:2,labels:true} },
     { caption:"The upgraded primary chords — I, IV, V7, and the triumphant return to I. The final cadence of Book 2!",
       staff:{clef:"treble",tempo:80,notes:[
         {p:"C4",d:"h",label:"I"},{p:"E4",d:"h",chord:true},{p:"G4",d:"h",chord:true},

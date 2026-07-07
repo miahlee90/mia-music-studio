@@ -188,7 +188,7 @@ LESSON_CONTENT[36]={
         {p:"C4",d:"w",x:160},{p:"E4",d:"w",chord:true},
         {p:"E4",d:"w",x:340},{p:"G4",d:"w",chord:true}],
         brackets:[{from:0,to:1,label:"M3 — 4 half steps"},{from:2,to:3,label:"m3 — only 3"}],width:460},
-      kb:{start:60,octaves:1,labels:true,marks:[64,67]} }
+      kb:{start:60,octaves:1,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Major/minor Sprint (45s)",

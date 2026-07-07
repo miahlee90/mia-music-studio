@@ -175,7 +175,7 @@ LESSON_CONTENT[38]={
         {p:"C4",d:"q",label:"Do"},{p:"D4",d:"q",label:"Re"},{p:"E4",d:"q",label:"Mi"},{p:"G4",d:"q",label:"Sol"},{bar:"double"},
         {p:"G4",d:"q",label:"Do"},{p:"A4",d:"q",label:"Re"},{p:"B4",d:"q",label:"Mi"},{p:"D5",d:"q",label:"Sol"},{bar:"final"}],
         brackets:[{from:0,to:3,label:"C major"},{from:5,to:8,label:"G major — up a P5"}],width:560},
-      kb:{start:60,octaves:2,labels:true,marks:[60,67]} }
+      kb:{start:60,octaves:2,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Syllable Sprint (45s)",

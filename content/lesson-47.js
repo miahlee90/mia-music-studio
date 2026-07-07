@@ -126,7 +126,7 @@ LESSON_CONTENT[47]={
       staff:{clef:"treble",tempo:110,notes:[
         {p:"C4",d:"q",label:"1"},{p:"D4",d:"q",label:"2"},{p:"E4",d:"q",label:"3"},{p:"F4",d:"q",label:"4"},{p:"G4",d:"q",label:"5"},{p:"A4",d:"q",label:"6"},{p:"B4",d:"q",label:"7"},{p:"C5",d:"q",label:"8"},{bar:"double"},
         {p:"C4",d:"w",label:"C triad"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{bar:"final"}],width:660},
-      kb:{start:60,octaves:1,labels:true,marks:[60,64,67]} },
+      kb:{start:60,octaves:1,labels:true} },
     { caption:"The same C triad in bass clef and treble clef — all lines in one, all spaces in the other, root C at the bottom of both.",
       staff:{clef:"grand",tempo:60,notes:[
         {p:"C4",d:"w",clef:"treble"},{p:"E4",d:"w",chord:true,clef:"treble"},{p:"G4",d:"w",chord:true,clef:"treble"},
