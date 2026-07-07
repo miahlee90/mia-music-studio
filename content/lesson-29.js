@@ -40,18 +40,20 @@ function MF_L29_ladder(container,fb){
     <div class="choices chips lad-sharps" style="display:none"></div>
     <div class="choices chips lad-names" style="display:none"></div>
     <div class="lad-hint" style="text-align:center;font-size:13.5px;margin-top:10px;line-height:1.7">
-      <span style="color:#0a8754;font-weight:800">Order of sharps: F♯ C♯ G♯ D♯ A♯ E♯ B♯</span><br>
-      <span style="color:var(--muted)">Name the key: the note one half step ABOVE the last sharp.</span>
+      <span style="color:var(--correct);font-weight:800">Order of sharps: F♯ C♯ G♯ D♯ A♯ E♯ B♯</span><br>
+      <span style="color:var(--primary);font-weight:700">Name the key: the note one half step ABOVE the last sharp.</span>
     </div>`;
   const q=container.querySelector(".lad-q"), holder=container.querySelector(".lad-staff"),
         doneLine=container.querySelector(".lad-done"),
         shRow=container.querySelector(".lad-sharps"), nmRow=container.querySelector(".lad-names");
   SHARPS.forEach(s=>{ const b=document.createElement("button"); b.textContent=s;
+    b.style.color="var(--correct)"; b.style.borderColor="var(--correct)";
     b.onclick=()=>{ if(phase!=="add"||b.disabled) return;
       if(s===SHARPS[n]){ b.disabled=true; n++; draw(); MFAudio.tone(58+n*3,.3); setPhase("name"); }
       else { MFAudio.tone(40,.25); fb(false,`Fat Cats Go Down Alleys Eating Bread — sharp #${n+1} is ${SHARPS[n]}.`); } };
     shRow.appendChild(b); });
   KEYS.forEach((k,ki)=>{ const b=document.createElement("button"); b.textContent=k+" Major";
+    b.style.color="var(--primary)"; b.style.borderColor="var(--primary)";
     b.onclick=()=>{ if(phase!=="name"||b.disabled) return;
       if(ki===n){ b.disabled=true; MFAudio.tone(64+n*2,.3);
         doneLine.textContent=KEYS.slice(0,n+1).map((kk,i)=>`${i}♯=${kk}`).join(" · ");
@@ -66,7 +68,7 @@ function MF_L29_ladder(container,fb){
     shRow.style.display=p==="add"?"":"none";
     nmRow.style.display=p==="name"?"":"none";
     q.innerHTML=p==="add"? `Now ADD sharp #${n+1} — which sharp comes next?`
-      : (n===0? "Let's start from <b>C major</b> — the completely EMPTY signature, no sharps at all. Tap <b>C Major</b> to begin the ladder!" : `${n} sharp${n>1?"s":""} on the staff — which major key is this now?`);
+      : (n===0? "Let's start from <b>C major</b> — the completely EMPTY signature, no sharps at all.<br><b>Tap C Major to begin the ladder!</b>" : `${n} sharp${n>1?"s":""} on the staff — which major key is this now?`);
   }
   draw(); setPhase("name");
 }
