@@ -43,10 +43,10 @@ const LESSONS=[
  {n:40, title:"Sixteenth Rests", unit:10, book:2, time:15, kw:["sixteenth rest"]},
  {n:41, title:"Dotted Eighth Notes", unit:10, book:2, time:15, kw:["dotted eighth","swing"]},
  {n:42, title:"Common Time and Cut Time (Alla Breve)", unit:10, book:2, time:15, kw:["common time","cut time","alla breve"]},
- {n:43, title:"3/8 and 6/8 Time Signatures", unit:11, book:2, time:12, kw:["3/8","6/8","compound meter"]},
- {n:44, title:"3/8 and 6/8 Time Signatures at Fast Tempos", unit:11, book:2, time:11, kw:["6/8 fast","compound"]},
- {n:45, title:"Eighth Note Triplets", unit:11, book:2, time:12, kw:["triplet"]},
- {n:46, title:"Incomplete Measures (Pick-up Notes) and Syncopation", unit:11, book:2, time:12, kw:["pickup","anacrusis","syncopation"]},
+ {n:43, title:"3/8 and 6/8 Time Signatures", unit:11, book:2, time:15, kw:["3/8","6/8","compound meter"]},
+ {n:44, title:"3/8 and 6/8 Time Signatures at Fast Tempos", unit:11, book:2, time:15, kw:["6/8 fast","compound"]},
+ {n:45, title:"Eighth Note Triplets", unit:11, book:2, time:15, kw:["triplet"]},
+ {n:46, title:"Incomplete Measures (Pick-up Notes) and Syncopation", unit:11, book:2, time:15, kw:["pickup","anacrusis","syncopation"]},
  {n:47, title:"Triads", unit:12, book:2, time:13, kw:["triad","chord","root third fifth"]},
  {n:48, title:"Primary and Major Triads", unit:12, book:2, time:12, kw:["primary triads","I IV V"]},
  {n:49, title:"Scale Degree Names", unit:12, book:2, time:11, kw:["tonic","dominant","subdominant","scale degrees"]},
@@ -98,5 +98,5 @@ const UNITS=[
  {unit:18, book:3, name:"Form", lessons:[72,75]}
 ];
 /* built lessons so far (index pages link only these) */
-const BUILT_THROUGH=42;
+const BUILT_THROUGH=46;
 const LESSON_CONTENT={}; /* filled by content/lesson-NN.js */

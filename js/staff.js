@@ -17,6 +17,9 @@
    clickable via spec.onKeysig(i); each accidental wrapped in g.ksgroup[data-ks]),
    W/H step carets above the staff (spec.steps:[{from,to,label:"W"|"H"}]),
    labeled under-brackets for tetrachord grouping (spec.brackets:[{from,to,label}]).
+   v7.7 (Unit 11): TRIPLETS — spec.tuplets:[{from,to}] draws the "3" (with a
+   small bracket when the group is unbeamed) above the group and playback fits
+   the notes into 2/3 of their written time (3-in-the-time-of-2).
    v7.6 (Unit 10): SIXTEENTHS — d:"16" (double flag / double beam via
    spec.beams:[[a,b,2]]; partial-beam stub with [i,i,2] pointing back at the
    previous stem), rest:"16" (two hooks), dotted eighth "8.", cut time
@@ -400,6 +403,23 @@ const Staff=(()=>{
       else
         parts.push(`<line class="acc" x1="${x1}" y1="${y}" x2="${x2}" y2="${y-5}"/><line class="acc" x1="${x1}" y1="${y}" x2="${x2}" y2="${y+5}"/>`);
     });
+    /* v7.7 — triplet "3" markers (with bracket when unbeamed) */
+    (spec.tuplets||[]).forEach(tp=>{
+      const A=placed[tp.from], B=placed[tp.to];
+      if(!A||!B) return;
+      const topT=pl=>{
+        if(pl.y===undefined) return (pl.y0!==undefined?pl.y0:y0t)-6;
+        const s=durShape(normD(pl.n.d));
+        const up=pl.y > pl.y0+2*GAP;
+        return (s.stem&&up)? pl.y-42 : pl.y-12;
+      };
+      const yB=Math.min(topT(A),topT(B))-6, mid=(A.x+B.x)/2;
+      minEl=Math.min(minEl,yB-18);
+      let beamed=false;
+      (spec.beams||[]).forEach(bm=>{ if(bm[0]<=tp.from&&bm[1]>=tp.to) beamed=true; });
+      if(!beamed) parts.push(`<path class="acc" fill="none" d="M ${A.x-4} ${yB+6} L ${A.x-4} ${yB} L ${mid-8} ${yB} M ${mid+8} ${yB} L ${B.x+4} ${yB} L ${B.x+4} ${yB+6}"/>`);
+      parts.push(`<text class="lbl" x="${mid}" y="${yB+4}" text-anchor="middle" font-style="italic">3</text>`);
+    });
     /* v7 — W/H step carets above the staff (scale/tetrachord teaching)
        v7.1: each caret sits a constant distance above its two notes (stems included)
        v7.2: tighter offsets (instructor: bass H a bit lower) + ALIGNMENT smoothing —
@@ -485,7 +505,8 @@ const Staff=(()=>{
         return;
       }
       if(n.dyn&&VOLS[n.dyn]!==undefined) vol=VOLS[n.dyn];
-      const base=tempo? beatsOf(n)*spb : DURSEC[normD(n.d||n.rest)]*(isDotted(n)?1.5:1);
+      let base=tempo? beatsOf(n)*spb : DURSEC[normD(n.d||n.rest)]*(isDotted(n)?1.5:1);
+      if((spec.tuplets||[]).some(tp=>i>=tp.from&&i<=tp.to)) base*=2/3;
       const dur=n.artic==="fermata"? base*1.8 : base;
       if(n.chord&&!n.rest){ /* harmonic interval: sound with the previous note, BOTH stay lit */
         MFAudio.tone(MFAudio.midi(n.sound||n.p), lastDur||Math.min(dur,1.8), lastStart, vol*.9);
