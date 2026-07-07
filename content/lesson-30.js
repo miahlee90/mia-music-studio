@@ -26,6 +26,53 @@ function MF_L30_buildSig(container,fb){
   draw();
 }
 
+/* the FLAT-KEY LADDER (instructor 2026-07-06, mirrors L29's sharp ladder):
+   start from an EMPTY signature (C major) and climb to 7 flats — the student
+   ADDS each flat in order and MATCHES every new signature to its key name.
+   Color pairing: adding flats = GREEN, naming keys = PURPLE. */
+function MF_L30_ladder(container,fb){
+  const FLATS=["B♭","E♭","A♭","D♭","G♭","C♭","F♭"];
+  const KEYS=["C","F","B♭","E♭","A♭","D♭","G♭","C♭"];
+  let n=0, phase="name";
+  container.innerHTML=`<div class="big-q lad-q" style="text-align:center"></div>
+    <div class="lad-staff"></div>
+    <div class="lad-done" style="text-align:center;font-size:13px;color:var(--muted);min-height:18px"></div>
+    <div class="choices chips lad-flats" style="display:none"></div>
+    <div class="choices chips lad-names" style="display:none"></div>
+    <div class="lad-hint" style="text-align:center;font-size:13.5px;margin-top:10px;line-height:1.7">
+      <span style="color:var(--correct);font-weight:800">Order of flats: B♭ E♭ A♭ D♭ G♭ C♭ F♭</span><br>
+      <span style="color:var(--primary);font-weight:700">Name the key: the NEXT-TO-LAST flat · one flat alone = F Major.</span>
+    </div>`;
+  const q=container.querySelector(".lad-q"), holder=container.querySelector(".lad-staff"),
+        doneLine=container.querySelector(".lad-done"),
+        flRow=container.querySelector(".lad-flats"), nmRow=container.querySelector(".lad-names");
+  FLATS.forEach(s=>{ const b=document.createElement("button"); b.textContent=s;
+    b.style.color="var(--correct)"; b.style.borderColor="var(--correct)";
+    b.onclick=()=>{ if(phase!=="add"||b.disabled) return;
+      if(s===FLATS[n]){ b.disabled=true; n++; draw(); MFAudio.tone(70-n*3,.3); setPhase("name"); }
+      else { MFAudio.tone(40,.25); fb(false,`BEAD Goes Clean Fast — flat #${n+1} is ${FLATS[n]}.`); } };
+    flRow.appendChild(b); });
+  KEYS.forEach((k,ki)=>{ const b=document.createElement("button"); b.textContent=k+" Major";
+    b.style.color="var(--primary)"; b.style.borderColor="var(--primary)";
+    b.onclick=()=>{ if(phase!=="name"||b.disabled) return;
+      if(ki===n){ b.disabled=true; MFAudio.tone(76-n*2,.3);
+        doneLine.textContent=KEYS.slice(0,n+1).map((kk,i)=>`${i}♭=${kk}`).join(" · ");
+        if(n>=7){ flRow.style.display="none"; nmRow.style.display="none";
+          q.innerHTML="✓ The complete flat-key ladder — C major to C♭ major!";
+          fb(true,"✓ All eight keys matched! From two flats on, the next-to-last flat names the key — and one flat alone is always F major."); }
+        else setPhase("add"); }
+      else { MFAudio.tone(40,.25); fb(false, n===0? "Remember — the empty signature IS C major. Tap C Major to begin!" : (n===1? "One flat alone is the EXCEPTION — that key is F major!" : `Find the NEXT-TO-LAST flat (${FLATS[n-2]}) — it names the key.`)); } };
+    nmRow.appendChild(b); });
+  function draw(){ Staff.render(holder, n===0? {clef:"treble",notes:[],width:300} : {clef:"treble",keysig:{flats:n},notes:[],width:300}); }
+  function setPhase(p){ phase=p;
+    flRow.style.display=p==="add"?"":"none";
+    nmRow.style.display=p==="name"?"":"none";
+    q.innerHTML=p==="add"? `Now ADD flat #${n+1} — which flat comes next?`
+      : (n===0? "Let's start from <b>C major</b> — the completely EMPTY signature, no flats at all.<br><b>Tap C Major to begin the ladder!</b>" : `${n} flat${n>1?"s":""} on the staff — which major key is this now?`);
+  }
+  draw(); setPhase("name");
+}
+
 /* name-the-key drill: 4 rounds across treble & bass, incl. the F exception */
 function MF_L30_nameKey(container,fb){
   const ROUNDS=[{key:"F",clef:"treble",why:"one flat alone = F major (the exception!)"},
@@ -83,15 +130,10 @@ LESSON_CONTENT[30]={
         success:"✓ BEAD Goes Clean Fast — B E A D G C F.",
         fail:"It spells a word at the start: B-E-A-D…",
         hint:"The reverse of F C G D A E B." } },
-    { say:"Naming flat keys uses a different shortcut: <b>the next-to-last flat IS the name of the key</b>. Below, the flats are B♭–E♭–A♭, and the next-to-last (highlighted) is <b>E♭</b>. \u{1F447} <b>So this key signature means which major key?</b>",
-      show:{ type:"custom", mount:(el)=>{
-        const api=Staff.render(el,{clef:"treble",keysig:"Eb",notes:[],width:260});
-        const g=api.svg.querySelectorAll(".ksgroup"); if(g.length>1) g[g.length-2].classList.add("hl");
-      } },
-      try:{ type:"mc", choices:["E♭ major","A♭ major","B♭ major","F major"], answer:0,
-        success:"✓ Three flats, next-to-last is E♭ — E♭ major. The signature names itself!",
-        fail:"Count in from the END: the SECOND-to-last flat names the key.",
-        hint:"B♭ … E♭ … A♭ — which one is next-to-last?" } },
+    { say:"Naming flat keys uses a different shortcut: <b>the NEXT-TO-LAST flat IS the name of the key</b> — and the one exception is a single flat (B♭) alone, which is always <b>F MAJOR</b>. Now climb the whole ladder yourself: starting from a completely <b>EMPTY signature</b>, add all seven flats one at a time — and name each new key as it appears. \u{1F447} <b>Start with the empty staff — which major key has no flats at all?</b>",
+      try:{ type:"custom",
+        hint:"Add flats in BEAD-Goes-Clean-Fast order; to name each key, read the NEXT-TO-LAST flat (one flat alone = F major).",
+        mount:(container,fb)=>MF_L30_ladder(container,fb) } },
     { say:"One important exception: with only <b>ONE flat (B♭)</b> there is no 'next-to-last' — and that key is always <b>F MAJOR</b>. It's the only flat major key that ignores the rule. \u{1F447} <b>True or false: the key signature with one flat is B♭ major.</b>",
       show:{ type:"staff", spec:{clef:"grand",keysig:"F",notes:[],width:340} },
       try:{ type:"mc", choices:["False — it's F major","True — it's B♭ major"], answer:0,
