@@ -8,36 +8,65 @@
 
 /* the circle data: 12 positions clockwise from the top */
 const MF_L34_POS=[
-  {k:"C",  n:"0"},        {k:"G",  n:"1♯"}, {k:"D",n:"2♯"}, {k:"A",n:"3♯"},
-  {k:"E",  n:"4♯"},       {k:"B",  alt:"C♭", n:"5♯"}, {k:"F♯", alt:"G♭", n:"6♯"},
-  {k:"C♯", alt:"D♭", n:"7♯"}, {k:"A♭", n:"4♭"}, {k:"E♭",n:"3♭"}, {k:"B♭",n:"2♭"}, {k:"F",n:"1♭"}];
+  {k:"C",  n:"0",  rel:"Am"},  {k:"G", n:"1♯", rel:"Em"}, {k:"D",n:"2♯",rel:"Bm"}, {k:"A",n:"3♯",rel:"F♯m"},
+  {k:"E",  n:"4♯", rel:"C♯m"}, {k:"B", alt:"C♭", n:"5♯", rel:"G♯m"}, {k:"F♯", alt:"G♭", n:"6♯", rel:"E♭m"},
+  {k:"C♯", alt:"D♭", n:"7♯", rel:"B♭m"}, {k:"A♭",n:"4♭",rel:"Fm"}, {k:"E♭",n:"3♭",rel:"Cm"}, {k:"B♭",n:"2♭",rel:"Gm"}, {k:"F",n:"1♭",rel:"Dm"}];
 function MF_L34_ks(label){ return label.replace("♯","#").replace("♭","b"); }
 
-/* draw the circle. opts:{blank:[indexes], hot:true(clickable), onKey(i,node), mark:[indexes]} */
+/* draw the circle. opts:{blank:[indexes], hot:true(clickable), onKey(i,node), mark:[indexes],
+   minors:true → fills the inner ring with the relative minors (나란한조, Book 3)}
+   v2 (instructor 2026-07-07): COLOR two-ring design like classic charts — green outer
+   band = Major keys, warm inner band reserved for the relative minors; BIG clockwise /
+   counterclockwise arrows OUTSIDE the wheel. API unchanged (walk/build/explorer reuse). */
 function MF_L34_circle(el,opts){
   opts=opts||{};
-  const W=340, cx=170, cy=170, R=128;
+  const W=440,H=424,cx=220,cy=252,R2=150,R1=108,R0=64;
   const blank=new Set(opts.blank||[]);
-  let svg=`<svg viewBox="0 0 ${W} ${W}" width="100%" style="max-width:${W}px;display:block;margin:0 auto" xmlns="http://www.w3.org/2000/svg">`;
-  svg+=`<circle cx="${cx}" cy="${cy}" r="${R}" fill="none" stroke="#c9d2e4" stroke-width="2"/>`;
-  svg+=`<text x="${cx}" y="${cy-8}" text-anchor="middle" style="font-weight:800;font-size:17px" fill="#1c1e54">Circle</text>`;
-  svg+=`<text x="${cx}" y="${cy+10}" text-anchor="middle" style="font-weight:800;font-size:17px" fill="#1c1e54">of 5ths</text>`;
-  svg+=`<text x="${cx+56}" y="${cy-52}" text-anchor="middle" style="font-size:12px;font-weight:700" fill="#2E8B57">+1♯ ↻</text>`;
-  svg+=`<text x="${cx-56}" y="${cy-52}" text-anchor="middle" style="font-size:12px;font-weight:700" fill="#533afd">↺ +1♭</text>`;
+  const P=(r,d)=>{const a=d*Math.PI/180;return [cx+r*Math.cos(a),cy+r*Math.sin(a)];};
+  const F=n=>n.toFixed(1);
+  function sector(rOut,rIn,d1,d2){
+    const [x1,y1]=P(rOut,d1),[x2,y2]=P(rOut,d2),[x3,y3]=P(rIn,d2),[x4,y4]=P(rIn,d1);
+    return `M ${F(x1)} ${F(y1)} A ${rOut} ${rOut} 0 0 1 ${F(x2)} ${F(y2)} L ${F(x3)} ${F(y3)} A ${rIn} ${rIn} 0 0 0 ${F(x4)} ${F(y4)} Z`;
+  }
+  let svg=`<svg viewBox="0 0 ${W} ${H}" width="100%" style="max-width:${W}px;display:block;margin:0 auto" xmlns="http://www.w3.org/2000/svg">`;
+  svg+=`<defs><marker id="cofAG" markerWidth="9" markerHeight="9" refX="4.5" refY="4.5" orient="auto"><path d="M0 0 L9 4.5 L0 9 Z" fill="#2E8B57"/></marker><marker id="cofAP" markerWidth="9" markerHeight="9" refX="4.5" refY="4.5" orient="auto"><path d="M0 0 L9 4.5 L0 9 Z" fill="#533afd"/></marker></defs>`;
+  /* BIG direction arrows OUTSIDE the wheel */
+  const rA=R2+20;
+  const [ax1,ay1]=P(rA,-76),[ax2,ay2]=P(rA,-14);
+  svg+=`<path d="M ${F(ax1)} ${F(ay1)} A ${rA} ${rA} 0 0 1 ${F(ax2)} ${F(ay2)}" fill="none" stroke="#2E8B57" stroke-width="5" marker-end="url(#cofAG)"/>`;
+  const [bx1,by1]=P(rA,-104),[bx2,by2]=P(rA,-166);
+  svg+=`<path d="M ${F(bx1)} ${F(by1)} A ${rA} ${rA} 0 0 0 ${F(bx2)} ${F(by2)}" fill="none" stroke="#533afd" stroke-width="5" marker-end="url(#cofAP)"/>`;
+  svg+=`<text x="${cx+118}" y="30" text-anchor="middle" style="font-weight:800;font-size:15px" fill="#2E8B57">CLOCKWISE \u21bb</text>`;
+  svg+=`<text x="${cx+118}" y="48" text-anchor="middle" style="font-weight:700;font-size:13px" fill="#2E8B57">up a 5th \u00b7 +1\u266f</text>`;
+  svg+=`<text x="${cx-118}" y="30" text-anchor="middle" style="font-weight:800;font-size:15px" fill="#533afd">\u21ba COUNTERCLOCKWISE</text>`;
+  svg+=`<text x="${cx-118}" y="48" text-anchor="middle" style="font-weight:700;font-size:13px" fill="#533afd">up a 4th \u00b7 +1\u266d</text>`;
+  /* inner ring — reserved for the relative minors (Book 3) */
   MF_L34_POS.forEach((p,i)=>{
-    const a=(-90+i*30)*Math.PI/180, x=cx+R*Math.cos(a), y=cy+R*Math.sin(a);
+    const d0=-90+i*30, d1=d0-15, d2=d0+15;
+    svg+=`<path d="${sector(R1-2,R0,d1,d2)}" fill="#fbe9d3" stroke="#E8A33D" stroke-width="1" opacity="${opts.minors?".95":".55"}"/>`;
+    if(opts.minors&&p.rel){ const [tx,ty]=P((R1+R0)/2-1,d0);
+      svg+=`<text x="${F(tx)}" y="${F(ty+4)}" text-anchor="middle" style="font-weight:700;font-size:11px" fill="#8a5300">${p.rel}</text>`; }
+  });
+  /* center hub */
+  svg+=`<circle cx="${cx}" cy="${cy}" r="${R0-6}" fill="#eef6fb" stroke="#9fc2d8" stroke-width="2"/>`;
+  svg+=`<text x="${cx}" y="${cy-6}" text-anchor="middle" style="font-weight:800;font-size:15px" fill="#1c1e54">Circle</text>`;
+  svg+=`<text x="${cx}" y="${cy+12}" text-anchor="middle" style="font-weight:800;font-size:15px" fill="#1c1e54">of 5ths</text>`;
+  /* outer ring — the Major keys */
+  MF_L34_POS.forEach((p,i)=>{
+    const d0=-90+i*30, d1=d0-15, d2=d0+15;
     const mark=(opts.mark||[]).includes(i);
-    const fill=mark? "#ffd166" : (blank.has(i)? "#fff" : "#eef1ff");
-    const stroke=blank.has(i)? "#b9b9f9" : "#4434d4";
-    const dash=blank.has(i)? ` stroke-dasharray="4 3"` : "";
+    const fill=mark? "#ffd166" : (blank.has(i)? "#ffffff" : "#def0e5");
+    const stroke=blank.has(i)? "#b9b9f9" : "#2E8B57";
+    const dash=blank.has(i)? ` stroke-dasharray="5 4"` : "";
+    const [tx,ty]=P((R1+R2)/2,d0);
     svg+=`<g class="cof-node" data-i="${i}" style="cursor:${opts.hot?"pointer":"default"}">`;
-    svg+=`<circle cx="${x}" cy="${y}" r="21" fill="${fill}" stroke="${stroke}" stroke-width="2"${dash}/>`;
+    svg+=`<path d="${sector(R2,R1,d1,d2)}" fill="${fill}" stroke="${stroke}" stroke-width="1.6"${dash}/>`;
     if(!blank.has(i)){
       if(p.alt){
-        svg+=`<text x="${x}" y="${y-1}" text-anchor="middle" style="font-weight:800;font-size:12px" fill="#1c1e54">${p.k}</text>`;
-        svg+=`<text x="${x}" y="${y+11}" text-anchor="middle" style="font-size:10px" fill="#64748d">${p.alt}</text>`;
-      } else svg+=`<text x="${x}" y="${y+5}" text-anchor="middle" style="font-weight:800;font-size:14px" fill="#1c1e54">${p.k}</text>`;
-    } else svg+=`<text x="${x}" y="${y+5}" text-anchor="middle" style="font-weight:800;font-size:14px" fill="#b9b9f9">?</text>`;
+        svg+=`<text x="${F(tx)}" y="${F(ty-1)}" text-anchor="middle" style="font-weight:800;font-size:13px" fill="#14532d">${p.k}</text>`;
+        svg+=`<text x="${F(tx)}" y="${F(ty+12)}" text-anchor="middle" style="font-size:10.5px;font-weight:600" fill="#3f6212">${p.alt}</text>`;
+      } else svg+=`<text x="${F(tx)}" y="${F(ty+6)}" text-anchor="middle" style="font-weight:800;font-size:16px" fill="#14532d">${p.k}</text>`;
+    } else svg+=`<text x="${F(tx)}" y="${F(ty+6)}" text-anchor="middle" style="font-weight:800;font-size:16px" fill="#b9b9f9">?</text>`;
     svg+=`</g>`;
   });
   svg+=`</svg>`;
