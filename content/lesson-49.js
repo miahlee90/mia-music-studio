@@ -91,8 +91,8 @@ LESSON_CONTENT[49]={
   ],
   steps:[
     { say:"The headline trio first — the degrees carrying the primary chords. Degree 1, the keynote, is the <b>TONIC (I)</b>: home base, the center of gravity. Degree 5, a 5th <b>above</b>, is the <b>DOMINANT (V)</b>. Degree 4 is the <b>SUBDOMINANT (IV)</b> — named because it lies a 5th <b>BELOW</b> the tonic ('sub' = under), the mirror of the dominant. \u{1F447} <b>Why is degree 4 called SUBdominant?</b>",
-      show:{ type:"staff", spec:{clef:"treble",tempo:90,notes:[
-        {p:"F3",d:"h",label:"Subdominant — 5th below"},{p:"C4",d:"h",label:"TONIC",x:330},{p:"G4",d:"h",label:"Dominant — 5th above"}],width:560} },
+      show:{ type:"staff", spec:{clef:"grand",tempo:90,notes:[
+        {p:"F3",d:"h",clef:"bass",x:150,label:"Subdominant — 5th below"},{p:"C4",d:"h",clef:"treble",x:345,label:"TONIC"},{p:"G4",d:"h",clef:"treble",x:540,label:"Dominant — 5th above"}],width:660} },
       try:{ type:"mc", choices:["It sits a 5th BELOW the tonic — the dominant's mirror","It is slightly weaker than the dominant","It sits just below the dominant"], answer:0,
         success:"✓ The book is emphatic: subdominant = same distance BELOW the tonic as the dominant is ABOVE — not 'just under the dominant'!",
         fail:"'Sub' measures from the TONIC, not from the dominant.",

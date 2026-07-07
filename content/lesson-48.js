@@ -93,9 +93,9 @@ LESSON_CONTENT[48]={
   steps:[
     { say:"The most important triads of any key grow on scale degrees <b>1, 4, and 5</b> — the <b>PRIMARY TRIADS</b> (or primary chords), labeled with <b>ROMAN NUMERALS: I, IV, V</b>. \u{1F447} <b>The primary triads are built on which degrees?</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:80,notes:[
-        {p:"C4",d:"h",label:"I"},{p:"E4",d:"h",chord:true},{p:"G4",d:"h",chord:true},
-        {p:"F4",d:"h",label:"IV",x:330},{p:"A4",d:"h",chord:true},{p:"C5",d:"h",chord:true},
-        {p:"G4",d:"h",label:"V",x:480},{p:"B4",d:"h",chord:true},{p:"D5",d:"h",chord:true}],width:580} },
+        {p:"C4",d:"h",x:140,label:"I"},{p:"E4",d:"h",chord:true},{p:"G4",d:"h",chord:true},
+        {p:"F4",d:"h",x:310,label:"IV"},{p:"A4",d:"h",chord:true},{p:"C5",d:"h",chord:true},
+        {p:"G4",d:"h",x:480,label:"V"},{p:"B4",d:"h",chord:true},{p:"D5",d:"h",chord:true}],width:580} },
       try:{ type:"mc", choices:["1, 4, and 5","1, 2, and 3","1, 3, and 5"], answer:0,
         success:"✓ Degrees 1, 4, 5 → chords I, IV, V. (1-3-5 spells one triad's INSIDES; 1-4-5 locates three different triads!)",
         fail:"Careful — 1-3-5 is a triad's spelling, not the primary LOCATIONS.",

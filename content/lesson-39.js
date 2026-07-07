@@ -101,8 +101,8 @@ LESSON_CONTENT[39]={
         mount:(container,fb)=>MF_L39_tree(container,fb) } },
     { say:"Anatomy check. A single sixteenth note = filled head + stem + <b>TWO flags</b>. Grouped sixteenths trade their flags for <b>TWO beams</b>. (One flag/beam = eighth; two = sixteenth.) \u{1F447} <b>How do you spot a sixteenth note instantly?</b>",
       show:{ type:"staff", spec:{clef:"treble",notes:[
-        {p:"D5",d:"16",x:150,label:"flags ×2"},{p:"C5",d:"16",x:330},{p:"B4",d:"16"},{p:"C5",d:"16"},{p:"D5",d:"16",label:"beams ×2"}],
-        beams:[[1,4,2]],width:460} },
+        {p:"D5",d:"16",x:140,label:"flags ×2"},{p:"C5",d:"16",x:300},{p:"B4",d:"16",x:360},{p:"C5",d:"16",x:420},{p:"D5",d:"16",x:480,label:"beams ×2"}],
+        beams:[[1,4,2]],width:560} },
       try:{ type:"mc", choices:["Two flags or two beams","A hollow head","A dot after the head"], answer:0,
         success:"✓ Two of everything: 2 flags alone, 2 beams in groups. One more than the eighth note — because it's one split further down.",
         fail:"Compare with an eighth note — what doubled?",

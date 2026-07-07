@@ -108,7 +108,7 @@ LESSON_CONTENT[37]={
         hint:"Small m = smaller size." } },
     { say:"<b>AUGMENTED</b> means 'made larger'. Raise a <b>Perfect OR Major</b> interval by <b>one half step</b> (letters unchanged) and it becomes augmented — abbreviated <b>aug</b>. C–G (P5) stretches to C–G♯ (aug 5). C–E (M3) stretches to C–E♯ (aug 3). \u{1F447} <b>C–G♯ is an…?</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:70,notes:[
-        {p:"C4",d:"w"},{p:"G4",d:"w",chord:true},{p:"C4",d:"w",x:300},{p:"G#4",d:"w",chord:true}],
+        {p:"C4",d:"w",x:160},{p:"G4",d:"w",chord:true},{p:"C4",d:"w",x:340},{p:"G#4",d:"w",chord:true}],
         brackets:[{from:0,to:1,label:"P5 — 7 half steps"},{from:2,to:3,label:"aug 5 — 8 half steps"}],width:460},
         kb:{start:60,octaves:1,labels:true,marks:[60,67,68]} },
       try:{ type:"mc", choices:["Augmented 5th","Major 5th","Perfect 6th"], answer:0,
@@ -117,7 +117,7 @@ LESSON_CONTENT[37]={
         hint:"Augmented = made larger." } },
     { say:"<b>DIMINISHED</b> means 'made smaller'. Lower a <b>Perfect OR minor</b> interval by <b>one half step</b> (letters unchanged) and it becomes diminished — abbreviated <b>dim</b>. C–G (P5) shrinks to C–G♭ (dim 5). C–E♭ (m3) shrinks to C–E𝄫 (dim 3). \u{1F447} <b>C–G♭ is a…?</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:70,notes:[
-        {p:"C4",d:"w"},{p:"G4",d:"w",chord:true},{p:"C4",d:"w",x:300},{p:"Gb4",d:"w",chord:true}],
+        {p:"C4",d:"w",x:160},{p:"G4",d:"w",chord:true},{p:"C4",d:"w",x:340},{p:"Gb4",d:"w",chord:true}],
         brackets:[{from:0,to:1,label:"P5 — 7 half steps"},{from:2,to:3,label:"dim 5 — 6 half steps"}],width:460},
         kb:{start:60,octaves:1,labels:true,marks:[60,66,67]} },
       try:{ type:"mc", choices:["Diminished 5th","minor 5th","Perfect 4th"], answer:0,

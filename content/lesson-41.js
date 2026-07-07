@@ -113,8 +113,8 @@ LESSON_CONTENT[41]={
         mount:(container,fb)=>MF_L41_feel(container,fb) } },
     { say:"One rhythm, THREE costumes (AEMT shows all three): (1) an 8th <b>tied</b> to a 16th plus a 16th, (2) the <b>dot</b> replacing the tie, (3) the beamed pair with a <b>stub beam</b> on the 16th. They SOUND identical — the dot is just the tidiest spelling. \u{1F447} <b>Play the example, then: what does the dot replace?</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:60,time:"2/4",notes:[
-        {p:"B4",d:"8"},{p:"B4",d:"16"},{p:"B4",d:"16"},
-        {p:"B4",d:"8.",x:430},{p:"B4",d:"16"},{bar:"final"}],
+        {p:"B4",d:"8",x:130},{p:"B4",d:"16",x:190},{p:"B4",d:"16",x:250},
+        {p:"B4",d:"8.",x:400},{p:"B4",d:"16",x:470},{bar:"final"}],
         arcs:[{from:0,to:1,type:"tie"}],
         beams:[[0,2],[1,2,2],[3,4],[4,4,2]],
         brackets:[{from:0,to:2,label:"tied spelling"},{from:3,to:4,label:"dotted spelling"}],width:560} },

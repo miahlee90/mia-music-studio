@@ -110,7 +110,7 @@ LESSON_CONTENT[36]={
         hint:"The non-Perfect numbers." } },
     { say:"The big rule of the day: lower a <b>MAJOR</b> interval by <b>one half step</b> — keeping the letter names — and it becomes <b>MINOR</b>. C→E is a Major 3rd (M3); flat the E and C→E♭ is a minor 3rd (m3). The letters didn't change, so it is still a 3rd; only the SIZE shrank. \u{1F447} <b>What changes when Major becomes minor?</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:70,notes:[
-        {p:"C4",d:"w"},{p:"E4",d:"w",chord:true},{p:"C4",d:"w",x:300},{p:"Eb4",d:"w",chord:true}],
+        {p:"C4",d:"w",x:150},{p:"E4",d:"w",chord:true},{p:"C4",d:"w",x:330},{p:"Eb4",d:"w",chord:true}],
         brackets:[{from:0,to:1,label:"M3 — 4 half steps"},{from:2,to:3,label:"m3 — 3 half steps"}],width:440},
         kb:{start:60,octaves:1,labels:true,marks:[60,63,64]} },
       try:{ type:"mc", choices:["Only the size — one half step smaller","The letter names","The interval number"], answer:0,
@@ -185,8 +185,8 @@ LESSON_CONTENT[36]={
       kb:{start:60,octaves:1,labels:true} },
     { caption:"Minor by another road: E–G uses no accidentals at all, yet it is a minor 3rd (3 half steps). Quality comes from the DISTANCE, not from whether a flat is visible!",
       staff:{clef:"treble",tempo:70,notes:[
-        {p:"C4",d:"w"},{p:"E4",d:"w",chord:true},
-        {p:"E4",d:"w",x:300},{p:"G4",d:"w",chord:true}],
+        {p:"C4",d:"w",x:160},{p:"E4",d:"w",chord:true},
+        {p:"E4",d:"w",x:340},{p:"G4",d:"w",chord:true}],
         brackets:[{from:0,to:1,label:"M3 — 4 half steps"},{from:2,to:3,label:"m3 — only 3!"}],width:460},
       kb:{start:60,octaves:1,labels:true,marks:[64,67]} }
   ],

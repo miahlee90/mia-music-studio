@@ -90,8 +90,8 @@ LESSON_CONTENT[47]={
         hint:"Bottom note of the stack (in root position)." } },
     { say:"Now the reading shortcut. In <b>ROOT POSITION</b> a triad takes <b>every other note</b> (C-E-G, D-F-A, E-G-B…) — so on the staff it's <b>ALL LINES or ALL SPACES</b>: a tidy snowman \u{2603}! \u{1F447} <b>A root-position triad on the staff looks like…?</b>",
       show:{ type:"staff", spec:{clef:"bass",tempo:60,notes:[
-        {p:"G2",d:"w",label:"lines"},{p:"B2",d:"w",chord:true},{p:"D3",d:"w",chord:true},
-        {p:"A2",d:"w",x:380,label:"spaces"},{p:"C3",d:"w",chord:true},{p:"E3",d:"w",chord:true}],width:480} },
+        {p:"G2",d:"w",x:160,label:"lines"},{p:"B2",d:"w",chord:true},{p:"D3",d:"w",chord:true},
+        {p:"A2",d:"w",x:360,label:"spaces"},{p:"C3",d:"w",chord:true},{p:"E3",d:"w",chord:true}],width:480} },
       try:{ type:"mc", choices:["All lines, or all spaces — a stacked snowman","One line, one space, one line","Notes side by side"], answer:0,
         success:"✓ Skip-a-letter spacing = matching staff positions. If the stack mixes lines AND spaces, it's not in root position!",
         fail:"Skip-one-letter notes land on matching positions…",

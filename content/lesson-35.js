@@ -104,7 +104,7 @@ LESSON_CONTENT[35]={
         fail:"Count every letter from C as 1: C D E F G A.",
         hint:"Both ends count — C itself is 1." } },
     { say:"Here's the problem: these two intervals are BOTH '3rds' — same letters, C to E. But press play: they are different sizes and different moods! The number alone can't tell them apart. Intervals need a second label: their <b>QUALITY</b>. \u{1F447} <b>What does the interval NUMBER alone fail to tell us?</b>",
-      show:{ type:"staff", spec:{clef:"treble",tempo:70,notes:[{p:"C4",d:"w"},{p:"E4",d:"w",chord:true},{p:"C4",d:"w",x:300},{p:"Eb4",d:"w",chord:true}],brackets:[{from:0,to:1,label:"a 3rd"},{from:2,to:3,label:"also a 3rd!"}],width:420} },
+      show:{ type:"staff", spec:{clef:"treble",tempo:70,notes:[{p:"C4",d:"w",x:150},{p:"E4",d:"w",chord:true},{p:"C4",d:"w",x:310},{p:"Eb4",d:"w",chord:true}],brackets:[{from:0,to:1,label:"a 3rd"},{from:2,to:3,label:"also a 3rd!"}],width:420} },
       try:{ type:"mc", choices:["The exact size in half steps","The letter names","Which clef to use"], answer:0,
         success:"✓ Both are 3rds by letter-count, but one is a half step smaller. QUALITY measures the exact size — and that's today's skill.",
         fail:"The letters are identical (C and E) — so what changed?",

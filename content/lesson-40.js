@@ -94,7 +94,7 @@ LESSON_CONTENT[40]={
   steps:[
     { say:"Every note has a matching rest. You know the eighth rest — the little 'seven' with ONE hook. Add a SECOND hook and it becomes a <b>SIXTEENTH REST</b>: <b>¼ beat of silence</b>. \u{1F447} <b>What visually separates a sixteenth rest from an eighth rest?</b>",
       show:{ type:"staff", spec:{clef:"treble",notes:[
-        {rest:"8",label:"eighth — 1 hook",x:170},{rest:"16",label:"sixteenth — 2 hooks",x:390}],width:520} },
+        {rest:"8",label:"eighth — 1 hook",x:180},{rest:"16",label:"sixteenth — 2 hooks",x:380}],width:520} },
       try:{ type:"mc", choices:["A second hook","A longer slash","It hangs from the top line"], answer:0,
         success:"✓ Hooks count like flags: one = eighth, two = sixteenth. Same doubling logic as the notes!",
         fail:"Compare the tops of the two symbols.",

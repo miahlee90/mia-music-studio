@@ -17,6 +17,8 @@
    clickable via spec.onKeysig(i); each accidental wrapped in g.ksgroup[data-ks]),
    W/H step carets above the staff (spec.steps:[{from,to,label:"W"|"H"}]),
    labeled under-brackets for tetrachord grouping (spec.brackets:[{from,to,label}]).
+   v7.8 (Unit 12): CHORD STEMS - stemmed {chord:true} groups share ONE stem
+   of consistent length instead of one stem per notehead.
    v7.7 (Unit 11): TRIPLETS — spec.tuplets:[{from,to}] draws the "3" (with a
    small bracket when the group is unbeamed) above the group and playback fits
    the notes into 2/3 of their written time (3-in-the-time-of-2).
@@ -138,11 +140,11 @@ const Staff=(()=>{
     parts.push(`<text class="tsig" x="${x}" y="${y0+4*GAP-3}" font-size="${fs}" text-anchor="middle">${ts.bottom}</text>`);
   }
 
-  function noteSVG(x,y,d,extra,y0,noFlag,dot,onLine){
+  function noteSVG(x,y,d,extra,y0,noFlag,dot,onLine,noStem){
     const s=durShape(d), cls="note"+(s.hollow?" hollow":"")+(extra||"");
     const rx=(d==="w")?10.5:9;
     let out=`<ellipse class="${cls}" cx="${x}" cy="${y}" rx="${rx}" ry="6.5"/>`;
-    if(s.stem){
+    if(s.stem&&!noStem){
       const up = y > y0+2*GAP;
       out+= up? `<line class="stem" x1="${x+8.4}" y1="${y-2}" x2="${x+8.4}" y2="${y-38}"/>`
               : `<line class="stem" x1="${x-8.4}" y1="${y+2}" x2="${x-8.4}" y2="${y+38}"/>`;
@@ -339,6 +341,10 @@ const Staff=(()=>{
     if(hasLabel&&maxNoteBottom===-Infinity) maxNoteBottom=staffBottom;
     const labelY = hasLabel? Math.max(staffBottom+22, maxNoteBottom+18, hasDyn?dynY+16:0) : 0;
     if(hasLabel) maxEl=Math.max(maxEl,labelY+6);
+    /* v7.8 - chord groups share one stem: collect members */
+    const chordMembers=new Set(), chordGroups={};
+    items.forEach((n,i)=>{ if(n&&n.chord&&!n.rest){ let b=i-1; while(b>0&&items[b]&&items[b].chord)b--;
+      if(!chordGroups[b]) chordGroups[b]=[b]; chordGroups[b].push(i); chordMembers.add(i); chordMembers.add(b); }});
     placed.forEach(({n,i,clef,y0,x,y,kind})=>{
       if(kind==="bar"){
         const yTop=grand? y0t : y0, yBot=grand? y0b+4*GAP : y0+4*GAP;
@@ -356,7 +362,7 @@ const Staff=(()=>{
         const accCh = n.acc==="n"?"n" : (n.p.match(/^[A-G]([#b])\d$/)||[])[1];
         const idx=dia(n.p)-baseIdx(clef);
         const onLine=idx%2===0;
-        let inner=noteSVG(x,y,normD(n.d),(spec.clickNotes?" clickable":""),y0,beamSet.has(i),isDotted(n),onLine);
+        let inner=noteSVG(x,y,normD(n.d),(spec.clickNotes?" clickable":""),y0,beamSet.has(i),isDotted(n),onLine,chordMembers.has(i));
         if(accCh) inner=accSVG(x-18,y,accCh==="n"?"nat":accCh)+inner;
         if(n.artic) inner+=articSVG(x,y,y0,n.artic,n.articPos);
         parts.push(`<g class="notegroup" data-i="${i}" data-p="${n.p}">${inner}</g>`);
@@ -365,6 +371,19 @@ const Staff=(()=>{
       if(n.label){ const hw=Math.min(W/2-4, 4+String(n.label).length*3.4);
         const lx=Math.max(hw+4, Math.min(W-hw-4, x));
         parts.push(`<text class="lbl" x="${lx}" y="${labelY}" text-anchor="middle">${n.label}</text>`); }
+    });
+    /* v7.8 - one shared stem per stemmed chord group */
+    Object.keys(chordGroups).forEach(b=>{
+      const mem=chordGroups[b].map(ix=>placed.find(pl=>pl.i===ix&&pl.y!==undefined)).filter(Boolean);
+      if(mem.length<2) return;
+      const base=mem[0];
+      if(!durShape(normD(base.n.d)).stem) return;
+      const ys=mem.map(pl=>pl.y), yTop=Math.min.apply(null,ys), yBot=Math.max.apply(null,ys);
+      const up=((yTop+yBot)/2) > base.y0+2*GAP;
+      if(up) parts.push(`<line class="stem" x1="${base.x+8.4}" y1="${yBot-2}" x2="${base.x+8.4}" y2="${yTop-38}"/>`);
+      else parts.push(`<line class="stem" x1="${base.x-8.4}" y1="${yTop+2}" x2="${base.x-8.4}" y2="${yBot+38}"/>`);
+      minEl=Math.min(minEl, up? yTop-38 : yTop);
+      maxEl=Math.max(maxEl, up? yBot : yBot+38);
     });
     /* beams: connect stem tips of first/last beamed note in each group */
     (spec.beams||[]).forEach(bm=>{ const [a,b]=bm, bmLv=bm[2];

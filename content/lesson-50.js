@@ -90,8 +90,8 @@ LESSON_CONTENT[50]={
   steps:[
     { say:"The recipe: take the <b>V (dominant) triad</b> and add a <b>minor 7th above the root</b>. In C major: G-B-D + <b>F</b> = <b>G7</b>, the V7 chord. Equivalent shortcut: add a <b>minor 3rd above the 5th</b> (D→F). \u{1F447} <b>V7 = V triad + …?</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:70,notes:[
-        {p:"G4",d:"w",label:"V"},{p:"B4",d:"w",chord:true},{p:"D5",d:"w",chord:true},
-        {p:"G4",d:"w",x:400,label:"V7 = G-B-D-F"},{p:"B4",d:"w",chord:true},{p:"D5",d:"w",chord:true},{p:"F5",d:"w",chord:true}],width:520} },
+        {p:"G4",d:"w",x:170,label:"V"},{p:"B4",d:"w",chord:true},{p:"D5",d:"w",chord:true},
+        {p:"G4",d:"w",x:390,label:"V7 = G-B-D-F"},{p:"B4",d:"w",chord:true},{p:"D5",d:"w",chord:true},{p:"F5",d:"w",chord:true}],width:520} },
       try:{ type:"mc", choices:["A minor 7th above the root","A Major 7th above the root","Another perfect 5th"], answer:0,
         success:"✓ Minor 7th (G→F = 10 half steps). A MAJOR 7th would give F♯ — a very different, dreamier chord.",
         fail:"G up to F — count the half steps: 10 = which interval from Unit 9?",
@@ -111,17 +111,17 @@ LESSON_CONTENT[50]={
         mount:(container,fb)=>MF_L50_resolve(container,fb) } },
     { say:"Practical detail from the book: <b>the 5th of V7 is often omitted</b> — G-B-F instead of G-B-D-F. Three singers or players can then cover it, it matches I and IV in size, and the chord KEEPS its 7th-chord flavor (the root, 3rd and 7th carry all the character). \u{1F447} <b>Which note gets dropped in the 3-voice V7?</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:70,notes:[
-        {p:"G4",d:"w",label:"full V7"},{p:"B4",d:"w",chord:true},{p:"D5",d:"w",chord:true},{p:"F5",d:"w",chord:true},
-        {p:"G4",d:"w",x:430,label:"5th omitted"},{p:"B4",d:"w",chord:true},{p:"F5",d:"w",chord:true}],width:540} },
+        {p:"G4",d:"w",x:170,label:"full V7"},{p:"B4",d:"w",chord:true},{p:"D5",d:"w",chord:true},{p:"F5",d:"w",chord:true},
+        {p:"G4",d:"w",x:400,label:"5th omitted"},{p:"B4",d:"w",chord:true},{p:"F5",d:"w",chord:true}],width:540} },
       try:{ type:"mc", choices:["The 5th (D)","The 7th (F)","The root (G)"], answer:0,
         success:"✓ The 5th adds fullness but not flavor — root, 3rd and 7th do the real work. Drop the D and G7 is still unmistakably G7.",
         fail:"Drop the 7th and it's not a 7th chord at all!",
         hint:"Keep the name-note, the quality-note, and the tension-note." } },
     { say:"The book's closing upgrade: from now on, <b>the three primary chords are I, IV, and V7</b> — the dominant almost always brings its 7th along in real music. And with that… you've completed every concept in Book 2! \u{1F447} <b>The upgraded primary trio is…?</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:80,notes:[
-        {p:"C4",d:"h",label:"I"},{p:"E4",d:"h",chord:true},{p:"G4",d:"h",chord:true},
-        {p:"F4",d:"h",label:"IV",x:330},{p:"A4",d:"h",chord:true},{p:"C5",d:"h",chord:true},
-        {p:"G4",d:"h",label:"V7",x:480},{p:"B4",d:"h",chord:true},{p:"D5",d:"h",chord:true},{p:"F5",d:"h",chord:true}],width:580} },
+        {p:"C4",d:"h",x:140,label:"I"},{p:"E4",d:"h",chord:true},{p:"G4",d:"h",chord:true},
+        {p:"F4",d:"h",x:310,label:"IV"},{p:"A4",d:"h",chord:true},{p:"C5",d:"h",chord:true},
+        {p:"G4",d:"h",x:480,label:"V7"},{p:"B4",d:"h",chord:true},{p:"D5",d:"h",chord:true},{p:"F5",d:"h",chord:true}],width:580} },
       try:{ type:"mc", choices:["I, IV, and V7","I, ii, and V7","I7, IV7, and V7"], answer:0,
         success:"✓ I, IV, V7 — the harmonization toolkit of Book 3 and beyond. BOOK 2 COMPLETE — take a bow! \u{1F386}",
         fail:"Only the DOMINANT gets the 7th upgrade (for now).",
@@ -130,8 +130,8 @@ LESSON_CONTENT[50]={
   examples:[
     { caption:"V grows into V7: the dominant triad, then the same chord with its minor 7th — hear the tension arrive with the F.",
       staff:{clef:"treble",tempo:60,notes:[
-        {p:"G4",d:"w",label:"V"},{p:"B4",d:"w",chord:true},{p:"D5",d:"w",chord:true},
-        {p:"G4",d:"w",x:400,label:"V7"},{p:"B4",d:"w",chord:true},{p:"D5",d:"w",chord:true},{p:"F5",d:"w",chord:true}],width:520},
+        {p:"G4",d:"w",x:170,label:"V"},{p:"B4",d:"w",chord:true},{p:"D5",d:"w",chord:true},
+        {p:"G4",d:"w",x:390,label:"V7"},{p:"B4",d:"w",chord:true},{p:"D5",d:"w",chord:true},{p:"F5",d:"w",chord:true}],width:520},
       kb:{start:60,octaves:2,labels:true,marks:[67,71,74,77]} },
     { caption:"The upgraded primary chords — I, IV, V7, and the triumphant return to I. The final cadence of Book 2!",
       staff:{clef:"treble",tempo:80,notes:[
