@@ -53,7 +53,7 @@ function MF_L33_countUp(container,fb){
 
 /* ear rounds: melodic or harmonic? (audio and revealed staff always use the SAME pitches) */
 function MF_L33_ear(container,fb){
-  const ROUNDS=[{a:"C4",b:"E4",harm:false},{a:"C4",b:"G4",harm:true},{a:"D4",b:"A4",harm:true},{a:"E4",b:"B4",harm:false}];
+  const ROUNDS=[{a:"C4",b:"E4",harm:false},{a:"C4",b:"E4",harm:true},{a:"C4",b:"E4",harm:true},{a:"C4",b:"E4",harm:false}]; /* always the C-E of the staff above - only the DELIVERY changes */
   let i=0,heard=false;
   container.innerHTML=`<div class="big-q l33-eq" style="text-align:center"></div>
     <div style="text-align:center"><button class="play l33-play">▶ Hear the interval</button></div>
@@ -74,7 +74,7 @@ function MF_L33_ear(container,fb){
     if(saidHarm===cur.harm){
       Staff.render(show, cur.harm? {clef:"treble",notes:[{p:cur.a,d:"w"},{p:cur.b,d:"w",chord:true}],width:200}
                                  : {clef:"treble",notes:[{p:cur.a,d:"h"},{p:cur.b,d:"h"}],width:200});
-      i++; MFAudio.tone(76,.3);
+      i++;
       if(i>=ROUNDS.length){ ch.style.display="none"; container.querySelector(".l33-play").style.display="none";
         q.textContent="Ears calibrated!";
         fb(true,"✓ Four for four! Together = harmonic (stacked notation); one-after-another = melodic (side by side)."); }
@@ -155,7 +155,7 @@ LESSON_CONTENT[33]={
         fail:"Eight letters up lands on the same letter…",
         hint:"'Oct' like octopus — eight." } },
     { say:"Intervals are heard two ways: a <b>MELODIC interval</b> sounds the notes <b>separately</b>; a <b>HARMONIC interval</b> sounds them <b>together</b> (written stacked). The SIZE stays the same — only the delivery changes. \u{1F447} <b>Trust your ears — melodic or harmonic?</b>",
-      show:{ type:"staff", spec:{clef:"treble",notes:[{p:"C4",d:"h"},{p:"E4",d:"h"},{bar:"single"},{p:"C5",d:"w"},{p:"E5",d:"w",chord:true},{bar:"final"}],brackets:[{from:0,to:1,label:"melodic"},{from:3,to:4,label:"harmonic"}],width:400} },
+      show:{ type:"staff", spec:{clef:"treble",notes:[{p:"C4",d:"h"},{p:"E4",d:"h"},{bar:"single"},{p:"C4",d:"w"},{p:"E4",d:"w",chord:true},{bar:"final"}],brackets:[{from:0,to:1,label:"melodic"},{from:3,to:4,label:"harmonic"}],width:400} },
       try:{ type:"custom",
         hint:"Overlapping sound = harmonic; taking turns = melodic.",
         mount:(container,fb)=>MF_L33_ear(container,fb) } },
