@@ -127,7 +127,7 @@ LESSON_CONTENT[35]={
       try:{ type:"custom",
         hint:"Count MOVES between keys, not the keys themselves. C→C♯ is 1 half step, C→D is 2…",
         mount:(container,fb)=>MF_L35_ruler(container,fb) } },
-    { say:"Now the shortcut that saves all that counting: the <b>MAJOR SCALE is a ready-made measuring tape</b>. Build any interval from the keynote UP to a scale note, and its quality is automatic: scale notes <b>1, 4, 5, 8</b> give <b>PERFECT</b> intervals; scale notes <b>2, 3, 6, 7</b> give <b>MAJOR</b> intervals. \u{1F447} <b>The keynote up to scale note 5 makes which interval?</b>",
+    { say:"Now the shortcut that saves all that counting: the <b>MAJOR SCALE is a ready-made measuring tape</b>. Intervals measured <b>from the keynote</b> up to scale notes <b>1, 4, 5, and 8</b> are <b>PERFECT</b> intervals; intervals from the keynote up to scale notes <b>2, 3, 6, and 7</b> are <b>MAJOR</b> intervals. \u{1F447} <b>The keynote up to scale note 5 makes which interval?</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:100,notes:[
         {p:"C4",d:"q",label:"1"},{p:"D4",d:"q",label:"2"},{p:"E4",d:"q",label:"3"},{p:"F4",d:"q",label:"4"},{p:"G4",d:"q",label:"5"},{p:"A4",d:"q",label:"6"},{p:"B4",d:"q",label:"7"},{p:"C5",d:"q",label:"8"}],width:520},
         kb:{start:60,octaves:1,labels:true,marks:[60,65,67,72]} },
