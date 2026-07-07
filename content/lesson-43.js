@@ -33,36 +33,55 @@ function MF_L43_chart(container,fb){
   ask();
 }
 
-/* pulse-group tapper: tap the STRONG beats of 6/8 (1 and 4) while it plays */
+/* pulse-group tapper v2 (instructor): READY-GO count-in (예비박), twelve circles
+   drawn as TWO measures that light up with the sound (G-C-C-E-C-C twice =
+   sol-do-do-mi-do-do), strong beats 1 & 4 bigger and red-rimmed. */
 function MF_L43_pulse(container,fb){
-  let round=0, taps=[], playing=false;
-  container.innerHTML=`<div class="big-q l43-pq" style="text-align:center">6/8 pulses in TWO groups of three: <b>1</b>-2-3-<b>4</b>-5-6. Press play, then tap the drum on beats <b>1</b> and <b>4</b> only!</div>
+  const SPB=.34, SEQ=[79,72,72,76,72,72], NAME={79:"G",76:"E",72:"C"};
+  let playing=false, taps=[], t0=0, timers=[];
+  container.innerHTML=`<div class="big-q" style="text-align:center">6/8 pulses in TWO groups of three: <b>1</b>-2-3-<b>4</b>-5-6. Press play — after the <b>READY… GO!</b> count-in, tap the drum on beats <b>1</b> and <b>4</b> of each measure!</div>
+    <div class="l43-ready" style="text-align:center;font-weight:800;font-size:1.35rem;min-height:32px;color:#e11d48"></div>
+    <div class="l43-dots" style="display:flex;justify-content:center;align-items:center;gap:7px;margin:10px 0;flex-wrap:wrap"></div>
     <div style="text-align:center">
-      <button class="play l43-pp">▶ Play a 6/8 measure ×2</button>
+      <button class="play l43-pp">\u25b6 Play (2 measures)</button>
       <button class="play l43-pd" style="font-size:1.4rem">\u{1F941} TAP</button></div>
     <div class="l43-pmsg" style="text-align:center;font-weight:800;min-height:24px;color:var(--correct)"></div>`;
-  const msg=container.querySelector(".l43-pmsg");
-  const SPB=.32; /* per eighth */
-  container.querySelector(".l43-pp").onclick=function(){
-    if(playing) return; playing=true; taps=[]; this.disabled=true; msg.textContent="…listen and tap 1 and 4!";
-    const t0=performance.now();
-    for(let m=0;m<2;m++) for(let k=0;k<6;k++){
-      MFAudio.tone(k===0?79:(k===3?76:72),.16,(m*6+k)*SPB,(k===0||k===3)?.6:.3);
+  const ready=container.querySelector(".l43-ready"), msg=container.querySelector(".l43-pmsg"),
+        dotRow=container.querySelector(".l43-dots"), dots=[];
+  for(let m=0;m<2;m++){
+    if(m){ const bar=document.createElement("div"); bar.style.cssText="width:3px;height:36px;background:#23263e;margin:0 8px;border-radius:2px"; dotRow.appendChild(bar); }
+    for(let k=0;k<6;k++){
+      const strong=(k===0||k===3), d=document.createElement("div");
+      d.textContent=NAME[SEQ[k]];
+      d.style.cssText=`width:${strong?36:27}px;height:${strong?36:27}px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:${strong?14:11.5}px;border:${strong?3:2}px solid ${strong?"#e11d48":"#4434d4"};color:#1c1e54;background:#fff;transition:background .12s`;
+      dotRow.appendChild(d); dots.push(d);
     }
-    this._t0=t0;
-    setTimeout(()=>{ playing=false; this.disabled=false;
-      const targets=[0,3,6,9].map(k=>k*SPB*1000);
-      let hit=0;
-      targets.forEach(tt=>{ if(taps.some(tp=>Math.abs(tp-tt)<200)) hit++; });
+  }
+  const IN=6*SPB; /* one silent count-in measure: READY on 1, GO on 4 */
+  container.querySelector(".l43-pp").onclick=function(){
+    if(playing) return; playing=true; taps=[]; this.disabled=true; msg.textContent="";
+    timers.forEach(clearTimeout); timers=[];
+    dots.forEach(d=>d.style.background="#fff");
+    MFAudio.tone(45,.14,0,.6);        timers.push(setTimeout(()=>ready.textContent="READY\u2026",0));
+    MFAudio.tone(45,.14,3*SPB,.65);   timers.push(setTimeout(()=>ready.textContent="GO!",3*SPB*1000));
+    timers.push(setTimeout(()=>ready.textContent="",IN*1000+600));
+    for(let m=0;m<2;m++) for(let k=0;k<6;k++){
+      const t=IN+(m*6+k)*SPB, strong=(k===0||k===3), ix=m*6+k;
+      MFAudio.tone(SEQ[k],.18,t,strong?.62:.3);
+      timers.push(setTimeout(()=>{ dots[ix].style.background = strong? "#ffd9e1" : "#e3e1fd"; },t*1000));
+    }
+    t0=performance.now();
+    timers.push(setTimeout(()=>{ playing=false; this.disabled=false;
+      const targets=[0,3,6,9].map(k=>(IN+k*SPB)*1000);
+      let hit=0; targets.forEach(tt=>{ if(taps.some(tp=>Math.abs(tp-tt)<230)) hit++; });
       const extra=taps.length-hit;
-      if(hit>=3&&extra<=1){ msg.textContent="✓ Strong beats nailed!";
-        fb(true,`✓ You tapped the big pulses: ${hit} of 4 strong beats (1 and 4). That two-pulse swing is the FEEL of 6/8 — like a boat rocking.`); }
-      else { msg.textContent="Try again — tap only on the two STRONG beats per measure.";
-        fb(false,"Tap along with the LOUD clicks only — beats 1 and 4."); }
-    }, 12*SPB*1000+400);
-    const tapBtn=container.querySelector(".l43-pd");
-    tapBtn.onclick=()=>{ if(!playing) return; MFAudio.tone(48,.08,0,.5); taps.push(performance.now()-t0); };
+      if(hit>=3&&extra<=1){ msg.textContent="\u2713 Strong beats nailed!";
+        fb(true,`\u2713 ${hit} of 4 strong beats — you tapped WITH the big pulses (the G and the E). That two-pulse swing is the feel of 6/8!`); }
+      else { msg.textContent="Try again — wait for GO!, then tap the big red circles' beats.";
+        fb(false,"Tap only when the BIG circles light: beat 1 (G) and beat 4 (E) of each measure."); }
+    },(IN+12*SPB)*1000+400));
   };
+  container.querySelector(".l43-pd").onclick=()=>{ if(!playing) return; MFAudio.tone(48,.08,0,.5); taps.push(performance.now()-t0); };
 }
 
 LESSON_CONTENT[43]={

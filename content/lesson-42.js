@@ -93,7 +93,7 @@ LESSON_CONTENT[42]={
         success:"✓ C = common time = 4/4. Same music, fancier badge.",
         fail:"The PLAIN C (no slash) is the familiar one…",
         hint:"Common = the time you've used since Lesson 11." } },
-    { say:"Second symbol: draw a vertical line through the C — <b><span style='font-size:1.35em;line-height:1'>𝄵</span></b> — and you get <b>CUT TIME</b>, also called <b>ALLA BREVE</b>. The slash cuts 4/4's numbers in half: <b>2/2</b>. That means <b>2 beats per measure</b>, and the <b>HALF note receives 1 beat</b>. \u{1F447} <b>In cut time, which note is the beat?</b>",
+    { say:"Second symbol: draw a vertical line through the C — <b><span style='font-size:1.3em;line-height:1;vertical-align:-0.14em;display:inline-block'>𝄵</span></b> — and you get <b>CUT TIME</b>, also called <b>ALLA BREVE</b>. The slash cuts 4/4's numbers in half: <b>2/2</b>. That means <b>2 beats per measure</b>, and the <b>HALF note receives 1 beat</b>. \u{1F447} <b>In cut time, which note is the beat?</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:168,time:"C|",notes:[
         {p:"C5",d:"h",label:"1"},{p:"G4",d:"h",label:"2"},{bar:"single"},
         {p:"E5",d:"h",label:"1"},{p:"C5",d:"h",label:"2"},{bar:"final"}],width:440} },
