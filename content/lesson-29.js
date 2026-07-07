@@ -112,9 +112,11 @@ LESSON_CONTENT[29]={
   ],
   examples:[
     { caption:"Key of G — 1 sharp (F♯). No sharp is written before the F in the music, yet it still PLAYS as F♯: the key signature does the work.",
-      staff:{clef:"treble",tempo:100,keysig:"G",notes:[{p:"G4",d:"q",label:"G"},{p:"A4",d:"q",label:"A"},{p:"B4",d:"q",label:"B"},{p:"C5",d:"q",label:"C"},{p:"D5",d:"q",label:"D"},{p:"E5",d:"q",label:"E"},{p:"F5",sound:"F#5",d:"q",label:"F♯!"},{p:"G5",d:"q",label:"G"}],width:540} },
+      staff:{clef:"treble",tempo:100,keysig:"G",notes:[{p:"G4",d:"q",label:"G"},{p:"A4",d:"q",label:"A"},{p:"B4",d:"q",label:"B"},{p:"C5",d:"q",label:"C"},{p:"D5",d:"q",label:"D"},{p:"E5",d:"q",label:"E"},{p:"F5",sound:"F#5",d:"q",label:"F♯!"},{p:"G5",d:"q",label:"G"}],width:540},
+      kb:{start:60,octaves:2,labels:true,marks:[67,69,71,72,74,76,78,79]} },
     { caption:"Key of D — 2 sharps (F♯, C♯). Every F and every C in the piece is played sharp, in any octave, without another sign.",
-      staff:{clef:"treble",tempo:100,keysig:"D",notes:[{p:"D4",d:"q",label:"D"},{p:"E4",d:"q",label:"E"},{p:"F4",sound:"F#4",d:"q",label:"F♯!"},{p:"G4",d:"q",label:"G"},{p:"A4",d:"q",label:"A"},{p:"B4",d:"q",label:"B"},{p:"C5",sound:"C#5",d:"q",label:"C♯!"},{p:"D5",d:"q",label:"D"}],width:540} }
+      staff:{clef:"treble",tempo:100,keysig:"D",notes:[{p:"D4",d:"q",label:"D"},{p:"E4",d:"q",label:"E"},{p:"F4",sound:"F#4",d:"q",label:"F♯!"},{p:"G4",d:"q",label:"G"},{p:"A4",d:"q",label:"A"},{p:"B4",d:"q",label:"B"},{p:"C5",sound:"C#5",d:"q",label:"C♯!"},{p:"D5",d:"q",label:"D"}],width:540},
+      kb:{start:60,octaves:2,labels:true,marks:[62,64,66,67,69,71,73,74]} }
   ],
   games:[
     { type:"order-tap", title:"Game 1 · Order of Sharps Race",

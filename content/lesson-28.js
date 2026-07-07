@@ -56,7 +56,7 @@ LESSON_CONTENT[28]={
         container.innerHTML=`<div style="text-align:center">
           <button class="play hk-a">▶ Version A (all natural)</button>
           <button class="play hk-b">▶ Version B (one change)</button></div>
-          <div class="choices hk-ch" style="display:none"><button>Version B — the early notes settle perfectly</button><button>Version A — it sounded fine</button><button>They were identical</button></div>`;
+          <div class="choices hk-ch" style="display:none"><button>Version B — the early notes settle perfectly</button><button>Version A — it sounded fine</button><button>They are the same</button></div>`;
         const ch=container.querySelector(".hk-ch");
         let heardA=false,heardB=false;
         const playSeq=s=>s.forEach((m,i)=>MFAudio.tone(m,.32,i*.3));
@@ -115,9 +115,11 @@ LESSON_CONTENT[28]={
   ],
   examples:[
     { caption:"The F major scale: F and C tetrachords joined by a whole step. B is lowered to B♭ to create the half step from A.",
-      staff:{clef:"treble",tempo:100,notes:[{p:"F4",d:"q",label:"F"},{p:"G4",d:"q",label:"G"},{p:"A4",d:"q",label:"A"},{p:"Bb4",d:"q",label:"B♭"},{p:"C5",d:"q",label:"C"},{p:"D5",d:"q",label:"D"},{p:"E5",d:"q",label:"E"},{p:"F5",d:"q",label:"F"}],steps:[{from:0,to:1,label:"W"},{from:1,to:2,label:"W"},{from:2,to:3,label:"H"},{from:3,to:4,label:"W"},{from:4,to:5,label:"W"},{from:5,to:6,label:"W"},{from:6,to:7,label:"H"}],brackets:[{from:0,to:3,label:"F tetrachord"},{from:4,to:7,label:"C tetrachord"}],width:540} },
+      staff:{clef:"treble",tempo:100,notes:[{p:"F4",d:"q",label:"F"},{p:"G4",d:"q",label:"G"},{p:"A4",d:"q",label:"A"},{p:"Bb4",d:"q",label:"B♭"},{p:"C5",d:"q",label:"C"},{p:"D5",d:"q",label:"D"},{p:"E5",d:"q",label:"E"},{p:"F5",d:"q",label:"F"}],steps:[{from:0,to:1,label:"W"},{from:1,to:2,label:"W"},{from:2,to:3,label:"H"},{from:3,to:4,label:"W"},{from:4,to:5,label:"W"},{from:5,to:6,label:"W"},{from:6,to:7,label:"H"}],brackets:[{from:0,to:3,label:"F tetrachord"},{from:4,to:7,label:"C tetrachord"}],width:540},
+      kb:{start:60,octaves:2,labels:true,marks:[65,67,69,70,72,74,76,77]} },
     { caption:"The B♭ major scale: B♭ and F tetrachords. E is lowered to E♭ — and B♭ carries over from F major.",
-      staff:{clef:"treble",tempo:100,notes:[{p:"Bb3",d:"q",label:"B♭"},{p:"C4",d:"q",label:"C"},{p:"D4",d:"q",label:"D"},{p:"Eb4",d:"q",label:"E♭"},{p:"F4",d:"q",label:"F"},{p:"G4",d:"q",label:"G"},{p:"A4",d:"q",label:"A"},{p:"Bb4",d:"q",label:"B♭"}],steps:[{from:0,to:1,label:"W"},{from:1,to:2,label:"W"},{from:2,to:3,label:"H"},{from:3,to:4,label:"W"},{from:4,to:5,label:"W"},{from:5,to:6,label:"W"},{from:6,to:7,label:"H"}],brackets:[{from:0,to:3,label:"B♭ tetrachord"},{from:4,to:7,label:"F tetrachord"}],width:540} }
+      staff:{clef:"treble",tempo:100,notes:[{p:"Bb3",d:"q",label:"B♭"},{p:"C4",d:"q",label:"C"},{p:"D4",d:"q",label:"D"},{p:"Eb4",d:"q",label:"E♭"},{p:"F4",d:"q",label:"F"},{p:"G4",d:"q",label:"G"},{p:"A4",d:"q",label:"A"},{p:"Bb4",d:"q",label:"B♭"}],steps:[{from:0,to:1,label:"W"},{from:1,to:2,label:"W"},{from:2,to:3,label:"H"},{from:3,to:4,label:"W"},{from:4,to:5,label:"W"},{from:5,to:6,label:"W"},{from:6,to:7,label:"H"}],brackets:[{from:0,to:3,label:"B♭ tetrachord"},{from:4,to:7,label:"F tetrachord"}],width:540},
+      kb:{start:57,octaves:2,labels:true,marks:[58,60,62,63,65,67,69,70]} }
   ],
   games:[
     { type:"symbol-hunt", title:"Game 1 · Flat Hunt",

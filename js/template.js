@@ -184,9 +184,12 @@
     if(oi>=reveal.length) this.parentElement.style.display="none";
   };
 
-  /* examples */
+  /* examples (v3.2: optional e.kb = Keyboard.create opts — marked keyboard under the staff,
+     so scale examples show their half steps and black keys on the piano too) */
   C.examples.forEach((e,i)=>{
-    const api=Staff.render(document.getElementById("ex"+i),e.staff);
+    const host=document.getElementById("ex"+i);
+    const api=Staff.render(host,e.staff);
+    if(e.kb){ const k=document.createElement("div"); k.style.marginTop="10px"; host.appendChild(k); Keyboard.create(k,e.kb); }
     const b=document.getElementById("exBtn"+i); if(b) b.onclick=()=>Staff.play(e.staff,api);
   });
   /* keyboard */

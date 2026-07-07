@@ -119,9 +119,11 @@ LESSON_CONTENT[26]={
   ],
   examples:[
     { caption:"The C major scale: two tetrachords (brackets) joined by one whole step. Follow the W–H carets as it plays.",
-      staff:{clef:"treble",tempo:100,notes:[{p:"C4",d:"q",label:"1"},{p:"D4",d:"q",label:"2"},{p:"E4",d:"q",label:"3"},{p:"F4",d:"q",label:"4"},{p:"G4",d:"q",label:"5"},{p:"A4",d:"q",label:"6"},{p:"B4",d:"q",label:"7"},{p:"C5",d:"q",label:"8"}],steps:[{from:0,to:1,label:"W"},{from:1,to:2,label:"W"},{from:2,to:3,label:"H"},{from:3,to:4,label:"W"},{from:4,to:5,label:"W"},{from:5,to:6,label:"W"},{from:6,to:7,label:"H"}],brackets:[{from:0,to:3,label:"C tetrachord"},{from:4,to:7,label:"G tetrachord"}],width:540} },
+      staff:{clef:"treble",tempo:100,notes:[{p:"C4",d:"q",label:"1"},{p:"D4",d:"q",label:"2"},{p:"E4",d:"q",label:"3"},{p:"F4",d:"q",label:"4"},{p:"G4",d:"q",label:"5"},{p:"A4",d:"q",label:"6"},{p:"B4",d:"q",label:"7"},{p:"C5",d:"q",label:"8"}],steps:[{from:0,to:1,label:"W"},{from:1,to:2,label:"W"},{from:2,to:3,label:"H"},{from:3,to:4,label:"W"},{from:4,to:5,label:"W"},{from:5,to:6,label:"W"},{from:6,to:7,label:"H"}],brackets:[{from:0,to:3,label:"C tetrachord"},{from:4,to:7,label:"G tetrachord"}],width:540},
+      kb:{start:60,octaves:1,labels:true,marks:[60,62,64,65,67,69,71,72]} },
     { caption:"The eight DEGREES of the major scale — in bass clef this time. The half steps sit between 3–4 and 7–8.",
-      staff:{clef:"bass",tempo:90,notes:[{p:"C3",d:"q",label:"1"},{p:"D3",d:"q",label:"2"},{p:"E3",d:"q",label:"3"},{p:"F3",d:"q",label:"4"},{p:"G3",d:"q",label:"5"},{p:"A3",d:"q",label:"6"},{p:"B3",d:"q",label:"7"},{p:"C4",d:"q",label:"8"}],steps:[{from:2,to:3,label:"H"},{from:6,to:7,label:"H"}],width:540} }
+      staff:{clef:"bass",tempo:90,notes:[{p:"C3",d:"q",label:"1"},{p:"D3",d:"q",label:"2"},{p:"E3",d:"q",label:"3"},{p:"F3",d:"q",label:"4"},{p:"G3",d:"q",label:"5"},{p:"A3",d:"q",label:"6"},{p:"B3",d:"q",label:"7"},{p:"C4",d:"q",label:"8"}],steps:[{from:2,to:3,label:"H"},{from:6,to:7,label:"H"}],width:540},
+      kb:{start:48,octaves:1,labels:true,marks:[48,50,52,53,55,57,59,60]} }
   ],
   games:[
     { type:"order-tap", title:"Game 1 · Tap the Major-Scale Pattern",

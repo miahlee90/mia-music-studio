@@ -56,7 +56,7 @@ LESSON_CONTENT[27]={
         container.innerHTML=`<div style="text-align:center">
           <button class="play hk-a">▶ Version A (all natural)</button>
           <button class="play hk-b">▶ Version B (one change)</button></div>
-          <div class="choices hk-ch" style="display:none"><button>Version B — it climbs cleanly to the top</button><button>Version A — it sounded fine</button><button>They were identical</button></div>`;
+          <div class="choices hk-ch" style="display:none"><button>Version B — it climbs cleanly to the top</button><button>Version A — it sounded fine</button><button>They are the same</button></div>`;
         const ch=container.querySelector(".hk-ch");
         let heardA=false,heardB=false;
         const playSeq=s=>s.forEach((m,i)=>MFAudio.tone(m,.32,i*.3));
@@ -115,9 +115,11 @@ LESSON_CONTENT[27]={
   ],
   examples:[
     { caption:"The G major scale: G and D tetrachords joined by a whole step. F is raised to F♯ to create the whole step from E.",
-      staff:{clef:"treble",tempo:100,notes:[{p:"G4",d:"q",label:"G"},{p:"A4",d:"q",label:"A"},{p:"B4",d:"q",label:"B"},{p:"C5",d:"q",label:"C"},{p:"D5",d:"q",label:"D"},{p:"E5",d:"q",label:"E"},{p:"F#5",d:"q",label:"F♯"},{p:"G5",d:"q",label:"G"}],steps:[{from:0,to:1,label:"W"},{from:1,to:2,label:"W"},{from:2,to:3,label:"H"},{from:3,to:4,label:"W"},{from:4,to:5,label:"W"},{from:5,to:6,label:"W"},{from:6,to:7,label:"H"}],brackets:[{from:0,to:3,label:"G tetrachord"},{from:4,to:7,label:"D tetrachord"}],width:540} },
+      staff:{clef:"treble",tempo:100,notes:[{p:"G4",d:"q",label:"G"},{p:"A4",d:"q",label:"A"},{p:"B4",d:"q",label:"B"},{p:"C5",d:"q",label:"C"},{p:"D5",d:"q",label:"D"},{p:"E5",d:"q",label:"E"},{p:"F#5",d:"q",label:"F♯"},{p:"G5",d:"q",label:"G"}],steps:[{from:0,to:1,label:"W"},{from:1,to:2,label:"W"},{from:2,to:3,label:"H"},{from:3,to:4,label:"W"},{from:4,to:5,label:"W"},{from:5,to:6,label:"W"},{from:6,to:7,label:"H"}],brackets:[{from:0,to:3,label:"G tetrachord"},{from:4,to:7,label:"D tetrachord"}],width:540},
+      kb:{start:60,octaves:2,labels:true,marks:[67,69,71,72,74,76,78,79]} },
     { caption:"The D major scale: D and A tetrachords. C is raised to C♯ — and F♯ carries over from G major.",
-      staff:{clef:"treble",tempo:100,notes:[{p:"D4",d:"q",label:"D"},{p:"E4",d:"q",label:"E"},{p:"F#4",d:"q",label:"F♯"},{p:"G4",d:"q",label:"G"},{p:"A4",d:"q",label:"A"},{p:"B4",d:"q",label:"B"},{p:"C#5",d:"q",label:"C♯"},{p:"D5",d:"q",label:"D"}],steps:[{from:0,to:1,label:"W"},{from:1,to:2,label:"W"},{from:2,to:3,label:"H"},{from:3,to:4,label:"W"},{from:4,to:5,label:"W"},{from:5,to:6,label:"W"},{from:6,to:7,label:"H"}],brackets:[{from:0,to:3,label:"D tetrachord"},{from:4,to:7,label:"A tetrachord"}],width:540} }
+      staff:{clef:"treble",tempo:100,notes:[{p:"D4",d:"q",label:"D"},{p:"E4",d:"q",label:"E"},{p:"F#4",d:"q",label:"F♯"},{p:"G4",d:"q",label:"G"},{p:"A4",d:"q",label:"A"},{p:"B4",d:"q",label:"B"},{p:"C#5",d:"q",label:"C♯"},{p:"D5",d:"q",label:"D"}],steps:[{from:0,to:1,label:"W"},{from:1,to:2,label:"W"},{from:2,to:3,label:"H"},{from:3,to:4,label:"W"},{from:4,to:5,label:"W"},{from:5,to:6,label:"W"},{from:6,to:7,label:"H"}],brackets:[{from:0,to:3,label:"D tetrachord"},{from:4,to:7,label:"A tetrachord"}],width:540},
+      kb:{start:60,octaves:2,labels:true,marks:[62,64,66,67,69,71,73,74]} }
   ],
   games:[
     { type:"symbol-hunt", title:"Game 1 · Sharp Hunt",
