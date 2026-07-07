@@ -24,7 +24,7 @@ function MF_L41_feel(container,fb){
   [...ch.children].forEach((b,bi)=>b.onclick=()=>{
     if(!heard) return;
     const dotted=ROUNDS[i];
-    if((bi===0)===dotted){ i++; MFAudio.tone(76,.3);
+    if((bi===0)===dotted){ i++; MFAudio.yay();
       if(i>=ROUNDS.length){ ch.style.display="none"; container.querySelector(".l41-p").style.display="none";
         q.textContent="The swagger detector is calibrated!";
         fb(true,"✓ Four for four! Long–short = dotted 8th + 16th (¾ + ¼); even = two straight eighths (½ + ½). Your ear knows the difference now."); }

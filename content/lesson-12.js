@@ -61,7 +61,7 @@ LESSON_CONTENT[12]={
           }
           container.querySelector(".ad-dot").onclick=function(){
             if(dotted) return;
-            dotted=true; this.disabled=true; MFAudio.tone(76,.3); draw();
+            dotted=true; this.disabled=true; MFAudio.yay(); draw();
             fb(true,"✓ Dot attached! The half note just grew from 2 beats to 3. Press ▶ to hear the difference.");
           };
           container.querySelector(".ad-play").onclick=()=>{

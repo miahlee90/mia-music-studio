@@ -49,7 +49,7 @@ function MF_L7_barSpots(container,fb){
   function pick(c,b){
     if(placed.has(c.g)||b.disabled) return;
     if(correct.has(c.g)){
-      placed.add(c.g); b.disabled=true; MFAudio.tone(76,.3);
+      placed.add(c.g); b.disabled=true; MFAudio.yay();
       draw();
       if([...correct].every(g=>placed.has(g))){
         ch.style.display="none";
@@ -104,7 +104,7 @@ LESSON_CONTENT[7]={
             width:440,
             onBar:(i,kind)=>{
               if(found.has(i)) return;
-              found.add(i); MFAudio.tone(76,.3);
+              found.add(i); MFAudio.yay();
               if(found.size===3) fb(true,"✓ All 3 found — two single bar lines plus the double bar at the end. They slice the staff into tidy sections!");
               else fb(true,`✓ That's a bar line! ${3-found.size} more hiding…`);
             }});

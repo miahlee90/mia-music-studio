@@ -198,7 +198,7 @@ LESSON_CONTENT[11]={
           function pick(c,b){
             if(placed.has(c.g)||b.disabled) return;
             if(correct.has(c.g)){
-              placed.add(c.g); b.disabled=true; MFAudio.tone(76,.3);
+              placed.add(c.g); b.disabled=true; MFAudio.yay();
               draw();
               if([...correct].every(g=>placed.has(g))){
                 ch.style.display="none";

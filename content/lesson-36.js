@@ -161,7 +161,7 @@ LESSON_CONTENT[36]={
             MFAudio.tone(c.a,.9,0,.42); MFAudio.tone(c.b,.9,0,.42); heard=true; setTimeout(()=>ch.style.display="",1100); };
           [...ch.children].forEach((b,bi)=>b.onclick=()=>{
             if(!heard) return; const c=ROUNDS[i];
-            if((bi===1)===c.minor){ i++; MFAudio.tone(76,.3);
+            if((bi===1)===c.minor){ i++; MFAudio.yay();
               if(i>=ROUNDS.length){ ch.style.display="none"; container.querySelector(".l36-play").style.display="none";
                 q.textContent="Ears fully tuned!"; fb(true,`✓ Four for four! That was a ${c.minor?"minor":"Major"} ${c.name} — the mood never lies.`); }
               else { fb(true,`✓ ${c.minor?"Minor":"Major"} ${c.name} — well heard! Next sound…`); setTimeout(ask,900); } }

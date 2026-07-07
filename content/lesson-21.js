@@ -19,7 +19,7 @@ function MF_L21_whereGo(container,fb){
   OPTS.forEach((o,oi)=>{ const b=document.createElement("button"); b.textContent=o;
     b.onclick=()=>{
       const cur=rounds[i];
-      if(oi===cur.a){ MFAudio.tone(76,.3); i++;
+      if(oi===cur.a){ MFAudio.yay(); i++;
         if(i>=rounds.length){ ch.style.display="none"; q.textContent="GPS calibrated!";
           fb(true,"✓ Beginning, Sign, Stop, Special ending — all four destinations locked in!"); }
         else { fb(true,"✓ "+cur.why+" Next sign…"); ask(); } }

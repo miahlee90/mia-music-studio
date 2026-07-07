@@ -18,7 +18,7 @@ function MF_L14_whichEnding(container,fb){
   function ask(){ q.textContent=`Situation ${i+1} of ${rounds.length}: `+rounds[i].q; }
   [...ch.children].forEach((b,bi)=>b.onclick=()=>{
     const cur=rounds[i];
-    if(bi===cur.a){ MFAudio.tone(76,.3); i++;
+    if(bi===cur.a){ MFAudio.yay(); i++;
       if(i>=rounds.length){ ch.style.display="none"; q.textContent="Roadmap mastered!";
         fb(true,"✓ All four situations handled — first trip takes exit 1, second trip skips to exit 2!"); }
       else { fb(true,"✓ "+cur.why+" Next situation…"); ask(); } }

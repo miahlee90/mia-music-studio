@@ -30,7 +30,7 @@ function MF_L40_silent(container,fb){
       const notes=[];
       for(let k=0;k<4;k++) notes.push(k===ROUNDS[i]? {rest:"16"} : {p:"B4",d:"16",label:SYL[k]});
       Staff.render(show,{clef:"treble",notes,width:240});
-      i++; MFAudio.tone(76,.3);
+      i++; MFAudio.yay();
       if(i>=ROUNDS.length){ ch.style.display="none"; container.querySelector(".l40-p").style.display="none";
         q.textContent="Silence located every time!";
         fb(true,"✓ Four for four! The count never stopped — you tracked 1-e-&-a straight through the silence. That's exactly how sixteenth rests work."); }
@@ -54,7 +54,7 @@ function MF_L40_hooks(container,fb){
   }
   [...ch.children].forEach((b,bi)=>b.onclick=()=>{
     const is16=ROUNDS[i]==="16";
-    if((bi===1)===is16){ i++; MFAudio.tone(76,.25);
+    if((bi===1)===is16){ i++; MFAudio.yay();
       if(i>=ROUNDS.length){ ch.style.display="none"; q.textContent="Hook counting: automatic!";
         fb(true,`✓ All ${ROUNDS.length}! One hook = eighth rest (½ beat); two hooks = sixteenth rest (¼ beat).`); }
       else { fb(true,`✓ ${is16?"Two hooks — sixteenth":"One hook — eighth"} rest! Next…`); setTimeout(ask,700); } }

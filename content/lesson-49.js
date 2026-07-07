@@ -50,7 +50,7 @@ function MF_L49_logic(container,fb){
       const b=document.createElement("button"); b.textContent=o;
       b.onclick=()=>{
         const c=ROUNDS[i];
-        if(oi===c.a){ i++; MFAudio.tone(76,.25);
+        if(oi===c.a){ i++; MFAudio.yay();
           if(i>=ROUNDS.length){ ch.style.display="none"; q.textContent="Every name has its story!";
             fb(true,`✓ ${c.exp} The names all measure FROM THE TONIC — music's center of gravity.`); }
           else { fb(true,`✓ ${c.exp}`); setTimeout(ask,1200); } }

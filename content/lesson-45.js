@@ -25,7 +25,7 @@ function MF_L45_ear(container,fb){
   [...ch.children].forEach((b,bi)=>b.onclick=()=>{
     if(!heard) return;
     const trip=ROUNDS[i];
-    if((bi===0)===trip){ i++; MFAudio.tone(76,.3);
+    if((bi===0)===trip){ i++; MFAudio.yay();
       if(i>=ROUNDS.length){ ch.style.display="none"; container.querySelector(".l45-p").style.display="none";
         q.textContent="Two vs three: mastered!";
         fb(true,"✓ Four for four! Two even eighths split the beat in half; a triplet melts it into three equal drops. Your ear can now tell duple from triple instantly."); }

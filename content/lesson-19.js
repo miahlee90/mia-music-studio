@@ -127,7 +127,7 @@ LESSON_CONTENT[19]={
           OPTS.forEach(o=>{ const b=document.createElement("button"); b.textContent=o;
             b.onclick=()=>{
               const cur=rounds[i];
-              if(o===cur.a){ MFAudio.tone(76,.3); i++;
+              if(o===cur.a){ MFAudio.yay(); i++;
                 if(i>=rounds.length){ ch.style.display="none"; q.textContent="Perfect casting!";
                   fb(true,"✓ Every scene got the right heartbeat — that's how composers set a mood before a single melody is heard!"); }
                 else { fb(true,`✓ ${cur.a} fits perfectly! Next scene…`); ask(); } }

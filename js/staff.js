@@ -56,7 +56,9 @@ const MFAudio=(()=>{
     const m=p.match(/^([A-G])([#b]?)(\d)$/); if(!m) return 60;
     return 12*(+m[3]+1)+P2M[m[1]]+(m[2]==="#"?1:m[2]==="b"?-1:0);
   }
-  return {tone,click,chord,midi,ac};
+  /* success chime: a quick do-mi-sol arpeggio (instructor: no beeps - pretty melody) */
+  function yay(){ tone(72,.16,0,.32); tone(76,.16,.09,.32); tone(79,.30,.18,.34); }
+  return {tone,click,chord,midi,ac,yay};
 })();
 
 const Staff=(()=>{

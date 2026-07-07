@@ -89,7 +89,7 @@ LESSON_CONTENT[22]={
           function ask(){ q.textContent=`Case ${i+1} of ${rounds.length}: `+rounds[i].q; }
           [...ch.children].forEach((b,bi)=>b.onclick=()=>{
             const cur=rounds[i], saidYes=bi===0, ok=saidYes===cur.a;
-            if(ok){ MFAudio.tone(76,.3); i++;
+            if(ok){ MFAudio.yay(); i++;
               if(i>=rounds.length){ ch.style.display="none"; q.textContent="Rule mastered!";
                 fb(true,"✓ Four for four — the flat lives until the bar line, and not a beat longer!"); }
               else { fb(true,"✓ "+cur.why+" Next case…"); ask(); } }

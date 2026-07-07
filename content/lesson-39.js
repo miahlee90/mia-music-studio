@@ -56,7 +56,7 @@ function MF_L39_syll(container,fb){
   };
   [...ch.children].forEach((b,bi)=>b.onclick=()=>{
     if(!heard) return;
-    if(bi===ROUNDS[i]){ i++; MFAudio.tone(76,.3);
+    if(bi===ROUNDS[i]){ i++; MFAudio.yay();
       if(i>=ROUNDS.length){ ch.style.display="none"; container.querySelector(".l39-sp").style.display="none";
         q.textContent="Subdivision ears unlocked!";
         fb(true,"✓ Four for four! You can HEAR the four slots inside one beat: 1-e-&-a. That's what counting sixteenths gives you."); }

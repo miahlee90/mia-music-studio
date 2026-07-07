@@ -119,7 +119,7 @@ LESSON_CONTENT[8]={
             const cur=rounds[i], said=bi===0, ok=said===cur.complete;
             const sum=cur.toks.reduce((s,d)=>s+B[d],0);
             const mathTxt=cur.toks.map(d=>B[d]).join(" + ")+" = "+sum;
-            if(ok){ MFAudio.tone(76,.35); i++;
+            if(ok){ MFAudio.yay(); i++;
               if(i>=rounds.length){ ch.style.display="none"; q.textContent="Inspection complete!";
                 fb(true,"✓ All five inspected correctly! You can spot a missing beat from across the room."); }
               else { fb(true,`✓ Right — ${mathTxt}${cur.complete?", exactly full!":", so it's missing "+(4-sum)+"."} Next measure…`); ask(); } }

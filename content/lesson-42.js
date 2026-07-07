@@ -47,7 +47,7 @@ function MF_L42_match(container,fb){
       const b=document.createElement("button"); b.textContent=o;
       b.onclick=()=>{
         const c=ROUNDS[i];
-        if(oi===c.a){ i++; MFAudio.tone(76,.25);
+        if(oi===c.a){ i++; MFAudio.yay();
           if(i>=ROUNDS.length){ ch.style.display="none"; q.textContent="All symbols decoded!";
             fb(true,`✓ ${c.exp} C = 4/4, slashed C = 2/2, half note = the cut-time beat.`); }
           else { fb(true,`✓ ${c.exp}`); setTimeout(ask,1100); } }

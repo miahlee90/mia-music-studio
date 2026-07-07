@@ -22,7 +22,7 @@ function MF_L43_chart(container,fb){
       const b=document.createElement("button"); b.textContent=o;
       b.onclick=()=>{
         const c=ROUNDS[i];
-        if(oi===c.a){ i++; MFAudio.tone(76,.25);
+        if(oi===c.a){ i++; MFAudio.yay();
           if(i>=ROUNDS.length){ ch.style.display="none"; q.textContent="Value chart mastered!";
             fb(true,`✓ ${c.exp} In bottom-8 land: eighth=1, quarter=2, dotted quarter=3, dotted half=6.`); }
           else { fb(true,`✓ ${c.exp}`); setTimeout(ask,1100); } }

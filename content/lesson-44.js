@@ -47,7 +47,7 @@ function MF_L44_conv(container,fb){
       const b=document.createElement("button"); b.textContent=o;
       b.onclick=()=>{
         const c=ROUNDS[i];
-        if(oi===c.a){ i++; MFAudio.tone(76,.25);
+        if(oi===c.a){ i++; MFAudio.yay();
           if(i>=ROUNDS.length){ ch.style.display="none"; q.textContent="Fast-tempo conversion complete!";
             fb(true,`✓ ${c.exp} Fast 3/8 = in ONE; fast 6/8 = in TWO; the dotted quarter = the new beat.`); }
           else { fb(true,`✓ ${c.exp}`); setTimeout(ask,1100); } }

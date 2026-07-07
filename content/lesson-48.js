@@ -51,7 +51,7 @@ function MF_L48_xray(container,fb){
       const b=document.createElement("button"); b.textContent=o;
       b.onclick=()=>{
         const c=ROUNDS[i];
-        if(oi===c.a){ i++; MFAudio.tone(76,.25);
+        if(oi===c.a){ i++; MFAudio.yay();
           if(i>=ROUNDS.length){ ch.style.display="none"; q.textContent="X-ray complete — the major triad has no secrets!";
             fb(true,`✓ ${c.exp} Both recipes agree: (M3 + m3 stacked) = (root + M3 + P5).`); }
           else { fb(true,`✓ ${c.exp}`); setTimeout(ask,1100); } }

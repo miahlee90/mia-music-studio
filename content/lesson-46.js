@@ -29,7 +29,7 @@ function MF_L46_pickup(container,fb){
   [...ch.children].forEach((b,bi)=>b.onclick=()=>{
     if(!heard) return;
     const c=ROUNDS[i];
-    if((bi===0)===c.pickup){ i++; MFAudio.tone(76,.3);
+    if((bi===0)===c.pickup){ i++; MFAudio.yay();
       if(i>=ROUNDS.length){ ch.style.display="none"; container.querySelector(".l46-p").style.display="none";
         q.textContent="Pick-up radar calibrated!";
         fb(true,"✓ Four for four! Tunes that run in ahead of the first drum-downbeat start with PICK-UP notes — an incomplete first measure."); }
@@ -62,7 +62,7 @@ function MF_L46_sync(container,fb){
   [...ch.children].forEach((b,bi)=>b.onclick=()=>{
     if(!heard) return;
     const sync=ROUNDS[i];
-    if((bi===0)===sync){ i++; MFAudio.tone(76,.3);
+    if((bi===0)===sync){ i++; MFAudio.yay();
       if(i>=ROUNDS.length){ ch.style.display="none"; container.querySelector(".l46-sp").style.display="none";
         q.textContent="Groove detector: expert level!";
         fb(true,"✓ Four for four! Accents BETWEEN the beats = SYNCOPATION — the off-balance kick behind ragtime, jazz, funk, and pop."); }

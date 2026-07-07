@@ -766,7 +766,7 @@ const Games=(()=>{
       }
       function ans(n){
         const ok=n===curN;
-        if(ok){ score++; MFAudio.tone(76,.35); $(".gq").textContent=`✓ Yes — ${curN} measures! Count the spaces BETWEEN the bar lines.`; }
+        if(ok){ score++; MFAudio.yay(); $(".gq").textContent=`✓ Yes — ${curN} measures! Count the spaces BETWEEN the bar lines.`; }
         else { MFAudio.tone(40,.25); $(".gq").textContent=`✗ It's ${curN} — count the containers between bar lines, and remember the double bar ends the last one.`; }
         $(".gs").textContent=`Score: ${score}`;
         numRow.style.display="none";
@@ -808,7 +808,7 @@ const Games=(()=>{
           b.onclick=()=>{
             if(answered) return; answered=true;
             const ok=c.label===target.label;
-            if(ok){ score++; MFAudio.tone(76,.35); $(".gq").textContent=`✓ That's the ${target.label}!`; }
+            if(ok){ score++; MFAudio.yay(); $(".gq").textContent=`✓ That's the ${target.label}!`; }
             else { MFAudio.tone(40,.25); $(".gq").textContent=`✗ That one is the ${c.label} — look again for the ${target.label} next time.`; }
             $(".gs").textContent=`Score: ${score}`;
             setTimeout(ask, ok?900:2100);
@@ -853,7 +853,7 @@ const Games=(()=>{
       function ans(saidComplete){
         const ok=saidComplete===cur.complete;
         const mathTxt=cur.toks.map(v=>VAL_BEATS[v]).join(" + ")+" = "+cur.sum;
-        if(ok){ score++; MFAudio.tone(76,.35); $(".gq").textContent=`✓ Right — ${mathTxt}${cur.complete?` beat${cur.sum>1?"s":""}: complete!`:` beats: it still needs ${target-cur.sum} more.`}`; }
+        if(ok){ score++; MFAudio.yay(); $(".gq").textContent=`✓ Right — ${mathTxt}${cur.complete?` beat${cur.sum>1?"s":""}: complete!`:` beats: it still needs ${target-cur.sum} more.`}`; }
         else { MFAudio.tone(40,.25); $(".gq").textContent=`✗ Add it up: ${mathTxt} — ${cur.complete?"exactly "+target+", complete!":"only "+cur.sum+", incomplete."}`; }
         $(".gs").textContent=`Score: ${score}`;
         $(".gbtns").style.display="none";
@@ -895,7 +895,7 @@ const Games=(()=>{
         if(!running||waiting) return;
         waiting=true; asked++;
         const ok=said===correct;
-        if(ok){ score++; streak++; MFAudio.tone(76,.3); $(".gq").innerHTML=`✓ Yes — <b>${$(".gterm").textContent}</b> = ${correct}!`; }
+        if(ok){ score++; streak++; MFAudio.yay(); $(".gq").innerHTML=`✓ Yes — <b>${$(".gterm").textContent}</b> = ${correct}!`; }
         else { streak=0; MFAudio.tone(40,.25); $(".gq").innerHTML=`✗ <b>${$(".gterm").textContent}</b> means <b>${correct}</b>.`; }
         $(".gs").textContent=(secs?`⏱ ${left}s · `:"")+`Score: ${score} · Streak: ${streak}`;
         setTimeout(ask, ok?650:1900);
@@ -992,7 +992,7 @@ const Games=(()=>{
         if(!running||waiting) return;
         waiting=true; asked++;
         const ok=i===cur.answer;
-        if(ok){ score++; streak++; MFAudio.tone(76,.3); $(".gq").innerHTML="✓ "+cur.explain; }
+        if(ok){ score++; streak++; MFAudio.yay(); $(".gq").innerHTML="✓ "+cur.explain; }
         else { streak=0; MFAudio.tone(40,.25); $(".gq").innerHTML="✗ "+cur.explain; }
         $(".gs").textContent=(secs?`⏱ ${left}s · `:"")+`Score: ${score} · Streak: ${streak}`;
         setTimeout(ask, ok?800:2200);
