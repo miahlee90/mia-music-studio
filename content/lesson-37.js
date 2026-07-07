@@ -155,15 +155,15 @@ LESSON_CONTENT[37]={
         {p:"C4",d:"w"},{p:"G4",d:"w",chord:true},
         {p:"C4",d:"w"},{p:"G#4",d:"w",chord:true}],
         brackets:[{from:0,to:1,label:"dim 5"},{from:2,to:3,label:"P5"},{from:4,to:5,label:"aug 5"}],width:460},
-      kb:{start:60,octaves:1,labels:true,marks:[66,67,68]} },
-    { caption:"The 3rd at four sizes — the full ladder from diminished to augmented. E𝄫 is played on the D key, but spelled as an E to keep the interval a 3rd. (Staff shows the sounding keys.)",
+      kb:{start:60,octaves:1,labels:true} },
+    { caption:"The 3rd at four sizes — the full ladder from diminished to augmented. E𝄫 is WRITTEN on the E line (double flat) but SOUNDS on the D key; E♯ is written on E but sounds on F. Press play and watch the keyboard light the keys you actually hear.",
       staff:{clef:"treble",tempo:60,notes:[
-        {p:"C4",d:"w"},{p:"D4",d:"w",chord:true,label:"E𝄫"},
+        {p:"C4",d:"w"},{p:"E4",d:"w",chord:true,acc:"bb",sound:"D4"},
         {p:"C4",d:"w"},{p:"Eb4",d:"w",chord:true},
         {p:"C4",d:"w"},{p:"E4",d:"w",chord:true},
-        {p:"C4",d:"w"},{p:"F4",d:"w",chord:true,label:"E♯"}],
+        {p:"C4",d:"w"},{p:"E4",d:"w",chord:true,acc:"#",sound:"F4"}],
         brackets:[{from:0,to:1,label:"dim 3"},{from:2,to:3,label:"m3"},{from:4,to:5,label:"M3"},{from:6,to:7,label:"aug 3"}],width:560},
-      kb:{start:60,octaves:1,labels:true,marks:[62,63,64,65]} }
+      kb:{start:60,octaves:1,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Five-Quality Sprint (45s)",
@@ -253,8 +253,8 @@ LESSON_CONTENT[37]={
       staff:{clef:"treble",notes:[{p:"C4",d:"w"},{p:"G#4",d:"w",chord:true}],width:130}},
     {term:"Diminished Interval", def:"An interval one half step smaller than a minor or Perfect interval, with the same letter names. Abbreviated dim.",
       staff:{clef:"treble",notes:[{p:"C4",d:"w"},{p:"Gb4",d:"w",chord:true}],width:130}},
-    {term:"Double Sharp<br><span class=\"dbx\" style=\"font-size:3em;line-height:1.15;display:inline-block\">𝄪</span>", def:"Raises an already-sharp note by another half step — used to spell augmented intervals correctly."},
-    {term:"Double Flat<br><span class=\"dbx\" style=\"font-size:3em;line-height:1.15;display:inline-block\">𝄫</span>", def:"Lowers an already-flat note by another half step — used to spell diminished intervals correctly."},
+    {term:"Double Sharp<br><span class=\"dbx\" style=\"font-size:3em;line-height:1.15;display:block;text-align:center\">𝄪</span>", def:"Raises an already-sharp note by another half step — used to spell augmented intervals correctly."},
+    {term:"Double Flat<br><span class=\"dbx\" style=\"font-size:1.5em;line-height:1.15;display:block;text-align:center\">𝄫</span>", def:"Lowers an already-flat note by another half step — used to spell diminished intervals correctly."},
     {term:"Chromatic Interval", def:"An interval whose keynote and upper note are NOT from the same major scale. Minor, diminished, and augmented intervals are always chromatic in major keys."}
   ],
   mistakes:[],

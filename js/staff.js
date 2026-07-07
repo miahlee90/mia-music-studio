@@ -202,6 +202,11 @@ const Staff=(()=>{
       +L(x-6,y-3,x+6,y-5.5)+L(x-6,y+5.5,x+6,y+3);
     if(a==="b") return L(x-2,y-12,x-2,y+5)
       +`<path class="acc" fill="none" d="M ${x-2} ${y+5} C ${x+7} ${y}, ${x+6} ${y-6}, ${x-2} ${y-2}"/>`;
+    if(a==="bb"){ const f=dx=>L(x+dx,y-12,x+dx,y+5)
+      +`<path class="acc" fill="none" d="M ${x+dx} ${y+5} C ${x+dx+9} ${y}, ${x+dx+8} ${y-6}, ${x+dx} ${y-2}"/>`;
+      return f(-9)+f(0); }
+    if(a==="x") return L(x-4.5,y-4.5,x+4.5,y+4.5)+L(x-4.5,y+4.5,x+4.5,y-4.5)
+      +`<rect class="acc" x="${x-6}" y="${y-1.6}" width="3.4" height="3.2" fill="currentColor"/><rect class="acc" x="${x+2.6}" y="${y-1.6}" width="3.4" height="3.2" fill="currentColor"/>`;
     /* natural */
     return L(x-2.5,y-10,x-2.5,y+5)+L(x+2.5,y-5,x+2.5,y+10)
       +L(x-2.5,y-3.5,x+2.5,y-5.5)+L(x-2.5,y+5.5,x+2.5,y+3.5);
@@ -362,11 +367,11 @@ const Staff=(()=>{
         parts.push(`<g class="notegroup" data-i="${i}" data-rest="${n.rest}">${restSVG(x,y0,normD(n.rest),(spec.clickNotes?" clickable":""))}${n.dot?`<circle class="artic" cx="${x+13}" cy="${y0+2*GAP-7}" r="2.7"/>`:""}</g>`);
       } else {
         parts.push(ledgersFor(n.p,clef,x,y0));
-        const accCh = n.acc==="n"?"n" : (n.p.match(/^[A-G]([#b])\d$/)||[])[1];
+        const accCh = n.acc==="n"?"n" : (n.acc==="bb"||n.acc==="x"||n.acc==="#"||n.acc==="b")? n.acc : (n.p.match(/^[A-G]([#b])\d$/)||[])[1];
         const idx=dia(n.p)-baseIdx(clef);
         const onLine=idx%2===0;
         let inner=noteSVG(x,y,normD(n.d),(spec.clickNotes?" clickable":""),y0,beamSet.has(i),isDotted(n),onLine,chordMembers.has(i));
-        if(accCh) inner=accSVG(x-18-(accShift||0),y,accCh==="n"?"nat":accCh)+inner;
+        if(accCh) inner=accSVG(x-18-(accCh==="bb"?6:0)-(accShift||0),y,accCh==="n"?"nat":accCh)+inner;
         if(n.artic) inner+=articSVG(x,y,y0,n.artic,n.articPos);
         parts.push(`<g class="notegroup" data-i="${i}" data-p="${n.p}">${inner}</g>`);
         if(n.dyn) parts.push(`<text class="dyn" x="${x}" y="${dynY}" text-anchor="middle">${n.dyn}</text>`);
