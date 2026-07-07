@@ -270,13 +270,13 @@
     while(w.nextNode()){
       const t=w.currentNode, pe=t.parentElement;
       if(!RE.test(t.nodeValue)) continue;
-      if(pe&&(pe.classList.contains("dbx")||pe.closest("svg"))) continue;
+      if(pe&&(pe.classList.contains("dbx")||pe.classList.contains("dbf")||pe.closest("svg"))) continue;
       hits.push(t);
     }
     hits.forEach(t=>{
       const span=document.createElement("span");
       span.innerHTML=t.nodeValue.replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]))
-        .replace(/([\u{1D12A}\u{1D12B}])/gu,'<span class="dbx">$1</span>');
+        .replace(/(\u{1D12A})/gu,'<span class="dbx">$1</span>').replace(/(\u{1D12B})/gu,'<span class="dbf">$1</span>');
       t.parentNode.replaceChild(span,t);
     });
   }

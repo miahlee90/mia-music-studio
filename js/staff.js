@@ -17,6 +17,10 @@
    clickable via spec.onKeysig(i); each accidental wrapped in g.ksgroup[data-ks]),
    W/H step carets above the staff (spec.steps:[{from,to,label:"W"|"H"}]),
    labeled under-brackets for tetrachord grouping (spec.brackets:[{from,to,label}]).
+   v7.9: mid-line KEY-SIGNATURE items ({ksig:"G"} takes a layout slot and
+   draws that signature there - key changes after a double bar), and
+   acc:"none" suppresses a pitch's accidental when the key signature
+   already covers it.
    v7.8 (Unit 12): CHORD STEMS - stemmed {chord:true} groups share ONE stem
    of consistent length instead of one stem per notehead.
    v7.7 (Unit 11): TRIPLETS — spec.tuplets:[{from,to}] draws the "3" (with a
@@ -296,6 +300,7 @@ const Staff=(()=>{
       if(n.label) hasLabel=true;
       if(n.dyn) hasDyn=true;
       if(n.bar!==undefined){ placed.push({n,i,clef,y0,x,kind:"bar"}); return; }
+      if(n.ksig!==undefined){ placed.push({n,i,clef,y0,x,kind:"ksig"}); return; }
       if(n.mark!==undefined){ minEl=Math.min(minEl,y0-38); placed.push({n,i,clef,y0,x,kind:"mark"}); return; }
       if(n.letter!==undefined){ placed.push({n,i,clef,y0,x,kind:"letter"}); return; }
       if(n.rest){
@@ -359,6 +364,11 @@ const Staff=(()=>{
         const bk=n.bar===true?"single":n.bar;
         parts.push(barSVG(x,yTop,yBot,bk));
         if(spec.clickBars) parts.push(`<rect class="clickbar" data-bar="${i}" data-kind="${bk}" x="${x-11}" y="${yTop-6}" width="22" height="${yBot-yTop+12}"/>`);
+      } else if(kind==="ksig"){
+        const ks=parseKeysig(n.ksig);
+        if(ks){ const x0=x-(ks.n*12)/2+6;
+          for(let j=0;j<ks.n;j++){ const yy=yFor(KSPOS[ks.type][clef][j],clef,y0);
+            parts.push(`<g class="notegroup" data-i="${i}" data-ksig="${n.ksig}">${accSVG(x0+j*12,yy,ks.type==="sharp"?"#":"b")}</g>`); } }
       } else if(kind==="mark"){
         parts.push(`<g class="notegroup" data-i="${i}" data-mark="${n.mark}">${markSVG(x,y0,n.mark)}</g>`);
       } else if(kind==="letter"){
@@ -367,7 +377,7 @@ const Staff=(()=>{
         parts.push(`<g class="notegroup" data-i="${i}" data-rest="${n.rest}">${restSVG(x,y0,normD(n.rest),(spec.clickNotes?" clickable":""))}${n.dot?`<circle class="artic" cx="${x+13}" cy="${y0+2*GAP-7}" r="2.7"/>`:""}</g>`);
       } else {
         parts.push(ledgersFor(n.p,clef,x,y0));
-        const accCh = n.acc==="n"?"n" : (n.acc==="bb"||n.acc==="x"||n.acc==="#"||n.acc==="b")? n.acc : (n.p.match(/^[A-G]([#b])\d$/)||[])[1];
+        const accCh = n.acc==="none"? undefined : n.acc==="n"?"n" : (n.acc==="bb"||n.acc==="x"||n.acc==="#"||n.acc==="b")? n.acc : (n.p.match(/^[A-G]([#b])\d$/)||[])[1];
         const idx=dia(n.p)-baseIdx(clef);
         const onLine=idx%2===0;
         let inner=noteSVG(x,y,normD(n.d),(spec.clickNotes?" clickable":""),y0,beamSet.has(i),isDotted(n),onLine,chordMembers.has(i));
@@ -529,7 +539,7 @@ const Staff=(()=>{
     const LETTER_MIDI={A:60,B:64,C:67,D:72};
     let lastStart=0, lastDur=0;
     seq.forEach(([n,i])=>{
-      if(n.bar!==undefined||n.mark!==undefined) return;
+      if(n.bar!==undefined||n.mark!==undefined||n.ksig!==undefined) return;
       if(n.letter!==undefined){
         const dur=tempo? 4*spb : 1.6;
         MFAudio.tone(LETTER_MIDI[n.letter]||60, Math.max(.3,dur*.9), t, .45);

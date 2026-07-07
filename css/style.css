@@ -375,6 +375,7 @@ button.notecard svg.mf-staff{height:46px;width:auto;max-width:100%;display:block
 
 /* v3.4 — auto-enlarged double sharp/flat glyphs (template.js walker) */
 .dbx{font-size:1.55em;line-height:1;vertical-align:-0.08em;font-weight:700}
+.dbf{font-size:1.05em;line-height:1;font-weight:800} /* double flat: lowercase-b height, gently bold */
 
 /* DD-30 — red guide arrow: "press THIS key"; purple stays = "this key is sounding" */
 .mf-kb .kpoint{position:absolute;top:-2px;left:0;width:100%;text-align:center;font-size:19px;line-height:1;

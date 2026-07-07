@@ -256,7 +256,7 @@ LESSON_CONTENT[37]={
     {term:"Diminished Interval", def:"An interval one half step smaller than a minor or Perfect interval, with the same letter names. Abbreviated dim.",
       staff:{clef:"treble",notes:[{p:"C4",d:"w"},{p:"Gb4",d:"w",chord:true}],width:130}},
     {term:"Double Sharp", sym:'<span class="dbx" style="font-size:2.8em;line-height:1">𝄪</span>', def:"Raises an already-sharp note by another half step — used to spell augmented intervals correctly."},
-    {term:"Double Flat", sym:'<span class="dbx" style="font-size:1.6em;line-height:1">𝄫</span>', def:"Lowers an already-flat note by another half step — used to spell diminished intervals correctly."},
+    {term:"Double Flat", sym:'<span class="dbf" style="font-size:1.3em">𝄫</span>', def:"Lowers an already-flat note by another half step — used to spell diminished intervals correctly."},
     {term:"Chromatic Interval", def:"An interval whose keynote and upper note are NOT from the same major scale. Minor, diminished, and augmented intervals are always chromatic in major keys."}
   ],
   mistakes:[],

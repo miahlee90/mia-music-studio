@@ -81,8 +81,8 @@ function MF_L38_machine(container,fb){
         if(o===cur.g){ i++; MFAudio.tone(MFAudio.midi(GP[cur.g]),.35); draw();
           if(i>=MEL.length){ ch.style.display="none"; q.textContent="Transposition complete!";
             const spec={clef:"treble",tempo:110,notes:[
-              {p:"C4",d:"q"},{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"G4",d:"q"},{bar:"double"},
-              {p:"G4",d:"q"},{p:"A4",d:"q"},{p:"B4",d:"q"},{p:"D5",d:"q"},{bar:"final"}],width:480};
+              {p:"C4",d:"q"},{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"G4",d:"q"},{bar:"double"},{ksig:"G"},
+              {p:"G4",d:"q"},{p:"A4",d:"q"},{p:"B4",d:"q"},{p:"D5",d:"q"},{bar:"final"}],width:520};
             const api=Staff.render(holder,spec); setTimeout(()=>Staff.play(spec,api),400);
             fb(true,"✓ C-D-E-G became G-A-B-D — every note up a Perfect 5th, every interval preserved, syllables still Do-Re-Mi-Sol. Press play and hear the same tune, higher!"); }
           else { fb(true,`✓ ${cur.c} → ${o} (${cur.syl} stays ${cur.syl}). Next note…`); } }
@@ -130,9 +130,9 @@ LESSON_CONTENT[38]={
         success:"✓ Do(1) Re(2) Mi(3) Fa(4) SOL(5). Sing the ladder until it's automatic!",
         fail:"Count up: Do, Re, Mi, Fa…",
         hint:"Do-Re-Mi-Fa-?" } },
-    { say:"The magic ingredient is <b>MOVABLE DO</b>: Do is not glued to C — <b>Do is always the KEYNOTE of the current key</b>. In C major, Do = C. In G major, Do = G, and F♯ becomes Ti. Note names change; syllables never do. \u{1F447} <b>In F major, which note is Do?</b>",
-      show:{ type:"staff", spec:{clef:"treble",tempo:110,keysig:"G",notes:[
-        {p:"G4",d:"q",label:"Do"},{p:"A4",d:"q",label:"Re"},{p:"B4",d:"q",label:"Mi"},{p:"C5",d:"q",label:"Fa"},{p:"D5",d:"q",label:"Sol"},{p:"E5",d:"q",label:"La"},{p:"F#5",d:"q",label:"Ti"},{p:"G5",d:"q",label:"Do"}],width:520} },
+    { say:"The magic ingredient is <b>MOVABLE DO</b>: Do is always the tonic (keynote) of the current key. In C major, Do = C. In G major, Do = G, so F♯ is Ti. The note names stay the same. Only the solfège syllables (Do, Re, Mi...) change. \u{1F447} <b>In F major, which note is Do?</b>",
+      show:{ type:"staff", spec:{clef:"treble",tempo:110,keysig:"F",notes:[
+        {p:"F4",d:"q",label:"Do"},{p:"G4",d:"q",label:"Re"},{p:"A4",d:"q",label:"Mi"},{p:"Bb4",d:"q",acc:"none",label:"Fa"},{p:"C5",d:"q",label:"Sol"},{p:"D5",d:"q",label:"La"},{p:"E5",d:"q",label:"Ti"},{p:"F5",d:"q",label:"Do"}],width:520} },
       try:{ type:"mc", choices:["F — the keynote","C — always C","B♭ — the flat"], answer:0,
         success:"✓ Do = the keynote, wherever you are. F major → F is Do (and B♭ is Fa).",
         fail:"Movable Do follows the KEY, not the letter C.",
@@ -148,9 +148,9 @@ LESSON_CONTENT[38]={
         hint:"Degree, not letter." } },
     { say:"Now the second big idea: <b>TRANSPOSITION</b> — rewriting a melody in a different key, keeping <b>every interval exactly the same</b>. The tune sounds higher or lower, but its shape is untouched. Why? To fit a singer's range, or an instrument's tuning. \u{1F447} <b>After transposing, what stays the SAME?</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:110,notes:[
-        {p:"C4",d:"q",label:"Do"},{p:"D4",d:"q",label:"Re"},{p:"E4",d:"q",label:"Mi"},{p:"G4",d:"q",label:"Sol"},{bar:"double"},
+        {p:"C4",d:"q",label:"Do"},{p:"D4",d:"q",label:"Re"},{p:"E4",d:"q",label:"Mi"},{p:"G4",d:"q",label:"Sol"},{bar:"double"},{ksig:"G"},
         {p:"G4",d:"q",label:"Do"},{p:"A4",d:"q",label:"Re"},{p:"B4",d:"q",label:"Mi"},{p:"D5",d:"q",label:"Sol"},{bar:"final"}],
-        brackets:[{from:0,to:3,label:"in C major"},{from:5,to:8,label:"in G major"}],width:560} },
+        brackets:[{from:0,to:3,label:"in C major"},{from:6,to:9,label:"in G major"}],width:600} },
       try:{ type:"mc", choices:["The intervals and the melody's shape","The letter names","The starting pitch"], answer:0,
         success:"✓ Intervals, shape, syllables — all preserved. Only the letters and the key signature change.",
         fail:"The notes clearly changed (C-D-E-G → G-A-B-D)… so what survived?",
@@ -172,9 +172,9 @@ LESSON_CONTENT[38]={
       kb:{start:60,octaves:1,labels:true} },
     { caption:"One melody, two homes: Do-Re-Mi-Sol in C major, then the identical shape up a Perfect 5th in G major. Same intervals, same syllables — press play and hear the tune simply lift.",
       staff:{clef:"treble",tempo:110,notes:[
-        {p:"C4",d:"q",label:"Do"},{p:"D4",d:"q",label:"Re"},{p:"E4",d:"q",label:"Mi"},{p:"G4",d:"q",label:"Sol"},{bar:"double"},
+        {p:"C4",d:"q",label:"Do"},{p:"D4",d:"q",label:"Re"},{p:"E4",d:"q",label:"Mi"},{p:"G4",d:"q",label:"Sol"},{bar:"double"},{ksig:"G"},
         {p:"G4",d:"q",label:"Do"},{p:"A4",d:"q",label:"Re"},{p:"B4",d:"q",label:"Mi"},{p:"D5",d:"q",label:"Sol"},{bar:"final"}],
-        brackets:[{from:0,to:3,label:"C major"},{from:5,to:8,label:"G major — up a P5"}],width:560},
+        brackets:[{from:0,to:3,label:"C major"},{from:6,to:9,label:"G major — up a P5"}],width:600},
       kb:{start:60,octaves:2,labels:true} }
   ],
   games:[
