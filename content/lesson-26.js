@@ -123,7 +123,7 @@ LESSON_CONTENT[26]={
       try:{ type:"custom",
         hint:"Wide, wide, then narrow: W – W – H.",
         mount:(container,fb)=>MF_L26_blueprint(container,fb) } },
-    { say:"Now the big idea: a <b>MAJOR SCALE</b> is <b>eight notes — two tetrachords joined by one whole step</b>. C–D–E–F is the C tetrachord; step up a whole step to G, and G–A–B–C is the G tetrachord. The first and last note share the same name: the <b>KEYNOTE</b> — so the eight written notes contain <b>7 different pitches</b>, with the keynote appearing twice. A scale can begin on any note. \u{1F447} <b>What joins the two tetrachords of a major scale?</b>",
+    { say:"Now the big idea: a <b>MAJOR SCALE</b> is <b>eight notes — two tetrachords joined by one whole step</b>. C–D–E–F is the C tetrachord; step up a whole step to G, and G–A–B–C is the G tetrachord. The first and last note share the same name: the <b>KEYNOTE</b> — so the eight written notes contain <b>7 different pitches</b>, with the keynote appearing twice. That makes the major scale a <b>seven-note (diatonic) scale</b> in the pattern <b>W–W–H–W–W–W–H</b>, and its job in music is to <b>establish a key center</b>: the keynote feels like home, and melodies and chords are built around it. A scale can begin on any note. \u{1F447} <b>What joins the two tetrachords of a major scale?</b>",
       show:{ type:"custom", mount:(el)=>MF_L26_staffKb(el,
         {clef:"treble",notes:[{p:"C4",d:"q",label:"1"},{p:"D4",d:"q",label:"2"},{p:"E4",d:"q",label:"3"},{p:"F4",d:"q",label:"4"},{p:"G4",d:"q",label:"5"},{p:"A4",d:"q",label:"6"},{p:"B4",d:"q",label:"7"},{p:"C5",d:"q",label:"8"}],steps:[{from:3,to:4,label:"Whole Step"}],brackets:[{from:0,to:3,label:"C tetrachord"},{from:4,to:7,label:"G tetrachord"}],width:520},
         {start:60,octaves:1,labels:true,marks:[60,62,64,65,67,69,71,72]}) },
@@ -263,7 +263,7 @@ LESSON_CONTENT[26]={
     {term:"Tetra", def:"Four."},
     {term:"Tetrachord", def:"A series of four notes having a pattern of whole step, whole step, half step. The four notes of a tetrachord must be in alphabetical order.",
       staff:{clef:"treble",notes:[{p:"C4",d:"q"},{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"F4",d:"q"}],steps:[{from:0,to:1,label:"W"},{from:1,to:2,label:"W"},{from:2,to:3,label:"H"}],width:200}},
-    {term:"Major Scale", def:"A scale made up of eight notes — two tetrachords joined by a whole step."},
+    {term:"Major Scale", def:"A seven-note (diatonic) scale in the pattern W–W–H–W–W–W–H — for example, C major: C, D, E, F, G, A, B, plus the repeated keynote. Built from two tetrachords joined by a whole step, it establishes the key center that melodies and chords are built around."},
     {term:"Keynote", def:"The note on which a scale begins and ends."},
     {term:"Degrees", def:"The tones or steps of a scale. There are eight degrees in a major scale."}
   ],

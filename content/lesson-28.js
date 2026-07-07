@@ -225,8 +225,8 @@ LESSON_CONTENT[28]={
     { gen:"note-name", params:{clef:"bass"}, count:2 }
   ],
   vocabulary:[
-    {term:"F Major Scale", def:"A major scale with one flat: B♭. Built from the F and C tetrachords joined by a whole step."},
-    {term:"B♭ Major Scale", def:"A major scale with two flats: B♭ and E♭. Built from the B♭ and F tetrachords joined by a whole step."},
+    {term:"F Major Scale", def:"F major is a major scale based on F, consisting of the pitches F, G, A, B♭, C, D, and E. Key signature: one flat (B♭)."},
+    {term:"B♭ Major Scale", def:"B♭ major is a major scale based on B♭, consisting of the pitches B♭, C, D, E♭, F, G, and A. Key signature: two flats (B♭, E♭)."},
     {term:"Flat (♭)", def:"Lowers a note by one half step.",
       staff:{clef:"treble",notes:[{p:"Bb4",d:"q"}],width:120}},
     {term:"Keynote", def:"The note on which a scale begins and ends."}

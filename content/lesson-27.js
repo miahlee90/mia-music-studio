@@ -224,8 +224,8 @@ LESSON_CONTENT[27]={
     { gen:"note-name", params:{clef:"treble"}, count:2 }
   ],
   vocabulary:[
-    {term:"G Major Scale", def:"A major scale with one sharp: F♯. Built from the G and D tetrachords joined by a whole step."},
-    {term:"D Major Scale", def:"A major scale with two sharps: F♯ and C♯. Built from the D and A tetrachords joined by a whole step."},
+    {term:"G Major Scale", def:"G major is a major scale based on G, consisting of the pitches G, A, B, C, D, E, and F♯. Key signature: one sharp (F♯)."},
+    {term:"D Major Scale", def:"D major is a major scale based on D, consisting of the pitches D, E, F♯, G, A, B, and C♯. Key signature: two sharps (F♯, C♯)."},
     {term:"Sharp (♯)", def:"Raises a note by one half step.",
       staff:{clef:"treble",notes:[{p:"F#4",d:"q"}],width:120}},
     {term:"Keynote", def:"The note on which a scale begins and ends."}

@@ -96,7 +96,7 @@ LESSON_CONTENT[32]={
     "Perform a chromatic scale on the keyboard"
   ],
   steps:[
-    { say:"The <b>CHROMATIC SCALE</b> is made up entirely of <b>half steps in consecutive order</b> — on a keyboard it uses <b>every key, black and white</b>. It may begin on any note, and within one octave there are <b>12 tones</b>. (Careful counting: the MAJOR scale from Lesson 26 is written with 8 notes but contains only <b>7 different pitches</b> — its 8th note repeats the keynote an octave higher. The chromatic scale contains all <b>12</b>.) \u{1F447} <b>How many different pitches are inside one octave of a chromatic scale?</b>",
+    { say:"The <b>CHROMATIC SCALE</b> is made up entirely of <b>half steps in consecutive order</b> — a <b>twelve-note scale</b> containing <b>every pitch within the octave</b>. On a keyboard it uses <b>every key, black and white</b>, and it may begin on any note. Unlike the major scale — seven different pitches built around a home keynote that <b>establishes a key center</b> — the chromatic scale has <b>no key center and no hierarchy</b>: musicians use it for <b>color</b>, for decorating melodies, for <b>smooth half-step connections</b>, and for <b>modulation</b> between keys. \u{1F447} <b>How many different pitches are inside one octave of a chromatic scale?</b>",
       show:{ type:"custom", mount:(el)=>MF_L32_staffKb(el,
         {clef:"treble",notes:[{p:"C4",d:"q",label:"C"},{p:"C#4",d:"q",label:"C♯"},{p:"D4",d:"q",label:"D"},{p:"D#4",d:"q",label:"D♯"},{p:"E4",d:"q",label:"E"},{p:"F4",d:"q",label:"F"},{p:"F#4",d:"q",label:"F♯"},{p:"G4",d:"q",label:"G"},{p:"G#4",d:"q",label:"G♯"},{p:"A4",d:"q",label:"A"},{p:"A#4",d:"q",label:"A♯"},{p:"B4",d:"q",label:"B"},{p:"C5",d:"q",label:"C"}],width:560},
         {start:60,octaves:1,labels:true,marks:[60,61,62,63,64,65,66,67,68,69,70,71,72]}) },
@@ -117,25 +117,7 @@ LESSON_CONTENT[32]={
     { say:"Half-step radar time — chromatic motion is ONLY half steps, so you must spot them instantly. \u{1F447} <b>Judge each pair of marked keys:</b>",
       try:{ type:"custom",
         hint:"Half step = the VERY next key, black or white. E–F and B–C count too!",
-        mount:(container,fb)=>MF_L32_detective(container,fb) } },
-    { say:"Side by side, precisely: the <b>MAJOR SCALE</b> is a seven-note (diatonic) scale in the pattern <b>W–W–H–W–W–W–H</b> — <b>7 different pitches</b> plus the repeated keynote — and its job is to <b>establish a key center</b> that melodies and chords are built around. The <b>CHROMATIC SCALE</b> contains <b>all 12 pitches</b> in half steps — <b>no key center, no hierarchy</b>: its job is <b>color</b>, smooth connecting motion between notes, and travel between keys. \u{1F447} <b>How many DIFFERENT pitches does each scale contain within one octave?</b>",
-      show:{ type:"html", html:`<div style="max-width:520px;margin:0 auto"><table style="width:100%;border-collapse:collapse;font-size:14px;text-align:center">
-        <tr style="color:var(--muted)"><th style="padding:4px"></th><th>Major scale</th><th>Chromatic scale</th></tr>
-        <tr><td style="text-align:left;color:var(--muted)">Different pitches</td><td><b>7</b> (+ repeated keynote)</td><td><b>12</b> (every key)</td></tr>
-        <tr><td style="text-align:left;color:var(--muted)">Pattern</td><td>W–W–H–W–W–W–H</td><td>all half steps</td></tr>
-        <tr><td style="text-align:left;color:var(--muted)">Function</td><td>establishes the KEY CENTER</td><td>no key center — all 12 equal</td></tr>
-        <tr><td style="text-align:left;color:var(--muted)">Role in music</td><td>melody, chords &amp; progressions built around home</td><td>color, embellishment, smooth connections, modulation</td></tr>
-      </table></div>` },
-      try:{ type:"mc", choices:["Major 7 · Chromatic 12","Major 8 · Chromatic 13","Both contain 12","Major 7 · Chromatic 10"], answer:0,
-        success:"✓ 7 vs 12 — the written 8th and 13th notes simply repeat the keynote an octave higher.",
-        fail:"Don't count the repeated keynote at the top of either scale.",
-        hint:"Different PITCHES, not written notes." } },
-    { say:"The upgrade that matters most — <b>what each scale is FOR</b>. The <b>major scale establishes a key center</b>: its keynote feels like HOME, and the other degrees form a hierarchy of pulls around it — the engine behind melodies, chords and progressions. The <b>chromatic scale removes that hierarchy</b>: no note is home, all twelve are equal. Composers use it for <b>color</b>, for decorating melodies, for <b>smooth half-step connections</b> between chord tones, and for <b>modulation</b> — traveling from one key to another. \u{1F447} <b>Which scale establishes a key center, and which one supplies color?</b>",
-      try:{ type:"mc",
-        choices:["Major = key center · Chromatic = color","Chromatic = key center · Major = color","Both establish a key center","Neither has any function"], answer:0,
-        success:"✓ The major scale builds the home; the chromatic scale paints the journey — color, connection, and travel between keys.",
-        fail:"Which scale has a keynote that feels like HOME?",
-        hint:"Hierarchy vs. equality." } }
+        mount:(container,fb)=>MF_L32_detective(container,fb) } }
   ],
   examples:[
     { caption:"Ascending chromatic scale from C — sharps on the way up. Every neighboring note is one half step.",
@@ -248,7 +230,7 @@ LESSON_CONTENT[32]={
     { gen:"note-name", params:{clef:"bass"}, count:2 }
   ],
   vocabulary:[
-    {term:"Chromatic Scale", def:"A scale made up entirely of half steps in consecutive order. On the keyboard it uses every key, black or white.",
+    {term:"Chromatic Scale", def:"The chromatic scale is a twelve-note scale that includes every half step within the octave — C, C♯, D, D♯, E, F, F♯, G, G♯, A, A♯, B. On the keyboard it uses every key, black and white; ascending versions usually use sharps, descending versions flats.",
       staff:{clef:"treble",notes:[{p:"C4",d:"q"},{p:"C#4",d:"q"},{p:"D4",d:"q"},{p:"D#4",d:"q"}],width:170}},
     {term:"Half Step", def:"The smallest interval between two adjacent notes — the very next key."},
     {term:"Ascending", def:"Moving from lower pitches to higher pitches. Ascending chromatic scales usually use sharps."},
