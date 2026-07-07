@@ -18,7 +18,7 @@ function MF_L39_tree(container,fb){
     <div class="l39-staff"></div>
     <div style="text-align:center"><button class="play l39-split">✂️ Split every note in half!</button></div>`;
   const q=container.querySelector(".l39-q"), holder=container.querySelector(".l39-staff"), btn=container.querySelector(".l39-split");
-  function draw(){
+  function draw(doPlay){
     const L=LEVELS[lv];
     const notes=[]; for(let i=0;i<L.n;i++) notes.push({p:"B4",d:L.d});
     const spec={clef:"treble",tempo:60,notes,width:Math.max(240,L.n*38+140)};
@@ -26,16 +26,16 @@ function MF_L39_tree(container,fb){
     if(L.d==="16") spec.beams=[[0,3,2],[4,7,2],[8,11,2],[12,15,2]];
     const api=Staff.render(holder,spec);
     q.innerHTML=`<b>${L.name}</b> — ${L.beats}. ${lv<4?"Same total time, smaller pieces…":"THE SIXTEENTH NOTE: two beams, ¼ beat each!"}`;
-    setTimeout(()=>Staff.play(spec,api),400);
+    if(doPlay) setTimeout(()=>Staff.play(spec,api),400); /* no sound on page load — only after a split click */
   }
   btn.onclick=()=>{
     if(lv>=4) return;
     lv++;
-    draw();
+    draw(true);
     if(lv>=4){ btn.style.display="none";
       fb(true,"✓ w → 2 h → 4 q → 8 eighths → 16 SIXTEENTHS. Each split halves the value; sixteenths get a SECOND beam and are worth ¼ beat. Four of them fill one beat: 1-e-&-a!"); }
   };
-  draw();
+  draw(false);
 }
 
 /* silent-syllable detective, sixteenth edition warm-up: WHICH sixteenth is loud? */
