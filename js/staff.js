@@ -17,6 +17,11 @@
    clickable via spec.onKeysig(i); each accidental wrapped in g.ksgroup[data-ks]),
    W/H step carets above the staff (spec.steps:[{from,to,label:"W"|"H"}]),
    labeled under-brackets for tetrachord grouping (spec.brackets:[{from,to,label}]).
+   v8.0 (DD-32, instructor): DURATION-PROPORTIONAL LAYOUT - horizontal space
+   follows time: four 16ths take about the width of two 8ths, which take
+   about the width of one quarter. Long notes are softly capped, tuplets
+   are compressed to their real 2/3 time, and everything scales to fill
+   the given width. Explicit n.x still overrides (DD-28 symmetric specs).
    v7.9: mid-line KEY-SIGNATURE items ({ksig:"G"} takes a layout slot and
    draws that signature there - key changes after a double bar), and
    acc:"none" suppresses a pitch's accidental when the key signature
@@ -284,21 +289,37 @@ const Staff=(()=>{
     /* marks adjacent to a bar line align WITH that bar (terms above bar lines) and take no layout slot */
     const attachedMark=items.map((n,i)=> n.mark!==undefined &&
       ((items[i+1]&&items[i+1].bar!==undefined) || (i>0&&items[i-1].bar!==undefined)));
-    const slotOf=[]; let SC=0;
-    items.forEach((n,i)=>{ slotOf[i]=(attachedMark[i]||n.chord)? -1 : SC++; });
-    const endsWithBar = items.length>1 && items[items.length-1].bar!==undefined;
+    /* v8.0 (DD-32) - duration-proportional spacing */
+    const BEATW=110, MINW=26, MAXW=150;
+    const inTuplet=i=>(spec.tuplets||[]).some(tp=>i>=tp.from&&i<=tp.to);
+    function itemW(n,i){
+      if(attachedMark[i]||n.chord) return 0;
+      if(n.bar!==undefined) return 30;
+      if(n.ksig!==undefined){ const ks=parseKeysig(n.ksig); return ks? ks.n*12+18 : 20; }
+      if(n.mark!==undefined) return 46;
+      if(n.letter!==undefined) return 84;
+      let b=beatsOf(n); if(!(b>0)) b=1;
+      if(inTuplet(i)) b*=2/3;
+      return Math.max(MINW, Math.min(MAXW, b*BEATW));
+    }
+    const wN=items.map((n,i)=>itemW(n,i));
+    const natural=wN.reduce((a,b)=>a+b,0)||1;
+    const availW=W-40-startX;
+    const fSc=Math.min(2.4, availW/natural);
+    let cursor=startX+Math.max(0,(availW-natural*fSc)/2);
+    const xArr=[];
+    items.forEach((n,i)=>{
+      const w2=wN[i]*fSc;
+      const xx = n.x || ((n.bar!==undefined&&i===items.length-1)? W-16 : cursor+w2/2);
+      xArr[i]=xx;
+      if(wN[i]) cursor = n.x? n.x+w2/2 : cursor+w2;
+    });
+    /* marks adjacent to a bar line align WITH that bar */
+    items.forEach((n,i)=>{ if(attachedMark[i]) xArr[i]=(items[i+1]&&items[i+1].bar!==undefined)? xArr[i+1] : xArr[i-1]; });
     items.forEach((n,i)=>{
       const clef = n.clef || (grand? "treble" : (spec.clef||"treble"));
       const y0 = clef==="bass"? y0b : y0t;
-      /* lines that CLOSE with a bar spread evenly from start to that bar (equal measures);
-         otherwise few items gather toward the center */
-      const avail=W-40-startX;
-      const span=Math.min(avail,(SC-1)*92);
-      const off=startX+(avail-span)/2;
-      const spreadX = SC<=1? (startX+W-40)/2
-        : endsWithBar? startX + Math.max(0,slotOf[i])*((W-16-startX)/Math.max(1,SC-1))
-        : off+Math.max(0,slotOf[i])*(span/Math.max(1,SC-1));
-      let x = n.x || ((n.bar!==undefined && i===items.length-1)? W-16 : spreadX);
+      let x = xArr[i];
       let accShift=0; /* v7.8c: chord 2nds shift the head right - the accidental must NOT follow */
       if(n.chord && placed.length){ const prev=placed[placed.length-1];
         if(prev && prev.n.p){ const dd=Math.abs(dia(n.p)-dia(prev.n.p)); if(dd<=1){ x=prev.x+13; accShift=13; } else x=prev.x; } }
