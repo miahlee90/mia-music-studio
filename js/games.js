@@ -960,6 +960,75 @@ const Games=(()=>{
         }
       }
       $(".gstart").onclick=function(){ this.style.display="none"; $(".gq").textContent=spec.title||"Tap the items in the correct order!"; setup(); };
+    },
+
+    /* v7.3 — Key-Signature Match-Up (instructor 2026-07-06): signature cards on top,
+       DRAG each key-name block onto its signature (tap-to-pick, tap-to-place on phones).
+       spec:{rounds:3, perRound:4, pool:[{key,label}], clefs:["treble","bass"]}
+       key "C" renders an EMPTY signature — a valid challenge (no sharps/flats = C major). */
+    "sig-match":(el,spec,onFinish)=>{
+      const pool=spec.pool||[], perRound=spec.perRound||4, totalRounds=spec.rounds||3;
+      const clefs=spec.clefs||["treble","bass"];
+      el.innerHTML=`<div class="game-arena">
+        <button class="play gstart">▶ Start</button>
+        <div class="big-q gq"></div>
+        <div class="sm-grid" style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;max-width:480px;margin:10px auto"></div>
+        <div class="gbtns sm-pile" style="display:block"></div>
+        <div class="streak gs"></div></div>`;
+      const $=s=>el.querySelector(s);
+      const grid=$(".sm-grid"), pile=$(".sm-pile");
+      let round=0,mistakes=0,matched=0,sel=null,running=false;
+      function setup(){
+        if(round>=totalRounds){ end(); return; }
+        matched=0; sel=null;
+        const picks=shuffle([...pool]).slice(0,perRound);
+        grid.innerHTML=""; pile.innerHTML="";
+        $(".gq").textContent=`Round ${round+1} of ${totalRounds}: drag each key name onto its signature!`;
+        picks.forEach(p=>{
+          const card=document.createElement("div");
+          card.style.cssText="border:1.5px solid #cdd5e1;border-radius:10px;background:#fff;padding:6px 4px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer";
+          card.dataset.label=p.label;
+          const st=document.createElement("div"); st.style.width="100%"; card.appendChild(st);
+          const slot=document.createElement("div");
+          slot.style.cssText="margin-top:4px;min-width:92px;height:30px;border:2px dashed #3b3486;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;background:#fff";
+          card.appendChild(slot); card._slot=slot;
+          grid.appendChild(card);
+          Staff.render(st,{clef:pick(clefs),keysig:p.key,notes:[],width:170});
+          card.addEventListener("dragover",e=>e.preventDefault());
+          card.addEventListener("drop",e=>{ e.preventDefault(); tryMatch(card); });
+          card.addEventListener("click",()=>tryMatch(card));
+        });
+        shuffle(picks.map(p=>p.label)).forEach(lbl=>{
+          const b=document.createElement("button"); b.textContent=lbl; b.draggable=true;
+          b.addEventListener("dragstart",()=>{ sel=b; });
+          b.addEventListener("click",e=>{ e.stopPropagation(); if(b.disabled) return;
+            [...pile.children].forEach(x=>x.style.outline=""); sel=b; b.style.outline="3px solid #ffd166"; });
+          pile.appendChild(b);
+        });
+      }
+      function tryMatch(card){
+        if(!running||!sel||sel.disabled||card.dataset.done) return;
+        if(sel.textContent===card.dataset.label){
+          card.dataset.done="1"; card._slot.textContent=card.dataset.label;
+          card._slot.style.borderStyle="solid"; card._slot.style.background="#eef1ff";
+          sel.disabled=true; sel.style.opacity=".35"; sel.style.outline=""; sel=null; matched++;
+          MFAudio.tone(70+matched*2,.3);
+          $(".gs").textContent=`Round ${round+1} · matched ${matched}/${perRound} · misses ${mistakes}`;
+          if(matched>=perRound){ round++; setTimeout(setup,900); }
+        } else {
+          mistakes++; MFAudio.tone(40,.25);
+          card.classList.add("shake"); setTimeout(()=>card.classList.remove("shake"),450);
+          $(".gq").textContent="Not that one — count the accidentals and use your rules!";
+        }
+      }
+      function end(){
+        running=false; grid.innerHTML=""; pile.innerHTML="";
+        const stars=mistakes===0?3:mistakes<=3?2:1;
+        $(".gq").innerHTML=`\u{1F389} All signatures matched! ${"⭐".repeat(stars)} (misses: ${mistakes})`;
+        $(".gstart").style.display="inline-block"; $(".gstart").textContent="▶ Play again";
+        if(onFinish)onFinish(stars,3);
+      }
+      $(".gstart").onclick=function(){ this.style.display="none"; round=0;mistakes=0;running=true; setup(); };
     }
 
   };

@@ -26,6 +26,51 @@ function MF_L29_buildSig(container,fb){
   draw();
 }
 
+/* the SHARP-KEY LADDER (instructor 2026-07-06): start from an EMPTY signature
+   (C major) and climb to 7 sharps — the student ADDS each sharp in order and
+   MATCHES every new signature to its key name. (The book saves the circle of
+   fifths for Lesson 34 — this ladder is the raw material for it.) */
+function MF_L29_ladder(container,fb){
+  const SHARPS=["F♯","C♯","G♯","D♯","A♯","E♯","B♯"];
+  const KEYS=["C","G","D","A","E","B","F♯","C♯"];
+  let n=0, phase="name";
+  container.innerHTML=`<div class="big-q lad-q" style="text-align:center"></div>
+    <div class="lad-staff"></div>
+    <div class="lad-done" style="text-align:center;font-size:13px;color:var(--muted);min-height:18px"></div>
+    <div class="choices chips lad-sharps" style="display:none"></div>
+    <div class="choices chips lad-names" style="display:none"></div>
+    <div class="lad-hint" style="text-align:center;font-size:13.5px;margin-top:10px;line-height:1.7">
+      <span style="color:#0a8754;font-weight:800">Order of sharps: F♯ C♯ G♯ D♯ A♯ E♯ B♯</span><br>
+      <span style="color:var(--muted)">Name the key: the note one half step ABOVE the last sharp.</span>
+    </div>`;
+  const q=container.querySelector(".lad-q"), holder=container.querySelector(".lad-staff"),
+        doneLine=container.querySelector(".lad-done"),
+        shRow=container.querySelector(".lad-sharps"), nmRow=container.querySelector(".lad-names");
+  SHARPS.forEach(s=>{ const b=document.createElement("button"); b.textContent=s;
+    b.onclick=()=>{ if(phase!=="add"||b.disabled) return;
+      if(s===SHARPS[n]){ b.disabled=true; n++; draw(); MFAudio.tone(58+n*3,.3); setPhase("name"); }
+      else { MFAudio.tone(40,.25); fb(false,`Fat Cats Go Down Alleys Eating Bread — sharp #${n+1} is ${SHARPS[n]}.`); } };
+    shRow.appendChild(b); });
+  KEYS.forEach((k,ki)=>{ const b=document.createElement("button"); b.textContent=k+" Major";
+    b.onclick=()=>{ if(phase!=="name"||b.disabled) return;
+      if(ki===n){ b.disabled=true; MFAudio.tone(64+n*2,.3);
+        doneLine.textContent=KEYS.slice(0,n+1).map((kk,i)=>`${i}♯=${kk}`).join(" · ");
+        if(n>=7){ shRow.style.display="none"; nmRow.style.display="none";
+          q.innerHTML="✓ The complete sharp-key ladder — C major to C♯ major!";
+          fb(true,"✓ All eight keys matched! Each added sharp lifts the key: last sharp + one half step up = the key name."); }
+        else setPhase("add"); }
+      else { MFAudio.tone(40,.25); fb(false, n===0? "Remember — the empty signature IS C major. Tap C Major to begin!" : `Find the LAST sharp (${SHARPS[n-1]}) and go UP one half step.`); } };
+    nmRow.appendChild(b); });
+  function draw(){ Staff.render(holder, n===0? {clef:"treble",notes:[],width:300} : {clef:"treble",keysig:{sharps:n},notes:[],width:300}); }
+  function setPhase(p){ phase=p;
+    shRow.style.display=p==="add"?"":"none";
+    nmRow.style.display=p==="name"?"":"none";
+    q.innerHTML=p==="add"? `Now ADD sharp #${n+1} — which sharp comes next?`
+      : (n===0? "Let's start from <b>C major</b> — the completely EMPTY signature, no sharps at all. Tap <b>C Major</b> to begin the ladder!" : `${n} sharp${n>1?"s":""} on the staff — which major key is this now?`);
+  }
+  draw(); setPhase("name");
+}
+
 /* name-the-key drill: 4 rounds across treble & bass */
 function MF_L29_nameKey(container,fb){
   const ROUNDS=[{key:"G",clef:"treble",last:"F♯"},{key:"D",clef:"bass",last:"C♯"},{key:"A",clef:"treble",last:"G♯"},{key:"E",clef:"bass",last:"D♯"}];
@@ -92,15 +137,10 @@ LESSON_CONTENT[29]={
         success:"✓ F♯ then C♯ — exactly the sharps the D major scale needs.",
         fail:"Count the sharps on the staff above and name them in order.",
         hint:"First two of Fat Cats Go…" } },
-    { say:"How do you NAME a key from its signature? <b>Go up one half step from the LAST sharp.</b> Below, the last (highlighted) sharp is <b>G♯</b>. \u{1F447} <b>One half step above G♯ gives which major key?</b>",
-      show:{ type:"custom", mount:(el)=>{
-        const api=Staff.render(el,{clef:"treble",keysig:"A",notes:[],width:260});
-        const g=api.svg.querySelectorAll(".ksgroup"); if(g.length) g[g.length-1].classList.add("hl");
-      } },
-      try:{ type:"mc", choices:["A major","G major","E major","D major"], answer:0,
-        success:"✓ G♯ + one half step = A. Three sharps = A major!",
-        fail:"One half step above G♯ is the very next key…",
-        hint:"G♯ → A." } },
+    { say:"How do you NAME a key from its signature? <b>Go up one half step from the LAST sharp.</b> Now climb the whole ladder yourself: starting from a completely <b>EMPTY signature</b>, add all seven sharps one at a time — and name each new key as it appears. \u{1F447} <b>Start with the empty staff — which major key has no sharps at all?</b>",
+      try:{ type:"custom",
+        hint:"Add sharps in Fat-Cats order; to name each key, take the LAST sharp and go up one half step.",
+        mount:(container,fb)=>MF_L29_ladder(container,fb) } },
     { say:"Drill time — treble AND bass. \u{1F447} <b>Name each key from its signature:</b>",
       try:{ type:"custom",
         hint:"Find the last sharp, go up one half step — that note names the key.",

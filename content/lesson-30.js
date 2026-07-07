@@ -154,7 +154,21 @@ LESSON_CONTENT[30]={
         ["Flats B♭ E♭","B♭ Major"],
         ["Flats B♭ E♭ A♭","E♭ Major"],
         ["Flats B♭ E♭ A♭ D♭","A♭ Major"]]},
-      result:(score)=>score>=7?"The rule (and the exception) are pure reflex!":null }
+      result:(score)=>score>=7?"The rule (and the exception) are pure reflex!":null },
+    { type:"sig-match", title:"Game 5 · Key-Signature Match-Up — ALL Keys!",
+      intro:"The grand finale: sharps, flats AND the empty signature together. Drag each key name onto its signature — three rounds!",
+      miaIntro:"Every signature you know, in one game — sharps, flats, and one with nothing at all! \u{1F3C6}",
+      spec:{rounds:3, perRound:4, clefs:["treble","bass"], pool:[
+        {key:"C", label:"C Major"},
+        {key:"G", label:"G Major"},
+        {key:"D", label:"D Major"},
+        {key:"A", label:"A Major"},
+        {key:"E", label:"E Major"},
+        {key:"F", label:"F Major"},
+        {key:"Bb", label:"B♭ Major"},
+        {key:"Eb", label:"E♭ Major"},
+        {key:"Ab", label:"A♭ Major"}]},
+      result:(stars)=>stars>=3?"A perfect match-up across BOTH key families!":null }
   ],
   practiceIntro:"20 practice questions — the order of flats, the next-to-last-flat rule, and the F major exception. Answer right and the next appears automatically!",
   practice:[
@@ -250,7 +264,7 @@ LESSON_CONTENT[30]={
   ],
   rewards:{ badge:"Flat Key Decoder", icon:"\u{1F511}" },
   sectionOrder:["secHook","secObjectives","secLearn","secExample","secReview",
-    "secGame0","secGame1","secGame2","secGame3","secPractice","secQuiz","secTips","secNext"],
+    "secGame0","secGame1","secGame2","secGame3","secGame4","secPractice","secQuiz","secTips","secNext"],
   miaPerfect:"Perfect score — Unit 7 conquered! Scales built, signatures decoded, exception memorized. \u{1F511}\u{1F389}\u{1F389}",
   miaPass:"You passed — and finished Unit 7! Keep BEAD Goes Clean Fast handy, and never forget: one flat = F major.",
   mia:{
