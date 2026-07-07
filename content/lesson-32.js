@@ -123,12 +123,19 @@ LESSON_CONTENT[32]={
         <tr style="color:var(--muted)"><th style="padding:4px"></th><th>Major scale</th><th>Chromatic scale</th></tr>
         <tr><td style="text-align:left;color:var(--muted)">Different pitches</td><td><b>7</b> (+ repeated keynote)</td><td><b>12</b> (every key)</td></tr>
         <tr><td style="text-align:left;color:var(--muted)">Pattern</td><td>W–W–H–W–W–W–H</td><td>all half steps</td></tr>
-        <tr><td style="text-align:left;color:var(--muted)">Job</td><td>establishes the KEY CENTER</td><td>color &amp; connection — no center</td></tr>
+        <tr><td style="text-align:left;color:var(--muted)">Function</td><td>establishes the KEY CENTER</td><td>no key center — all 12 equal</td></tr>
+        <tr><td style="text-align:left;color:var(--muted)">Role in music</td><td>melody, chords &amp; progressions built around home</td><td>color, embellishment, smooth connections, modulation</td></tr>
       </table></div>` },
       try:{ type:"mc", choices:["Major 7 · Chromatic 12","Major 8 · Chromatic 13","Both contain 12","Major 7 · Chromatic 10"], answer:0,
         success:"✓ 7 vs 12 — the written 8th and 13th notes simply repeat the keynote an octave higher.",
         fail:"Don't count the repeated keynote at the top of either scale.",
-        hint:"Different PITCHES, not written notes." } }
+        hint:"Different PITCHES, not written notes." } },
+    { say:"The upgrade that matters most — <b>what each scale is FOR</b>. The <b>major scale establishes a key center</b>: its keynote feels like HOME, and the other degrees form a hierarchy of pulls around it — the engine behind melodies, chords and progressions. The <b>chromatic scale removes that hierarchy</b>: no note is home, all twelve are equal. Composers use it for <b>color</b>, for decorating melodies, for <b>smooth half-step connections</b> between chord tones, and for <b>modulation</b> — traveling from one key to another. \u{1F447} <b>Which scale establishes a key center, and which one supplies color?</b>",
+      try:{ type:"mc",
+        choices:["Major = key center · Chromatic = color","Chromatic = key center · Major = color","Both establish a key center","Neither has any function"], answer:0,
+        success:"✓ The major scale builds the home; the chromatic scale paints the journey — color, connection, and travel between keys.",
+        fail:"Which scale has a keynote that feels like HOME?",
+        hint:"Hierarchy vs. equality." } }
   ],
   examples:[
     { caption:"Ascending chromatic scale from C — sharps on the way up. Every neighboring note is one half step.",
@@ -215,6 +222,9 @@ LESSON_CONTENT[32]={
       explain:"Twelve — the 13th written note repeats the keynote.", hint:"Don't double-count the top note." },
     { type:"mc", q:"Every interval in a chromatic scale is a ____ step.", choices:["half","whole","skipped"], answer:0,
       explain:"Half steps only.", hint:"The definition itself." },
+    { type:"mc", q:"Composers use the chromatic scale for…",
+      choices:["color, smooth half-step connections, and modulation between keys","establishing the home key","keeping the beat steady"], answer:0,
+      explain:"With no key center of its own, the chromatic scale decorates, connects and travels.", hint:"It has no 'home' to establish." },
     { type:"mc", q:"Which comparison is correct?",
       choices:["Major: 7 different pitches, establishes a key center · Chromatic: all 12, adds color with no key center",
                "Major: 12 pitches · Chromatic: 7 pitches",
@@ -251,7 +261,7 @@ LESSON_CONTENT[32]={
     "✔ Spelling convention: <b>ascending → sharps</b>, <b>descending → flats</b>.",
     "✔ It may begin on <b>any note</b>.",
     "✔ Count carefully: <b>major = 7 different pitches</b> (the 8th written note repeats the keynote) · <b>chromatic = all 12</b>.",
-    "✔ Jobs differ: the major scale <b>establishes a key center</b>; the chromatic scale adds <b>color and connection</b> with no center."
+    "✔ <b>Function</b>: the major scale <b>establishes a key center</b> — home, hierarchy, progressions; the chromatic scale has <b>no center</b> — it supplies <b>color, embellishment, smooth connections and modulation</b>."
   ],
   tips:[
     "The chromatic scale is your interval ruler: ANY interval can be measured by counting its half steps.",
