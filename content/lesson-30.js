@@ -40,8 +40,8 @@ function MF_L30_ladder(container,fb){
     <div class="choices chips lad-flats" style="display:none"></div>
     <div class="choices chips lad-names" style="display:none"></div>
     <div class="lad-hint" style="text-align:center;font-size:13.5px;margin-top:10px;line-height:1.7">
-      <span style="color:var(--correct);font-weight:800">Order of flats: B♭ E♭ A♭ D♭ G♭ C♭ F♭</span><br>
-      <span style="color:var(--primary);font-weight:700">Name the key: the NEXT-TO-LAST flat · one flat alone = F Major.</span>
+      <span class="lad-h1" style="color:var(--correct);font-weight:800;display:none">Order of flats: B♭ E♭ A♭ D♭ G♭ C♭ F♭</span>
+      <span class="lad-h2" style="color:var(--primary);font-weight:700;display:none">Name the key: the NEXT-TO-LAST flat · one flat alone = F Major.</span>
     </div>`;
   const q=container.querySelector(".lad-q"), holder=container.querySelector(".lad-staff"),
         doneLine=container.querySelector(".lad-done"),
@@ -65,6 +65,9 @@ function MF_L30_ladder(container,fb){
     nmRow.appendChild(b); });
   function draw(){ Staff.render(holder, n===0? {clef:"treble",notes:[],width:300} : {clef:"treble",keysig:{flats:n},notes:[],width:300}); }
   function setPhase(p){ phase=p;
+    const h1=container.querySelector(".lad-h1"), h2=container.querySelector(".lad-h2");
+    h1.style.display=p==="add"?"inline":"none";
+    h2.style.display=p==="name"?"inline":"none";
     flRow.style.display=p==="add"?"":"none";
     nmRow.style.display=p==="name"?"":"none";
     q.innerHTML=p==="add"? `Now ADD flat #${n+1} — which flat comes next?`
