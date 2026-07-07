@@ -236,8 +236,7 @@ LESSON_CONTENT[44]={
   ],
   vocabulary:[
     {term:"In One", def:"Counting each fast 3/8 measure as a single pulse — the dotted quarter (or full measure) = 1 count."},
-    {term:"In Two", def:"Counting each fast 6/8 measure as two pulses — each dotted quarter = 1 count.",
-      staff:{clef:"treble",time:"6/8",notes:[{p:"B4",d:"q."},{p:"B4",d:"q."},{bar:"final"}],width:200}},
+    {term:"In Two", def:"Counting each fast 6/8 measure as two pulses — each dotted quarter = 1 count."},
     {term:"Strong Beat", def:"The beat that launches each group: beat 1 in 3/8; beats 1 and 4 in 6/8. At speed, only strong beats are counted."},
     {term:"Felt Beat", def:"The pulse a listener actually taps to — at fast compound tempos, the dotted quarter."}
   ],
