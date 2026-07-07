@@ -17,6 +17,10 @@
    clickable via spec.onKeysig(i); each accidental wrapped in g.ksgroup[data-ks]),
    W/H step carets above the staff (spec.steps:[{from,to,label:"W"|"H"}]),
    labeled under-brackets for tetrachord grouping (spec.brackets:[{from,to,label}]).
+   v7.6 (Unit 10): SIXTEENTHS — d:"16" (double flag / double beam via
+   spec.beams:[[a,b,2]]; partial-beam stub with [i,i,2] pointing back at the
+   previous stem), rest:"16" (two hooks), dotted eighth "8.", cut time
+   (spec.time:"C|" draws the slashed C; "C" = common time as before).
    v7.4 (Unit 8): HARMONIC INTERVALS — {chord:true} stacks a note on the previous
    one (same x; 2nds/unisons offset 13px) and plays it SIMULTANEOUSLY.
    NOTE (maintenance): edit by FULL-FILE REWRITE only. */
@@ -53,7 +57,7 @@ const MFAudio=(()=>{
 const Staff=(()=>{
   const GAP=15, TOP=20, LEFT=10;
   const LETTERS=["C","D","E","F","G","A","B"];
-  const BEATS={w:4,h:2,q:1,"8":0.5};
+  const BEATS={w:4,h:2,q:1,"8":0.5,"16":0.25};
   const VOLS={pp:.14,p:.24,mp:.36,mf:.5,f:.66,ff:.85};
   function dia(p){ const m=p.match(/^([A-G])[#b]?(\d)$/); return (+m[2])*7+LETTERS.indexOf(m[1]); }
   /* diatonic index of bottom line: treble E4=30, bass G2=18 */
@@ -61,7 +65,7 @@ const Staff=(()=>{
   function yFor(p,clef,y0){ return (y0+4*GAP)-(dia(p)-baseIdx(clef))*(GAP/2); }
   function normD(d){ d=String(d||"q"); return d.endsWith(".")? d.slice(0,-1) : d; }
   function isDotted(n){ return !!n.dot || String(n.d||n.rest||"").endsWith("."); }
-  function durShape(d){ return {w:{hollow:true,stem:false},h:{hollow:true,stem:true},q:{hollow:false,stem:true},"8":{hollow:false,stem:true,flag:true}}[normD(d)]||{hollow:false,stem:true}; }
+  function durShape(d){ return {w:{hollow:true,stem:false},h:{hollow:true,stem:true},q:{hollow:false,stem:true},"8":{hollow:false,stem:true,flag:true},"16":{hollow:false,stem:true,flag:true,flag16:true}}[normD(d)]||{hollow:false,stem:true}; }
   function beatsOf(n){ return BEATS[normD(n.d||n.rest)]*(isDotted(n)?1.5:1); }
 
   function drawOneStaff(parts,y0,W,clef,opts){
@@ -116,12 +120,14 @@ const Staff=(()=>{
     if(!t) return null;
     if(typeof t==="object") return t;
     if(String(t).trim().toUpperCase()==="C") return {common:true};
+    if(String(t).trim().toUpperCase()==="C|") return {common:true,cut:true};
     const m=String(t).match(/^(\d+)\s*\/\s*(\d+)$/); return m?{top:+m[1],bottom:+m[2]}:null;
   }
   function drawTime(parts,y0,ts,ksW){
     const x=LEFT+52+(ksW||0);
     if(ts.common){
       parts.push(`<text class="tsig" x="${x}" y="${y0+2*GAP+GAP*0.95}" font-size="${GAP*2.9}" text-anchor="middle">C</text>`);
+      if(ts.cut) parts.push(`<line class="barline" x1="${x}" y1="${y0+2*GAP-24}" x2="${x}" y2="${y0+2*GAP+24}"/>`);
       return;
     }
     const fs=GAP*1.9; /* digits clear the middle line */
@@ -137,8 +143,12 @@ const Staff=(()=>{
       const up = y > y0+2*GAP;
       out+= up? `<line class="stem" x1="${x+8.4}" y1="${y-2}" x2="${x+8.4}" y2="${y-38}"/>`
               : `<line class="stem" x1="${x-8.4}" y1="${y+2}" x2="${x-8.4}" y2="${y+38}"/>`;
-      if(s.flag&&!noFlag) out+= up? `<path class="stem" d="M${x+8.4} ${y-38} q12 6 8 20" fill="none"/>`
-                                  : `<path class="stem" d="M${x-8.4} ${y+38} q12 -6 8 -20" fill="none"/>`;
+      if(s.flag&&!noFlag){
+        const nf=s.flag16?2:1;
+        for(let k=0;k<nf;k++)
+          out+= up? `<path class="stem" d="M${x+8.4} ${y-38+k*9} q12 6 8 20" fill="none"/>`
+                  : `<path class="stem" d="M${x-8.4} ${y+38-k*9} q12 -6 8 -20" fill="none"/>`;
+      }
     }
     if(dot) out+=`<circle class="artic" cx="${x+rx+6}" cy="${onLine? y-6 : y}" r="2.7"/>`;
     return out;
@@ -149,6 +159,12 @@ const Staff=(()=>{
       return `<rect class="${cls}" x="${x-9}" y="${y0+GAP}" width="18" height="7"/>`;
     if(type==="h")
       return `<rect class="${cls}" x="${x-9}" y="${y0+2*GAP-7}" width="18" height="7"/>`;
+    if(type==="16") /* sixteenth rest: TWO hooks on one slash */
+      return `<circle class="${cls}" cx="${x-1}" cy="${y0+21}" r="3.2"/>
+        <path class="rest-line" d="M ${x-1} ${y0+21} C ${x+2} ${y0+25}, ${x+6} ${y0+24}, ${x+9} ${y0+18}"/>
+        <circle class="${cls}" cx="${x-4}" cy="${y0+30}" r="3.2"/>
+        <path class="rest-line" d="M ${x-4} ${y0+30} C ${x-1} ${y0+34}, ${x+3} ${y0+33}, ${x+6} ${y0+27}"/>
+        <path class="rest-line" d="M ${x+9} ${y0+18} L ${x-2} ${y0+44}"/>`;
     if(type==="8") /* eighth rest: dot head + seven-stroke */
       return `<circle class="${cls}" cx="${x-4}" cy="${y0+26}" r="3.4"/>
         <path class="rest-line" d="M ${x-4} ${y0+26} C ${x-1} ${y0+30}, ${x+3} ${y0+29}, ${x+6} ${y0+23} L ${x-1} ${y0+44}"/>`;
@@ -348,13 +364,19 @@ const Staff=(()=>{
         parts.push(`<text class="lbl" x="${lx}" y="${labelY}" text-anchor="middle">${n.label}</text>`); }
     });
     /* beams: connect stem tips of first/last beamed note in each group */
-    (spec.beams||[]).forEach(([a,b])=>{
+    (spec.beams||[]).forEach(bm=>{ const [a,b]=bm, bmLv=bm[2];
       const A=placed[a], B=placed[b];
       if(!A||!B||A.y===undefined||B.y===undefined) return;
       const up=A.y > A.y0+2*GAP;
       const xa=up? A.x+8.4 : A.x-8.4, xb=up? B.x+8.4 : B.x-8.4;
       const ya=up? A.y-38 : A.y+38, yb=up? B.y-38 : B.y+38;
-      parts.push(`<line class="beam" x1="${xa}" y1="${ya}" x2="${xb}" y2="${yb}"/>`);
+      const lv=bmLv||1, slope=(xb===xa)?0:(yb-ya)/(xb-xa);
+      for(let L=1;L<=lv;L++){
+        if(xa===xb&&L===1) continue; /* stub entry: only the upper level(s) */
+        const off=(L-1)*7.5*(up?1:-1);
+        if(xa===xb) parts.push(`<line class="beam" x1="${xa-14}" y1="${ya+off}" x2="${xa}" y2="${ya+off}"/>`);
+        else parts.push(`<line class="beam" x1="${xa}" y1="${ya+off}" x2="${xb}" y2="${yb+off}"/>`);
+      }
     });
     /* ties & slurs */
     (spec.arcs||[]).forEach(a=>{
@@ -440,7 +462,7 @@ const Staff=(()=>{
         if(i!=null){ const g=svg.querySelector(`.notegroup[data-i="${i}"] .note, .notegroup[data-i="${i}"] .rest, .notegroup[data-i="${i}"] .mtxt`); if(g)g.classList.add("hl"); } }
     };
   }
-  const DURSEC={w:1.6,h:1.0,q:0.55,"8":0.3};
+  const DURSEC={w:1.6,h:1.0,q:0.55,"8":0.3,"16":0.18};
   function play(spec, api){
     let t=0;
     const tempo=spec.tempo||0, spb=tempo?60/tempo:0;

@@ -20,9 +20,9 @@ const Quiz=(()=>{
                  bass:["G2","A2","B2","C3","D3","E3","F3","G3","A3"] };
   const LS_POS={ treble:{lines:["E4","G4","B4","D5","F5"], spaces:["F4","A4","C5","E5"]},
                  bass:  {lines:["G2","B2","D3","F3","A3"], spaces:["A2","C3","E3","G3"]} };
-  const VAL_NAME={w:"Whole Note",h:"Half Note",q:"Quarter Note","8":"Eighth Note","h.":"Dotted Half Note","q.":"Dotted Quarter Note"};
-  const VAL_BEATS={w:4,h:2,q:1,"8":0.5,"h.":3,"q.":1.5};
-  const BEATLBL={0.5:"\u00bd beat",1:"1 beat",1.5:"1\u00bd beats",2:"2 beats",3:"3 beats",4:"4 beats"};
+  const VAL_NAME={w:"Whole Note",h:"Half Note",q:"Quarter Note","8":"Eighth Note","16":"Sixteenth Note","h.":"Dotted Half Note","q.":"Dotted Quarter Note","8.":"Dotted Eighth Note"};
+  const VAL_BEATS={w:4,h:2,q:1,"8":0.5,"16":0.25,"h.":3,"q.":1.5,"8.":0.75};
+  const BEATLBL={0.25:"\u00bc beat",0.5:"\u00bd beat",0.75:"\u00be beat",1:"1 beat",1.5:"1\u00bd beats",2:"2 beats",3:"3 beats",4:"4 beats"};
   const tokDot=t=>String(t).endsWith("."), tokBase=t=>String(t).replace(".","");
   const generators={
     "note-name": p=>{
@@ -72,10 +72,10 @@ const Quiz=(()=>{
       const isRest=(p&&p.kind)==="rest";
       const v=pick(values), askBeats=(p&&p.ask)==="beats"||((!p||!p.ask)&&Math.random()<.5);
       const pitch=pick(["G4","B4","D5","F4","A4","E4","C5"]);
-      const NAMES=isRest?{w:"Whole Rest",h:"Half Rest",q:"Quarter Rest","8":"Eighth Rest"}:VAL_NAME;
+      const NAMES=isRest?{w:"Whole Rest",h:"Half Rest",q:"Quarter Rest","8":"Eighth Rest","16":"Sixteenth Rest"}:VAL_NAME;
       const SHAPE=isRest
-        ?{w:"it hangs BELOW the 4th line (the hole)",h:"it sits ON the 3rd line (the hat)",q:"the squiggly symbol","8":"the little seven with a dot"}
-        :{w:"hollow head with NO stem",h:"hollow head WITH a stem",q:"filled head with a stem","8":"filled head with a stem and a flag","h.":"a half note PLUS a dot (2 + 1)","q.":"a quarter note PLUS a dot (1 + \u00bd)"};
+        ?{w:"it hangs BELOW the 4th line (the hole)",h:"it sits ON the 3rd line (the hat)",q:"the squiggly symbol","8":"the little seven with a dot","16":"the little seven with TWO hooks"}
+        :{w:"hollow head with NO stem",h:"hollow head WITH a stem",q:"filled head with a stem","8":"filled head with a stem and a flag","h.":"a half note PLUS a dot (2 + 1)","q.":"a quarter note PLUS a dot (1 + \u00bd)","16":"filled head, stem, and TWO flags","8.":"an eighth note PLUS a dot (\u00bd + \u00bc)"};
       let choices,correct,q;
       function build(correctVal,all){
         const others=shuffle(all.filter(x=>x!==correctVal));

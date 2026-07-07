@@ -39,10 +39,10 @@ const LESSONS=[
  {n:36, title:"Minor Intervals", unit:9, book:2, time:15, kw:["minor interval"]},
  {n:37, title:"Augmented and Diminished Intervals", unit:9, book:2, time:15, kw:["augmented","diminished","interval"]},
  {n:38, title:"Solfège and Transposition", unit:9, book:2, time:15, kw:["solfege","do re mi","transposition"]},
- {n:39, title:"Sixteenth Notes", unit:10, book:2, time:12, kw:["sixteenth","semiquaver"]},
- {n:40, title:"Sixteenth Rests", unit:10, book:2, time:10, kw:["sixteenth rest"]},
- {n:41, title:"Dotted Eighth Notes", unit:10, book:2, time:12, kw:["dotted eighth","swing"]},
- {n:42, title:"Common Time and Cut Time (Alla Breve)", unit:10, book:2, time:11, kw:["common time","cut time","alla breve"]},
+ {n:39, title:"Sixteenth Notes", unit:10, book:2, time:15, kw:["sixteenth","semiquaver"]},
+ {n:40, title:"Sixteenth Rests", unit:10, book:2, time:15, kw:["sixteenth rest"]},
+ {n:41, title:"Dotted Eighth Notes", unit:10, book:2, time:15, kw:["dotted eighth","swing"]},
+ {n:42, title:"Common Time and Cut Time (Alla Breve)", unit:10, book:2, time:15, kw:["common time","cut time","alla breve"]},
  {n:43, title:"3/8 and 6/8 Time Signatures", unit:11, book:2, time:12, kw:["3/8","6/8","compound meter"]},
  {n:44, title:"3/8 and 6/8 Time Signatures at Fast Tempos", unit:11, book:2, time:11, kw:["6/8 fast","compound"]},
  {n:45, title:"Eighth Note Triplets", unit:11, book:2, time:12, kw:["triplet"]},
@@ -98,5 +98,5 @@ const UNITS=[
  {unit:18, book:3, name:"Form", lessons:[72,75]}
 ];
 /* built lessons so far (index pages link only these) */
-const BUILT_THROUGH=38;
+const BUILT_THROUGH=42;
 const LESSON_CONTENT={}; /* filled by content/lesson-NN.js */

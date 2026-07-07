@@ -23,9 +23,9 @@ const Games=(()=>{
     LETTERS.forEach(l=>{ const b=document.createElement("button"); b.textContent=l; b.onclick=()=>onPick(l); row.appendChild(b); });
     parent.appendChild(row); return row;
   }
-  const VAL_NAME={w:"Whole Note",h:"Half Note",q:"Quarter Note","8":"Eighth Note","h.":"Dotted Half Note","q.":"Dotted Quarter Note"};
-  const VAL_BEATS={w:4,h:2,q:1,"8":0.5,"h.":3,"q.":1.5};
-  const BEATLBL={0.5:"\u00bd beat",1:"1 beat",1.5:"1\u00bd beats",2:"2 beats",3:"3 beats",4:"4 beats"};
+  const VAL_NAME={w:"Whole Note",h:"Half Note",q:"Quarter Note","8":"Eighth Note","16":"Sixteenth Note","h.":"Dotted Half Note","q.":"Dotted Quarter Note","8.":"Dotted Eighth Note"};
+  const VAL_BEATS={w:4,h:2,q:1,"8":0.5,"16":0.25,"h.":3,"q.":1.5,"8.":0.75};
+  const BEATLBL={0.25:"¼ beat",0.5:"½ beat",0.75:"¾ beat",1:"1 beat",1.5:"1½ beats",2:"2 beats",3:"3 beats",4:"4 beats"};
   const tokDot=t=>t.endsWith("."), tokBase=t=>t.replace(".","");
   const tokItem=(t,p)=>({p:p||"B4",d:tokBase(t),dot:tokDot(t)});
   const registry={
@@ -514,10 +514,10 @@ const Games=(()=>{
     "value-race":(el,spec,onFinish)=>{
       const rounds=spec.rounds||10, secs=spec.seconds||0;
       const values=spec.values||["w","h","q"], ask=spec.ask||"beats", isRest=spec.kind==="rest";
-      const RNAME={w:"Whole Rest",h:"Half Rest",q:"Quarter Rest","8":"Eighth Rest"};
+      const RNAME={w:"Whole Rest",h:"Half Rest",q:"Quarter Rest","8":"Eighth Rest","16":"Sixteenth Rest"};
       const NAMES=isRest?RNAME:VAL_NAME;
-      const SHAPE=isRest?{w:"it hangs BELOW the 4th line — the hole",h:"it sits ON the 3rd line — the hat",q:"the squiggle","8":"the little seven with a dot"}
-                        :{w:"No stem, hollow head.",h:"Hollow head WITH a stem.",q:"Filled head with a stem.","8":"Filled head with a stem AND a flag.","h.":"A half note plus a dot — 2 + 1.","q.":"A quarter note plus a dot — 1 + ½."};
+      const SHAPE=isRest?{w:"it hangs BELOW the 4th line — the hole",h:"it sits ON the 3rd line — the hat",q:"the squiggle","8":"the little seven with a dot","16":"the little seven with TWO hooks"}
+                        :{w:"No stem, hollow head.",h:"Hollow head WITH a stem.",q:"Filled head with a stem.","8":"Filled head with a stem AND a flag.","16":"Filled head, stem, and TWO flags.","h.":"A half note plus a dot — 2 + 1.","q.":"A quarter note plus a dot — 1 + ½.","8.":"An eighth note plus a dot — ½ + ¼."};
       const PITCHES=["G4","B4","D5","F4","A4","E4","C5"];
       el.innerHTML=`<div class="game-arena">
         <button class="play gstart">▶ ${secs?`Start the ${secs}-second challenge`:"Start"}</button>
