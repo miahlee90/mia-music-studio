@@ -285,8 +285,9 @@ const Staff=(()=>{
         : endsWithBar? startX + Math.max(0,slotOf[i])*((W-16-startX)/Math.max(1,SC-1))
         : off+Math.max(0,slotOf[i])*(span/Math.max(1,SC-1));
       let x = n.x || ((n.bar!==undefined && i===items.length-1)? W-16 : spreadX);
+      let accShift=0; /* v7.8c: chord 2nds shift the head right - the accidental must NOT follow */
       if(n.chord && placed.length){ const prev=placed[placed.length-1];
-        if(prev && prev.n.p){ const dd=Math.abs(dia(n.p)-dia(prev.n.p)); x=prev.x+(dd<=1?13:0); } }
+        if(prev && prev.n.p){ const dd=Math.abs(dia(n.p)-dia(prev.n.p)); if(dd<=1){ x=prev.x+13; accShift=13; } else x=prev.x; } }
       if(n.label) hasLabel=true;
       if(n.dyn) hasDyn=true;
       if(n.bar!==undefined){ placed.push({n,i,clef,y0,x,kind:"bar"}); return; }
@@ -305,7 +306,7 @@ const Staff=(()=>{
       if(n.artic) { top=Math.min(top, n.articPos==="above"? y0-22 : y-18); bottom=Math.max(bottom,y+18); }
       minEl=Math.min(minEl,top-6); maxEl=Math.max(maxEl,bottom+6);
       maxNoteBottom=Math.max(maxNoteBottom,bottom);
-      placed.push({n,i,clef,y0,x,y,kind:"note"});
+      placed.push({n,i,clef,y0,x,y,kind:"note",accShift});
     });
     /* whole rest alone in its measure sits centered in it */
     placed.forEach((pl,pi)=>{
@@ -347,7 +348,7 @@ const Staff=(()=>{
     const chordMembers=new Set(), chordGroups={};
     items.forEach((n,i)=>{ if(n&&n.chord&&!n.rest){ let b=i-1; while(b>0&&items[b]&&items[b].chord)b--;
       if(!chordGroups[b]) chordGroups[b]=[b]; chordGroups[b].push(i); chordMembers.add(i); chordMembers.add(b); }});
-    placed.forEach(({n,i,clef,y0,x,y,kind})=>{
+    placed.forEach(({n,i,clef,y0,x,y,kind,accShift})=>{
       if(kind==="bar"){
         const yTop=grand? y0t : y0, yBot=grand? y0b+4*GAP : y0+4*GAP;
         const bk=n.bar===true?"single":n.bar;
@@ -365,7 +366,7 @@ const Staff=(()=>{
         const idx=dia(n.p)-baseIdx(clef);
         const onLine=idx%2===0;
         let inner=noteSVG(x,y,normD(n.d),(spec.clickNotes?" clickable":""),y0,beamSet.has(i),isDotted(n),onLine,chordMembers.has(i));
-        if(accCh) inner=accSVG(x-18,y,accCh==="n"?"nat":accCh)+inner;
+        if(accCh) inner=accSVG(x-18-(accShift||0),y,accCh==="n"?"nat":accCh)+inner;
         if(n.artic) inner+=articSVG(x,y,y0,n.artic,n.articPos);
         parts.push(`<g class="notegroup" data-i="${i}" data-p="${n.p}">${inner}</g>`);
         if(n.dyn) parts.push(`<text class="dyn" x="${x}" y="${dynY}" text-anchor="middle">${n.dyn}</text>`);
