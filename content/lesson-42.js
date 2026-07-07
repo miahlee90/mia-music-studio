@@ -87,14 +87,14 @@ LESSON_CONTENT[42]={
   ],
   steps:[
     { say:"First symbol: a plain letter <b>C</b> in place of the time signature = <b>COMMON TIME</b>, which is simply another way of writing <b>4/4</b>. Four beats per measure, quarter note = 1 beat — everything you already know. \u{1F447} <b>C stands for…?</b>",
-      show:{ type:"staff", spec:{clef:"treble",tempo:90,time:"C",notes:[
+      show:{ type:"staff", spec:{clef:"treble",tempo:76,time:"C",notes:[
         {p:"C5",d:"q",label:"1"},{p:"D5",d:"q",label:"2"},{p:"E5",d:"q",label:"3"},{p:"D5",d:"q",label:"4"},{bar:"final"}],width:380} },
       try:{ type:"mc", choices:["Common time — exactly 4/4","Cut time — 2/2","'Chorus'"], answer:0,
         success:"✓ C = common time = 4/4. Same music, fancier badge.",
         fail:"The PLAIN C (no slash) is the familiar one…",
         hint:"Common = the time you've used since Lesson 11." } },
-    { say:"Second symbol: draw a vertical line through the C — <b>𝄵</b> — and you get <b>CUT TIME</b>, also called <b>ALLA BREVE</b>. The slash cuts 4/4's numbers in half: <b>2/2</b>. That means <b>2 beats per measure</b>, and the <b>HALF note receives 1 beat</b>. \u{1F447} <b>In cut time, which note is the beat?</b>",
-      show:{ type:"staff", spec:{clef:"treble",tempo:80,time:"C|",notes:[
+    { say:"Second symbol: draw a vertical line through the C — <b><span style='font-size:1.35em;line-height:1'>𝄵</span></b> — and you get <b>CUT TIME</b>, also called <b>ALLA BREVE</b>. The slash cuts 4/4's numbers in half: <b>2/2</b>. That means <b>2 beats per measure</b>, and the <b>HALF note receives 1 beat</b>. \u{1F447} <b>In cut time, which note is the beat?</b>",
+      show:{ type:"staff", spec:{clef:"treble",tempo:168,time:"C|",notes:[
         {p:"C5",d:"h",label:"1"},{p:"G4",d:"h",label:"2"},{bar:"single"},
         {p:"E5",d:"h",label:"1"},{p:"C5",d:"h",label:"2"},{bar:"final"}],width:440} },
       try:{ type:"mc", choices:["The half note","The quarter note","The whole note"], answer:0,
@@ -124,10 +124,10 @@ LESSON_CONTENT[42]={
   ],
   examples:[
     { caption:"The same melody twice: first in common time (four quarter-note beats), then in cut time (two half-note beats). Play both — the notes match, the stride doubles.",
-      staff:{clef:"treble",tempo:90,time:"C",notes:[
+      staff:{clef:"treble",tempo:76,time:"C",notes:[
         {p:"C5",d:"q",label:"1"},{p:"E5",d:"q",label:"2"},{p:"G4",d:"q",label:"3"},{p:"C5",d:"q",label:"4"},{bar:"final"}],width:400} },
     { caption:"Cut time in action — count the big TWO: whole notes take 2 beats, halves take 1, quarters just half a beat each.",
-      staff:{clef:"treble",tempo:80,time:"C|",notes:[
+      staff:{clef:"treble",tempo:168,time:"C|",notes:[
         {p:"C5",d:"h",label:"1"},{p:"G4",d:"h",label:"2"},{bar:"single"},
         {p:"E5",d:"q",label:"1"},{p:"D5",d:"q",label:"&"},{p:"C5",d:"h",label:"2"},{bar:"single"},
         {p:"C5",d:"w",label:"1 – 2"},{bar:"final"}],width:560} }
