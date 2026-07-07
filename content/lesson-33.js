@@ -51,9 +51,9 @@ function MF_L33_countUp(container,fb){
   ask();
 }
 
-/* ear rounds: melodic or harmonic? */
+/* ear rounds: melodic or harmonic? (audio and revealed staff always use the SAME pitches) */
 function MF_L33_ear(container,fb){
-  const ROUNDS=[{a:60,b:67,harm:false},{a:60,b:64,harm:true},{a:62,b:69,harm:true},{a:64,b:71,harm:false}];
+  const ROUNDS=[{a:"C4",b:"E4",harm:false},{a:"C4",b:"G4",harm:true},{a:"D4",b:"A4",harm:true},{a:"E4",b:"B4",harm:false}];
   let i=0,heard=false;
   container.innerHTML=`<div class="big-q l33-eq" style="text-align:center"></div>
     <div style="text-align:center"><button class="play l33-play">▶ Hear the interval</button></div>
@@ -63,17 +63,17 @@ function MF_L33_ear(container,fb){
   function ask(){ heard=false; ch.style.display="none"; show.innerHTML="";
     q.textContent=`Sound ${i+1} of ${ROUNDS.length}: listen — are the two notes played one after another, or together?`; }
   container.querySelector(".l33-play").onclick=()=>{
-    const cur=ROUNDS[i];
-    if(cur.harm){ MFAudio.tone(cur.a,.9,0,.42); MFAudio.tone(cur.b,.9,0,.42); }
-    else { MFAudio.tone(cur.a,.55,0); MFAudio.tone(cur.b,.55,.65); }
+    const cur=ROUNDS[i], ma=MFAudio.midi(cur.a), mb=MFAudio.midi(cur.b);
+    if(cur.harm){ MFAudio.tone(ma,.9,0,.42); MFAudio.tone(mb,.9,0,.42); }
+    else { MFAudio.tone(ma,.55,0); MFAudio.tone(mb,.55,.65); }
     heard=true; setTimeout(()=>{ ch.style.display=""; }, cur.harm?1100:1400);
   };
   [...ch.children].forEach((b,bi)=>b.onclick=()=>{
     if(!heard) return;
     const cur=ROUNDS[i], saidHarm=bi===1;
     if(saidHarm===cur.harm){
-      Staff.render(show, cur.harm? {clef:"treble",notes:[{p:"C4",d:"w"},{p:"E4",d:"w",chord:true}],width:180}
-                                 : {clef:"treble",notes:[{p:"C4",d:"h"},{p:"G4",d:"h"}],width:180});
+      Staff.render(show, cur.harm? {clef:"treble",notes:[{p:cur.a,d:"w"},{p:cur.b,d:"w",chord:true}],width:200}
+                                 : {clef:"treble",notes:[{p:cur.a,d:"h"},{p:cur.b,d:"h"}],width:200});
       i++; MFAudio.tone(76,.3);
       if(i>=ROUNDS.length){ ch.style.display="none"; container.querySelector(".l33-play").style.display="none";
         q.textContent="Ears calibrated!";
@@ -155,7 +155,7 @@ LESSON_CONTENT[33]={
         fail:"Eight letters up lands on the same letter…",
         hint:"'Oct' like octopus — eight." } },
     { say:"Intervals are heard two ways: a <b>MELODIC interval</b> sounds the notes <b>separately</b>; a <b>HARMONIC interval</b> sounds them <b>together</b> (written stacked). The SIZE stays the same — only the delivery changes. \u{1F447} <b>Trust your ears — melodic or harmonic?</b>",
-      show:{ type:"staff", spec:{clef:"treble",notes:[{p:"C4",d:"h",label:"melodic"},{p:"E4",d:"h"},{p:"C5",d:"w",label:"harmonic"},{p:"E5",d:"w",chord:true}],width:320} },
+      show:{ type:"staff", spec:{clef:"treble",notes:[{p:"C4",d:"h",label:"melodic"},{p:"E4",d:"h"},{bar:"single"},{p:"C5",d:"w",label:"harmonic"},{p:"E5",d:"w",chord:true},{bar:"final"}],width:380} },
       try:{ type:"custom",
         hint:"Overlapping sound = harmonic; taking turns = melodic.",
         mount:(container,fb)=>MF_L33_ear(container,fb) } },
@@ -183,7 +183,7 @@ LESSON_CONTENT[33]={
         {p:"C4",d:"w"},{p:"C5",d:"w",chord:true}],
         brackets:[{from:0,to:1,label:"unison"},{from:2,to:3,label:"2nd"},{from:4,to:5,label:"3rd"},{from:6,to:7,label:"4th"},{from:8,to:9,label:"5th"},{from:10,to:11,label:"6th"},{from:12,to:13,label:"7th"},{from:14,to:15,label:"octave"}],width:580} },
     { caption:"The same 3rd delivered two ways: melodic (C then E, side by side) — then harmonic (C and E stacked, together).",
-      staff:{clef:"treble",tempo:80,notes:[{p:"C4",d:"h",label:"melodic 3rd"},{p:"E4",d:"h"},{p:"C4",d:"w",label:"harmonic 3rd"},{p:"E4",d:"w",chord:true}],width:360} }
+      staff:{clef:"treble",tempo:80,notes:[{p:"C4",d:"h",label:"melodic 3rd"},{p:"E4",d:"h"},{bar:"single"},{p:"C4",d:"w",label:"harmonic 3rd"},{p:"E4",d:"w",chord:true},{bar:"final"}],width:400} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Interval Sprint (45s)",
