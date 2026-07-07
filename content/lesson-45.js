@@ -93,9 +93,9 @@ LESSON_CONTENT[45]={
   steps:[
     { say:"Definition first: when three notes are grouped with a small <b>3</b> above or below them, the group is a <b>TRIPLET</b> — <b>three notes played in the time of two notes of the same value</b>. An eighth-note triplet = 3 eighths in the time of 2 eighths (one quarter-note beat). \u{1F447} <b>An eighth-note triplet fills how much time?</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:80,notes:[
-        {p:"C5",d:"8"},{p:"C5",d:"8"},{p:"C5",d:"8"},{p:"C5",d:"8",x:400},{p:"C5",d:"8"},{bar:"final"}],
+        {p:"C5",d:"8",x:140},{p:"C5",d:"8",x:190},{p:"C5",d:"8",x:240},{p:"C5",d:"8",x:380},{p:"C5",d:"8",x:470},{bar:"final"}],
         beams:[[0,2],[3,4]],tuplets:[{from:0,to:2}],
-        brackets:[{from:0,to:2,label:"triplet = 1 beat"},{from:3,to:4,label:"2 eighths = 1 beat"}],width:520} },
+        brackets:[{from:0,to:2,label:"triplet = 1 beat"},{from:3,to:4,label:"2 eighths = 1 beat"}],width:560} },
       try:{ type:"mc", choices:["One beat — same as two normal eighths","1½ beats","Three full beats"], answer:0,
         success:"✓ Three-in-the-time-of-two: the trio squeezes into ONE quarter-note beat. The 3 is the warning label.",
         fail:"The definition: 3 notes in the time of 2 eighths…",
