@@ -12,6 +12,11 @@
    dynamics ({dyn:"pp".."ff"} — playback volume follows), hairpins
    (spec.hairpins:[{from,to,type:"cresc"|"decresc"}]), roadmap marks
    ({mark:"segno"|"coda"|"tocoda"|"fine"|"dc-fine"|"ds-fine"|"dc-coda"|"ds-coda"}).
+   v7 (Book 2, Unit 7): KEY SIGNATURES (spec.keysig:"G"|"Bb"|{sharps:n}|{flats:n} —
+   drawn right after the clef in standard order/positions, treble+bass+grand;
+   clickable via spec.onKeysig(i); each accidental wrapped in g.ksgroup[data-ks]),
+   W/H step carets above the staff (spec.steps:[{from,to,label:"W"|"H"}]),
+   labeled under-brackets for tetrachord grouping (spec.brackets:[{from,to,label}]).
    NOTE (maintenance): edit by FULL-FILE REWRITE only. */
 const MFAudio=(()=>{
   let ctx=null;
@@ -83,7 +88,27 @@ const Staff=(()=>{
       parts.push(`<circle class="clefdot" cx="${LEFT+31}" cy="${y0+GAP*0.5}" r="3.1"/>`);
       parts.push(`<circle class="clefdot" cx="${LEFT+31}" cy="${y0+GAP*1.5}" r="3.1"/>`);
     }
-    if(opts._time) drawTime(parts,y0,opts._time);
+    if(opts._ks) drawKeysig(parts,y0,clef,opts._ks);
+    if(opts._time) drawTime(parts,y0,opts._time,opts._ksW);
+  }
+  /* v7 — key signatures. Major keys: positive = sharps, negative = flats */
+  const KEYS={C:0,G:1,D:2,A:3,E:4,B:5,"F#":6,"C#":7,F:-1,Bb:-2,Eb:-3,Ab:-4,Db:-5,Gb:-6,Cb:-7};
+  const KSPOS={ sharp:{treble:["F5","C5","G5","D5","A4","E5","B4"],bass:["F3","C3","G3","D3","A2","E3","B2"]},
+                flat:{treble:["B4","E5","A4","D5","G4","C5","F4"],bass:["B2","E3","A2","D3","G2","C3","F2"]} };
+  function parseKeysig(k){
+    if(k==null) return null;
+    if(typeof k==="object") return k.sharps?{type:"sharp",n:Math.min(7,k.sharps)}:(k.flats?{type:"flat",n:Math.min(7,k.flats)}:null);
+    const v=KEYS[String(k).trim()];
+    if(v===undefined||v===0) return null;
+    return {type:v>0?"sharp":"flat", n:Math.abs(v)};
+  }
+  function drawKeysig(parts,y0,clef,ks){
+    if(clef!=="treble"&&clef!=="bass") return;
+    const pos=KSPOS[ks.type][clef];
+    for(let i=0;i<ks.n;i++){
+      const x=LEFT+46+i*12, y=yFor(pos[i],clef,y0);
+      parts.push(`<g class="ksgroup" data-ks="${i}">${accSVG(x,y,ks.type==="sharp"?"#":"b")}</g>`);
+    }
   }
   function parseTime(t){
     if(!t) return null;
@@ -91,8 +116,8 @@ const Staff=(()=>{
     if(String(t).trim().toUpperCase()==="C") return {common:true};
     const m=String(t).match(/^(\d+)\s*\/\s*(\d+)$/); return m?{top:+m[1],bottom:+m[2]}:null;
   }
-  function drawTime(parts,y0,ts){
-    const x=LEFT+52;
+  function drawTime(parts,y0,ts,ksW){
+    const x=LEFT+52+(ksW||0);
     if(ts.common){
       parts.push(`<text class="tsig" x="${x}" y="${y0+2*GAP+GAP*0.95}" font-size="${GAP*2.9}" text-anchor="middle">C</text>`);
       return;
@@ -194,10 +219,12 @@ const Staff=(()=>{
     const W=spec.width||420;
     const grand=spec.clef==="grand";
     const ts=parseTime(spec.time);
+    const ks=parseKeysig(spec.keysig);
+    const ksW=ks? ks.n*12+10 : 0;
     const H0 = grand? 2*TOP+9*GAP+50 : 2*TOP+4*GAP+30;
     const y0t=TOP+10, y0b=grand? y0t+4*GAP+40 : y0t;
     const staffBottom=(grand? y0b:y0t)+4*GAP;
-    const opts=Object.assign({},spec,{_time:ts});
+    const opts=Object.assign({},spec,{_time:ts,_ks:ks,_ksW:ksW});
     const parts=[];
     if(grand){
       drawOneStaff(parts,y0t,W,"treble",opts);
@@ -210,7 +237,7 @@ const Staff=(()=>{
     const items=spec.notes||[];
     /* clef:"none" (symbol cards) has no clef taking space — start items further left
        so a single symbol sits visually centered in the card */
-    const startX=(grand?70:(spec.clef==="none"?30:80))+(ts?30:0);
+    const startX=(grand?70:(spec.clef==="none"?30:80))+(ts?30:0)+ksW;
     const beamSet=new Set();
     (spec.beams||[]).forEach(([a,b])=>{ for(let i=a;i<=b;i++) beamSet.add(i); });
     const placed=[];
@@ -347,6 +374,26 @@ const Staff=(()=>{
       else
         parts.push(`<line class="acc" x1="${x1}" y1="${y}" x2="${x2}" y2="${y-5}"/><line class="acc" x1="${x1}" y1="${y}" x2="${x2}" y2="${y+5}"/>`);
     });
+    /* v7 — W/H step carets above the staff (scale/tetrachord teaching) */
+    (spec.steps||[]).forEach(st=>{
+      const A=placed[st.from], B=placed[st.to];
+      if(!A||!B) return;
+      const yB=(A.y0!==undefined?A.y0:y0t)-14, mid=(A.x+B.x)/2;
+      minEl=Math.min(minEl, yB-(st.label?28:14));
+      parts.push(`<path class="acc" fill="none" d="M ${A.x+5} ${yB} L ${mid} ${yB-9} L ${B.x-5} ${yB}"/>`);
+      if(st.label) parts.push(`<text class="lbl" x="${mid}" y="${yB-14}" text-anchor="middle">${st.label}</text>`);
+    });
+    /* v7 — labeled under-brackets (tetrachord grouping) */
+    if(spec.brackets&&spec.brackets.length){
+      const yBr=Math.max(staffBottom+16, maxNoteBottom+12, hasLabel?labelY+6:0, hasDyn?dynY+6:0);
+      spec.brackets.forEach(br=>{
+        const A=placed[br.from], B=placed[br.to];
+        if(!A||!B) return;
+        parts.push(`<path class="acc" fill="none" d="M ${A.x-12} ${yBr} L ${A.x-12} ${yBr+8} L ${B.x+12} ${yBr+8} L ${B.x+12} ${yBr}"/>`);
+        if(br.label) parts.push(`<text class="lbl" x="${(A.x+B.x)/2}" y="${yBr+22}" text-anchor="middle">${br.label}</text>`);
+        maxEl=Math.max(maxEl, yBr+(br.label?28:12));
+      });
+    }
     /* 1st / 2nd ending brackets */
     (spec.endings||[]).forEach(e=>{
       const A=placed[e.from], B=placed[e.to]; if(!A||!B) return;
@@ -367,6 +414,7 @@ const Staff=(()=>{
     if(spec.onSpace) svg.querySelectorAll(".clickspace").forEach(s=>s.addEventListener("click",()=>spec.onSpace(+s.dataset.space,s.dataset.staff)));
     if(spec.onNote) svg.querySelectorAll(".notegroup").forEach(g=>g.addEventListener("click",()=>spec.onNote(+g.dataset.i,g.dataset.p||null)));
     if(spec.onBar) svg.querySelectorAll(".clickbar").forEach(b=>b.addEventListener("click",()=>spec.onBar(+b.dataset.bar,b.dataset.kind)));
+    if(spec.onKeysig) svg.querySelectorAll(".ksgroup").forEach(g=>{ g.classList.add("clickable"); g.addEventListener("click",()=>spec.onKeysig(+g.dataset.ks)); });
     return {
       svg,
       highlight(i){ svg.querySelectorAll(".notegroup .note, .notegroup .rest, .notegroup .mtxt").forEach(n=>n.classList.remove("hl"));
@@ -414,5 +462,5 @@ const Staff=(()=>{
     if(api) setTimeout(()=>api.highlight(null), t*1000+200);
     return t;
   }
-  return {render,play,dia,yFor,BEATS};
+  return {render,play,dia,yFor,BEATS,KEYS};
 })();

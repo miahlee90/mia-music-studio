@@ -180,6 +180,31 @@ const Quiz=(()=>{
         explain:`${name(a)} \u2192 ${name(b)} = ${correct.toLowerCase()} — ${isHalf?"the very next key, nothing in between":"two half steps, one key is skipped"}.`,
         hint:"Picture the keyboard: is there a key BETWEEN them?" };
     },
+    /* v5.2 — name the major key from a key signature
+       (params:{kind:"sharp"|"flat"|"both", max:1..4, clef:"treble"|"bass"|"both"}) */
+    "keysig-id": p=>{
+      const SH=[["G",1],["D",2],["A",3],["E",4]], FL=[["F",1],["Bb",2],["Eb",3],["Ab",4]];
+      const kind=(p&&p.kind)||"both", max=(p&&p.max)||4;
+      const pool=(kind==="sharp"?SH:kind==="flat"?FL:[...SH,...FL]).filter(k=>k[1]<=max);
+      const [key,n]=pick(pool);
+      const isFlat=FL.some(k=>k[0]===key);
+      const disp=k=>k.replace("b","\u266d")+" Major";
+      const clef=(p&&p.clef&&p.clef!=="both")? p.clef : pick(["treble","bass"]);
+      const all=[...new Set((kind==="sharp"?SH:kind==="flat"?FL:[...SH,...FL]).map(k=>disp(k[0])))];
+      const correct=disp(key);
+      const choices=shuffle([correct,...shuffle(all.filter(c=>c!==correct)).slice(0,3)]);
+      const ORDS=["F\u266f","C\u266f","G\u266f","D\u266f"], ORDF=["B\u266d","E\u266d","A\u266d","D\u266d"];
+      const expl=isFlat
+        ? (n===1? "One flat (B\u266d) alone is the exception — it is always F Major."
+                : `The flats are ${ORDF.slice(0,n).join(", ")} — the NEXT-TO-LAST flat (${ORDF[n-2]}) names the key: ${correct}.`)
+        : `The sharps are ${ORDS.slice(0,n).join(", ")} — one half step UP from the last sharp (${ORDS[n-1]}) gives ${correct}.`;
+      return { type:"mc", q:"Name this major key signature.",
+        staff:{clef, keysig:key, notes:[], width:220},
+        choices, answer:choices.indexOf(correct),
+        explain:expl,
+        hint:isFlat? "Next-to-last flat = the key name (one flat alone = F Major)."
+                   : "Find the last sharp, then go up one half step." };
+    },
     /* v5 — enharmonic pairs */
     "enharmonic": ()=>{
       const PAIRS=[["C\u266f","D\u266d"],["D\u266f","E\u266d"],["F\u266f","G\u266d"],["G\u266f","A\u266d"],["A\u266f","B\u266d"]];

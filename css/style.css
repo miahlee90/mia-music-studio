@@ -361,3 +361,8 @@ button.notecard svg.mf-staff{height:46px;width:auto;max-width:100%;display:block
 .vox-card.back .vox-front{display:none}
 .vox-card.back .vox-back{display:block}
 @media (max-width:600px){ .vox-card{flex:1 1 45%} }
+
+/* v7 — key signatures (Book 2, L29-30) */
+.mf-staff .ksgroup.clickable{cursor:pointer}
+.mf-staff .ksgroup.clickable:hover .acc{stroke:var(--accent)}
+.mf-staff .ksgroup.hl .acc{stroke:var(--accent)}

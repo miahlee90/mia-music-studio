@@ -26,11 +26,11 @@ const LESSONS=[
  {n:23, title:"Sharps", unit:6, book:1, time:15, kw:["sharp","accidental"]},
  {n:24, title:"Naturals", unit:6, book:1, time:15, kw:["natural","accidental"]},
  {n:25, title:"Whole Steps, Half Steps and Enharmonic Notes", unit:6, book:1, time:15, kw:["whole step","half step","enharmonic"]},
- {n:26, title:"Tetrachords and Major Scales", unit:7, book:2, time:13, kw:["tetrachord","major scale"]},
- {n:27, title:"The Sharp Scales — G and D Major", unit:7, book:2, time:12, kw:["G major","D major","sharp scales"]},
- {n:28, title:"The Flat Scales — F and B♭ Major", unit:7, book:2, time:12, kw:["F major","Bb major","flat scales"]},
- {n:29, title:"Key Signatures — The Sharp Keys", unit:7, book:2, time:12, kw:["key signature","sharp keys"]},
- {n:30, title:"Key Signatures — The Flat Keys", unit:7, book:2, time:12, kw:["key signature","flat keys"]},
+ {n:26, title:"Tetrachords and Major Scales", unit:7, book:2, time:15, kw:["tetrachord","major scale"]},
+ {n:27, title:"The Sharp Scales — G and D Major", unit:7, book:2, time:15, kw:["G major","D major","sharp scales"]},
+ {n:28, title:"The Flat Scales — F and B♭ Major", unit:7, book:2, time:15, kw:["F major","Bb major","flat scales"]},
+ {n:29, title:"Key Signatures — The Sharp Keys", unit:7, book:2, time:15, kw:["key signature","sharp keys"]},
+ {n:30, title:"Key Signatures — The Flat Keys", unit:7, book:2, time:15, kw:["key signature","flat keys"]},
  {n:31, title:"The Remaining Major Scales with Key Signatures", unit:8, book:2, time:13, kw:["major scales","key signatures"]},
  {n:32, title:"Chromatic Scale", unit:8, book:2, time:11, kw:["chromatic","half steps"]},
  {n:33, title:"Intervals", unit:8, book:2, time:12, kw:["interval","2nd","3rd","distance"]},
@@ -98,5 +98,5 @@ const UNITS=[
  {unit:18, book:3, name:"Form", lessons:[72,75]}
 ];
 /* built lessons so far (index pages link only these) */
-const BUILT_THROUGH=25;
+const BUILT_THROUGH=30;
 const LESSON_CONTENT={}; /* filled by content/lesson-NN.js */
