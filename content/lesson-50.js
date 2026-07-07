@@ -91,8 +91,7 @@ LESSON_CONTENT[50]={
     { say:"The recipe: take the <b>V (dominant) triad</b> and add a <b>minor 7th above the root</b>. In C major: G-B-D + <b>F</b> = <b>G7</b>, the V7 chord. Equivalent shortcut: add a <b>minor 3rd above the 5th</b> (D→F). \u{1F447} <b>V7 = V triad + …?</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:70,notes:[
         {p:"G4",d:"w",label:"V"},{p:"B4",d:"w",chord:true},{p:"D5",d:"w",chord:true},
-        {p:"G4",d:"w",x:400,label:"V7"},{p:"B4",d:"w",chord:true},{p:"D5",d:"w",chord:true},{p:"F5",d:"w",chord:true}],
-        brackets:[{from:3,to:6,label:"root + 3rd + 5th + m7"}],width:520} },
+        {p:"G4",d:"w",x:400,label:"V7 = G-B-D-F"},{p:"B4",d:"w",chord:true},{p:"D5",d:"w",chord:true},{p:"F5",d:"w",chord:true}],width:520} },
       try:{ type:"mc", choices:["A minor 7th above the root","A Major 7th above the root","Another perfect 5th"], answer:0,
         success:"✓ Minor 7th (G→F = 10 half steps). A MAJOR 7th would give F♯ — a very different, dreamier chord.",
         fail:"G up to F — count the half steps: 10 = which interval from Unit 9?",

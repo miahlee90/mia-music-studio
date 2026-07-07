@@ -76,8 +76,9 @@ LESSON_CONTENT[47]={
   ],
   steps:[
     { say:"Definitions first. <b>Three or more notes sounded together = a CHORD.</b> The star chord of all music: a 3-note chord built of a <b>ROOT, a 3rd, and a 5th</b> — the <b>TRIAD</b>. \u{1F447} <b>A triad consists of…?</b>",
-      show:{ type:"staff", spec:{clef:"treble",tempo:60,notes:[
-        {p:"C4",d:"w",label:"root"},{p:"E4",d:"w",chord:true,label:"3rd"},{p:"G4",d:"w",chord:true,label:"5th"}],width:220} },
+      show:{ type:"staff", spec:{clef:"treble",tempo:80,notes:[
+        {p:"C4",d:"h",label:"root"},{p:"E4",d:"h",label:"3rd"},{p:"G4",d:"h",label:"5th"},{bar:"double"},
+        {p:"C4",d:"w",label:"the triad"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{bar:"final"}],width:440} },
       try:{ type:"mc", choices:["Root + 3rd + 5th","Root + 2nd + 4th","Any three random notes"], answer:0,
         success:"✓ Root, then a 3rd above, then a 5th above the root — the triad recipe never changes.",
         fail:"Measure both intervals UP from the bottom note…",
