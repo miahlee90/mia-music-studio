@@ -278,7 +278,7 @@ LESSON_CONTENT[33]={
     {term:"Interval", def:"The distance in pitch between two notes.",
       staff:{clef:"treble",notes:[{p:"C4",d:"w"},{p:"E4",d:"w",chord:true}],width:130}},
     {term:"Melodic Interval", def:"Two notes sounded separately.",
-      staff:{clef:"treble",notes:[{p:"C4",d:"h"},{p:"E4",d:"h"}],width:130}},
+      staff:{clef:"treble",notes:[{p:"C4",d:"h",x:100},{p:"E4",d:"h",x:160}],width:200}},
     {term:"Harmonic Interval", def:"Two notes sounded together.",
       staff:{clef:"treble",notes:[{p:"C4",d:"w"},{p:"G4",d:"w",chord:true}],width:130}},
     {term:"Unison", def:"The interval between two identical notes. Also called a prime interval."},
