@@ -458,7 +458,10 @@ const Staff=(()=>{
       const s=stemsUp? 1 : -1; /* curve on the NOTEHEAD side, opposite the stems */
       const y1=A.y+s*11, y2=B.y+s*11, cy=(stemsUp? Math.max(y1,y2) : Math.min(y1,y2))+s*15;
       minEl=Math.min(minEl,cy-4); maxEl=Math.max(maxEl,cy+4);
-      parts.push(`<path class="arc" d="M ${A.x+3} ${y1} C ${(A.x+B.x)/2} ${cy}, ${(A.x+B.x)/2} ${cy}, ${B.x-3} ${y2}"/>`);
+      /* v8.0b (instructor, all lessons): a tie is a smooth round arch - control
+         points at the thirds instead of one shared apex (which made a kink) */
+      const c1=A.x+3+(B.x-A.x-6)/3, c2=A.x+3+2*(B.x-A.x-6)/3;
+      parts.push(`<path class="arc" d="M ${A.x+3} ${y1} C ${c1} ${cy}, ${c2} ${cy}, ${B.x-3} ${y2}"/>`);
     });
     /* hairpins (crescendo / decrescendo wedges below the staff) */
     (spec.hairpins||[]).forEach(hp=>{

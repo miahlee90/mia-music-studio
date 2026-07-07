@@ -132,16 +132,16 @@ LESSON_CONTENT[41]={
     { caption:"The long–short strut in action — count '1 e & a' and feel the hold-hold-hold-SNAP of every beat.",
       staff:{clef:"treble",tempo:60,time:"4/4",notes:[
         {p:"C5",d:"8.",label:"1 e &"},{p:"D5",d:"16",label:"a"},{p:"E5",d:"8.",label:"2 e &"},{p:"D5",d:"16",label:"a"},
-        {p:"C5",d:"8",label:"3"},{p:"D5",d:"8",label:"&"},{p:"C5",d:"h",label:"4",x:600},{bar:"final"}],
+        {p:"C5",d:"8",label:"3"},{p:"D5",d:"8",label:"&"},{p:"C5",d:"q",label:"4"},{bar:"final"}],
         beams:[[0,1],[1,1,2],[2,3],[3,3,2],[4,5]],width:660} },
     { caption:"Three spellings, one sound: tied 8th+16th, then the dotted pair, then plain even 8ths for contrast — hear how the first two match and the third walks flat.",
-      staff:{clef:"treble",tempo:60,time:"2/4",notes:[
-        {p:"B4",d:"8"},{p:"B4",d:"16"},{p:"B4",d:"16"},{bar:"single"},
-        {p:"B4",d:"8."},{p:"B4",d:"16"},{bar:"single"},
+      staff:{clef:"treble",tempo:60,time:"3/4",notes:[
+        {p:"B4",d:"8"},{p:"B4",d:"16"},{p:"B4",d:"16"},
+        {p:"B4",d:"8."},{p:"B4",d:"16"},
         {p:"B4",d:"8"},{p:"B4",d:"8"},{bar:"final"}],
         arcs:[{from:0,to:1,type:"tie"}],
-        beams:[[0,2],[1,2,2],[4,5],[5,5,2],[7,8]],
-        brackets:[{from:0,to:2,label:"tie"},{from:4,to:5,label:"dot"},{from:7,to:8,label:"even"}],width:620} }
+        beams:[[0,2],[1,2,2],[3,4],[4,4,2],[5,6]],
+        brackets:[{from:0,to:2,label:"tie"},{from:3,to:4,label:"dot"},{from:5,to:6,label:"even"}],width:620} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Dot Detective Sprint (45s)",
