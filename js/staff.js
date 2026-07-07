@@ -375,8 +375,11 @@ const Staff=(()=>{
         parts.push(`<line class="acc" x1="${x1}" y1="${y}" x2="${x2}" y2="${y-5}"/><line class="acc" x1="${x1}" y1="${y}" x2="${x2}" y2="${y+5}"/>`);
     });
     /* v7 — W/H step carets above the staff (scale/tetrachord teaching)
-       v7.1: each caret sits a CONSTANT distance above its two notes (stems included),
-       so carets follow the scale upward instead of floating at a fixed height */
+       v7.1: each caret sits a constant distance above its two notes (stems included)
+       v7.2: tighter offsets (instructor: bass H a bit lower) + ALIGNMENT smoothing —
+       when the melody keeps rising, a caret never sags BELOW the previous one
+       (fixes the stem-flip dip at the top of a scale) */
+    let _pc=null,_pp=null;
     (spec.steps||[]).forEach(st=>{
       const A=placed[st.from], B=placed[st.to];
       if(!A||!B) return;
@@ -384,9 +387,13 @@ const Staff=(()=>{
         if(pl.y===undefined) return (pl.y0!==undefined?pl.y0:y0t)-6;
         const s=durShape(normD(pl.n.d));
         const up=pl.y > pl.y0+2*GAP;
-        return (s.stem&&up)? pl.y-42 : pl.y-11;
+        return (s.stem&&up)? pl.y-40 : pl.y-9;
       };
-      const yB=Math.min(topOf(A),topOf(B))-6, mid=(A.x+B.x)/2;
+      let yB=Math.min(topOf(A),topOf(B))-4;
+      const pairY=Math.min(A.y!==undefined?A.y:1e9, B.y!==undefined?B.y:1e9);
+      if(_pc!==null&&_pp!==null&&pairY<=_pp) yB=Math.min(yB,_pc);
+      _pc=yB; _pp=pairY;
+      const mid=(A.x+B.x)/2;
       minEl=Math.min(minEl, yB-(st.label?28:14));
       parts.push(`<path class="acc" fill="none" d="M ${A.x+5} ${yB} L ${mid} ${yB-9} L ${B.x-5} ${yB}"/>`);
       if(st.label) parts.push(`<text class="lbl" x="${mid}" y="${yB-14}" text-anchor="middle">${st.label}</text>`);

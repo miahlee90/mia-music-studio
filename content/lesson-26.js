@@ -4,30 +4,60 @@
    joined by one whole step (not just a memorized formula); review-style staff work included.
    NOTE: edit by FULL-FILE REWRITE only. */
 
-/* build-the-blueprint (worksheet style, per instructor sketch):
-   four notes on a staff, a ∨ under each pair, and an empty box to fill with W or H */
+/* build-the-blueprint (brick-laying, per instructor sketch v2):
+   ∨ arrows CONNECT each pair of notes; an empty box sits BETWEEN the two notes;
+   the answer blocks (two "Whole Step" bricks + one "Half Step" brick) are
+   DRAGGED into the boxes — tap-to-pick, tap-to-place also works on phones */
 function MF_L26_blueprint(container,fb){
-  const seq=["W","W","H"], FULL={W:"Whole Step",H:"Half Step"};
-  let i=0;
-  container.innerHTML=`<div class="l26-bp-staff"></div>
-    <div style="display:flex;justify-content:center;gap:56px;margin:0 0 10px">
-      ${seq.map(()=>`<div style="text-align:center">
-        <div style="font-size:22px;line-height:14px;color:var(--primary-dark);font-weight:700">∨</div>
-        <div class="l26-box" style="width:46px;height:46px;border:2.5px solid var(--primary-dark);border-radius:8px;font-weight:800;font-size:22px;display:flex;align-items:center;justify-content:center;margin:6px auto 0;background:#fff"></div>
-      </div>`).join("")}
+  const TGT=["W","W","H"], FULL={W:"Whole Step",H:"Half Step"}, WD=400;
+  let sel=null, placed=0;
+  container.innerHTML=`<div style="max-width:${WD}px;margin:0 auto">
+      <div class="bp-staff"></div>
+      <svg class="bp-arrows" viewBox="0 0 ${WD} 32" width="100%" style="display:block"></svg>
+      <div class="bp-boxes" style="position:relative;height:50px"></div>
     </div>
-    <div class="choices chips l26-ch"></div>`;
-  Staff.render(container.querySelector(".l26-bp-staff"),{clef:"treble",notes:[{p:"C4",d:"q"},{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"F4",d:"q"}],width:340});
-  const boxes=[...container.querySelectorAll(".l26-box")], ch=container.querySelector(".l26-ch");
-  ["Whole Step","Half Step"].forEach(lbl=>{ const b=document.createElement("button"); b.textContent=lbl;
-    b.onclick=()=>{
-      if(i>=seq.length) return;
-      if(lbl===FULL[seq[i]]){ boxes[i].textContent=seq[i]; i++; MFAudio.tone(60+i*4,.3);
-        if(i>=seq.length) fb(true,"✓ W – W – H — the tetrachord blueprint. Both halves of every major scale follow it!");
-        else fb(true,`✓ ${i===1?"Whole step first…":"…another whole step…"} keep going!`); }
-      else { MFAudio.tone(40,.25); fb(false, i<2?"A tetrachord starts WIDE: whole step first.":"The last distance is the small one — a half step."); }
-    };
-    ch.appendChild(b); });
+    <div class="choices bp-pile" style="margin-top:6px"></div>
+    <p style="text-align:center;font-size:13px;color:var(--muted);margin:4px 0 0">Drag each block into its box — or tap a block, then tap the box.</p>`;
+  const api=Staff.render(container.querySelector(".bp-staff"),{clef:"treble",notes:[{p:"C4",d:"q"},{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"F4",d:"q"}],width:WD});
+  const xs=[...api.svg.querySelectorAll(".notegroup ellipse")].map(e=>+e.getAttribute("cx"));
+  const mids=[0,1,2].map(i=>(xs[i]+xs[i+1])/2);
+  container.querySelector(".bp-arrows").innerHTML=[0,1,2].map(i=>
+    `<path d="M ${xs[i]+7} 4 L ${mids[i]} 26 L ${xs[i+1]-7} 4" fill="none" stroke="#3b3486" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>`).join("");
+  const boxRow=container.querySelector(".bp-boxes");
+  const boxes=mids.map((mx,i)=>{ const b=document.createElement("div");
+    b.style.cssText=`position:absolute;left:${mx/WD*100}%;transform:translateX(-50%);min-width:86px;height:42px;border:2.5px dashed #3b3486;border-radius:9px;display:flex;align-items:center;justify-content:center;font-weight:800;background:#fff;cursor:pointer`;
+    b.dataset.t=TGT[i]; boxRow.appendChild(b); return b; });
+  const pile=container.querySelector(".bp-pile");
+  ["W","W","H"].sort(()=>Math.random()-.5).forEach(t=>{
+    const blk=document.createElement("button"); blk.textContent=FULL[t]; blk.dataset.t=t; blk.draggable=true;
+    blk.addEventListener("dragstart",e=>{ sel=blk; e.dataTransfer.setData("text/plain",t); });
+    blk.addEventListener("click",()=>{ if(blk.disabled) return;
+      [...pile.children].forEach(x=>x.style.outline="");
+      sel=blk; blk.style.outline="3px solid #ffd166"; });
+    pile.appendChild(blk);
+  });
+  function tryPlace(box,blk){
+    if(!blk||blk.disabled||box.dataset.done) return;
+    if(blk.dataset.t===box.dataset.t){
+      box.dataset.done="1"; box.textContent=blk.textContent;
+      box.style.borderStyle="solid"; box.style.background="#eef1ff"; box.style.fontSize="13px"; box.style.padding="0 8px";
+      blk.disabled=true; blk.style.opacity=".35"; blk.style.outline=""; sel=null; placed++;
+      MFAudio.tone(58+placed*4,.3);
+      if(placed>=TGT.length) fb(true,"✓ W – W – H, laid like bricks — the tetrachord blueprint. Both halves of every major scale follow it!");
+      else fb(true,"✓ That brick fits! Keep building…");
+    } else {
+      box.classList.add("shake"); setTimeout(()=>box.classList.remove("shake"),450); MFAudio.tone(40,.25);
+      fb(false, box.dataset.t==="H" ? "The LAST gap, E to F, is the narrow one — a Half Step brick goes there." : "The first two gaps are WIDE — Whole Step bricks go there.");
+    }
+  }
+  boxes.forEach(box=>{
+    box.addEventListener("dragover",e=>e.preventDefault());
+    box.addEventListener("drop",e=>{ e.preventDefault();
+      const t=e.dataTransfer.getData("text/plain");
+      const blk=(sel&&!sel.disabled)? sel : [...pile.children].find(b=>!b.disabled&&b.dataset.t===t);
+      tryPlace(box,blk); });
+    box.addEventListener("click",()=>{ if(sel&&!sel.disabled) tryPlace(box,sel); });
+  });
 }
 
 /* staff + keyboard side by side — the keyboard makes the half steps VISIBLE */
