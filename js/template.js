@@ -193,7 +193,7 @@
     let kbApi=null;
     if(e.kb){ const k=document.createElement("div"); k.style.marginTop="10px"; host.appendChild(k); kbApi=Keyboard.create(k,e.kb); }
     const playApi=kbApi? { svg:api.svg,
-      highlight:(ix)=>{ api.highlight(ix);
+      highlight:(ix,keep)=>{ api.highlight(ix,keep);
         if(ix!=null){ const n=e.staff.notes[ix];
           if(n && n.rest===undefined && n.bar===undefined && (n.p||n.sound)) kbApi.press(MFAudio.midi(n.sound||n.p), true); } } } : api;
     const b=document.getElementById("exBtn"+i); if(b) b.onclick=()=>Staff.play(e.staff,playApi);

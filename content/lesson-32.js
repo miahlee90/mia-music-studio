@@ -230,8 +230,7 @@ LESSON_CONTENT[32]={
     { gen:"note-name", params:{clef:"bass"}, count:2 }
   ],
   vocabulary:[
-    {term:"Chromatic Scale", def:"The chromatic scale is a twelve-note scale that includes every half step within the octave — C, C♯, D, D♯, E, F, F♯, G, G♯, A, A♯, B. On the keyboard it uses every key, black and white; ascending versions usually use sharps, descending versions flats.",
-      staff:{clef:"treble",notes:[{p:"C4",d:"q"},{p:"C#4",d:"q"},{p:"D4",d:"q"},{p:"D#4",d:"q"}],width:170}},
+    {term:"Chromatic Scale", def:"The chromatic scale is a twelve-note scale that includes every half step within the octave — C, C♯, D, D♯, E, F, F♯, G, G♯, A, A♯, B. On the keyboard it uses every key, black and white; ascending versions usually use sharps, descending versions flats."},
     {term:"Half Step", def:"The smallest interval between two adjacent notes — the very next key."},
     {term:"Ascending", def:"Moving from lower pitches to higher pitches. Ascending chromatic scales usually use sharps."},
     {term:"Descending", def:"Moving from higher pitches to lower pitches. Descending chromatic scales usually use flats."}

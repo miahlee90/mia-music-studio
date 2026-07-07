@@ -155,12 +155,12 @@ LESSON_CONTENT[33]={
         fail:"Eight letters up lands on the same letter…",
         hint:"'Oct' like octopus — eight." } },
     { say:"Intervals are heard two ways: a <b>MELODIC interval</b> sounds the notes <b>separately</b>; a <b>HARMONIC interval</b> sounds them <b>together</b> (written stacked). The SIZE stays the same — only the delivery changes. \u{1F447} <b>Trust your ears — melodic or harmonic?</b>",
-      show:{ type:"staff", spec:{clef:"treble",notes:[{p:"C4",d:"h",label:"melodic"},{p:"E4",d:"h"},{bar:"single"},{p:"C5",d:"w",label:"harmonic"},{p:"E5",d:"w",chord:true},{bar:"final"}],width:380} },
+      show:{ type:"staff", spec:{clef:"treble",notes:[{p:"C4",d:"h"},{p:"E4",d:"h"},{bar:"single"},{p:"C5",d:"w"},{p:"E5",d:"w",chord:true},{bar:"final"}],brackets:[{from:0,to:1,label:"melodic"},{from:3,to:4,label:"harmonic"}],width:400} },
       try:{ type:"custom",
         hint:"Overlapping sound = harmonic; taking turns = melodic.",
         mount:(container,fb)=>MF_L33_ear(container,fb) } },
     { say:"A reading shortcut: <b>EVEN-numbered intervals</b> (2nds, 4ths, 6ths, octaves) go <b>line→space</b> or <b>space→line</b>; <b>ODD-numbered intervals</b> (unisons, 3rds, 5ths, 7ths) go <b>line→line</b> or <b>space→space</b>. \u{1F447} <b>A 5th written on the staff goes from…?</b>",
-      show:{ type:"staff", spec:{clef:"treble",notes:[{p:"F4",d:"w"},{p:"G4",d:"w",chord:true},{p:"E4",d:"w"},{p:"B4",d:"w",chord:true}],brackets:[{from:0,to:1,label:"2nd — line to space"},{from:2,to:3,label:"5th — line to line"}],width:380} },
+      show:{ type:"staff", spec:{clef:"treble",notes:[{p:"F4",d:"w",x:150},{p:"G4",d:"w",chord:true},{p:"E4",d:"w",x:360},{p:"B4",d:"w",chord:true}],brackets:[{from:0,to:1,label:"2nd — line to space"},{from:2,to:3,label:"5th — line to line"}],width:480} },
       try:{ type:"mc", choices:["Line to line, or space to space","Line to space only","Anywhere at all"], answer:0,
         success:"✓ Odd numbers match: line↔line or space↔space. Even numbers mix them.",
         fail:"5 is an ODD number — check the odd rule.",
@@ -181,9 +181,9 @@ LESSON_CONTENT[33]={
         {p:"C4",d:"w"},{p:"A4",d:"w",chord:true},
         {p:"C4",d:"w"},{p:"B4",d:"w",chord:true},
         {p:"C4",d:"w"},{p:"C5",d:"w",chord:true}],
-        brackets:[{from:0,to:1,label:"unison"},{from:2,to:3,label:"2nd"},{from:4,to:5,label:"3rd"},{from:6,to:7,label:"4th"},{from:8,to:9,label:"5th"},{from:10,to:11,label:"6th"},{from:12,to:13,label:"7th"},{from:14,to:15,label:"octave"}],width:580} },
+        brackets:[{from:0,to:1,label:"unison"},{from:2,to:3,label:"2nd"},{from:4,to:5,label:"3rd"},{from:6,to:7,label:"4th"},{from:8,to:9,label:"5th"},{from:10,to:11,label:"6th"},{from:12,to:13,label:"7th"},{from:14,to:15,label:"octave"}],width:640} },
     { caption:"The same 3rd delivered two ways: melodic (C then E, side by side) — then harmonic (C and E stacked, together).",
-      staff:{clef:"treble",tempo:80,notes:[{p:"C4",d:"h",label:"melodic 3rd"},{p:"E4",d:"h"},{bar:"single"},{p:"C4",d:"w",label:"harmonic 3rd"},{p:"E4",d:"w",chord:true},{bar:"final"}],width:400} }
+      staff:{clef:"treble",tempo:80,notes:[{p:"C4",d:"h"},{p:"E4",d:"h"},{bar:"single"},{p:"C4",d:"w"},{p:"E4",d:"w",chord:true},{bar:"final"}],brackets:[{from:0,to:1,label:"melodic 3rd"},{from:3,to:4,label:"harmonic 3rd"}],width:440} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Interval Sprint (45s)",

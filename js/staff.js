@@ -436,7 +436,7 @@ const Staff=(()=>{
     if(spec.onKeysig) svg.querySelectorAll(".ksgroup").forEach(g=>{ g.classList.add("clickable"); g.addEventListener("click",()=>spec.onKeysig(+g.dataset.ks)); });
     return {
       svg,
-      highlight(i){ svg.querySelectorAll(".notegroup .note, .notegroup .rest, .notegroup .mtxt").forEach(n=>n.classList.remove("hl"));
+      highlight(i,keep){ if(!keep) svg.querySelectorAll(".notegroup .note, .notegroup .rest, .notegroup .mtxt").forEach(n=>n.classList.remove("hl"));
         if(i!=null){ const g=svg.querySelector(`.notegroup[data-i="${i}"] .note, .notegroup[data-i="${i}"] .rest, .notegroup[data-i="${i}"] .mtxt`); if(g)g.classList.add("hl"); } }
     };
   }
@@ -465,9 +465,9 @@ const Staff=(()=>{
       if(n.dyn&&VOLS[n.dyn]!==undefined) vol=VOLS[n.dyn];
       const base=tempo? beatsOf(n)*spb : DURSEC[normD(n.d||n.rest)]*(isDotted(n)?1.5:1);
       const dur=n.artic==="fermata"? base*1.8 : base;
-      if(n.chord&&!n.rest){ /* harmonic interval: sound with the previous note */
+      if(n.chord&&!n.rest){ /* harmonic interval: sound with the previous note, BOTH stay lit */
         MFAudio.tone(MFAudio.midi(n.sound||n.p), lastDur||Math.min(dur,1.8), lastStart, vol*.9);
-        if(api) setTimeout(()=>api.highlight(i), lastStart*1000);
+        if(api) setTimeout(()=>api.highlight(i,true), lastStart*1000+30);
         return;
       }
       if(!n.rest&&!tiedTo.has(i)){
