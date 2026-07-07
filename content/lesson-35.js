@@ -103,12 +103,26 @@ LESSON_CONTENT[35]={
         success:"✓ C(1) D(2) E(3) F(4) G(5) A(6) — a 6th. Number: solved. But the number is only HALF of an interval's name…",
         fail:"Count every letter from C as 1: C D E F G A.",
         hint:"Both ends count — C itself is 1." } },
-    { say:"Here's the problem: these two intervals are BOTH '3rds' — same letters, C to E. But press play: they are different sizes and different moods! The number alone can't tell them apart. Intervals need a second label: their <b>QUALITY</b>. \u{1F447} <b>What does the interval NUMBER alone fail to tell us?</b>",
-      show:{ type:"staff", spec:{clef:"treble",tempo:70,notes:[{p:"C4",d:"w",x:150},{p:"E4",d:"w",chord:true},{p:"C4",d:"w",x:310},{p:"Eb4",d:"w",chord:true}],brackets:[{from:0,to:1,label:"a 3rd"},{from:2,to:3,label:"also a 3rd!"}],width:420} },
-      try:{ type:"mc", choices:["The exact size in half steps","The letter names","Which clef to use"], answer:0,
-        success:"✓ Both are 3rds by letter-count, but one is a half step smaller. QUALITY measures the exact size — and that's today's skill.",
-        fail:"The letters are identical (C and E) — so what changed?",
-        hint:"One E wears a flat. The distance shrank." } },
+    { say:"Here's the problem: these two intervals are BOTH written C up to E-something — same letters. <b>Press both play buttons</b> and listen: different sizes, different moods! The letter-count NUMBER can't tell them apart. \u{1F447} <b>True or false — BOTH of them are 3rds?</b>",
+      show:{ type:"staff", spec:{clef:"treble",notes:[{p:"C4",d:"w",x:150},{p:"E4",d:"w",chord:true},{p:"C4",d:"w",x:310},{p:"Eb4",d:"w",chord:true}],brackets:[{from:0,to:1,label:"3rd #1"},{from:2,to:3,label:"3rd #2"}],width:420} },
+      try:{ type:"custom",
+        hint:"Count the letters of each one: C(1) D(2) E(3)\u2026 then trust your ears for the SIZE.",
+        mount:(container,fb)=>{
+          container.innerHTML=`<div style="text-align:center">
+            <button class="play l35-ta">\u25b6 3rd #1 (C\u2013E)</button>
+            <button class="play l35-tb">\u25b6 3rd #2 (C\u2013E\u266d)</button></div>
+            <div class="big-q" style="text-align:center">True or false: BOTH intervals are 3rds.</div>
+            <div class="choices l35-tch" style="display:none"><button>\u2705 True \u2014 both are 3rds</button><button>\u274c False \u2014 only one is a 3rd</button></div>`;
+          const ch=container.querySelector(".l35-tch");
+          let hA=false,hB=false;
+          const arm=()=>{ if(hA&&hB) setTimeout(()=>ch.style.display="",900); };
+          container.querySelector(".l35-ta").onclick=()=>{ MFAudio.tone(60,.9,0,.42); MFAudio.tone(64,.9,0,.42); hA=true; arm(); };
+          container.querySelector(".l35-tb").onclick=()=>{ MFAudio.tone(60,.9,0,.42); MFAudio.tone(63,.9,0,.42); hB=true; arm(); };
+          [...ch.children].forEach((b,i)=>b.onclick=()=>{
+            if(i===0){ MFAudio.yay(); fb(true,"\u2713 TRUE \u2014 count the letters: C-D-E, three for each, so BOTH are 3rds. But your ears caught two different SIZES (4 half steps vs 3). The number alone can't tell them apart \u2014 that's exactly why intervals need a QUALITY label."); }
+            else { MFAudio.tone(40,.2); fb(false,"Count the letters of EACH one: C(1) D(2) E(3) \u2014 the flat doesn't change the letter."); }
+          });
+        } } },
     { say:"Quality is measured in <b>HALF STEPS</b> — keyboard distance, black keys included. \u{1F447} <b>Grab the ruler: press every key and measure three intervals in half steps:</b>",
       try:{ type:"custom",
         hint:"Count MOVES between keys, not the keys themselves. C→C♯ is 1 half step, C→D is 2…",
