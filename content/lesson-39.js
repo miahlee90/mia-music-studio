@@ -153,7 +153,7 @@ LESSON_CONTENT[39]={
         {p:"C5",d:"q",label:"1"},{p:"D5",d:"8",label:"2"},{p:"D5",d:"8",label:"&"},
         {p:"E5",d:"16",label:"3"},{p:"E5",d:"16",label:"e"},{p:"E5",d:"16",label:"&"},{p:"E5",d:"16",label:"a"},{p:"C5",d:"q",label:"4"},{bar:"single"},
         {p:"D5",d:"8",label:"1"},{p:"E5",d:"16",label:"&"},{p:"D5",d:"16",label:"a"},{p:"C5",d:"q",label:"2"},{p:"B4",d:"h",label:"3-4"},{bar:"final"}],
-        beams:[[1,2],[3,6,2],[8,10],[9,10,2]],width:680} }
+        beams:[[1,2],[3,6,2],[9,11],[10,11,2]],width:680} }
   ],
   games:[
     { type:"value-race", title:"Game 1 · Value Race — sixteenth edition (45s)",

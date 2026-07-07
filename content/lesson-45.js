@@ -136,7 +136,7 @@ LESSON_CONTENT[45]={
         {p:"C5",d:"8",label:"2"},{p:"C5",d:"8",label:"trip"},{p:"C5",d:"8",label:"let"},{bar:"single"},
         {p:"D5",d:"8",label:"1"},{p:"D5",d:"8",label:"trip"},{p:"D5",d:"8",label:"let"},
         {p:"C5",d:"q",label:"2"},{bar:"final"}],
-        beams:[[0,1],[2,4],[5,7]],tuplets:[{from:2,to:4},{from:5,to:7}],width:600} },
+        beams:[[0,1],[2,4],[6,8]],tuplets:[{from:2,to:4},{from:6,to:8}],width:600} },
     { caption:"À la Nutcracker — quarter, then a triplet swirl, then a resolving note: the triplet as a burst of motion inside a march.",
       staff:{clef:"treble",tempo:90,time:"4/4",notes:[
         {p:"G5",d:"q",label:"1"},{p:"G5",d:"8",label:"2"},{p:"G5",d:"8",label:"&"},

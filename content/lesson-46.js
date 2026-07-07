@@ -124,7 +124,7 @@ LESSON_CONTENT[46]={
       show:{ type:"staff", spec:{clef:"treble",tempo:90,time:"2/4",notes:[
         {p:"C5",d:"8",label:"1"},{p:"E5",d:"8",label:"&",artic:"accent"},{p:"C5",d:"8",label:"2"},{p:"E5",d:"8",label:"&",artic:"accent"},{bar:"single"},
         {p:"D5",d:"8",label:"1"},{p:"F5",d:"8",label:"&",artic:"accent"},{p:"D5",d:"q",label:"2"},{bar:"final"}],
-        beams:[[0,1],[2,3],[4,5]],width:520} },
+        beams:[[0,1],[2,3],[5,6]],width:520} },
       try:{ type:"mc", choices:["On the '&' — between the beats","On beats 1 and 2","On every note equally"], answer:0,
         success:"✓ The > signs sit on the off-beats. That against-the-grain kick is syncopation — the engine of ragtime, jazz, and pop.",
         fail:"Find the > marks — which count-labels do they share?",

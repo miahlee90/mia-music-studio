@@ -393,6 +393,12 @@ const Staff=(()=>{
       const xa=up? A.x+8.4 : A.x-8.4, xb=up? B.x+8.4 : B.x-8.4;
       const ya=up? A.y-38 : A.y+38, yb=up? B.y-38 : B.y+38;
       const lv=bmLv||1, slope=(xb===xa)?0:(yb-ya)/(xb-xa);
+      /* v7.8b - interior stems extend to meet the beam (no detached middle notes) */
+      if(xa!==xb) for(let i2=a+1;i2<b;i2++){
+        const P=placed.find(pl=>pl.i===i2&&pl.y!==undefined); if(!P) continue;
+        const xs=up? P.x+8.4 : P.x-8.4;
+        parts.push(`<line class="stem" x1="${xs}" y1="${P.y+(up?-2:2)}" x2="${xs}" y2="${ya+slope*(xs-xa)}"/>`);
+      }
       for(let L=1;L<=lv;L++){
         if(xa===xb&&L===1) continue; /* stub entry: only the upper level(s) */
         const off=(L-1)*7.5*(up?1:-1);

@@ -112,7 +112,7 @@ LESSON_CONTENT[43]={
         {p:"C5",d:"8",label:"1"},{p:"D5",d:"8",label:"2"},{p:"E5",d:"8",label:"3"},
         {p:"F5",d:"8",label:"4"},{p:"E5",d:"8",label:"5"},{p:"D5",d:"8",label:"6"},{bar:"single"},
         {p:"E5",d:"8",label:"1"},{p:"D5",d:"8",label:"2"},{p:"C5",d:"8",label:"3"},{p:"C5",d:"q.",label:"4-5-6"},{bar:"final"}],
-        beams:[[0,2],[3,5],[6,8]],
+        beams:[[0,2],[3,5],[7,9]],
         brackets:[{from:0,to:2,label:"group 1"},{from:3,to:5,label:"group 2"}],width:620} },
       try:{ type:"mc", choices:["Beats 1 and 4","Beats 1 and 3","Every beat"], answer:0,
         success:"✓ ONE-two-three-FOUR-five-six: the strong pulses launch each group of three.",
@@ -147,7 +147,7 @@ LESSON_CONTENT[43]={
         {p:"C5",d:"8",label:"1"},{p:"D5",d:"8",label:"2"},{p:"E5",d:"8",label:"3"},
         {p:"F5",d:"8",label:"4"},{p:"G5",d:"8",label:"5"},{p:"E5",d:"8",label:"6"},{bar:"single"},
         {p:"F5",d:"8",label:"1"},{p:"D5",d:"8",label:"2"},{p:"B4",d:"8",label:"3"},{p:"C5",d:"q.",label:"4-5-6"},{bar:"final"}],
-        beams:[[0,2],[3,5],[6,8]],width:640} }
+        beams:[[0,2],[3,5],[7,9]],width:640} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Bottom-8 Value Sprint (45s)",
