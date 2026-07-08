@@ -1,4 +1,4 @@
-/* Music Fundamentals — quiz engine (DD-07, DD-19 hybrid generators, DD-20 completion codes) v5.6
+/* Music Fundamentals — quiz engine (DD-07, DD-19 hybrid generators, DD-20 completion codes) v5.7
    v2: wrong-answer review list, explicit percentage, drill supports fixed questions.
    v3 (Milestone 2): "line-space" generator supports params:{clef:"bass"}.
    v4 (Milestone 3): adds "note-value" (identify whole/half/quarter or its beats)
@@ -380,6 +380,76 @@ const Quiz=(()=>{
         staff, choices, answer:choices.indexOf(correct),
         explain:`Bottom note of a root-position triad = the root: ${correct} (${correct}-${third[0]}-${fifth[0]}).`,
         hint:"In root position, the root is the LOWEST note." };
+    },
+    /* v5.7 (Book 3, Unit 14) — rel-key: relative major/minor pairs.
+       params:{ask:"min"|"maj"|"sig"|"both"} */
+    "rel-key": p=>{
+      const PAIRS=[["C","A"],["G","E"],["D","B"],["A","F#"],["E","C#"],["F","D"],["Bb","G"],["Eb","C"],["Ab","F"]];
+      const SIG={C:"no sharps or flats",G:"1 sharp",D:"2 sharps",A:"3 sharps",E:"4 sharps",F:"1 flat",Bb:"2 flats",Eb:"3 flats",Ab:"4 flats"};
+      const pr=PAIRS[Math.floor(Math.random()*PAIRS.length)];
+      let mode=(p&&p.ask)||"min";
+      if(mode==="both") mode=["min","maj","sig"][Math.floor(Math.random()*3)];
+      const wrongs=arr=>arr.sort(()=>Math.random()-.5).slice(0,3);
+      if(mode==="maj"){
+        const correct=pr[0]+" major";
+        const ws=wrongs(PAIRS.map(x=>x[0]+" major").filter(x=>x!==correct));
+        const choices=[correct,...ws].sort(()=>Math.random()-.5);
+        return { type:"mc", q:`Which MAJOR key is the relative major of ${pr[1]} minor?`,
+          choices, answer:choices.indexOf(correct),
+          explain:`Up a minor 3rd from ${pr[1]}: ${pr[0]} major (same key signature: ${SIG[pr[0]]}).`,
+          hint:"Relative major = a minor 3rd ABOVE the minor keynote." };
+      }
+      if(mode==="sig"){
+        const correct=pr[1]+" minor";
+        const ws=wrongs(PAIRS.map(x=>x[1]+" minor").filter(x=>x!==correct));
+        const choices=[correct,...ws].sort(()=>Math.random()-.5);
+        const staff= pr[0]==="C"? undefined : {clef:"treble",keysig:pr[0],notes:[],width:180};
+        return { type:"mc", q: pr[0]==="C"? "A key signature with NO sharps or flats belongs to which MINOR key?" : "This key signature belongs to which MINOR key?",
+          staff, choices, answer:choices.indexOf(correct),
+          explain:`${SIG[pr[0]]} = ${pr[0]} major — whose relative minor is ${pr[1]} minor (6th degree of ${pr[0]} major).`,
+          hint:"Name the MAJOR key first, then go to its 6th degree." };
+      }
+      const correct=pr[1]+" minor";
+      const ws=wrongs(PAIRS.map(x=>x[1]+" minor").filter(x=>x!==correct));
+      const choices=[correct,...ws].sort(()=>Math.random()-.5);
+      return { type:"mc", q:`Which minor key is the RELATIVE MINOR of ${pr[0]} major?`,
+        choices, answer:choices.indexOf(correct),
+        explain:`The 6th degree of ${pr[0]} major is ${pr[1]} → ${pr[1]} minor (same signature: ${SIG[pr[0]]}).`,
+        hint:"Count up to the 6th scale degree — or down a minor 3rd from the keynote." };
+    },
+    /* v5.7 (Book 3, Unit 14) — triad-quality: major/minor/augmented/diminished.
+       params:{quals:["M","m","A","d"], ask:"quality"|"symbol"} */
+    "triad-quality": p=>{
+      const SPELL={
+        C:{M:["C4","E4","G4"], m:["C4","Eb4","G4"], A:["C4","E4","G#4"], d:["C4","Eb4","Gb4"]},
+        F:{M:["F4","A4","C5"], m:["F4","Ab4","C5"], A:["F4","A4","C#5"], d:["F4","Ab4","Cb5"]},
+        G:{M:["G4","B4","D5"], m:["G4","Bb4","D5"], A:["G4","B4","D#5"], d:["G4","Bb4","Db5"]},
+        D:{M:["D4","F#4","A4"], m:["D4","F4","A4"], A:["D4","F#4","A#4"], d:["D4","F4","Ab4"]}};
+      const QNAME={M:"Major",m:"Minor",A:"Augmented",d:"Diminished"};
+      const QSYM={M:"",m:"m",A:"+",d:"\u00b0"};
+      const QEXPL={M:"major 3rd + minor 3rd (M3 below, P5 frame)",m:"minor 3rd + major 3rd (lowered 3rd)",
+        A:"two MAJOR 3rds — the 5th is raised",d:"two MINOR 3rds — the 5th is lowered"};
+      const quals=(p&&p.quals)||["M","m","A","d"];
+      const roots=Object.keys(SPELL);
+      const root=roots[Math.floor(Math.random()*roots.length)];
+      const q0=quals[Math.floor(Math.random()*quals.length)];
+      const ps=SPELL[root][q0];
+      const staff={clef:"treble",notes:ps.map((pp,ix)=>ix===0?{p:pp,d:"w"}:{p:pp,d:"w",chord:true}),width:200};
+      const nice=s=>s.replace(/([A-G])b/,"$1\u266d").replace(/([A-G])#/,"$1\u266f").replace(/\d/,"");
+      const spelled=ps.map(nice).join("-");
+      if((p&&p.ask)==="symbol"){
+        const correct=root+QSYM[q0];
+        const choices=quals.map(q2=>root+QSYM[q2]);
+        return { type:"mc", q:"Which chord symbol names this triad?",
+          staff, choices, answer:choices.indexOf(correct),
+          explain:`${spelled} = ${QNAME[q0]}: ${QEXPL[q0]}. Symbol: ${correct||root}.`,
+          hint:"Letter only = major, m = minor, + = augmented, \u00b0 = diminished." };
+      }
+      const choices=quals.map(q2=>QNAME[q2]);
+      return { type:"mc", q:"What QUALITY is this triad?",
+        staff, choices, answer:choices.indexOf(QNAME[q0]),
+        explain:`${spelled}: ${QEXPL[q0]} → ${QNAME[q0]}.`,
+        hint:"Check the 3rd first (major/minor), then the 5th (perfect/raised/lowered)." };
     },
     /* v5.6 (Book 3, Unit 13) — inversion-id: triad & V7 chord positions.
        params:{subject:"triad"|"v7"|"both", ask:"position"|"figure"|"both", clef} */

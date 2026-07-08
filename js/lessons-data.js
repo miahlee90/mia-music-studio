@@ -56,10 +56,10 @@ const LESSONS=[
  {n:53, title:"V7 Chord — 1st, 2nd and 3rd Inversions", unit:13, book:3, time:15, kw:["V7 inversions"]},
  {n:54, title:"Figured Bass", unit:13, book:3, time:15, kw:["figured bass","numbers"]},
  {n:55, title:"Major Chord Progressions", unit:13, book:3, time:15, kw:["progression","I IV V7"]},
- {n:56, title:"Minor Scales", unit:14, book:3, time:12, kw:["minor scale","relative minor"]},
- {n:57, title:"Natural, Harmonic and Melodic Minor Scales", unit:14, book:3, time:13, kw:["natural minor","harmonic minor","melodic minor"]},
- {n:58, title:"Minor Triads", unit:14, book:3, time:11, kw:["minor triad"]},
- {n:59, title:"Augmented and Diminished Triads", unit:14, book:3, time:12, kw:["augmented","diminished","triads"]},
+ {n:56, title:"Minor Scales", unit:14, book:3, time:15, kw:["minor scale","relative minor"]},
+ {n:57, title:"Natural, Harmonic and Melodic Minor Scales", unit:14, book:3, time:15, kw:["natural minor","harmonic minor","melodic minor"]},
+ {n:58, title:"Minor Triads", unit:14, book:3, time:15, kw:["minor triad"]},
+ {n:59, title:"Augmented and Diminished Triads", unit:14, book:3, time:15, kw:["augmented","diminished","triads"]},
  {n:60, title:"The Primary Triads in Minor Keys", unit:15, book:3, time:12, kw:["minor primary triads","i iv V"]},
  {n:61, title:"Minor Chord Progressions", unit:15, book:3, time:12, kw:["minor progression"]},
  {n:62, title:"Modes Related to the Major Scale: Ionian, Mixolydian and Lydian", unit:15, book:3, time:13, kw:["modes","ionian","mixolydian","lydian"]},
@@ -98,5 +98,5 @@ const UNITS=[
  {unit:18, book:3, name:"Form", lessons:[72,75]}
 ];
 /* built lessons so far (index pages link only these) */
-const BUILT_THROUGH=55;
+const BUILT_THROUGH=59;
 const LESSON_CONTENT={}; /* filled by content/lesson-NN.js */
