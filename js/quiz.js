@@ -1,4 +1,4 @@
-/* Music Fundamentals — quiz engine (DD-07, DD-19 hybrid generators, DD-20 completion codes) v4
+/* Music Fundamentals — quiz engine (DD-07, DD-19 hybrid generators, DD-20 completion codes) v5.6
    v2: wrong-answer review list, explicit percentage, drill supports fixed questions.
    v3 (Milestone 2): "line-space" generator supports params:{clef:"bass"}.
    v4 (Milestone 3): adds "note-value" (identify whole/half/quarter or its beats)
@@ -380,6 +380,58 @@ const Quiz=(()=>{
         staff, choices, answer:choices.indexOf(correct),
         explain:`Bottom note of a root-position triad = the root: ${correct} (${correct}-${third[0]}-${fifth[0]}).`,
         hint:"In root position, the root is the LOWEST note." };
+    },
+    /* v5.6 (Book 3, Unit 13) — inversion-id: triad & V7 chord positions.
+       params:{subject:"triad"|"v7"|"both", ask:"position"|"figure"|"both", clef} */
+    "inversion-id": p=>{
+      const L=["C","D","E","F","G","A","B"];
+      const TRIADS={C:["C","E","G"],F:["F","A","C"],G:["G","B","D"],D:["D","F#","A"],A:["A","C#","E"],Bb:["Bb","D","F"]};
+      const SEVENTHS={G7:["G","B","D","F"],C7:["C","E","G","Bb"],D7:["D","F#","A","C"],A7:["A","C#","E","G"],F7:["F","A","C","Eb"]};
+      const subject=(p&&p.subject)==="both"? (Math.random()<.5?"triad":"v7") : ((p&&p.subject)||"triad");
+      const ask=(p&&p.ask)==="both"? (Math.random()<.5?"position":"figure") : ((p&&p.ask)||"position");
+      const clef=(p&&p.clef)||"treble";
+      const SET=subject==="v7"? SEVENTHS : TRIADS;
+      const names=Object.keys(SET);
+      const name=names[Math.floor(Math.random()*names.length)];
+      const tones=SET[name];
+      const k=Math.floor(Math.random()*tones.length); /* 0=root pos, 1=1st inv, ... */
+      /* close-position voicing from the chosen bass upward */
+      const order=tones.slice(k).concat(tones.slice(0,k));
+      let oct=clef==="bass"?2:4, prevIdx=-99;
+      const ps=order.map(t=>{
+        let idx=L.indexOf(t[0])+7*oct;
+        while(idx<=prevIdx){ oct++; idx=L.indexOf(t[0])+7*oct; }
+        prevIdx=idx;
+        return t+oct;
+      });
+      /* keep the chord inside a friendly range */
+      const topIdx=L.indexOf(order[order.length-1][0])+7*(+ps[ps.length-1].slice(-1));
+      if(clef!=="bass"&&topIdx>=7*6){ /* above B5: drop an octave */
+        for(let i=0;i<ps.length;i++) ps[i]=ps[i].slice(0,-1)+(+ps[i].slice(-1)-1);
+      }
+      const staff={clef,notes:ps.map((pp,ix)=>ix===0?{p:pp,d:"w"}:{p:pp,d:"w",chord:true}),width:200};
+      const POS3=["Root position","1st inversion","2nd inversion"];
+      const POS4=["Root position","1st inversion","2nd inversion","3rd inversion"];
+      const FIG3=["5/3 (or none)","6","6/4"];
+      const FIG4=["7","6/5","4/3","4/2"];
+      const bassRole=["root","3rd","5th","7th"][k];
+      const chordLabel=subject==="v7"? name+" (a V7-type chord)" : name+" major";
+      if(ask==="figure"){
+        const FIGS=subject==="v7"? FIG4 : FIG3;
+        const correct=FIGS[k];
+        const choices=FIGS.slice();
+        return { type:"mc", q:`Figured bass: which figure fits this ${subject==="v7"?"seventh chord":"triad"} position?`,
+          staff, choices, answer:choices.indexOf(correct),
+          explain:`The bass is the ${bassRole} → ${POS4[k]} → ${correct}. (${chordLabel}: ${tones.join("-")})`,
+          hint:"Find the BASS note first — the figures describe intervals above it." };
+      }
+      const POS=subject==="v7"? POS4 : POS3;
+      const correct=POS[k];
+      const choices=POS.slice();
+      return { type:"mc", q:`What position is this ${subject==="v7"?"V7-type seventh chord":"major triad"} in?`,
+        staff, choices, answer:choices.indexOf(correct),
+        explain:`Lowest note = the ${bassRole} of ${chordLabel} → ${correct}. The letters (${tones.join("-")}) never changed.`,
+        hint:"Only the BASS note decides the position — name the chord from its stacked-3rds spelling first." };
     },
     /* v5.5 — scale degree names (Unit 12, L49)
        (params:{ask:"name"|"note"|"both"}) — C major */

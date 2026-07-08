@@ -51,11 +51,11 @@ const LESSONS=[
  {n:48, title:"Primary and Major Triads", unit:12, book:2, time:15, kw:["primary triads","I IV V"]},
  {n:49, title:"Scale Degree Names", unit:12, book:2, time:15, kw:["tonic","dominant","subdominant","scale degrees"]},
  {n:50, title:"The V7 (Dominant 7th) Chord", unit:12, book:2, time:15, kw:["V7","dominant seventh"]},
- {n:51, title:"Triads — 1st Inversion", unit:13, book:3, time:12, kw:["inversion","first inversion"]},
- {n:52, title:"Triads — 2nd Inversion", unit:13, book:3, time:12, kw:["second inversion"]},
- {n:53, title:"V7 Chord — 1st, 2nd and 3rd Inversions", unit:13, book:3, time:13, kw:["V7 inversions"]},
- {n:54, title:"Figured Bass", unit:13, book:3, time:13, kw:["figured bass","numbers"]},
- {n:55, title:"Major Chord Progressions", unit:13, book:3, time:12, kw:["progression","I IV V7"]},
+ {n:51, title:"Triads — 1st Inversion", unit:13, book:3, time:15, kw:["inversion","first inversion"]},
+ {n:52, title:"Triads — 2nd Inversion", unit:13, book:3, time:15, kw:["second inversion"]},
+ {n:53, title:"V7 Chord — 1st, 2nd and 3rd Inversions", unit:13, book:3, time:15, kw:["V7 inversions"]},
+ {n:54, title:"Figured Bass", unit:13, book:3, time:15, kw:["figured bass","numbers"]},
+ {n:55, title:"Major Chord Progressions", unit:13, book:3, time:15, kw:["progression","I IV V7"]},
  {n:56, title:"Minor Scales", unit:14, book:3, time:12, kw:["minor scale","relative minor"]},
  {n:57, title:"Natural, Harmonic and Melodic Minor Scales", unit:14, book:3, time:13, kw:["natural minor","harmonic minor","melodic minor"]},
  {n:58, title:"Minor Triads", unit:14, book:3, time:11, kw:["minor triad"]},
@@ -98,5 +98,5 @@ const UNITS=[
  {unit:18, book:3, name:"Form", lessons:[72,75]}
 ];
 /* built lessons so far (index pages link only these) */
-const BUILT_THROUGH=50;
+const BUILT_THROUGH=55;
 const LESSON_CONTENT={}; /* filled by content/lesson-NN.js */
