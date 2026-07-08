@@ -37,7 +37,9 @@ function MF_L41_feel(container,fb){
 /* dot calculator: build the dotted 8th from sixteenth blocks */
 function MF_L41_calc(container,fb){
   let placed=0;
-  container.innerHTML=`<div class="big-q l41-cq" style="text-align:center">An eighth note = <b>2</b> sixteenths. The dot adds <b>half its value</b>. Tap the ➕ to add the dot's sixteenths:</div>
+  container.innerHTML=`<div class="big-q l41-cq" style="text-align:center">Build a dotted eighth note using sixteenth-note units.<br>
+    <span style="font-weight:600">An eighth note equals <b>2</b> sixteenth notes. A dot adds <b>half of the note's original value</b>. Half of 2 is 1.</span><br>
+    Tap the ➕:</div>
     <div class="l41-cbar" style="display:flex;gap:6px;justify-content:center;margin:14px 0;min-height:44px"></div>
     <div style="text-align:center"><button class="play l41-add">➕ Add the dot's value</button></div>
     <div class="l41-cmsg" style="text-align:center;font-weight:800;min-height:24px;color:var(--correct)"></div>`;
@@ -45,13 +47,13 @@ function MF_L41_calc(container,fb){
   function block(txt,extra){ return `<div style="width:64px;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff;background:${extra?"var(--correct)":"var(--primary)"}">${txt}</div>`; }
   function draw(){
     bar.innerHTML=block("♬ ¼")+block("♬ ¼")+(placed>=1?block("+ ¼",true):"");
-    msg.textContent=placed===0? "eighth note = 2 sixteenths (½ beat)" : "2 + 1 = 3 sixteenths = ¾ beat — the DOTTED EIGHTH!";
+    msg.textContent=placed===0? "" : "2 + 1 = 3 sixteenth notes = ¾ of one beat";
   }
   btn.onclick=()=>{
     if(placed>=1) return;
     placed=1; draw(); btn.style.display="none";
     MFAudio.tone(72,.62,0,.55); 
-    fb(true,"✓ Dot math: the 8th is worth 2 sixteenths; half of 2 is 1; 2 + 1 = 3 sixteenths = ¾ of a beat. The dotted eighth almost fills the beat — leaving room for exactly ONE sixteenth.");
+    fb(true,"✓ Correct! You built a dotted eighth note: 2 + 1 = 3 sixteenth notes (¾ beat). It is usually followed by a sixteenth note to complete one beat.");
   };
   draw();
 }
