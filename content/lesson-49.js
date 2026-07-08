@@ -17,7 +17,7 @@ function MF_L49_climb(container,fb){
   function ask(){ q.innerHTML=`In C major, press the <b>${DEG[k][0]}</b>${k===7?" (top of the ladder!)":""}.`; }
   kb=Keyboard.create(kbHolder,{start:60,octaves:1,labels:true,
     onKey:m=>{
-      if(m===DEG[k][1]){
+      if((m-DEG[k][1])%12===0){ /* either C answers "Tonic" - degree identity is what counts */
         pressed.push(m); kb.mark(pressed); MFAudio.tone(m,.35);
         cnt.textContent=DEG.slice(0,k+1).map((d,ix)=>`${ix+1}=${d[0]==="Leading Tone"?"L.T.":d[0]}`).join("  ");
         k++;
