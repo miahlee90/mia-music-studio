@@ -82,7 +82,8 @@ function MF_L45_tap(container,fb){
       const pBase=IN+pass*GROUPS*BPS;
       if(pass===1) timers.push(setTimeout(()=>{ dots.forEach(d=>d.style.background="#fff"); cd.textContent="REPEAT!"; timers.push(setTimeout(()=>cd.textContent="",900)); },pBase*1000-60));
       for(let b=0;b<GROUPS;b++){
-        MFAudio.tone(48,.12,pBase+b*BPS,.66); /* beat drum */
+        MFAudio.tone(48,.12,pBase+b*BPS,.66); /* beat drum: STRONG */
+        [1,2].forEach(s=>MFAudio.tone(48,.05,pBase+b*BPS+s*BPS/3,.16)); /* -weak-weak: the triplet grid, all 8 groups */
         for(let k=0;k<3;k++){
           const t=pBase+(b+k/3)*BPS, ix=b*3+k;
           timers.push(setTimeout(()=>{ dots[ix].style.background = k===0? "#ffd9e1" : "#e3e1fd"; },t*1000));
