@@ -1,4 +1,4 @@
-/* Music Fundamentals — quiz engine (DD-07, DD-19 hybrid generators, DD-20 completion codes) v5.7
+/* Music Fundamentals — quiz engine (DD-07, DD-19 hybrid generators, DD-20 completion codes) v5.8
    v2: wrong-answer review list, explicit percentage, drill supports fixed questions.
    v3 (Milestone 2): "line-space" generator supports params:{clef:"bass"}.
    v4 (Milestone 3): adds "note-value" (identify whole/half/quarter or its beats)
@@ -380,6 +380,41 @@ const Quiz=(()=>{
         staff, choices, answer:choices.indexOf(correct),
         explain:`Bottom note of a root-position triad = the root: ${correct} (${correct}-${third[0]}-${fifth[0]}).`,
         hint:"In root position, the root is the LOWEST note." };
+    },
+    /* v5.8 (Book 3, Unit 15) — mode-id: the seven modes.
+       params:{set:"major"|"minor"|"all", ask:"scale"|"recipe"|"both"} */
+    "mode-id": p=>{
+      const MODES={
+        "Ionian":   {base:"major", ps:["C4","D4","E4","F4","G4","A4","B4","C5"], recipe:"the major scale itself"},
+        "Mixolydian":{base:"major", ps:["C4","D4","E4","F4","G4","A4","Bb4","C5"], recipe:"a major scale with the 7th LOWERED a half step"},
+        "Lydian":   {base:"major", ps:["C4","D4","E4","F#4","G4","A4","B4","C5"], recipe:"a major scale with the 4th RAISED a half step"},
+        "Aeolian":  {base:"minor", ps:["A3","B3","C4","D4","E4","F4","G4","A4"], recipe:"the natural minor scale itself"},
+        "Dorian":   {base:"minor", ps:["A3","B3","C4","D4","E4","F#4","G4","A4"], recipe:"a natural minor scale with the 6th RAISED a half step"},
+        "Phrygian": {base:"minor", ps:["A3","Bb3","C4","D4","E4","F4","G4","A4"], recipe:"a natural minor scale with the 2nd LOWERED a half step"},
+        "Locrian":  {base:"minor", ps:["A3","Bb3","C4","D4","Eb4","F4","G4","A4"], recipe:"a natural minor scale with the 2nd AND 5th lowered a half step"}};
+      const set=(p&&p.set)||"all";
+      const names=Object.keys(MODES).filter(n=>set==="all"||MODES[n].base===set);
+      const name=names[Math.floor(Math.random()*names.length)];
+      const M=MODES[name];
+      let mode=(p&&p.ask)||"scale";
+      if(mode==="both") mode=Math.random()<.5?"scale":"recipe";
+      if(mode==="recipe"){
+        const correct=M.recipe;
+        const ws=names.filter(n=>n!==name).sort(()=>Math.random()-.5).slice(0,3).map(n=>MODES[n].recipe);
+        const choices=[correct,...ws].sort(()=>Math.random()-.5);
+        return { type:"mc", q:`The ${name} mode is…`,
+          choices, answer:choices.indexOf(correct),
+          explain:`${name}: ${M.recipe}.`,
+          hint:M.base==="major"?"It's one of the major-related modes.":"It's one of the minor-related modes." };
+      }
+      const keynote=M.base==="major"?"C":"A";
+      const choices=names.slice().sort(()=>Math.random()-.5).slice(0,Math.min(4,names.length));
+      if(!choices.includes(name)){ choices[Math.floor(Math.random()*choices.length)]=name; }
+      const staff={clef:"treble",notes:M.ps.map(pp=>({p:pp,d:"q"})),width:420};
+      return { type:"mc", q:`Name this mode (built on ${keynote}).`,
+        staff, choices, answer:choices.indexOf(name),
+        explain:`${name} on ${keynote}: ${M.recipe}.`,
+        hint:M.base==="major"?"Compare it with the plain major scale — which degree moved?":"Compare it with natural minor — which degree moved?" };
     },
     /* v5.7 (Book 3, Unit 14) — rel-key: relative major/minor pairs.
        params:{ask:"min"|"maj"|"sig"|"both"} */

@@ -60,10 +60,10 @@ const LESSONS=[
  {n:57, title:"Natural, Harmonic and Melodic Minor Scales", unit:14, book:3, time:15, kw:["natural minor","harmonic minor","melodic minor"]},
  {n:58, title:"Minor Triads", unit:14, book:3, time:15, kw:["minor triad"]},
  {n:59, title:"Augmented and Diminished Triads", unit:14, book:3, time:15, kw:["augmented","diminished","triads"]},
- {n:60, title:"The Primary Triads in Minor Keys", unit:15, book:3, time:12, kw:["minor primary triads","i iv V"]},
- {n:61, title:"Minor Chord Progressions", unit:15, book:3, time:12, kw:["minor progression"]},
- {n:62, title:"Modes Related to the Major Scale: Ionian, Mixolydian and Lydian", unit:15, book:3, time:13, kw:["modes","ionian","mixolydian","lydian"]},
- {n:63, title:"Modes Related to the Minor Scale: Aeolian, Dorian, Phrygian, Locrian", unit:15, book:3, time:13, kw:["aeolian","dorian","phrygian","locrian"]},
+ {n:60, title:"The Primary Triads in Minor Keys", unit:15, book:3, time:15, kw:["minor primary triads","i iv V"]},
+ {n:61, title:"Minor Chord Progressions", unit:15, book:3, time:15, kw:["minor progression"]},
+ {n:62, title:"Modes Related to the Major Scale: Ionian, Mixolydian and Lydian", unit:15, book:3, time:15, kw:["modes","ionian","mixolydian","lydian"]},
+ {n:63, title:"Modes Related to the Minor Scale: Aeolian, Dorian, Phrygian, Locrian", unit:15, book:3, time:15, kw:["aeolian","dorian","phrygian","locrian"]},
  {n:64, title:"Harmonizing a Melody in a Major Key", unit:16, book:3, time:13, kw:["harmonize","melody","major"]},
  {n:65, title:"Broken Chords and Arpeggiated Accompaniments", unit:16, book:3, time:12, kw:["broken chord","arpeggio","alberti"]},
  {n:66, title:"Passing and Neighboring Tones", unit:16, book:3, time:12, kw:["passing tone","neighbor tone","nonharmonic"]},
@@ -98,5 +98,5 @@ const UNITS=[
  {unit:18, book:3, name:"Form", lessons:[72,75]}
 ];
 /* built lessons so far (index pages link only these) */
-const BUILT_THROUGH=59;
+const BUILT_THROUGH=63;
 const LESSON_CONTENT={}; /* filled by content/lesson-NN.js */
