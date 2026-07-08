@@ -35,51 +35,72 @@ function MF_L45_ear(container,fb){
   ask();
 }
 
-/* triplet tap v2 (instructor): 4-3-2-1 count-in (예비박), six circles in two
-   beat-groups (tri-po-let x2) that light at the ideal moments, then score. */
+/* triplet tap v3 (instructor): SLOW two-beat count-in in triplet feel
+   ("2 - - 1 - -"), FOUR beat-groups with a repeat sign = eight groups of
+   tri-po-let practice; circles light at the ideal moments each pass. */
 function MF_L45_tap(container,fb){
-  const BPS=.9, CIN=4, SYL=["tri","po","let"];
+  const BPS=1.2, GROUPS=4, PASSES=2, SYL=["tri","po","let"];
   let taps=[], playing=false, t0=0, timers=[];
-  container.innerHTML=`<div class="big-q" style="text-align:center">Your turn to PLAY a triplet: press start, count down <b>4-3-2-1</b> with the clicks, then tap the drum THREE times, evenly, inside each beat — \u201ctri-po-let, tri-po-let\u201d!</div>
-    <div class="l45-cd" style="text-align:center;font-weight:800;font-size:1.5rem;min-height:34px;color:#e11d48"></div>
-    <div class="l45-dots" style="display:flex;justify-content:center;align-items:center;gap:7px;margin:8px 0"></div>
+  container.innerHTML=`<div class="big-q" style="text-align:center">Your turn to PLAY triplets: press start — a slow <b>\u201c2 \u2013 \u2013 1 \u2013 \u2013\u201d</b> count-in, then tap THREE even taps in every beat. Four groups, then the repeat sign runs them again — eight in all!</div>
+    <div class="l45-cd" style="text-align:center;font-weight:800;font-size:1.6rem;min-height:36px;color:#e11d48"></div>
+    <div class="l45-dots" style="display:flex;justify-content:center;align-items:center;gap:6px;margin:8px 0;flex-wrap:wrap"></div>
     <div style="text-align:center">
       <button class="play l45-tp">\u25b6 Start</button>
       <button class="play l45-td" style="font-size:1.4rem">\u{1F941} TAP</button></div>
     <div class="l45-tm" style="text-align:center;font-weight:800;min-height:24px;color:var(--correct)"></div>`;
   const cd=container.querySelector(".l45-cd"), msg=container.querySelector(".l45-tm"),
         dotRow=container.querySelector(".l45-dots"), dots=[];
-  for(let b=0;b<2;b++){
-    if(b){ const gap=document.createElement("div"); gap.style.cssText="width:3px;height:32px;background:#23263e;margin:0 8px;border-radius:2px"; dotRow.appendChild(gap); }
+  for(let b=0;b<GROUPS;b++){
+    if(b){ const gap=document.createElement("div"); gap.style.cssText="width:2.5px;height:30px;background:#23263e;margin:0 6px;border-radius:2px"; dotRow.appendChild(gap); }
     for(let k=0;k<3;k++){
       const strong=k===0, d=document.createElement("div");
       d.textContent=SYL[k];
-      d.style.cssText=`width:${strong?36:29}px;height:${strong?36:29}px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:11px;border:${strong?3:2}px solid ${strong?"#e11d48":"#4434d4"};color:#1c1e54;background:#fff;transition:background .12s`;
+      d.style.cssText=`width:${strong?33:27}px;height:${strong?33:27}px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:10.5px;border:${strong?3:2}px solid ${strong?"#e11d48":"#4434d4"};color:#1c1e54;background:#fff;transition:background .12s`;
       dotRow.appendChild(d); dots.push(d);
     }
   }
+  /* repeat sign */
+  const rep=document.createElement("div");
+  rep.style.cssText="display:flex;align-items:center;gap:3px;margin-left:8px;height:30px";
+  rep.innerHTML=`<div style="display:flex;flex-direction:column;gap:5px;justify-content:center"><div style="width:4.5px;height:4.5px;border-radius:50%;background:#23263e"></div><div style="width:4.5px;height:4.5px;border-radius:50%;background:#23263e"></div></div><div style="width:2.5px;height:30px;background:#23263e"></div><div style="width:6px;height:30px;background:#23263e"></div>`;
+  dotRow.appendChild(rep);
   container.querySelector(".l45-tp").onclick=function(){
     if(playing) return; playing=true; taps=[]; this.disabled=true; msg.textContent="";
     timers.forEach(clearTimeout); timers=[];
     dots.forEach(d=>d.style.background="#fff");
-    for(let c=0;c<CIN;c++){ MFAudio.tone(45,.12,c*BPS,c===CIN-1?.68:.55);
-      timers.push(setTimeout(()=>cd.textContent=String(CIN-c),c*BPS*1000)); }
-    const IN=CIN*BPS;
-    timers.push(setTimeout(()=>cd.textContent="",IN*1000+250));
-    [0,1].forEach(b=>MFAudio.tone(48,.12,IN+b*BPS,.68));
-    for(let b=0;b<2;b++) for(let k=0;k<3;k++){
-      const t=IN+(b+k/3)*BPS, ix=b*3+k;
-      timers.push(setTimeout(()=>{ dots[ix].style.background = k===0? "#ffd9e1" : "#e3e1fd"; },t*1000));
+    /* slow count-in: 2 - - 1 - -  (number click on the beat, two soft triplet ticks) */
+    [0,1].forEach(c=>{
+      const base=c*BPS;
+      MFAudio.tone(45,.14,base,c===1?.7:.6);
+      timers.push(setTimeout(()=>cd.textContent=String(2-c),base*1000));
+      [1,2].forEach(s=>{ MFAudio.tone(45,.06,base+s*BPS/3,.18);
+        timers.push(setTimeout(()=>cd.textContent=String(2-c)+" "+"\u2013 ".repeat(s),(base+s*BPS/3)*1000)); });
+    });
+    const IN=2*BPS;
+    timers.push(setTimeout(()=>cd.textContent="",IN*1000+200));
+    for(let pass=0;pass<PASSES;pass++){
+      const pBase=IN+pass*GROUPS*BPS;
+      if(pass===1) timers.push(setTimeout(()=>{ dots.forEach(d=>d.style.background="#fff"); cd.textContent="REPEAT!"; timers.push(setTimeout(()=>cd.textContent="",900)); },pBase*1000-60));
+      for(let b=0;b<GROUPS;b++){
+        MFAudio.tone(48,.12,pBase+b*BPS,.66); /* beat drum */
+        for(let k=0;k<3;k++){
+          const t=pBase+(b+k/3)*BPS, ix=b*3+k;
+          timers.push(setTimeout(()=>{ dots[ix].style.background = k===0? "#ffd9e1" : "#e3e1fd"; },t*1000));
+        }
+      }
     }
     t0=performance.now();
+    const total=IN+PASSES*GROUPS*BPS;
     timers.push(setTimeout(()=>{ playing=false; this.disabled=false;
-      const targets=[]; for(let b=0;b<2;b++) for(let k=0;k<3;k++) targets.push((IN+(b+k/3)*BPS)*1000);
-      let hit=0; targets.forEach(tt=>{ if(taps.some(tp=>Math.abs(tp-tt)<180)) hit++; });
-      if(hit>=4&&taps.length<=8){ msg.textContent=`\u2713 ${hit} of 6 triplet slots hit!`;
-        fb(true,`\u2713 You fit three even taps inside the beats — a real performed triplet. Smooth, not lumpy: that's the triplet feel of jazz, blues, and lullabies.`); }
-      else { msg.textContent="Keep the three taps EVEN — try again!";
-        fb(false,"Chant 'tri-po-let' out loud as you tap — three equal syllables, three equal taps."); }
-    },(IN+2*BPS)*1000+500));
+      const targets=[];
+      for(let pass=0;pass<PASSES;pass++) for(let b=0;b<GROUPS;b++) for(let k=0;k<3;k++)
+        targets.push((IN+(pass*GROUPS+b+k/3)*BPS)*1000);
+      let hit=0; targets.forEach(tt=>{ if(taps.some(tp=>Math.abs(tp-tt)<190)) hit++; });
+      if(hit>=16&&taps.length<=30){ msg.textContent=`\u2713 ${hit} of 24 triplet slots hit!`;
+        fb(true,`\u2713 Eight full groups of even triplets — a real performed tri-po-let groove. Smooth, not lumpy!`); }
+      else { msg.textContent=`${hit} of 24 — keep the three taps EVEN and steady, try again!`;
+        fb(false,"Chant 'tri-po-let' out loud with the slow count-in — three equal syllables, three equal taps, all eight groups."); }
+    },total*1000+500));
   };
   container.querySelector(".l45-td").onclick=()=>{ if(!playing) return; MFAudio.tone(72,.1,0,.5); taps.push(performance.now()-t0); };
 }
