@@ -105,7 +105,7 @@ LESSON_CONTENT[46]={
       show:{ type:"staff", spec:{clef:"treble",tempo:100,time:"3/4",notes:[
         {p:"G4",d:"q",label:"3"},{bar:"single"},
         {p:"C5",d:"q",label:"1"},{p:"C5",d:"q",label:"2"},{p:"D5",d:"q",label:"3"},{bar:"single"},
-        {p:"E5",d:"h",label:"1-2",x:560},{bar:"final"}],
+        {p:"E5",d:"h",label:"1-2"},{bar:"final"}],
         brackets:[{from:0,to:0,label:"pick-up"}],width:640} },
       try:{ type:"mc", choices:["2 beats — the ones the pick-up borrowed","3 beats as usual","1 beat only"], answer:0,
         success:"✓ 1 + 2 = 3: the first and last measures share one full measure between them. Composers keep tidy books!",
@@ -144,12 +144,12 @@ LESSON_CONTENT[46]={
       staff:{clef:"treble",tempo:100,time:"3/4",notes:[
         {p:"G4",d:"q",label:"3"},{bar:"single"},
         {p:"C5",d:"q",label:"1"},{p:"E5",d:"q",label:"2"},{p:"G5",d:"q",label:"3"},{bar:"single"},
-        {p:"E5",d:"q",label:"1"},{p:"C5",d:"h",label:"2-3",x:600},{bar:"final"}],
+        {p:"E5",d:"q",label:"1"},{p:"C5",d:"h",label:"2-3"},{bar:"final"}],
         brackets:[{from:0,to:0,label:"pick-up"}],width:660} },
-    { caption:"Syncopation: the accented notes (>) strike between the drumbeats — count '1 & 2 &' and feel the kick land on the &s.",
-      staff:{clef:"treble",tempo:90,time:"4/4",notes:[
-        {p:"C5",d:"8",label:"1"},{p:"E5",d:"q",label:"&",artic:"accent"},{p:"E5",d:"8",label:"2 &"},
-        {p:"D5",d:"8",label:"3"},{p:"F5",d:"q",label:"&",artic:"accent"},{p:"D5",d:"8",label:"4 &"},{bar:"final"}],width:560} }
+    { caption:"Syncopation: the classic 8th–quarter–quarter–quarter–8th figure. Every quarter starts on an '&' — the accents (>) land BETWEEN the beats. Count '1 & 2 & 3 & 4 &' with a steady foot!",
+      staff:{clef:"treble",tempo:88,time:"4/4",notes:[
+        {p:"C5",d:"8",label:"1"},{p:"E5",d:"q",label:"& (2)",artic:"accent"},{p:"E5",d:"q",label:"& (3)",artic:"accent"},{p:"E5",d:"q",label:"& (4)",artic:"accent"},{p:"C5",d:"8",label:"&"},{bar:"single"},
+        {p:"D5",d:"8",label:"1"},{p:"F5",d:"q",label:"& (2)",artic:"accent"},{p:"F5",d:"q",label:"& (3)",artic:"accent"},{p:"F5",d:"q",label:"& (4)",artic:"accent"},{p:"D5",d:"8",label:"&"},{bar:"final"}],width:680} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Trick-or-Beat Sprint (45s)",
@@ -247,7 +247,7 @@ LESSON_CONTENT[46]={
     {term:"Pick-up Note(s)", def:"The note or notes of an incomplete measure at the beginning of a piece. The missing beats are found in the last measure. Also called an anacrusis.",
       staff:{clef:"treble",time:"3/4",notes:[{p:"G4",d:"q"},{bar:"single"},{p:"C5",d:"q"},{p:"E5",d:"q"},{p:"G5",d:"q"},{bar:"final"}],width:280}},
     {term:"Syncopation", def:"When the accent in a passage falls on the weak beat (&) rather than the strong beat.",
-      staff:{clef:"treble",notes:[{p:"C5",d:"8"},{p:"E5",d:"8",artic:"accent"},{p:"C5",d:"8"},{p:"E5",d:"8",artic:"accent"}],beams:[[0,1],[2,3]],width:200}},
+      staff:{clef:"treble",notes:[{p:"C5",d:"8"},{p:"E5",d:"q",artic:"accent"},{p:"C5",d:"8"}],width:200}},
     {term:"Accent (>)", def:"A sign directing one note to be played louder — the tool that makes syncopation visible."},
     {term:"Anacrusis", def:"The formal name for pick-up notes — the up-push before the first downbeat."}
   ],
