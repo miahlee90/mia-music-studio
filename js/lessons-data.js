@@ -72,10 +72,10 @@ const LESSONS=[
  {n:69, title:"Composing a Melody in a Minor Key", unit:17, book:3, time:15, kw:["compose","minor"]},
  {n:70, title:"12-Bar Blues Chord Progression", unit:17, book:3, time:15, kw:["blues","12-bar"]},
  {n:71, title:"The Blues Scale", unit:17, book:3, time:15, kw:["blues scale"]},
- {n:72, title:"Basic Forms of Music — Motive and Phrase", unit:18, book:3, time:12, kw:["motive","phrase","form"]},
- {n:73, title:"AB (Binary) Form", unit:18, book:3, time:11, kw:["binary","AB form"]},
- {n:74, title:"ABA (Ternary) Form", unit:18, book:3, time:11, kw:["ternary","ABA form"]},
- {n:75, title:"Rondo Form", unit:18, book:3, time:12, kw:["rondo"]}
+ {n:72, title:"Basic Forms of Music — Motive and Phrase", unit:18, book:3, time:15, kw:["motive","phrase","form"]},
+ {n:73, title:"AB (Binary) Form", unit:18, book:3, time:15, kw:["binary","AB form"]},
+ {n:74, title:"ABA (Ternary) Form", unit:18, book:3, time:15, kw:["ternary","ABA form"]},
+ {n:75, title:"Rondo Form", unit:18, book:3, time:15, kw:["rondo"]}
 ];
 const UNITS=[
  {unit:1, book:1, name:"The Staff and Clefs", lessons:[1,5]},
@@ -98,5 +98,5 @@ const UNITS=[
  {unit:18, book:3, name:"Form", lessons:[72,75]}
 ];
 /* built lessons so far (index pages link only these) */
-const BUILT_THROUGH=71;
+const BUILT_THROUGH=75;
 const LESSON_CONTENT={}; /* filled by content/lesson-NN.js */
