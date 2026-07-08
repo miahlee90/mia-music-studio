@@ -383,26 +383,14 @@ button.notecard svg.mf-staff{height:46px;width:auto;max-width:100%;display:block
 .mf-kb .b .kpoint{color:#ff5a76;top:2px}
 @keyframes kpt{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
 
-/* ── piano inside the purple (v2, instructor): translucent keys rise from the
-   bottom of every header and melt into the gradient — a watermark keyboard.
-   Time badge removed to reclaim the space. ── */
+/* ── piano photo-band across every header (v3, instructor's mock): a realistic
+   keyboard strip along the bottom, slightly tilted like a photographed grand.
+   Time badge stays removed. ── */
 .time-badge{display:none}
-.lesson-header{padding:26px 16px 46px}
-.hero{padding:64px 16px 92px}
-.lesson-header::before,.hero::before{ /* ghost white keys */
-  content:"";position:absolute;bottom:0;left:0;right:0;height:52px;z-index:0;pointer-events:none;
-  background:repeating-linear-gradient(90deg,rgba(255,255,255,.13) 0 24px,rgba(255,255,255,0) 24px 27px);
-  -webkit-mask-image:linear-gradient(180deg,transparent 0,#000 62%);
-  mask-image:linear-gradient(180deg,transparent 0,#000 62%)}
-.lesson-header::after,.hero::after{ /* black keys, octave-true: C#/D# + F#/G#/A# */
-  content:"";position:absolute;bottom:20px;left:0;right:0;height:32px;z-index:0;pointer-events:none;
-  background:repeating-linear-gradient(90deg,
-    transparent 0 19px,   rgba(10,12,40,.5) 19px 35px,
-    transparent 35px 46px, rgba(10,12,40,.5) 46px 62px,
-    transparent 62px 100px, rgba(10,12,40,.5) 100px 116px,
-    transparent 116px 127px, rgba(10,12,40,.5) 127px 143px,
-    transparent 143px 154px, rgba(10,12,40,.5) 154px 170px,
-    transparent 170px 189px);
-  border-radius:0 0 3px 3px;
-  -webkit-mask-image:linear-gradient(180deg,transparent 0,#000 55%);
-  mask-image:linear-gradient(180deg,transparent 0,#000 55%)}
+.lesson-header{padding:24px 16px 76px}
+.hero{padding:56px 16px 118px}
+.lesson-header::before,.hero::before{
+  content:"";position:absolute;left:-3%;right:-3%;bottom:-16px;height:74px;z-index:0;pointer-events:none;
+  background:url("data:image/svg+xml;utf8,<rect x='1' y='0' width='24' height='84' rx='2.5' fill='url(%23w)'/><svg xmlns='http://www.w3.org/2000/svg' width='182' height='84' viewBox='0 0 182 84'><defs><linearGradient id='w' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='%23c9cede'/><stop offset='.18' stop-color='%23eef0f7'/><stop offset='1' stop-color='%23ffffff'/></linearGradient><linearGradient id='b' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='%23000010'/><stop offset='.12' stop-color='%23353a5e'/><stop offset='.3' stop-color='%2310122b'/><stop offset='1' stop-color='%23060714'/></linearGradient></defs><rect width='182' height='84' fill='%23060714'/><rect x='27' y='0' width='24' height='84' rx='2.5' fill='url(%23w)'/><svg xmlns='http://www.w3.org/2000/svg' width='182' height='84' viewBox='0 0 182 84'><defs><linearGradient id='w' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='%23c9cede'/><stop offset='.18' stop-color='%23eef0f7'/><stop offset='1' stop-color='%23ffffff'/></linearGradient><linearGradient id='b' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='%23000010'/><stop offset='.12' stop-color='%23353a5e'/><stop offset='.3' stop-color='%2310122b'/><stop offset='1' stop-color='%23060714'/></linearGradient></defs><rect width='182' height='84' fill='%23060714'/><rect x='53' y='0' width='24' height='84' rx='2.5' fill='url(%23w)'/><svg xmlns='http://www.w3.org/2000/svg' width='182' height='84' viewBox='0 0 182 84'><defs><linearGradient id='w' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='%23c9cede'/><stop offset='.18' stop-color='%23eef0f7'/><stop offset='1' stop-color='%23ffffff'/></linearGradient><linearGradient id='b' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='%23000010'/><stop offset='.12' stop-color='%23353a5e'/><stop offset='.3' stop-color='%2310122b'/><stop offset='1' stop-color='%23060714'/></linearGradient></defs><rect width='182' height='84' fill='%23060714'/><rect x='79' y='0' width='24' height='84' rx='2.5' fill='url(%23w)'/><svg xmlns='http://www.w3.org/2000/svg' width='182' height='84' viewBox='0 0 182 84'><defs><linearGradient id='w' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='%23c9cede'/><stop offset='.18' stop-color='%23eef0f7'/><stop offset='1' stop-color='%23ffffff'/></linearGradient><linearGradient id='b' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='%23000010'/><stop offset='.12' stop-color='%23353a5e'/><stop offset='.3' stop-color='%2310122b'/><stop offset='1' stop-color='%23060714'/></linearGradient></defs><rect width='182' height='84' fill='%23060714'/><rect x='105' y='0' width='24' height='84' rx='2.5' fill='url(%23w)'/><svg xmlns='http://www.w3.org/2000/svg' width='182' height='84' viewBox='0 0 182 84'><defs><linearGradient id='w' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='%23c9cede'/><stop offset='.18' stop-color='%23eef0f7'/><stop offset='1' stop-color='%23ffffff'/></linearGradient><linearGradient id='b' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='%23000010'/><stop offset='.12' stop-color='%23353a5e'/><stop offset='.3' stop-color='%2310122b'/><stop offset='1' stop-color='%23060714'/></linearGradient></defs><rect width='182' height='84' fill='%23060714'/><rect x='131' y='0' width='24' height='84' rx='2.5' fill='url(%23w)'/><svg xmlns='http://www.w3.org/2000/svg' width='182' height='84' viewBox='0 0 182 84'><defs><linearGradient id='w' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='%23c9cede'/><stop offset='.18' stop-color='%23eef0f7'/><stop offset='1' stop-color='%23ffffff'/></linearGradient><linearGradient id='b' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='%23000010'/><stop offset='.12' stop-color='%23353a5e'/><stop offset='.3' stop-color='%2310122b'/><stop offset='1' stop-color='%23060714'/></linearGradient></defs><rect width='182' height='84' fill='%23060714'/><rect x='157' y='0' width='24' height='84' rx='2.5' fill='url(%23w)'/><rect x='17' y='0' width='17' height='52' rx='2.5' fill='url(%23b)'/><rect x='43' y='0' width='17' height='52' rx='2.5' fill='url(%23b)'/><rect x='95' y='0' width='17' height='52' rx='2.5' fill='url(%23b)'/><rect x='121' y='0' width='17' height='52' rx='2.5' fill='url(%23b)'/><rect x='147' y='0' width='17' height='52' rx='2.5' fill='url(%23b)'/><rect width='182' height='7' fill='rgba(0,0,10,.45)'/></svg>") repeat-x bottom left/auto 100%;
+  transform:rotate(-2.2deg);box-shadow:0 -6px 18px rgba(0,0,10,.35)}
+.hero::before{height:88px}
