@@ -383,18 +383,26 @@ button.notecard svg.mf-staff{height:46px;width:auto;max-width:100%;display:block
 .mf-kb .b .kpoint{color:#ff5a76;top:2px}
 @keyframes kpt{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
 
-/* ── piano-key strip across every header (instructor: 음악 사이트인 게 한눈에!) ── */
-.lesson-header,.hero{padding-top:58px}
-.lesson-header::before,.hero::before{ /* white keys hanging from the top edge */
-  content:"";position:absolute;top:0;left:0;right:0;height:26px;z-index:0;pointer-events:none;
-  background:repeating-linear-gradient(90deg,#fdfdfd 0 21.5px,#c9cede 21.5px 24px);
-  border-bottom:2px solid rgba(0,0,0,.35);border-radius:0 0 4px 4px}
-.lesson-header::after,.hero::after{ /* black keys: C#/D# + F#/G#/A# per octave */
-  content:"";position:absolute;top:0;left:0;right:0;height:17px;z-index:0;pointer-events:none;
+/* ── piano inside the purple (v2, instructor): translucent keys rise from the
+   bottom of every header and melt into the gradient — a watermark keyboard.
+   Time badge removed to reclaim the space. ── */
+.time-badge{display:none}
+.lesson-header{padding:26px 16px 46px}
+.hero{padding:64px 16px 92px}
+.lesson-header::before,.hero::before{ /* ghost white keys */
+  content:"";position:absolute;bottom:0;left:0;right:0;height:52px;z-index:0;pointer-events:none;
+  background:repeating-linear-gradient(90deg,rgba(255,255,255,.13) 0 24px,rgba(255,255,255,0) 24px 27px);
+  -webkit-mask-image:linear-gradient(180deg,transparent 0,#000 62%);
+  mask-image:linear-gradient(180deg,transparent 0,#000 62%)}
+.lesson-header::after,.hero::after{ /* black keys, octave-true: C#/D# + F#/G#/A# */
+  content:"";position:absolute;bottom:20px;left:0;right:0;height:32px;z-index:0;pointer-events:none;
   background:repeating-linear-gradient(90deg,
-    transparent 0 17px,   #14162e 17px 31px,
-    transparent 31px 41px, #14162e 41px 55px,
-    transparent 55px 89px, #14162e 89px 103px,
-    transparent 103px 113px,#14162e 113px 127px,
-    transparent 127px 137px,#14162e 137px 151px,
-    transparent 151px 168px)}
+    transparent 0 19px,   rgba(10,12,40,.5) 19px 35px,
+    transparent 35px 46px, rgba(10,12,40,.5) 46px 62px,
+    transparent 62px 100px, rgba(10,12,40,.5) 100px 116px,
+    transparent 116px 127px, rgba(10,12,40,.5) 127px 143px,
+    transparent 143px 154px, rgba(10,12,40,.5) 154px 170px,
+    transparent 170px 189px);
+  border-radius:0 0 3px 3px;
+  -webkit-mask-image:linear-gradient(180deg,transparent 0,#000 55%);
+  mask-image:linear-gradient(180deg,transparent 0,#000 55%)}
