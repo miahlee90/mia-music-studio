@@ -13,26 +13,27 @@ function MF_L47_build(container,fb){
     {root:"G",m:[67,71,74],letters:["G","B","D"]},
     {root:"D",m:[62,65,69],letters:["D","F","A"]}];
   const PART=["root","3rd","5th"];
-  let r=0,k=0,kb=null,got=[];
+  let r=0,k=0,kb=null,got=[],off=0;
   container.innerHTML=`<div class="big-q l47-q" style="text-align:center"></div>
     <div class="l47-staff"></div><div class="l47-kb"></div>
     <p style="text-align:center;font-size:13.5px;color:var(--primary);font-weight:700;margin:6px 0 0">Root → skip a letter → 3rd → skip a letter → 5th. Every other white key!</p>`;
   const q=container.querySelector(".l47-q"), holder=container.querySelector(".l47-staff"), kbHolder=container.querySelector(".l47-kb");
   function drawStaff(){
     const cur=ROUNDS[r];
-    const notes=got.map((L2,ix)=>{ const o=cur.m[ix]>=72?"5":"4"; return ix===0?{p:L2+o,d:"w"}:{p:L2+o,d:"w",chord:true}; });
+    const notes=got.map((L2,ix)=>{ const o=String(Math.floor((cur.m[ix]+off)/12)-1); return ix===0?{p:L2+o,d:"w"}:{p:L2+o,d:"w",chord:true}; });
     if(notes.length) Staff.render(holder,{clef:"treble",notes,width:180}); else holder.innerHTML="";
   }
   function ask(){
-    const cur=ROUNDS[r]; k=0; got=[]; drawStaff();
+    const cur=ROUNDS[r]; k=0; got=[]; off=0; drawStaff();
     q.innerHTML=`Build ${r+1} of ${ROUNDS.length}: stack the <b>${cur.root} triad</b> — press its <b>root</b> first.`;
     kbHolder.innerHTML="";
     kb=Keyboard.create(kbHolder,{start:60,octaves:2,labels:true,
       onKey:m=>{
         const c=ROUNDS[r];
-        if(m===c.m[k]){
-          got.push(c.letters[k]); kb.mark(c.m.slice(0,k+1)); MFAudio.tone(m,.5,0,.5); drawStaff(); k++;
-          if(k>=3){ MFAudio.tone(c.m[0],.9,.15,.4); MFAudio.tone(c.m[1],.9,.15,.4); MFAudio.tone(c.m[2],.9,.15,.4); r++;
+        if(k===0 && (m-c.m[0])%12===0 && m+(c.m[2]-c.m[0])<=84) off=m-c.m[0];
+        if(m===c.m[k]+off && !(k===0 && (m-c.m[0])%12!==0)){
+          got.push(c.letters[k]); kb.mark(c.m.slice(0,k+1).map(x=>x+off)); MFAudio.tone(m,.5,0,.5); drawStaff(); k++;
+          if(k>=3){ MFAudio.tone(c.m[0]+off,.9,.15,.4); MFAudio.tone(c.m[1]+off,.9,.15,.4); MFAudio.tone(c.m[2]+off,.9,.15,.4); r++;
             if(r>=ROUNDS.length){ q.textContent="Four snowmen built!";
               fb(true,`✓ ${c.letters.join("-")} — root, 3rd, 5th. Every triad is the same recipe: a note, skip one, another, skip one, one more.`); }
             else { fb(true,`✓ The ${c.root} triad: ${c.letters.join("-")}! Hear it ring. Next…`); setTimeout(ask,1600); } }

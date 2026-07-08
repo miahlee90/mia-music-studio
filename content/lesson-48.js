@@ -23,7 +23,10 @@ function MF_L48_primary(container,fb){
     kb=Keyboard.create(kbHolder,{start:60,octaves:2,labels:true,
       onKey:m=>{
         const c=ROUNDS[i];
-        if(m===c.m[0]){ kb.mark(c.m); c.m.forEach(x=>MFAudio.tone(x,.9,.1,.4)); i++;
+        /* either octave of the root is correct - the triad rings in that octave */
+        if((m-c.m[0])%12===0 && m+(c.m[2]-c.m[0])<=84){
+          const off=m-c.m[0];
+          kb.mark(c.m.map(x=>x+off)); c.m.forEach(x=>MFAudio.tone(x+off,.9,.1,.4)); i++;
           if(i>=ROUNDS.length){ q.textContent="I, IV, V — under your fingers!";
             fb(true,`✓ ${c.ask} = the ${c.root} triad. The three primary chords of C major: C (I), F (IV), G (V) — you just played the backbone of a thousand songs.`); }
           else { fb(true,`✓ ${c.ask} = ${c.root} (${c.root} triad). Next…`); setTimeout(ask,1500); } }
