@@ -23,9 +23,9 @@ function MF_L54_count(container,fb){
     Staff.render(holder,{clef:"treble",notes:R.ps.map((p,ix)=>ix===0?{p,d:"w",label:R.name}:{p,d:"w",chord:true}),width:260});
   }
   function ask(){
-    if(r>=ROUNDS.length){ q.textContent="Both figures decoded — you just READ figured bass!"; ch.innerHTML=""; holder.innerHTML=""; return; }
+    if(r>=ROUNDS.length){ q.textContent="Excellent! You decoded both figured bass symbols."; ch.innerHTML=""; holder.innerHTML=""; return; }
     const R=ROUNDS[r]; k=0; draw();
-    q.innerHTML=`${R.name}: the bass is <b>${R.ps[0][0]}</b>. From the bass UP to the middle note (${R.ps[1][0]}) is…?`;
+    q.innerHTML=`Count the intervals above the bass note. ${R.name}: from the bass <b>${R.ps[0][0]}</b> up to the middle note (${R.ps[1][0]}) is…?`;
     ch.innerHTML="";
     ["a 2nd","a 3rd","a 4th","a 6th"].forEach(t=>{
       const b=document.createElement("button"); b.textContent=t;
@@ -33,7 +33,7 @@ function MF_L54_count(container,fb){
         const R2=ROUNDS[r];
         if(t===R2.ints[k]){
           MFAudio.yay(); k++;
-          if(k<2){ q.innerHTML=`✓ And from the bass up to the TOP note (${R2.ps[2][0]}) is…?`; }
+          if(k<2){ q.innerHTML=`✓ Now find the top note: from the bass up to ${R2.ps[2][0]} is…?`; }
           else { fb(true,`✓ ${R2.expl}`); r++; setTimeout(ask,1600); }
         } else { MFAudio.tone(40,.2); fb(false,`Count letter names from ${R2.ps[0][0]} upward, counting ${R2.ps[0][0]} itself as 1.`); }
       };
@@ -61,9 +61,9 @@ function MF_L54_build(container,fb){
     Staff.render(sh,{clef:"treble",notes:ps.map((p,ix)=>ix===0?{p,d:"w"}:{p,d:"w",chord:true}),width:200});
   }
   function ask(){
-    if(r>=ROUNDS.length){ q.textContent="Four chords built straight from the code — Baroque keyboardists would hire you!"; return; }
+    if(r>=ROUNDS.length){ q.textContent="Great! You built all four chords from figured bass."; return; }
     k=0; last=null; got=[]; drawStaff();
-    q.innerHTML=`<b>${ROUNDS[r].label}</b> → build ${ROUNDS[r].chord}, bottom to top. Press <b>${ROUNDS[r].names[0].split(" ")[0]}</b> first.`;
+    q.innerHTML=`<b>${ROUNDS[r].label}</b> → build ${ROUNDS[r].chord} from the bass note. Press <b>${ROUNDS[r].names[0].split(" ")[0]}</b> first.`;
   }
   Keyboard.create(kh,{start:60,octaves:2,labels:true,
     onKey:m=>{
@@ -74,7 +74,7 @@ function MF_L54_build(container,fb){
         if(k>=R.pcs.length){ got.forEach(x=>MFAudio.tone(x,1.0,.1,.3));
           fb(true,`✓ ${R.chord} — read from the figures alone.`);
           r++; setTimeout(ask,1500); }
-        else q.innerHTML=`Good — next: <b>${R.names[k]}</b>, higher than your last key.`;
+        else q.innerHTML=`Now play <b>${R.names[k]}</b> above the previous note.`;
       } else if(m%12===want){ MFAudio.tone(40,.2); fb(false,"Right letter — stack UPWARD from the bass."); }
       else { MFAudio.tone(40,.2); fb(false,k===0? "Start on the GIVEN bass note." : "Count the interval up from the bass — the figures tell you exactly how far."); }
     }});
@@ -84,7 +84,7 @@ function MF_L54_build(container,fb){
 LESSON_CONTENT[54]={
   welcome:"Today you learn to read a 400-year-old secret code. \u{1F5DD}\u{FE0F}",
   hook:{
-    say:"A Baroque composer hands you only this: a bass note <b>E</b> and the number <b>6</b>. That's the WHOLE instruction. <b>What are they asking you to play?</b>",
+    say:"<b>A composer writes only one bass note and the number 6.</b> \u{1F447} <b>What chord should you play?</b>",
     interact:{ type:"custom",
       mount:(container,fb)=>{
         container.innerHTML=`<div class="l54h-staff"></div>
@@ -93,7 +93,7 @@ LESSON_CONTENT[54]={
         const ch=container.querySelector(".hk-ch");
         [...ch.children].forEach((b,i)=>b.onclick=()=>{
           if(i===0){ [64,67,72].forEach(m=>MFAudio.tone(m,1.2,0,.33));
-            fb(true,"✓ The 6 means: build notes a 3rd and a 6th above the bass → E-G-C, which is C major in 1st inversion. A whole chord from one number — that shorthand is called FIGURED BASS, and it powered the entire Baroque era (1600–1750)!"); }
+            fb(true,"✓ The 6 means: build notes a 3rd and a 6th above the bass → E-G-C, C major in 1st inversion. This number system is called FIGURED BASS — today's lesson!"); }
           else fb(false,"It's shorthand — one number standing for something much bigger. Think chords, not repetitions.");
         });
       } }
@@ -107,16 +107,16 @@ LESSON_CONTENT[54]={
     "Build chords from a bass note + figure"
   ],
   steps:[
-    { say:"The story: in the <b>Baroque period (1600–1750)</b>, composers wrote only the <b>bass line</b> plus small <b>numbers</b> — the keyboard player built the chords live. The system is called <b>FIGURED BASS</b>: musical shorthand. \u{1F447} <b>The numbers describe intervals measured from which note?</b>",
+    { say:"<b>What is Figured Bass?</b> During the <b>Baroque period (1600–1750)</b>, composers often wrote only the <b>bass line</b> and a few <b>numbers</b>. The performer used those numbers to build the correct chord. This system is called <b>figured bass</b>. \u{1F447} <b>The numbers show intervals measured from which note?</b>",
       try:{ type:"mc", choices:["The bass (lowest) note","The root","Middle C"], answer:0,
         success:"✓ Everything counts UP from the bass. That's why it's called figured BASS.",
         fail:"The name of the system is a giant hint…",
         hint:"FIGURED ____." } },
-    { say:"Decode your first figures by counting intervals yourself. \u{1F447}",
+    { say:"Count the intervals above the bass note to identify the chord. \u{1F447}",
       try:{ type:"custom",
         hint:"Count letter names upward from the bass, counting the bass as 1.",
         mount:(container,fb)=>MF_L54_count(container,fb) } },
-    { say:"The triad table: <b>root position = 5/3</b> (so ordinary it's usually <b>omitted</b>), <b>1st inversion = 6</b> (from 6/3 — the 3 was dropped over time), <b>2nd inversion = 6/4</b>. In the key of C: I, I⁶, I⁶₄. \u{1F447} <b>A plain Roman numeral with NO figure means…</b>",
+    { say:"<b>Triad Figures:</b> Root position = <b>5/3</b> (usually written without numbers) · 1st inversion = <b>6</b> · 2nd inversion = <b>6/4</b>. In the key of C: I, I⁶, I⁶₄. \u{1F447} <b>A Roman numeral without a figure means…</b>",
       show:{ type:"staff", spec:{clef:"treble",notes:[
         {p:"C4",d:"w",label:"I"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},
         {p:"E4",d:"w",label:"I⁶"},{p:"G4",d:"w",chord:true},{p:"C5",d:"w",chord:true},
@@ -125,12 +125,12 @@ LESSON_CONTENT[54]={
         success:"✓ No figure = nothing unusual = root position. Writers only add numbers when the bass ISN'T the root.",
         fail:"5/3 is the figure so normal it vanished…",
         hint:"Default settings need no label." } },
-    { say:"There's a second shorthand you already met in Lesson 53: <b>letter symbols</b> like <b>C/E</b> — chord name, slash, bass note. The book's rule: <b>letter symbols go ABOVE the staff, Roman numerals go BELOW</b>. \u{1F447} <b>C/G is…</b>",
+    { say:"<b>Two Ways to Label Chords:</b> Chords can be labeled with <b>Roman numerals</b> or <b>slash chord symbols</b>. Slash chords are written <b>above</b> the staff; Roman numerals are written <b>below</b> the staff. \u{1F447} <b>C/G means…</b>",
       try:{ type:"mc", choices:["C major with G in the bass — same as I⁶₄ in C","G major with C in the bass","C and G played alone"], answer:0,
         success:"✓ One chord, two spellings: pop/jazz charts say C/G above the staff; theory says I⁶₄ below it.",
         fail:"Left of the slash = chord; right = bass.",
         hint:"Same rule as G7/B last lesson." } },
-    { say:"Now the seventh chords — four positions, four figures: <b>V⁷</b> (root), <b>V⁶₅</b> (1st), <b>V⁴₃</b> (2nd), <b>V⁴₂</b> (3rd). Each is trimmed from the full interval stack (7/5/3, 6/5/3, 6/4/3, 6/4/2). \u{1F447} <b>Which figure marks the 7th in the bass?</b>",
+    { say:"<b>Figured Bass for Seventh Chords:</b> Root position = <b>7</b> · 1st inversion = <b>6/5</b> · 2nd inversion = <b>4/3</b> · 3rd inversion = <b>4/2</b>. \u{1F447} <b>Which figure shows the 7th in the bass?</b>",
       show:{ type:"staff", spec:{clef:"treble",notes:[
         {p:"G3",d:"w",label:"V⁷"},{p:"B3",d:"w",chord:true},{p:"D4",d:"w",chord:true},{p:"F4",d:"w",chord:true},
         {p:"B3",d:"w",label:"V⁶₅"},{p:"D4",d:"w",chord:true},{p:"F4",d:"w",chord:true},{p:"G4",d:"w",chord:true},
@@ -141,16 +141,26 @@ LESSON_CONTENT[54]={
         fail:"3rd inversion puts the crunch at the BOTTOM — the root is only a 2nd above the bass.",
         hint:"The smallest number in any figure = the root's distance from the bass." },
       },
-    { say:"Pattern check — don't memorize blindly! The figures always list <b>intervals above the bass</b>, biggest number on top. In V⁴₃ (bass D): F is a 3rd up, G is a 4th up. \u{1F447} <b>Why does V⁶₅ have a 5 in it?</b>",
+    { say:"<b>Understanding the Numbers:</b> The numbers always show intervals <b>above the bass note</b>. In <b>V⁶₅</b>, the 7th of the chord is a <b>5th above the bass</b>. \u{1F447} <b>Why does V⁶₅ include the number 5?</b>",
+      show:{ type:"html", html:`<table style="border-collapse:collapse;margin:0 auto;font-size:14.5px;min-width:320px">
+        <tr><th colspan="2" style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:6px 14px">Triads</th></tr>
+        <tr><td style="border:1.5px solid #cdd5e1;padding:5px 14px">Root position</td><td style="border:1.5px solid #cdd5e1;padding:5px 14px;text-align:center;font-weight:800">5/3 <span style="font-weight:400;color:#667">(usually omitted)</span></td></tr>
+        <tr><td style="border:1.5px solid #cdd5e1;padding:5px 14px">1st inversion</td><td style="border:1.5px solid #cdd5e1;padding:5px 14px;text-align:center;font-weight:800">6</td></tr>
+        <tr><td style="border:1.5px solid #cdd5e1;padding:5px 14px">2nd inversion</td><td style="border:1.5px solid #cdd5e1;padding:5px 14px;text-align:center;font-weight:800">6/4</td></tr>
+        <tr><th colspan="2" style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:6px 14px">Seventh Chords</th></tr>
+        <tr><td style="border:1.5px solid #cdd5e1;padding:5px 14px">Root position</td><td style="border:1.5px solid #cdd5e1;padding:5px 14px;text-align:center;font-weight:800">7</td></tr>
+        <tr><td style="border:1.5px solid #cdd5e1;padding:5px 14px">1st inversion</td><td style="border:1.5px solid #cdd5e1;padding:5px 14px;text-align:center;font-weight:800">6/5</td></tr>
+        <tr><td style="border:1.5px solid #cdd5e1;padding:5px 14px">2nd inversion</td><td style="border:1.5px solid #cdd5e1;padding:5px 14px;text-align:center;font-weight:800">4/3</td></tr>
+        <tr><td style="border:1.5px solid #cdd5e1;padding:5px 14px">3rd inversion</td><td style="border:1.5px solid #cdd5e1;padding:5px 14px;text-align:center;font-weight:800">4/2</td></tr></table>` },
       try:{ type:"mc", choices:["The 7th (F) sits a 5th above the bass B","It's the chord's 5th degree","It means five notes"], answer:0,
         success:"✓ Bass B → F = a 5th, bass B → G (root) = a 6th: 6/5. The numbers literally measure the stack.",
         fail:"Count from bass B: B(1)-C(2)-D(3)-E(4)-F(5)…",
         hint:"Count letter names up from the bass." } },
-    { say:"Time to PLAY the code: a bass note and a figure appear — build the chord they describe. \u{1F447}",
+    { say:"Build each chord from the <b>bass note</b> and the <b>figured bass numbers</b>. \u{1F447}",
       try:{ type:"custom",
         hint:"Figures = intervals above the bass. 6 → 3rd+6th up; 6/4 → 4th+6th; 6/5 → the V7 rotation starting on its 3rd; 4/2 → starting on its 7th.",
         mount:(container,fb)=>MF_L54_build(container,fb) } },
-    { say:"Figure detective — one of these pairings is WRONG. \u{1F447}",
+    { say:"<b>Find the Incorrect Pair</b> \u{1F447} <b>Which pairing is incorrect?</b>",
       try:{ type:"mc", choices:["I⁶₄ = the 3rd is in the bass","I⁶ = the 3rd is in the bass","V⁴₂ = the 7th is in the bass","V⁷ = root position"], answer:0,
         success:"✓ Caught it! I⁶₄ puts the 5TH in the bass (G-C-E in C major), not the 3rd. The other three are all true.",
         fail:"Three of these are straight from today's tables — test each one.",
@@ -216,13 +226,13 @@ LESSON_CONTENT[54]={
       explain:"Always counted up from the lowest note (AEMT3 p.86)." },
     { type:"mc", q:"The figured bass system comes from which era?", choices:["Baroque (1600–1750)","Renaissance (1400–1600)","Romantic (1800s)"], answer:0,
       explain:"Baroque keyboardists improvised from bass + figures." },
-    { type:"mc", q:"I⁶ in the key of C means…", choices:["E in the bass (1st inversion of C major)","G in the bass","C major with 6 notes"], answer:0,
+    { type:"mc", q:"In the key of C, what does I⁶ mean?", choices:["E in the bass (1st inversion of C major)","G in the bass","C major with 6 notes"], answer:0,
       explain:"6 = 1st inversion: E-G-C." },
     { type:"mc", q:"I⁶₄ in the key of C has which bass note?", choices:["G","E","C"], answer:0,
       explain:"6/4 = 2nd inversion: the 5th (G) in the bass." },
-    { type:"mc", q:"Which figure set belongs to SEVENTH chords?", choices:["7, 6/5, 4/3, 4/2","5/3, 6, 6/4","1, 2, 3, 4"], answer:0,
+    { type:"mc", q:"Which figured bass symbols belong to seventh chords?", choices:["7, 6/5, 4/3, 4/2","5/3, 6, 6/4","1, 2, 3, 4"], answer:0,
       explain:"Four positions need four figures." },
-    { type:"mc", q:"Letter symbols like C/E are usually written…", choices:["above the staff","below the staff","inside the staff"], answer:0,
+    { type:"mc", q:"Where are slash chord symbols usually written?", choices:["above the staff","below the staff","inside the staff"], answer:0,
       explain:"Letters above, Roman numerals below — the book's placement rule." },
     { type:"truefalse", q:"A root-position triad must always show the figure 5/3.", answer:false,
       explain:"5/3 is so standard it's normally omitted." },
@@ -247,7 +257,7 @@ LESSON_CONTENT[54]={
       explain:"2nd inversion: 5th in the bass.", hint:"6/4 = Lesson 52's chord." },
     { type:"mc", q:"Which figure marks a V7 chord with its 5TH in the bass?", choices:["4/3","6/5","4/2","7"], answer:0,
       explain:"2nd inversion of a seventh = 4/3.", hint:"Middle of the seventh ladder." },
-    { type:"mc", q:"What are the TWO ways to label this chord?",
+    { type:"mc", q:"What are two correct ways to label this chord?",
       staff:{clef:"treble",notes:[{p:"E4",d:"w"},{p:"G4",d:"w",chord:true},{p:"C5",d:"w",chord:true}],width:200},
       choices:["C/E above the staff, I⁶ below","E/C above, vi below","C6 above, IV below"], answer:0,
       explain:"C major, 1st inversion: letter symbol C/E, numeral I⁶.", hint:"Chord/bass and numeral+figure." },
@@ -255,11 +265,11 @@ LESSON_CONTENT[54]={
       staff:{clef:"treble",notes:[{p:"F4",d:"w"},{p:"G4",d:"w",chord:true},{p:"B4",d:"w",chord:true},{p:"D5",d:"w",chord:true}],width:200},
       choices:["4/2","6/5","7","4/3"], answer:0,
       explain:"7th (F) in the bass = 3rd inversion = V⁴₂.", hint:"The root is a 2nd above the bass." },
-    { type:"mc", q:"Why did figured bass exist at all?", choices:["Baroque players improvised chords live from the bass + numbers","Composers couldn't write chords","Printing presses had no note symbols"], answer:0,
+    { type:"mc", q:"Why was figured bass used during the Baroque period?", choices:["Keyboard players used the bass note and figures to build chords","Composers couldn't write chords","Printing presses had no note symbols"], answer:0,
       explain:"Like a jazz lead sheet, 350 years early.", hint:"Think of the keyboardist's job." },
     { type:"mc", q:"Roman numeral symbols (like V⁶₅) are usually written…", choices:["below the staff","above the staff","in the margin"], answer:0,
       explain:"Letters above, numerals below.", hint:"Where did Example 1 print them?" },
-    { type:"mc", q:"The figure 4/3 tells you the bass note is the chord's…", choices:["5th","root","3rd","7th"], answer:0,
+    { type:"mc", q:"In a V⁴₃ chord, which chord tone is in the bass?", choices:["5th","root","3rd","7th"], answer:0,
       explain:"2nd inversion of a seventh chord: 5th in the bass.", hint:"Ladder: 7 → 6/5 → 4/3 → 4/2." },
     /* generated */
     { gen:"inversion-id", params:{subject:"both", ask:"figure"}, count:4 },

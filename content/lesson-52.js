@@ -26,13 +26,13 @@ function MF_L52_flip(container,fb){
           fb(true,`✓ ${R.first.map(p=>p[0]).join("-")} became ${R.second.map(p=>p[0]).join("-")} — now the 5TH is the bottom note. That's 2nd inversion!`);
           r++;
           if(r<ROUNDS.length) nxt.style.display="inline-block";
-          else q.textContent="Both chords double-flipped — root → 3rd → 5th in the bass, and it's still the same chord!";
+          else q.textContent="Great! The chord name stayed the same — only the order changed.";
         } else { MFAudio.tone(40,.2); fb(false,"Tap the LOWEST note — that's the one that jumps up an octave."); }
       } : undefined});
   }
   function ask(){
     const R=ROUNDS[r]; nxt.style.display="none";
-    q.innerHTML=`${R.name} in <b>1st inversion</b>: ${R.first.map(p=>p[0]).join("-")}. Tap the <b>bass note</b> to send it up an octave and flip AGAIN.`;
+    q.innerHTML=`${R.name} in <b>1st inversion</b>: ${R.first.map(p=>p[0]).join("-")}. Tap the <b>lowest note</b> to move it up one octave.`;
     draw(R.first,"1st inversion",true);
   }
   nxt.onclick=()=>ask();
@@ -54,14 +54,14 @@ function MF_L52_detect(container,fb){
     <div class="choices chips l52d-ch" style="display:none"><button>Root position</button><button>1st inversion</button><button>2nd inversion</button></div>`;
   const q=container.querySelector(".l52d-q"), holder=container.querySelector(".l52d-staff"), ch=container.querySelector(".l52d-ch");
   function ask(){
-    if(r>=ROUNDS.length){ q.textContent=`Case closed — ${score} of ${ROUNDS.length} positions identified!`; holder.innerHTML=""; ch.style.display="none"; return; }
+    if(r>=ROUNDS.length){ q.textContent="Great job! You identified every chord position."; holder.innerHTML=""; ch.style.display="none"; return; }
     const R=ROUNDS[r]; found=false; ch.style.display="none";
-    q.innerHTML=`Chord ${r+1} of ${ROUNDS.length}: tap the <b>LOWEST note</b> first.`;
+    q.innerHTML=`Tap the <b>lowest note</b> first. (Chord ${r+1} of ${ROUNDS.length})`;
     Staff.render(holder,{clef:"treble",notes:R.ps.map((p,ix)=>ix===0?{p,d:"w"}:{p,d:"w",chord:true}),width:220,clickNotes:true,
       onNote:(i,p)=>{
         MFAudio.tone(MFAudio.midi(p),.5,0,.4);
         if(found) return;
-        if(i===0){ found=true; q.innerHTML=`Bass = <b>${R.ps[0][0]}</b>. Spell ${R.name} in 3rds — what job does ${R.ps[0][0]} do, and so, what position is this?`; ch.style.display=""; }
+        if(i===0){ found=true; q.innerHTML=`✓ The lowest note is <b>${R.ps[0][0]}</b>. Now identify the chord position.`; ch.style.display=""; }
         else fb(false,"Go lower — the BOTTOM note runs this show.");
       }});
   }
@@ -92,9 +92,9 @@ function MF_L52_build(container,fb){
     Staff.render(sh,{clef:"treble",notes:ps.map((p,ix)=>ix===0?{p,d:"w"}:{p,d:"w",chord:true}),width:190});
   }
   function ask(){
-    if(r>=ROUNDS.length){ q.textContent="Three 6/4 chords built — the 5th anchored every one!"; return; }
+    if(r>=ROUNDS.length){ q.textContent="Excellent! You built all three 2nd inversion triads."; return; }
     k=0; last=null; got=[]; drawStaff();
-    q.innerHTML=`Build <b>${ROUNDS[r].name} in 2nd inversion</b>, bottom to top. Start anywhere: press <b>${ROUNDS[r].letters[0]}</b>.`;
+    q.innerHTML=`Build <b>${ROUNDS[r].name}</b> in <b>2nd inversion</b>. Press <b>${ROUNDS[r].letters[0]}</b> first.`;
   }
   Keyboard.create(kh,{start:60,octaves:2,labels:true,
     onKey:m=>{
@@ -105,7 +105,7 @@ function MF_L52_build(container,fb){
         if(k>=3){ got.forEach(x=>MFAudio.tone(x,1.0,.1,.32));
           fb(true,`✓ ${R.name}, 2nd inversion — 5th in the bass, root in the middle, 3rd on top.`);
           r++; setTimeout(ask,1400); }
-        else q.innerHTML=`Good — now <b>${R.letters[k]}</b>, higher than your last key.`;
+        else q.innerHTML=`Now play <b>${R.letters[k]}</b> above the note you just played.`;
       } else if(m%12===want){ MFAudio.tone(40,.2); fb(false,"Right letter — but stack UPWARD from the bass."); }
       else { MFAudio.tone(40,.2); fb(false,k===0? `Which note is the 5TH of ${R.name}? That one goes in the bass.` : "Follow the recipe: 5th, then root, then 3rd."); }
     }});
@@ -115,14 +115,14 @@ function MF_L52_build(container,fb){
 LESSON_CONTENT[52]={
   welcome:"Lesson 51 flipped the chord once. Today… we flip it AGAIN! \u{2696}\u{FE0F}",
   hook:{
-    say:"Three C major chords — root position, 1st inversion, and today's newcomer. <b>Listen: which one is balancing on its 5TH?</b>",
+    say:"<b>Three C major chords — same notes, different positions.</b> Listen carefully. <b>Which chord has the 5th as the lowest note?</b>",
     interact:{ type:"custom",
       mount:(container,fb)=>{
         container.innerHTML=`<div style="text-align:center">
           <button class="play hk-a">▶ Chord A</button>
           <button class="play hk-b">▶ Chord B</button>
           <button class="play hk-c">▶ Chord C</button></div>
-          <div class="choices hk-ch" style="display:none"><button>Chord C — G was on the bottom</button><button>Chord A — the root is the 5th</button><button>Chord B — E is the 5th</button></div>`;
+          <div class="choices hk-ch" style="display:none"><button>Chord C — G, the 5th, is the lowest note</button><button>Chord A — the 5th is on the bottom</button><button>Chord B — E is the 5th</button></div>`;
         const ch=container.querySelector(".hk-ch");
         let heard=new Set();
         const show=()=>{ if(heard.size>=3) setTimeout(()=>ch.style.display="",1200); };
@@ -130,7 +130,7 @@ LESSON_CONTENT[52]={
         container.querySelector(".hk-b").onclick=()=>{ [64,67,72].forEach(m=>MFAudio.tone(m,1.1,0,.33)); heard.add("b"); show(); };
         container.querySelector(".hk-c").onclick=()=>{ [67,72,76].forEach(m=>MFAudio.tone(m,1.1,0,.33)); heard.add("c"); show(); };
         [...ch.children].forEach((b,i)=>b.onclick=()=>{
-          if(i===0) fb(true,"✓ Chord C was G-C-E: the 5th (G) in the bass. That's 2ND INVERSION — the final position of a triad, and today's lesson!");
+          if(i===0) fb(true,"✓ Chord C was G-C-E — the 5th (G) is the lowest note. That's 2ND INVERSION, today's lesson!");
           else fb(false,"Name each chord's bottom note, then ask: is it the root, the 3rd, or the 5th of C-E-G?");
         });
       } }
@@ -144,7 +144,7 @@ LESSON_CONTENT[52]={
     "Build 2nd-inversion triads on the staff and keyboard"
   ],
   steps:[
-    { say:"Where we are: root position has the <b>root</b> in the bass; one flip put the <b>3rd</b> in the bass. \u{1F447} <b>If we flip ONE more time, which chord tone will land in the bass?</b>",
+    { say:"<b>Quick Review:</b> In <b>root position</b>, the root is the lowest note. In <b>1st inversion</b>, the 3rd is the lowest note. \u{1F447} <b>If we invert the chord one more time, which chord tone becomes the lowest note?</b>",
       show:{ type:"staff", spec:{clef:"treble",notes:[
         {p:"C4",d:"w",label:"root position"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},
         {p:"E4",d:"w",label:"1st inversion"},{p:"G4",d:"w",chord:true},{p:"C5",d:"w",chord:true},
@@ -153,25 +153,25 @@ LESSON_CONTENT[52]={
         success:"✓ Root, 3rd… 5th! The bass climbs through the chord tones one flip at a time.",
         fail:"Follow the ladder: root position → 3rd in the bass → next chord tone up…",
         hint:"A triad only owns three tones: root, 3rd, 5th." } },
-    { say:"Do the flip yourself: start from <b>1st inversion</b> and send the bass note up an octave. \u{1F447}",
+    { say:"Move the <b>lowest note</b> up one octave. The <b>5th</b> becomes the lowest note, creating <b>2nd INVERSION</b>. \u{1F447}",
       try:{ type:"custom",
         hint:"Tap the LOWEST note of the 1st-inversion stack.",
         mount:(container,fb)=>MF_L52_flip(container,fb) } },
-    { say:"The rule, engraved in stone: <b>in 2nd inversion, the 5th is ALWAYS the bottom note.</b> And the letters STILL spell the same chord. \u{1F447} <b>G-C-E is…?</b>",
+    { say:"<b>2nd Inversion Rule:</b> In <b>2nd inversion</b>, the <b>5th</b> is the lowest note. The chord name does <b>not</b> change. \u{1F447} <b>G–C–E is…?</b>",
       show:{ type:"staff", spec:{clef:"treble",notes:[
         {p:"G4",d:"w",label:"C: G-C-E"},{p:"C5",d:"w",chord:true},{p:"E5",d:"w",chord:true},
         {p:"C4",d:"w",label:"F: C-F-A"},{p:"F4",d:"w",chord:true},{p:"A4",d:"w",chord:true},
         {p:"D4",d:"w",label:"G: D-G-B"},{p:"G4",d:"w",chord:true},{p:"B4",d:"w",chord:true}],width:480} },
       try:{ type:"mc", choices:["C major, 2nd inversion","G major, root position","C major, 1st inversion"], answer:0,
-        success:"✓ Restack: C-E-G. The bass G is the 5th → 2nd inversion. (G major would be G-B-D — the B gives it away.)",
-        fail:"Restack G-C-E into 3rds. What root do you get?",
-        hint:"Name the chord from the stacked-3rds spelling, THEN check the bass." } },
-    { say:"Why do musicians call this the <b>6/4 chord</b>? Count the intervals <b>above the bass</b>: in G-C-E, the bass G to C is a <b>4th</b> and G to E is a <b>6th</b>. Those two numbers, 6 and 4, name the shape. \u{1F447} <b>The 6/4 nickname counts intervals from which note?</b>",
+        success:"✓ Rearranged into thirds: C-E-G. The bass G is the 5th → 2nd inversion. (G major would be G-B-D — the B gives it away.)",
+        fail:"Rearrange G-C-E into thirds. What root do you get?",
+        hint:"Rearrange the notes into thirds to name the chord, THEN check the lowest note." } },
+    { say:"<b>Why is it called a 6/4 chord?</b> Figured bass measures intervals <b>above the bass note</b>. In <b>G–C–E</b>, C is a <b>4th</b> above G, and E is a <b>6th</b> above G. That's why this inversion is called a <b>6/4 chord</b>. \u{1F447} <b>The numbers in 6/4 are measured from which note?</b>",
       try:{ type:"mc", choices:["The bass (lowest) note","The root","The top note"], answer:0,
         success:"✓ Always from the BASS. This idea grows into a whole system next lesson — figured bass!",
         fail:"6 what and 4 what? Sixth and fourth ABOVE something…",
         hint:"The same note that decides the inversion." } },
-    { say:"The book's close-position shortcut: in <b>BOTH</b> inversions, look for the interval of a <b>4th</b> inside the chord — <b>the ROOT is always its UPPER note</b>. In E-G-C the 4th is G→C; in G-C-E it's G→C again — and C is the root both times! \u{1F447} <b>In close position, the root always sits…</b>",
+    { say:"<b>Finding the Root in Close Position:</b> In close-position inversions, look for the <b>4th</b> inside the chord. The <b>upper note of the 4th</b> is always the <b>root</b>. In E-G-C the 4th is G→C; in G-C-E it's G→C again — and C is the root both times! \u{1F447} <b>In close position, where is the root?</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:80,notes:[
         {p:"G4",d:"h",label:"the 4th…"},{p:"C5",d:"h"},
         {p:"E4",d:"w",label:"1st inv. (G→C on top)"},{p:"G4",d:"w",chord:true},{p:"C5",d:"w",chord:true},
@@ -181,15 +181,15 @@ LESSON_CONTENT[52]={
         success:"✓ Find the 4th, take its top note — that's your root and your chord name. Instant identification!",
         fail:"G up to C… which of those two is the root of C major?",
         hint:"4th = G→C here. The root is C." } },
-    { say:"Detective rounds — now with all THREE positions in the lineup. Bass note first! \u{1F447}",
+    { say:"<b>Identify the inversion.</b> Find the <b>lowest note</b> first, then name the chord position. \u{1F447}",
       try:{ type:"custom",
         hint:"Tap the bass, spell the chord in 3rds, match the bass to root/3rd/5th.",
         mount:(container,fb)=>MF_L52_detect(container,fb) } },
-    { say:"Under the fingers: build three <b>6/4 chords</b>. \u{1F447}",
+    { say:"<b>Build these chords in 2nd inversion.</b> \u{1F447}",
       try:{ type:"custom",
         hint:"5th in the bass, root in the middle, 3rd on top.",
         mount:(container,fb)=>MF_L52_build(container,fb) } },
-    { say:"One character note: 2nd inversion sounds the <b>least stable</b> of the three positions — music usually treats it as a passing chord that moves on quickly rather than a resting place. \u{1F447} <b>A composer would most likely use a 6/4 chord to…</b>",
+    { say:"<b>How is 2nd inversion used?</b> A <b>2nd inversion</b> chord sounds less stable than root position or 1st inversion. It is often used as a <b>passing chord</b> between stronger chords. \u{1F447} <b>A composer would most likely use a 6/4 chord to…</b>",
       try:{ type:"mc", choices:["pass smoothly between two stronger chords","end a piece with a big final chord","replace the tonic forever"], answer:0,
         success:"✓ It's a mover, not a settler. You'll hear exactly this in Lesson 55's smooth progressions.",
         fail:"Would you END a piece on a chord that feels off-balance?",
@@ -246,14 +246,14 @@ LESSON_CONTENT[52]={
     { type:"mc", q:"To create a 2nd inversion from a 1st-inversion triad, move the ____ up one octave.", choices:["bass note (the 3rd)","top note (the root)","middle note (the 5th)"], answer:0,
       explain:"E-G-C → G-C-E: the lowest note keeps jumping (AEMT3 p.84)." },
     { type:"mc", q:"G-C-E is which chord, in which position?", choices:["C major, 2nd inversion","G major, root position","E minor, 1st inversion"], answer:0,
-      explain:"Restack: C-E-G — with the 5th (G) in the bass." },
+      explain:"Rearrange: C-E-G — with the 5th (G) in the bass." },
     { type:"mc", q:"C-F-A is F major in…", choices:["2nd inversion","root position","1st inversion"], answer:0,
       explain:"C is the 5th of F-A-C → 2nd inversion." },
-    { type:"mc", q:"The bass-note ladder through the three positions is…", choices:["root → 3rd → 5th","root → 5th → 3rd","3rd → root → 5th"], answer:0,
+    { type:"mc", q:"Which chord tone is the lowest note in each position?", choices:["root → 3rd → 5th","root → 5th → 3rd","3rd → root → 5th"], answer:0,
       explain:"Each flip promotes the next chord tone into the bass." },
     { type:"mc", q:"In close position, the ROOT of an inverted triad is always…", choices:["the upper note of the 4th","the lower note of the 4th","the middle note"], answer:0,
       explain:"Find the 4th, take its top note — works for 1st AND 2nd inversions." },
-    { type:"mc", q:"Which position tends to sound the LEAST stable?", choices:["2nd inversion","root position","they sound identical"], answer:0,
+    { type:"mc", q:"Which inversion is usually the least stable?", choices:["2nd inversion","root position","they sound identical"], answer:0,
       explain:"The 6/4 chord usually passes through rather than resting." },
     { type:"truefalse", q:"A 2nd-inversion triad has the root in the bass.", answer:false,
       explain:"The 5TH is in the bass — the root moved to the middle." },
@@ -281,18 +281,18 @@ LESSON_CONTENT[52]={
     { type:"mc", q:"Name this chord and its position.",
       staff:{clef:"treble",notes:[{p:"C4",d:"w"},{p:"F4",d:"w",chord:true},{p:"A4",d:"w",chord:true}],width:200},
       choices:["F major, 2nd inversion","C major, root position","F major, 1st inversion"], answer:0,
-      explain:"Restack: F-A-C; the bass C is the 5th → 2nd inversion.", hint:"The 4th (C→F) has the root on top." },
+      explain:"Rearrange: F-A-C; the bass C is the 5th → 2nd inversion.", hint:"The 4th (C→F) has the root on top." },
     { type:"mc", q:"Name this chord and its position.",
       staff:{clef:"treble",notes:[{p:"D4",d:"w"},{p:"G4",d:"w",chord:true},{p:"B4",d:"w",chord:true}],width:200},
       choices:["G major, 2nd inversion","D major, root position","G major, 1st inversion"], answer:0,
       explain:"G-B-D with the 5th (D) in the bass.", hint:"D→G is a 4th — root on top of it." },
-    { type:"mc", q:"A student says: \u{201C}G-C-E is a G major chord — G is on the bottom.\u{201D} What's the truth?", choices:["It's C major in 2nd inversion — the bass only names the position","The student is right","It's E minor"], answer:0,
-      explain:"Restack in 3rds: C-E-G. G is merely the bass on duty.", hint:"Same trap as Lesson 51 — restack first!" },
+    { type:"mc", q:"A student says, \u{201C}G–C–E is a G major chord because G is the lowest note.\u{201D} Why is the student incorrect?", choices:["It's C major in 2nd inversion. The bass note shows the inversion, not the chord name.","The student is right","It's E minor"], answer:0,
+      explain:"Rearrange in 3rds: C-E-G. G is merely the bass on duty.", hint:"Same trap as Lesson 51 — rearrange first!" },
     { type:"mc", q:"In close position, where does the ROOT sit relative to the interval of a 4th?", choices:["It is the upper note of the 4th","It is the lower note of the 4th","It never touches the 4th"], answer:0,
       explain:"The book's shortcut for BOTH inversions — spot the 4th, grab its top.", hint:"G→C in our examples… and C is the root." },
     { type:"mc", q:"Which statement is correct?", choices:["Second inversion places the 5th in the bass","Second inversion places the 3rd in the bass","Second inversion changes a major chord into minor","Every 2nd inversion is in open position"], answer:0,
       explain:"5th in the bass — the other options mix up the rules.", hint:"Today's rule, verbatim." },
-    { type:"mc", q:"In Example 2 (C → F/C → C), why did the music use IV in 2nd inversion?", choices:["So the bass could stay on C while the harmony changed","To make the chord louder","To turn F major into F minor"], answer:0,
+    { type:"mc", q:"Why is IV in 2nd inversion used in this progression? (C → F/C → C)", choices:["So the bass could stay on C while the harmony changed","To make the chord louder","To turn F major into F minor"], answer:0,
       explain:"A still bass + moving harmony = the classic 6/4 move.", hint:"What did the bass do — or rather, NOT do?" },
     /* generated */
     { gen:"inversion-id", params:{subject:"triad", ask:"position"}, count:4 },
@@ -316,7 +316,7 @@ LESSON_CONTENT[52]={
     "✔ The 6/4 chord is a <b>passing, less-stable</b> sound — it moves on rather than settling."
   ],
   tips:[
-    "Fast ID at a glance: root position = perfect snowman; 1st inversion = gap on top; 2nd inversion = gap at the BOTTOM (the 4th sits between the two lowest notes).",
+    "Fast ID at a glance: root position = even stack; 1st inversion = gap on top; 2nd inversion = gap at the BOTTOM (the 4th sits between the two lowest notes).",
     "Piano drill: play C-E-G → E-G-C → G-C-E → C-E-G an octave up. Do it in F and G too — you just played every triad position that exists.",
     "Hear it: 2nd inversion sounds like someone standing on tiptoe — beautiful, but ready to move.",
     "Lesson 53 asks the big question: a V7 chord has FOUR notes… so how many inversions can IT have?"
@@ -340,7 +340,7 @@ LESSON_CONTENT[52]={
       explain:"Sprint all three positions, climb the 6/4 ladder, spot positions on cards, then tap the flip order.",
       hint:"The gap in the stack tells you where the 4th is." },
     quiz:{ label:"this question",
-      explain:"Restack the letters in 3rds for the NAME; match the bass to root/3rd/5th for the POSITION. The 4th trick speeds everything up.",
+      explain:"Rearrange the letters in 3rds for the NAME; match the bass to root/3rd/5th for the POSITION. The 4th trick speeds everything up.",
       play:()=>{[60,64,67].forEach(m=>MFAudio.tone(m,.7,0,.33));[64,67,72].forEach(m=>MFAudio.tone(m,.7,.8,.33));[67,72,76].forEach(m=>MFAudio.tone(m,.9,1.6,.33));} }
   }
 };

@@ -21,9 +21,9 @@ function MF_L55_common(container,fb){
     <div style="text-align:center"><button class="play l55c-hear">▶ Hear both chords</button></div>`;
   const q=container.querySelector(".l55c-q"), holder=container.querySelector(".l55c-staff"), hear=container.querySelector(".l55c-hear");
   function ask(){
-    if(r>=ROUNDS.length){ q.textContent="All common tones found — the glue of smooth harmony!"; holder.innerHTML=""; hear.style.display="none"; return; }
+    if(r>=ROUNDS.length){ q.textContent="Excellent! You found every common tone."; holder.innerHTML=""; hear.style.display="none"; return; }
     const R=ROUNDS[r];
-    q.innerHTML=`${R.a.name} then ${R.b.name}: tap the note of the <b>second chord</b> that ALSO belongs to the first.`;
+    q.innerHTML=`${R.a.name} then ${R.b.name}: tap the note <b>shared by both chords</b>.`;
     const notes=[...R.a.ps.map((p,ix)=>ix===0?{p,d:"w",label:R.a.name.split(" ")[0]}:{p,d:"w",chord:true}),
                  ...R.b.ps.map((p,ix)=>ix===0?{p,d:"w",label:R.b.name.split(" ")[0]}:{p,d:"w",chord:true})];
     const bStart=R.a.ps.length;
@@ -50,7 +50,7 @@ function MF_L55_smooth(container,fb){
   const CHOPPY=[[48,64,67,72],[53,65,69,72],[48,64,67,72],[55,67,71,74,77],[48,64,67,72]];
   const SMOOTH=[[48,64,67,72],[48,65,69,72],[48,64,67,72],[47,67,71,74,77],[48,64,67,72]];
   function playProg(rows){ rows.forEach((row,i)=>row.forEach(m=>MFAudio.tone(m,1.0,i*1.05,.28))); }
-  container.innerHTML=`<div class="big-q" style="text-align:center">The same I-IV-I-V7-I progression, two ways. Which version's BASS walks instead of leaping?</div>
+  container.innerHTML=`<div class="big-q" style="text-align:center">Listen to both examples. Which bass line sounds smoother?</div>
     <div style="text-align:center">
       <button class="play l55-a">▶ Version A (all root position)</button>
       <button class="play l55-b">▶ Version B (with inversions)</button></div>
@@ -86,7 +86,7 @@ function MF_L55_build(container,fb){
   function ask(){
     drawMap();
     if(s>=SLOTS.length){
-      q.textContent="Progression assembled — now hear your handiwork!";
+      q.textContent="Great! Listen to your chord progression.";
       ch.innerHTML=""; pl.style.display="inline-block"; return;
     }
     q.innerHTML=SLOTS[s].q; ch.innerHTML="";
@@ -110,13 +110,13 @@ function MF_L55_build(container,fb){
 LESSON_CONTENT[55]={
   welcome:"The Unit 13 finale — where inversions stop being theory and start making music flow. \u{1F30A}",
   hook:{
-    say:"Every song you love is chords MOVING — a <b>chord progression</b>. But the same three chords can trudge… or glide. <b>Listen to the two versions. What made version B glide?</b>",
+    say:"<b>A chord progression is a series of chords.</b> Listen to these two examples. Both use the same chords. <b>Which one sounds smoother?</b>",
     interact:{ type:"custom",
       mount:(container,fb)=>{
         container.innerHTML=`<div style="text-align:center">
           <button class="play hk-a">▶ Version A</button>
           <button class="play hk-b">▶ Version B</button></div>
-          <div class="choices hk-ch" style="display:none"><button>B reused inversions so the bass barely moved</button><button>B was louder</button><button>B used completely different chords</button></div>`;
+          <div class="choices hk-ch" style="display:none"><button>Version B — its bass moves by small steps</button><button>Version A — large leaps sound smoother</button><button>They sound exactly the same</button></div>`;
         const A=[[48,64,67,72],[53,65,69,72],[55,67,71,74],[48,64,67,72]];
         const B=[[48,64,67,72],[48,65,69,72],[47,67,71,74],[48,64,67,72]];
         const ch=container.querySelector(".hk-ch");
@@ -125,8 +125,8 @@ LESSON_CONTENT[55]={
         container.querySelector(".hk-a").onclick=()=>{ play(A); hA=true; if(hB) setTimeout(()=>ch.style.display="",4300); };
         container.querySelector(".hk-b").onclick=()=>{ play(B); hB=true; if(hA) setTimeout(()=>ch.style.display="",4300); };
         [...ch.children].forEach((b,i)=>b.onclick=()=>{
-          if(i===0) fb(true,"✓ Identical chords — I, IV, V, I — but version B flipped IV and V into inversions so the bass could WALK (C-C-B-C) instead of LEAP (C-F-G-C). That craft is called voice leading, and it's today's finale lesson!");
-          else fb(false,"Both versions used the exact same three chords at the same volume. The difference lives in the BASS line…");
+          if(i===0) fb(true,"✓ Both versions used the same chords — I, IV, V, I. Version B put IV and V in INVERSIONS, so the bass moved C-C-B-C instead of leaping C-F-G-C. Smoother bass movement is called good VOICE LEADING — today's lesson!");
+          else fb(false,"Both versions used the same chords. Listen again and follow only the LOWEST voice of each version.");
         });
       } }
   },
@@ -139,7 +139,7 @@ LESSON_CONTENT[55]={
     "Play the book's smooth pattern: I → IV⁶₄ → I → V⁶ (or V⁶₅) → I"
   ],
   steps:[
-    { say:"Definition first: chords that <b>move (progress) from one to another</b> form a <b>CHORD PROGRESSION</b>. And the book's big claim: because <b>I, IV and V together contain EVERY note of the major scale</b>, they can <b>ACCOMPANY</b> most simple melodies. \u{1F447} <b>Check the claim — which scale notes do I, IV and V cover in C major?</b>",
+    { say:"<b>What is a Chord Progression?</b> A <b>chord progression</b> is a series of chords played one after another. The three primary chords — <b>I, IV, and V</b> — contain all seven notes of the major scale, so they can accompany many simple melodies. \u{1F447} <b>Together, which notes do I, IV, and V contain in C major?</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:80,notes:[
         {p:"C4",d:"h",label:"I"},{p:"E4",d:"h",chord:true},{p:"G4",d:"h",chord:true},
         {p:"F4",d:"h",label:"IV"},{p:"A4",d:"h",chord:true},{p:"C5",d:"h",chord:true},
@@ -148,16 +148,16 @@ LESSON_CONTENT[55]={
         success:"✓ C-D-E-F-G-A-B — every letter appears. Whatever note a simple melody sings, one of these three chords contains it. That's why they're the accompaniment kings.",
         fail:"List them: I gives C,E,G; IV adds F,A; V adds B,D…",
         hint:"Three chords × three notes, minus shared ones = 7 letters." } },
-    { say:"Familiar upgrade: in many progressions <b>a V7 chord is used in place of the V chord</b> — same job, extra pull. \u{1F447} <b>In C major, that swap replaces G-B-D with…</b>",
+    { say:"<b>Using V7:</b> The <b>V7 chord</b> is often used instead of <b>V</b> because it creates a <b>stronger pull</b> back to the tonic. \u{1F447} <b>In C major, which chord replaces G–B–D?</b>",
       try:{ type:"mc", choices:["G-B-D-F (G7)","G-B-D-F♯","F-A-C-E"], answer:0,
         success:"✓ Just add the minor 7th — Lesson 50's chord slides right into the progression.",
         fail:"V7 = V + a minor 7th above the root…",
         hint:"Lesson 50's chord." } },
-    { say:"Now the problem the book poses: when IV and V(7) stay in <b>root position</b>, the progression sounds <b>choppy</b> — the bass leaps a 4th up, a 5th down… \u{1F447} <b>Hear it, watch the bass, then decide:</b>",
+    { say:"<b>Why Use Inversions?</b> If every chord stays in <b>root position</b>, the bass often makes large leaps. Using inversions creates <b>smoother bass movement</b>. \u{1F447} <b>Listen to both examples. Which bass line sounds smoother?</b>",
       try:{ type:"custom",
         hint:"Follow only the lowest sound of each chord.",
         mount:(container,fb)=>MF_L55_smooth(container,fb) } },
-    { say:"The book's three fixes, note by note: in <b>IV</b>, move the <b>5th (C) down an octave</b> → IV⁶₄. In <b>V</b>, move the <b>3rd and 5th down</b> → V⁶. In <b>V7</b>, move the <b>3rd, 5th and 7th down</b> → V⁶₅. \u{1F447} <b>To smooth the IV chord, which of ITS notes drops an octave?</b>",
+    { say:"<b>Creating a Smoother Progression:</b> Changing the inversion of IV, V, or V7 helps the bass move by smaller intervals. This creates <b>better voice leading</b>. <b>Voice leading means moving each note as smoothly as possible from one chord to the next.</b> \u{1F447} <b>Which note moves down an octave to create IV⁶₄?</b>",
       show:{ type:"staff", spec:{clef:"treble",notes:[
         {p:"F4",d:"w",label:"IV"},{p:"A4",d:"w",chord:true},{p:"C5",d:"w",chord:true},
         {p:"C4",d:"w",label:"IV⁶₄"},{p:"F4",d:"w",chord:true},{p:"A4",d:"w",chord:true},
@@ -167,11 +167,11 @@ LESSON_CONTENT[55]={
         success:"✓ C drops to the bass — and since C is exactly the note IV shares with I, the bass doesn't move at all between I and IV⁶₄!",
         fail:"Which note of F-A-C would land the bass on the tonic?",
         hint:"The dropped note becomes the new bass — you want it to be C." } },
-    { say:"That shared C has a name: a <b>COMMON TONE</b> — a note belonging to two neighboring chords. Good voice leading <b>keeps common tones in the same voice</b> and moves everything else the shortest distance. \u{1F447} <b>Find the common tones yourself:</b>",
+    { say:"<b>Common Tones:</b> A <b>common tone</b> is a note shared by two neighboring chords. Keeping common tones in the same voice helps create <b>smooth voice leading</b>. \u{1F447} <b>Find the common tones:</b>",
       try:{ type:"custom",
         hint:"Compare the spellings letter by letter.",
         mount:(container,fb)=>MF_L55_common(container,fb) } },
-    { say:"Here is the book's finished formula — memorize the shape: <b>I → IV⁶₄ → I → V⁶ (or V⁶₅) → I</b>. Notice a common tone connects every pair of neighbors. \u{1F447} <b>Between I and V⁶₅, which note is common?</b>",
+    { say:"<b>A Smooth Chord Progression:</b> I → IV⁶₄ → I → V⁶ (or V⁶₅) → I. Each pair of neighboring chords shares at least one common tone. \u{1F447} <b>Which note is shared by I and V⁶₅?</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:70,notes:[
         {p:"C4",d:"h",label:"I"},{p:"E4",d:"h",chord:true},{p:"G4",d:"h",chord:true},
         {p:"C4",d:"h",label:"IV⁶₄"},{p:"F4",d:"h",chord:true},{p:"A4",d:"h",chord:true},
@@ -182,7 +182,7 @@ LESSON_CONTENT[55]={
         success:"✓ G holds steady while B-D-F lean in around it. Every joint in this progression has its own little anchor.",
         fail:"Spell both: C-E-G and G-B-D-F. One letter overlaps…",
         hint:"I and V7 share exactly one note." } },
-    { say:"Your turn to be the arranger: pick the position of each chord so the bass glides. \u{1F447}",
+    { say:"Arrange the chords to create the smoothest bass line. \u{1F447}",
       try:{ type:"custom",
         hint:"Keep the bass ON or NEXT TO C at every step.",
         mount:(container,fb)=>MF_L55_build(container,fb) } }
@@ -249,13 +249,13 @@ LESSON_CONTENT[55]={
     { gen:"term-match", params:{subject:"term", pool:[["Chord progression","a sequence of moving chords"],["Common tone","a note two chords share"],["Voice leading","smooth movement between chords"],["Nearest motion","each voice moves the shortest distance"],["IV⁶₄","the IV chord with its 5th in the bass"]], reverse:true}, count:4 },
     { type:"mc", q:"Chords that move from one to another are called a…", choices:["chord progression","scale","cadenza"], answer:0,
       explain:"Progress = move forward (AEMT3 p.87)." },
-    { type:"mc", q:"I, IV and V can accompany most simple melodies because…", choices:["together they contain all the notes of the major scale","they are the loudest chords","they never change position"], answer:0,
+    { type:"mc", q:"Why can I, IV, and V accompany many simple melodies?", choices:["together they contain all the notes of the major scale","they are the loudest chords","they never change position"], answer:0,
       explain:"C-E-G + F-A-C + G-B-D = all seven letters." },
     { type:"mc", q:"In many progressions, the V chord is replaced by…", choices:["V7","IV","vii"], answer:0,
       explain:"Same function, stronger pull to I." },
-    { type:"mc", q:"An all-root-position progression tends to sound…", choices:["choppy — the bass leaps","smoother than inversions","out of tune"], answer:0,
+    { type:"mc", q:"A progression using only root-position chords often sounds…", choices:["choppy — the bass leaps","smoother than inversions","out of tune"], answer:0,
       explain:"Root-to-root bass motion means constant 4th and 5th leaps." },
-    { type:"mc", q:"To smooth the V7 chord, the book moves which notes down an octave?", choices:["the 3rd, 5th and 7th","only the root","just the 7th"], answer:0,
+    { type:"mc", q:"Which notes move down an octave in V7 to create V⁶₅?", choices:["the 3rd, 5th and 7th","only the root","just the 7th"], answer:0,
       explain:"G-B-D-F → B-D-F-G = V⁶₅, bass one half step under the tonic." },
     { type:"mc", q:"In the smooth pattern I → IV⁶₄ → I, the bass line is…", choices:["C — C — C (it never moves)","C — F — C","C — A — C"], answer:0,
       explain:"IV⁶₄ borrows the common tone C as its bass." },
@@ -273,7 +273,7 @@ LESSON_CONTENT[55]={
     { type:"mc", q:"A chord progression is…", choices:["a sequence of chords","a single chord","a scale","a melody"], answer:0,
       explain:"Chords in motion, one to the next.", hint:"Pro-GRESS." },
     { type:"mc", q:"A common tone is…", choices:["a note shared by two consecutive chords","a repeated rhythm","the bass note","the highest note"], answer:0,
-      explain:"The glue between neighboring chords.", hint:"Common = shared." },
+      explain:"The shared note that connects neighboring chords.", hint:"Common = shared." },
     { type:"mc", q:"Why are inversions used in chord progressions?", choices:["To create smoother voice leading","To make chords louder","To change the key","To add more notes"], answer:0,
       explain:"Inversions let the bass walk instead of leap.", hint:"Think of version B in the hook." },
     { type:"truefalse", q:"Good voice leading usually minimizes the distance each voice moves.", answer:true,
@@ -282,13 +282,13 @@ LESSON_CONTENT[55]={
       explain:"Exactly backwards — nearest motion wins.", hint:"Would you rather walk or jump?" },
     { type:"mc", q:"Which pair of chords shares the note C?", choices:["C major and F major","C major and D major","G major and D major","D major and A major"], answer:0,
       explain:"C-E-G and F-A-C both contain C.", hint:"Spell each pair." },
-    { type:"mc", q:"In the book's smooth progression, the IV chord appears in…", choices:["2nd inversion (IV⁶₄)","root position","3rd inversion"], answer:0,
+    { type:"mc", q:"In this progression, which inversion is used for IV?", choices:["2nd inversion (IV⁶₄)","root position","3rd inversion"], answer:0,
       explain:"Its 5th (C) drops to the bass — the common tone with I.", hint:"Which figure kept the bass on C?" },
-    { type:"mc", q:"In the smooth progression, V or V7 appears in…", choices:["1st inversion (V⁶ or V⁶₅)","2nd inversion","root position"], answer:0,
+    { type:"mc", q:"Which inversion is used for V (or V7)?", choices:["1st inversion (V⁶ or V⁶₅)","2nd inversion","root position"], answer:0,
       explain:"3rd (B) in the bass — a half step from home.", hint:"The bass sang C-B-C." },
     { type:"mc", q:"What is the bass line of I → IV⁶₄ → I → V⁶₅ → I in C major?", choices:["C - C - C - B - C","C - F - C - G - C","C - A - C - F - C"], answer:0,
       explain:"Two common-tone basses plus one half-step neighbor.", hint:"Almost nothing moves." },
-    { type:"mc", q:"A student rewrites every chord in root position and every voice leaps. Which principle is ignored?", choices:["Voice leading","Key signature","Tempo","Meter"], answer:0,
+    { type:"mc", q:"A student writes every chord in root position, creating large leaps between chords. What important idea is missing?", choices:["Voice leading","Key signature","Tempo","Meter"], answer:0,
       explain:"Smooth part-writing = common tones + nearest motion.", hint:"It's today's title concept." },
     { type:"mc", q:"Identify this progression chord (in C major).",
       staff:{clef:"treble",notes:[{p:"C4",d:"w"},{p:"F4",d:"w",chord:true},{p:"A4",d:"w",chord:true}],width:200},
@@ -329,14 +329,14 @@ LESSON_CONTENT[55]={
   rewards:{ badge:"Smooth Operator — Unit 13 Champion", icon:"\u{1F30A}" },
   sectionOrder:["secHook","secObjectives","secLearn","secExample","secReview",
     "secGame0","secGame1","secGame2","secGame3","secPractice","secQuiz","secTips","secNext"],
-  miaPerfect:"A PERFECT finale to Unit 13 — your progressions positively GLIDE! \u{1F30A}\u{1F3C6}\u{1F389}",
+  miaPerfect:"A PERFECT finale to Unit 13 — your progressions are beautifully smooth! \u{1F30A}\u{1F3C6}\u{1F389}",
   miaPass:"Passed — and Unit 13 is COMPLETE! Inversions, figures, progressions: all yours. \u{1F389}",
   mia:{
     hook:{ label:"the welcome",
       explain:"Both versions were I-IV-V-I. Version B flipped IV and V into inversions so the bass walked C-C-B-C instead of leaping C-F-G-C.",
       play:()=>{const B=[[48,64,67,72],[48,65,69,72],[47,67,71,74],[48,64,67,72]];B.forEach((row,i)=>row.forEach(m=>MFAudio.tone(m,1.0,i*1.0,.28)));} },
     learn:{ label:"smooth progressions",
-      explain:"I-IV-V(7) cover the whole scale. Root-only = choppy; IV⁶₄ and V⁶(₅) let common tones hold and the bass glide: I → IV⁶₄ → I → V⁶₅ → I.",
+      explain:"I-IV-V(7) cover the whole scale. Root-only = choppy; IV⁶₄ and V⁶(₅) keep common tones in place and the bass moving by step: I → IV⁶₄ → I → V⁶₅ → I.",
       hint:"Common tones stay; everything else moves the least.",
       play:()=>{[[48,64,67,72],[48,65,69,72],[48,64,67,72],[47,67,71,74,77],[48,64,67,72]].forEach((row,i)=>row.forEach(m=>MFAudio.tone(m,1.0,i*1.0,.26)));} },
     example:{ label:"the examples",

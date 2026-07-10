@@ -26,7 +26,7 @@ function MF_L51_flip(container,fb){
           fb(true,`✓ The root flew to the TOP: ${R.root.map(p=>p[0]).join("-")} became ${R.inv.map(p=>p[0]).join("-")}. Now the 3rd is the bottom note — 1st inversion!`);
           r++;
           if(r<ROUNDS.length){ nxt.style.display="inline-block"; }
-          else q.textContent="Both chords flipped — the notes never changed, only the order!";
+          else q.textContent="Great! The notes stayed the same — only their order changed.";
         } else { MFAudio.tone(40,.2); fb(false,"That's not the ROOT — in root position the root is the LOWEST note."); }
       } : undefined});
   }
@@ -52,7 +52,7 @@ function MF_L51_detect(container,fb){
     <div class="choices chips l51d-ch" style="display:none"><button>Root position</button><button>1st inversion</button></div>`;
   const q=container.querySelector(".l51d-q"), holder=container.querySelector(".l51d-staff"), ch=container.querySelector(".l51d-ch");
   function ask(){
-    if(r>=ROUNDS.length){ q.textContent=`Detective work complete — ${score} of ${ROUNDS.length} positions named!`; holder.innerHTML=""; ch.style.display="none"; return; }
+    if(r>=ROUNDS.length){ q.textContent="Great job! You identified every inversion."; holder.innerHTML=""; ch.style.display="none"; return; }
     const R=ROUNDS[r]; found=false; ch.style.display="none";
     q.innerHTML=`Chord ${r+1} of ${ROUNDS.length}: first, tap the <b>LOWEST note</b>.`;
     Staff.render(holder,{clef:"treble",notes:R.ps.map((p,ix)=>ix===0?{p,d:"w"}:{p,d:"w",chord:true}),width:220,clickNotes:true,
@@ -90,7 +90,7 @@ function MF_L51_build(container,fb){
     Staff.render(sh,{clef:"treble",notes:ps.map((p,ix)=>ix===0?{p,d:"w"}:{p,d:"w",chord:true}),width:190});
   }
   function ask(){
-    if(r>=ROUNDS.length){ q.textContent="All three 1st inversions built — 3rd on the bottom every time!"; return; }
+    if(r>=ROUNDS.length){ q.textContent="Excellent! You built all three 1st inversion triads."; return; }
     k=0; last=null; got=[]; drawStaff();
     q.innerHTML=`Build <b>${ROUNDS[r].name} in 1st inversion</b>, bottom to top. Start anywhere: press <b>${ROUNDS[r].letters[0]}</b>.`;
   }
@@ -103,7 +103,7 @@ function MF_L51_build(container,fb){
         if(k>=3){ got.forEach(x=>MFAudio.tone(x,1.0,.1,.32));
           fb(true,`✓ ${R.name}, 1st inversion — the 3rd sits in the bass and the root rides on top.`);
           r++; setTimeout(ask,1400); }
-        else q.innerHTML=`Good — now <b>${R.letters[k]}</b>, higher than the key you just pressed.`;
+        else q.innerHTML=`Now play <b>${R.letters[k]}</b> above the note you just played.`;
       } else if(m%12===want){ MFAudio.tone(40,.2); fb(false,"Right letter, wrong direction — stack UPWARD from the bass."); }
       else { MFAudio.tone(40,.2); fb(false,k===0? `The 3rd of ${R.name} goes in the bass. Spell the triad in 3rds first.` : "Check the spelling — 3rd, then 5th, then the root on top."); }
     }});
@@ -113,20 +113,20 @@ function MF_L51_build(container,fb){
 LESSON_CONTENT[51]={
   welcome:"Welcome back! Today's magic trick: turning a chord upside down. \u{1F503}",
   hook:{
-    say:"Two C major chords — the SAME three letters. But listen to the bottom note. <b>Which one has the root on the bottom?</b>",
+    say:"<b>Both of these are C major chords.</b> They use the same three notes, but in a different order. <b>Which one is in root position?</b>",
     interact:{ type:"custom",
       mount:(container,fb)=>{
         container.innerHTML=`<div style="text-align:center">
           <button class="play hk-a">▶ Chord A</button>
           <button class="play hk-b">▶ Chord B</button></div>
-          <div class="choices hk-ch" style="display:none"><button>Chord A — C was on the bottom</button><button>Chord B — E on the bottom is the root</button></div>`;
+          <div class="choices hk-ch" style="display:none"><button>Chord A — the root (C) is the lowest note</button><button>Chord B — E is the lowest note, so it is in root position</button></div>`;
         const ch=container.querySelector(".hk-ch");
         let hA=false,hB=false;
         container.querySelector(".hk-a").onclick=()=>{ [60,64,67].forEach(m=>MFAudio.tone(m,1.1,0,.33)); hA=true; if(hB) setTimeout(()=>ch.style.display="",1400); };
         container.querySelector(".hk-b").onclick=()=>{ [64,67,72].forEach(m=>MFAudio.tone(m,1.1,0,.33)); hB=true; if(hA) setTimeout(()=>ch.style.display="",1400); };
         [...ch.children].forEach((b,i)=>b.onclick=()=>{
-          if(i===0) fb(true,"✓ Chord A was C-E-G, root position. Chord B was E-G-C — the SAME chord flipped so its 3rd sits in the bass. That flip is called an INVERSION, and it's today's whole lesson!");
-          else fb(false,"Careful — E is the 3rd of C major, not the root. Play both again and track the bottom note.");
+          if(i===0) fb(true,"✓ Chord A is in root position — C, the root, is the lowest note. Chord B is the same chord with E, the 3rd, as the lowest note. That arrangement is called an INVERSION — today's lesson!");
+          else fb(false,"Careful — E is the 3rd of C major, not the root. Play both again and listen for the lowest note.");
         });
       } }
   },
@@ -139,23 +139,23 @@ LESSON_CONTENT[51]={
     "Build 1st-inversion triads on the staff and keyboard"
   ],
   steps:[
-    { say:"Quick review from Lesson 47: a triad in <b>ROOT POSITION</b> stacks root-3rd-5th, snowman style, with the <b>root on the bottom</b>. \u{1F447} <b>Which chord tone is the lowest note in root position?</b>",
+    { say:"<b>Quick Review:</b> In <b>root position</b>, the notes are arranged <b>root–3rd–5th</b>, with the <b>root as the lowest note</b>. \u{1F447} <b>Which chord tone is the lowest note in root position?</b>",
       show:{ type:"staff", spec:{clef:"treble",notes:[
         {p:"C4",d:"w",label:"C major: C-E-G (root position)"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true}],width:260} },
       try:{ type:"mc", choices:["The root","The 3rd","The 5th"], answer:0,
         success:"✓ Root on the bottom = root position. Triad knowledge confirmed!",
         fail:"Root position literally puts its name-note at the base.",
         hint:"The position is named after its bass note's job." } },
-    { say:"Now the move: a triad does NOT have to keep its root on the bottom. <b>Move the root up one octave</b> and the chord lands in <b>1st INVERSION</b>. \u{1F447} <b>Try it — tap the root:</b>",
+    { say:"Move the <b>root</b> up one octave. The <b>3rd</b> becomes the lowest note, creating <b>1st INVERSION</b>. \u{1F447} <b>Try it — tap the root:</b>",
       try:{ type:"custom",
         hint:"The root is the BOTTOM note of the root-position stack.",
         mount:(container,fb)=>MF_L51_flip(container,fb) } },
     { say:"A Common Mistake: <b>E–G–C is still a C major chord, even though E is the lowest note.</b> \u{1F447} <b>Is this statement correct?</b>",
-      try:{ type:"mc", choices:["Yes — the ROOT names the chord; the bass only names the position","No — the bass note names the chord, so it's an E chord","Only in open position"], answer:0,
-        success:"✓ Correct! The notes still spell C-E-G, so the chord is C major — in 1st inversion. The root names the chord; the bass note names the POSITION.",
-        fail:"Re-stack E-G-C into 3rds: C-E-G. Whose chord is that?",
-        hint:"Restack the letters into a snowman of 3rds — the bottom of THAT stack is the root." } },
-    { say:"1st Inversion Rule: <b>The 3rd of the chord is the lowest note.</b> Here are C, F and G major, each in 1st inversion. \u{1F447} <b>Which chord tone is the lowest note in every 1st inversion triad?</b>",
+      try:{ type:"mc", choices:["Yes. The root names the chord. The bass note shows the inversion.","No — the bass note names the chord, so it's an E chord","Only in open position"], answer:0,
+        success:"✓ Correct! The notes still spell C-E-G, so the chord is C major — in 1st inversion. The root names the chord; the bass note shows the inversion.",
+        fail:"Rearrange E-G-C into thirds: C-E-G. Whose chord is that?",
+        hint:"Rearrange the letters into thirds — the bottom of that stack is the root." } },
+    { say:"1st Inversion Rule: <b>The 3rd of the chord is the lowest note.</b> Here are <b>C, F, and G major triads</b> in <b>1st inversion</b>. \u{1F447} <b>Which chord tone is the lowest note in every 1st inversion triad?</b>",
       show:{ type:"staff", spec:{clef:"treble",notes:[
         {p:"E4",d:"w",label:"C: E-G-C"},{p:"G4",d:"w",chord:true},{p:"C5",d:"w",chord:true},
         {p:"A4",d:"w",label:"F: A-C-F"},{p:"C5",d:"w",chord:true},{p:"F5",d:"w",chord:true},
@@ -164,7 +164,7 @@ LESSON_CONTENT[51]={
         success:"✓ The 3rd is the lowest note in every 1st inversion triad. (The root moved to the TOP.)",
         fail:"Look at the lowest note of each chord — is it the root, the 3rd, or the 5th?",
         hint:"Root position: root-3rd-5th. Remove the root from the bottom — what's left down there?" } },
-    { say:"One more pair of words from the book: notes packed <b>within one octave</b> = <b>CLOSE position</b>; spread <b>wider than an octave</b> = <b>OPEN position</b>. Both can be root position OR 1st inversion — the bass note still decides. \u{1F447} <b>What does open position mean?</b>",
+    { say:"<b>Close vs. Open Position:</b> In <b>close position</b>, all chord tones fit within one octave. In <b>open position</b>, the chord tones are spread wider than one octave. Both root position and inversions can be either close or open. \u{1F447} <b>What does open position mean?</b>",
       show:{ type:"staff", spec:{clef:"treble",notes:[
         {p:"C4",d:"w",label:"close (root pos.)"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},
         {p:"C4",d:"w",label:"open (root pos.)"},{p:"G4",d:"w",chord:true},{p:"E5",d:"w",chord:true},
@@ -174,15 +174,15 @@ LESSON_CONTENT[51]={
         success:"✓ Same tones, more air between them. The INVERSION never changes with spacing — only the bass note matters.",
         fail:"Open/close is about SPACING, not about which note is in the bass.",
         hint:"Measure from the bottom note to the top note: inside one octave, or beyond it?" } },
-    { say:"Detective time — the book's Review works exactly like this. <b>Find the bass note FIRST, then name the position.</b> \u{1F447}",
+    { say:"<b>Identify the inversion.</b> Find the <b>lowest note</b> first, then name the chord position. \u{1F447}",
       try:{ type:"custom",
         hint:"Tap the bottom note, then ask: is it the root or the 3rd of the chord's spelling?",
         mount:(container,fb)=>MF_L51_detect(container,fb) } },
-    { say:"Now build them under your fingers. \u{1F447} <b>Three keys, three 1st inversions:</b>",
+    { say:"Build these three chords in <b>1st inversion</b>. \u{1F447}",
       try:{ type:"custom",
         hint:"3rd on the bottom, 5th in the middle, root on top — stack upward.",
         mount:(container,fb)=>MF_L51_build(container,fb) } },
-    { say:"Final check before the real music. \u{1F447} <b>Which of these is F major in 1st inversion?</b>",
+    { say:"<b>Final Check</b> \u{1F447} <b>Which of these is F major in 1st inversion?</b>",
       try:{ type:"mc", choices:["A-C-F","F-A-C","C-F-A"], answer:0,
         success:"✓ A (the 3rd) in the bass, root F on top. You're officially inverting!",
         fail:"F major spells F-A-C. Put its 3rd — A — on the bottom.",
@@ -244,14 +244,14 @@ LESSON_CONTENT[51]={
     { type:"mc", q:"To create a 1st inversion from root position, move the ____ up one octave.", choices:["root","3rd","5th"], answer:0,
       explain:"C-E-G → E-G-C: the root goes to the top (AEMT3 p.83)." },
     { type:"mc", q:"E-G-C is which chord, in which position?", choices:["C major, 1st inversion","E major, root position","C major, root position"], answer:0,
-      explain:"Restack in 3rds: C-E-G. C major — with its 3rd (E) in the bass." },
+      explain:"Rearranged into thirds: C-E-G. C major — with its 3rd (E) in the bass." },
     { type:"mc", q:"In 1st inversion, the root sits…", choices:["on top","in the bass","in the middle"], answer:0,
       explain:"It moved up an octave — from the bottom to the top." },
     { type:"mc", q:"G major (G-B-D) in 1st inversion is spelled…", choices:["B-D-G","D-G-B","G-D-B"], answer:0,
       explain:"3rd (B) in the bass, then 5th, then root." },
     { type:"mc", q:"A chord whose tones span MORE than an octave is in…", choices:["open position","close position","2nd inversion"], answer:0,
       explain:"Spacing wider than an octave = open. Spacing never changes the inversion." },
-    { type:"mc", q:"Which note decides a chord's INVERSION?", choices:["the lowest (bass) note","the highest note","the loudest note"], answer:0,
+    { type:"mc", q:"Which note determines the inversion of a chord?", choices:["the lowest (bass) note","the highest note","the loudest note"], answer:0,
       explain:"Bass = position. Root = name." },
     { type:"truefalse", q:"Inverting a chord changes its name.", answer:false,
       explain:"Same letters, same chord — only the arrangement changes." },
@@ -281,16 +281,16 @@ LESSON_CONTENT[51]={
     { type:"mc", q:"Name this chord and its position.",
       staff:{clef:"treble",notes:[{p:"A4",d:"w"},{p:"C5",d:"w",chord:true},{p:"F5",d:"w",chord:true}],width:200},
       choices:["F major, 1st inversion","A minor, root position","F major, root position"], answer:0,
-      explain:"Restack: F-A-C. The bass A is the 3rd → 1st inversion.", hint:"Restack the letters into 3rds first." },
+      explain:"Rearrange into thirds: F-A-C. The bass A is the 3rd → 1st inversion.", hint:"Rearrange the letters into thirds first." },
     { type:"mc", q:"Name this chord and its position.",
       staff:{clef:"treble",notes:[{p:"G4",d:"w"},{p:"B4",d:"w",chord:true},{p:"D5",d:"w",chord:true}],width:200},
       choices:["G major, root position","G major, 1st inversion","D major, 2nd inversion"], answer:0,
       explain:"Bass G IS the root: G-B-D, root position.", hint:"Is the bass the root or the 3rd?" },
-    { type:"mc", q:"A student says: \u{201C}E-G-C must be an E chord — E is on the bottom.\u{201D} What's wrong?", choices:["The bass names the POSITION, not the chord — it's C major in 1st inversion","Nothing — the student is right","E-G-C is actually G major"], answer:0,
-      explain:"Restacked in 3rds it spells C-E-G. Bass note = position; root = name.", hint:"Restack before you name." },
+    { type:"mc", q:"A student says, \u{201C}E–G–C must be an E chord — E is on the bottom.\u{201D} Why is the student incorrect?", choices:["The bass names the POSITION, not the chord — it's C major in 1st inversion","Nothing — the student is right","E-G-C is actually G major"], answer:0,
+      explain:"Rearranged into thirds it spells C-E-G. Bass note = position; root = name.", hint:"Rearrange the notes into thirds before naming the chord." },
     { type:"mc", q:"Which statement is correct?", choices:["A 1st-inversion triad has the 3rd as its lowest note","Inversions change the identity of a chord","Open position means the root is always on the bottom","Close position means the chord has four notes"], answer:0,
       explain:"The other three all confuse spacing, naming or position rules.", hint:"One of these is today's core rule, word for word." },
-    { type:"mc", q:"WHY do musicians use 1st inversion? (Think of Example 2.)", choices:["It makes the bass line move more smoothly","It makes the chord louder","It adds a 4th note to the triad"], answer:0,
+    { type:"mc", q:"Why do musicians use 1st inversion chords?", choices:["It makes the bass line move more smoothly","It makes the chord louder","It adds a 4th note to the triad"], answer:0,
       explain:"C → B → C in the bass instead of C → G → C leaps: smoother, more connected harmony.", hint:"Listen to what the BASS did in the second example." },
     /* generated */
     { gen:"inversion-id", params:{subject:"triad", ask:"position"}, count:4 },
@@ -316,7 +316,7 @@ LESSON_CONTENT[51]={
     "✔ 1st inversions make <b>smoother bass lines</b> — you heard C-B-C in the example."
   ],
   tips:[
-    "Reading trick: a root-position triad is a perfect snowman (all lines or all spaces). A 1st inversion has a GAP above — the top two notes sit a 4th apart with the root on top.",
+    "Reading trick: a root-position triad stacks evenly (all lines or all spaces). A 1st inversion has a GAP above — the top two notes sit a 4th apart with the root on top.",
     "At the piano, flip any triad you know: play C-E-G, then move just your thumb note up an octave. One finger moves; the whole sound changes.",
     "In Lesson 52 the chord flips AGAIN — guess which note will be in the bass next!",
     "Composers love 1st inversions for walking bass lines: I → V⁶ → I gives the bass do-ti-do."
@@ -328,7 +328,7 @@ LESSON_CONTENT[51]={
   miaPass:"Passed! The 3rd-in-the-bass rule is yours. Lesson 52 flips the chord one more time…",
   mia:{
     hook:{ label:"the welcome",
-      explain:"Chord A was C-E-G (root position). Chord B re-stacked the same letters as E-G-C — 1st inversion, with the 3rd in the bass.",
+      explain:"Chord A was C-E-G (root position). Chord B rearranged the same notes as E-G-C — 1st inversion, with the 3rd as the lowest note.",
       play:()=>{[60,64,67].forEach(m=>MFAudio.tone(m,.9,0,.33));[64,67,72].forEach(m=>MFAudio.tone(m,1.1,1.1,.33));} },
     learn:{ label:"1st inversion",
       explain:"Move the root up an octave and the 3rd becomes the bass: that's 1st inversion. Letters unchanged → name unchanged. Close = within an octave, open = wider.",
@@ -340,7 +340,7 @@ LESSON_CONTENT[51]={
       explain:"Sprint positions, climb three 1st inversions, spot them on cards, then race the vocabulary.",
       hint:"Always find the BASS note first." },
     quiz:{ label:"this question",
-      explain:"Every question reduces to two moves: restack the letters in 3rds to NAME the chord, then look at the bass to name the POSITION.",
+      explain:"Every question reduces to two moves: rearrange the letters into thirds to NAME the chord, then look at the bass to name the POSITION.",
       play:()=>{[60,64,67].forEach(m=>MFAudio.tone(m,.8,0,.33));[64,67,72].forEach(m=>MFAudio.tone(m,1,1,.33));} }
   }
 };

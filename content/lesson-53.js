@@ -27,16 +27,16 @@ function MF_L53_flip(container,fb){
           const N=POSITIONS[k];
           N.ps.forEach(p=>MFAudio.tone(MFAudio.midi(p),1.0,.1,.3));
           if(k<POSITIONS.length-1){
-            fb(true,`✓ Flip ${k}: now the bass is ${N.bass} → ${N.label}. Tap the new bass to keep flipping!`);
-            q.innerHTML=`Position ${k+1} of 4: <b>${N.label}</b>. Tap the bass note for the next flip.`;
+            fb(true,`✓ Great! The chord moved to the next inversion — the lowest note is now ${N.bass}.`);
+            q.innerHTML=`Position ${k+1} of 4: <b>${N.label}</b>. Tap the lowest note to continue.`;
           } else {
-            fb(true,`✓ Final flip! The 7TH (F) is in the bass → 3rd inversion — the position a triad can never have. Four notes, four positions!`);
-            q.textContent="G7 fully explored: G, B, D and F each took a turn in the bass.";
+            fb(true,`✓ Excellent! In 3rd inversion the 7th (F) is the lowest note. Each chord tone has now been in the bass.`);
+            q.textContent="Excellent! Each chord tone has now been in the bass.";
           }
         } else { MFAudio.tone(40,.2); fb(false,"Tap the LOWEST note — that's the one that jumps up an octave."); }
       }});
   }
-  q.innerHTML=`G7 in <b>root position</b> (G-B-D-F). Tap the <b>bass note</b> to start flipping.`;
+  q.innerHTML=`G7 in <b>root position</b> (G-B-D-F). Tap the <b>lowest note</b> to move it up one octave.`;
   draw();
 }
 
@@ -56,14 +56,14 @@ function MF_L53_detect(container,fb){
     <div class="choices chips l53d-ch" style="display:none"><button>Root position</button><button>1st inversion</button><button>2nd inversion</button><button>3rd inversion</button></div>`;
   const q=container.querySelector(".l53d-q"), holder=container.querySelector(".l53d-staff"), ch=container.querySelector(".l53d-ch");
   function ask(){
-    if(r>=ROUNDS.length){ q.textContent=`Investigation complete — ${score} of ${ROUNDS.length} correct!`; holder.innerHTML=""; ch.style.display="none"; return; }
+    if(r>=ROUNDS.length){ q.textContent="Great job! You identified every inversion."; holder.innerHTML=""; ch.style.display="none"; return; }
     const R=ROUNDS[r]; found=false; ch.style.display="none";
-    q.innerHTML=`Chord ${r+1} of ${ROUNDS.length} (${R.chord}: ${R.chord==="G7"?"G-B-D-F":"C-E-G-B♭"}): tap the <b>LOWEST note</b>.`;
+    q.innerHTML=`${R.chord} (${R.chord==="G7"?"G-B-D-F":"C-E-G-B♭"}): tap the <b>lowest note</b> first. (Chord ${r+1} of ${ROUNDS.length})`;
     Staff.render(holder,{clef:"treble",notes:R.ps.map((p,ix)=>ix===0?{p,d:"w"}:{p,d:"w",chord:true}),width:230,clickNotes:true,
       onNote:(i,p)=>{
         MFAudio.tone(MFAudio.midi(p),.5,0,.4);
         if(found) return;
-        if(i===0){ found=true; q.innerHTML=`Bass = <b>${R.ps[0].replace(/\d/,"").replace("b","♭")}</b>. Which job is that in ${R.chord} — and which position?`; ch.style.display=""; }
+        if(i===0){ found=true; q.innerHTML=`✓ The lowest note is <b>${R.ps[0].replace(/\d/,"").replace("b","♭")}</b>. Now identify the inversion.`; ch.style.display=""; }
         else fb(false,"Lower! The bottom note decides the position.");
       }});
   }
@@ -94,9 +94,9 @@ function MF_L53_build(container,fb){
     Staff.render(sh,{clef:"treble",notes:ps.map((p,ix)=>ix===0?{p,d:"w"}:{p,d:"w",chord:true}),width:200});
   }
   function ask(){
-    if(r>=ROUNDS.length){ q.textContent="All three inversions of G7 built — even the 7th took the bass!"; return; }
+    if(r>=ROUNDS.length){ q.textContent="Excellent! You built all three inversions."; return; }
     k=0; last=null; got=[]; drawStaff();
-    q.innerHTML=`Build <b>${ROUNDS[r].name}</b>, bottom to top. Start anywhere: press <b>${ROUNDS[r].letters[0]}</b>.`;
+    q.innerHTML=`Build <b>${ROUNDS[r].name}</b>. Press <b>${ROUNDS[r].letters[0]}</b> first.`;
   }
   Keyboard.create(kh,{start:60,octaves:2,labels:true,
     onKey:m=>{
@@ -105,9 +105,9 @@ function MF_L53_build(container,fb){
       if(m%12===want && (last===null || m>last)){
         last=m; got.push(m); k++; drawStaff();
         if(k>=4){ got.forEach(x=>MFAudio.tone(x,1.0,.1,.3));
-          fb(true,`✓ ${R.name} — bass: ${R.letters[0].split(" ")[0]}, root on ${["top","the middle","the second step"][r]||"its new floor"}.`);
+          fb(true,`✓ ${R.name} — the lowest note is ${R.letters[0].split(" ")[0]}.`);
           r++; setTimeout(ask,1400); }
-        else q.innerHTML=`Good — now <b>${R.letters[k]}</b>, higher than your last key.`;
+        else q.innerHTML=`Now play <b>${R.letters[k]}</b> above the note you just played.`;
       } else if(m%12===want){ MFAudio.tone(40,.2); fb(false,"Right letter — stack UPWARD from the bass."); }
       else { MFAudio.tone(40,.2); fb(false,k===0? `Which note of G-B-D-F does the bass job in ${R.name}?` : "Keep the G7 spelling: G-B-D-F, rotated."); }
     }});
@@ -117,20 +117,20 @@ function MF_L53_build(container,fb){
 LESSON_CONTENT[53]={
   welcome:"A triad flips three ways. Today's chord flips FOUR — because it brought an extra note. \u{1F504}",
   hook:{
-    say:"Remember G7 from Lesson 50 — G-B-D-F? Listen to these two versions. <b>One has its 7TH in the bass — the position no triad can ever have. Which?</b>",
+    say:"<b>A V7 chord has four notes, so it can be played in four different positions.</b> Listen carefully. <b>Which chord has the 7th as the lowest note?</b>",
     interact:{ type:"custom",
       mount:(container,fb)=>{
         container.innerHTML=`<div style="text-align:center">
           <button class="play hk-a">▶ Version A</button>
           <button class="play hk-b">▶ Version B</button></div>
-          <div class="choices hk-ch" style="display:none"><button>Version B — F rumbled at the bottom</button><button>Version A — G in the bass is the 7th</button></div>`;
+          <div class="choices hk-ch" style="display:none"><button>Version B — F, the 7th, is the lowest note</button><button>Version A — G in the bass is the 7th</button></div>`;
         const ch=container.querySelector(".hk-ch");
         let hA=false,hB=false;
         container.querySelector(".hk-a").onclick=()=>{ [55,59,62,65].forEach(m=>MFAudio.tone(m,1.2,0,.32)); hA=true; if(hB) setTimeout(()=>ch.style.display="",1400); };
         container.querySelector(".hk-b").onclick=()=>{ [53,55,59,62].forEach(m=>MFAudio.tone(m,1.2,0,.32)); hB=true; if(hA) setTimeout(()=>ch.style.display="",1400); };
         [...ch.children].forEach((b,i)=>b.onclick=()=>{
-          if(i===0) fb(true,"✓ Version B was F-G-B-D: the 7th (F) in the bass — 3RD INVERSION, a position that exists only for 4-note chords. Today: all four positions of V7!");
-          else fb(false,"Version A had G (the ROOT) in the bass — that's plain root position. Listen for the version whose floor sounds restless.");
+          if(i===0) fb(true,"✓ Version B was F-G-B-D — the 7th (F) is the lowest note: 3RD INVERSION. Today: all four positions of V7!");
+          else fb(false,"Version A had G, the ROOT, as its lowest note — that's root position. Listen again for the lowest note.");
         });
       } }
   },
@@ -143,16 +143,16 @@ LESSON_CONTENT[53]={
     "Identify V7 positions by bass note, on sight"
   ],
   steps:[
-    { say:"A triad owns 3 notes → 3 positions. <b>V7 owns FOUR notes</b> (root-3rd-5th-7th) — so how many positions can it be written in? \u{1F447}",
+    { say:"<b>Quick Review:</b> A triad has <b>3 notes</b>, so it has <b>3 positions</b>. A <b>V7 chord has 4 notes</b>, so it has <b>4 positions</b>. \u{1F447} <b>How many positions can a V7 chord have?</b>",
       try:{ type:"mc", choices:["4","3","7"], answer:0,
         success:"✓ Four notes, four possible bass notes, four positions: root, 1st, 2nd and 3rd inversion.",
         fail:"Every chord tone gets one turn in the bass…",
         hint:"Count the notes of G-B-D-F." } },
-    { say:"Work the flip machine: keep sending the bass up an octave and watch G7 walk through all four positions. \u{1F447}",
+    { say:"Move the <b>lowest note</b> up one octave each time. Watch the <b>V7 chord</b> move through all <b>four positions</b>. \u{1F447}",
       try:{ type:"custom",
         hint:"Tap the LOWEST note each time — three flips total.",
         mount:(container,fb)=>MF_L53_flip(container,fb) } },
-    { say:"The complete map, just like the book draws it. Note the new resident of the bass in each position. \u{1F447} <b>In 3rd inversion, the bottom note is the chord's…?</b>",
+    { say:"<b>V7 Inversions:</b> Each inversion places a different chord tone in the bass. In <b>3rd inversion</b>, the <b>7th</b> is the lowest note. \u{1F447} <b>Which chord tone is the lowest note in 3rd inversion?</b>",
       show:{ type:"staff", spec:{clef:"treble",notes:[
         {p:"G3",d:"w",label:"root (G7)"},{p:"B3",d:"w",chord:true},{p:"D4",d:"w",chord:true},{p:"F4",d:"w",chord:true},
         {p:"B3",d:"w",label:"1st (G7/B)"},{p:"D4",d:"w",chord:true},{p:"F4",d:"w",chord:true},{p:"G4",d:"w",chord:true},
@@ -162,12 +162,12 @@ LESSON_CONTENT[53]={
         success:"✓ 7th in the bass = 3rd inversion. The bass ladder is now root → 3rd → 5th → 7th.",
         fail:"Three flips from root position — who's left to take the bass?",
         hint:"Each flip promotes the next chord tone." } },
-    { say:"Those slash names above the staff — <b>G7/B, G7/D, G7/F</b> — are letter chord symbols: <b>chord name / bass note</b>. Musicians read them constantly. \u{1F447} <b>G7/D means…?</b>",
+    { say:"<b>Slash Chord Symbols:</b> A slash chord shows the <b>chord name</b> followed by the <b>bass note</b>. For example, <b>G7/D</b> means <b>G7 with D in the bass</b>. \u{1F447} <b>What does G7/D mean?</b>",
       try:{ type:"mc", choices:["G7 with D in the bass (2nd inversion)","D7 with G in the bass","G major without a 7th"], answer:0,
         success:"✓ Left of the slash = the chord; right of the slash = the bass note. D is the 5th of G7 → 2nd inversion.",
         fail:"Read it aloud: \u{201C}G seven over D\u{201D}…",
         hint:"chord / bass." } },
-    { say:"The book's speed trick for sevenths: in every close-position inversion, two neighbors sit just a <b>2nd</b> apart — the 7th and the root — and <b>the ROOT is the UPPER note of that 2nd</b>. Find F-G in each inversion below. \u{1F447} <b>The upper note of the 2nd is always…</b>",
+    { say:"<b>Finding the Root:</b> In close position, the <b>7th</b> and the <b>root</b> are next to each other — an interval of a <b>2nd</b>. The <b>upper note</b> is always the <b>root</b>. Find F-G in each inversion below. \u{1F447} <b>The upper note of the 2nd is always…</b>",
       show:{ type:"staff", spec:{clef:"treble",notes:[
         {p:"B3",d:"w",label:"1st: F-G on top"},{p:"D4",d:"w",chord:true},{p:"F4",d:"w",chord:true},{p:"G4",d:"w",chord:true},
         {p:"D4",d:"w",label:"2nd: F-G inside"},{p:"F4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{p:"B4",d:"w",chord:true},
@@ -176,11 +176,11 @@ LESSON_CONTENT[53]={
         success:"✓ Spot the 2nd (F-G here), grab its top note (G) — you've named the chord's root instantly, in ANY inversion.",
         fail:"In G7 the crunchy neighbors are F and G. Which one is the root?",
         hint:"Triads hid the root on top of a 4th; sevenths hide it on top of a 2nd." } },
-    { say:"Detective rounds — G7 and C7, four positions possible. Bass first, as always. \u{1F447}",
+    { say:"<b>Identify the inversion.</b> Find the <b>lowest note</b>, then identify the chord position. \u{1F447}",
       try:{ type:"custom",
         hint:"Spell the chord from its root (G-B-D-F / C-E-G-B♭), then match the bass note's job.",
         mount:(container,fb)=>MF_L53_detect(container,fb) } },
-    { say:"Now build all three inversions of G7 with your own hands. \u{1F447}",
+    { say:"<b>Build all three inversions of G7.</b> \u{1F447}",
       try:{ type:"custom",
         hint:"Rotate G-B-D-F: start each round on the new bass note and stack upward.",
         mount:(container,fb)=>MF_L53_build(container,fb) } }
@@ -245,11 +245,11 @@ LESSON_CONTENT[53]={
       explain:"Only a 4-note chord can put a 7th in the bass." },
     { type:"mc", q:"In G7's 2nd inversion, the bass note is…", choices:["D","B","F"], answer:0,
       explain:"2nd inversion = 5th in the bass; the 5th of G7 is D." },
-    { type:"mc", q:"F-G-B-D is G7 in…", choices:["3rd inversion","root position","1st inversion"], answer:0,
+    { type:"mc", q:"F–G–B–D is which inversion of G7?", choices:["3rd inversion","root position","1st inversion"], answer:0,
       explain:"F is the 7th of G-B-D-F → 3rd inversion." },
     { type:"mc", q:"The letter symbol for G7 with B in the bass is…", choices:["G7/B","B7/G","G/B7"], answer:0,
       explain:"Chord name, slash, bass note." },
-    { type:"mc", q:"In close position, the ROOT of an inverted seventh chord is…", choices:["the upper note of the 2nd","the lower note of the 2nd","always the top note of the chord"], answer:0,
+    { type:"mc", q:"In close position, where is the root located?", choices:["the upper note of the 2nd","the lower note of the 2nd","always the top note of the chord"], answer:0,
       explain:"Find the two notes a 2nd apart (7th+root) — the root is on top." },
     { type:"truefalse", q:"Inverting a V7 chord changes its name.", answer:false,
       explain:"G-B-D-F in any order is still G7." },
@@ -280,15 +280,15 @@ LESSON_CONTENT[53]={
       staff:{clef:"treble",notes:[{p:"F4",d:"w"},{p:"G4",d:"w",chord:true},{p:"B4",d:"w",chord:true},{p:"D5",d:"w",chord:true}],width:200},
       choices:["3rd inversion","2nd inversion","root position","1st inversion"], answer:0,
       explain:"F (the 7th) in the bass → 3rd inversion — G7/F.", hint:"The bass is the crunchiest note of the chord." },
-    { type:"mc", q:"The symbol G7/F tells a performer to play…", choices:["a G7 chord with F as the lowest note","an F7 chord with G as the lowest note","F major, then G7"], answer:0,
+    { type:"mc", q:"What does the symbol G7/F mean?", choices:["a G7 chord with F as the lowest note","an F7 chord with G as the lowest note","F major, then G7"], answer:0,
       explain:"Chord / bass — the slash names the floor.", hint:"Left = chord, right = bass." },
     { type:"mc", q:"In close position, the two notes that sit a 2nd apart in an inverted V7 are…", choices:["the 7th and the root","the root and the 3rd","the 3rd and the 5th"], answer:0,
       explain:"F-G in G7 — and the ROOT is the upper one.", hint:"The crunch pair." },
-    { type:"mc", q:"A student sees D-F-G-B and says: \u{201C}D is the bass, so this is a D chord.\u{201D} What's correct?", choices:["It's G7 in 2nd inversion — restack in 3rds to find the root G","The student is right","It's B diminished"], answer:0,
+    { type:"mc", q:"A student says, \u{201C}D–F–G–B is a D chord because D is the lowest note.\u{201D} Why is the student incorrect?", choices:["It is G7 in 2nd inversion. Rearrange the notes into thirds to find the root.","The student is right","It's B diminished"], answer:0,
       explain:"F-G is the 2nd → the root is G → G-B-D-F → 2nd inversion.", hint:"Use the 2nd trick." },
     { type:"mc", q:"Which listing is the bass-note ladder of V7 positions, in order?", choices:["root → 3rd → 5th → 7th","root → 5th → 3rd → 7th","7th → 5th → 3rd → root"], answer:0,
       explain:"Each flip promotes the next chord tone into the bass.", hint:"Same ladder as triads, one rung longer." },
-    { type:"mc", q:"In Example 2, why did the bass F of G7/F feel so satisfying moving to E?", choices:["The 7th resolves DOWN by step into the I chord","F is louder than E","The chord became minor"], answer:0,
+    { type:"mc", q:"Why does F naturally resolve to E in G7/F → C?", choices:["The 7th of the V7 chord resolves down by step to the 3rd of the I chord","F is louder than E","The chord became minor"], answer:0,
       explain:"The 7th's downward pull is the engine of V7 → I.", hint:"Which chord tone was in the bass?" },
     /* generated */
     { gen:"inversion-id", params:{subject:"v7", ask:"position"}, count:4 },
