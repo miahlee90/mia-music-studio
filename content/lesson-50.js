@@ -38,11 +38,11 @@ function MF_L50_factory(container,fb){
 /* resolution lab: V7 → I vs V7 → nowhere */
 function MF_L50_resolve(container,fb){
   let hA=false,hB=false;
-  container.innerHTML=`<div class="big-q" style="text-align:center">V7 is famously RESTLESS. Press both endings — which one satisfies?</div>
+  container.innerHTML=`<div class="big-q" style="text-align:center">Listen to both endings. Which one sounds finished? Why?</div>
     <div style="text-align:center">
       <button class="play l50-a">▶ Ending A: V7 → I</button>
-      <button class="play l50-b">▶ Ending B: V7 → (stop)</button></div>
-    <div class="choices l50-ch" style="display:none"><button>Ending A — V7 melted into home</button><button>Ending B — stopping on V7 felt complete</button></div>`;
+      <button class="play l50-b">▶ Ending B: V7 (stops on the dominant)</button></div>
+    <div class="choices l50-ch" style="display:none"><button>Ending A — the tritone resolved to the tonic (I), so it sounds finished</button><button>Ending B — stopping on the dominant felt complete</button></div>`;
   const ch=container.querySelector(".l50-ch");
   container.querySelector(".l50-a").onclick=()=>{
     [67,71,74,77].forEach(m=>MFAudio.tone(m,.8,0,.3));
@@ -55,7 +55,7 @@ function MF_L50_resolve(container,fb){
   };
   [...ch.children].forEach((b,i)=>b.onclick=()=>{
     if(i===0) fb(true,"✓ V7 → I is music's most powerful arrival: the leading tone (B) rises to C, the 7th (F) sinks to E, and home never felt so earned. Composers end pieces with it constantly.");
-    else fb(false,"Really? Play Ending B again and try to feel 'finished'…");
+    else fb(false,"Play Ending B again — the B and F of the tritone are left hanging, so the music feels unfinished.");
   });
 }
 
@@ -105,7 +105,7 @@ LESSON_CONTENT[50]={
       try:{ type:"custom",
         hint:"G, B, D — then the m7: F.",
         mount:(container,fb)=>MF_L50_factory(container,fb) } },
-    { say:"Why the 7th? TENSION. The added F clashes gently with B (a tritone — your L37 'devil'!) and the whole chord strains toward I. \u{1F447} <b>Feel the resolution:</b>",
+    { say:"Why add the 7th? The added 7th (<b>F</b>) forms a <b>tritone</b> with <b>B</b>, the chord's 3rd. This unstable interval creates tension that naturally wants to resolve to the tonic (I): B rises to C, F falls to E. \u{1F447} <b>Listen to both examples and decide which ending feels complete:</b>",
       try:{ type:"custom",
         hint:"Which ending could you actually END a piece with?",
         mount:(container,fb)=>MF_L50_resolve(container,fb) } },
@@ -202,7 +202,7 @@ LESSON_CONTENT[50]={
     { type:"truefalse", q:"After this lesson, the three primary chords are I, IV, and V7.", answer:true,
       explain:"The dominant almost always brings its 7th." },
     { type:"mc", q:"The tension inside V7 comes partly from B and F forming…", choices:["a tritone (dim 5th)","a perfect 5th","an octave"], answer:0,
-      explain:"Lesson 37's 'devil' powers the pull to I." },
+      explain:"The B–F tritone (the unstable interval from Lesson 37) naturally wants to resolve to I." },
     { type:"mc", q:"V7 resolves most naturally to…", choices:["I","IV","vii"], answer:0,
       explain:"Dominant → tonic: music's strongest arrival." }
   ],
@@ -235,7 +235,7 @@ LESSON_CONTENT[50]={
     { type:"mc", q:"V7 most naturally resolves to…", choices:["the I chord","the IV chord","another V7","silence"], answer:0,
       explain:"Leading tone up, 7th down — home.", hint:"Where did the resolution lab land?" },
     { type:"mc", q:"Why does V7 pull harder toward I than plain V?", choices:["The added 7th creates extra tension (a tritone with the 3rd)","It is played faster","Four notes are louder than three"], answer:0,
-      explain:"B-F, the tritone, begs to resolve.", hint:"Lesson 37's spooky interval hides inside." },
+      explain:"The B–F tritone is unstable and naturally resolves: B up to C, F down to E.", hint:"An unstable interval (a tritone) hides between the chord's 3rd and 7th." },
     /* generated */
     { gen:"term-match", params:{subject:"term", pool:[["V7","V triad + minor 7th above the root"],["G7 in C major","G-B-D-F"],["Omittable note of V7","the 5th"],["Primary chords (final)","I, IV, V7"]], reverse:true}, count:3 },
     { gen:"triad-id", params:{ask:"numeral"}, count:2 },

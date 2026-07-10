@@ -298,7 +298,7 @@ LESSON_CONTENT[59]={
     { type:"mc", q:"In C major, the complete triad-quality lineup I through vii is…", choices:["M m m M M m dim","M M m m M m M","m M m M m M dim"], answer:0,
       explain:"1-4-5 major, 2-3-6 minor, 7 diminished.", hint:"The book's three bullet points." },
     { type:"mc", q:"Which triad quality contains the TRITONE between its root and 5th?", choices:["Diminished","Major","Augmented"], answer:0,
-      explain:"The diminished 5th (B-F) is the tritone — Lesson 37's devil, now living inside a chord.", hint:"The squeezed frame." },
+      explain:"The diminished 5th (B-F) is a tritone — the famously unstable interval from Lesson 37, now living inside a chord.", hint:"The squeezed frame." },
     { type:"mc", q:"Which pair correctly describes the SOUND of the two new chords?", choices:["Augmented floats without direction; diminished coils with tension","Both sound calm and final","Augmented is dark; diminished is bright"], answer:0,
       explain:"Both unstable — one drifts, one grinds.", hint:"The two strangers of the hook." },
     /* generated */
