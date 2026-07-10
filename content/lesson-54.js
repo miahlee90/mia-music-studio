@@ -71,7 +71,7 @@ function MF_L54_build(container,fb){
       const want=R.pcs[k];
       if(m%12===want && (last===null || m>last)){
         last=m; got.push(m); k++; drawStaff();
-        if(k>=R.pcs.length){ MFAudio.yay(); got.forEach(x=>MFAudio.tone(x,1.0,.6,.3));
+        if(k>=R.pcs.length){ got.forEach(x=>MFAudio.tone(x,1.0,.1,.3));
           fb(true,`✓ ${R.chord} — read from the figures alone.`);
           r++; setTimeout(ask,1500); }
         else q.innerHTML=`Good — next: <b>${R.names[k]}</b>, higher than your last key.`;

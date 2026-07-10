@@ -20,9 +20,9 @@ function MF_L52_flip(container,fb){
       width:250, clickNotes:clickable,
       onNote: clickable? (i)=>{
         const R=ROUNDS[r];
-        if(i===0){ MFAudio.yay();
+        if(i===0){
           draw(R.second,"2nd inversion",false);
-          R.second.forEach(p=>MFAudio.tone(MFAudio.midi(p),1.0,.6,.32));
+          R.second.forEach(p=>MFAudio.tone(MFAudio.midi(p),1.0,.1,.32));
           fb(true,`✓ ${R.first.map(p=>p[0]).join("-")} became ${R.second.map(p=>p[0]).join("-")} — now the 5TH is the bottom note. That's 2nd inversion!`);
           r++;
           if(r<ROUNDS.length) nxt.style.display="inline-block";
@@ -102,7 +102,7 @@ function MF_L52_build(container,fb){
       const want=R.pcs[k];
       if(m%12===want && (last===null || m>last)){
         last=m; got.push(m); k++; drawStaff();
-        if(k>=3){ MFAudio.yay(); got.forEach(x=>MFAudio.tone(x,1.0,.6,.32));
+        if(k>=3){ got.forEach(x=>MFAudio.tone(x,1.0,.1,.32));
           fb(true,`✓ ${R.name}, 2nd inversion — 5th in the bass, root in the middle, 3rd on top.`);
           r++; setTimeout(ask,1400); }
         else q.innerHTML=`Good — now <b>${R.letters[k]}</b>, higher than your last key.`;

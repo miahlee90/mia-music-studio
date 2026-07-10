@@ -19,10 +19,10 @@ function MF_L51_flip(container,fb){
     Staff.render(holder,{clef:"treble",notes:ps.map((p,ix)=>ix===0?{p,d:"w",label}:{p,d:"w",chord:true}),
       width:240, clickNotes:clickable,
       onNote: clickable? (i)=>{
-        if(i===0){ MFAudio.yay();
+        if(i===0){
           const R=ROUNDS[r];
           draw(R.inv, "1st inversion", false);
-          R.inv.forEach(p=>MFAudio.tone(MFAudio.midi(p),1.0,.6,.32));
+          R.inv.forEach(p=>MFAudio.tone(MFAudio.midi(p),1.0,.1,.32));
           fb(true,`✓ The root flew to the TOP: ${R.root.map(p=>p[0]).join("-")} became ${R.inv.map(p=>p[0]).join("-")}. Now the 3rd is the bottom note — 1st inversion!`);
           r++;
           if(r<ROUNDS.length){ nxt.style.display="inline-block"; }
@@ -100,7 +100,7 @@ function MF_L51_build(container,fb){
       const want=R.pcs[k];
       if(m%12===want && (last===null || m>last)){
         last=m; got.push(m); k++; drawStaff();
-        if(k>=3){ MFAudio.yay(); got.forEach(x=>MFAudio.tone(x,1.0,.6,.32));
+        if(k>=3){ got.forEach(x=>MFAudio.tone(x,1.0,.1,.32));
           fb(true,`✓ ${R.name}, 1st inversion — the 3rd sits in the bass and the root rides on top.`);
           r++; setTimeout(ask,1400); }
         else q.innerHTML=`Good — now <b>${R.letters[k]}</b>, higher than the key you just pressed.`;

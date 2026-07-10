@@ -22,9 +22,9 @@ function MF_L58_morph(container,fb){
       width:240, clickNotes:clickable,
       onNote: clickable? (i)=>{
         const R=ROUNDS[r];
-        if(i===1){ MFAudio.yay();
+        if(i===1){
           draw(R.min, R.name+" minor", false);
-          R.min.forEach(p=>MFAudio.tone(MFAudio.midi(p),1.1,.6,.32));
+          R.min.forEach(p=>MFAudio.tone(MFAudio.midi(p),1.1,.1,.32));
           fb(true,`✓ The 3rd dropped a half step (→ ${R.newP}) and the whole mood dimmed: ${R.name} major became ${R.name} MINOR. Root and 5th never moved.`);
           r++;
           if(r<ROUNDS.length) nxt.style.display="inline-block";
@@ -68,7 +68,7 @@ function MF_L58_build(container,fb){
       const want=R.pcs[k];
       if(m%12===want && (last===null || m>last)){
         last=m; got.push(m); k++; drawStaff();
-        if(k>=3){ MFAudio.yay(); got.forEach(x=>MFAudio.tone(x,1.1,.6,.32));
+        if(k>=3){ got.forEach(x=>MFAudio.tone(x,1.1,.1,.32));
           fb(true,`✓ ${R.name}: root + minor 3rd + Perfect 5th. Hear the shade in it?`);
           r++; setTimeout(ask,1400); }
         else q.innerHTML=`Good — now <b>${R.names[k]}</b>, above your last key.`;

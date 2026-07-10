@@ -39,8 +39,8 @@ function MF_L71_convert(container,fb){
           } else fb(false,`Keep degree ${n.deg===8?1:n.deg} — operation 1 removes only the 2nd and the 6th.`);
         } else if(phase===1){
           if((n.deg===3||n.deg===7)&&!flatted.includes(n.deg)){
-            flatted.push(n.deg); MFAudio.yay();
-            MFAudio.tone(MFAudio.midi(n.p[0]+"b"+n.p[n.p.length-1]),.6,.55,.42);
+            flatted.push(n.deg);
+            MFAudio.tone(MFAudio.midi(n.p[0]+"b"+n.p[n.p.length-1]),.6,.1,.42);
             if(flatted.length<2){ q.innerHTML="✓ Flatted! One more…"; draw(true); }
             else { fb(true,"✓ E→E♭ and B→B♭ — operation 2 complete. One thing missing: operation 3 adds a brand-new note!");
               q.innerHTML="Operation 3: press the button to add the <b>flatted 5th</b>."; draw(false); addBtn.style.display="inline-block"; }

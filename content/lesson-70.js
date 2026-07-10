@@ -34,7 +34,7 @@ function MF_L70_build(container,fb){
   [...ch.children].forEach(b=>b.onclick=()=>{
     if(k>=FORM.length) return;
     if(b.textContent===FORM[k]){
-      MFAudio.yay(); CH[b.textContent].forEach(m=>MFAudio.tone(m,.7,.55,.26));
+      CH[b.textContent].forEach(m=>MFAudio.tone(m,.7,.05,.26));
       picked.push(b.textContent); k++;
       fb(true,`✓ Bar ${k}: ${picked[k-1]}. ${k===12?"Blueprint complete!":""}`);
       ask();

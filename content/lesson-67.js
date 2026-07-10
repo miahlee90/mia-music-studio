@@ -42,9 +42,8 @@ function MF_L67_compose(container,fb){
         const M2=MEAS[k];
         if(M2.must && name!==M2.must){ MFAudio.tone(40,.2); fb(false,`The ${k===0?"first":"last"} note tends to be the ROOT of the I chord — that's ${M2.must}.`); return; }
         if(M2.tones[name]===undefined){ MFAudio.tone(40,.2); fb(false,`${name} isn't a tone of ${M2.sym} — for the skeleton, stay INSIDE the chord. (Decorations come later!)`); return; }
-        MFAudio.yay();
-        MFAudio.tone(M2.tones[name],.7,.55,.42);
-        M2.chord.forEach(m=>MFAudio.tone(m,.8,.55,.2));
+        MFAudio.tone(M2.tones[name],.7,.05,.42);
+        M2.chord.forEach(m=>MFAudio.tone(m,.8,.05,.2));
         picked.push({name, midi:M2.tones[name]}); k++;
         fb(true,`✓ ${name} over ${M2.sym} — a chord tone doing its job.`);
         setTimeout(ask,1000);

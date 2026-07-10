@@ -20,22 +20,22 @@ function MF_L57_fix(container,fb){
       onNote:(i,p)=>{
         MFAudio.tone(MFAudio.midi(p),.5,0,.4);
         if(stage===0){
-          if(i===6){ MFAudio.yay();
+          if(i===6){
             const H=["A3","B3","C4","D4","E4","F4","G#4","A4"];
             draw(H,"A harmonic minor");
-            H.forEach((pp,ix)=>MFAudio.tone(MFAudio.midi(pp),.4,.6+ix*.28,.38));
+            H.forEach((pp,ix)=>MFAudio.tone(MFAudio.midi(pp),.4,.3+ix*.28,.38));
             fb(true,"✓ G becomes G♯ — the raised 7th is now a LEADING TONE, one half step under A. This is the HARMONIC MINOR, and the raise applies going up AND coming down.");
             stage=1; done=[];
             setTimeout(()=>{ q.innerHTML="Now build the <b>MELODIC minor (ascending)</b>: starting again from natural minor, tap the <b>6th</b> and the <b>7th</b> — both get raised."; draw(NAT,"A natural minor"); },3400);
           } else fb(false,`That's degree ${i+1}. The harmonic minor raises only the 7TH.`);
         } else {
-          if(i===5&&!done.includes(5)){ done.push(5); MFAudio.yay();
+          if(i===5&&!done.includes(5)){ done.push(5);
             draw(["A3","B3","C4","D4","E4","F#4","G4","A4"],"6th raised…");
             q.innerHTML="✓ F→F♯. One more: tap the <b>7th</b>."; }
-          else if(i===6&&done.includes(5)){ MFAudio.yay();
+          else if(i===6&&done.includes(5)){
             const M=["A3","B3","C4","D4","E4","F#4","G#4","A4"];
             draw(M,"A melodic minor (ascending)");
-            M.forEach((pp,ix)=>MFAudio.tone(MFAudio.midi(pp),.4,.6+ix*.28,.38));
+            M.forEach((pp,ix)=>MFAudio.tone(MFAudio.midi(pp),.4,.3+ix*.28,.38));
             fb(true,"✓ F♯ AND G♯ — the MELODIC minor ascending. The raised 6th smooths the path into the raised 7th. (Coming down, both cancel — it descends as natural minor.)");
             q.textContent="Both fixes built — three scales from one set of letters!";
           }

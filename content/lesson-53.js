@@ -23,9 +23,9 @@ function MF_L53_flip(container,fb){
       onNote:(i)=>{
         if(i===0){
           if(k>=POSITIONS.length-1) return;
-          k++; MFAudio.yay(); draw();
+          k++; draw();
           const N=POSITIONS[k];
-          N.ps.forEach(p=>MFAudio.tone(MFAudio.midi(p),1.0,.6,.3));
+          N.ps.forEach(p=>MFAudio.tone(MFAudio.midi(p),1.0,.1,.3));
           if(k<POSITIONS.length-1){
             fb(true,`✓ Flip ${k}: now the bass is ${N.bass} → ${N.label}. Tap the new bass to keep flipping!`);
             q.innerHTML=`Position ${k+1} of 4: <b>${N.label}</b>. Tap the bass note for the next flip.`;
@@ -104,7 +104,7 @@ function MF_L53_build(container,fb){
       const want=R.pcs[k];
       if(m%12===want && (last===null || m>last)){
         last=m; got.push(m); k++; drawStaff();
-        if(k>=4){ MFAudio.yay(); got.forEach(x=>MFAudio.tone(x,1.0,.6,.3));
+        if(k>=4){ got.forEach(x=>MFAudio.tone(x,1.0,.1,.3));
           fb(true,`✓ ${R.name} — bass: ${R.letters[0].split(" ")[0]}, root on ${["top","the middle","the second step"][r]||"its new floor"}.`);
           r++; setTimeout(ask,1400); }
         else q.innerHTML=`Good — now <b>${R.letters[k]}</b>, higher than your last key.`;

@@ -40,8 +40,8 @@ function MF_L66_detect(container,fb){
   }
   [...ch.children].forEach((b,i)=>b.onclick=()=>{
     const R=ROUNDS[r]; if(!R||!found) return;
-    if(i===R.kind){ MFAudio.yay();
-      R.ps.forEach((p,ix)=>MFAudio.tone(MFAudio.midi(p),.45,.55+ix*.4,.4));
+    if(i===R.kind){
+      R.ps.forEach((p,ix)=>MFAudio.tone(MFAudio.midi(p),.45,.05+ix*.4,.4));
       fb(true,`✓ ${R.expl}`);
       r++; setTimeout(ask,1500); }
     else { MFAudio.tone(40,.2); fb(false,"Check the frame: does the melody land on a DIFFERENT chord tone (passing) or the SAME one (neighbor)? Above or below?"); }

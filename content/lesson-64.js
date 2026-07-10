@@ -36,9 +36,8 @@ function MF_L64_harm(container,fb){
   [...ch.children].forEach(b=>b.onclick=()=>{
     const S=STEPS[k]; if(!S) return;
     if(S.ok.includes(b.textContent)){
-      MFAudio.yay();
-      MFAudio.tone(MFAudio.midi(S.note),.8,.55,.4);
-      CH[b.textContent].forEach(m=>MFAudio.tone(m,.9,.55,.25));
+      MFAudio.tone(MFAudio.midi(S.note),.8,.05,.4);
+      CH[b.textContent].forEach(m=>MFAudio.tone(m,.9,.05,.25));
       picked.push(b.textContent); k++;
       fb(true,`✓ ${S.why}`);
       setTimeout(ask,1200);

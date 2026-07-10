@@ -40,9 +40,8 @@ function MF_L69_compose(container,fb){
         const M2=MEAS[k];
         if(M2.must && name!==M2.must){ MFAudio.tone(40,.2); fb(false,`The ${k===0?"first":"last"} note tends to be the root of i — that's ${M2.must}.`); return; }
         if(M2.tones[name]===undefined){ MFAudio.tone(40,.2); fb(false,`${name} isn't a tone of ${M2.sym}. Skeleton first — decorations later!`); return; }
-        MFAudio.yay();
-        MFAudio.tone(M2.tones[name],.7,.55,.44);
-        M2.chord.forEach(m=>MFAudio.tone(m,.8,.55,.2));
+        MFAudio.tone(M2.tones[name],.7,.05,.44);
+        M2.chord.forEach(m=>MFAudio.tone(m,.8,.05,.2));
         picked.push({name, midi:M2.tones[name]}); k++;
         fb(true,`✓ ${name} over ${M2.sym}.`);
         setTimeout(ask,1000);
@@ -85,8 +84,8 @@ function MF_L69_labels(container,fb){
       const b=document.createElement("button"); b.textContent=o;
       b.onclick=()=>{
         const R2=ROUNDS[r];
-        if(o===R2.answer){ MFAudio.yay();
-          R2.ps.forEach((p,ix)=>MFAudio.tone(MFAudio.midi(p),.45,.55+ix*.4,.42));
+        if(o===R2.answer){
+          R2.ps.forEach((p,ix)=>MFAudio.tone(MFAudio.midi(p),.45,.05+ix*.4,.42));
           fb(true,`✓ ${R2.expl}`);
           r++; setTimeout(ask,1500); }
         else { MFAudio.tone(40,.2); fb(false,"Is the note IN D-F-A (then R/3/5) or outside it (then P/U/L by its journey)?"); }
