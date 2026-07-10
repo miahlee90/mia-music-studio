@@ -226,7 +226,7 @@ LESSON_CONTENT[49]={
     "Mnemonic mirror: dominant/subdominant and mediant/submediant are two pairs of reflections around the tonic.",
     "Say degrees as names during scale practice: 'Tonic… supertonic…' — the titles stick in a week.",
     "Composers speak this language constantly: 'rest on the dominant', 'pivot on the submediant' — now you're fluent.",
-    "One lesson left in Book 2! The dominant grows a 7th — the mighty V7 chord."
+    "Next lesson: the dominant grows a 7th — the mighty V7 chord."
   ],
   rewards:{ badge:"Court Herald", icon:"\u{1F3F0}" },
   sectionOrder:["secHook","secObjectives","secLearn","secExample","secReview",

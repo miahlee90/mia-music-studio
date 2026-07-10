@@ -122,7 +122,7 @@ LESSON_CONTENT[48]={
         brackets:[{from:0,to:1,label:"M3 below"},{from:1,to:2,label:"m3 on top"}],width:240},
         kb:{start:60,octaves:1,labels:true,marks:[60,64,67]} },
       try:{ type:"mc", choices:["Major 3rd on the bottom, minor 3rd on top","Minor 3rd on the bottom, Major 3rd on top","Two Major 3rds"], answer:0,
-        success:"✓ M3 + m3, in that order. (Flip the floors and you get a MINOR triad — a Book 3 story!)",
+        success:"✓ M3 + m3, in that order. (Flip the floors and you get a MINOR triad — a story for Lesson 58!)",
         fail:"Which floor was 4 half steps? Bottom or top?",
         hint:"C→E (4), then E→G (3)." } },
     { say:"One more remarkable fact from the book: <b>the three primary triads together contain EVERY tone of the major scale.</b> C-E-G + F-A-C + G-B-D = C, D, E, F, G, A, B — the whole scale! That's why three chords can harmonize practically any melody. \u{1F447} <b>Which scale tone is missing from I, IV, and V combined?</b>",

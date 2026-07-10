@@ -114,7 +114,7 @@ LESSON_CONTENT[75]={
         {p:"G4",d:"8",label:"A"},{p:"G4",d:"8"},{p:"E4",d:"q"},{p:"G4",d:"q"},{p:"C5",d:"h"},{bar:"final"}],
         beams:[[0,1],[6,7],[12,13],[18,19],[24,25]],width:680},
       kb:{start:57,octaves:2,labels:true} },
-    { caption:"The graduation cadence: I → IV → V7 → I, one last time — the same chords that closed Book 2, now heard by ears that understand EVERYTHING they're doing. Congratulations, musician.",
+    { caption:"The graduation cadence: I → IV → V7 → I, one last time — the same chords that closed Lesson 50, now heard by ears that understand EVERYTHING they're doing. Congratulations, musician.",
       staff:{clef:"treble",tempo:80,notes:[
         {p:"C4",d:"h",label:"I"},{p:"E4",d:"h",chord:true},{p:"G4",d:"h",chord:true},
         {p:"F4",d:"h",label:"IV"},{p:"A4",d:"h",chord:true},{p:"C5",d:"h",chord:true},
@@ -153,7 +153,7 @@ LESSON_CONTENT[75]={
         {label:"Rondo (ABACABA)", spec:{clef:"none",notes:[{letter:"A"},{letter:"B"},{letter:"A"},{letter:"C"},{letter:"A"},{letter:"B"},{letter:"A"}],width:260}}]},
       result:(score)=>score>=5?"All forms named on sight — analyst supreme!":null },
     { type:"term-race", title:"Game 4 · THE GRAND FINALE — 75-Lesson Victory Race",
-      intro:"The final game of the final lesson: highlights from ALL THREE BOOKS. Everything you are. GO!",
+      intro:"The final game of the final lesson: highlights from ALL 75 LESSONS. Everything you are. GO!",
       miaIntro:"THE LAST RACE — make the whole course proud! \u{1F3C6}\u{1F386}",
       spec:{rounds:12, reverse:true, pool:[
         ["The staff","5 lines, 4 spaces (Lesson 1!)"],

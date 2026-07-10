@@ -152,7 +152,7 @@ LESSON_CONTENT[55]={
       try:{ type:"mc", choices:["G-B-D-F (G7)","G-B-D-F♯","F-A-C-E"], answer:0,
         success:"✓ Just add the minor 7th — Lesson 50's chord slides right into the progression.",
         fail:"V7 = V + a minor 7th above the root…",
-        hint:"Book 2's finale chord." } },
+        hint:"Lesson 50's chord." } },
     { say:"Now the problem the book poses: when IV and V(7) stay in <b>root position</b>, the progression sounds <b>choppy</b> — the bass leaps a 4th up, a 5th down… \u{1F447} <b>Hear it, watch the bass, then decide:</b>",
       try:{ type:"custom",
         hint:"Follow only the lowest sound of each chord.",

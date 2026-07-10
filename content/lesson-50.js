@@ -60,7 +60,7 @@ function MF_L50_resolve(container,fb){
 }
 
 LESSON_CONTENT[50]={
-  welcome:"The final lesson of Book 2 — and the V chord saves its best trick for last: a 7th! \u{1F386}",
+  welcome:"The V chord saves its best trick for last: a 7th! \u{1F386}",
   hook:{
     say:"Two versions of the classic ending. One uses the plain V triad; the other adds a SECRET NOTE that makes the arrival irresistible. <b>Which ending pulls home harder?</b>",
     interact:{ type:"custom",
@@ -74,7 +74,7 @@ LESSON_CONTENT[50]={
         container.querySelector(".hk-a").onclick=()=>{ [67,71,74].forEach(m=>MFAudio.tone(m,.8,0,.33)); [60,64,67].forEach(m=>MFAudio.tone(m,1.2,.9,.38)); hA=true; if(hB) setTimeout(()=>ch.style.display="",2300); };
         container.querySelector(".hk-b").onclick=()=>{ [67,71,74,77].forEach(m=>MFAudio.tone(m,.8,0,.3)); [60,64,67,72].forEach(m=>MFAudio.tone(m,1.2,.9,.35)); hB=true; if(hA) setTimeout(()=>ch.style.display="",2300); };
         [...ch.children].forEach((b,i)=>b.onclick=()=>{
-          if(i===0) fb(true,"✓ The secret note was F — a minor 7th above G — turning V into V7, the DOMINANT SEVENTH chord. That extra lean is today's whole lesson… and Book 2's grand finale!");
+          if(i===0) fb(true,"✓ The secret note was F — a minor 7th above G — turning V into V7, the DOMINANT SEVENTH chord. That extra lean is today's whole lesson!");
           else fb(false,"Play both once more — which second chord ACHES before resolving?");
         });
       } }
@@ -117,13 +117,13 @@ LESSON_CONTENT[50]={
         success:"✓ The 5th (D) is left out — the root, 3rd and 7th carry the chord's character, so G\u2013B\u2013F still sounds like V7.",
         fail:"Drop the 7th and it's not a 7th chord at all!",
         hint:"Keep the name-note, the quality-note, and the tension-note." } },
-    { say:"The book's closing upgrade: from now on, <b>the three primary chords are I, IV, and V7</b> — the dominant almost always brings its 7th along in real music. And with that… you've completed every concept in Book 2! \u{1F447} <b>The upgraded primary trio is…?</b>",
+    { say:"A Common Chord Group: in many songs, the three most common harmonic functions are <b>I, IV, and V7</b>. Together, they create a strong sense of <b>home, movement, and resolution</b>. \u{1F447} <b>Which three chords make up this common progression?</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:80,notes:[
         {p:"C4",d:"h",x:140,label:"I"},{p:"E4",d:"h",chord:true},{p:"G4",d:"h",chord:true},
         {p:"F4",d:"h",x:310,label:"IV"},{p:"A4",d:"h",chord:true},{p:"C5",d:"h",chord:true},
         {p:"G4",d:"h",x:480,label:"V7"},{p:"B4",d:"h",chord:true},{p:"D5",d:"h",chord:true},{p:"F5",d:"h",chord:true}],width:580} },
       try:{ type:"mc", choices:["I, IV, and V7","I, ii, and V7","I7, IV7, and V7"], answer:0,
-        success:"✓ I, IV, V7 — the harmonization toolkit of Book 3 and beyond. BOOK 2 COMPLETE — take a bow! \u{1F386}",
+        success:"✓ I, IV, V7 — home, movement, resolution: the harmonization toolkit for everything ahead. Take a bow! \u{1F386}",
         fail:"Only the DOMINANT gets the 7th upgrade (for now).",
         hint:"One chord earned a 7; two stayed triads." } }
   ],
@@ -133,7 +133,7 @@ LESSON_CONTENT[50]={
         {p:"G4",d:"w",x:170,label:"V"},{p:"B4",d:"w",chord:true},{p:"D5",d:"w",chord:true},
         {p:"G4",d:"w",x:390,label:"V7"},{p:"B4",d:"w",chord:true},{p:"D5",d:"w",chord:true},{p:"F5",d:"w",chord:true}],width:520},
       kb:{start:60,octaves:2,labels:true} },
-    { caption:"The upgraded primary chords — I, IV, V7, and the triumphant return to I. The final cadence of Book 2!",
+    { caption:"The upgraded primary chords — I, IV, V7, and the triumphant return to I: home, movement, and resolution in one cadence.",
       staff:{clef:"treble",tempo:80,notes:[
         {p:"C4",d:"h",label:"I"},{p:"E4",d:"h",chord:true},{p:"G4",d:"h",chord:true},
         {p:"F4",d:"h",label:"IV"},{p:"A4",d:"h",chord:true},{p:"C5",d:"h",chord:true},
@@ -143,7 +143,7 @@ LESSON_CONTENT[50]={
   games:[
     { type:"gen-race", title:"Game 1 · V7 Fact Sprint (45s)",
       intro:"Everything V7 — recipes, spellings, omissions — at top speed!",
-      miaIntro:"The final sprint of Book 2! \u{1F386}",
+      miaIntro:"The final sprint of the lesson! \u{1F386}",
       spec:{gen:"term-match", params:{subject:"term", pool:[
         ["V7 chord","the V triad + a minor 7th above the root"],
         ["G7 in C major","G-B-D-F"],
@@ -167,8 +167,8 @@ LESSON_CONTENT[50]={
         {label:"I (C-E-G)", spec:{clef:"treble",notes:[{p:"C4",d:"w"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true}],width:150}},
         {label:"V7, 5th omitted", spec:{clef:"treble",notes:[{p:"G4",d:"w"},{p:"B4",d:"w",chord:true},{p:"F5",d:"w",chord:true}],width:150}}]},
       result:(score)=>score>=5?"No seventh slips past you!":null },
-    { type:"term-race", title:"Game 4 · BOOK 2 GRAND FINALE Race",
-      intro:"The victory lap: chords, intervals, meters — highlights from all of Book 2!",
+    { type:"term-race", title:"Game 4 · GRAND REVIEW Race",
+      intro:"The victory lap: chords, intervals, meters — highlights from Lessons 26–50!",
       miaIntro:"Everything you've learned — GO! \u{1F3C6}",
       spec:{rounds:10, reverse:true, pool:[
         ["V7","the dominant seventh chord"],
@@ -181,7 +181,7 @@ LESSON_CONTENT[50]={
         ["Cut time","2/2 — alla breve"],
         ["Leading tone","degree 7 — pulls to the tonic"],
         ["Circle of fifths","the key-signature map from Unit 8"]]},
-      result:(score)=>score>=8?"BOOK 2 CHAMPION — see you in Book 3!":null }
+      result:(score)=>score>=8?"REVIEW CHAMPION — inversions await in Lesson 51!":null }
   ],
   practiceIntro:"20 practice questions — recipes, spellings, omissions and the big finale review. Answer right and the next appears automatically!",
   practice:[
@@ -206,7 +206,7 @@ LESSON_CONTENT[50]={
     { type:"mc", q:"V7 resolves most naturally to…", choices:["I","IV","vii"], answer:0,
       explain:"Dominant → tonic: music's strongest arrival." }
   ],
-  miaQuizIntro:"The FINAL quiz of Book 2 — bring everything. G-B-D-F and go!",
+  miaQuizIntro:"The final quiz of the unit — bring everything. G-B-D-F and go!",
   quiz:[
     { type:"mc", q:"A V7 chord is built by adding a minor 7th above the root of…", choices:["the V (dominant) triad","the I (tonic) triad","the IV triad","any minor triad"], answer:0,
       explain:"Dominant + m7 = dominant seventh.", hint:"Its other name says it." },
@@ -230,7 +230,7 @@ LESSON_CONTENT[50]={
       staff:{clef:"treble",notes:[{p:"G4",d:"w"},{p:"B4",d:"w",chord:true},{p:"F5",d:"w",chord:true}],width:200},
       choices:["V7 with the 5th omitted","An error — chords need stacked 3rds only","IV"], answer:0,
       explain:"G-B-F: root, 3rd, 7th — G7 minus its D.", hint:"What's missing from G-B-D-F?" },
-    { type:"mc", q:"The three primary chords, in their final Book-2 form, are…", choices:["I, IV, and V7","I, IV, and V","I7, IV, and V"], answer:0,
+    { type:"mc", q:"The three primary chords, in their upgraded form, are…", choices:["I, IV, and V7","I, IV, and V","I7, IV, and V"], answer:0,
       explain:"The dominant brings its 7th from now on.", hint:"One upgrade only." },
     { type:"mc", q:"V7 most naturally resolves to…", choices:["the I chord","the IV chord","another V7","silence"], answer:0,
       explain:"Leading tone up, 7th down — home.", hint:"Where did the resolution lab land?" },
@@ -247,7 +247,7 @@ LESSON_CONTENT[50]={
     {term:"G7", def:"The V7 chord of C major: G-B-D-F."},
     {term:"Omitted 5th", def:"V7 is often written without its 5th (G-B-F) — three voices can perform it, and the 7th-chord quality remains.",
       staff:{clef:"treble",notes:[{p:"G4",d:"w"},{p:"B4",d:"w",chord:true},{p:"F5",d:"w",chord:true}],width:130}},
-    {term:"Primary Chords (final form)", def:"I, IV, and V7 — the harmonization toolkit going into Book 3."}
+    {term:"Primary Chords (final form)", def:"I, IV, and V7 — the harmonization toolkit for the lessons ahead."}
   ],
   mistakes:[],
   summary:[
@@ -255,19 +255,19 @@ LESSON_CONTENT[50]={
     "✔ Four notes → a <b>chord</b>, not a triad.",
     "✔ The <b>5th is often omitted</b> (G-B-F) — the quality survives; three voices suffice.",
     "✔ The primary chords are now <b>I, IV, V7</b>.",
-    "✔ V7's tritone (3rd + 7th) makes dominant → tonic music's strongest resolution. <b>BOOK 2 COMPLETE!</b> \u{1F386}"
+    "✔ V7's tritone (3rd + 7th) makes dominant → tonic music's strongest resolution. <b>LESSONS 26–50 COMPLETE!</b> \u{1F386}"
   ],
   tips:[
     "Every 'bluesy' chord you've ever heard is a cousin of V7 — dominant sevenths run the blues.",
     "Voice-leading preview: in V7 → I, the leading tone rises (B→C) while the 7th falls (F→E). Two half steps do all the magic.",
     "Play I → IV → V7 → I daily. It is the single most useful progression you will ever own.",
-    "Congratulations — all 50 lessons of Books 1-2 are yours! Book 3 begins with new keys, minor scales, and beyond. \u{1F386}"
+    "Congratulations — the first 50 lessons are yours! Next up: chord inversions, minor scales, and beyond. \u{1F386}"
   ],
-  rewards:{ badge:"Dominant Master — Book 2 Champion", icon:"\u{1F386}" },
+  rewards:{ badge:"Dominant Master", icon:"\u{1F386}" },
   sectionOrder:["secHook","secObjectives","secLearn","secExample","secReview",
     "secGame0","secGame1","secGame2","secGame3","secPractice","secQuiz","secTips","secNext"],
-  miaPerfect:"A PERFECT score on the FINAL lesson of Book 2 — I could not be prouder! \u{1F386}\u{1F3C6}\u{1F389}",
-  miaPass:"Passed — and with it, Book 2 is COMPLETE! G-B-D-F forever. \u{1F386}",
+  miaPerfect:"A PERFECT score on the V7 finale — I could not be prouder! \u{1F386}\u{1F3C6}\u{1F389}",
+  miaPass:"Passed — the V7 chord is yours! G-B-D-F forever. \u{1F386}",
   mia:{
     hook:{ label:"the welcome",
       explain:"Ending 1 was V → I; ending 2 added F to make V7 → I — the minor 7th that turns a nice arrival into an inevitable one.",
@@ -277,9 +277,9 @@ LESSON_CONTENT[50]={
       hint:"G-B-D-F. The F is the magic.",
       play:()=>{[67,71,74,77].forEach(m=>MFAudio.tone(m,1,.1,.3));} },
     example:{ label:"the examples",
-      explain:"Example 1 grows V into V7; example 2 plays the full I-IV-V7-I cadence — the final sound of Book 2." },
+      explain:"Example 1 grows V into V7; example 2 plays the full I-IV-V7-I cadence — music's most classic closing sound." },
     game:{ label:"the games",
-      explain:"Sprint the facts, climb G7, spot sevenths by eye, then run the Book 2 victory lap.",
+      explain:"Sprint the facts, climb G7, spot sevenths by eye, then run the grand review race.",
       hint:"Count noteheads first: four = seventh chord." },
     quiz:{ label:"this question",
       explain:"Everything reduces to the recipe: G-B-D-F, four notes, m7 on top, 5th optional, resolves to I.",

@@ -145,7 +145,7 @@ LESSON_CONTENT[57]={
         success:"✓ The shape-shifter itself. One name per behavior: natural never changes, harmonic changes once forever, melodic changes going up and repents coming down.",
         fail:"Which form has a two-way personality?",
         hint:"Up ♯6♯7, down natural — the book's exact description." } },
-    { say:"Book bonus — the <b>diatonic intervals of the HARMONIC minor</b> (measured from the tonic) are all P, M or m: <b>P1, M2, m3, P4, P5, m6, M7, P8</b>. Compare with major: only the 3rd and 6th shrink to minor. \u{1F447} <b>In harmonic minor, the interval from tonic up to degree 7 is…</b>",
+    { say:"Bonus — the <b>diatonic intervals of the HARMONIC minor</b> (measured from the tonic) are all P, M or m: <b>P1, M2, m3, P4, P5, m6, M7, P8</b>. Compare with major: only the 3rd and 6th shrink to minor. \u{1F447} <b>In harmonic minor, the interval from tonic up to degree 7 is…</b>",
       show:{ type:"staff", spec:{clef:"treble",notes:[
         {p:"A3",d:"h",label:"m3"},{p:"C4",d:"h",chord:true},
         {p:"A3",d:"h",label:"m6"},{p:"F4",d:"h",chord:true},

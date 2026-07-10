@@ -117,7 +117,7 @@ function MF_L53_build(container,fb){
 LESSON_CONTENT[53]={
   welcome:"A triad flips three ways. Today's chord flips FOUR — because it brought an extra note. \u{1F504}",
   hook:{
-    say:"Remember G7 from Book 2's finale — G-B-D-F? Listen to these two versions. <b>One has its 7TH in the bass — the position no triad can ever have. Which?</b>",
+    say:"Remember G7 from Lesson 50 — G-B-D-F? Listen to these two versions. <b>One has its 7TH in the bass — the position no triad can ever have. Which?</b>",
     interact:{ type:"custom",
       mount:(container,fb)=>{
         container.innerHTML=`<div style="text-align:center">

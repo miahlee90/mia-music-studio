@@ -226,7 +226,7 @@ LESSON_CONTENT[24]={
   rewards:{ badge:"Natural Master", icon:"\u{1F504}" },
   sectionOrder:["secHook","secObjectives","secLearn","secExample","secReview",
     "secGame0","secGame1","secGame2","secGame3","secPractice","secQuiz","secTips","secNext"],
-  miaPerfect:"PERFECT — raise, lower, cancel, all under control! One lesson left in Book 1! \u{1F504}\u{1F389}",
+  miaPerfect:"PERFECT — raise, lower, cancel, all under control! One more lesson in this unit! \u{1F504}\u{1F389}",
   miaPass:"You passed! The undo button is yours. Review below or run it back for perfection.",
   mia:{
     hook:{ label:"the welcome",

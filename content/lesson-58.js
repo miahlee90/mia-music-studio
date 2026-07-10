@@ -281,7 +281,7 @@ LESSON_CONTENT[58]={
       choices:["G minor","G major","B♭ major"], answer:0,
       explain:"The ♭ pulled the 3rd down: Gm.", hint:"What did the flat do to the middle note?" },
     { type:"mc", q:"Lowercase Roman numerals indicate…", choices:["minor triads","loud passages","inversions"], answer:0,
-      explain:"Case = quality: I major, ii minor.", hint:"Book's footnote from p.92." },
+      explain:"Case = quality: I major, ii minor.", hint:"Case = quality: uppercase major, lowercase minor." },
     { type:"mc", q:"A song alternates C → Am → F → G. The Am chord is…", choices:["the vi chord of C major","the ii chord","a mistake — Am isn't in C major"], answer:0,
       explain:"A minor lives on degree 6 — the most famous pop loop in history uses it.", hint:"A = which degree of C?" },
     { type:"mc", q:"Which is the fastest EAR clue for minor?", choices:["The chord's middle sounds lowered/shaded","The chord is quieter","The chord is shorter"], answer:0,

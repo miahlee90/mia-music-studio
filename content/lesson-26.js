@@ -85,7 +85,7 @@ function MF_L26_kbBuild(container,fb){
 }
 
 LESSON_CONTENT[26]={
-  welcome:"Welcome to Book 2! Today you get the construction plan behind EVERY major scale. \u{1F3D7}",
+  welcome:"Welcome back! Today you get the construction plan behind EVERY major scale. \u{1F3D7}",
   hook:{
     say:"You've heard this ladder of notes a thousand times. Press play and listen closely to the <b>first</b> and <b>last</b> notes. What do you notice?",
     interact:{ type:"custom",
@@ -172,7 +172,7 @@ LESSON_CONTENT[26]={
       result:(score)=>score>=5?"Every building block spotted!":null },
     { type:"term-race", title:"Game 3 · Scale Vocabulary Race",
       intro:"Tetrachord, keynote, degrees — match the terms at speed!",
-      miaIntro:"Book 2 vocabulary, round one! \u{26A1}",
+      miaIntro:"New vocabulary, round one! \u{26A1}",
       spec:{rounds:8, reverse:true, pool:[
         ["Tetrachord","Four notes in the pattern W–W–H"],
         ["Major Scale","Eight notes — two tetrachords joined by a whole step"],
@@ -216,7 +216,7 @@ LESSON_CONTENT[26]={
     { type:"mc", q:"The distances between all scale degrees OTHER than 3–4 and 7–8 are…", choices:["whole steps","half steps","octaves"], answer:0,
       explain:"Only 3–4 and 7–8 are half steps; the rest are whole steps." }
   ],
-  miaQuizIntro:"First quiz of Book 2 — show the blueprint who's boss!",
+  miaQuizIntro:"First scale quiz — show the blueprint who's boss!",
   quiz:[
     { type:"mc", q:"A tetrachord contains:", choices:["Three notes","Four notes","Five notes","Eight notes"], answer:1,
       explain:"TETRA means four.", hint:"Think of the word TETRA." },
@@ -284,7 +284,7 @@ LESSON_CONTENT[26]={
   rewards:{ badge:"Scale Architect", icon:"\u{1F3D7}" },
   sectionOrder:["secHook","secObjectives","secLearn","secExample","secReview",
     "secGame0","secGame1","secGame2","secGame3","secPractice","secQuiz","secTips","secNext"],
-  miaPerfect:"A perfect score on the very first lesson of Book 2! The blueprint is officially yours. \u{1F3D7}\u{1F389}",
+  miaPerfect:"A perfect score on your very first scale lesson! The blueprint is officially yours. \u{1F3D7}\u{1F389}",
   miaPass:"You passed! Keep the pattern humming in your head — W W H, W, W W H — and G major will feel easy next time.",
   mia:{
     hook:{ label:"the welcome",

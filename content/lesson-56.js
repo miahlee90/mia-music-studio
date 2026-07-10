@@ -92,7 +92,7 @@ LESSON_CONTENT[56]={
     "Name relative pairs for the keys you know"
   ],
   steps:[
-    { say:"From Book 2 you know there are <b>15 major key signatures</b>. Here's today's headline: <b>for every major key there is a RELATIVE MINOR KEY with the SAME key signature</b>. Same address, different resident. \u{1F447} <b>What do relative keys share?</b>",
+    { say:"From Lesson 31 you know there are <b>15 major key signatures</b>. Here's today's headline: <b>for every major key there is a RELATIVE MINOR KEY with the SAME key signature</b>. Same address, different resident. \u{1F447} <b>What do relative keys share?</b>",
       try:{ type:"mc", choices:["The same key signature","The same tonic","The same tempo"], answer:0,
         success:"✓ One signature, two keys — a major one and a minor one. The difference is WHERE each calls home.",
         fail:"Roommates share an address, not a bedroom…",

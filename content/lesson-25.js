@@ -41,7 +41,7 @@ function MF_L25_stepDrill(container,fb){
 }
 
 LESSON_CONTENT[25]={
-  welcome:"The FINAL lesson of Book 1 — measuring music's smallest steps! \u{1F463}",
+  welcome:"A milestone lesson — measuring music's smallest steps! \u{1F463}",
   hook:{
     say:"Did you know one piano key can have <b>two different names</b>? Sounds strange — but it's true! Press play: <b>C♯… and D♭.</b> What do you notice?",
     interact:{ type:"custom",
@@ -140,7 +140,7 @@ LESSON_CONTENT[25]={
         ["A♯","B♭ — the same black key"]]},
       result:(score)=>score>=7?"Every twin matched instantly!":null },
     { type:"symbol-hunt", title:"Game 2 · Accidental Review Hunt",
-      intro:"Sharp, flat, natural — Book 1's full accidental kit, one last hunt!",
+      intro:"Sharp, flat, natural — your full accidental kit, one last hunt!",
       miaIntro:"Final review hunt — all three signs! \u{1F50D}",
       spec:{rounds:6, pool:[
         {label:"Sharp (F♯)", spec:{clef:"treble",notes:[{p:"F#4",d:"q"}]}},
@@ -150,7 +150,7 @@ LESSON_CONTENT[25]={
         {label:"Eighth Rest", spec:{clef:"treble",notes:[{rest:"8"}]}}]},
       result:(score)=>score>=5?"The accidental family holds no secrets!":null },
     { type:"term-race", title:"Game 3 · Step & Twin Vocabulary",
-      intro:"Half steps, whole steps, enharmonics — the final vocabulary dash of Book 1!",
+      intro:"Half steps, whole steps, enharmonics — the final vocabulary dash of the unit!",
       miaIntro:"Last vocabulary race of the book! \u{1F3C1}",
       spec:{rounds:8, pool:[
         ["Half Step","The distance to the VERY next key"],
@@ -159,12 +159,12 @@ LESSON_CONTENT[25]={
         ["Interval","The distance between two notes"],
         ["E–F and B–C","The two white-key half steps"],
         ["H + H","= one Whole step"]]},
-      result:(score)=>score>=7?"Vocabulary complete — Book 1 brain fully loaded!":null },
-    { type:"value-race", title:"Game 4 · Book 1 Value Sprint (45s)",
+      result:(score)=>score>=7?"Vocabulary complete — fully loaded!":null },
+    { type:"value-race", title:"Game 4 · GRAND Value Sprint (45s)",
       intro:"The grand finale sprint: every note value you've learned since Lesson 6!",
-      miaIntro:"The last sprint of Book 1 — everything you've got! \u{1F3C6}",
+      miaIntro:"The grand sprint — everything you've got! \u{1F3C6}",
       spec:{seconds:45, ask:"beats", values:["8","q","q.","h","h.","w"]},
-      result:(score)=>score>=13?score+" — a Book 1 champion finish!":null }
+      result:(score)=>score>=13?score+" — a champion finish!":null }
   ],
   practiceIntro:"20 practice questions — half steps, whole steps, enharmonic twins, and the white-key surprises. Answer right and the next appears automatically!",
   practice:[
@@ -192,7 +192,7 @@ LESSON_CONTENT[25]={
     { type:"mc", q:"The enharmonic note for E♯ is…", choices:["F","D♯","G♭"], answer:0, explain:"E♯ is a half step above E — the very key F. White-key enharmonics exist too!" },
     { type:"mc", q:"The enharmonic note for C♭ is…", choices:["B","D♭","C♯"], answer:0, explain:"C♭ is a half step below C — the key B." }
   ],
-  miaQuizIntro:"The FINAL quiz of Book 1! Half steps, whole steps, twins — finish strong!",
+  miaQuizIntro:"A milestone quiz! Half steps, whole steps, twins — finish strong!",
   quiz:[
     { type:"mc", q:"How many half steps equal one whole step?", choices:["1","2","3","4"], answer:1,
       explain:"H + H = W.", hint:"The golden equation." },
@@ -247,19 +247,19 @@ LESSON_CONTENT[25]={
     "✔ <b>H + H = W</b>.",
     "✔ <b>E–F and B–C</b> are half steps — no black key between!",
     "✔ <b>Enharmonic notes</b>: same key, same sound, two names (C♯ = D♭).",
-    "✔ \u{1F389} <b>BOOK 1 COMPLETE</b> — staff, rhythm, expression, accidentals, intervals!"
+    "✔ \u{1F389} <b>LESSONS 1–25 COMPLETE</b> — staff, rhythm, expression, accidentals, intervals!"
   ],
   tips:[
     "At any piano, play E–F and B–C slowly — feel how CLOSE those white neighbors are.",
     "Which name to use — C♯ or D♭? Context decides; for now, know they're the same key.",
-    "Half steps are the atoms of music — scales and keys (Book 2!) are built from H and W patterns.",
-    "\u{1F393} You finished ALL of Book 1 — 25 lessons! Book 2 opens with tetrachords and major scales. See you there!"
+    "Half steps are the atoms of music — scales and keys (coming in Lesson 26!) are built from H and W patterns.",
+    "\u{1F393} You finished the first 25 lessons! Next up: tetrachords and major scales. See you there!"
   ],
-  rewards:{ badge:"Book 1 Graduate", icon:"\u{1F393}" },
+  rewards:{ badge:"25-Lesson Graduate", icon:"\u{1F393}" },
   sectionOrder:["secHook","secObjectives","secLearn","secExample","secReview",
     "secGame0","secGame1","secGame2","secGame3","secPractice","secQuiz","secTips","secNext"],
-  miaPerfect:"A PERFECT score on the FINAL lesson of Book 1?! Take a bow, graduate — Book 2 and the major scales await! \u{1F393}\u{1F389}\u{1F389}",
-  miaPass:"You passed — and finished Book 1! Every step from the empty staff to enharmonic twins. Review below, or celebrate and meet me in Book 2!",
+  miaPerfect:"A PERFECT score on this milestone lesson?! Take a bow, graduate — the major scales await! \u{1F393}\u{1F389}\u{1F389}",
+  miaPass:"You passed — the first 25 lessons complete! Every step from the empty staff to enharmonic twins. Review below, or celebrate and meet me in Lesson 26!",
   mia:{
     hook:{ label:"the welcome",
       explain:"One black key, two names: C♯ approached from C, D♭ approached from D. Same sound — enharmonic.",
@@ -271,8 +271,8 @@ LESSON_CONTENT[25]={
     example:{ label:"the examples",
       explain:"Half steps with and without accidentals, then whole steps skipping one key each — the two building blocks of every scale." },
     game:{ label:"the games",
-      explain:"Race the twins, hunt the signs one last time, dash the vocabulary, and sprint every value from Book 1.",
-      hint:"Finish strong — this is the Book 1 finale!" },
+      explain:"Race the twins, hunt the signs one last time, dash the vocabulary, and sprint every value you know.",
+      hint:"Finish strong — this is a milestone finale!" },
     quiz:{ label:"this question",
       explain:"Three ideas: half = next key, whole = two halves, enharmonic = one key with two names. Plus the E–F/B–C surprise.",
       play:()=>{MFAudio.tone(64,.4,0);MFAudio.tone(65,.6,.5);} }

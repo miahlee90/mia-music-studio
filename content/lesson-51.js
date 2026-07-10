@@ -111,7 +111,7 @@ function MF_L51_build(container,fb){
 }
 
 LESSON_CONTENT[51]={
-  welcome:"Welcome to BOOK 3! We start with a magic trick: turning a chord upside down. \u{1F503}",
+  welcome:"Welcome back! Today's magic trick: turning a chord upside down. \u{1F503}",
   hook:{
     say:"Two C major chords — the SAME three letters. But listen to the bottom note. <b>Which one has the root on the bottom?</b>",
     interact:{ type:"custom",
@@ -139,11 +139,11 @@ LESSON_CONTENT[51]={
     "Build 1st-inversion triads on the staff and keyboard"
   ],
   steps:[
-    { say:"Quick review from Book 2: a triad in <b>ROOT POSITION</b> stacks root-3rd-5th, snowman style, with the <b>root on the bottom</b>. \u{1F447} <b>In root position, the lowest note is…?</b>",
+    { say:"Quick review from Lesson 47: a triad in <b>ROOT POSITION</b> stacks root-3rd-5th, snowman style, with the <b>root on the bottom</b>. \u{1F447} <b>In root position, the lowest note is…?</b>",
       show:{ type:"staff", spec:{clef:"treble",notes:[
         {p:"C4",d:"w",label:"C major: C-E-G (root position)"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true}],width:260} },
       try:{ type:"mc", choices:["The root","The 3rd","The 5th"], answer:0,
-        success:"✓ Root on the bottom = root position. Book 2 knowledge confirmed!",
+        success:"✓ Root on the bottom = root position. Triad knowledge confirmed!",
         fail:"Root position literally puts its name-note at the base.",
         hint:"The position is named after its bass note's job." } },
     { say:"Now the move: a triad does NOT have to keep its root on the bottom. <b>Move the root up one octave</b> and the chord lands in <b>1st INVERSION</b>. \u{1F447} <b>Try it — tap the root:</b>",
@@ -324,7 +324,7 @@ LESSON_CONTENT[51]={
   rewards:{ badge:"Chord Flipper", icon:"\u{1F503}" },
   sectionOrder:["secHook","secObjectives","secLearn","secExample","secReview",
     "secGame0","secGame1","secGame2","secGame3","secPractice","secQuiz","secTips","secNext"],
-  miaPerfect:"A PERFECT score on the very first lesson of Book 3 — what a way to start! \u{1F503}\u{1F389}",
+  miaPerfect:"A PERFECT score on your very first inversion lesson — what a way to start! \u{1F503}\u{1F389}",
   miaPass:"Passed! The 3rd-in-the-bass rule is yours. Lesson 52 flips the chord one more time…",
   mia:{
     hook:{ label:"the welcome",
