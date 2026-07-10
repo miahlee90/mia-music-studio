@@ -25,16 +25,16 @@ function MF_L58_morph(container,fb){
         if(i===1){
           draw(R.min, R.name+" minor", false);
           R.min.forEach(p=>MFAudio.tone(MFAudio.midi(p),1.1,.1,.32));
-          fb(true,`✓ The 3rd dropped a half step (→ ${R.newP}) and the whole mood dimmed: ${R.name} major became ${R.name} MINOR. Root and 5th never moved.`);
+          fb(true,`✓ Excellent! You changed ${R.name} major into ${R.name} minor — the 3rd was lowered to ${R.newP}. The root and 5th stayed the same.`);
           r++;
           if(r<ROUNDS.length) nxt.style.display="inline-block";
-          else q.textContent="Three morphs done — one lowered note is the entire difference!";
-        } else { MFAudio.tone(40,.2); fb(false, i===0? "That's the ROOT — it stays put. Aim for the MIDDLE note." : "That's the 5TH — it stays put too. The 3rd is the mood dial."); }
+          else q.textContent="Excellent! You changed each major triad into a minor triad.";
+        } else { MFAudio.tone(40,.2); fb(false, i===0? "That's the root — it stays the same. Tap the 3rd, the middle note." : "That's the 5th — it stays the same too. Tap the 3rd."); }
       } : undefined});
   }
   function ask(){
     const R=ROUNDS[r]; nxt.style.display="none";
-    q.innerHTML=`${R.name} major (${R.maj.map(p=>p.replace(/\d/,"").replace("b","♭").replace("#","♯")).join("-")}). Tap the note that gets LOWERED to make it minor.`;
+    q.innerHTML=`${R.name} major (${R.maj.map(p=>p.replace(/\d/,"").replace("b","♭").replace("#","♯")).join("-")}). Lower the 3rd — tap the note that changes.`;
     draw(R.maj, R.name+" major", true);
   }
   nxt.onclick=()=>ask();
@@ -58,9 +58,9 @@ function MF_L58_build(container,fb){
     Staff.render(sh,{clef:"treble",notes:ps.map((p,ix)=>ix===0?{p,d:"w"}:{p,d:"w",chord:true}),width:190});
   }
   function ask(){
-    if(r>=ROUNDS.length){ q.textContent="Three minor triads built — m3 + P5 from any root!"; return; }
+    if(r>=ROUNDS.length){ q.textContent="Great! You built three minor triads."; return; }
     k=0; last=null; got=[]; drawStaff();
-    q.innerHTML=`Build <b>${ROUNDS[r].name}</b>, bottom to top. Start anywhere: press <b>${ROUNDS[r].names[0].split(" ")[0]}</b>.`;
+    q.innerHTML=`Build <b>${ROUNDS[r].name}</b>. Press <b>${ROUNDS[r].names[0].split(" ")[0]}</b> first.`;
   }
   Keyboard.create(kh,{start:60,octaves:2,labels:true,
     onKey:m=>{
@@ -69,9 +69,9 @@ function MF_L58_build(container,fb){
       if(m%12===want && (last===null || m>last)){
         last=m; got.push(m); k++; drawStaff();
         if(k>=3){ got.forEach(x=>MFAudio.tone(x,1.1,.1,.32));
-          fb(true,`✓ ${R.name}: root + minor 3rd + Perfect 5th. Hear the shade in it?`);
+          fb(true,`✓ ${R.name}: root + minor 3rd + Perfect 5th.`);
           r++; setTimeout(ask,1400); }
-        else q.innerHTML=`Good — now <b>${R.names[k]}</b>, above your last key.`;
+        else q.innerHTML=`Now play <b>${R.names[k]}</b> above the note you just played.`;
       } else if(m%12===want){ MFAudio.tone(40,.2); fb(false,"Right key, wrong direction — build UPWARD."); }
       else { MFAudio.tone(40,.2); fb(false,k===1? "Count 3 half steps up from the root — that's the MINOR 3rd." : k===2? "The 5th is 7 half steps above the root — same as in major!" : "Start on the root."); }
     }});
@@ -91,9 +91,9 @@ function MF_L58_ear(container,fb){
     <div class="choices chips l58e-ch" style="display:none"><button>Major</button><button>Minor</button></div>`;
   const q=container.querySelector(".l58e-q"), pl=container.querySelector(".l58e-play"), ch=container.querySelector(".l58e-ch");
   function ask(){
-    if(r>=ROUNDS.length){ q.textContent="Four for four possible — your ear knows the 3rd now!"; pl.style.display="none"; ch.style.display="none"; return; }
+    if(r>=ROUNDS.length){ q.textContent="Excellent! You identified every chord."; pl.style.display="none"; ch.style.display="none"; return; }
     played=false; ch.style.display="none";
-    q.innerHTML=`Round ${r+1} of ${ROUNDS.length}: bright or shaded?`;
+    q.innerHTML=`Round ${r+1} of ${ROUNDS.length}: is this chord major or minor?`;
   }
   pl.onclick=()=>{ const R=ROUNDS[r]; if(!R) return;
     R.midis.forEach(m=>MFAudio.tone(m,1.2,0,.32)); played=true;
@@ -101,30 +101,30 @@ function MF_L58_ear(container,fb){
   [...ch.children].forEach((b,i)=>b.onclick=()=>{
     if(!played) return;
     const R=ROUNDS[r];
-    if((i===1)===R.minor){ MFAudio.yay(); fb(true,`✓ ${R.name} — ${R.minor?"the lowered 3rd shades it":"the major 3rd brightens it"}.`);
+    if((i===1)===R.minor){ MFAudio.yay(); fb(true,`✓ ${R.name} — the 3rd is ${R.minor?"minor":"major"}.`);
       r++; setTimeout(ask,1200); }
-    else { MFAudio.tone(40,.2); fb(false,"Replay and listen to the MIDDLE of the chord — high and sunny, or low and clouded?"); }
+    else { MFAudio.tone(40,.2); fb(false,"Listen again to the 3rd — is it major or minor?"); }
   });
   ask();
 }
 
 LESSON_CONTENT[58]={
-  welcome:"One note. That's all that separates sunshine from shadow. \u{1F311}",
+  welcome:"Major or minor? The difference is just one note. \u{1F311}",
   hook:{
-    say:"Two chords on the same root. <b>Listen — which one is the MINOR one, and what did it change?</b>",
+    say:"<b>These two chords have the same root.</b> Listen carefully. <b>Which one is minor, and what changed?</b>",
     interact:{ type:"custom",
       mount:(container,fb)=>{
         container.innerHTML=`<div style="text-align:center">
           <button class="play hk-a">▶ Chord A</button>
           <button class="play hk-b">▶ Chord B</button></div>
-          <div class="choices hk-ch" style="display:none"><button>B is minor — its MIDDLE note dropped a half step</button><button>B is minor — it removed the top note</button><button>A is minor — it's the darker one</button></div>`;
+          <div class="choices hk-ch" style="display:none"><button>B is minor — its 3rd was lowered a half step</button><button>B is minor — it removed the top note</button><button>A is minor — it's the darker one</button></div>`;
         const ch=container.querySelector(".hk-ch");
         let hA=false,hB=false;
         container.querySelector(".hk-a").onclick=()=>{ [60,64,67].forEach(m=>MFAudio.tone(m,1.2,0,.33)); hA=true; if(hB) setTimeout(()=>ch.style.display="",1400); };
         container.querySelector(".hk-b").onclick=()=>{ [60,63,67].forEach(m=>MFAudio.tone(m,1.2,0,.33)); hB=true; if(hA) setTimeout(()=>ch.style.display="",1400); };
         [...ch.children].forEach((b,i)=>b.onclick=()=>{
-          if(i===0) fb(true,"✓ E slid down to E♭ — the 3rd fell one half step, and C major became C MINOR. Root and 5th identical; one note owns the whole mood. Today: minor triads!");
-          else fb(false,"Both chords kept three notes and the same outer frame. Listen to the MIDDLE…");
+          if(i===0) fb(true,"✓ E was lowered to E♭ — the 3rd changed, and C major became C minor. The root and 5th stayed the same. Today: minor triads!");
+          else fb(false,"Both chords kept the same root and 5th. Listen to the 3rd — the middle note.");
         });
       } }
   },
@@ -137,28 +137,28 @@ LESSON_CONTENT[58]={
     "Recognize major vs minor by sight and by ear"
   ],
   steps:[
-    { say:"The blueprint, side by side. <b>Major triad = root + MAJOR 3rd + Perfect 5th. Minor triad = root + MINOR 3rd + Perfect 5th.</b> Spot the one word that changed. \u{1F447} <b>Which chord member sets major apart from minor?</b>",
+    { say:"<b>Major vs. Minor Triads:</b> Both major and minor triads have the same <b>root</b> and <b>perfect 5th</b>. The only difference is the <b>3rd</b>. \u{1F447} <b>Which chord tone makes a major triad different from a minor triad?</b>",
       show:{ type:"staff", spec:{clef:"treble",notes:[
         {p:"C4",d:"w",label:"C major: M3 + P5"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},
         {p:"C4",d:"w",label:"C minor: m3 + P5"},{p:"Eb4",d:"w",chord:true},{p:"G4",d:"w",chord:true}],width:420} },
       try:{ type:"mc", choices:["The 3rd","The root","The 5th"], answer:0,
-        success:"✓ The 3rd is the quality dial: 4 half steps up = major, 3 half steps = minor. Root and 5th are shared scaffolding.",
+        success:"✓ The 3rd: 4 half steps above the root = major, 3 half steps = minor. The root and 5th are the same in both.",
         fail:"Compare the two spellings note by note…",
         hint:"C-E-G vs C-E♭-G." } },
-    { say:"So the book's conversion rule: <b>any major triad may be changed to minor by lowering the 3rd a half step</b>. Do it yourself — three times. \u{1F447}",
+    { say:"<b>Changing Major to Minor:</b> Lower the <b>3rd</b> by a half step. The root and the 5th stay the same. <b>Remember: lowering the 3rd changes a major triad into a minor triad.</b> \u{1F447} <b>Change the major triad into a minor triad:</b>",
       try:{ type:"custom",
-        hint:"The 3rd is the MIDDLE note of the snowman.",
+        hint:"The 3rd is the middle note.",
         mount:(container,fb)=>MF_L58_morph(container,fb) } },
-    { say:"The stacking view: a major triad is a <b>M3 with a m3 on top</b>; a minor triad flips the recipe — <b>a m3 with a M3 on top</b>. Both stacks add up to the same P5. \u{1F447} <b>To build a minor triad, add which 3rd ON TOP of which?</b>",
-      try:{ type:"mc", choices:["A major 3rd on top of a minor 3rd","A minor 3rd on top of a major 3rd","Two minor 3rds"], answer:0,
-        success:"✓ m3 first (C→E♭), then M3 (E♭→G). The flip of major's recipe — same outer 5th, opposite inner mood.",
-        fail:"Minor starts small: the SMALL 3rd sits at the bottom.",
-        hint:"Bottom interval names the quality." } },
-    { say:"Build them under your fingers — count half steps: <b>3 up for the m3, 7 up for the P5</b>. \u{1F447}",
+    { say:"<b>Building a Minor Triad:</b> A minor triad is built with a <b>minor 3rd</b>, followed by a <b>Major 3rd</b>. \u{1F447} <b>Which interval is placed on top?</b>",
+      try:{ type:"mc", choices:["A Major 3rd","A minor 3rd","A Perfect 5th"], answer:0,
+        success:"✓ The minor 3rd is on the bottom (C→E♭); the Major 3rd is on top (E♭→G).",
+        fail:"The minor 3rd sits at the BOTTOM — so what is on top?",
+        hint:"m3 below, M3 above." } },
+    { say:"Build three minor triads. \u{1F447}",
       try:{ type:"custom",
         hint:"Root, +3 half steps, +7 half steps.",
         mount:(container,fb)=>MF_L58_build(container,fb) } },
-    { say:"Now the treasure map: build a triad on EVERY degree of a major scale, and some come out minor automatically. The book's rule: <b>1st, 4th, 5th degrees = MAJOR triads; 2nd, 3rd, 6th = MINOR triads</b>. \u{1F447} <b>In C major, the naturally-minor triads are…</b>",
+    { say:"<b>Minor Triads in a Major Key:</b> In a major scale, <b>I, IV, V are major</b> and <b>ii, iii, vi are minor</b>. \u{1F447} <b>Which triads are naturally minor in C major?</b>",
       show:{ type:"staff", spec:{clef:"treble",notes:[
         {p:"C4",d:"w",label:"I"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},
         {p:"D4",d:"w",label:"ii = Dm"},{p:"F4",d:"w",chord:true},{p:"A4",d:"w",chord:true},
@@ -170,18 +170,18 @@ LESSON_CONTENT[58]={
         success:"✓ ii=Dm, iii=Em, vi=Am — minor chords living INSIDE the major key, no accidentals needed. (Degree 7 is a special case — next lesson!)",
         fail:"Count the degrees: 2, 3 and 6 of C major are D, E and A…",
         hint:"Degrees 2-3-6 go minor." } },
-    { say:"Notation manners: minor triads get <b>lowercase Roman numerals</b> (ii, iii, vi) and letter symbols with a small m (<b>Dm, Em, Am</b>). Major keeps uppercase (I, IV, V) and plain letters. \u{1F447} <b>The triad on degree 6 of C major is written…</b>",
+    { say:"<b>Chord Symbols:</b> Minor triads use <b>lowercase Roman numerals</b> and a lowercase <b>m</b> in letter names (Dm, Em, Am). \u{1F447} <b>How is the triad built on degree 6 written?</b>",
       try:{ type:"mc", choices:["vi (A minor)","VI (A major)","6+"], answer:0,
         success:"✓ Lowercase vi, letter symbol Am. The case of the numeral IS the quality badge.",
         fail:"Degree 6 builds a MINOR chord — which case shows that?",
         hint:"Small chord feeling, small letters." } },
-    { say:"Ear check, final round. \u{1F447} <b>Major or minor?</b>",
+    { say:"<b>Listen Carefully:</b> Is the chord <b>major</b> or <b>minor</b>? \u{1F447}",
       try:{ type:"custom",
         hint:"Bright middle = major; clouded middle = minor.",
         mount:(container,fb)=>MF_L58_ear(container,fb) } }
   ],
   examples:[
-    { caption:"The morph, then the pair: C major melting into C minor — one half step down in the middle. Then hear both again on the keyboard lights.",
+    { caption:"C major, then C minor: the 3rd is lowered one half step. Then G major and G minor — watch the keyboard as each pair plays.",
       staff:{clef:"treble",tempo:60,notes:[
         {p:"C4",d:"w",label:"C"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},
         {p:"C4",d:"w",label:"Cm"},{p:"Eb4",d:"w",chord:true},{p:"G4",d:"w",chord:true},
@@ -204,7 +204,7 @@ LESSON_CONTENT[58]={
       result:(score)=>score>=8?score+" chords judged — quality control expert!":null },
     { type:"key-climb", title:"Game 2 · Minor Triad Ladder",
       intro:"Climb D minor, A minor and C minor — root, minor 3rd, perfect 5th!",
-      miaIntro:"Three shaded chords! \u{1FA9C}",
+      miaIntro:"Three minor triads! \u{1FA9C}",
       spec:{seq:[62,65,69, 69,72,76, 60,63,67],
         names:["D (root)","F (m3)","A (P5)","A (root)","C (m3)","E (P5)","C (root)","E♭ (m3 — black key!)","G (P5)"],
         start:60, octaves:2, title:"Dm → Am → Cm, note by note"},
@@ -232,7 +232,7 @@ LESSON_CONTENT[58]={
         ["Cm","the letter symbol for C minor"]]},
       result:(score)=>score>=6?"Fact-perfect on minor triads!":null }
   ],
-  practiceIntro:"20 practice questions — recipes, morphs and the in-key minor map. Answer right and the next appears automatically!",
+  practiceIntro:"20 practice questions — building, changing and finding minor triads. Answer right and the next appears automatically!",
   practice:[
     { gen:"triad-quality", params:{quals:["M","m"]}, count:6 },
     { gen:"triad-quality", params:{quals:["M","m"], ask:"symbol"}, count:3 },
@@ -243,9 +243,9 @@ LESSON_CONTENT[58]={
       explain:"Lower the 3rd a half step — the universal converter." },
     { type:"mc", q:"D minor is spelled…", choices:["D-F-A","D-F♯-A","D-G-A"], answer:0,
       explain:"White keys only: m3 (D→F) + P5 (D→A)." },
-    { type:"mc", q:"In a major key, triads on which degrees are minor?", choices:["2nd, 3rd and 6th","1st, 4th and 5th","only the 7th"], answer:0,
+    { type:"mc", q:"Which scale degrees form minor triads in a major key?", choices:["2nd, 3rd and 6th","1st, 4th and 5th","only the 7th"], answer:0,
       explain:"ii, iii, vi — lowercase for a reason." },
-    { type:"mc", q:"The letter symbol for G minor is…", choices:["Gm","G−","gm7"], answer:0,
+    { type:"mc", q:"What is the correct chord symbol for G minor?", choices:["Gm","G−","gm7"], answer:0,
       explain:"Chord letter + small m." },
     { type:"truefalse", q:"The root and 5th change when a triad turns minor.", answer:false,
       explain:"They stay — only the 3rd falls." },
@@ -253,14 +253,14 @@ LESSON_CONTENT[58]={
       explain:"The mirror of major's recipe." },
     { type:"truefalse", q:"In C major, the triad on scale degree 6 is A minor.", answer:true,
       explain:"A-C-E: vi." },
-    { type:"truefalse", q:"Minor triads need accidentals in every key.", answer:false,
+    { type:"truefalse", q:"Minor triads always need accidentals.", answer:false,
       explain:"Dm, Em, Am live in C major on white keys alone." }
   ],
   miaQuizIntro:"Quiz! Keep your eye — and ear — on the 3rd.",
   quiz:[
     { type:"mc", q:"A minor triad consists of a root, a…", choices:["minor 3rd and Perfect 5th","Major 3rd and Perfect 5th","minor 3rd and diminished 5th","Major 3rd and Augmented 5th"], answer:0,
       explain:"m3 + P5 — the definition.", hint:"One word differs from major's recipe." },
-    { type:"mc", q:"Any major triad becomes minor by…", choices:["lowering the 3rd a half step","raising the root","lowering the 5th a half step"], answer:0,
+    { type:"mc", q:"How do you change a major triad into a minor triad?", choices:["Lower the 3rd a half step","Raise the root","Lower the 5th a half step"], answer:0,
       explain:"One half step in the middle changes everything.", hint:"The morph lab move." },
     { type:"mc", q:"The minor 3rd above C is…", choices:["E♭","E","D"], answer:0,
       explain:"3 half steps: C→D♭→D→E♭.", hint:"Count 3 half steps." },
@@ -268,7 +268,7 @@ LESSON_CONTENT[58]={
       explain:"Only the 3rd tells them apart.", hint:"What stayed put in the morphs?" },
     { type:"truefalse", q:"A minor triad is built m3 + M3 from the bottom up.", answer:true,
       explain:"Small then big — the flip of major.", hint:"Bottom interval = quality." },
-    { type:"mc", q:"Which degrees of a MAJOR scale carry naturally minor triads?", choices:["2nd, 3rd, 6th","1st, 4th, 5th","5th and 7th"], answer:0,
+    { type:"mc", q:"Which scale degrees naturally form minor triads in a major key?", choices:["2nd, 3rd, 6th","1st, 4th, 5th","5th and 7th"], answer:0,
       explain:"ii, iii, vi.", hint:"The treasure-map step." },
     { type:"mc", q:"In C major, the triad built on E (degree 3) is written…", choices:["iii (E minor)","III (E major)","iii° (E diminished)"], answer:0,
       explain:"E-G-B = minor → lowercase iii.", hint:"Spell E-G-B and check its 3rd." },
@@ -280,12 +280,12 @@ LESSON_CONTENT[58]={
       staff:{clef:"treble",notes:[{p:"G4",d:"w"},{p:"Bb4",d:"w",chord:true},{p:"D5",d:"w",chord:true}],width:200},
       choices:["G minor","G major","B♭ major"], answer:0,
       explain:"The ♭ pulled the 3rd down: Gm.", hint:"What did the flat do to the middle note?" },
-    { type:"mc", q:"Lowercase Roman numerals indicate…", choices:["minor triads","loud passages","inversions"], answer:0,
+    { type:"mc", q:"What do lowercase Roman numerals represent?", choices:["minor triads","loud passages","inversions"], answer:0,
       explain:"Case = quality: I major, ii minor.", hint:"Case = quality: uppercase major, lowercase minor." },
     { type:"mc", q:"A song alternates C → Am → F → G. The Am chord is…", choices:["the vi chord of C major","the ii chord","a mistake — Am isn't in C major"], answer:0,
       explain:"A minor lives on degree 6 — the most famous pop loop in history uses it.", hint:"A = which degree of C?" },
-    { type:"mc", q:"Which is the fastest EAR clue for minor?", choices:["The chord's middle sounds lowered/shaded","The chord is quieter","The chord is shorter"], answer:0,
-      explain:"The lowered 3rd darkens the middle of the sound.", hint:"What did you listen for in the ear lab?" },
+    { type:"mc", q:"Which is the best ear clue for a minor triad?", choices:["The 3rd sounds lower than it does in a major triad","The chord is quieter","The chord is shorter"], answer:0,
+      explain:"The lowered 3rd is the defining sound of a minor triad.", hint:"What did you listen for in the ear lab?" },
     /* generated */
     { gen:"triad-quality", params:{quals:["M","m"]}, count:4 },
     { gen:"triad-quality", params:{quals:["M","m"], ask:"symbol"}, count:2 },
@@ -330,7 +330,7 @@ LESSON_CONTENT[58]={
       explain:"Example 1 morphs C→Cm and G→Gm; example 2 tours the minor residents of C major (ii, iii, vi) and comes home to I." },
     game:{ label:"the games",
       explain:"Sprint qualities, climb three minor triads, spot the m-chords, then race the facts.",
-      hint:"Middle note down = minor." },
+      hint:"A lowered 3rd = minor." },
     quiz:{ label:"this question",
       explain:"Everything is the 3rd: 4 half steps = major, 3 = minor. And in a major key, degrees 2-3-6 build minor automatically.",
       play:()=>{[60,63,67].forEach(m=>MFAudio.tone(m,1.1,0,.33));} }

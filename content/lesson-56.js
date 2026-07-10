@@ -16,16 +16,16 @@ function MF_L56_sixth(container,fb){
     <div class="l56s-staff"></div>`;
   const q=container.querySelector(".l56s-q"), holder=container.querySelector(".l56s-staff");
   function ask(){
-    if(r>=ROUNDS.length){ q.textContent="Three relatives discovered — the 6th degree never fails!"; holder.innerHTML=""; return; }
+    if(r>=ROUNDS.length){ q.textContent="Great! You found the relative minor keys."; holder.innerHTML=""; return; }
     const R=ROUNDS[r];
-    q.innerHTML=`${R.maj} scale: tap its <b>6th degree</b> to reveal the relative minor.`;
+    q.innerHTML=`${R.maj} scale: tap the <b>6th scale degree</b>.`;
     Staff.render(holder,{clef:"treble",keysig:R.keysig,
       notes:R.ps.map((p,i)=>({p, d:"q", acc:R.keysig?"none":undefined, label:String(i+1)})),
       width:520, clickNotes:true,
       onNote:(i,p)=>{
         MFAudio.tone(MFAudio.midi(p),.5,0,.4);
         if(i===5){ MFAudio.yay();
-          fb(true,`✓ Degree 6 of ${R.maj} is ${R.minor} → the relative minor is ${R.minor} MINOR, wearing the exact same key signature.`);
+          fb(true,`✓ Great! Degree 6 of ${R.maj} is ${R.minor} — the relative minor is ${R.minor} minor, with the same key signature.`);
           r++; setTimeout(ask,1500);
         } else fb(false,`That's degree ${i+1}. Count up to SIX.`);
       }});
@@ -44,19 +44,19 @@ function MF_L56_down3(container,fb){
   container.innerHTML=`<div class="big-q l56k-q" style="text-align:center"></div><div class="l56k-kb"></div>`;
   const q=container.querySelector(".l56k-q"), kh=container.querySelector(".l56k-kb");
   function ask(){
-    if(r>=ROUNDS.length){ q.textContent="Four keynotes found by ear and finger — 3 half steps down, every time!"; kb.point(null); return; }
+    if(r>=ROUNDS.length){ q.textContent="Great! You found the relative key of each major key."; kb.point(null); return; }
     const R=ROUNDS[r];
     kb.point(R.start);
-    q.innerHTML=`The red arrow marks <b>${R.maj}</b> (the major keynote). Press it, then count <b>3 half steps DOWN</b> and press the relative minor's keynote.`;
+    q.innerHTML=`Press the major tonic <b>${R.maj}</b> (red arrow), then count <b>three half steps down</b> to the relative minor.`;
   }
   let armed=false;
   kb=Keyboard.create(kh,{start:60,octaves:2,labels:true,
     onKey:m=>{
       const R=ROUNDS[r]; if(!R) return;
-      if(m===R.start){ armed=true; kb.point(null); q.innerHTML=`Good — that's ${R.maj}. Now 3 half steps down…`; return; }
+      if(m===R.start){ armed=true; kb.point(null); q.innerHTML=`Excellent! Now count down three half steps.`; return; }
       if(!armed){ fb(false,"Start from the red arrow — the MAJOR keynote."); return; }
       if(m===R.target){ MFAudio.yay();
-        fb(true,`✓ ${R.maj} minus a minor 3rd = ${R.minor}. ${R.maj} major and ${R.minor} minor are relatives — same signature, different home.`);
+        fb(true,`✓ Great! You found the relative key: ${R.minor} minor.`);
         armed=false; r++; setTimeout(ask,1400); }
       else { MFAudio.tone(40,.2); fb(false,"Count key by key — 3 half steps below the major keynote (black keys count!)."); }
     }});
@@ -64,22 +64,22 @@ function MF_L56_down3(container,fb){
 }
 
 LESSON_CONTENT[56]={
-  welcome:"Unit 14 begins — welcome to the minor world. Every major key is about to introduce you to its roommate. \u{1F3E0}",
+  welcome:"Unit 14 begins — welcome to the minor world. Every major key has a relative minor. \u{1F3E0}",
   hook:{
-    say:"Two scales — <b>identical key signature</b> (none at all!). But listen: one sounds bright, one sounds shadowed. <b>How can the same notes make two different moods?</b>",
+    say:"<b>These two scales use the same notes and the same key signature.</b> <b>Why do they sound different?</b>",
     interact:{ type:"custom",
       mount:(container,fb)=>{
         container.innerHTML=`<div style="text-align:center">
           <button class="play hk-a">▶ Scale 1</button>
           <button class="play hk-b">▶ Scale 2</button></div>
-          <div class="choices hk-ch" style="display:none"><button>They start on different notes — different HOME bases</button><button>Scale 2 secretly added flats</button><button>Scale 2 was played more quietly</button></div>`;
+          <div class="choices hk-ch" style="display:none"><button>They start on different notes — the tonic is different</button><button>Scale 2 secretly added flats</button><button>Scale 2 was played more quietly</button></div>`;
         const ch=container.querySelector(".hk-ch");
         let hA=false,hB=false;
         container.querySelector(".hk-a").onclick=()=>{ [60,62,64,65,67,69,71,72].forEach((m,i)=>MFAudio.tone(m,.45,i*.32,.4)); hA=true; if(hB) setTimeout(()=>ch.style.display="",3000); };
         container.querySelector(".hk-b").onclick=()=>{ [57,59,60,62,64,65,67,69].forEach((m,i)=>MFAudio.tone(m,.45,i*.32,.4)); hB=true; if(hA) setTimeout(()=>ch.style.display="",3000); };
         [...ch.children].forEach((b,i)=>b.onclick=()=>{
-          if(i===0) fb(true,"✓ Scale 1 was C major (C to C); scale 2 used the SAME seven letters but ran A to A — the RELATIVE MINOR. Same key signature, new tonic, whole new mood. That's today's discovery!");
-          else fb(false,"Both scales used exactly the white keys, at the same volume. Listen to where each one feels 'at home'…");
+          if(i===0) fb(true,"✓ Scale 1 was C major (C to C); scale 2 used the same notes from A to A — the RELATIVE MINOR. Same key signature, different tonic. Today's lesson!");
+          else fb(false,"Both scales use exactly the same notes. Listen for the note each scale treats as home — the tonic.");
         });
       } }
   },
@@ -92,20 +92,20 @@ LESSON_CONTENT[56]={
     "Name relative pairs for the keys you know"
   ],
   steps:[
-    { say:"From Lesson 31 you know there are <b>15 major key signatures</b>. Here's today's headline: <b>for every major key there is a RELATIVE MINOR KEY with the SAME key signature</b>. Same address, different resident. \u{1F447} <b>What do relative keys share?</b>",
+    { say:"<b>Relative Major and Minor:</b> Every <b>major key</b> has a <b>relative minor</b>. Relative keys share the <b>same key signature</b>, but they have different tonic notes. \u{1F447} <b>What do relative keys share?</b>",
       try:{ type:"mc", choices:["The same key signature","The same tonic","The same tempo"], answer:0,
-        success:"✓ One signature, two keys — a major one and a minor one. The difference is WHERE each calls home.",
-        fail:"Roommates share an address, not a bedroom…",
+        success:"✓ One key signature, two keys — a major key and a minor key. The difference is the tonic.",
+        fail:"Look at the sharps and flats at the start of the staff…",
         hint:"Think of the sharps and flats at the start of the staff." } },
-    { say:"How to find the roommate: <b>the relative minor begins on the 6TH note of the major scale</b>. That 6th note becomes the minor scale's keynote AND its name. \u{1F447} <b>Tap the 6th degree:</b>",
+    { say:"<b>Finding the Relative Minor:</b> The relative minor begins on the <b>6th degree</b> of the major scale. That note becomes the tonic of the minor key. \u{1F447} <b>Tap the 6th scale degree:</b>",
       try:{ type:"custom",
         hint:"Count the scale notes 1-2-3-4-5-6 from the keynote.",
         mount:(container,fb)=>MF_L56_sixth(container,fb) } },
-    { say:"The keyboard shortcut: the 6th degree sits exactly a <b>minor 3rd (3 half steps) BELOW</b> the major keynote. \u{1F447} <b>Find four relative minors by finger-counting:</b>",
+    { say:"<b>Shortcut:</b> The relative minor is a <b>minor 3rd (3 half steps)</b> below the major tonic. \u{1F447} <b>Find four relative minor keys:</b>",
       try:{ type:"custom",
         hint:"3 half steps down — count every key, black ones included.",
         mount:(container,fb)=>MF_L56_down3(container,fb) } },
-    { say:"See them side by side: <b>A minor uses ONLY the notes of C major</b> — no sharps, no flats — just reordered around a new home base, A. \u{1F447} <b>Why do C major and A minor share a signature?</b>",
+    { say:"<b>Example:</b> C major and A minor use the <b>same seven notes</b>. They sound different because <b>A</b> becomes the tonic instead of <b>C</b>. <b>Remember: relative major and minor keys have the same key signature, but they are different keys because they have different tonics.</b> \u{1F447} <b>Why do C major and A minor have the same key signature?</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:100,notes:[
         {p:"C4",d:"q",label:"C major"},{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"F4",d:"q"},{p:"G4",d:"q"},{p:"A4",d:"q",label:"6 = A!"},{p:"B4",d:"q"},{p:"C5",d:"q"},{bar:"double"},
         {p:"A3",d:"q",label:"A minor"},{p:"B3",d:"q"},{p:"C4",d:"q"},{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"F4",d:"q"},{p:"G4",d:"q"},{p:"A4",d:"q"},{bar:"final"}],width:640} },
@@ -113,12 +113,12 @@ LESSON_CONTENT[56]={
         success:"✓ Same seven letters, same accidentals (none here) — so the signature can't tell them apart. Only the TONIC can.",
         fail:"Compare the letters of both scales…",
         hint:"A-B-C-D-E-F-G vs C-D-E-F-G-A-B." } },
-    { say:"The reverse trip: from a minor key, the <b>relative MAJOR is a minor 3rd UP</b> from the minor keynote. \u{1F447} <b>The relative major of E minor is…</b>",
+    { say:"<b>Finding the Relative Major:</b> To find the relative major, move <b>up a minor 3rd</b> from the minor tonic. \u{1F447} <b>What is the relative major of E minor?</b>",
       try:{ type:"mc", choices:["G major","C major","E major"], answer:0,
         success:"✓ E up a minor 3rd = G. E minor and G major share one sharp (F♯).",
         fail:"Count 3 half steps UP from E: F, F♯, G.",
         hint:"Minor → major = climb a m3." } },
-    { say:"Now read signatures like a local: <b>1 sharp</b> = G major… OR its relative, E minor. Every signature has TWO names now. \u{1F447} <b>One flat belongs to F major and to…</b>",
+    { say:"<b>Reading Key Signatures:</b> Every key signature represents <b>one major key</b> and <b>one relative minor key</b>. \u{1F447} <b>One flat belongs to F major and…</b>",
       show:{ type:"staff", spec:{clef:"treble",keysig:"F",notes:[],width:220} },
       try:{ type:"mc", choices:["D minor","A minor","B♭ minor"], answer:0,
         success:"✓ The 6th degree of F major is D → D minor. From now on, every signature you see is a duo.",
@@ -150,9 +150,9 @@ LESSON_CONTENT[56]={
         names:["C (major keynote)","A — relative minor!","G (major keynote)","E — relative minor!","F (major keynote)","D — relative minor!","D (major keynote)","B — relative minor!"],
         start:60, octaves:2, title:"C→Am, G→Em, F→Dm, D→Bm — majors and their relatives"},
       result:(score)=>score!==null?"Elevator operator certified — every floor a minor 3rd!":null },
-    { type:"sig-match", title:"Game 3 · Signature Roommates",
+    { type:"sig-match", title:"Game 3 · Key Signature Match",
       intro:"Drag each MINOR key name onto the key signature it shares with its relative major!",
-      miaIntro:"Same address, minor resident! \u{1F3E0}",
+      miaIntro:"Same key signature, minor key! \u{1F3E0}",
       spec:{rounds:2, perRound:4, clefs:["treble","bass"], pool:[
         {key:"C",label:"A minor"},
         {key:"G",label:"E minor"},
@@ -182,11 +182,11 @@ LESSON_CONTENT[56]={
     { gen:"term-match", params:{subject:"term", pool:[["Relative minor","same signature, tonic on the major's 6th degree"],["Relative major","same signature, a m3 above the minor tonic"],["Tonic","the home note of a scale"],["Key signature","the sharps or flats at the start of the staff"]], reverse:true}, count:4 },
     { type:"mc", q:"The relative minor begins on which degree of the major scale?", choices:["6th","5th","3rd"], answer:0,
       explain:"Degree 6 becomes the minor keynote (AEMT3 p.90)." },
-    { type:"mc", q:"The keyboard shortcut from major keynote to relative minor keynote is…", choices:["a minor 3rd down","a whole step down","a perfect 5th up"], answer:0,
+    { type:"mc", q:"How can you quickly find the relative minor?", choices:["a minor 3rd down","a whole step down","a perfect 5th up"], answer:0,
       explain:"3 half steps below — C down to A." },
     { type:"mc", q:"The relative minor of D major is…", choices:["B minor","D minor","F# minor"], answer:0,
       explain:"6th degree of D major = B." },
-    { type:"mc", q:"The relative MAJOR of C minor is…", choices:["E♭ major","C major","G major"], answer:0,
+    { type:"mc", q:"What is the relative major of C minor?", choices:["E♭ major","C major","G major"], answer:0,
       explain:"A minor 3rd up from C = E♭; both carry 3 flats." },
     { type:"truefalse", q:"Relative keys have the same key signature.", answer:true,
       explain:"That's what makes them relatives." },
@@ -199,17 +199,17 @@ LESSON_CONTENT[56]={
   ],
   miaQuizIntro:"Quiz time! Count to 6, or ride the minor-3rd elevator — both roads lead home.",
   quiz:[
-    { type:"mc", q:"A relative minor key shares what with its relative major?", choices:["The same key signature","The same tonic","The same starting note","The same tempo"], answer:0,
-      explain:"One signature, two keys.", hint:"The roommates metaphor." },
+    { type:"mc", q:"What do relative major and minor keys share?", choices:["The same key signature","The same tonic","The same starting note","The same tempo"], answer:0,
+      explain:"One signature, two keys.", hint:"Look at the start of the staff." },
     { type:"mc", q:"The relative minor scale begins on which note of the major scale?", choices:["The 6th","The 5th","The 2nd","The 7th"], answer:0,
       explain:"Degree 6 = the minor keynote and its name.", hint:"Think '6 = relative minor'." },
     { type:"mc", q:"The relative minor of C major is…", choices:["A minor","E minor","C minor","D minor"], answer:0,
       explain:"C-D-E-F-G-A: the 6th note is A.", hint:"Count to 6." },
     { type:"mc", q:"The relative minor of G major is…", choices:["E minor","B minor","G minor","D minor"], answer:0,
       explain:"6th degree of G major = E; both have 1 sharp.", hint:"G-A-B-C-D-…" },
-    { type:"mc", q:"Another way to find the relative minor keynote is to go…", choices:["down a minor 3rd from the major keynote","up a perfect 4th","down a whole step"], answer:0,
+    { type:"mc", q:"How can you find the relative minor from a major key?", choices:["down a minor 3rd from the major keynote","up a perfect 4th","down a whole step"], answer:0,
       explain:"C down 3 half steps = A.", hint:"The elevator game." },
-    { type:"mc", q:"To find the relative MAJOR from a minor keynote, go…", choices:["up a minor 3rd","down a minor 3rd","up a perfect 5th"], answer:0,
+    { type:"mc", q:"How can you find the relative major from a minor key?", choices:["up a minor 3rd","down a minor 3rd","up a perfect 5th"], answer:0,
       explain:"The same elevator, ridden upward.", hint:"Opposite direction from before." },
     { type:"truefalse", q:"Relative major and minor scales use the same tones.", answer:true,
       explain:"Identical notes, different home base.", hint:"Why the signature matches." },
@@ -219,10 +219,10 @@ LESSON_CONTENT[56]={
       staff:{clef:"treble",keysig:"D",notes:[],width:200},
       choices:["D major & B minor","D major & D minor","G major & E minor"], answer:0,
       explain:"2 sharps = D major; its 6th degree is B → B minor.", hint:"Name the major first, then count to 6." },
-    { type:"mc", q:"A melody uses only white keys but keeps landing on A and ending on A. Its key is most likely…", choices:["A minor","C major","A major"], answer:0,
+    { type:"mc", q:"A melody uses only the white keys and ends on A. What is the most likely key?", choices:["A minor","C major","A major"], answer:0,
       explain:"Home base decides: white keys + tonic A = A minor.", hint:"Where does it feel finished?" },
-    { type:"mc", q:"How many relative minor keys exist in total?", choices:["15 — one for every major key","12","7"], answer:0,
-      explain:"Every one of the 15 major signatures has its minor roommate.", hint:"Same count as major keys." },
+    { type:"mc", q:"How many relative minor keys are there?", choices:["15 — one for every major key","12","7"], answer:0,
+      explain:"Every one of the 15 major key signatures has a relative minor.", hint:"Same count as major keys." },
     { type:"mc", q:"B♭ major (2 flats) has which relative minor?", choices:["G minor","B♭ minor","D minor"], answer:0,
       explain:"6th degree of B♭ major = G.", hint:"B♭-C-D-E♭-F-G…" },
     /* generated */

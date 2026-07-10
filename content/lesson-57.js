@@ -24,9 +24,9 @@ function MF_L57_fix(container,fb){
             const H=["A3","B3","C4","D4","E4","F4","G#4","A4"];
             draw(H,"A harmonic minor");
             H.forEach((pp,ix)=>MFAudio.tone(MFAudio.midi(pp),.4,.3+ix*.28,.38));
-            fb(true,"✓ G becomes G♯ — the raised 7th is now a LEADING TONE, one half step under A. This is the HARMONIC MINOR, and the raise applies going up AND coming down.");
+            fb(true,"✓ Great! You built the harmonic minor scale — G♯ is the leading tone, used both ascending and descending.");
             stage=1; done=[];
-            setTimeout(()=>{ q.innerHTML="Now build the <b>MELODIC minor (ascending)</b>: starting again from natural minor, tap the <b>6th</b> and the <b>7th</b> — both get raised."; draw(NAT,"A natural minor"); },3400);
+            setTimeout(()=>{ q.innerHTML="Now raise the <b>6th and 7th</b> to build the <b>melodic minor</b> (ascending)."; draw(NAT,"A natural minor"); },3400);
           } else fb(false,`That's degree ${i+1}. The harmonic minor raises only the 7TH.`);
         } else {
           if(i===5&&!done.includes(5)){ done.push(5);
@@ -36,15 +36,15 @@ function MF_L57_fix(container,fb){
             const M=["A3","B3","C4","D4","E4","F#4","G#4","A4"];
             draw(M,"A melodic minor (ascending)");
             M.forEach((pp,ix)=>MFAudio.tone(MFAudio.midi(pp),.4,.3+ix*.28,.38));
-            fb(true,"✓ F♯ AND G♯ — the MELODIC minor ascending. The raised 6th smooths the path into the raised 7th. (Coming down, both cancel — it descends as natural minor.)");
-            q.textContent="Both fixes built — three scales from one set of letters!";
+            fb(true,"✓ Excellent! F♯ and G♯ — the melodic minor ascending. Descending, it returns to the natural minor form.");
+            q.textContent="Excellent! You built all three forms of the minor scale.";
           }
           else if(i===6&&!done.includes(5)) fb(false,"Raise the 6TH first — melodic minor lifts both, in order.");
           else fb(false,`That's degree ${i+1}. Melodic minor raises degrees 6 and 7.`);
         }
       }});
   }
-  q.innerHTML="A <b>natural minor</b>. Make it HARMONIC: tap the degree that gets raised a half step.";
+  q.innerHTML="A <b>natural minor</b>. Build the <b>harmonic minor</b>: raise the 7th degree — tap it.";
   draw(NAT,"A natural minor");
 }
 
@@ -60,9 +60,9 @@ function MF_L57_ear(container,fb){
     <div class="choices chips l57e-ch" style="display:none"><button>Natural</button><button>Harmonic</button><button>Melodic</button></div>`;
   const q=container.querySelector(".l57e-q"), pl=container.querySelector(".l57e-play"), ch=container.querySelector(".l57e-ch");
   function ask(){
-    if(r>=order.length){ q.textContent="Ears calibrated — you can NAME a minor's flavor now!"; pl.style.display="none"; ch.style.display="none"; return; }
+    if(r>=order.length){ q.textContent="Excellent! You identified every minor form."; pl.style.display="none"; ch.style.display="none"; return; }
     played=false; ch.style.display="none";
-    q.innerHTML=`Round ${r+1} of ${order.length}: listen closely to degrees 6 and 7…`;
+    q.innerHTML=`Round ${r+1} of ${order.length}: which form do you hear? Listen to degrees 6 and 7.`;
   }
   pl.onclick=()=>{
     const F=FORMS[order[r]]; if(!F) return;
@@ -72,9 +72,9 @@ function MF_L57_ear(container,fb){
   [...ch.children].forEach((b,i)=>b.onclick=()=>{
     if(!played) return;
     const want=order[r];
-    if(i===want){ MFAudio.yay(); fb(true,`✓ ${FORMS[want].name}! ${want===0?"Plain 6 and 7 — no lifts.":want===1?"Only the 7th was raised — that exotic gap between 6 and ♯7 gives it away.":"Both 6 and 7 raised — the top of the scale sounded almost major."}`);
+    if(i===want){ MFAudio.yay(); fb(true,`✓ ${FORMS[want].name}! ${want===0?"Degrees 6 and 7 stayed natural.":want===1?"Only the 7th was raised — the large gap between 6 and ♯7 gives it away.":"Both 6 and 7 were raised."}`);
       r++; setTimeout(ask,1400); }
-    else { MFAudio.tone(40,.2); fb(false,"Replay it and stare at the last three notes: were 6 and 7 low, half-lifted, or both lifted?"); }
+    else { MFAudio.tone(40,.2); fb(false,"Listen again to degrees 6 and 7: are they natural, or raised?"); }
   });
   ask();
 }
@@ -82,20 +82,20 @@ function MF_L57_ear(container,fb){
 LESSON_CONTENT[57]={
   welcome:"Major scales come in one flavor. Minor scales come in THREE. Let's taste them all. \u{1F3AD}",
   hook:{
-    say:"One scale, two endings. Ending A strolls to the top; ending B <b>yearns</b> its way there. <b>Which ending pulls harder into the final note?</b>",
+    say:"<b>There are three common forms of the minor scale.</b> Listen carefully. <b>Which ending creates the strongest pull to the tonic?</b>",
     interact:{ type:"custom",
       mount:(container,fb)=>{
         container.innerHTML=`<div style="text-align:center">
           <button class="play hk-a">▶ Ending A: …F, G, A</button>
           <button class="play hk-b">▶ Ending B: …F, G♯, A</button></div>
-          <div class="choices hk-ch" style="display:none"><button>Ending B — the G♯ leaned into A</button><button>Ending A — plain G pulls harder</button></div>`;
+          <div class="choices hk-ch" style="display:none"><button>Ending B — the raised 7th (G♯) pulls to the tonic</button><button>Ending A — plain G pulls harder</button></div>`;
         const ch=container.querySelector(".hk-ch");
         let hA=false,hB=false;
         container.querySelector(".hk-a").onclick=()=>{ [64,65,67,69].forEach((m,i)=>MFAudio.tone(m,.5,i*.4,.42)); hA=true; if(hB) setTimeout(()=>ch.style.display="",2100); };
         container.querySelector(".hk-b").onclick=()=>{ [64,65,68,69].forEach((m,i)=>MFAudio.tone(m,.5,i*.4,.42)); hB=true; if(hA) setTimeout(()=>ch.style.display="",2100); };
         [...ch.children].forEach((b,i)=>b.onclick=()=>{
-          if(i===0) fb(true,"✓ Raising that one note (G→G♯) created a LEADING TONE — a half step below home that begs to arrive. That single lift is why the minor scale grew extra forms. Today: all three!");
-          else fb(false,"Play both again — which last-but-one note sounds like it's on tiptoe?");
+          if(i===0) fb(true,"✓ Raising G to G♯ created a LEADING TONE — a half step below the tonic that pulls strongly to it. That is why the minor scale has extra forms. Today: all three!");
+          else fb(false,"Play both again — listen to the note just before the final A.");
         });
       } }
   },
@@ -108,60 +108,62 @@ LESSON_CONTENT[57]={
     "Identify the forms by sight and by ear"
   ],
   steps:[
-    { say:"Form 1 — the <b>NATURAL minor</b>: it uses <b>only the tones of the relative major scale</b> (Lesson 56's scale IS this form). Nothing raised, nothing added. \u{1F447} <b>A natural minor contains how many accidentals?</b>",
+    { say:"<b>Natural Minor:</b> The <b>natural minor</b> uses the same notes as its <b>relative major</b>. No notes are raised or lowered. \u{1F447} <b>How many accidentals are added to the natural minor scale?</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:110,notes:[
         {p:"A3",d:"q",label:"1"},{p:"B3",d:"q",label:"2"},{p:"C4",d:"q",label:"3"},{p:"D4",d:"q",label:"4"},
         {p:"E4",d:"q",label:"5"},{p:"F4",d:"q",label:"6"},{p:"G4",d:"q",label:"7"},{p:"A4",d:"q",label:"8"}],width:540} },
       try:{ type:"mc", choices:["None — same notes as C major","One sharp","One flat"], answer:0,
-        success:"✓ Pure relative-major material. The natural minor is the 'factory setting.'",
+        success:"✓ No accidentals — the natural minor uses only the notes of its relative major.",
         fail:"It shares EVERYTHING with its relative major…",
         hint:"A minor's relative major is C major." } },
-    { say:"But the factory setting has a soft spot: its 7th (G) sits a WHOLE step below home, so arrivals feel mild — you heard it in the hook. Composers wanted the tug of a <b>leading tone</b>. \u{1F447} <b>A leading tone sits how far below the tonic?</b>",
+    { say:"<b>Why Raise the 7th?</b> In the natural minor scale, the <b>7th degree</b> is a whole step below the tonic. Raising the 7th creates a <b>leading tone</b>, which pulls strongly to the tonic. \u{1F447} <b>How far below the tonic is a leading tone?</b>",
       try:{ type:"mc", choices:["A half step","A whole step","A minor 3rd"], answer:0,
-        success:"✓ One half step of pure gravity. To get it, the minor scale needs surgery on its 7th…",
+        success:"✓ One half step below the tonic — the strongest possible pull.",
         fail:"The closer to home, the stronger the pull.",
         hint:"Think of B→C in C major." } },
-    { say:"Do the surgery yourself — twice. \u{1F447} <b>Build the harmonic, then the melodic form:</b>",
+    { say:"Build the <b>harmonic minor</b> and <b>melodic minor</b> scales. \u{1F447}",
       try:{ type:"custom",
         hint:"Harmonic: raise degree 7 only. Melodic: degrees 6 AND 7 (ascending).",
         mount:(container,fb)=>MF_L57_fix(container,fb) } },
-    { say:"Form 2 — the <b>HARMONIC minor</b>: 7th raised a half step, and — mark this — <b>both ascending AND descending</b>. The book adds: it is <b>the most frequently used of the three</b>. \u{1F447} <b>Does harmonic minor lower the ♯7 on the way down?</b>",
+    { say:"<b>Harmonic Minor:</b> Raise the <b>7th degree</b> by a half step. The raised 7th is used <b>both ascending and descending</b>. Harmonic minor is the most commonly used minor form. \u{1F447} <b>Does harmonic minor lower the raised 7th when descending?</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:110,notes:[
         {p:"A3",d:"q"},{p:"B3",d:"q"},{p:"C4",d:"q"},{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"F4",d:"q",label:"6"},{p:"G#4",d:"q",label:"♯7"},{p:"A4",d:"q",label:"8"}],width:540} },
-      try:{ type:"mc", choices:["No — ♯7 stays in both directions","Yes — it descends naturally","Only on weekends"], answer:0,
+      try:{ type:"mc", choices:["No — ♯7 stays in both directions","Yes — it descends naturally","Only in major keys"], answer:0,
         success:"✓ The raise is permanent in this form — that's what separates it from melodic minor.",
         fail:"Harmonic minor is the consistent one…",
         hint:"Only ONE form changes on the way down." } },
-    { say:"But the fix created a new quirk: from F up to G♯ is <b>1½ steps</b> — a dramatic, exotic gap that's awkward for smooth MELODIES. Form 3 — the <b>MELODIC minor</b> — solves it: <b>raise the 6th AND 7th ascending</b>… then <b>descend like the natural minor</b>. \u{1F447} <b>Why raise the 6th too?</b>",
+    { say:"<b>Melodic Minor:</b> Raising only the 7th creates a large interval between <b>6 and ♯7</b>. To make the melody smoother, melodic minor raises <b>both the 6th and 7th</b> when ascending. Descending, it returns to the <b>natural minor</b> form. \u{1F447} <b>Why is the 6th also raised?</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:110,notes:[
         {p:"A3",d:"q",label:"up:"},{p:"B3",d:"q"},{p:"C4",d:"q"},{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"F#4",d:"q",label:"♯6"},{p:"G#4",d:"q",label:"♯7"},{p:"A4",d:"q"},
         {p:"G4",d:"q",acc:"n",label:"down: ♮7"},{p:"F4",d:"q",acc:"n",label:"♮6"},{p:"E4",d:"q"},{p:"D4",d:"q"},{p:"C4",d:"q"},{p:"B3",d:"q"},{p:"A3",d:"q"},{bar:"final"}],width:660} },
-      try:{ type:"mc", choices:["To close the awkward 1½-step gap between 6 and ♯7","To make the scale louder","Because 6 is unlucky"], answer:0,
+      try:{ type:"mc", choices:["To make the melody smoother — it closes the large gap between 6 and ♯7","To make the scale louder","To add another leading tone"], answer:0,
         success:"✓ F♯ smooths the staircase into G♯: whole step, half step — singable again. Coming down there's no leading-tone job to do, so both lifts cancel.",
         fail:"Measure F to G♯ — how many half steps?",
         hint:"Three half steps = the gap that needed patching." } },
-    { say:"Memory anchor: <b>7 → Harmony</b> (the raised 7th powers CHORDS — hence 'harmonic'), <b>6 & 7 → Melody</b> (smooth LINES — hence 'melodic'). \u{1F447} <b>A scale with ♯6 and ♯7 going up but plain notes coming down is…</b>",
+    { say:"<b>Remember:</b> Harmonic minor — raise the <b>7th</b>. Melodic minor — raise the <b>6th and 7th</b> when ascending. \u{1F447} <b>Which minor scale raises both the 6th and 7th?</b>",
+      show:{ type:"html", html:`<table style="border-collapse:collapse;margin:0 auto;font-size:14.5px;min-width:340px">
+        <tr><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:6px 14px">Scale</th><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:6px 14px">Ascending</th><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:6px 14px">Descending</th></tr>
+        <tr><td style="border:1.5px solid #cdd5e1;padding:5px 14px">Natural Minor</td><td style="border:1.5px solid #cdd5e1;padding:5px 14px;text-align:center">natural</td><td style="border:1.5px solid #cdd5e1;padding:5px 14px;text-align:center">natural</td></tr>
+        <tr><td style="border:1.5px solid #cdd5e1;padding:5px 14px">Harmonic Minor</td><td style="border:1.5px solid #cdd5e1;padding:5px 14px;text-align:center;font-weight:800">♯7</td><td style="border:1.5px solid #cdd5e1;padding:5px 14px;text-align:center;font-weight:800">♯7</td></tr>
+        <tr><td style="border:1.5px solid #cdd5e1;padding:5px 14px">Melodic Minor</td><td style="border:1.5px solid #cdd5e1;padding:5px 14px;text-align:center;font-weight:800">♯6, ♯7</td><td style="border:1.5px solid #cdd5e1;padding:5px 14px;text-align:center">natural</td></tr></table>` },
       try:{ type:"mc", choices:["Melodic minor","Harmonic minor","Natural minor"], answer:0,
         success:"✓ The shape-shifter itself. One name per behavior: natural never changes, harmonic changes once forever, melodic changes going up and repents coming down.",
         fail:"Which form has a two-way personality?",
         hint:"Up ♯6♯7, down natural — the book's exact description." } },
-    { say:"Bonus — the <b>diatonic intervals of the HARMONIC minor</b> (measured from the tonic) are all P, M or m: <b>P1, M2, m3, P4, P5, m6, M7, P8</b>. Compare with major: only the 3rd and 6th shrink to minor. \u{1F447} <b>In harmonic minor, the interval from tonic up to degree 7 is…</b>",
+    { say:"<b>Extra:</b> In harmonic minor, the interval from the tonic to the raised 7th is a <b>Major 7th</b>. \u{1F447} <b>What is the interval from the tonic to the raised 7th?</b>",
       show:{ type:"staff", spec:{clef:"treble",notes:[
-        {p:"A3",d:"h",label:"m3"},{p:"C4",d:"h",chord:true},
-        {p:"A3",d:"h",label:"m6"},{p:"F4",d:"h",chord:true},
-        {p:"A3",d:"h",label:"M7"},{p:"G#4",d:"h",chord:true},
-        {p:"A3",d:"h",label:"P5"},{p:"E4",d:"h",chord:true}],width:480} },
+        {p:"A3",d:"w",label:"tonic → ♯7 = Major 7th"},{p:"G#4",d:"w",chord:true}],width:280} },
       try:{ type:"mc", choices:["A Major 7th","A minor 7th","A Perfect 7th"], answer:0,
-        success:"✓ A up to G♯ = M7 — the raised 7th upgraded that interval from minor to Major. (And 'perfect 7th' doesn't exist!)",
+        success:"✓ A up to G♯ is a Major 7th. (There is no such thing as a 'perfect 7th'.)",
         fail:"G♯ is the RAISED 7th…",
         hint:"Raising the top note makes an interval BIGGER." } },
-    { say:"Final exam for your ears. \u{1F447} <b>Name the form by sound alone:</b>",
+    { say:"<b>Listen Carefully:</b> Identify the type of minor scale by ear. \u{1F447}",
       try:{ type:"custom",
         hint:"Focus on the last three notes: plain (natural), one lift with a gap (harmonic), or two lifts (melodic).",
         mount:(container,fb)=>MF_L57_ear(container,fb) } }
   ],
   examples:[
-    { caption:"The three forms of A minor, back to back: natural (plain), harmonic (♯7 — hear the exotic gap), melodic ascending (♯6 ♯7 — smooth as major until the last step).",
+    { caption:"The three forms of A minor, back to back: natural (plain), harmonic (♯7 — hear the large gap), melodic ascending (♯6 ♯7 — smooth as major until the last step).",
       staff:{clef:"treble",tempo:120,notes:[
         {p:"A3",d:"q",label:"natural"},{p:"B3",d:"q"},{p:"C4",d:"q"},{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"F4",d:"q"},{p:"G4",d:"q"},{p:"A4",d:"q"},{bar:"double"},
         {p:"A3",d:"q",label:"harmonic"},{p:"B3",d:"q"},{p:"C4",d:"q"},{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"F4",d:"q"},{p:"G#4",d:"q"},{p:"A4",d:"q"},{bar:"double"},
@@ -228,7 +230,7 @@ LESSON_CONTENT[57]={
       explain:"F♯ and G♯ in A minor — for a smooth climb." },
     { type:"mc", q:"Descending, the melodic minor sounds like…", choices:["the natural minor","the harmonic minor","the major scale"], answer:0,
       explain:"The lifts cancel on the way down." },
-    { type:"mc", q:"Which form does the book call the most frequently used?", choices:["Harmonic minor","Natural minor","Melodic minor"], answer:0,
+    { type:"mc", q:"Which minor form is used most often?", choices:["Harmonic minor","Natural minor","Melodic minor"], answer:0,
       explain:"Its leading tone powers the strongest chords." },
     { type:"mc", q:"In A harmonic minor, the raised 7th is…", choices:["G♯","F♯","C♯"], answer:0,
       explain:"The 7th letter from A is G — raised to G♯." },
@@ -238,15 +240,15 @@ LESSON_CONTENT[57]={
       explain:"Half step below tonic = maximum pull." },
     { type:"truefalse", q:"In the harmonic minor, the interval tonic→7th is a Major 7th.", answer:true,
       explain:"A→G♯ = M7 (the book's interval chart)." },
-    { type:"truefalse", q:"The melodic minor exists because F→G♯ was awkward to sing.", answer:true,
-      explain:"Raising the 6th patches the 1½-step gap." }
+    { type:"mc", q:"Why was the melodic minor scale developed?", choices:["To make the large gap between 6 and ♯7 easier to sing","To add more sharps","To replace the major scale"], answer:0,
+      explain:"Raising the 6th makes the melody smoother." }
   ],
   miaQuizIntro:"Final quiz! Natural, harmonic, melodic — know what changes, which way, and WHY.",
   quiz:[
     { type:"mc", q:"How many common forms does the minor scale have?", choices:["3","1","2","5"], answer:0,
       explain:"Natural, harmonic, melodic.", hint:"Today's whole lesson in one number." },
     { type:"mc", q:"The NATURAL minor scale…", choices:["uses only the tones of its relative major","raises the 7th","raises the 6th and 7th"], answer:0,
-      explain:"The unaltered, factory-setting form.", hint:"'Natural' = untouched." },
+      explain:"No notes are raised or lowered.", hint:"'Natural' = untouched." },
     { type:"mc", q:"The HARMONIC minor scale raises the 7th…", choices:["ascending AND descending","ascending only","descending only"], answer:0,
       explain:"The raise is permanent in this form.", hint:"It's the consistent sibling." },
     { type:"mc", q:"The MELODIC minor scale ascending raises…", choices:["the 6th and 7th","only the 6th","the 4th and 5th"], answer:0,
@@ -255,9 +257,9 @@ LESSON_CONTENT[57]={
       explain:"No leading-tone job downhill — the lifts cancel.", hint:"The round-trip game." },
     { type:"truefalse", q:"The harmonic minor is the most frequently used minor form.", answer:true,
       explain:"Straight from the book.", hint:"Its name hints at chords — music's engine." },
-    { type:"mc", q:"The purpose of raising the 7th is to create…", choices:["a leading tone that pulls to the tonic","a louder scale","a new key signature"], answer:0,
+    { type:"mc", q:"Why is the 7th raised in the harmonic minor scale?", choices:["To create a leading tone that pulls to the tonic","To make the scale louder","To change the key signature"], answer:0,
       explain:"Half step below home = the tug you heard in the hook.", hint:"What did G♯ do to A?" },
-    { type:"mc", q:"The awkward interval inside the harmonic minor lies between…", choices:["degrees 6 and ♯7","degrees 1 and 2","degrees 4 and 5"], answer:0,
+    { type:"mc", q:"Which two scale degrees create the large interval in harmonic minor?", choices:["degrees 6 and ♯7","degrees 1 and 2","degrees 4 and 5"], answer:0,
       explain:"F to G♯: 1½ steps — the gap melodic minor fixes.", hint:"Right below the raised note." },
     { type:"mc", q:"Identify this scale.",
       staff:{clef:"treble",notes:[{p:"A3",d:"q"},{p:"B3",d:"q"},{p:"C4",d:"q"},{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"F4",d:"q"},{p:"G#4",d:"q"},{p:"A4",d:"q"}],width:400},
@@ -267,10 +269,10 @@ LESSON_CONTENT[57]={
       staff:{clef:"treble",notes:[{p:"A3",d:"q"},{p:"B3",d:"q"},{p:"C4",d:"q"},{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"F#4",d:"q"},{p:"G#4",d:"q"},{p:"A4",d:"q"}],width:400},
       choices:["A melodic minor ascending","A harmonic minor","A major"], answer:0,
       explain:"♯6 AND ♯7 going up = melodic.", hint:"Two sharps, top of the scale." },
-    { type:"mc", q:"In the harmonic minor, ALL diatonic intervals from the tonic are…", choices:["perfect, major or minor","augmented or diminished","perfect only"], answer:0,
-      explain:"P1 M2 m3 P4 P5 m6 M7 P8.", hint:"Same three families as the major scale." },
-    { type:"mc", q:"A singer finds F→G♯ hard to pitch, so the composer writes F♯ before the G♯. The singer is now singing…", choices:["melodic minor","harmonic minor","natural minor"], answer:0,
-      explain:"Raising the 6th for melodic smoothness is the melodic minor's whole reason to exist.", hint:"Which form was invented for SINGERS?" },
+    { type:"mc", q:"Which scale raises both the 6th and 7th when ascending?", choices:["Melodic minor","Harmonic minor","Natural minor"], answer:0,
+      explain:"Melodic minor raises 6 and 7 ascending and returns to natural minor descending.", hint:"The two-way form." },
+    { type:"mc", q:"A singer has trouble singing the large interval between 6 and ♯7. Which minor form makes the melody smoother?", choices:["Melodic minor","Harmonic minor","Natural minor"], answer:0,
+      explain:"Raising the 6th makes the line smoother — that is the melodic minor's purpose.", hint:"The form made for melodies." },
     /* generated */
     { gen:"term-match", params:{subject:"term", pool:[["Natural","no changes"],["Harmonic","♯7 both ways"],["Melodic up","♯6 ♯7"],["Melodic down","natural again"]], reverse:true}, count:3 },
     { gen:"rel-key", params:{ask:"both"}, count:3 }
@@ -288,7 +290,7 @@ LESSON_CONTENT[57]={
   summary:[
     "✔ Three forms: <b>natural</b> (unchanged), <b>harmonic</b> (♯7, both directions), <b>melodic</b> (♯6 ♯7 up, natural down).",
     "✔ The raised 7th = a <b>leading tone</b> — a half step below home with maximum pull.",
-    "✔ Harmonic minor is <b>the most frequently used</b>; its 6→♯7 gap (1½ steps) is its trademark sound.",
+    "✔ Harmonic minor is <b>the most frequently used</b>; the large 6→♯7 gap is its trademark sound.",
     "✔ Melodic minor raises the 6th to <b>smooth the climb</b>, then cancels everything downhill.",
     "✔ Harmonic minor intervals from the tonic: <b>P1 M2 m3 P4 P5 m6 M7 P8</b> — all P/M/m."
   ],
@@ -305,7 +307,7 @@ LESSON_CONTENT[57]={
   miaPass:"Passed! Natural, harmonic, melodic — filed and findable. Minor triads await!",
   mia:{
     hook:{ label:"the welcome",
-      explain:"Ending A used the natural 7th (G) — a whole step from home. Ending B raised it to G♯, a leading tone half a step from A: instant yearning.",
+      explain:"Ending A used the natural 7th (G) — a whole step below the tonic. Ending B raised it to G♯ — a leading tone, a half step below A.",
       play:()=>{[64,65,68,69].forEach((m,i)=>MFAudio.tone(m,.5,i*.4,.42));} },
     learn:{ label:"the three forms",
       explain:"Natural = untouched. Harmonic = ♯7 both ways (leading tone; most used). Melodic = ♯6♯7 up for smoothness, natural coming down.",
