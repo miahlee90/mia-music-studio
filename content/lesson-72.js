@@ -16,7 +16,7 @@ function MF_L72_hunt(container,fb){
     {p:"G4",d:"8"},{p:"G4",d:"8"},{p:"G4",d:"8"},{p:"C5",d:"h"}];
   const STARTS=[0,4,8];
   let found=[];
-  container.innerHTML=`<div class="big-q l72h-q" style="text-align:center">One tiny motive — three appearances (the later ones TRANSPOSED). Tap the <b>first note of each appearance</b>.</div>
+  container.innerHTML=`<div class="big-q l72h-q" style="text-align:center">Listen for the motive — it appears three times (later at different pitches). Tap the <b>first note of each appearance</b>.</div>
     <div class="l72h-staff"></div>
     <div style="text-align:center"><button class="play l72h-play">▶ Hear the melody</button></div>`;
   const q=container.querySelector(".l72h-q"), holder=container.querySelector(".l72h-staff"), pl=container.querySelector(".l72h-play");
@@ -25,11 +25,11 @@ function MF_L72_hunt(container,fb){
       MFAudio.tone(MFAudio.midi(p),.4,0,.4);
       if(STARTS.includes(i)&&!found.includes(i)){
         found.push(i); MFAudio.yay();
-        if(found.length<3) q.innerHTML=`✓ Appearance ${found.length} found! ${3-found.length} more — same short-short-short-LONG shape, new pitch level.`;
-        else { q.textContent="All three appearances found!";
-          fb(true,"✓ One motive, three statements — the 2nd and 3rd are TRANSPOSITIONS (same shape, higher start). That's how 'most music is based on the development and expansion of one or more motives.'"); }
-      } else if(STARTS.includes(i)) q.innerHTML="Already counted that one — find the next appearance.";
-      else fb(false,"That's mid-motive. Find where the short-short-short-LONG pattern BEGINS.");
+        if(found.length<3) q.innerHTML=`✓ Great! You found the motive. ${3-found.length} more — same short-short-short-LONG shape, new pitch.`;
+        else { q.textContent="Excellent! You found the motive each time.";
+          fb(true,"✓ One motive, three statements — the 2nd and 3rd are repeated at different pitches (TRANSPOSITION). Most music develops one or more motives this way."); }
+      } else if(STARTS.includes(i)) q.innerHTML="Already found — listen again for the next one.";
+      else fb(false,"Listen again. Find where the short-short-short-LONG pattern BEGINS.");
     }};
   const api=Staff.render(holder,spec);
   pl.onclick=()=>Staff.play(spec,api);
@@ -43,7 +43,7 @@ function MF_L72_breath(container,fb){
     {p:"E4",d:"q"},{p:"D4",d:"q"},{p:"B3",d:"q"},{p:"C4",d:"h",label:"?"}];
   const ENDS=[3,7];
   let found=[];
-  container.innerHTML=`<div class="big-q l72b-q" style="text-align:center">Two phrases — two breaths. Play it, then tap the note where EACH phrase takes its breath.</div>
+  container.innerHTML=`<div class="big-q l72b-q" style="text-align:center">Two phrases. Play the melody, then tap the note where EACH phrase ends.</div>
     <div class="l72b-staff"></div>
     <div style="text-align:center"><button class="play l72b-play">▶ Play the melody</button></div>`;
   const q=container.querySelector(".l72b-q"), holder=container.querySelector(".l72b-staff"), pl=container.querySelector(".l72b-play");
@@ -52,10 +52,10 @@ function MF_L72_breath(container,fb){
       MFAudio.tone(MFAudio.midi(p),.5,0,.4);
       if(ENDS.includes(i)&&!found.includes(i)){
         found.push(i); MFAudio.yay();
-        if(found.length<2) q.innerHTML="✓ One breath found — the long note where the line pauses, like a comma. One more!";
-        else { q.textContent="Both breaths found!";
-          fb(true,"✓ The long notes are where the music 'takes a breath' — each marks the END OF A PHRASE. Phrase 1 pauses on G (incomplete — a comma); phrase 2 settles on C (complete — a period)."); }
-      } else if(ENDS.includes(i)) q.innerHTML="Counted! Where does the OTHER phrase breathe?";
+        if(found.length<2) q.innerHTML="✓ You found one phrase ending — the long note where the line pauses. Where does the other phrase end?";
+        else { q.textContent="Excellent! You found both phrase endings.";
+          fb(true,"✓ The long notes are where the music 'takes a breath' — each marks the END OF A PHRASE. Phrase 1 pauses on G (incomplete); phrase 2 settles on C (complete)."); }
+      } else if(ENDS.includes(i)) q.innerHTML="Found — where does the OTHER phrase end?";
       else fb(false,"Mid-phrase — sing along and notice where you'd naturally breathe: on the LONG notes.");
     }};
   const api=Staff.render(holder,spec);
@@ -63,9 +63,9 @@ function MF_L72_breath(container,fb){
 }
 
 LESSON_CONTENT[72]={
-  welcome:"The FINAL unit! We zoom out from notes and chords to whole pieces — starting with music's smallest idea. \u{1F9F1}",
+  welcome:"Motives and phrases: music's building blocks. \u{1F9F1}",
   hook:{
-    say:"Four notes. Just FOUR. Yet they may be the most famous idea in all of classical music. <b>Listen — do you recognize them?</b>",
+    say:"<b>Can four notes become an entire piece of music?</b> Let's find out how a small musical idea can grow into something much bigger. <b>Listen — do you recognize these four notes?</b>",
     interact:{ type:"custom",
       mount:(container,fb)=>{
         container.innerHTML=`<div style="text-align:center">
@@ -78,26 +78,28 @@ LESSON_CONTENT[72]={
           setTimeout(()=>ch.style.display="",2100);
         };
         [...ch.children].forEach((b,i)=>b.onclick=()=>{
-          if(i===0) fb(true,"✓ The opening MOTIVE of Beethoven's 5th — the book's own example. A motive is a SHORT element used repeatedly, and Beethoven built an entire symphony from those four notes. Today: motives and phrases, music's building blocks!");
+          if(i===0) fb(true,"✓ The opening MOTIVE of Beethoven's 5th. A motive is a SHORT musical idea used repeatedly — Beethoven built an entire symphony from those four notes. Today: motives and phrases, music's building blocks!");
           else fb(false,"Da-da-da-DUMMM… think of the most famous symphony opening ever written.");
         });
       } }
   },
   objectives:[
-    "Follow the analogy: letters→words→sentences = notes→motives→phrases→pieces",
+    "Understand the order: notes → motives → phrases → sections → complete piece",
     "Define MOTIVE: a short melodic, rhythmic or harmonic element used repeatedly",
     "See how motives develop: repetition, transposition, variation",
     "Define PHRASE: a short section — a complete or incomplete musical idea",
-    "Hear phrase endings as breaths ('lifts'), like commas in speech",
+    "Hear phrase endings as breaths ('lifts')",
     "Count and compare the phrases of a simple song"
   ],
   steps:[
-    { say:"The book's analogy: <b>writing begins with a letter</b> — letters combine into words, sentences, paragraphs, chapters. <b>Music begins with a NOTE</b>, combined into larger and larger units until a piece exists. \u{1F447} <b>Why learn the basic forms?</b>",
+    { say:"<b>Building Blocks of Music:</b> Music is built from small ideas. Notes become motives. Motives become phrases. Phrases become larger sections. \u{1F447} <b>Why is it helpful to understand musical form?</b>",
+      show:{ type:"html", html:`<div style="max-width:300px;margin:0 auto;font-size:14.5px;line-height:1.9;background:var(--card,#fff);border:1.5px solid #cdd5e1;border-radius:12px;padding:12px 18px;text-align:center;font-weight:700">
+        Notes<br>↓<br>Motive<br>↓<br>Phrase<br>↓<br>Section<br>↓<br>Complete Piece</div>` },
       try:{ type:"mc", choices:["To understand how a composition is organized and structured","To play louder","To avoid learning chords"], answer:0,
-        success:"✓ Form is the architecture — after 71 lessons of bricks (notes, rhythms, chords), we now read the blueprints.",
-        fail:"The book's second paragraph states the reason…",
+        success:"✓ Understanding form shows how a composition is organized and structured.",
+        fail:"Think about organization and structure…",
         hint:"Organization and structure." } },
-    { say:"Unit one of meaning: <b>a MOTIVE is a short melodic, rhythmic or harmonic element that is used REPEATEDLY throughout a piece</b> — and <b>most music is based on the development and expansion of one or more motives</b>. \u{1F447} <b>What makes four notes a motive?</b>",
+    { say:"<b>What Is a Motive?</b> A <b>motive</b> is a short musical idea. It may be melodic, rhythmic, or harmonic. It is usually repeated throughout a piece. \u{1F447} <b>What makes a musical idea a motive?</b>",
       show:{ type:"staff", spec:{clef:"treble",time:"2/4",tempo:110,notes:[
         {rest:"8"},{p:"G4",d:"8"},{p:"G4",d:"8"},{p:"G4",d:"8"},{p:"Eb4",d:"h",artic:"fermata"},{bar:"final"}],
         beams:[[1,3]],width:380} },
@@ -105,27 +107,32 @@ LESSON_CONTENT[72]={
         success:"✓ Short + repeated = motive. Beethoven's is four notes, but a motive can also be a rhythm or even a chord pattern.",
         fail:"Two words in the definition carry all the weight…",
         hint:"Short… repeatedly…" } },
-    { say:"How does one tiny idea fill a symphony? The book: after its introduction, the motive returns <b>in its original form, then in TRANSPOSITION and other variations</b> — its RHYTHM even becomes a motive in later movements. \u{1F447} <b>Hunt the motive yourself:</b>",
+    { say:"Listen for the motive. <b>How many times do you hear it?</b> Tap the first note of each appearance. \u{1F447}",
       try:{ type:"custom",
         hint:"Same shape (short-short-short-LONG), different starting pitches.",
         mount:(container,fb)=>MF_L72_hunt(container,fb) } },
-    { say:"Unit two of meaning: <b>a PHRASE is a short section of music that may be a COMPLETE or INCOMPLETE musical idea</b>, containing one or more motives. Speech clue: <b>a phrase ends where a speaker would take a breath — at a comma</b>. \u{1F447} <b>The end of a musical phrase gives the performer…</b>",
+    { say:"<b>What Is a Phrase?</b> A <b>phrase</b> is a short musical idea that sounds complete or almost complete. A phrase may contain one or more motives. It often ends where a performer would naturally breathe. <b>Remember: a motive is a small idea. A phrase is a complete musical thought made from one or more motives.</b> \u{1F447} <b>What usually happens at the end of a phrase?</b>",
+      show:{ type:"html", html:`<table style="border-collapse:collapse;margin:0 auto;font-size:14.5px;min-width:280px">
+        <tr><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:6px 14px">Motive</th><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:6px 14px">Phrase</th></tr>
+        <tr><td style="border:1.5px solid #cdd5e1;padding:4px 14px">Short musical idea</td><td style="border:1.5px solid #cdd5e1;padding:4px 14px">Complete musical thought</td></tr>
+        <tr><td style="border:1.5px solid #cdd5e1;padding:4px 14px">Repeated often</td><td style="border:1.5px solid #cdd5e1;padding:4px 14px">Made of one or more motives</td></tr>
+        <tr><td style="border:1.5px solid #cdd5e1;padding:4px 14px">Very short</td><td style="border:1.5px solid #cdd5e1;padding:4px 14px">Longer</td></tr></table>` },
       try:{ type:"mc", choices:["A 'lift' or breath","A louder dynamic","A new key signature"], answer:0,
-        success:"✓ Singers literally breathe there; instrumentalists 'lift.' Music punctuates itself just like language.",
-        fail:"What does the book say happens at a comma?",
+        success:"✓ A 'lift' or breath — singers breathe there; instrumentalists lift.",
+        fail:"Where would a singer breathe?",
         hint:"What do singers need regularly?" } },
-    { say:"Find the breaths with your own ears and eyes. \u{1F447}",
+    { say:"Listen and find where each phrase ends. \u{1F447}",
       try:{ type:"custom",
         hint:"Phrases end on the LONG notes — where you'd naturally breathe.",
         mount:(container,fb)=>MF_L72_breath(container,fb) } },
-    { say:"Complete vs incomplete: phrase 1 of our melody paused on G — a musical <b>comma</b> (incomplete, expecting more). Phrase 2 settled on C — a musical <b>period</b> (complete). \u{1F447} <b>A phrase ending away from the tonic feels…</b>",
-      try:{ type:"mc", choices:["Incomplete — like a comma awaiting the next phrase","Complete — like a period","Like the end of the entire piece"], answer:0,
-        success:"✓ Question-and-answer: incomplete phrases ask, complete phrases answer. Songs breathe in these pairs constantly.",
+    { say:"<b>Complete or Incomplete:</b> A phrase ending on the tonic usually sounds complete. A phrase ending away from the tonic usually sounds incomplete. \u{1F447} <b>Which phrase sounds unfinished?</b>",
+      try:{ type:"mc", choices:["Phrase 1 — it pauses on G, away from the tonic","Phrase 2 — it ends on C, the tonic","Neither"], answer:0,
+        success:"✓ Phrase 1 sounds unfinished — it ends away from the tonic and leads to another phrase.",
         fail:"Did the pause on G feel finished?",
-        hint:"Comma vs period." } },
-    { say:"Phrase-counting practice, book style: the classic nursery rhyme melody has <b>four phrases</b> (a, b, c, d) — and the book asks which two are SIMILAR. In our example, listen: phrase a and phrase c start identically. \u{1F447} <b>Two similar phrases in a song usually mean…</b>",
-      try:{ type:"mc", choices:["The composer reused material — motives at work!","A printing error","The song has no form"], answer:0,
-        success:"✓ Repetition is design, not laziness — recognizing similar phrases is the first step of FORM analysis, which the next three lessons build on.",
+        hint:"Tonic = complete." } },
+    { say:"<b>Finding Similar Phrases:</b> Some phrases begin the same because they use the same motive. In our example, phrase a and phrase c start identically. \u{1F447} <b>What does it mean when two phrases begin alike?</b>",
+      try:{ type:"mc", choices:["They use the same motive","A printing error","The song has no form"], answer:0,
+        success:"✓ They share a motive — recognizing similar phrases is the first step of form analysis, which the next three lessons build on.",
         fail:"Why would a composer bring an idea back?",
         hint:"Think of the motive lesson you JUST had." } }
   ],
@@ -137,10 +144,10 @@ LESSON_CONTENT[72]={
         {p:"G4",d:"8",label:"again!"},{p:"G4",d:"8"},{p:"G4",d:"8"},{p:"C5",d:"h"},{bar:"final"}],
         beams:[[0,2],[4,6],[8,10]],width:620},
       kb:{start:60,octaves:2,labels:true} },
-    { caption:"Two phrases in question-and-answer: the first breathes on G (incomplete — a comma), the second settles on C (complete — a period). Every simple song you know breathes this way.",
+    { caption:"Two phrases in question-and-answer: the first pauses on G (incomplete), the second settles on C (complete). Every simple song breathes this way.",
       staff:{clef:"treble",tempo:100,notes:[
-        {p:"C4",d:"q",label:"phrase 1…"},{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"G4",d:"h",label:"breath (comma)"},
-        {p:"E4",d:"q",label:"phrase 2…"},{p:"D4",d:"q"},{p:"B3",d:"q"},{p:"C4",d:"h",label:"home (period)"},{bar:"final"}],width:620},
+        {p:"C4",d:"q",label:"phrase 1…"},{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"G4",d:"h",label:"phrase ends (incomplete)"},
+        {p:"E4",d:"q",label:"phrase 2…"},{p:"D4",d:"q"},{p:"B3",d:"q"},{p:"C4",d:"h",label:"phrase ends (complete)"},{bar:"final"}],width:620},
       kb:{start:57,octaves:2,labels:true} }
   ],
   games:[
@@ -153,7 +160,7 @@ LESSON_CONTENT[72]={
         ["Most music is based on","developing and expanding motives"],
         ["Beethoven's 5th motive","four notes: short-short-short-LONG"],
         ["Phrase","a short section — complete or incomplete idea"],
-        ["A phrase's end","a 'lift' or breath, like a comma"],
+        ["A phrase's end","a 'lift' or breath"],
         ["Transposition","the same motive at a new pitch level"],
         ["Music's basic unit","the note"]], reverse:true}, seconds:45},
       result:(score)=>score>=8?score+" — blocks stacked high!":null },
@@ -185,54 +192,54 @@ LESSON_CONTENT[72]={
     { gen:"term-match", params:{subject:"term", pool:[["Motive","short, used repeatedly"],["Phrase","a complete or incomplete idea"],["Phrase ending","a breath or 'lift'"],["Transposition","same shape, new pitch"],["Music's basic unit","the note"]], reverse:true}, count:6 },
     { gen:"note-value", params:{}, count:2 },
     { type:"mc", q:"A MOTIVE is…", choices:["a short melodic, rhythmic or harmonic element used repeatedly","an entire song","a kind of tempo"], answer:0,
-      explain:"The definition, word for word (AEMT3 p.114)." },
-    { type:"mc", q:"Most music is based on…", choices:["the development and expansion of one or more motives","a single long melody with no repeats","random notes"], answer:0,
+      explain:"Short + repeated = motive." },
+    { type:"mc", q:"Most music develops from…", choices:["one or more motives, expanded and developed","a single long melody with no repeats","random notes"], answer:0,
       explain:"Motives are the seeds of pieces." },
     { type:"mc", q:"The famous four-note motive belongs to…", choices:["Beethoven's Symphony No. 5","a piano exercise","the blues"], answer:0,
-      explain:"The book's own example — first movement." },
+      explain:"The famous four-note motive." },
     { type:"mc", q:"A PHRASE is…", choices:["a short section of music — a complete or incomplete idea","always exactly 4 notes","another word for motive"], answer:0,
       explain:"It may CONTAIN motives." },
-    { type:"mc", q:"The end of a phrase is like…", choices:["a comma — a breath","a drum solo","a key change"], answer:0,
-      explain:"Speakers pause at commas; singers breathe at phrase ends." },
-    { type:"mc", q:"Restating a motive at a new pitch level is called…", choices:["transposition","inversion","syncopation"], answer:0,
+    { type:"mc", q:"A phrase usually ends where…", choices:["a performer would take a breath","a drum solo begins","the key changes"], answer:0,
+      explain:"Singers breathe at phrase ends." },
+    { type:"mc", q:"Repeating a motive at a different pitch is called…", choices:["transposition","inversion","syncopation"], answer:0,
       explain:"Same shape, new address." },
     { type:"truefalse", q:"A motive must be melodic — rhythms can't be motives.", answer:false,
       explain:"Melodic, RHYTHMIC or harmonic — Beethoven's rhythm returns in later movements." },
     { type:"truefalse", q:"A phrase may contain one or more motives.", answer:true,
       explain:"In original form or variation." },
     { type:"truefalse", q:"A phrase must always be a complete musical idea.", answer:false,
-      explain:"Complete OR incomplete — commas exist in music too." },
+      explain:"Complete OR incomplete." },
     { type:"truefalse", q:"Understanding basic forms helps you understand how a composition is organized.", answer:true,
       explain:"The whole point of Unit 18." }
   ],
-  miaQuizIntro:"Quiz! Small ideas, big pieces — show me the blueprint.",
+  miaQuizIntro:"Quiz! Small ideas, big pieces.",
   quiz:[
-    { type:"mc", q:"Music's most basic unit is…", choices:["the note","the phrase","the chord"], answer:0,
+    { type:"mc", q:"The smallest building block of music is…", choices:["the note","the phrase","the chord"], answer:0,
       explain:"Like a letter of the alphabet.", hint:"The smallest brick." },
-    { type:"mc", q:"A motive is a short element that is…", choices:["used repeatedly throughout a piece","played only once","always in the bass"], answer:0,
+    { type:"mc", q:"A motive is…", choices:["a short musical idea used repeatedly","played only once","always in the bass"], answer:0,
       explain:"Repetition is its identity.", hint:"Why we recognize da-da-da-DUM." },
     { type:"mc", q:"A motive may be melodic, rhythmic or…", choices:["harmonic","visual","verbal"], answer:0,
       explain:"Three possible kinds.", hint:"The third musical dimension." },
-    { type:"mc", q:"After its introduction, Beethoven's motive returns…", choices:["in original form, transposition and other variations","never again","only in the finale"], answer:0,
-      explain:"Development and expansion in action.", hint:"The book's description." },
+    { type:"truefalse", q:"A motive can return in different forms (original, transposition, variation).", answer:true,
+      explain:"Development and expansion in action.", hint:"How motives grow." },
     { type:"mc", q:"A phrase is a short section of music that may be…", choices:["a complete or incomplete musical idea","only complete","only incomplete"], answer:0,
-      explain:"Both kinds exist — commas and periods.", hint:"Two options." },
+      explain:"Both kinds exist — incomplete and complete.", hint:"Two options." },
     { type:"truefalse", q:"The end of a musical phrase provides a 'lift' or breath.", answer:true,
       explain:"For instrumentalist or singer alike.", hint:"The comma analogy." },
     { type:"truefalse", q:"When speaking, the end of a phrase usually happens at a comma.", answer:true,
-      explain:"The book's speech analogy.", hint:"Where do you pause?" },
+      explain:"Speakers pause; singers breathe.", hint:"Where do you pause?" },
     { type:"mc", q:"Identify what happened to the motive between these two statements.",
       staff:{clef:"treble",notes:[{p:"D4",d:"8"},{p:"D4",d:"8"},{p:"D4",d:"8"},{p:"G4",d:"q"},{p:"E4",d:"8"},{p:"E4",d:"8"},{p:"E4",d:"8"},{p:"A4",d:"q"}],beams:[[0,2],[4,6]],width:420},
-      choices:["It was transposed (same shape, higher pitch)","It was deleted","The rhythm changed completely"], answer:0,
+      choices:["It was repeated at a different pitch (transposition)","It was deleted","The rhythm changed completely"], answer:0,
       explain:"Short-short-short-long, moved up a step.", hint:"Compare shapes, then pitches." },
-    { type:"mc", q:"How many phrases does the book count in 'Mary Had a Little Lamb'?", choices:["4 (a, b, c, d)","2","8"], answer:0,
-      explain:"Four phrases, four breaths.", hint:"a through d." },
-    { type:"mc", q:"A phrase ending on a long note AWAY from the tonic feels like…", choices:["a comma — more music is coming","a period — fully finished","an error"], answer:0,
-      explain:"Incomplete = expectant.", hint:"The G pause in the example." },
-    { type:"mc", q:"The writing analogy runs: letters → words → sentences. Music runs:", choices:["notes → motives → phrases","phrases → notes → motives","chords → scales → keys"], answer:0,
+    { type:"mc", q:"A short song has four natural breathing points. How many phrases are in this melody?", choices:["4","2","8"], answer:0,
+      explain:"Four phrase endings = four phrases.", hint:"One breath per phrase." },
+    { type:"mc", q:"A phrase ends on a long note AWAY from the tonic. What does it sound like?", choices:["It sounds unfinished and leads to another phrase","It sounds fully finished","It sounds like an error"], answer:0,
+      explain:"Away from the tonic = incomplete.", hint:"The G pause in the example." },
+    { type:"mc", q:"What is the correct order, from smallest to largest?", choices:["Notes → Motives → Phrases","Phrases → Notes → Motives","Chords → Scales → Keys"], answer:0,
       explain:"Small to large, in order.", hint:"Game 4's pyramid." },
-    { type:"mc", q:"Two phrases of a song begin identically. A form analyst would say…", choices:["the composer reused a motive — mark the phrases as similar","the song is broken","they must be deleted"], answer:0,
-      explain:"Similarity-spotting IS form analysis.", hint:"The book's exercise 1 asks exactly this." },
+    { type:"mc", q:"Two phrases of a song begin identically. What does this mean?", choices:["The composer used the same motive in both phrases","The song is broken","They must be deleted"], answer:0,
+      explain:"Similarity-spotting IS form analysis.", hint:"Think of the motive." },
     /* generated */
     { gen:"term-match", params:{subject:"term", pool:[["Motive","the repeated short idea"],["Phrase","the musical sentence-part"],["Breath","a phrase's ending lift"],["Transposition","same idea, new height"]], reverse:true}, count:3 },
     { gen:"rhythm-count", params:{}, count:2 },
@@ -242,15 +249,15 @@ LESSON_CONTENT[72]={
     {term:"Motive", def:"A short melodic, rhythmic or harmonic element used repeatedly throughout a piece — the seed most music grows from.",
       staff:{clef:"treble",notes:[{p:"G4",d:"8"},{p:"G4",d:"8"},{p:"G4",d:"8"},{p:"Eb4",d:"q"}],beams:[[0,2]],width:130}},
     {term:"Phrase", def:"A short section of music — a complete or incomplete musical idea, often containing motives."},
-    {term:"The Breath", def:"A phrase ends with a 'lift' or breath, like a comma in speech."},
+    {term:"The Breath", def:"A phrase ends with a 'lift' or breath — where a performer would naturally breathe."},
     {term:"Transposition", def:"Restating a motive or phrase at a different pitch level — same shape, new height."}
   ],
   mistakes:[],
   summary:[
-    "✔ Writing: letters→words→sentences. Music: <b>notes→motives→phrases→pieces</b>.",
+    "✔ Music is built from small ideas: <b>notes → motives → phrases → sections → complete piece</b>.",
     "✔ <b>MOTIVE</b> = a short melodic, rhythmic or harmonic element <b>used repeatedly</b> — most music develops one or more of them.",
     "✔ Beethoven's 5th: <b>four notes</b> reused in original form, <b>transposition</b> and variation.",
-    "✔ <b>PHRASE</b> = a short section — a <b>complete or incomplete</b> idea, ending with a <b>breath</b> (comma).",
+    "✔ <b>PHRASE</b> = a short section — a <b>complete or incomplete</b> idea, ending with a <b>breath</b>.",
     "✔ Spotting similar phrases = the first step of <b>form analysis</b>."
   ],
   tips:[
@@ -262,18 +269,18 @@ LESSON_CONTENT[72]={
   rewards:{ badge:"Idea Archaeologist", icon:"\u{1F9F1}" },
   sectionOrder:["secHook","secObjectives","secLearn","secExample","secReview",
     "secGame0","secGame1","secGame2","secGame3","secPractice","secQuiz","secTips","secNext"],
-  miaPerfect:"PERFECT! Motives, phrases, breaths — the blueprint reader awakens. \u{1F9F1}\u{1F389}",
+  miaPerfect:"PERFECT! Motives, phrases, breaths — you know music's building blocks. \u{1F9F1}\u{1F389}",
   miaPass:"Passed! You see the small ideas inside big music now. Sections are next…",
   mia:{
     hook:{ label:"the welcome",
-      explain:"Those four notes — short-short-short-LONG — are the opening motive of Beethoven's Symphony No. 5, the book's example of a motive.",
+      explain:"Those four notes — short-short-short-LONG — are the opening motive of Beethoven's Symphony No. 5, a famous example of a motive.",
       play:()=>{[67,67,67].forEach((m,i)=>MFAudio.tone(m,.22,i*.24,.45));MFAudio.tone(63,1.6,.72,.5);} },
     learn:{ label:"motives & phrases",
       explain:"Motive = short element used repeatedly (melodic/rhythmic/harmonic); developed via repetition, transposition, variation. Phrase = short section, complete or incomplete, ending with a breath.",
       hint:"Motive = the idea; phrase = the sentence-part.",
       play:()=>{[62,62,62,67].forEach((m,i)=>MFAudio.tone(m,i===3?.8:.25,i*.26,.42));} },
     example:{ label:"the examples",
-      explain:"Example 1 grows one motive through transpositions; example 2 shows two phrases breathing — comma, then period." },
+      explain:"Example 1 grows one motive through transpositions; example 2 shows two phrases — incomplete, then complete." },
     game:{ label:"the games",
       explain:"Sprint the definitions, play the famous motive, detect disguised motives, then build the pyramid from note to piece.",
       hint:"Short + repeated = motive." },

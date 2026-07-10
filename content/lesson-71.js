@@ -7,7 +7,7 @@
    spontaneously create a unique solo.
    NOTE: edit by FULL-FILE REWRITE only. */
 
-/* scale surgery: major → blues in three operations */
+/* build the blues scale: major → blues in three steps */
 function MF_L71_convert(container,fb){
   let phase=0, removed=[], flatted=[];
   container.innerHTML=`<div class="big-q l71c-q" style="text-align:center"></div>
@@ -34,18 +34,18 @@ function MF_L71_convert(container,fb){
         if(phase===0){
           if(n.deg===2||n.deg===6){
             if(!removed.includes(n.deg)){ removed.push(n.deg); MFAudio.yay();
-              if(removed.length<2){ q.innerHTML="✓ Gone! One more to remove…"; draw(true); }
-              else { fb(true,"✓ Degrees 2 and 6 removed — operation 1 complete. Now operation 2: FLAT the 3rd and the 7th (tap them)."); phase=1; q.innerHTML="Operation 2: tap the <b>3rd</b> and the <b>7th</b> to flat them."; draw(true); } }
-          } else fb(false,`Keep degree ${n.deg===8?1:n.deg} — operation 1 removes only the 2nd and the 6th.`);
+              if(removed.length<2){ q.innerHTML="✓ Great! Keep building the blues scale — one more to remove…"; draw(true); }
+              else { fb(true,"✓ Degrees 2 and 6 removed — step 1 complete. Now step 2: LOWER the 3rd and the 7th (tap them)."); phase=1; q.innerHTML="Step 2: tap the <b>3rd</b> and the <b>7th</b> to lower them."; draw(true); } }
+          } else fb(false,`Keep degree ${n.deg===8?1:n.deg} — step 1 removes only the 2nd and the 6th.`);
         } else if(phase===1){
           if((n.deg===3||n.deg===7)&&!flatted.includes(n.deg)){
             flatted.push(n.deg);
             MFAudio.tone(MFAudio.midi(n.p[0]+"b"+n.p[n.p.length-1]),.6,.1,.42);
-            if(flatted.length<2){ q.innerHTML="✓ Flatted! One more…"; draw(true); }
-            else { fb(true,"✓ E→E♭ and B→B♭ — operation 2 complete. One thing missing: operation 3 adds a brand-new note!");
-              q.innerHTML="Operation 3: press the button to add the <b>flatted 5th</b>."; draw(false); addBtn.style.display="inline-block"; }
-          } else if(n.deg===3||n.deg===7) q.innerHTML="Already flatted — get the other one!";
-          else fb(false,`Degree ${n.deg===8?1:n.deg} stays natural — flat only the 3rd and the 7th.`);
+            if(flatted.length<2){ q.innerHTML="✓ Lowered! One more…"; draw(true); }
+            else { fb(true,"✓ E→E♭ and B→B♭ — step 2 complete. One thing missing: step 3 adds a new note!");
+              q.innerHTML="Step 3: press the button to add the <b>lowered 5th</b>."; draw(false); addBtn.style.display="inline-block"; }
+          } else if(n.deg===3||n.deg===7) q.innerHTML="Already lowered — now the other one!";
+          else fb(false,`Degree ${n.deg===8?1:n.deg} stays natural — lower only the 3rd and the 7th.`);
         }
       } : undefined});
   }
@@ -53,17 +53,17 @@ function MF_L71_convert(container,fb){
     phase=2; addBtn.style.display="none"; draw(false);
     [60,63,65,66,67,70,72].forEach((m,i)=>MFAudio.tone(m,.45,.2+i*.32,.42));
     fb(true,"✓ G♭ slides in between F and G — and there it is: the C BLUES SCALE. C-E♭-F-G♭-G-B♭-C: seven notes, three of them BLUE (♭3, ♭5, ♭7).");
-    q.textContent="Surgery complete — the patient now plays the blues.";
+    q.textContent="Your blues scale is complete.";
   };
-  q.innerHTML="Operation 1: this is C major. Tap the <b>2nd</b> and the <b>6th</b> degrees to REMOVE them.";
+  q.innerHTML="Step 1: this is C major. Tap the <b>2nd</b> and the <b>6th</b> degrees to REMOVE them.";
   draw(true);
 }
 
-/* improv lab: blues-scale free play over an optional vamp */
+/* improvising: blues-scale free play over an optional vamp */
 function MF_L71_improv(container,fb){
   const BLUES=new Set([0,3,5,6,7,10]);
   let hits=0, streak=0, vamped=false;
-  container.innerHTML=`<div class="big-q l71i-q" style="text-align:center">The blues scale: <b>C · E♭ · F · G♭ · G · B♭</b> (any octave). Improvise — make up YOUR solo. Blue notes get bonus sparkle!</div>
+  container.innerHTML=`<div class="big-q l71i-q" style="text-align:center">The blues scale: <b>C · E♭ · F · G♭ · G · B♭</b> (any octave). Try improvising — make up YOUR solo.</div>
     <div style="text-align:center"><button class="play l71i-vamp">▶ Start a 4-bar backing vamp</button></div>
     <div class="l71i-kb"></div>
     <div class="streak l71i-s" style="text-align:center"></div>`;
@@ -80,31 +80,31 @@ function MF_L71_improv(container,fb){
         hits++; streak++;
         if(pc===3||pc===6||pc===10){ s.textContent=`\u{1F535} BLUE NOTE! · notes: ${hits} · streak: ${streak}`; }
         else s.textContent=`✓ in the scale · notes: ${hits} · streak: ${streak}`;
-        if(hits===12){ MFAudio.yay(); fb(true,"✓ Twelve blues notes — you're IMPROVISING: spontaneously creating a unique solo, exactly as the book defines it. B.B. King would nod."); }
+        if(hits===12){ MFAudio.yay(); fb(true,"✓ Twelve blues notes — you're IMPROVISING: creating music as you play."); }
       } else {
         streak=0; s.textContent=`✗ outside the scale · streak reset`;
-        fb(false,"That one's not in the C blues scale — stick to C, E♭, F, G♭, G, B♭ (any octave).");
+        fb(false,"That note is not in the C blues scale — use C, E♭, F, G♭, G, B♭ (any octave).");
       }
     }});
 }
 
 LESSON_CONTENT[71]={
-  welcome:"The final ingredient of the blues — a scale with three bent, beautiful BLUE notes. \u{1F535}",
+  welcome:"The blues scale and its blue notes. \u{1F535}",
   hook:{
-    say:"Two quick solos over the same blues chord. One uses the plain major scale… one uses THE scale. <b>Which one actually sounds like the blues?</b>",
+    say:"<b>Two solos use the same blues progression.</b> Listen to both. <b>Which one sounds more like the blues?</b>",
     interact:{ type:"custom",
       mount:(container,fb)=>{
         container.innerHTML=`<div style="text-align:center">
           <button class="play hk-a">▶ Solo A</button>
           <button class="play hk-b">▶ Solo B</button></div>
-          <div class="choices hk-ch" style="display:none"><button>Solo B — those bent notes ARE the blues</button><button>Solo A — plain and sunny is bluesier</button></div>`;
+          <div class="choices hk-ch" style="display:none"><button>Solo B — its lowered notes create the blues sound</button><button>Solo A — the plain major scale</button></div>`;
         const ch=container.querySelector(".hk-ch");
         let hA=false,hB=false;
         container.querySelector(".hk-a").onclick=()=>{ [60,62,64,67,69,72].forEach((m,i)=>MFAudio.tone(m,.4,i*.3,.42)); [48,64,67].forEach(m=>MFAudio.tone(m,2.2,0,.18)); hA=true; if(hB) setTimeout(()=>ch.style.display="",2400); };
         container.querySelector(".hk-b").onclick=()=>{ [60,63,65,66,67,70,72].forEach((m,i)=>MFAudio.tone(m,.4,i*.3,.42)); [48,64,67].forEach(m=>MFAudio.tone(m,2.4,0,.18)); hB=true; if(hA) setTimeout(()=>ch.style.display="",2400); };
         [...ch.children].forEach((b,i)=>b.onclick=()=>{
-          if(i===0) fb(true,"✓ Solo B used the BLUES SCALE — with its flatted 3rd, 5th and 7th, the BLUE NOTES. That bend against the major chord underneath is the very sound of the blues. Today: build the scale and improvise with it!");
-          else fb(false,"Solo A was the plain major scale — pretty, but no ache. Listen for the BENT notes in B…");
+          if(i===0) fb(true,"✓ Solo B used the BLUES SCALE — with its flatted 3rd, 5th and 7th, the BLUE NOTES. Those notes against the major chord create the blues sound. Today: build the scale and improvise with it!");
+          else fb(false,"Solo A was the plain major scale. Listen again for the LOWERED notes in B…");
         });
       } }
   },
@@ -112,55 +112,58 @@ LESSON_CONTENT[71]={
     "Know both blues ingredients: the 12-bar progression AND the blues scale",
     "The blues scale has only 7 notes, with flatted 3rd, 5th and 7th",
     "Call the flatted notes by name: BLUE NOTES",
-    "Convert any major scale: remove 2 & 6 → flat 3 & 7 → add ♭5",
+    "Build from any major scale: remove 2 & 6 → lower 3 & 7 → add ♭5",
     "Spell the C blues scale: C-E♭-F-G♭-G-B♭-C",
-    "Define IMPROVISING — and do some!"
+    "Define improvising — and do some!"
   ],
   steps:[
-    { say:"The book's claim: the blues sound comes <b>not only from the chord progression but also from its unique scale</b>. Compared with major, <b>the BLUES SCALE has only 7 notes and includes a flatted 3rd, 5th and 7th</b>. \u{1F447} <b>The flatted notes are often called…</b>",
+    { say:"<b>The Blues Scale:</b> The blues sound comes from both the <b>12-bar blues progression</b> and the <b>blues scale</b>. The blues scale contains <b>blue notes</b>. \u{1F447} <b>What are the flatted notes in the blues scale called?</b>",
       try:{ type:"mc", choices:["Blue notes","Sad notes","Broken notes"], answer:0,
-        success:"✓ BLUE NOTES — ♭3, ♭5, ♭7. Three small bends, one giant style.",
+        success:"✓ BLUE NOTES — the flatted 3rd, 5th and 7th.",
         fail:"The scale's own name is the clue…",
         hint:"What color is the blues?" } },
-    { say:"The conversion recipe, three operations: <b>1) remove the 2nd and 6th degrees · 2) flat the 3rd and 7th · 3) add a flatted 5th</b>. Perform the surgery yourself: \u{1F447}",
+    { say:"<b>Build a Blues Scale:</b> Start with a major scale. <b>1) Remove the 2nd and 6th. · 2) Lower the 3rd and 7th. · 3) Add a lowered 5th.</b> \u{1F447} <b>Build the blues scale.</b>",
+      show:{ type:"html", html:`<table style="border-collapse:collapse;margin:0 auto;font-size:14px">
+        <tr><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:5px 10px">Major Scale</th><td style="border:1.5px solid #cdd5e1;padding:5px 10px;text-align:center">C</td><td style="border:1.5px solid #cdd5e1;padding:5px 10px;text-align:center">D</td><td style="border:1.5px solid #cdd5e1;padding:5px 10px;text-align:center">E</td><td style="border:1.5px solid #cdd5e1;padding:5px 10px;text-align:center">F</td><td style="border:1.5px solid #cdd5e1;padding:5px 10px;text-align:center">—</td><td style="border:1.5px solid #cdd5e1;padding:5px 10px;text-align:center">G</td><td style="border:1.5px solid #cdd5e1;padding:5px 10px;text-align:center">A</td><td style="border:1.5px solid #cdd5e1;padding:5px 10px;text-align:center">B</td></tr>
+        <tr><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:5px 10px">Blues Scale</th><td style="border:1.5px solid #cdd5e1;padding:5px 10px;text-align:center;font-weight:800">C</td><td style="border:1.5px solid #cdd5e1;padding:5px 10px;text-align:center">—</td><td style="border:1.5px solid #cdd5e1;padding:5px 10px;text-align:center;font-weight:800">E♭</td><td style="border:1.5px solid #cdd5e1;padding:5px 10px;text-align:center;font-weight:800">F</td><td style="border:1.5px solid #cdd5e1;padding:5px 10px;text-align:center;font-weight:800">G♭</td><td style="border:1.5px solid #cdd5e1;padding:5px 10px;text-align:center;font-weight:800">G</td><td style="border:1.5px solid #cdd5e1;padding:5px 10px;text-align:center">—</td><td style="border:1.5px solid #cdd5e1;padding:5px 10px;text-align:center;font-weight:800">B♭</td></tr></table>` },
       try:{ type:"custom",
-        hint:"Remove 2 & 6 → flat 3 & 7 → add ♭5.",
+        hint:"Remove 2 & 6 → lower 3 & 7 → add ♭5.",
         mount:(container,fb)=>MF_L71_convert(container,fb) } },
-    { say:"The result, spelled out: <b>C - E♭ - F - G♭ - G - B♭ - C</b>, labeled <b>Root, ♭3, 4, ♭5, 5, ♭7, Root</b>. Count them! \u{1F447} <b>How many DIFFERENT notes does the blues scale contain?</b>",
+    { say:"<b>The C Blues Scale:</b> C – E♭ – F – G♭ – G – B♭ – C. \u{1F447} <b>How many notes are in the blues scale?</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:110,notes:[
         {p:"C4",d:"q",label:"Root"},{p:"Eb4",d:"q",label:"♭3"},{p:"F4",d:"q",label:"4"},{p:"Gb4",d:"q",label:"♭5"},
         {p:"G4",d:"q",label:"5"},{p:"Bb4",d:"q",label:"♭7"},{p:"C5",d:"q",label:"Root"}],width:520} },
-      try:{ type:"mc", choices:["7 (counting the root once… it's 6 pitches + the octave return)","12","8 like any scale"], answer:0,
-        success:"✓ The book counts 7 notes root-to-root — fewer than major's 8, because two degrees left and only one (♭5) moved in.",
+      try:{ type:"mc", choices:["7 notes","12 notes","8 notes"], answer:0,
+        success:"✓ 7 notes — two degrees were removed and one (♭5) was added.",
         fail:"Count the noteheads on the staff…",
         hint:"8 minus 2 removed plus 1 added." } },
-    { say:"Look closely at the neighbors <b>G♭ and G</b> — the flatted 5th sits right against the natural 5th, a chromatic crunch INSIDE the scale. \u{1F447} <b>Which pair of blues-scale notes is only a half step apart?</b>",
+    { say:"<b>The Blue Note:</b> The lowered 5th sits next to the natural 5th. This creates one of the characteristic blues sounds. \u{1F447} <b>Which two notes are a half step apart?</b>",
       try:{ type:"mc", choices:["♭5 and 5 (G♭ and G)","Root and ♭3","4 and ♭7"], answer:0,
-        success:"✓ That ♭5→5 slide is the scale's most electric move — solo players lean on it constantly.",
+        success:"✓ G♭ and G — the lowered 5th next to the natural 5th creates a characteristic blues sound.",
         fail:"Find the two notes sharing almost the same letter…",
         hint:"The added note and its neighbor." } },
-    { say:"Now the magic word: <b>IMPROVISING — to spontaneously create a unique solo</b>. Write or improvise blues-scale notes <b>over a blues chord progression</b> and \u{201C}the special sound of the blues is created.\u{201D} \u{1F447} <b>Improvising means…</b>",
+    { say:"<b>Improvising:</b> Improvising means creating music as you play. Blues musicians often improvise using the blues scale. <b>Remember: the blues scale is often used for improvising over a 12-bar blues progression.</b> \u{1F447} <b>What does improvising mean?</b>",
       try:{ type:"mc", choices:["Spontaneously creating a unique solo","Playing exactly what's written","Playing without any rhythm"], answer:0,
-        success:"✓ Made up in the moment, unique to you — with the blues scale as your safety net: every note in it works over the progression.",
-        fail:"The book defines it in five words…",
+        success:"✓ Creating music as you play — and every note of the blues scale works over the progression.",
+        fail:"Creating music as you play…",
         hint:"Spontaneous + unique." } },
-    { say:"YOUR TURN — the improv lab. \u{1F447}",
+    { say:"Improvise a short melody using the blues scale. \u{1F447}",
       try:{ type:"custom",
         hint:"C, E♭, F, G♭, G, B♭ — any octave, any order, any rhythm. Start the vamp for atmosphere!",
         mount:(container,fb)=>MF_L71_improv(container,fb) } },
-    { say:"Transfer: the recipe works from ANY major scale. \u{1F447} <b>The G blues scale is…</b>",
+    { say:"<b>Try Another Key:</b> Build the G blues scale. \u{1F447} <b>Which notes belong in the G blues scale?</b>",
       try:{ type:"mc", choices:["G-B♭-C-D♭-D-F-G","G-A-B-C-D-E-F♯-G","G-B-C-D-F♯-G"], answer:0,
-        success:"✓ From G major: drop A and E, flat B and F♯ (→B♭, F), add D♭. Root, ♭3, 4, ♭5, 5, ♭7, Root — the book's exercise 1!",
+        success:"✓ From G major: remove A and E, lower B and F♯ (→B♭, F), add D♭. Root, ♭3, 4, ♭5, 5, ♭7, Root.",
         fail:"Apply the three operations to G major, one at a time…",
         hint:"Remove 2&6, flat 3&7, add ♭5." } }
   ],
   examples:[
-    { caption:"C major vs C blues, side by side: two notes leave, three notes bend blue. Hear the transformation from sunshine to smoke.",
+    { caption:"C major vs C blues, side by side: two notes are removed, three are lowered.",
       staff:{clef:"treble",tempo:110,notes:[
         {p:"C4",d:"q",label:"C major"},{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"F4",d:"q"},{p:"G4",d:"q"},{p:"A4",d:"q"},{p:"B4",d:"q"},{p:"C5",d:"q"},{bar:"double"},
         {p:"C4",d:"q",label:"C blues"},{p:"Eb4",d:"q"},{p:"F4",d:"q"},{p:"Gb4",d:"q"},{p:"G4",d:"q"},{p:"Bb4",d:"q"},{p:"C5",d:"q"},{bar:"final"}],width:640},
       kb:{start:60,octaves:2,labels:true} },
-    { caption:"A written blues lick — blues-scale notes over the I chord, exactly what the book means by 'writing or improvising… over a blues chord progression.' The ♭3 against the chord's natural 3rd IS the blues.",
+    { caption:"A written blues melody — blues-scale notes over the I chord. The ♭3 against the chord's natural 3rd creates the blues sound.",
       staff:{clef:"treble",tempo:100,time:"4/4",notes:[
         {p:"C4",d:"8"},{p:"Eb4",d:"8"},{p:"F4",d:"8"},{p:"Gb4",d:"8"},{p:"G4",d:"q"},{p:"Bb4",d:"q"},
         {p:"G4",d:"8"},{p:"Gb4",d:"8"},{p:"F4",d:"8"},{p:"Eb4",d:"8"},{p:"C4",d:"h"},{bar:"final"}],
@@ -169,21 +172,21 @@ LESSON_CONTENT[71]={
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Blue-Note Sprint (45s)",
-      intro:"Recipe steps, spellings and definitions — race the blues facts!",
+      intro:"Steps, spellings and definitions — race the blues facts!",
       miaIntro:"♭3, ♭5, ♭7 — paint them blue! \u{26A1}",
       spec:{gen:"term-match", params:{subject:"term", pool:[
         ["Blue notes","the flatted 3rd, 5th and 7th"],
         ["Blues scale size","only 7 notes"],
-        ["Recipe step 1","remove the 2nd and 6th degrees"],
-        ["Recipe step 2","flat the 3rd and 7th"],
-        ["Recipe step 3","add a flatted 5th"],
+        ["Build step 1","remove the 2nd and 6th degrees"],
+        ["Build step 2","lower the 3rd and 7th"],
+        ["Build step 3","add a lowered 5th"],
         ["C blues scale","C-E♭-F-G♭-G-B♭-C"],
-        ["Improvising","spontaneously creating a unique solo"],
+        ["Improvising","creating music as you play"],
         ["The blues sound","the progression + the scale together"]], reverse:true}, seconds:45},
       result:(score)=>score>=8?score+" — blue-note fluent!":null },
     { type:"key-climb", title:"Game 2 · Blues Scale Round Trip",
-      intro:"Climb the C blues scale up and slide back down — feel the ♭5 crunch both ways!",
-      miaIntro:"Up the smoke, down the smoke! \u{1FA9C}",
+      intro:"Climb the C blues scale up and back down — watch for the ♭5!",
+      miaIntro:"Up and back down! \u{1FA9C}",
       spec:{seq:[60,63,65,66,67,70,72, 70,67,66,65,63,60],
         names:["C (root)","E♭ (♭3 — blue!)","F (4)","G♭ (♭5 — blue!)","G (5)","B♭ (♭7 — blue!)","C (top)","B♭","G","G♭","F","E♭","C — home"],
         start:60, octaves:2, title:"C blues scale, up and down"},
@@ -207,19 +210,19 @@ LESSON_CONTENT[71]={
         ["12-bar blues map","I×4 · IV×2 · I×2 · V×1 · IV×1 · I×2"],
         ["The blues' birthplace","America's south"],
         ["Blue notes","♭3, ♭5, ♭7"],
-        ["Blues scale recipe","remove 2&6, flat 3&7, add ♭5"],
+        ["Building the blues scale","remove 2&6, lower 3&7, add ♭5"],
         ["C blues scale","C-E♭-F-G♭-G-B♭-C"],
-        ["Improvising","a spontaneous, unique solo"],
+        ["Improvising","creating music as you play"],
         ["The complete blues sound","12-bar progression + blues scale"]]},
-      result:(score)=>score>=8?"UNIT 17 CHAMPION — you've got the blues (the good kind)!":null }
+      result:(score)=>score>=8?"UNIT 17 CHAMPION!":null }
   ],
   practiceIntro:"20 practice questions — the recipe, the spelling and the blue notes. Answer right and the next appears automatically!",
   practice:[
     { gen:"term-match", params:{subject:"term", pool:[["Blue notes","♭3, ♭5, ♭7"],["Step 1","remove degrees 2 and 6"],["Step 2","flat degrees 3 and 7"],["Step 3","add the flatted 5th"],["Improvise","create a solo spontaneously"]], reverse:true}, count:6 },
     { gen:"interval-quality", params:{ask:"quality"}, count:2 },
-    { type:"mc", q:"The blues scale has how many notes?", choices:["7","8","5"], answer:0,
-      explain:"Two fewer than major's 8, plus one added (AEMT3 p.111)." },
-    { type:"mc", q:"Which degrees are FLATTED in the blues scale?", choices:["3rd, 5th and 7th","2nd and 6th","1st and 4th"], answer:0,
+    { type:"mc", q:"How many notes are in the blues scale?", choices:["7","8","5"], answer:0,
+      explain:"Two degrees removed, one added." },
+    { type:"mc", q:"Which notes are lowered?", choices:["The 3rd, 5th and 7th","The 2nd and 6th","The 1st and 4th"], answer:0,
       explain:"The three blue notes." },
     { type:"mc", q:"Which degrees are REMOVED when converting major to blues?", choices:["2nd and 6th","3rd and 7th","1st and 5th"], answer:0,
       explain:"Operation 1 of the recipe." },
@@ -227,64 +230,64 @@ LESSON_CONTENT[71]={
       explain:"Root, ♭3, 4, ♭5, 5, ♭7, Root." },
     { type:"mc", q:"The flatted notes of the blues scale are often called…", choices:["blue notes","gray notes","passing tones"], answer:0,
       explain:"The style's namesake notes." },
-    { type:"mc", q:"IMPROVISING means…", choices:["spontaneously creating a unique solo","reading music perfectly","playing someone else's solo"], answer:0,
-      explain:"The book's exact definition." },
+    { type:"mc", q:"What does improvising mean?", choices:["Creating music as you play","Reading music perfectly","Playing someone else's solo"], answer:0,
+      explain:"Spontaneous and unique to you." },
     { type:"truefalse", q:"The blues sound comes only from the chord progression.", answer:false,
       explain:"NOT only — the unique scale matters just as much." },
     { type:"truefalse", q:"The blues scale contains both G♭ and G (in C).", answer:true,
-      explain:"♭5 AND 5 — the chromatic crunch." },
+      explain:"♭5 AND 5 — a half step apart." },
     { type:"truefalse", q:"The blues scale keeps the major scale's 2nd degree.", answer:false,
       explain:"Degree 2 is removed in operation 1." },
     { type:"truefalse", q:"Playing blues-scale notes over a blues progression creates the special blues sound.", answer:true,
-      explain:"The book's closing formula." }
+      explain:"Scale + progression = the blues sound." }
   ],
   miaQuizIntro:"The Unit 17 finale quiz! Seven notes, three of them blue — and a license to improvise.",
   quiz:[
-    { type:"mc", q:"The special sound of the blues comes from…", choices:["its chord progression AND its unique scale","only its tempo","only its lyrics"], answer:0,
+    { type:"mc", q:"What creates the blues sound?", choices:["The chord progression AND the blues scale","Only the tempo","Only the lyrics"], answer:0,
       explain:"Two ingredients, one style.", hint:"Lessons 70 + 71 together." },
-    { type:"mc", q:"Compared to the major scale, the blues scale has…", choices:["only 7 notes with flatted 3rd, 5th and 7th","more notes","the same notes, reordered"], answer:0,
-      explain:"Leaner and bent.", hint:"The book's comparison sentence." },
+    { type:"mc", q:"Compared with a major scale, what is different about the blues scale?", choices:["It has 7 notes, with lowered 3rd, 5th and 7th","It has more notes","It has the same notes, reordered"], answer:0,
+      explain:"Fewer notes; three of them lowered.", hint:"Count and compare." },
     { type:"mc", q:"The flatted notes are often called…", choices:["blue notes","soft notes","minor notes"], answer:0,
       explain:"♭3, ♭5, ♭7 — the blue trio.", hint:"The lesson's color." },
-    { type:"mc", q:"Step 1 of converting a major scale to blues:", choices:["remove the 2nd and 6th degrees","flat everything","add three sharps"], answer:0,
-      explain:"Two degrees pack their bags.", hint:"Subtraction first." },
-    { type:"mc", q:"Step 2:", choices:["flat the 3rd and 7th degrees","flat the 1st","remove the 5th"], answer:0,
-      explain:"Two bends.", hint:"The first two blue notes." },
-    { type:"mc", q:"Step 3:", choices:["add a flatted 5th","add a sharped 4th","remove the root"], answer:0,
-      explain:"The newcomer between 4 and 5.", hint:"The final blue note." },
+    { type:"mc", q:"Which scale degrees are removed?", choices:["The 2nd and 6th","The 3rd and 7th","The root"], answer:0,
+      explain:"Step 1 of building the scale.", hint:"Subtraction first." },
+    { type:"mc", q:"Which scale degrees are lowered?", choices:["The 3rd and 7th","The 1st","The 2nd and 6th"], answer:0,
+      explain:"Step 2 of building the scale.", hint:"The first two blue notes." },
+    { type:"mc", q:"Which note is added?", choices:["A lowered 5th","A sharped 4th","A second root"], answer:0,
+      explain:"Step 3 — it sits between 4 and 5.", hint:"The final blue note." },
     { type:"mc", q:"Identify this scale.",
       staff:{clef:"treble",notes:[{p:"C4",d:"q"},{p:"Eb4",d:"q"},{p:"F4",d:"q"},{p:"Gb4",d:"q"},{p:"G4",d:"q"},{p:"Bb4",d:"q"},{p:"C5",d:"q"}],width:440},
       choices:["The C blues scale","C natural minor","C major with typos"], answer:0,
       explain:"Root, ♭3, 4, ♭5, 5, ♭7, Root.", hint:"Count the notes: seven." },
     { type:"mc", q:"Which two notes of the C blues scale are a half step apart?", choices:["G♭ and G","C and E♭","F and B♭"], answer:0,
-      explain:"♭5 against 5 — the crunch.", hint:"The added note's neighbor." },
+      explain:"♭5 against 5 — a half step.", hint:"The added note's neighbor." },
     { type:"truefalse", q:"Improvising means spontaneously creating a unique solo.", answer:true,
-      explain:"Word for word from the book.", hint:"The improv lab's goal." },
-    { type:"mc", q:"The blues scale's ♭3 (E♭) played over a C MAJOR chord (with E♮)…", choices:["creates the signature blues clash — on purpose","is always an error","cancels the chord"], answer:0,
-      explain:"That intentional rub IS the blues.", hint:"Why solo B sounded so good." },
+      explain:"Creating music as you play.", hint:"Spontaneous + unique." },
+    { type:"mc", q:"The blues scale's ♭3 (E♭) played over a C MAJOR chord (with E♮)…", choices:["creates the characteristic blues sound","is always an error","cancels the chord"], answer:0,
+      explain:"That sound IS the blues.", hint:"Why solo B sounded like the blues." },
     { type:"mc", q:"The G blues scale (from the recipe) is…", choices:["G-B♭-C-D♭-D-F-G","G-A-B♭-C-D-E♭-F-G","G-B-D-F-G"], answer:0,
       explain:"Remove A & E, flat B & F♯, add D♭.", hint:"Apply all three operations to G major." },
-    { type:"mc", q:"To create the blues sound, you play blues-scale notes…", choices:["over a blues chord progression","without any chords","only as block chords"], answer:0,
+    { type:"mc", q:"How do musicians create a blues sound?", choices:["By using the blues scale over a blues progression","By playing without any chords","By playing only block chords"], answer:0,
       explain:"Scale + progression = the blues.", hint:"The two lessons combined." },
     /* generated */
-    { gen:"term-match", params:{subject:"term", pool:[["♭3, ♭5, ♭7","the blue notes"],["Remove 2 & 6","recipe step 1"],["Add ♭5","recipe step 3"],["Improvise","spontaneous unique solo"]], reverse:true}, count:3 },
+    { gen:"term-match", params:{subject:"term", pool:[["♭3, ♭5, ♭7","the blue notes"],["Remove 2 & 6","build step 1"],["Add ♭5","build step 3"],["Improvise","creating music as you play"]], reverse:true}, count:3 },
     { gen:"interval-quality", params:{ask:"quality"}, count:2 },
     { gen:"triad-id", params:{ask:"numeral"}, count:1 }
   ],
   vocabulary:[
     {term:"Blues Scale", def:"A 7-note scale with flatted 3rd, 5th and 7th. In C: C-E♭-F-G♭-G-B♭-C.",
       staff:{clef:"treble",notes:[{p:"C4",d:"q"},{p:"Eb4",d:"q"},{p:"Gb4",d:"q"},{p:"Bb4",d:"q"}],width:130}},
-    {term:"Blue Notes", def:"The flatted 3rd, 5th and 7th — the bent notes that give the blues its ache."},
-    {term:"The Recipe", def:"Major → blues: 1) remove degrees 2 & 6 · 2) flat 3 & 7 · 3) add a flatted 5th."},
-    {term:"Improvise", def:"To spontaneously create a unique solo — blues-scale notes over a blues progression."}
+    {term:"Blue Notes", def:"The flatted 3rd, 5th and 7th — the lowered notes that create the blues sound."},
+    {term:"Building the Scale", def:"Major → blues: 1) remove degrees 2 & 6 · 2) lower 3 & 7 · 3) add a lowered 5th."},
+    {term:"Improvise", def:"To create music as you play — blues-scale notes over a blues progression."}
   ],
   mistakes:[],
   summary:[
     "✔ The blues = <b>the 12-bar progression + the blues scale</b>.",
     "✔ The scale has <b>7 notes</b> with <b>♭3, ♭5, ♭7 — the BLUE NOTES</b>.",
-    "✔ Recipe: <b>remove 2 & 6 → flat 3 & 7 → add ♭5</b>.",
+    "✔ Build it: <b>remove 2 & 6 → lower 3 & 7 → add ♭5</b>.",
     "✔ C blues: <b>C-E♭-F-G♭-G-B♭-C</b> (Root, ♭3, 4, ♭5, 5, ♭7, Root).",
-    "✔ <b>IMPROVISE</b> = spontaneously create a unique solo. <b>UNIT 17 COMPLETE!</b> \u{1F389}"
+    "✔ <b>IMPROVISE</b> = create music as you play. <b>UNIT 17 COMPLETE!</b> \u{1F389}"
   ],
   tips:[
     "Every note of the blues scale works over every chord of the 12-bar progression — that's why it's the improviser's first scale.",
@@ -295,23 +298,23 @@ LESSON_CONTENT[71]={
   rewards:{ badge:"Blue-Note Bender — Unit 17 Champion", icon:"\u{1F535}" },
   sectionOrder:["secHook","secObjectives","secLearn","secExample","secReview",
     "secGame0","secGame1","secGame2","secGame3","secPractice","secQuiz","secTips","secNext"],
-  miaPerfect:"PERFECT — recipe, spelling, blue notes AND a solo of your own! Unit 17 conquered. \u{1F535}\u{1F3C6}\u{1F389}",
+  miaPerfect:"PERFECT — the scale, the blue notes AND a solo of your own! Unit 17 conquered. \u{1F535}\u{1F3C6}\u{1F389}",
   miaPass:"Passed — and Unit 17 is COMPLETE! You harmonize, compose AND improvise now. \u{1F389}",
   mia:{
     hook:{ label:"the welcome",
-      explain:"Solo A used plain C major; solo B used the BLUES SCALE — its ♭3, ♭5 and ♭7 bending against the chord created the blues ache.",
+      explain:"Solo A used plain C major; solo B used the BLUES SCALE — its ♭3, ♭5 and ♭7 against the chord created the blues sound.",
       play:()=>{[60,63,65,66,67,70,72].forEach((m,i)=>MFAudio.tone(m,.4,i*.3,.42));[48,64,67].forEach(m=>MFAudio.tone(m,2.4,0,.18));} },
     learn:{ label:"the blues scale",
-      explain:"7 notes: Root, ♭3, 4, ♭5, 5, ♭7, Root. Recipe: remove 2&6, flat 3&7, add ♭5. The flatted notes are the blue notes; improvising = spontaneous unique solo.",
+      explain:"7 notes: Root, ♭3, 4, ♭5, 5, ♭7, Root. Build it: remove 2&6, lower 3&7, add ♭5. The flatted notes are the blue notes; improvising = creating music as you play.",
       hint:"C-E♭-F-G♭-G-B♭-C.",
       play:()=>{[60,63,65,66,67,70,72].forEach((m,i)=>MFAudio.tone(m,.42,i*.3,.42));} },
     example:{ label:"the examples",
       explain:"Example 1 sets C major and C blues side by side; example 2 is a written blues lick over the I chord — the ♭3 rub in action." },
     game:{ label:"the games",
-      explain:"Sprint the recipe, climb the scale both ways, spot the blue intervals, then run the Unit 17 victory lap.",
+      explain:"Sprint the facts, climb the scale both ways, spot the blue intervals, then run the Unit 17 victory lap.",
       hint:"Three blue notes: ♭3, ♭5, ♭7." },
     quiz:{ label:"this question",
-      explain:"Everything comes from the recipe (remove 2&6, flat 3&7, add ♭5) and the spelling it produces. When in doubt, rebuild the scale.",
+      explain:"Everything comes from the three steps (remove 2&6, lower 3&7, add ♭5) and the spelling they produce. When in doubt, rebuild the scale.",
       play:()=>{[60,63,65,66,67,70,72].forEach((m,i)=>MFAudio.tone(m,.4,i*.28,.42));} }
   }
 };

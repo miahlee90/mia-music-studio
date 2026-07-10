@@ -26,25 +26,25 @@ function MF_L75_track(container,fb){
     if(!played||k>=5) return;
     if(b.textContent===ORDER[k]){ MFAudio.yay();
       picked.push(b.textContent); drawMap(); k++; played=false; ch.style.display="none";
-      if(k<5){ fb(true, ORDER[k-1]==="A"? `✓ ${k===1?"The main theme — A.":"A RETURNS — the recurring section doing its job!"}` : `✓ New contrasting material — ${ORDER[k-1]}.`);
+      if(k<5){ fb(true, ORDER[k-1]==="A"? `✓ ${k===1?"The main theme — A.":"Great! A returned again."}` : `✓ Excellent! That's the ${ORDER[k-1]} section — new material.`);
         pl.textContent=`▶ Play section ${k+1}`; }
       else { pl.style.display="none";
-        fb(true,"✓ A · B · A · C · A — a RONDO! The A section alternated with two different contrasting sections and kept coming back, just like the book's 'La Raspa.'");
-        q.textContent="ABACA — the rondo wheel, fully mapped. \u{1F3A1}"; }
-    } else { MFAudio.tone(40,.2); fb(false, "Compare: is it the recurring main theme (A), the first contrast (B), or something NEWER still (C)?"); }
+        fb(true,"✓ A · B · A · C · A — a RONDO! The A section alternated with two different contrasting sections and kept returning — the pattern of 'La Raspa.'");
+        q.textContent="ABACA — the rondo is complete. \u{1F3A1}"; }
+    } else { MFAudio.tone(40,.2); fb(false, "Listen for a NEW section — is it the main theme (A), the first contrast (B), or the newest one (C)?"); }
   });
   drawMap();
 }
 
 LESSON_CONTENT[75]={
-  welcome:"LESSON 75 OF 75. One last form — where the main theme refuses to say goodbye… and neither will we. \u{1F3A1}",
+  welcome:"The rondo: one main theme that keeps returning. \u{1F3A1}",
   hook:{
-    say:"One theme keeps RETURNING between adventures — like a carousel horse coming around. <b>Listen to the five sections: how many times does the main theme appear?</b>",
+    say:"<b>Listen carefully.</b> One melody keeps coming back between new musical ideas. \u{1F447} <b>How many times do you hear the main theme?</b>",
     interact:{ type:"custom",
       mount:(container,fb)=>{
         container.innerHTML=`<div style="text-align:center">
           <button class="play hk-a">▶ Play the whole piece</button></div>
-          <div class="choices hk-ch" style="display:none"><button>Three times — with two different adventures between</button><button>Once at the start only</button><button>Never — every section was new</button></div>`;
+          <div class="choices hk-ch" style="display:none"><button>Three times — with two new sections between</button><button>Once at the start only</button><button>Never — every section was new</button></div>`;
         const A=[67,67,64,67,67,72], B=[69,71,72,71,69,64], C=[65,69,72,69,65,60];
         const ch=container.querySelector(".hk-ch");
         container.querySelector(".hk-a").onclick=()=>{
@@ -53,7 +53,7 @@ LESSON_CONTENT[75]={
           setTimeout(()=>ch.style.display="",t*1000+400);
         };
         [...ch.children].forEach((b,i)=>b.onclick=()=>{
-          if(i===0) fb(true,"✓ A…B…A…C…A — the main theme came around THREE times, alternating with contrasting sections. That merry-go-round design is the RONDO — the final form of the course!");
+          if(i===0) fb(true,"✓ A…B…A…C…A — the main theme returned THREE times, alternating with contrasting sections. That design is the RONDO — today's lesson!");
           else fb(false,"Listen again and count how often the FIRST tune returns…");
         });
       } }
@@ -64,48 +64,48 @@ LESSON_CONTENT[75]={
     "Name the common types: ABABA, ABACA, ABACABA",
     "Track a rondo by ear, section by section",
     "Compare all four forms: AB, ABA, rondo — and the phrase/motive roots",
-    "CELEBRATE: 75 lessons complete!"
+    "Understand why the returning A creates balance"
   ],
   steps:[
-    { say:"The definition: <b>a RONDO consists of an A section alternating with other CONTRASTING sections of musical material — A is the RECURRING section</b>. \u{1F447} <b>What makes a rondo a rondo?</b>",
+    { say:"<b>What Is a Rondo?</b> A rondo has one main section (A) that keeps returning. New sections appear between each return. \u{1F447} <b>What makes a rondo different from other forms?</b>",
       try:{ type:"mc", choices:["A keeps coming back between contrasting sections","It has exactly two sections","It never repeats anything"], answer:0,
-        success:"✓ 'Rondo' shares roots with 'round' — the theme comes around and around, with adventures between visits.",
-        fail:"Which section RECURS?",
-        hint:"The carousel image." } },
-    { say:"The book lists <b>the most common rondo types: ABABA — ABACA — ABACABA</b>. Look closely at what alternates in each. \u{1F447} <b>In ABACA, how many DIFFERENT contrasting sections appear?</b>",
+        success:"✓ The A section keeps returning between contrasting sections.",
+        fail:"Which section keeps returning?",
+        hint:"The recurring A." } },
+    { say:"The most common rondo types: <b>ABABA · ABACA · ABACABA</b>. Look closely at what alternates in each. \u{1F447} <b>In ABACA, how many DIFFERENT contrasting sections appear?</b>",
       show:{ type:"html", html:`<div style="max-width:420px;margin:0 auto;font-size:17px;line-height:2.2;background:var(--card,#fff);border:1.5px solid #cdd5e1;border-radius:12px;padding:12px 18px;text-align:center;font-weight:800;letter-spacing:3px">
         A B A B A<br>A B A C A<br>A B A C A B A</div>` },
       try:{ type:"mc", choices:["Two — B and C","One — only B","Four"], answer:0,
-        success:"✓ B and C each get one visit; A gets THREE. The longer ABACABA gives B a return trip too — seven sections, still one recurring hero.",
+        success:"✓ B and C appear once each; A appears THREE times. The longer ABACABA gives B a return too — seven sections, one recurring theme.",
         fail:"Count the different letters that aren't A…",
         hint:"B… and?" } },
-    { say:"Every rondo rule in one sentence: <b>begin with A, return to A after every contrast, end on A</b>. \u{1F447} <b>Which of these could NOT be a rondo?</b>",
+    { say:"<b>A rondo always:</b> begins with A · returns to A after every new section · ends with A. \u{1F447} <b>Which of these could NOT be a rondo?</b>",
       try:{ type:"mc", choices:["ABCD — nothing ever returns","ABABA","ABACABA"], answer:0,
-        success:"✓ ABCD never brings A back — no recurrence, no rondo. The other two orbit their theme faithfully.",
+        success:"✓ ABCD never brings A back — no recurrence, no rondo. The other two begin, return to, and end with A.",
         fail:"Check each: does A recur between contrasts?",
         hint:"The recurring section is mandatory." } },
-    { say:"Now track a real one by EAR — five sections, three letters. \u{1F447}",
+    { say:"Listen to the music. Track the form — A, B or C? \u{1F447}",
       try:{ type:"custom",
         hint:"A is the one you'll recognize; C is newer than B.",
         mount:(container,fb)=>MF_L75_track(container,fb) } },
-    { say:"The book's example, \u{201C}La Raspa,\u{201D} follows exactly that plan — its exercise asks you to circle the form, and the answer is <b>ABACA</b>. \u{1F447} <b>In La Raspa, the C section stands out because…</b>",
+    { say:"The example \u{201C}La Raspa\u{201D} follows the pattern <b>A → B → A → C → A</b>. \u{1F447} <b>In La Raspa, the C section stands out because…</b>",
       try:{ type:"mc", choices:["It brings the newest contrast — even new harmony territory","It repeats the A section","It has no notes"], answer:0,
-        success:"✓ Each contrasting section differs from A AND from each other — melody, rhythm, harmony. (The book's exercise 3 asks which section differs harmonically: it's C!)",
+        success:"✓ Each contrasting section differs from A AND from each other — melody, rhythm, harmony.",
         fail:"C arrives AFTER B has already contrasted once…",
         hint:"Newer than new." } },
-    { say:"THE COURSE MAP — look how far you've come: <b>notes → motives → phrases → sections → AB → ABA → RONDO</b>. Every lesson from staff lines to blue notes lives inside this pyramid. \u{1F447} <b>The complete journey from smallest to largest is…</b>",
-      try:{ type:"mc", choices:["note → motive → phrase → section → complete form","form → note → phrase","chord → scale → note"], answer:0,
-        success:"✓ From a single notehead in Lesson 1 to complete musical architecture in Lesson 75. That's the entire alphabet, grammar and literature of music fundamentals — YOURS now. \u{1F393}",
-        fail:"Small to large, as always…",
-        hint:"Lesson 72's pyramid, completed." } },
-    { say:"One last question of the course. \u{1F447} <b>Ready for what comes next?</b>",
-      try:{ type:"mc", choices:["Yes — review the units, play real music, keep going!","No — music is finished forever","Only if there's a Lesson 76"], answer:0,
-        success:"✓ CONGRATULATIONS — ALL 75 LESSONS COMPLETE! \u{1F386}\u{1F393}\u{1F3C6} You read music, build chords, harmonize, compose, improvise and analyze form. The unit reviews await whenever you want to sharpen — and every piece of music you ever meet is now an open book.",
-        fail:"There's only one right answer to this one \u{1F609}",
-        hint:"The journey continues…" } }
+    { say:"<b>Why Does A Keep Returning?</b> Every return of A gives the listener something familiar. The new sections add variety. Together they create balance. \u{1F447} <b>Why does the A section keep returning?</b>",
+      try:{ type:"mc", choices:["So the listener always comes back to familiar music","To make the piece shorter","Because the other sections are mistakes"], answer:0,
+        success:"✓ Familiar returns + new sections = balance. That is the heart of the rondo.",
+        fail:"What does hearing A again give the listener?",
+        hint:"Something familiar." } },
+    { say:"<b>Compare the Forms:</b> AB → ABA → ABACA. \u{1F447} <b>Which form repeats A the MOST?</b>",
+      try:{ type:"mc", choices:["Rondo (ABACA)","Ternary (ABA)","Binary (AB)"], answer:0,
+        success:"✓ The rondo — A returns again and again. You now know all three forms: AB, ABA, and the rondo!",
+        fail:"Count the A's in each form…",
+        hint:"A-B-A-C-A." } }
   ],
   examples:[
-    { caption:"A miniature rondo, written out: A (the carousel theme), B (first contrast), A, C (second contrast — new harmony color), and A to close. Follow the letters as it plays!",
+    { caption:"A miniature rondo, written out: A (the main theme), B (first contrast), A, C (second contrast — new harmony), and A to close. Follow the letters as it plays!",
       staff:{clef:"treble",tempo:120,notes:[
         {p:"G4",d:"8",label:"A"},{p:"G4",d:"8"},{p:"E4",d:"q"},{p:"G4",d:"q"},{p:"C5",d:"q"},{bar:"double"},
         {p:"A4",d:"8",label:"B"},{p:"B4",d:"8"},{p:"C5",d:"q"},{p:"A4",d:"q"},{p:"E4",d:"q"},{bar:"double"},
@@ -114,7 +114,7 @@ LESSON_CONTENT[75]={
         {p:"G4",d:"8",label:"A"},{p:"G4",d:"8"},{p:"E4",d:"q"},{p:"G4",d:"q"},{p:"C5",d:"h"},{bar:"final"}],
         beams:[[0,1],[6,7],[12,13],[18,19],[24,25]],width:680},
       kb:{start:57,octaves:2,labels:true} },
-    { caption:"The graduation cadence: I → IV → V7 → I, one last time — the same chords that closed Lesson 50, now heard by ears that understand EVERYTHING they're doing. Congratulations, musician.",
+    { caption:"A closing cadence: I → IV → V7 → I — the same chords that closed Lesson 50, now heard with full understanding.",
       staff:{clef:"treble",tempo:80,notes:[
         {p:"C4",d:"h",label:"I"},{p:"E4",d:"h",chord:true},{p:"G4",d:"h",chord:true},
         {p:"F4",d:"h",label:"IV"},{p:"A4",d:"h",chord:true},{p:"C5",d:"h",chord:true},
@@ -132,26 +132,26 @@ LESSON_CONTENT[75]={
         ["Common rondo types","ABABA, ABACA, ABACABA"],
         ["ABACA's contrasts","B and C — one visit each"],
         ["Every rondo begins and ends with","the A section"],
-        ["'La Raspa'","the book's rondo example (ABACA)"],
+        ["'La Raspa'","a rondo example (ABACA)"],
         ["AB form","two parts, no return"],
         ["ABA form","statement, contrast, restatement"]], reverse:true}, seconds:45},
       result:(score)=>score>=8?score+" — rondo master!":null },
-    { type:"key-climb", title:"Game 2 · Ride the Rondo",
-      intro:"Play the carousel theme, a contrast, and the theme again — a mini-rondo under your fingers!",
+    { type:"key-climb", title:"Game 2 · Play the Rondo Theme",
+      intro:"Play the main theme, a contrast, and the theme again — a mini-rondo under your fingers!",
       miaIntro:"One last climb — make it musical! \u{1FA9C}",
       spec:{seq:[67,67,64,67,72, 69,71,72,69, 67,67,64,67,72],
         names:["G (A!)","G","E","G","C — theme done","A (B: contrast)","B","C","A — contrast done","G (A RETURNS!)","G","E","G","C — rondo!"],
-        start:57, octaves:2, title:"A · B · A — the carousel turns"},
-      result:(score)=>score!==null?"The carousel turned perfectly — bravo!":null },
+        start:57, octaves:2, title:"A · B · A — a mini-rondo"},
+      result:(score)=>score!==null?"Mini-rondo performed — bravo!":null },
     { type:"symbol-hunt", title:"Game 3 · Name That Form",
-      intro:"Form maps on cards — click the one each round names. The COURSE finale spotter!",
+      intro:"Form patterns on cards — click the one each round names!",
       miaIntro:"Every form you know! \u{1F440}",
       spec:{rounds:6, pool:[
         {label:"Rondo (ABACA)", spec:{clef:"none",notes:[{letter:"A"},{letter:"B"},{letter:"A"},{letter:"C"},{letter:"A"}],width:220}},
         {label:"Ternary (ABA)", spec:{clef:"none",notes:[{letter:"A"},{letter:"B"},{letter:"A"}],width:170}},
         {label:"Binary (AB)", spec:{clef:"none",notes:[{letter:"A"},{letter:"B"}],width:140}},
         {label:"Rondo (ABACABA)", spec:{clef:"none",notes:[{letter:"A"},{letter:"B"},{letter:"A"},{letter:"C"},{letter:"A"},{letter:"B"},{letter:"A"}],width:260}}]},
-      result:(score)=>score>=5?"All forms named on sight — analyst supreme!":null },
+      result:(score)=>score>=5?"All forms named on sight!":null },
     { type:"term-race", title:"Game 4 · THE GRAND FINALE — 75-Lesson Victory Race",
       intro:"The final game of the final lesson: highlights from ALL 75 LESSONS. Everything you are. GO!",
       miaIntro:"THE LAST RACE — make the whole course proud! \u{1F3C6}\u{1F386}",
@@ -177,48 +177,48 @@ LESSON_CONTENT[75]={
     { gen:"rel-key", params:{ask:"both"}, count:2 },
     { gen:"mode-id", params:{set:"all", ask:"recipe"}, count:2 },
     { type:"mc", q:"A rondo consists of an A section alternating with…", choices:["other contrasting sections","identical copies of A","silence"], answer:0,
-      explain:"Contrast between every return (AEMT3 p.117)." },
+      explain:"Contrast between every return." },
     { type:"mc", q:"In a rondo, the RECURRING section is…", choices:["A","B","C"], answer:0,
-      explain:"The carousel horse that keeps coming around." },
+      explain:"The section that keeps returning." },
     { type:"mc", q:"Which is a common rondo type?", choices:["ABACA","ABCD","AABB"], answer:0,
       explain:"Along with ABABA and ABACABA." },
-    { type:"mc", q:"The book's rondo example is…", choices:["'La Raspa' (Mexican folk song)","Beethoven's 5th","'Go, Tell It On the Mountain'"], answer:0,
+    { type:"mc", q:"Which song is a rondo example?", choices:["'La Raspa' (Mexican folk song)","Beethoven's 5th","'Go, Tell It On the Mountain'"], answer:0,
       explain:"Its form: ABACA." },
-    { type:"mc", q:"A rondo begins and ends with…", choices:["the A section","the newest section","a drum solo"], answer:0,
-      explain:"The theme frames everything." },
+    { type:"mc", q:"A rondo always begins and ends with…", choices:["the A section","the newest section","a drum solo"], answer:0,
+      explain:"A opens it and closes it." },
     { type:"truefalse", q:"In ABACABA, the B section appears twice.", answer:true,
       explain:"A×4, B×2, C×1 — count them!" },
     { type:"truefalse", q:"ABCD is a valid rondo form.", answer:false,
       explain:"Nothing recurs — no rondo." },
-    { type:"truefalse", q:"You have now completed all 75 lessons of this course.", answer:true,
-      explain:"CONGRATULATIONS! \u{1F386}\u{1F393}" }
+    { type:"truefalse", q:"In ABACA, the A section appears three times.", answer:true,
+      explain:"A, then B, A, C, A." }
   ],
-  miaQuizIntro:"THE FINAL QUIZ of the course. Rondo facts + your whole journey. Make it a victory lap! \u{1F3C6}",
+  miaQuizIntro:"Quiz! A begins it, A ends it, A keeps returning. \u{1F3C6}",
   quiz:[
     { type:"mc", q:"A RONDO is a form consisting of…", choices:["an A section alternating with contrasting sections","exactly two sections","one endless melody"], answer:0,
-      explain:"The book's definition, verbatim.", hint:"The carousel." },
+      explain:"A recurring main theme with contrasting sections.", hint:"The recurring A." },
     { type:"mc", q:"In rondo form, which section RECURS?", choices:["A","B","C"], answer:0,
       explain:"A is the recurring section.", hint:"The hero of the form." },
     { type:"mc", q:"The most common rondo types are…", choices:["ABABA, ABACA and ABACABA","AB and ABA only","AAA and BBB"], answer:0,
-      explain:"Three wheels of different sizes.", hint:"All start and end with A." },
-    { type:"mc", q:"'La Raspa,' the book's example, is in which form?", choices:["ABACA","ABABA","AB"], answer:0,
-      explain:"Exercise 1's answer — two contrasts, three A's.", hint:"It has a C section." },
+      explain:"Three patterns of different lengths.", hint:"All start and end with A." },
+    { type:"mc", q:"'La Raspa' is in which form?", choices:["ABACA","ABABA","AB"], answer:0,
+      explain:"Two contrasts, three A's.", hint:"It has a C section." },
     { type:"truefalse", q:"A rondo's contrasting sections must contrast with A and (in ABACA) with each other.", answer:true,
-      explain:"B and C are different adventures.", hint:"Why C gets a new letter." },
+      explain:"B and C differ from A and from each other.", hint:"Why C gets a new letter." },
     { type:"truefalse", q:"A rondo may end on its B section.", answer:false,
-      explain:"The recurring A closes every common type.", hint:"Check the three maps." },
+      explain:"The recurring A closes every common type.", hint:"Check the three patterns." },
     { type:"mc", q:"You hear: theme, contrast 1, theme, contrast 2, theme. The form is…", choices:["Rondo (ABACA)","Ternary (ABA)","Binary (AB)"], answer:0,
-      explain:"Two DIFFERENT contrasts with returns = rondo.", hint:"Count the adventures." },
+      explain:"Two DIFFERENT contrasts with returns = rondo.", hint:"Count the different contrasts." },
     { type:"mc", q:"You hear: statement, contrast, restatement — three sections total. The form is…", choices:["Ternary (ABA)","Rondo","Binary"], answer:0,
       explain:"One contrast only = ABA.", hint:"Lesson 74's shape." },
     { type:"mc", q:"Which form does NOT return to its opening material?", choices:["AB (binary)","ABA (ternary)","Rondo"], answer:0,
       explain:"Binary ends in B territory.", hint:"The one-way trip." },
     { type:"mc", q:"Order the forms by how many times A appears (ABACA vs ABA vs AB):", choices:["Rondo (3) > Ternary (2) > Binary (1)","Binary > Ternary > Rondo","All equal"], answer:0,
       explain:"The rondo loves its theme most.", hint:"Count A's in each map." },
-    { type:"mc", q:"COURSE QUESTION: the building blocks of every form you've learned are…", choices:["motives and phrases, combined into sections","only key signatures","only dynamics"], answer:0,
-      explain:"Lesson 72's pyramid underlies Lessons 73-75.", hint:"The smallest ideas first." },
-    { type:"mc", q:"FINAL QUESTION — 75 lessons ago you learned the staff's 5 lines. Today you analyzed rondo form. What connects everything between?", choices:["Every concept built on the ones before — notes to rhythms to chords to forms","Nothing — each lesson was unrelated","Luck"], answer:0,
-      explain:"One long staircase, and you climbed every step. CONGRATULATIONS, MUSICIAN! \u{1F393}\u{1F386}\u{1F3C6}", hint:"Think of the journey." },
+    { type:"mc", q:"Forms are built from…", choices:["motives → phrases → sections","only key signatures","only dynamics"], answer:0,
+      explain:"Lesson 72's order underlies Lessons 73-75.", hint:"The smallest ideas first." },
+    { type:"mc", q:"Which statement best describes rondo form?", choices:["A recurring main theme alternates with contrasting sections","Two sections with no return","One melody with no repeats"], answer:0,
+      explain:"That is the rondo.", hint:"A keeps returning." },
     /* generated — a victory mix from across the course */
     { gen:"term-match", params:{subject:"term", pool:[["Rondo","the recurring-A form"],["ABACA","two contrasts, three returns"],["Recurring section","A"],["75/75","COMPLETE!"]], reverse:true}, count:2 },
     { gen:"inversion-id", params:{subject:"both", ask:"both"}, count:2 },
@@ -229,7 +229,7 @@ LESSON_CONTENT[75]={
   vocabulary:[
     {term:"Rondo", def:"A form in which the A section ALTERNATES with contrasting sections — A is the recurring section."},
     {term:"ABABA · ABACA · ABACABA", def:"The most common rondo types — every one begins, returns to, and ends with A."},
-    {term:"Recurring Section", def:"The A section — the theme that keeps coming around between adventures."},
+    {term:"Recurring Section", def:"The A section — the main theme that returns between contrasting sections."},
     {term:"The Form Family", def:"AB (binary, no return) · ABA (ternary, one return) · rondo (returns again and again)."}
   ],
   mistakes:[],
@@ -262,7 +262,7 @@ LESSON_CONTENT[75]={
     example:{ label:"the examples",
       explain:"Example 1 is a written-out ABACA miniature; example 2 is your graduation cadence — I-IV-V7-I, understood completely." },
     game:{ label:"the games",
-      explain:"Sprint the rondo, ride the carousel, name every form on sight — then run the 75-lesson victory race.",
+      explain:"Sprint the rondo facts, play the theme, name every form on sight — then run the 75-lesson victory race.",
       hint:"It's the last one. Leave nothing behind. \u{1F3C6}" },
     quiz:{ label:"this question",
       explain:"Rondo questions reduce to one check: does A keep returning between contrasts? The victory-mix questions are your whole course saying hello.",

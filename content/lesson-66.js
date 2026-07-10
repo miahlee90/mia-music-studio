@@ -24,7 +24,7 @@ function MF_L66_detect(container,fb){
     <div class="choices chips l66d-ch" style="display:none"><button>Passing tone</button><button>Upper neighbor</button><button>Lower neighbor</button></div>`;
   const q=container.querySelector(".l66d-q"), holder=container.querySelector(".l66d-staff"), ch=container.querySelector(".l66d-ch");
   function ask(){
-    if(r>=ROUNDS.length){ q.textContent=`Detective work complete — passing and neighbors all identified!`; holder.innerHTML=""; ch.style.display="none"; return; }
+    if(r>=ROUNDS.length){ q.textContent=`Excellent! You identified them all.`; holder.innerHTML=""; ch.style.display="none"; return; }
     const R=ROUNDS[r]; found=false; ch.style.display="none";
     q.innerHTML=`The harmony is <b>${R.chord}</b>. Tap the melody note that does <b>NOT</b> belong to that chord.`;
     Staff.render(holder,{clef:"treble",notes:R.ps.map((p,i)=>({p,d:"q"})),width:300,clickNotes:true,
@@ -33,9 +33,9 @@ function MF_L66_detect(container,fb){
         if(found) return;
         const R2=ROUNDS[r];
         if(i===R2.nh){ found=true;
-          q.innerHTML=`✓ ${p.replace(/\d/,"").replace("#","♯")} is the outsider. Now — what KIND of non-harmonic tone is it?`;
+          q.innerHTML=`Great! You found the non-harmonic tone: ${p.replace(/\d/,"").replace("#","♯")}. Is it a passing tone or a neighboring tone?`;
           ch.style.display=""; }
-        else fb(false,`${p[0]} belongs to ${R2.chord} — it's a legitimate chord tone. Find the stranger.`);
+        else fb(false,`${p[0]} belongs to ${R2.chord} — it is a chord tone. Look for the note outside the chord.`);
       }});
   }
   [...ch.children].forEach((b,i)=>b.onclick=()=>{
@@ -44,28 +44,28 @@ function MF_L66_detect(container,fb){
       R.ps.forEach((p,ix)=>MFAudio.tone(MFAudio.midi(p),.45,.05+ix*.4,.4));
       fb(true,`✓ ${R.expl}`);
       r++; setTimeout(ask,1500); }
-    else { MFAudio.tone(40,.2); fb(false,"Check the frame: does the melody land on a DIFFERENT chord tone (passing) or the SAME one (neighbor)? Above or below?"); }
+    else { MFAudio.tone(40,.2); fb(false,"Does the melody land on a DIFFERENT chord tone (passing) or the SAME one (neighbor)? Above or below?"); }
   });
   ask();
 }
 
 LESSON_CONTENT[66]={
-  welcome:"Today we let the melody wander off the chord — legally. \u{1F98B}",
+  welcome:"Non-harmonic tones: melody notes outside the chord. \u{1F98B}",
   hook:{
-    say:"Two melodies over the SAME C chord. One uses only chord tones; the other slips one extra note between them. <b>Which flows more smoothly — and is that extra note 'wrong'?</b>",
+    say:"<b>Two melodies use the same C major chord.</b> One melody adds an extra note between the chord tones. Listen to both. <b>Are those extra notes wrong?</b>",
     interact:{ type:"custom",
       mount:(container,fb)=>{
         container.innerHTML=`<div style="text-align:center">
           <button class="play hk-a">▶ Melody A: C … E … G</button>
           <button class="play hk-b">▶ Melody B: C-D-E … G</button></div>
-          <div class="choices hk-ch" style="display:none"><button>B flows better — the D is a legal 'bridge' note</button><button>B is wrong — D isn't in the C chord</button></div>`;
+          <div class="choices hk-ch" style="display:none"><button>No — the extra note connects two chord tones smoothly</button><button>Yes — D is not in the C chord</button></div>`;
         const ch=container.querySelector(".hk-ch");
         let hA=false,hB=false;
         container.querySelector(".hk-a").onclick=()=>{ [60,64,67].forEach((m,i)=>MFAudio.tone(m,.55,i*.55,.42)); [48,52,55].forEach(m=>MFAudio.tone(m,1.8,0,.18)); hA=true; if(hB) setTimeout(()=>ch.style.display="",2200); };
         container.querySelector(".hk-b").onclick=()=>{ [60,62,64,67].forEach((m,i)=>MFAudio.tone(m,.5,i*.45,.42)); [48,52,55].forEach(m=>MFAudio.tone(m,2.0,0,.18)); hB=true; if(hA) setTimeout(()=>ch.style.display="",2200); };
         [...ch.children].forEach((b,i)=>b.onclick=()=>{
-          if(i===0) fb(true,"✓ The D is a NON-HARMONIC TONE — specifically a PASSING tone, stepping smoothly between two chord tones. Not wrong: essential! Most real melodies are full of them. Today: passing and neighboring tones!");
-          else fb(false,"It's outside the chord, yes — but did it SOUND wrong? Composers use these notes constantly, on purpose…");
+          if(i===0) fb(true,"✓ The D is a NON-HARMONIC TONE — a PASSING tone, stepping between two chord tones. Not wrong: most melodies include them. Today: passing and neighboring tones!");
+          else fb(false,"It is outside the chord — but did it SOUND wrong? Composers use these notes on purpose…");
         });
       } }
   },
@@ -75,53 +75,53 @@ LESSON_CONTENT[66]={
     "Neighboring tone: leaves and returns to the SAME chord tone",
     "Tell upper neighbors (above) from lower neighbors (below)",
     "Know they usually land on WEAK beats",
-    "Never let them influence your chord choice"
+    "Choose chords from the chord tones, not the non-harmonic tones"
   ],
   steps:[
-    { say:"The big idea: <b>most melodies include tones that are not part of the harmony chord</b> — the book calls them <b>NON-HARMONIC TONES</b>. They aren't mistakes; they're seasoning. \u{1F447} <b>A non-harmonic tone is…</b>",
+    { say:"<b>Non-Harmonic Tones:</b> A <b>non-harmonic tone</b> is a melody note that does <b>not</b> belong to the current chord. Non-harmonic tones add variety and smooth melodic movement. \u{1F447} <b>What is a non-harmonic tone?</b>",
       try:{ type:"mc", choices:["A melody note outside the current chord","A wrong note","A note played too softly"], answer:0,
-        success:"✓ Outside the chord, inside the music. Two flavors today: passing and neighboring.",
-        fail:"The hook's D over a C chord was one…",
+        success:"✓ A melody note outside the current chord. Today: passing and neighboring tones.",
+        fail:"The D over a C chord in the hook was one…",
         hint:"Non-harmonic = not in the harmony." } },
-    { say:"Flavor 1 — the <b>PASSING TONE</b>: the melody <b>passes from one chord tone to a DIFFERENT chord tone</b> with a stepping stone between (a half or whole step). C→D→E over a C chord: D is passing. \u{1F447} <b>What frames a passing tone?</b>",
+    { say:"<b>Passing Tone:</b> A <b>passing tone</b> connects <b>two different chord tones</b> by step. C→D→E over a C chord: D is the passing tone. \u{1F447} <b>What surrounds a passing tone?</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:90,notes:[
         {p:"C4",d:"q",label:"chord tone"},{p:"D4",d:"q",label:"P"},{p:"E4",d:"q",label:"chord tone"},{p:"G4",d:"h"},{bar:"final"}],width:400} },
       try:{ type:"mc", choices:["Two DIFFERENT chord tones","The same chord tone twice","Two rests"], answer:0,
-        success:"✓ Different departure and arrival — the passing tone is the bridge between them.",
+        success:"✓ Two DIFFERENT chord tones — the passing tone steps between them.",
         fail:"Where did the melody start and land — same place or new place?",
-        hint:"PASSING = traveling THROUGH to somewhere new." } },
-    { say:"Flavor 2 — the <b>NEIGHBORING TONE</b>: the melody <b>leaves a chord tone and returns to the SAME chord tone</b>, with the outsider between. Above = <b>UPPER neighbor</b>; below = <b>LOWER neighbor</b>. \u{1F447} <b>E→F→E over a C chord: the F is…</b>",
+        hint:"PASSING = moving through to a new chord tone." } },
+    { say:"<b>Neighboring Tone:</b> A neighboring tone leaves a chord tone and returns to the <b>same chord tone</b>. Upper neighbor = above · lower neighbor = below. <b>Remember: passing tone = different → different · neighboring tone = same → different → same.</b> \u{1F447} <b>E→F→E over a C chord: what is the F?</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:90,notes:[
         {p:"E4",d:"q",label:"chord tone"},{p:"F4",d:"q",label:"U"},{p:"E4",d:"q",label:"same tone!"},
         {p:"G4",d:"q",label:"chord tone"},{p:"F#4",d:"q",label:"L"},{p:"G4",d:"q",label:"same tone!"},{bar:"final"}],width:480} },
       try:{ type:"mc", choices:["An upper neighboring tone","A passing tone","A chord tone"], answer:0,
-        success:"✓ Left E, visited the neighbor ABOVE, came home to the same E. (G→F♯→G shows the LOWER neighbor.)",
-        fail:"Did the melody end up somewhere NEW, or back home?",
-        hint:"Neighbors visit and RETURN." } },
-    { say:"The rhythm rule: <b>passing and neighboring tones usually occur on a WEAK beat</b> — they decorate between the harmony's strong points. \u{1F447} <b>Why weak beats?</b>",
-      try:{ type:"mc", choices:["Strong beats belong to chord tones; outsiders slip between them","Weak beats are quieter","It's a printing convention"], answer:0,
-        success:"✓ The harmony anchors the strong beats; the seasoning sprinkles the weak ones. That's why the outsiders never sound wrong.",
+        success:"✓ An UPPER neighboring tone — it leaves E and returns to the same E from above. (G→F♯→G shows the LOWER neighbor.)",
+        fail:"Did the melody land on a NEW chord tone, or the SAME one?",
+        hint:"A neighboring tone RETURNS to the same chord tone." } },
+    { say:"<b>Where Do They Usually Appear?</b> Passing and neighboring tones usually occur on <b>weak beats</b>. Chord tones usually appear on <b>strong beats</b>. \u{1F447} <b>Why are passing and neighboring tones usually placed on weak beats?</b>",
+      try:{ type:"mc", choices:["Strong beats belong to chord tones; the decorations fit between them","Weak beats are quieter","It's a printing convention"], answer:0,
+        success:"✓ Chord tones hold the strong beats; passing and neighboring tones decorate the weak beats.",
         fail:"Where does the ear check the harmony most — strong or weak beats?",
-        hint:"Anchors on the strong, decoration on the weak." } },
-    { say:"And the harmonizing rule, crucial after Lesson 64: <b>non-harmonic tones should NOT be a factor in your choice of chord</b>. Harmonize the chord tones; let the decorations decorate. \u{1F447} <b>Melody C-D-E-F-G over one measure, harmony = C chord. The D and F are…</b>",
-      try:{ type:"mc", choices:["Ignored for chord choice — they're passing tones","Proof the chord must be G7","Reasons to change chords twice"], answer:0,
-        success:"✓ C, E, G anchor the C chord; D and F just pass through. One chord, five notes, zero problems.",
+        hint:"Chord tones on strong beats; decorations on weak beats." } },
+    { say:"<b>Choosing Chords:</b> When harmonizing a melody, choose chords based on the <b>chord tones</b>, not the non-harmonic tones. \u{1F447} <b>Melody C-D-E-F-G over one measure, harmony = C chord. Which notes should you use to choose the chord?</b>",
+      try:{ type:"mc", choices:["C, E, G — the chord tones; D and F are passing tones","All five notes equally","Only D and F"], answer:0,
+        success:"✓ C, E, G spell the C chord; D and F are passing tones and do not affect the chord choice.",
         fail:"Which of the five notes are IN C-E-G?",
-        hint:"Harmonize the skeleton, not the skin." } },
-    { say:"Detective time — find each outsider, then classify it. \u{1F447}",
+        hint:"Choose the chord from the chord tones." } },
+    { say:"Identify each non-harmonic tone. \u{1F447}",
       try:{ type:"custom",
         hint:"Different frame = passing; same frame = neighbor (upper/lower by direction).",
         mount:(container,fb)=>MF_L66_detect(container,fb) } },
-    { say:"Full-phrase test, book style: the harmony is C throughout. \u{1F447} <b>In C-B-C-D-E, what is the B?</b>",
+    { say:"<b>Review:</b> Classify each non-harmonic tone. The harmony is C throughout. \u{1F447} <b>In C-B-C-D-E, what is the B?</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:90,notes:[
         {p:"C4",d:"q"},{p:"B3",d:"q"},{p:"C4",d:"q"},{p:"D4",d:"q"},{p:"E4",d:"h"},{bar:"final"}],width:420} },
       try:{ type:"mc", choices:["A lower neighboring tone (and the D is a passing tone)","A passing tone (and the D is a neighbor)","Both are chord tones"], answer:0,
-        success:"✓ C→B→C = same-tone frame from below → LOWER neighbor. Then C→D→E = different-tone frame → PASSING. One phrase, both flavors!",
+        success:"✓ C→B→C = same tone, from below → LOWER neighbor. Then C→D→E = different tones → PASSING. One phrase, both types!",
         fail:"Frame check: C…C (same) then C…E (different).",
         hint:"Watch where each three-note group starts and lands." } }
   ],
   examples:[
-    { caption:"The book's demonstration: a melody over I-IV-V7-I where every arrow-note is a passing tone — outsiders bridging chord tones on weak beats.",
+    { caption:"A melody over I-IV-V7-I where every arrow-note is a passing tone, connecting chord tones on weak beats.",
       staff:{clef:"treble",tempo:100,notes:[
         {p:"C4",d:"q",label:"I"},{p:"D4",d:"q",label:"P"},{p:"E4",d:"q"},{p:"G4",d:"q"},
         {p:"F4",d:"q",label:"IV"},{p:"G4",d:"q",label:"P"},{p:"A4",d:"q"},{p:"C5",d:"q"},
@@ -135,9 +135,9 @@ LESSON_CONTENT[66]={
       kb:{start:60,octaves:2,labels:true} }
   ],
   games:[
-    { type:"gen-race", title:"Game 1 · Outsider Sprint (45s)",
+    { type:"gen-race", title:"Game 1 · Term Sprint (45s)",
       intro:"Passing, upper neighbor, lower neighbor — race the definitions!",
-      miaIntro:"Bridge or boomerang? \u{26A1}",
+      miaIntro:"Passing or neighboring? \u{26A1}",
       spec:{gen:"term-match", params:{subject:"term", pool:[
         ["Non-harmonic tone","a melody note outside the harmony chord"],
         ["Passing tone","steps between two DIFFERENT chord tones"],
@@ -146,14 +146,14 @@ LESSON_CONTENT[66]={
         ["Lower neighbor","the visit from below"],
         ["Their usual beat","weak"],
         ["Their role in chord choice","none — ignore them"]], reverse:true}, seconds:45},
-      result:(score)=>score>=8?score+" — outsider expertise certified!":null },
+      result:(score)=>score>=8?score+" — terms mastered!":null },
     { type:"key-climb", title:"Game 2 · Decorated Melody Climb",
-      intro:"Play a melody WITH its decorations: C-D-E (passing), E-F-E (neighbor), G!",
-      miaIntro:"Feel the bridge and the boomerang! \u{1FA9C}",
+      intro:"Play a melody with its non-harmonic tones: C-D-E (passing), E-F-E (neighbor)!",
+      miaIntro:"Chord tones and decorations! \u{1FA9C}",
       spec:{seq:[60,62,64, 64,65,64, 62,60],
         names:["C (chord tone)","D (passing!)","E (chord tone)","E again","F (upper neighbor!)","E (home)","D (passing down)","C (home)"],
-        start:60, octaves:2, title:"A melody full of legal outsiders"},
-      result:(score)=>score!==null?"Decorations under your fingers!":null },
+        start:60, octaves:2, title:"A melody with passing and neighboring tones"},
+      result:(score)=>score!==null?"Non-harmonic tones under your fingers!":null },
     { type:"symbol-hunt", title:"Game 3 · P, U or L?",
       intro:"Three-note figures on cards — click the one each round names! (Harmony: C chord.)",
       miaIntro:"Check the frame first! \u{1F440}",
@@ -164,8 +164,8 @@ LESSON_CONTENT[66]={
         {label:"All chord tones (C-E-G)", spec:{clef:"treble",notes:[{p:"C4",d:"q"},{p:"E4",d:"q"},{p:"G4",d:"q"}],width:170}}]},
       result:(score)=>score>=5?"Frames read at a glance!":null },
     { type:"term-race", title:"Game 4 · Non-Harmonic Fact Race",
-      intro:"Everything about the melody's legal outsiders!",
-      miaIntro:"Season to taste! \u{1F3C1}",
+      intro:"Everything about non-harmonic tones!",
+      miaIntro:"Facts, fast! \u{1F3C1}",
       spec:{rounds:8, reverse:true, pool:[
         ["C-D-E over a C chord","D is a passing tone"],
         ["E-F-E over a C chord","F is an upper neighbor"],
@@ -174,19 +174,19 @@ LESSON_CONTENT[66]={
         ["Neighbor's journey","out and back to the same tone"],
         ["Weak beats","where non-harmonic tones usually live"],
         ["Chord choice","ignores non-harmonic tones"],
-        ["Non-harmonic tones","seasoning, not mistakes"]]},
-      result:(score)=>score>=6?"Fully seasoned — melody chef!":null }
+        ["Non-harmonic tones","decorations, not mistakes"]]},
+      result:(score)=>score>=6?"Non-harmonic facts mastered!":null }
   ],
-  practiceIntro:"20 practice questions — frames, flavors and the weak-beat rule. Answer right and the next appears automatically!",
+  practiceIntro:"20 practice questions — passing tones, neighboring tones, and the weak-beat rule. Answer right and the next appears automatically!",
   practice:[
-    { gen:"term-match", params:{subject:"term", pool:[["Non-harmonic tone","outside the chord"],["Passing tone","bridges two different chord tones"],["Upper neighbor","above, then back"],["Lower neighbor","below, then back"],["Weak beat","the outsiders' usual home"]], reverse:true}, count:6 },
+    { gen:"term-match", params:{subject:"term", pool:[["Non-harmonic tone","outside the chord"],["Passing tone","bridges two different chord tones"],["Upper neighbor","above, then back"],["Lower neighbor","below, then back"],["Weak beat","where non-harmonic tones usually occur"]], reverse:true}, count:6 },
     { gen:"triad-id", params:{}, count:2 },
     { type:"mc", q:"Tones not part of the harmony chord are called…", choices:["non-harmonic tones","rest tones","grace notes"], answer:0,
       explain:"The umbrella term (AEMT3 p.104)." },
     { type:"mc", q:"A passing tone connects…", choices:["two DIFFERENT chord tones","the same chord tone twice","two rests"], answer:0,
       explain:"It travels through to a new destination." },
-    { type:"mc", q:"A neighboring tone returns to…", choices:["the SAME chord tone it left","a different chord tone","the tonic always"], answer:0,
-      explain:"Out and back — the boomerang." },
+    { type:"mc", q:"A neighboring tone…", choices:["leaves and returns to the SAME chord tone","connects two different chord tones","is always the tonic"], answer:0,
+      explain:"Same → different → same." },
     { type:"mc", q:"An upper neighboring tone sits ____ the chord tone.", choices:["above","below","exactly on"], answer:0,
       explain:"Upper = above; lower = below." },
     { type:"mc", q:"In C-D-E over a C chord, the D is a…", choices:["passing tone","upper neighbor","chord tone"], answer:0,
@@ -194,28 +194,28 @@ LESSON_CONTENT[66]={
     { type:"mc", q:"In G-A-G over a C chord, the A is a…", choices:["upper neighboring tone","passing tone","lower neighbor"], answer:0,
       explain:"Same G frame, visitor from above." },
     { type:"truefalse", q:"Passing and neighboring tones usually occur on a strong beat.", answer:false,
-      explain:"WEAK beats — between the harmony's anchors." },
+      explain:"WEAK beats — chord tones take the strong beats." },
     { type:"truefalse", q:"Non-harmonic tones should not influence which chord you choose.", answer:true,
       explain:"Harmonize the chord tones only." },
     { type:"truefalse", q:"A non-harmonic tone is a half or whole step from its chord tones.", answer:true,
       explain:"Steps, not leaps — that's what keeps them smooth." },
-    { type:"truefalse", q:"Most melodies avoid non-harmonic tones entirely.", answer:false,
-      explain:"MOST melodies include them — that's the book's first sentence." }
+    { type:"truefalse", q:"Most melodies include non-harmonic tones.", answer:true,
+      explain:"Most melodies use them for variety and smooth movement." }
   ],
   miaQuizIntro:"Quiz! Frame first: different tones = passing, same tone = neighbor.",
   quiz:[
     { type:"mc", q:"Non-harmonic tones are…", choices:["melody tones not part of the harmony chord","chord tones played loudly","notes in the bass clef"], answer:0,
-      explain:"Legal outsiders.", hint:"NON-harmonic." },
-    { type:"mc", q:"A PASSING tone…", choices:["connects two different chord tones by step","returns to the same chord tone","is always the tonic"], answer:0,
-      explain:"The bridge.", hint:"It passes THROUGH." },
-    { type:"mc", q:"A NEIGHBORING tone…", choices:["leaves and returns to the same chord tone","connects two different chord tones","only occurs in minor keys"], answer:0,
-      explain:"The boomerang.", hint:"Visit next door, come home." },
+      explain:"Melody notes outside the chord.", hint:"NON-harmonic." },
+    { type:"mc", q:"A passing tone…", choices:["connects two different chord tones by step","returns to the same chord tone","is always the tonic"], answer:0,
+      explain:"Different → different, by step.", hint:"It passes THROUGH." },
+    { type:"mc", q:"A neighboring tone…", choices:["leaves and returns to the same chord tone","connects two different chord tones","only occurs in minor keys"], answer:0,
+      explain:"Same → different → same.", hint:"It returns to the same tone." },
     { type:"mc", q:"An UPPER neighboring tone is ____ the chord tone; a LOWER one is ____.", choices:["above; below","below; above","before; after"], answer:0,
       explain:"Named by direction of the visit.", hint:"The names say it." },
     { type:"truefalse", q:"Passing and neighboring tones usually occur on a weak beat.", answer:true,
-      explain:"Decoration between anchors.", hint:"Where do the anchors sit?" },
-    { type:"truefalse", q:"These tones should be a major factor when choosing chords to harmonize a melody.", answer:false,
-      explain:"The book: they should NOT be a factor.", hint:"Skeleton vs skin." },
+      explain:"Chord tones take the strong beats.", hint:"Where do the chord tones sit?" },
+    { type:"mc", q:"Should non-harmonic tones determine your chord choice?", choices:["No — choose chords from the chord tones","Yes — every note matters equally","Only on strong beats"], answer:0,
+      explain:"Choose the chord from the chord tones.", hint:"Which notes spell the chord?" },
     { type:"mc", q:"The harmony is C (C-E-G). Identify the middle note.",
       staff:{clef:"treble",notes:[{p:"C4",d:"q"},{p:"D4",d:"q"},{p:"E4",d:"q"}],width:260},
       choices:["Passing tone","Upper neighbor","Chord tone"], answer:0,
@@ -227,11 +227,11 @@ LESSON_CONTENT[66]={
     { type:"mc", q:"The harmony is F (F-A-C). In F-G-A, the G is…", choices:["a passing tone","an upper neighbor","a chord tone of F"], answer:0,
       explain:"F and A are chord tones; G bridges them.", hint:"Spell F major first." },
     { type:"mc", q:"A melody over a C chord runs E-F-E-D-C. Classify F and D.", choices:["F = upper neighbor, D = passing tone","F = passing, D = neighbor","both are chord tones"], answer:0,
-      explain:"E-F-E = boomerang; E-D-C = bridge downward.", hint:"Two frames, two flavors." },
-    { type:"mc", q:"Why don't non-harmonic tones clash badly with the chord?", choices:["They step smoothly between chord tones on weak beats","They're played silently","They're actually in the chord"], answer:0,
-      explain:"Steps + weak beats = seamless decoration.", hint:"The two rules combined." },
-    { type:"mc", q:"When harmonizing C-D-E-F-G (one measure), you should analyze…", choices:["C, E, G — the chord tones — and pick the C chord","all five notes equally","only D and F"], answer:0,
-      explain:"D and F pass; the skeleton spells C major.", hint:"Ignore the seasoning." },
+      explain:"E-F-E returns to the same tone; E-D-C steps to a new one.", hint:"Same landing = neighbor; new landing = passing." },
+    { type:"mc", q:"Why do passing and neighboring tones usually sound smooth?", choices:["They move by step between chord tones and usually occur on weak beats","They're played silently","They're actually in the chord"], answer:0,
+      explain:"Stepwise motion on weak beats.", hint:"The two rules combined." },
+    { type:"mc", q:"Which melody notes should be used to choose the harmony? (Melody: C-D-E-F-G)", choices:["C, E, G — the chord tones","All five notes equally","Only D and F"], answer:0,
+      explain:"D and F are non-harmonic; C, E, G spell C major.", hint:"Use the chord tones." },
     /* generated */
     { gen:"term-match", params:{subject:"term", pool:[["Passing","different frame"],["Neighbor","same frame"],["Upper","from above"],["Lower","from below"]], reverse:true}, count:3 },
     { gen:"triad-id", params:{}, count:2 },
@@ -247,7 +247,7 @@ LESSON_CONTENT[66]={
   ],
   mistakes:[],
   summary:[
-    "✔ <b>Non-harmonic tones</b> = melody notes outside the harmony chord — seasoning, not errors.",
+    "✔ <b>Non-harmonic tones</b> = melody notes outside the harmony chord — decorations, not errors.",
     "✔ <b>Passing tone</b>: steps between two <b>DIFFERENT</b> chord tones (C-D-E).",
     "✔ <b>Neighboring tone</b>: out and back to the <b>SAME</b> chord tone — <b>upper</b> above, <b>lower</b> below.",
     "✔ Both usually live on <b>weak beats</b>.",
@@ -255,15 +255,15 @@ LESSON_CONTENT[66]={
   ],
   tips:[
     "Analysis routine: bracket each 3-note group, compare first and last notes. Same = neighbor; different = passing.",
-    "Sing 'London Bridge' — it's stuffed with passing and neighboring tones (the book uses it as an exercise!).",
-    "Composer's cheat: turn any boring chord-tone melody into a real tune by inserting passing tones on the weak beats.",
+    "Sing 'London Bridge' — it is full of passing and neighboring tones.",
+    "Turn a plain chord-tone melody into a real tune by adding passing tones on the weak beats.",
     "Next lesson you COMPOSE: your own melody over a progression, decorations included."
   ],
   rewards:{ badge:"Tone Gardener", icon:"\u{1F98B}" },
   sectionOrder:["secHook","secObjectives","secLearn","secExample","secReview",
     "secGame0","secGame1","secGame2","secGame3","secPractice","secQuiz","secTips","secNext"],
-  miaPerfect:"PERFECT! Passing, upper, lower — every outsider named on sight. \u{1F98B}\u{1F389}",
-  miaPass:"Passed! The melody's decorations hold no secrets. Time to compose your own…",
+  miaPerfect:"PERFECT! Passing, upper, lower — every non-harmonic tone named on sight. \u{1F98B}\u{1F389}",
+  miaPass:"Passed! You know the non-harmonic tones. Time to compose your own melody…",
   mia:{
     hook:{ label:"the welcome",
       explain:"Melody B added D between C and E — a PASSING tone: outside the C chord, but a smooth, legal bridge between two chord tones.",
@@ -278,7 +278,7 @@ LESSON_CONTENT[66]={
       explain:"Sprint the terms, play a decorated melody, classify P/U/L cards, then race the facts.",
       hint:"Passing passes; neighbors come home." },
     quiz:{ label:"this question",
-      explain:"One method: identify the chord, find the outsider, check its frame (same tone = neighbor, different = passing), then the direction.",
+      explain:"One method: identify the chord, find the non-harmonic tone, check where it lands (same tone = neighbor, different = passing), then the direction.",
       play:()=>{[60,62,64].forEach((m,i)=>MFAudio.tone(m,.45,i*.4,.42));} }
   }
 };

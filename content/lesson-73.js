@@ -17,7 +17,7 @@ function MF_L73_contrast(container,fb){
       expl:"A climbs stepwise; B tumbles downward. Melodic contrast — element #1."},
     {q:"Round 2: listen again — what ELSE differs?",
       choices:["The rhythm — A is even, B mixes long and short","The instrument","Nothing else"], right:0,
-      expl:"A moves in even values; B uses longs and quick shorts — rhythmic contrast, exactly like the book's example."}];
+      expl:"A moves in even values; B uses longs and quick shorts — rhythmic contrast."}];
   let r=0, heardA=false, heardB=false;
   container.innerHTML=`<div class="big-q l73c-q" style="text-align:center"></div>
     <div style="text-align:center">
@@ -27,13 +27,13 @@ function MF_L73_contrast(container,fb){
   const q=container.querySelector(".l73c-q"), ch=container.querySelector(".l73c-ch");
   function play(S){ let t=0; S.notes.forEach((m,i)=>{ MFAudio.tone(m,S.durs[i]*.95,t,.42); t+=S.durs[i]; }); return t; }
   function ask(){
-    if(r>=ROUNDS.length){ q.textContent="Both contrasts caught — melody AND rhythm. That's how B earns its own letter!"; ch.style.display="none"; return; }
+    if(r>=ROUNDS.length){ q.textContent="Great! You found the contrast — melody AND rhythm make B a new section."; ch.style.display="none"; return; }
     q.innerHTML=ROUNDS[r].q; ch.style.display="none"; ch.innerHTML="";
     ROUNDS[r].choices.forEach((c,i)=>{
       const b=document.createElement("button"); b.textContent=c;
       b.onclick=()=>{
         if(i===ROUNDS[r].right){ MFAudio.yay(); fb(true,"✓ "+ROUNDS[r].expl); r++; heardA=false; heardB=false; setTimeout(ask,1400); }
-        else { MFAudio.tone(40,.2); fb(false,"Play both sections again and compare that specific element."); }
+        else { MFAudio.tone(40,.2); fb(false,"Listen for the contrast — play both sections again and compare that element."); }
       };
       ch.appendChild(b);
     });
@@ -51,16 +51,16 @@ function MF_L73_vr(container,fb){
     {desc:"This section REPEATS with the same words after every verse — the whole room sings along.", ans:1,
       expl:"The repeated crowd-singer = the REFRAIN (or chorus)."},
     {desc:"In 'Go, Tell It On the Mountain,' the part marked A tells the seeker's story differently in each stanza.", ans:0,
-      expl:"Story that changes = verse — the book marks it as the A section."},
+      expl:"Story that changes = verse — the A section."},
     {desc:"The part that always returns with 'Go, tell it on the mountain…' word for word.", ans:1,
-      expl:"Same words, every time = refrain — the B section of the book's example."}];
+      expl:"Same words, every time = refrain — the B section."}];
   let r=0;
   container.innerHTML=`<div class="big-q l73v-q" style="text-align:center"></div>
     <div class="choices chips l73v-ch"><button>Verse</button><button>Refrain</button></div>`;
   const q=container.querySelector(".l73v-q"), ch=container.querySelector(".l73v-ch");
   function ask(){
-    if(r>=ROUNDS.length){ q.textContent="Verse and refrain sorted — the AB song format is yours!"; ch.style.display="none"; return; }
-    q.innerHTML=`Card ${r+1} of ${ROUNDS.length}: <i>${ROUNDS[r].desc}</i>`;
+    if(r>=ROUNDS.length){ q.textContent="Excellent! Verse and refrain — the AB song format is yours."; ch.style.display="none"; return; }
+    q.innerHTML=`Example ${r+1} of ${ROUNDS.length}: <i>${ROUNDS[r].desc}</i>`;
   }
   [...ch.children].forEach((b,i)=>b.onclick=()=>{
     const R=ROUNDS[r]; if(!R) return;
@@ -71,15 +71,15 @@ function MF_L73_vr(container,fb){
 }
 
 LESSON_CONTENT[73]={
-  welcome:"Phrases learned to breathe. Now they join teams — Team A and Team B. \u{1F1E6}",
+  welcome:"Binary (AB) form: music with two different sections. \u{1F1E6}",
   hook:{
-    say:"Two sections of one little piece. <b>Listen: do they feel like the SAME idea twice — or like two DIFFERENT ideas taking turns?</b>",
+    say:"<b>Listen to this piece.</b> \u{1F447} <b>Do you hear one musical idea, or two different sections?</b>",
     interact:{ type:"custom",
       mount:(container,fb)=>{
         container.innerHTML=`<div style="text-align:center">
           <button class="play hk-a">▶ First section</button>
           <button class="play hk-b">▶ Second section</button></div>
-          <div class="choices hk-ch" style="display:none"><button>Two different ideas — A, then a contrasting B</button><button>The same idea twice</button></div>`;
+          <div class="choices hk-ch" style="display:none"><button>Two different sections — A, then a contrasting B</button><button>One idea, played twice</button></div>`;
         const ch=container.querySelector(".hk-ch");
         let hA=false,hB=false;
         container.querySelector(".hk-a").onclick=()=>{ [60,62,64,65,67,67].forEach((m,i)=>MFAudio.tone(m,.4,i*.42,.42)); hA=true; if(hB) setTimeout(()=>ch.style.display="",2800); };
@@ -99,47 +99,53 @@ LESSON_CONTENT[73]={
     "Recognize verse + refrain as typical AB form"
   ],
   steps:[
-    { say:"Scaling up: <b>several phrases can be combined to form a complete SECTION (or part)</b>. When a piece has TWO sections whose material <b>contrasts</b>, it's in <b>AB — BINARY — FORM</b>. \u{1F447} <b>'Binary' means the piece has…</b>",
+    { say:"<b>What Is Binary Form?</b> Several phrases can combine to form a <b>section</b>. Music with <b>two different sections</b> is called <b>binary (AB) form</b>. \u{1F447} <b>What does binary form mean?</b>",
+      show:{ type:"html", html:`<div style="max-width:300px;margin:0 auto;font-size:16px;line-height:1.9;background:var(--card,#fff);border:1.5px solid #cdd5e1;border-radius:12px;padding:12px 18px;text-align:center;font-weight:800">
+        Section A&nbsp;&nbsp;|&nbsp;&nbsp;Section B<br><span style="font-weight:400;font-size:13.5px">two different sections</span></div>` },
       try:{ type:"mc", choices:["Two contrasting parts","Two composers","Two tempos always"], answer:0,
-        success:"✓ Bi = two. A states, B contrasts — like a conversation between two speakers.",
+        success:"✓ Bi = two. Binary form has two different sections: A and B.",
         fail:"Count the letters in 'AB'…",
         hint:"Bi-nary, bi-cycle…" } },
-    { say:"How is contrast made? Through <b>ELEMENTS: melody, rhythm, harmony, time signature and tempo</b>. In the book's example, A opens with an <b>ascending melody in quarter notes</b>; B answers with a <b>descending melody</b> in longs, dotted 8ths and 16ths. \u{1F447} <b>Detect the contrasts yourself:</b>",
+    { say:"<b>How Are the Sections Different?</b> Sections can be different in <b>melody, rhythm, harmony, tempo, and time signature</b>. In our example, A has an ascending melody in even notes; B has a descending melody in dotted rhythm. \u{1F447} <b>Which musical elements changed?</b>",
       try:{ type:"custom",
         hint:"Compare direction first, then rhythm.",
         mount:(container,fb)=>MF_L73_contrast(container,fb) } },
-    { say:"Important nuance: the two sections <b>may share a motive or end similarly</b> — but <b>each is musically distinct</b>. (In the book's song, the time signature stays the same and the harmony is similar; melody and rhythm carry the contrast.) \u{1F447} <b>For AB form, the sections must…</b>",
-      try:{ type:"mc", choices:["Be musically distinct from each other","Share absolutely nothing","Use different time signatures always"], answer:0,
-        success:"✓ Distinct, not alien — B can borrow a motive and still be its own section. Contrast in SOME elements is enough.",
-        fail:"Total separation isn't required — the book allows sharing…",
-        hint:"Distinct ≠ unrelated." } },
-    { say:"The song-format connection: <b>a VERSE tells a story and CHANGES with each repetition; the REFRAIN (or CHORUS) REPEATS after every verse</b>. And: <b>the verse-refrain format is typical of AB form</b>. \u{1F447} <b>Sort these cards:</b>",
+    { say:"<b>Different, but Connected:</b> The two sections should sound different. They may still share some musical ideas. <b>Remember: binary form has two different sections. They may share ideas, but they should sound different.</b> \u{1F447} <b>Must the two sections be completely different?</b>",
+      try:{ type:"mc", choices:["No — they may share ideas, but should sound different","Yes — they must share nothing","They must use different time signatures"], answer:0,
+        success:"✓ The sections may share a motive and still be distinct — contrast in SOME elements is enough.",
+        fail:"Total separation is not required…",
+        hint:"Different, but connected." } },
+    { say:"<b>Verse and Chorus:</b> In many songs, the <b>verse</b> tells a story and changes each time; the <b>chorus (refrain)</b> repeats after every verse. In many songs: verse = A, chorus = B. \u{1F447} <b>Which section repeats after each verse?</b>",
+      show:{ type:"html", html:`<table style="border-collapse:collapse;margin:0 auto;font-size:14.5px;min-width:240px">
+        <tr><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:6px 14px">Section</th><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:6px 14px">Typical Song Part</th></tr>
+        <tr><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center;font-weight:800">A</td><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center">Verse</td></tr>
+        <tr><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center;font-weight:800">B</td><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center">Chorus (Refrain)</td></tr></table>` },
       try:{ type:"custom",
         hint:"Changing story = verse; repeated sing-along = refrain.",
         mount:(container,fb)=>MF_L73_vr(container,fb) } },
-    { say:"Map it: in \u{201C}Go, Tell It On the Mountain\u{201D} the book labels the <b>verse as A</b> and the <b>refrain as B</b>. \u{1F447} <b>When the congregation joins in on the famous title line, they're singing…</b>",
+    { say:"In this song, <b>verse = A</b> and <b>chorus = B</b>. In \u{201C}Go, Tell It On the Mountain,\u{201D} everyone joins in on the famous title line. \u{1F447} <b>Which section is the chorus?</b>",
       try:{ type:"mc", choices:["The B section — the refrain","The A section — the verse","An improvised solo"], answer:0,
-        success:"✓ The repeated, join-in part is the refrain — section B of this AB song.",
+        success:"✓ The repeated, join-in part is the chorus (refrain) — section B of this AB song.",
         fail:"Which part repeats word-for-word every time?",
         hint:"Refrain = the repeater = B here." } },
-    { say:"Analysis drill, book style: a piece's first section ends with a <b>V7 chord</b> (incomplete — a musical comma); its second ends on <b>I</b> (complete). \u{1F447} <b>Which section probably ends on V7?</b>",
+    { say:"<b>Ending Each Section:</b> Section A often ends with an unfinished feeling. Section B usually sounds complete. \u{1F447} <b>Which section ends on V7?</b>",
       try:{ type:"mc", choices:["A — leaving the door open for B","B — endings love V7","Neither can end on V7"], answer:0,
-        success:"✓ A pauses expectantly (V7), B closes the door (I) — the same comma/period logic as phrases, one level up. (The book's exercise 2 asks exactly this!)",
+        success:"✓ Section A ends on V7 (unfinished, leading onward); section B ends on I (complete).",
         fail:"Which section needs to lead INTO the other?",
-        hint:"Commas come before the end, not at it." } },
-    { say:"Big-picture check. \u{1F447} <b>Which of these is an AB-form song plan?</b>",
+        hint:"Unfinished endings come first." } },
+    { say:"<b>Review:</b> \u{1F447} <b>Which example shows binary form?</b>",
       try:{ type:"mc", choices:["Verse (A) → Refrain (B), repeated","One melody with no sections","A section played three times identically"], answer:0,
-        success:"✓ Story, sing-along, story, sing-along — binary form powering half the songbook. Next lesson: what happens when A comes BACK after B…",
+        success:"✓ Verse then chorus — two different sections: binary form. Next lesson: what happens when A comes BACK after B…",
         fail:"AB needs TWO different sections…",
-        hint:"The typical format from the book's last paragraph." } }
+        hint:"Verse + chorus." } }
   ],
   examples:[
-    { caption:"A miniature binary piece: section A rises in even quarters and pauses on V7 (the comma); section B falls in dotted rhythm and closes on I (the period). Two sections, one journey.",
+    { caption:"A miniature binary piece: section A rises in even quarters and pauses on V7 (unfinished); section B falls in dotted rhythm and closes on I (complete).",
       staff:{clef:"treble",tempo:100,notes:[
         {p:"C4",d:"q",label:"A"},{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"F4",d:"q"},{p:"G4",d:"h",label:"…ends on V7"},{p:"B4",d:"h"},{bar:"double"},
         {p:"C5",d:"q.",label:"B"},{p:"B4",d:"8"},{p:"A4",d:"q"},{p:"G4",d:"q"},{p:"E4",d:"h",label:"…ends on I"},{p:"C4",d:"h"},{bar:"final"}],width:640},
       kb:{start:57,octaves:2,labels:true} },
-    { caption:"The verse-refrain wheel: A (the changing story) hands off to B (the repeated refrain), again and again — the typical AB song format.",
+    { caption:"Verse and refrain: A (the changing story) hands off to B (the repeated refrain), again and again — the typical AB song format.",
       staff:{clef:"treble",tempo:110,notes:[
         {p:"E4",d:"q",label:"A: verse 1…"},{p:"G4",d:"q"},{p:"E4",d:"q"},{p:"D4",d:"h"},
         {p:"G4",d:"q",label:"B: refrain!"},{p:"A4",d:"q"},{p:"G4",d:"q"},{p:"C5",d:"h"},{bar:"double"},
@@ -174,66 +180,66 @@ LESSON_CONTENT[73]={
       spec:{rounds:6, pool:[
         {label:"A material (rising, even)", spec:{clef:"treble",notes:[{p:"C4",d:"q"},{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"F4",d:"q"}],width:170}},
         {label:"B material (falling, dotted)", spec:{clef:"treble",notes:[{p:"C5",d:"q."},{p:"B4",d:"8"},{p:"A4",d:"q"},{p:"G4",d:"q"}],width:170}},
-        {label:"A's ending (V7 — the comma)", spec:{clef:"treble",notes:[{p:"G4",d:"w"},{p:"B4",d:"w",chord:true},{p:"F5",d:"w",chord:true}],width:150}},
-        {label:"B's ending (I — the period)", spec:{clef:"treble",notes:[{p:"C4",d:"w"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true}],width:150}}]},
+        {label:"A's ending (V7 — unfinished)", spec:{clef:"treble",notes:[{p:"G4",d:"w"},{p:"B4",d:"w",chord:true},{p:"F5",d:"w",chord:true}],width:150}},
+        {label:"B's ending (I — complete)", spec:{clef:"treble",notes:[{p:"C4",d:"w"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true}],width:150}}]},
       result:(score)=>score>=5?"Sections sorted on sight!":null },
     { type:"order-tap", title:"Game 4 · Assemble the AB Song",
       intro:"Tap the parts of a two-verse AB song in performance order!",
       miaIntro:"Story, sing-along, repeat! \u{1F3C1}",
       spec:{sequence:["Verse 1 (A)","Refrain (B)","Verse 2 (A — new words)","Refrain (B — same words)"],
         title:"One AB song, start to finish"},
-      result:(stars)=>stars>=2?"The AB wheel turns in your head now!":null }
+      result:(stars)=>stars>=2?"The AB song format is yours!":null }
   ],
   practiceIntro:"20 practice questions — sections, contrasts and the verse-refrain format. Answer right and the next appears automatically!",
   practice:[
     { gen:"term-match", params:{subject:"term", pool:[["Binary","two-part"],["A section","the statement"],["B section","the contrast"],["Verse","the changing story"],["Refrain","the repeater"],["Section","phrases combined"]], reverse:true}, count:6 },
     { gen:"triad-id", params:{ask:"numeral"}, count:2 },
     { type:"mc", q:"Several phrases combine to form a…", choices:["complete section (or part)","motive","key signature"], answer:0,
-      explain:"The next size up from a phrase (AEMT3 p.115)." },
-    { type:"mc", q:"Two-part forms are called…", choices:["AB or binary form","ABA form","rondo form"], answer:0,
+      explain:"The next size up from a phrase." },
+    { type:"mc", q:"Binary form has…", choices:["two different sections","three sections","one repeated section"], answer:0,
       explain:"Bi = two." },
-    { type:"mc", q:"In AB form, the material of the A section ____ the B section's.", choices:["contrasts with","is identical to","is louder than"], answer:0,
+    { type:"mc", q:"The A and B sections should…", choices:["sound different","be identical","use the same melody"], answer:0,
       explain:"Contrast defines the form." },
-    { type:"mc", q:"Which are contrast ELEMENTS named by the book?", choices:["melody, rhythm, harmony, time signature, tempo","only volume","only key"], answer:0,
-      explain:"Five levers of variety." },
-    { type:"mc", q:"A VERSE is a section that…", choices:["tells a story and changes with each repetition","never changes","is always instrumental"], answer:0,
-      explain:"The storyteller." },
-    { type:"mc", q:"A REFRAIN (or chorus) is…", choices:["repeated after each verse","sung only once","the same as a motive"], answer:0,
-      explain:"The sing-along that returns." },
+    { type:"mc", q:"Sections can be different in…", choices:["melody, rhythm, harmony, time signature and tempo","only volume","only key"], answer:0,
+      explain:"Five musical elements." },
+    { type:"mc", q:"What does a verse usually do?", choices:["Tells a story and changes with each repetition","Never changes","Is always instrumental"], answer:0,
+      explain:"The verse carries the story." },
+    { type:"mc", q:"What is a refrain (chorus)?", choices:["The section repeated after each verse","A section sung only once","The same as a motive"], answer:0,
+      explain:"The section that returns." },
     { type:"truefalse", q:"The two sections of an AB piece may share a motive.", answer:true,
       explain:"Shared DNA is allowed — distinctness is required." },
     { type:"truefalse", q:"The verse-refrain song format is typical of AB form.", answer:true,
-      explain:"The book's closing point." },
+      explain:"Verse = A, chorus = B." },
     { type:"truefalse", q:"AB form requires a different time signature in each section.", answer:false,
-      explain:"The book's example keeps ONE time signature throughout." },
+      explain:"A single time signature can serve both sections." },
     { type:"truefalse", q:"In 'Go, Tell It On the Mountain,' the refrain is the B section.", answer:true,
       explain:"Verse = A, refrain = B." }
   ],
-  miaQuizIntro:"Quiz! Two letters, five elements, one storytelling wheel.",
+  miaQuizIntro:"Quiz! Two letters, five elements, one song format.",
   quiz:[
-    { type:"mc", q:"In music, several phrases can be combined to form…", choices:["a complete section (or part)","a single note","a key signature"], answer:0,
-      explain:"Phrases → sections → forms.", hint:"The pyramid's next floor." },
-    { type:"mc", q:"Two-part forms are called…", choices:["AB or binary form","ternary form","rondo"], answer:0,
+    { type:"mc", q:"Several phrases make a…", choices:["complete section (or part)","single note","key signature"], answer:0,
+      explain:"Phrases → sections → forms.", hint:"The next building block." },
+    { type:"mc", q:"Binary form means…", choices:["music with two different sections (AB)","music with three sections","one repeated section"], answer:0,
       explain:"Two letters, two parts.", hint:"Bi-." },
     { type:"mc", q:"In AB form, the first section's material ____ the second's.", choices:["contrasts with","copies","must be shorter than"], answer:0,
       explain:"Contrast is the definition.", hint:"Why B gets its own letter." },
-    { type:"mc", q:"Variety between sections is achieved through differences in ELEMENTS such as…", choices:["melody, rhythm, harmony, time signature and tempo","paper size","the performer's outfit"], answer:0,
-      explain:"The book's list of five.", hint:"All musical dials." },
+    { type:"mc", q:"Which musical elements can make two sections different?", choices:["Melody, rhythm, harmony, time signature and tempo","Paper size","The performer's clothing"], answer:0,
+      explain:"Five musical elements.", hint:"All musical elements." },
     { type:"truefalse", q:"The two sections may share a motive or end similarly.", answer:true,
-      explain:"…while remaining musically distinct.", hint:"The nuance step." },
+      explain:"…while remaining musically distinct.", hint:"Different, but connected." },
     { type:"truefalse", q:"A verse changes with each repetition.", answer:true,
       explain:"The story moves on.", hint:"Verse 1, verse 2…" },
     { type:"mc", q:"The section repeated after each verse is the…", choices:["refrain (or chorus)","bridge","coda"], answer:0,
-      explain:"The book gives both names.", hint:"The crowd's favorite part." },
-    { type:"mc", q:"In the book's 'Go, Tell It On the Mountain': verse and refrain map to…", choices:["verse = A, refrain = B","verse = B, refrain = A","both are A"], answer:0,
-      explain:"Story first, sing-along second.", hint:"The order they arrive." },
-    { type:"mc", q:"In the book's example, which elements carry the A/B contrast?", choices:["Melody direction and rhythm (time signature stays, harmony similar)","Time signature only","Nothing differs"], answer:0,
-      explain:"Ascending quarters vs descending dotted figures.", hint:"The contrast detective's findings." },
-    { type:"mc", q:"Section A ends on V7; section B ends on I. This means…", choices:["A pauses like a comma; B closes like a period","A is finished; B is incomplete","both are complete"], answer:0,
-      explain:"Phrase logic, one level up.", hint:"Which chord says 'to be continued'?" },
+      explain:"Refrain and chorus are two names for it.", hint:"The crowd's favorite part." },
+    { type:"mc", q:"In this song, which section is the chorus? (Verse and chorus alternate.)", choices:["B — the chorus repeats after each verse","A — the chorus tells the story","Neither"], answer:0,
+      explain:"Verse = A, chorus = B.", hint:"Which part repeats?" },
+    { type:"mc", q:"Which musical elements create the contrast between A and B in our example?", choices:["Melody direction and rhythm","Time signature only","Nothing differs"], answer:0,
+      explain:"Ascending even notes vs descending dotted figures.", hint:"Compare direction and rhythm." },
+    { type:"mc", q:"Section A sounds unfinished, but Section B sounds complete. Why?", choices:["Section A ends on V7; section B ends on I","Section A is louder","Section B is shorter"], answer:0,
+      explain:"V7 leads onward; I closes.", hint:"Which chord says 'to be continued'?" },
     { type:"mc", q:"A song alternates 'story stanza' → 'same-words chorus' → 'new story stanza' → 'same-words chorus.' Its form is…", choices:["AB (binary) — verse and refrain","one giant A","rondo"], answer:0,
       explain:"The typical AB format in action.", hint:"Two alternating jobs." },
-    { type:"mc", q:"Which is NOT enough, by itself, to create true AB form?", choices:["Playing the same section twice at the same volume","Contrasting melodies between sections","Contrasting rhythms between sections"], answer:0,
+    { type:"mc", q:"Which example is NOT binary form?", choices:["Repeating the same section without contrast","A verse followed by a contrasting chorus","Two sections with different melodies"], answer:0,
       explain:"Repetition without contrast = still just A.", hint:"B must be DIFFERENT." },
     /* generated */
     { gen:"term-match", params:{subject:"term", pool:[["A","the statement"],["B","the contrast"],["Verse","changes each time"],["Refrain","repeats each time"]], reverse:true}, count:3 },
@@ -274,12 +280,12 @@ LESSON_CONTENT[73]={
       hint:"A states, B contrasts.",
       play:()=>{[60,62,64,65,67,67].forEach((m,i)=>MFAudio.tone(m,.38,i*.4,.42));} },
     example:{ label:"the examples",
-      explain:"Example 1 is a miniature binary piece (A ends on V7, B on I); example 2 turns the verse-refrain wheel twice." },
+      explain:"Example 1 is a miniature binary piece (A ends on V7, B on I); example 2 alternates verse and refrain twice." },
     game:{ label:"the games",
       explain:"Sprint the facts, play both sections, sort A/B material, then assemble a two-verse song.",
       hint:"Contrast = different letter." },
     quiz:{ label:"this question",
-      explain:"Three ideas answer everything: sections are phrase-teams, AB means contrast, and verse/refrain is AB's most famous costume.",
+      explain:"Three ideas answer everything: sections are groups of phrases, AB means two contrasting sections, and verse/refrain is the typical AB song format.",
       play:()=>{[72,71,69,67,60].forEach((m,i)=>MFAudio.tone(m,.4,i*.38,.42));} }
   }
 };

@@ -9,7 +9,7 @@
 /* build the 12-bar blues, bar by bar */
 function MF_L70_build(container,fb){
   const FORM=["I","I","I","I","IV","IV","I","I","V7","IV","I","I"];
-  const HINTS=["Four bars of home to start…","…still I…","…still I…","…one more!","Bar 5: the FIRST change — up to…","…two bars of it.","Back home for two…","…second one.","Bar 9: the climax chord!","Bar 10: step down through…","Home again…","…and done!"];
+  const HINTS=["Four bars of I to start…","…still I…","…still I…","…one more!","Bar 5: the FIRST change — up to…","…two bars of it.","Back to I for two…","…second one.","Bar 9: V or V7!","Bar 10: step down through…","Back to I…","…and done!"];
   const CH={I:[48,64,67,72], IV:[53,65,69,72], V7:[43,67,71,77]};
   let k=0; const picked=[];
   container.innerHTML=`<div class="big-q l70b-q" style="text-align:center"></div>
@@ -28,7 +28,7 @@ function MF_L70_build(container,fb){
   }
   function ask(){
     drawGrid();
-    if(k>=FORM.length){ q.textContent="All 12 bars filled — the exact traditional blueprint. Hit play and feel it roll!"; ch.style.display="none"; pl.style.display="inline-block"; return; }
+    if(k>=FORM.length){ q.textContent="Excellent! Your 12-bar blues is complete. Listen to your progression!"; ch.style.display="none"; pl.style.display="inline-block"; return; }
     q.innerHTML=`Bar ${k+1} of 12 — <i>${HINTS[k]}</i>`;
   }
   [...ch.children].forEach(b=>b.onclick=()=>{
@@ -36,26 +36,26 @@ function MF_L70_build(container,fb){
     if(b.textContent===FORM[k]){
       CH[b.textContent].forEach(m=>MFAudio.tone(m,.7,.05,.26));
       picked.push(b.textContent); k++;
-      fb(true,`✓ Bar ${k}: ${picked[k-1]}. ${k===12?"Blueprint complete!":""}`);
+      fb(true,`✓ Great! Bar ${k}: ${picked[k-1]}. ${k===12?"Pattern complete!":"Keep building the progression."}`);
       ask();
-    } else { MFAudio.tone(40,.2); fb(false,`Not bar ${k+1}'s chord. The formula: I×4, IV×2, I×2, V7×1, IV×1, I×2.`); }
+    } else { MFAudio.tone(40,.2); fb(false,`Which chord belongs in bar ${k+1}? The pattern: I×4, IV×2, I×2, V7×1, IV×1, I×2.`); }
   });
   pl.onclick=()=>{
     picked.forEach((f,i)=>CH[f].forEach(m=>MFAudio.tone(m,.75,i*.8,.26)));
-    setTimeout(()=>fb(true,"✓ Twelve bars of blues — the chassis of thousands of songs, built by you."),9800);
+    setTimeout(()=>fb(true,"✓ Twelve bars of blues — one of the most common progressions in popular music, built by you."),9800);
   };
   ask();
 }
 
 LESSON_CONTENT[70]={
-  welcome:"Today's progression has carried more songs than any other in history. Twelve bars. One legend. \u{1F3B7}",
+  welcome:"The 12-bar blues: one pattern, thousands of songs. \u{1F3B7}",
   hook:{
-    say:"Close your eyes and listen to these twelve bars. <b>Jazz clubs, rock stages, pop radio — where have you heard this pattern before?</b>",
+    say:"<b>Many blues, rock, and jazz songs use the same chord pattern.</b> Listen to these twelve bars. <b>Can you recognize the 12-bar blues?</b>",
     interact:{ type:"custom",
       mount:(container,fb)=>{
         container.innerHTML=`<div style="text-align:center">
           <button class="play hk-a">▶ Play the 12 bars</button></div>
-          <div class="choices hk-ch" style="display:none"><button>Everywhere — it's the famous BLUES progression</button><button>Only in classical symphonies</button><button>Never — it sounds brand new</button></div>`;
+          <div class="choices hk-ch" style="display:none"><button>Yes — it's the famous BLUES progression</button><button>No — it's a classical symphony pattern</button><button>No — it sounds brand new</button></div>`;
         const FORM=[[48,64,67,72],[48,64,67,72],[48,64,67,72],[48,64,67,72],[53,65,69,72],[53,65,69,72],[48,64,67,72],[48,64,67,72],[43,67,71,77],[53,65,69,72],[48,64,67,72],[48,64,67,72]];
         const ch=container.querySelector(".hk-ch");
         container.querySelector(".hk-a").onclick=()=>{
@@ -63,59 +63,62 @@ LESSON_CONTENT[70]={
           setTimeout(()=>ch.style.display="",9200);
         };
         [...ch.children].forEach((b,i)=>b.onclick=()=>{
-          if(i===0) fb(true,"✓ The 12-BAR BLUES — born in America's south from West African rhythms, gospel singing and European harmonies, and adopted by jazz, rock and pop alike. Today you learn its blueprint by heart!");
-          else fb(false,"Think of old rock'n'roll, boogie-woogie piano, jazz jams… that chord wheel is EVERYWHERE.");
+          if(i===0) fb(true,"✓ The 12-BAR BLUES — born in America's south from West African rhythms, gospel singing and European harmonies, and used in jazz, rock and pop. Today you learn its pattern!");
+          else fb(false,"Think of old rock'n'roll, boogie-woogie piano, jazz jams… this chord pattern is everywhere.");
         });
       } }
   },
   objectives:[
-    "Tell the blues' origin story: America's south — West African rhythms + gospel + European harmonies",
+    "Know where the blues began: the southern United States — West African rhythms + gospel + European harmonies",
     "Know where it lives now: jazz, rock and pop",
     "Define the form: 12 measures ('bars')",
-    "Memorize the traditional map: I×4 · IV×2 · I×2 · V(7)×1 · IV×1 · I×2",
+    "Know the traditional pattern: I×4 · IV×2 · I×2 · V(7)×1 · IV×1 · I×2",
     "Build a 12-bar blues in C (and transfer to other keys)",
-    "Use only I, IV and V(7) — three old friends, new groove"
+    "Use only I, IV and V(7)"
   ],
   steps:[
-    { say:"The history, straight from the book: <b>the blues has its roots in America's south</b>, where musicians combined <b>West African rhythms</b> with <b>gospel singing</b> and <b>European harmonies</b>. Today you'll find it <b>in jazz, rock and pop</b>. \u{1F447} <b>The blues grew from…</b>",
+    { say:"<b>The Blues:</b> Blues music began in the southern United States. It combines <b>West African rhythms, gospel singing, and European harmony</b>. Today, blues influences jazz, rock, and pop music. \u{1F447} <b>Blues music combines which musical traditions?</b>",
       try:{ type:"mc", choices:["West African rhythms + gospel singing + European harmonies","A single European composer","Electronic dance music"], answer:0,
         success:"✓ Three traditions met in the American south and built a musical language the whole world now speaks.",
-        fail:"The book lists three ingredients…",
+        fail:"Three traditions combined…",
         hint:"Rhythms + singing + harmonies." } },
-    { say:"The form: <b>a blues chord progression is usually 12 measures — 'bars' — long</b>. Many variations exist, but the <b>traditional</b> version uses just I, IV and V(7). \u{1F447} <b>How long is a standard blues progression?</b>",
+    { say:"<b>The 12-Bar Blues:</b> A traditional blues progression lasts <b>12 measures (bars)</b>. It mainly uses three chords: <b>I, IV, and V (or V7)</b>. \u{1F447} <b>How many measures are in a standard blues progression?</b>",
       try:{ type:"mc", choices:["12 bars","8 bars","16 bars"], answer:0,
         success:"✓ Twelve — hence the name. And those twelve bars loop, verse after verse.",
         fail:"The lesson's title has the number…",
         hint:"It's in the name." } },
-    { say:"The map, piece by piece — first, the LONG opening: <b>the I chord holds for FOUR full bars</b>. \u{1F447} <b>Bars 1-4 of a C blues are all…</b>",
+    { say:"<b>Bars 1–4:</b> The progression begins with <b>four measures of the I chord</b>. \u{1F447} <b>Which chord is played in bars 1–4 of a C blues?</b>",
       try:{ type:"mc", choices:["C (the I chord)","F (the IV chord)","G7 (the V7)"], answer:0,
-        success:"✓ Four bars of home — the blues takes its time settling in. (Singers use these bars for the first line of the verse.)",
-        fail:"The progression BEGINS at home…",
-        hint:"Longest stay = home base." } },
-    { say:"The middle: <b>IV for 2 bars, then back to I for 2 bars</b> (bars 5-8). \u{1F447} <b>The FIRST chord change of a blues arrives at bar…</b>",
+        success:"✓ Four bars of I. (Singers use these bars for the first line of the verse.)",
+        fail:"The progression begins on the tonic…",
+        hint:"The I chord opens the form." } },
+    { say:"<b>Bars 5–8:</b> Bars 5–6 use the <b>IV chord</b>. Bars 7–8 return to the <b>I chord</b>. \u{1F447} <b>When does the first chord change occur?</b>",
       show:{ type:"html", html:`<div style="max-width:430px;margin:0 auto;font-size:15px;line-height:2.1;background:var(--card,#fff);border:1.5px solid #cdd5e1;border-radius:12px;padding:12px 18px;text-align:center;font-weight:700">
         Bars 1-4: <b>I</b> &nbsp;·&nbsp; Bars 5-6: <b>IV</b> &nbsp;·&nbsp; Bars 7-8: <b>I</b><br>Bar 9: <b>V or V7</b> &nbsp;·&nbsp; Bar 10: <b>IV</b> &nbsp;·&nbsp; Bars 11-12: <b>I</b></div>` },
       try:{ type:"mc", choices:["Bar 5 — up to IV","Bar 2","Bar 9"], answer:0,
-        success:"✓ Four bars of I, THEN the lift to IV — that bar-5 shift is the first big landmark every blues player feels coming.",
+        success:"✓ Bar 5 — after four bars of I, the progression moves to IV.",
         fail:"Count the four bars of I first…",
         hint:"After the long opening." } },
-    { say:"The climax: <b>bar 9 brings the V (or V7) chord — one bar only — then bar 10 steps down through IV</b>, and bars 11-12 land home on I. \u{1F447} <b>The bar-9 → bar-10 chord pair is…</b>",
+    { say:"<b>Bars 9–12:</b> Bar 9 uses <b>V (or V7)</b>. Bar 10 moves to <b>IV</b>. Bars 11–12 return to <b>I</b>. <b>Remember: the chord pattern stays the same. Only the key changes.</b> \u{1F447} <b>Which chord comes after V?</b>",
       try:{ type:"mc", choices:["V(7) then IV","IV then V","I then V"], answer:0,
-        success:"✓ V then IV — the blues' signature descent. (Notice: unlike a classical cadence, the IV comes AFTER the V here — that's part of the blues flavor!)",
-        fail:"Bar 9 is the peak; bar 10 begins the descent…",
-        hint:"Climax, then step down." } },
-    { say:"THE MAIN EVENT: build the whole 12-bar blues in C, bar by bar. \u{1F447}",
+        success:"✓ V then IV — unlike a classical cadence, IV comes AFTER V here. That is part of the blues sound!",
+        fail:"Bar 9 is V; bar 10 steps down…",
+        hint:"V, then IV, then I." } },
+    { say:"Build a complete 12-bar blues progression in C major. \u{1F447}",
+      show:{ type:"html", html:`<table style="border-collapse:collapse;margin:0 auto;font-size:13px">
+        <tr><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:4px 7px">Bar</th><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:4px 7px">1</th><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:4px 7px">2</th><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:4px 7px">3</th><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:4px 7px">4</th><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:4px 7px">5</th><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:4px 7px">6</th><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:4px 7px">7</th><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:4px 7px">8</th><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:4px 7px">9</th><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:4px 7px">10</th><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:4px 7px">11</th><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:4px 7px">12</th></tr>
+        <tr><td style="border:1.5px solid #cdd5e1;padding:4px 7px;font-weight:800">Chord</td><td style="border:1.5px solid #cdd5e1;padding:4px 7px;text-align:center;font-weight:800">I</td><td style="border:1.5px solid #cdd5e1;padding:4px 7px;text-align:center;font-weight:800">I</td><td style="border:1.5px solid #cdd5e1;padding:4px 7px;text-align:center;font-weight:800">I</td><td style="border:1.5px solid #cdd5e1;padding:4px 7px;text-align:center;font-weight:800">I</td><td style="border:1.5px solid #cdd5e1;padding:4px 7px;text-align:center;font-weight:800">IV</td><td style="border:1.5px solid #cdd5e1;padding:4px 7px;text-align:center;font-weight:800">IV</td><td style="border:1.5px solid #cdd5e1;padding:4px 7px;text-align:center;font-weight:800">I</td><td style="border:1.5px solid #cdd5e1;padding:4px 7px;text-align:center;font-weight:800">I</td><td style="border:1.5px solid #cdd5e1;padding:4px 7px;text-align:center;font-weight:800">V7</td><td style="border:1.5px solid #cdd5e1;padding:4px 7px;text-align:center;font-weight:800">IV</td><td style="border:1.5px solid #cdd5e1;padding:4px 7px;text-align:center;font-weight:800">I</td><td style="border:1.5px solid #cdd5e1;padding:4px 7px;text-align:center;font-weight:800">I</td></tr></table>` },
       try:{ type:"custom",
         hint:"I×4 · IV×2 · I×2 · V7×1 · IV×1 · I×2.",
         mount:(container,fb)=>MF_L70_build(container,fb) } },
-    { say:"Transfer: the blues moves to ANY key by translating the numerals. \u{1F447} <b>A 12-bar blues in G uses which three chords?</b>",
+    { say:"<b>Try Another Key:</b> Use the same pattern in G major. \u{1F447} <b>Which three chords are used?</b>",
       try:{ type:"mc", choices:["G, C and D7","G, A and B7","C, F and G7"], answer:0,
-        success:"✓ I=G, IV=C, V7=D7. The book's exercises do exactly this in B♭, F and G — same wheel, new tires.",
+        success:"✓ I=G, IV=C, V7=D7. The chord pattern stays the same — only the key changes.",
         fail:"Find I, IV and V of G major…",
         hint:"Count up 4 and 5 from G." } }
   ],
   examples:[
-    { caption:"The C major 12-bar blues, exactly as the book charts it: four bars of I, two of IV, two of I, one V7, one IV, and two bars home. Follow the numerals!",
+    { caption:"The C major 12-bar blues: four bars of I, two of IV, two of I, one V7, one IV, and two bars of I. Follow the numerals!",
       staff:{clef:"treble",tempo:120,notes:[
         {p:"C4",d:"h",label:"I (bars 1-4)"},{p:"E4",d:"h",chord:true},{p:"G4",d:"h",chord:true},
         {p:"F4",d:"h",label:"IV (5-6)"},{p:"A4",d:"h",chord:true},{p:"C5",d:"h",chord:true},
@@ -124,7 +127,7 @@ LESSON_CONTENT[70]={
         {p:"F4",d:"h",label:"IV (10)"},{p:"A4",d:"h",chord:true},{p:"C5",d:"h",chord:true},
         {p:"C4",d:"w",label:"I (11-12)"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{bar:"final"}],width:660},
       kb:{start:48,octaves:3,labels:true} },
-    { caption:"The same wheel in B♭ — the key of the book's first exercise: B♭, E♭ and F7 take the same seats. Numerals never change; letters follow the key.",
+    { caption:"The same pattern in B♭: B♭, E♭ and F7 take the same positions. The numerals never change; the letters follow the key.",
       staff:{clef:"treble",tempo:120,notes:[
         {p:"Bb3",d:"h",label:"I = B♭"},{p:"D4",d:"h",chord:true},{p:"F4",d:"h",chord:true},
         {p:"Eb4",d:"h",label:"IV = E♭"},{p:"G4",d:"h",chord:true},{p:"Bb4",d:"h",chord:true},
@@ -133,7 +136,7 @@ LESSON_CONTENT[70]={
       kb:{start:46,octaves:2,labels:true} }
   ],
   games:[
-    { type:"gen-race", title:"Game 1 · Blues Blueprint Sprint (45s)",
+    { type:"gen-race", title:"Game 1 · Blues Pattern Sprint (45s)",
       intro:"Bars, origins, chords — race everything 12-bar!",
       miaIntro:"I, IV, V7 — twelve seats! \u{26A1}",
       spec:{gen:"term-match", params:{subject:"term", pool:[
@@ -144,13 +147,13 @@ LESSON_CONTENT[70]={
         ["Bars 1-4","the I chord"],
         ["Bars 5-6","the IV chord"],
         ["Bar 9","V or V7"],
-        ["Bar 10","IV — the signature descent"]], reverse:true}, seconds:45},
-      result:(score)=>score>=8?score+" — blueprint memorized!":null },
+        ["Bar 10","IV — after the V"]], reverse:true}, seconds:45},
+      result:(score)=>score>=8?score+" — pattern memorized!":null },
     { type:"key-climb", title:"Game 2 · Blues Bass Walk",
       intro:"Play the ROOT of each of the 12 bars — the bass player's night at work!",
       miaIntro:"C-C-C-C, F-F, C-C, G-F, C-C! \u{1FA9C}",
       spec:{seq:[48,48,48,48, 53,53, 48,48, 55,53, 48,48],
-        names:["C (bar 1)","C (2)","C (3)","C (4)","F (5 — first change!)","F (6)","C (7)","C (8)","G (9 — the climax!)","F (10 — step down)","C (11)","C (12 — done!)"],
+        names:["C (bar 1)","C (2)","C (3)","C (4)","F (5 — first change!)","F (6)","C (7)","C (8)","G (9 — the V bar!)","F (10 — step down)","C (11)","C (12 — done!)"],
         start:48, octaves:2, title:"The 12-bar bass roots, in order"},
       result:(score)=>score!==null?"Twelve bars walked — hired for the gig!":null },
     { type:"symbol-hunt", title:"Game 3 · Blues Chord Spotter",
@@ -162,64 +165,64 @@ LESSON_CONTENT[70]={
         {label:"V7 (G-B-D-F) — bar 9", spec:{clef:"treble",notes:[{p:"G4",d:"w"},{p:"B4",d:"w",chord:true},{p:"D5",d:"w",chord:true},{p:"F5",d:"w",chord:true}],width:150}},
         {label:"V (G-B-D) — bar 9's other option", spec:{clef:"treble",notes:[{p:"G4",d:"w"},{p:"B4",d:"w",chord:true},{p:"D5",d:"w",chord:true}],width:150}}]},
       result:(score)=>score>=5?"Three chords, twelve bars, zero doubts!":null },
-    { type:"order-tap", title:"Game 4 · Assemble the Wheel",
+    { type:"order-tap", title:"Game 4 · Assemble the Pattern",
       intro:"Tap the six segments of the 12-bar blues in order!",
-      miaIntro:"The whole wheel, six spokes! \u{1F3C1}",
+      miaIntro:"Six segments, in order! \u{1F3C1}",
       spec:{sequence:["I — four bars","IV — two bars","I — two bars","V(7) — one bar","IV — one bar","I — two bars"],
         title:"The traditional 12-bar blues, segment by segment"},
-      result:(stars)=>stars>=2?"The wheel spins in your sleep now!":null }
+      result:(stars)=>stars>=2?"The 12-bar pattern is yours!":null }
   ],
   practiceIntro:"20 practice questions — the map, the history and the transfers. Answer right and the next appears automatically!",
   practice:[
     { gen:"term-match", params:{subject:"term", pool:[["12 bars","the blues' usual length"],["Bars 1-4","I"],["Bars 5-6","IV"],["Bars 7-8","I again"],["Bar 9","V or V7"],["Bar 10","IV"],["Bars 11-12","I — home"]], reverse:true}, count:6 },
     { gen:"triad-id", params:{ask:"numeral"}, count:2 },
-    { type:"mc", q:"The blues has its roots in…", choices:["America's south","northern Europe","ancient Greece"], answer:0,
-      explain:"Where three musical traditions met (AEMT3 p.110)." },
-    { type:"mc", q:"The blues combined West African rhythms and gospel singing with…", choices:["European harmonies","Asian scales","electronic beats"], answer:0,
-      explain:"The book's three-ingredient recipe." },
+    { type:"mc", q:"Where did blues music begin?", choices:["The southern United States","Northern Europe","Ancient Greece"], answer:0,
+      explain:"Where three musical traditions met." },
+    { type:"mc", q:"Which musical traditions influenced the blues?", choices:["West African rhythms, gospel singing, European harmonies","Asian scales and electronic beats","Opera and plainchant"], answer:0,
+      explain:"Three traditions, one style." },
     { type:"mc", q:"The blues can often be found in…", choices:["jazz, rock and pop","only opera","only folk dances"], answer:0,
       explain:"It crossed into nearly every popular style." },
     { type:"mc", q:"A blues chord progression is usually…", choices:["12 measures long","4 measures long","32 measures long"], answer:0,
       explain:"Twelve bars — the name says it." },
     { type:"mc", q:"How many bars of I open the traditional blues?", choices:["4","2","1"], answer:0,
       explain:"The long settle-in." },
-    { type:"mc", q:"Bar 9 of the traditional blues carries…", choices:["V or V7","IV","I"], answer:0,
-      explain:"The one-bar climax." },
+    { type:"mc", q:"Which chord is played in bar 9?", choices:["V or V7","IV","I"], answer:0,
+      explain:"One bar of the dominant." },
     { type:"truefalse", q:"The traditional blues uses only the I, IV and V(7) chords.", answer:true,
       explain:"Three chords, endless songs." },
-    { type:"truefalse", q:"In the blues, IV comes directly AFTER V (bars 9→10).", answer:true,
-      explain:"The signature descent — unusual outside the blues." },
+    { type:"truefalse", q:"Bar 10 uses the IV chord after bar 9's V (or V7).", answer:true,
+      explain:"V → IV → I — a signature blues move." },
     { type:"truefalse", q:"There are many variations of the blues progression.", answer:true,
-      explain:"The book says so — ours is the traditional one." },
+      explain:"Ours is the traditional version." },
     { type:"truefalse", q:"A 12-bar blues in F uses F, B♭ and C7.", answer:true,
       explain:"I=F, IV=B♭, V7=C7." }
   ],
-  miaQuizIntro:"Quiz! Twelve bars, six segments, three chords — spin the wheel.",
+  miaQuizIntro:"Quiz! Twelve bars, six segments, three chords.",
   quiz:[
-    { type:"mc", q:"The music known as 'the blues' has its roots in…", choices:["America's south","Vienna","the Baroque courts"], answer:0,
-      explain:"Southern soil, global reach.", hint:"The book's opening." },
-    { type:"mc", q:"Which three traditions combined to create the blues?", choices:["West African rhythms, gospel singing, European harmonies","Baroque figures, waltzes, marches","Plainchant, opera, ragtime"], answer:0,
-      explain:"Three streams, one river.", hint:"Rhythm + voice + harmony." },
+    { type:"mc", q:"Where did blues music begin?", choices:["The southern United States","Vienna","The Baroque courts"], answer:0,
+      explain:"The southern United States.", hint:"Its birthplace." },
+    { type:"mc", q:"Which musical traditions helped create the blues?", choices:["West African rhythms, gospel singing, European harmonies","Baroque figures, waltzes, marches","Plainchant, opera, ragtime"], answer:0,
+      explain:"Three traditions combined.", hint:"Rhythm + voice + harmony." },
     { type:"mc", q:"A blues chord progression is usually how long?", choices:["12 measures","8 measures","24 measures"], answer:0,
       explain:"Hence '12-bar blues.'", hint:"The title." },
     { type:"mc", q:"The traditional blues opens with…", choices:["four bars of the I chord","four bars of V7","two bars of IV"], answer:0,
-      explain:"A long, confident stay at home.", hint:"The longest segment." },
+      explain:"Four bars of the tonic.", hint:"The longest segment." },
     { type:"mc", q:"Bars 5 and 6 carry…", choices:["the IV chord","the V chord","the ii chord"], answer:0,
-      explain:"The first change, two bars of it.", hint:"Up a 4th from home." },
-    { type:"mc", q:"Bar 9 — the climax — carries…", choices:["V or V7","IV","vi"], answer:0,
-      explain:"One bar of maximum tension.", hint:"The dominant's moment." },
+      explain:"The first change, two bars of it.", hint:"Up a 4th from I." },
+    { type:"mc", q:"Which chord is played in bar 9?", choices:["V or V7","IV","vi"], answer:0,
+      explain:"One bar of the dominant.", hint:"The V chord's moment." },
     { type:"mc", q:"Immediately after the V(7) bar comes…", choices:["one bar of IV","two bars of V","the final chord immediately"], answer:0,
-      explain:"V → IV → I: the blues' backwards-feeling, perfect descent.", hint:"The step-down." },
+      explain:"V → IV → I: the blues' signature order.", hint:"The step-down." },
     { type:"truefalse", q:"The last two bars of the traditional 12-bar blues are the I chord.", answer:true,
-      explain:"Home to close the loop — ready to repeat.", hint:"Bars 11-12." },
-    { type:"mc", q:"Complete the map: I×4, IV×2, I×2, ___, ___, I×2.", choices:["V(7)×1, IV×1","IV×1, V×1","V×2, nothing"], answer:0,
-      explain:"The 9-10 pair in order.", hint:"Climax then descent." },
+      explain:"I closes the form — ready to repeat.", hint:"Bars 11-12." },
+    { type:"mc", q:"Complete the 12-bar blues pattern: I×4, IV×2, I×2, ___, ___, I×2.", choices:["V(7)×1, IV×1","IV×1, V×1","V×2, nothing"], answer:0,
+      explain:"Bars 9 and 10 in order.", hint:"V, then IV." },
     { type:"mc", q:"A 12-bar blues in G uses…", choices:["G, C and D7","G, B and D","C, F and G7"], answer:0,
-      explain:"I=G, IV=C, V7=D7 — the book's exercise 3.", hint:"Translate the numerals." },
+      explain:"I=G, IV=C, V7=D7.", hint:"Translate the numerals." },
     { type:"mc", q:"A 12-bar blues in B♭ uses…", choices:["B♭, E♭ and F7","B♭, C and D7","F, B♭ and C7"], answer:0,
-      explain:"I=B♭, IV=E♭, V7=F7 — exercise 1's key.", hint:"Count up 4 and 5 from B♭." },
-    { type:"mc", q:"Why does the 12-bar blues matter so much?", choices:["It's the shared chassis of jazz, rock and pop songs worldwide","It was the first progression ever written","It uses chords no other style has"], answer:0,
-      explain:"Learn one wheel, play a thousand songs.", hint:"Think of how many genres borrowed it." },
+      explain:"I=B♭, IV=E♭, V7=F7.", hint:"Count up 4 and 5 from B♭." },
+    { type:"mc", q:"Why is the 12-bar blues progression important?", choices:["It is one of the most common progressions in blues, jazz, rock, and pop","It was the first progression ever written","It uses chords no other style has"], answer:0,
+      explain:"Learn one pattern, play a thousand songs.", hint:"Think of how many genres use it." },
     /* generated */
     { gen:"term-match", params:{subject:"term", pool:[["I×4","the opening"],["IV×2, I×2","the middle"],["V7, IV","bars 9 and 10"],["I×2","the close"]], reverse:true}, count:3 },
     { gen:"triad-id", params:{ask:"numeral"}, count:2 },
@@ -241,16 +244,16 @@ LESSON_CONTENT[70]={
     "✔ Translate the numerals and the blues plays in <b>every key</b>."
   ],
   tips:[
-    "Count bars in groups of four: 'home-home-home-home / up-up-home-home / climax-down-home-home.' Twelve becomes easy.",
+    "Count bars in groups of four: 'I-I-I-I / IV-IV-I-I / V-IV-I-I.' Twelve becomes easy.",
     "Play the bass-root walk (Game 2) every day this week — your hands will memorize the form before your head does.",
-    "Listen test: put on early rock'n'roll tonight and count to twelve. You'll catch the wheel turning within one song.",
-    "Next lesson: the blues' other secret — a special SCALE with three 'blue notes' bent into it."
+    "Listen test: put on early rock'n'roll tonight and count to twelve. You'll catch the pattern within one song.",
+    "Next lesson: the blues' other secret — a special SCALE with three 'blue notes'."
   ],
   rewards:{ badge:"12-Bar Architect", icon:"\u{1F3B7}" },
   sectionOrder:["secHook","secObjectives","secLearn","secExample","secReview",
     "secGame0","secGame1","secGame2","secGame3","secPractice","secQuiz","secTips","secNext"],
   miaPerfect:"PERFECT! Twelve bars, zero mistakes — the bandstand awaits. \u{1F3B7}\u{1F389}",
-  miaPass:"Passed! The wheel is yours. One more ingredient left: the blues SCALE…",
+  miaPass:"Passed! The 12-bar pattern is yours. Next: the blues SCALE…",
   mia:{
     hook:{ label:"the welcome",
       explain:"That was the traditional 12-bar blues: I×4, IV×2, I×2, V7, IV, I×2 — the most reused progression in popular music.",
@@ -260,12 +263,12 @@ LESSON_CONTENT[70]={
       hint:"4-2-2-1-1-2.",
       play:()=>{[48,64,67,72].forEach(m=>MFAudio.tone(m,.8,0,.26));[53,65,69,72].forEach(m=>MFAudio.tone(m,.8,.9,.26));[43,67,71,77].forEach(m=>MFAudio.tone(m,.8,1.8,.26));} },
     example:{ label:"the examples",
-      explain:"Example 1 charts the full C blues with bar numbers; example 2 moves the same wheel to B♭." },
+      explain:"Example 1 charts the full C blues with bar numbers; example 2 moves the same pattern to B♭." },
     game:{ label:"the games",
-      explain:"Sprint the blueprint, walk the bass, spot the three chords, then assemble the wheel from segments.",
+      explain:"Sprint the pattern, walk the bass, spot the three chords, then assemble the segments in order.",
       hint:"Segments: 4-2-2-1-1-2." },
     quiz:{ label:"this question",
-      explain:"Everything hangs on the map — I×4, IV×2, I×2, V(7), IV, I×2 — plus the origin story's three ingredients.",
+      explain:"Everything hangs on the pattern — I×4, IV×2, I×2, V(7), IV, I×2 — plus the three traditions that created the blues.",
       play:()=>{[43,67,71,77].forEach(m=>MFAudio.tone(m,.8,0,.27));[53,65,69,72].forEach(m=>MFAudio.tone(m,.8,.85,.27));[48,64,67,72].forEach(m=>MFAudio.tone(m,1,1.7,.27));} }
   }
 };
