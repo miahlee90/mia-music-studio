@@ -139,7 +139,7 @@ LESSON_CONTENT[51]={
     "Build 1st-inversion triads on the staff and keyboard"
   ],
   steps:[
-    { say:"Quick review from Lesson 47: a triad in <b>ROOT POSITION</b> stacks root-3rd-5th, snowman style, with the <b>root on the bottom</b>. \u{1F447} <b>In root position, the lowest note is…?</b>",
+    { say:"Quick review from Lesson 47: a triad in <b>ROOT POSITION</b> stacks root-3rd-5th, snowman style, with the <b>root on the bottom</b>. \u{1F447} <b>Which chord tone is the lowest note in root position?</b>",
       show:{ type:"staff", spec:{clef:"treble",notes:[
         {p:"C4",d:"w",label:"C major: C-E-G (root position)"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true}],width:260} },
       try:{ type:"mc", choices:["The root","The 3rd","The 5th"], answer:0,
@@ -155,16 +155,16 @@ LESSON_CONTENT[51]={
         success:"✓ Correct! The notes still spell C-E-G, so the chord is C major — in 1st inversion. The root names the chord; the bass note names the POSITION.",
         fail:"Re-stack E-G-C into 3rds: C-E-G. Whose chord is that?",
         hint:"Restack the letters into a snowman of 3rds — the bottom of THAT stack is the root." } },
-    { say:"The rule to memorize: <b>in 1st inversion, the 3rd is ALWAYS the bottom note.</b> Here are C, F and G major, each flipped once. \u{1F447} <b>The bottom note of every 1st-inversion triad is the chord's…?</b>",
+    { say:"1st Inversion Rule: <b>The 3rd of the chord is the lowest note.</b> Here are C, F and G major, each in 1st inversion. \u{1F447} <b>Which chord tone is the lowest note in every 1st inversion triad?</b>",
       show:{ type:"staff", spec:{clef:"treble",notes:[
         {p:"E4",d:"w",label:"C: E-G-C"},{p:"G4",d:"w",chord:true},{p:"C5",d:"w",chord:true},
         {p:"A4",d:"w",label:"F: A-C-F"},{p:"C5",d:"w",chord:true},{p:"F5",d:"w",chord:true},
         {p:"B4",d:"w",label:"G: B-D-G"},{p:"D5",d:"w",chord:true},{p:"G5",d:"w",chord:true}],width:480} },
       try:{ type:"mc", choices:["The 3rd","The root","The 5th"], answer:0,
-        success:"✓ 3rd in the bass = 1st inversion, every single time. (And the root? It moved to the TOP.)",
-        fail:"Look at what moved: the root left the bottom, so the next note up took over.",
+        success:"✓ The 3rd is the lowest note in every 1st inversion triad. (The root moved to the TOP.)",
+        fail:"Look at the lowest note of each chord — is it the root, the 3rd, or the 5th?",
         hint:"Root position: root-3rd-5th. Remove the root from the bottom — what's left down there?" } },
-    { say:"One more pair of words from the book: notes packed <b>within one octave</b> = <b>CLOSE position</b>; spread <b>wider than an octave</b> = <b>OPEN position</b>. Both can be root position OR 1st inversion — the bass note still decides. \u{1F447} <b>Open position means…?</b>",
+    { say:"One more pair of words from the book: notes packed <b>within one octave</b> = <b>CLOSE position</b>; spread <b>wider than an octave</b> = <b>OPEN position</b>. Both can be root position OR 1st inversion — the bass note still decides. \u{1F447} <b>What does open position mean?</b>",
       show:{ type:"staff", spec:{clef:"treble",notes:[
         {p:"C4",d:"w",label:"close (root pos.)"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},
         {p:"C4",d:"w",label:"open (root pos.)"},{p:"G4",d:"w",chord:true},{p:"E5",d:"w",chord:true},
