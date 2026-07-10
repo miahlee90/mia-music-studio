@@ -33,7 +33,7 @@ function MF_L60_build(container,fb){
       const want=R.pcs[k];
       if(m%12===want && (last===null || m>last)){
         last=m; got.push(m); k++; drawStaff();
-        if(k>=3){ MFAudio.yay(); got.forEach(x=>MFAudio.tone(x,1.2,.15,.32));
+        if(k>=3){ MFAudio.yay(); got.forEach(x=>MFAudio.tone(x,1.2,.6,.32));
           fb(true,`✓ ${R.name}. ${r===2?"G♯ makes it MAJOR — the harmonic minor's gift.":"Minor, as the scale degrees dictate."}`);
           r++; setTimeout(ask,1500); }
         else q.innerHTML=`Good — now <b>${R.names[k]}</b>, above your last key.`;
@@ -65,7 +65,7 @@ function MF_L60_quality(container,fb){
   [...ch.children].forEach((b,i)=>b.onclick=()=>{
     const R=ROUNDS[r]; if(!R) return;
     if(i===R.quality){ MFAudio.yay();
-      R.ps.forEach(p=>MFAudio.tone(MFAudio.midi(p),1.1,0,.32));
+      R.ps.forEach(p=>MFAudio.tone(MFAudio.midi(p),1.1,.6,.32));
       fb(true,`✓ ${R.sym} — ${QN[R.quality]}. ${R.quality===2?"The raised G♯ stretches C-E-G into C-E-G♯: the scale's built-in augmented chord!":R.quality===3?"G♯-B-D: two minor 3rds — diminished, standing right on the raised 7th.":""}`);
       r++; setTimeout(ask,1500); }
     else { MFAudio.tone(40,.2); fb(false,"Measure the 3rd, then the 5th — and remember every G in this scale is G♯."); }

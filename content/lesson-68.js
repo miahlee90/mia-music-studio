@@ -36,8 +36,8 @@ function MF_L68_harm(container,fb){
     const S=STEPS[k]; if(!S) return;
     if(S.ok.includes(b.textContent)){
       MFAudio.yay();
-      MFAudio.tone(MFAudio.midi(S.note),.8,0,.42);
-      CH[b.textContent].forEach(m=>MFAudio.tone(m,.9,0,.25));
+      MFAudio.tone(MFAudio.midi(S.note),.8,.55,.42);
+      CH[b.textContent].forEach(m=>MFAudio.tone(m,.9,.55,.25));
       picked.push(b.textContent); k++;
       fb(true,`✓ ${S.why}`);
       setTimeout(ask,1200);

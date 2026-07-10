@@ -25,7 +25,7 @@ function MF_L59_lab(container,fb){
         const R=ROUNDS[r];
         if(i===2){ MFAudio.yay();
           draw(R.out, R.to, false);
-          R.out.forEach(p=>MFAudio.tone(MFAudio.midi(p),1.2,.15,.32));
+          R.out.forEach(p=>MFAudio.tone(MFAudio.midi(p),1.2,.6,.32));
           fb(true,`✓ ${R.expl}`);
           r++;
           if(r<ROUNDS.length) nxt.style.display="inline-block";
@@ -70,7 +70,7 @@ function MF_L59_build(container,fb){
       const want=R.pcs[k];
       if(m%12===want && (last===null || m>last)){
         last=m; got.push(m); k++; drawStaff();
-        if(k>=3){ MFAudio.yay(); got.forEach(x=>MFAudio.tone(x,1.2,.15,.32));
+        if(k>=3){ MFAudio.yay(); got.forEach(x=>MFAudio.tone(x,1.2,.6,.32));
           fb(true,`✓ ${R.name} — ${R.sym}. ${r===1?"Hear it float?":r===3?"Hear it squirm?":"Solid ground."}`);
           r++; setTimeout(ask,1500); }
         else q.innerHTML=`Good — now <b>${R.names[k]}</b>, above your last key.`;
