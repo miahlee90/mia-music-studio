@@ -7,7 +7,7 @@
    Mixolydian = major with the 7th LOWERED; Lydian = major with the 4th RAISED.
    NOTE: edit by FULL-FILE REWRITE only. */
 
-/* spot-the-bent-note: compare a mode with the plain major scale */
+/* spot-the-changed-note: compare a mode with the plain major scale */
 function MF_L62_spot(container,fb){
   const MAJOR=["C4","D4","E4","F4","G4","A4","B4","C5"];
   const ROUNDS=[
@@ -21,9 +21,9 @@ function MF_L62_spot(container,fb){
     <div style="text-align:center"><button class="play l62s-hear">▶ Hear it</button></div>`;
   const q=container.querySelector(".l62s-q"), holder=container.querySelector(".l62s-staff"), hear=container.querySelector(".l62s-hear");
   function ask(){
-    if(r>=ROUNDS.length){ q.textContent="Both alterations spotted — you can bend a major scale two ways now!"; holder.innerHTML=""; hear.style.display="none"; return; }
+    if(r>=ROUNDS.length){ q.textContent="Great! You found the changed notes."; holder.innerHTML=""; hear.style.display="none"; return; }
     const R=ROUNDS[r];
-    q.innerHTML=`This is <b>${R.name}</b>. Compared with plain C major, ONE note moved. <b>Tap it.</b>`;
+    q.innerHTML=`Compare this mode with the major scale. This is <b>${R.name}</b> — <b>tap the changed note</b>.`;
     Staff.render(holder,{clef:"treble",notes:R.ps.map((p,i)=>({p,d:"q",label:String(i+1)})),width:520,clickNotes:true,
       onNote:(i,p)=>{
         MFAudio.tone(MFAudio.midi(p),.5,0,.4);
@@ -48,7 +48,7 @@ function MF_L62_build(container,fb){
   container.innerHTML=`<div class="big-q l62b-q" style="text-align:center"></div><div class="l62b-kb"></div>`;
   const q=container.querySelector(".l62b-q"), kh=container.querySelector(".l62b-kb");
   function ask(){
-    if(r>=ROUNDS.length){ q.textContent="Two modes under your fingers — the bent notes found themselves!"; return; }
+    if(r>=ROUNDS.length){ q.textContent="Excellent! You played both modes."; return; }
     k=0; last=null;
     q.innerHTML=`Play <b>${ROUNDS[r].name}</b>, bottom to top, starting on C. Watch for <b>${ROUNDS[r].hintNote}</b>.`;
   }
@@ -59,32 +59,32 @@ function MF_L62_build(container,fb){
       if(m%12===want && (last===null || m>last)){
         last=m; k++;
         if(k>=8){ MFAudio.yay();
-          fb(true,`✓ ${R.name} complete — ${r===0?"that B♭ gives it a relaxed, bluesy glow.":"that F♯ makes it float like a film score."}`);
+          fb(true,`✓ ${R.name} complete — ${r===0?"the 7th is lowered (B♭).":"the 4th is raised (F♯)."}`);
           r++; setTimeout(ask,1400); }
-        else q.innerHTML=`Good — next: <b>${R.names[k]}</b>.`;
+        else q.innerHTML=`Now play <b>${R.names[k]}</b>.`;
       } else { MFAudio.tone(40,.2);
-        fb(false, R.pcs[k]===10? "Degree 7 is LOWERED here — the black key below B." : R.pcs[k]===6? "Degree 4 is RAISED here — the black key above F." : "Follow the C major letters — only ONE degree is bent."); }
+        fb(false, R.pcs[k]===10? "Degree 7 is LOWERED here — the black key below B." : R.pcs[k]===6? "Degree 4 is RAISED here — the black key above F." : "Follow the C major letters — only ONE degree changes."); }
     }});
   ask();
 }
 
 LESSON_CONTENT[62]={
-  welcome:"Before major and minor ruled music, there were SEVEN scales with Greek names. Time to meet the family. \u{1F3DB}\u{FE0F}",
+  welcome:"Modes: the same notes as a major scale, starting on different degrees. \u{1F3DB}\u{FE0F}",
   hook:{
-    say:"Listen to plain C major… then the SAME scale with one note gently bent. <b>That tiny bend has a 2,000-year-old Greek name. Hear it?</b>",
+    say:"<b>Modes use the same notes as a major scale, but they begin on different scale degrees.</b> Listen to plain C major, then to C Mixolydian. <b>Can you hear the difference?</b>",
     interact:{ type:"custom",
       mount:(container,fb)=>{
         container.innerHTML=`<div style="text-align:center">
           <button class="play hk-a">▶ Scale 1 (plain)</button>
-          <button class="play hk-b">▶ Scale 2 (one bend)</button></div>
-          <div class="choices hk-ch" style="display:none"><button>Scale 2 lowered its 7th note</button><button>Scale 2 raised its 1st note</button><button>They're identical</button></div>`;
+          <button class="play hk-b">▶ Scale 2 (C Mixolydian)</button></div>
+          <div class="choices hk-ch" style="display:none"><button>Scale 2 lowered its 7th note</button><button>Scale 2 raised its 1st note</button><button>They sound identical</button></div>`;
         const ch=container.querySelector(".hk-ch");
         let hA=false,hB=false;
         container.querySelector(".hk-a").onclick=()=>{ [60,62,64,65,67,69,71,72].forEach((m,i)=>MFAudio.tone(m,.42,i*.3,.4)); hA=true; if(hB) setTimeout(()=>ch.style.display="",2900); };
         container.querySelector(".hk-b").onclick=()=>{ [60,62,64,65,67,69,70,72].forEach((m,i)=>MFAudio.tone(m,.42,i*.3,.4)); hB=true; if(hA) setTimeout(()=>ch.style.display="",2900); };
         [...ch.children].forEach((b,i)=>b.onclick=()=>{
-          if(i===0) fb(true,"✓ B became B♭ — and C major became C MIXOLYDIAN, the mode of countless rock and folk songs. Today: what modes are, and the three that grow from the major scale!");
-          else fb(false,"Both scales started identically… the difference came right before the top.");
+          if(i===0) fb(true,"✓ B became B♭ — and C major became C MIXOLYDIAN. Today: what modes are, and the three modes related to the major scale.");
+          else fb(false,"Both scales started the same way — listen to the note just before the top.");
         });
       } }
   },
@@ -97,25 +97,26 @@ LESSON_CONTENT[62]={
     "Recognize and build the three major-related modes"
   ],
   steps:[
-    { say:"The definition, straight from the book: a <b>MODE</b> is a scale of <b>eight notes in alphabetical order</b>, and it <b>can begin on ANY scale degree of a major scale</b>, using the parent scale's key signature. In C: start on C, or D, or E… seven starting points, <b>seven modes, each with a Greek name</b>. \u{1F447} <b>A mode built on the white keys from D to D uses…</b>",
+    { say:"<b>What Is a Mode?</b> A <b>mode</b> is a scale that begins on a different degree of a major scale while using the same key signature. A major scale has <b>seven modes</b>. \u{1F447} <b>A mode beginning on D and using only the white keys has which key signature?</b>",
       try:{ type:"mc", choices:["No sharps or flats — C major's signature","Two sharps","One flat"], answer:0,
         success:"✓ The parent (C major) lends its signature to every child mode. Same notes, seven different homes.",
         fail:"The parent scale is C major — what's ITS signature?",
         hint:"Modes borrow the PARENT's signature." } },
-    { say:"The family register, in the key of C: <b>C Ionian · D Dorian · E Phrygian · F Lydian · G Mixolydian · A Aeolian · B Locrian</b>. Two you secretly know already! \u{1F447} <b>Which mode is the natural minor scale in disguise?</b>",
-      show:{ type:"html", html:`<div style="max-width:430px;margin:0 auto;font-size:14.5px;line-height:1.9;background:var(--card,#fff);border:1.5px solid #cdd5e1;border-radius:12px;padding:12px 18px">
-        <b>C</b> → Ionian <span style="color:var(--muted,#667)">(= the major scale)</span><br>
-        <b>D</b> → Dorian<br>
-        <b>E</b> → Phrygian<br>
-        <b>F</b> → Lydian<br>
-        <b>G</b> → Mixolydian<br>
-        <b>A</b> → Aeolian <span style="color:var(--muted,#667)">(= the natural minor scale)</span><br>
-        <b>B</b> → Locrian</div>` },
+    { say:"<b>The Seven Modes:</b> C = Ionian · D = Dorian · E = Phrygian · F = Lydian · G = Mixolydian · A = Aeolian · B = Locrian. <b>Aeolian is the natural minor scale.</b> Today we'll focus on <b>Ionian, Mixolydian, and Lydian</b> — the other modes will be introduced later. \u{1F447} <b>Which mode is the natural minor scale?</b>",
+      show:{ type:"html", html:`<table style="border-collapse:collapse;margin:0 auto;font-size:14.5px;min-width:340px">
+        <tr><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:6px 12px">Mode</th><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:6px 12px">Starts On</th><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:6px 12px">Difference</th></tr>
+        <tr><td style="border:1.5px solid #cdd5e1;padding:4px 12px">Ionian</td><td style="border:1.5px solid #cdd5e1;padding:4px 12px;text-align:center">1</td><td style="border:1.5px solid #cdd5e1;padding:4px 12px">= major scale</td></tr>
+        <tr><td style="border:1.5px solid #cdd5e1;padding:4px 12px;color:#889">Dorian</td><td style="border:1.5px solid #cdd5e1;padding:4px 12px;text-align:center;color:#889">2</td><td style="border:1.5px solid #cdd5e1;padding:4px 12px;color:#889">(later)</td></tr>
+        <tr><td style="border:1.5px solid #cdd5e1;padding:4px 12px;color:#889">Phrygian</td><td style="border:1.5px solid #cdd5e1;padding:4px 12px;text-align:center;color:#889">3</td><td style="border:1.5px solid #cdd5e1;padding:4px 12px;color:#889">(later)</td></tr>
+        <tr><td style="border:1.5px solid #cdd5e1;padding:4px 12px">Lydian</td><td style="border:1.5px solid #cdd5e1;padding:4px 12px;text-align:center">4</td><td style="border:1.5px solid #cdd5e1;padding:4px 12px;font-weight:800">♯4</td></tr>
+        <tr><td style="border:1.5px solid #cdd5e1;padding:4px 12px">Mixolydian</td><td style="border:1.5px solid #cdd5e1;padding:4px 12px;text-align:center">5</td><td style="border:1.5px solid #cdd5e1;padding:4px 12px;font-weight:800">♭7</td></tr>
+        <tr><td style="border:1.5px solid #cdd5e1;padding:4px 12px">Aeolian</td><td style="border:1.5px solid #cdd5e1;padding:4px 12px;text-align:center">6</td><td style="border:1.5px solid #cdd5e1;padding:4px 12px">= natural minor</td></tr>
+        <tr><td style="border:1.5px solid #cdd5e1;padding:4px 12px;color:#889">Locrian</td><td style="border:1.5px solid #cdd5e1;padding:4px 12px;text-align:center;color:#889">7</td><td style="border:1.5px solid #cdd5e1;padding:4px 12px;color:#889">(later)</td></tr></table>` },
       try:{ type:"mc", choices:["Aeolian (starting on A)","Locrian (starting on B)","Dorian (starting on D)"], answer:0,
         success:"✓ A to A on white keys = A natural minor = the AEOLIAN mode. And C to C is IONIAN — the major scale. You've been playing modes since Lesson 26!",
         fail:"Which white-key scale did Lesson 56 call the relative minor?",
         hint:"A to A…" } },
-    { say:"Today's three are the <b>major-related</b> modes. First, the easy one: <b>IONIAN — a major scale</b>, full stop. Half steps between 3-4 and 7-8, like always. \u{1F447} <b>C Ionian differs from C major by…</b>",
+    { say:"<b>Ionian Mode:</b> Ionian is simply the <b>major scale</b>. \u{1F447} <b>How is Ionian different from the major scale?</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:110,notes:[
         {p:"C4",d:"q",label:"1"},{p:"D4",d:"q",label:"2"},{p:"E4",d:"q",label:"3"},{p:"F4",d:"q",label:"4"},
         {p:"G4",d:"q",label:"5"},{p:"A4",d:"q",label:"6"},{p:"B4",d:"q",label:"7"},{p:"C5",d:"q",label:"8"}],width:520} },
@@ -123,30 +124,30 @@ LESSON_CONTENT[62]={
         success:"✓ Ionian is simply the major scale's ancient name. One mode down, free of charge!",
         fail:"Read the definition again — 'a major scale'…",
         hint:"It's a rename, not a remodel." } },
-    { say:"Mode two: <b>MIXOLYDIAN — a major scale with the 7th LOWERED a half step</b>. The leading tone relaxes, and the scale stops 'needing' to resolve. Now — <b>find the bent notes yourself, by eye:</b> \u{1F447}",
+    { say:"<b>Mixolydian Mode:</b> Mixolydian is a <b>major scale with a lowered 7th</b>. \u{1F447} <b>Which note changes in Mixolydian? Find it below:</b>",
       try:{ type:"custom",
         hint:"Compare each degree with plain C major: C D E F G A B C.",
         mount:(container,fb)=>MF_L62_spot(container,fb) } },
-    { say:"Mode three recap: <b>LYDIAN — a major scale with the 4th RAISED a half step</b>. That ♯4 gives it a floating, wide-eyed shimmer. The half steps move: Mixolydian has them at 3-4 and 6-♭7; Lydian at ♯4-5 and 7-8. \u{1F447} <b>Which mode would a film composer pick for a 'flying' scene?</b>",
+    { say:"<b>Lydian Mode:</b> Lydian is a <b>major scale with a raised 4th</b>. Many listeners describe Lydian as bright or open because of its raised 4th. \u{1F447} <b>Which note changes in Lydian?</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:110,notes:[
         {p:"C4",d:"q",label:"1"},{p:"D4",d:"q",label:"2"},{p:"E4",d:"q",label:"3"},{p:"F#4",d:"q",label:"♯4"},
         {p:"G4",d:"q",label:"5"},{p:"A4",d:"q",label:"6"},{p:"B4",d:"q",label:"7"},{p:"C5",d:"q",label:"8"}],width:520} },
-      try:{ type:"mc", choices:["Lydian — the raised 4th floats","Ionian — plain is best","Neither, films avoid modes"], answer:0,
-        success:"✓ Lydian's ♯4 is Hollywood's favorite lift-off sound. (Mixolydian's ♭7, meanwhile, powers rock anthems and bagpipes alike.)",
-        fail:"Which alteration points UPWARD?",
-        hint:"Raised = rising = floating." } },
-    { say:"Play them — the bent notes are under your fingers. \u{1F447}",
+      try:{ type:"mc", choices:["The 4th is raised (F→F♯)","The 7th is lowered","The 2nd is raised"], answer:0,
+        success:"✓ The 4th is raised a half step: F becomes F♯.",
+        fail:"Compare with plain C major — which degree moved?",
+        hint:"Lydian = ♯4." } },
+    { say:"Play each mode. \u{1F447}",
       try:{ type:"custom",
-        hint:"Mixolydian bends ONE note down (7th); Lydian bends ONE note up (4th).",
+        hint:"Mixolydian lowers the 7th; Lydian raises the 4th.",
         mount:(container,fb)=>MF_L62_build(container,fb) } },
-    { say:"Recipe check before the games. \u{1F447} <b>G Mixolydian would be a G major scale with…</b>",
+    { say:"<b>Review:</b> G Mixolydian is a G major scale with… \u{1F447} <b>Which note changes?</b>",
       try:{ type:"mc", choices:["F♯ lowered to F♮","B lowered to B♭","C raised to C♯"], answer:0,
-        success:"✓ Lower the 7th: G major's F♯ relaxes to F. The recipes transfer to ANY keynote — that's the book's 'slight alterations' method.",
+        success:"✓ Lower the 7th: G major's F♯ becomes F natural. The same change works from any keynote.",
         fail:"What is the 7th degree of G major, and what does Mixolydian do to 7ths?",
-        hint:"G A B C D E F♯ G — bend the 7th down." } }
+        hint:"G A B C D E F♯ G — lower the 7th." } }
   ],
   examples:[
-    { caption:"The three major-related modes on C, back to back: Ionian (plain), Mixolydian (♭7 — hear it relax), Lydian (♯4 — hear it float).",
+    { caption:"The three major-related modes on C, back to back: Ionian (plain), Mixolydian (♭7), Lydian (♯4).",
       staff:{clef:"treble",tempo:120,notes:[
         {p:"C4",d:"q",label:"Ionian"},{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"F4",d:"q"},{p:"G4",d:"q"},{p:"A4",d:"q"},{p:"B4",d:"q"},{p:"C5",d:"q"},{bar:"double"},
         {p:"C4",d:"q",label:"Mixolydian"},{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"F4",d:"q"},{p:"G4",d:"q"},{p:"A4",d:"q"},{p:"Bb4",d:"q"},{p:"C5",d:"q"},{bar:"double"},
@@ -161,17 +162,17 @@ LESSON_CONTENT[62]={
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Major-Mode Sprint (45s)",
-      intro:"Scales flash by — name the mode, or match the recipe!",
+      intro:"Scales flash by — name the mode, or match the definition!",
       miaIntro:"♭7 or ♯4 — that's the whole question! \u{26A1}",
       spec:{gen:"mode-id", params:{set:"major", ask:"both"}, seconds:45},
       result:(score)=>score>=8?score+" modes named — Greek fluency rising!":null },
     { type:"key-climb", title:"Game 2 · Mixolydian & Lydian Climb",
-      intro:"Play C Mixolydian up, then C Lydian — two bends, sixteen keys!",
+      intro:"Play C Mixolydian, then C Lydian — sixteen keys!",
       miaIntro:"B♭ down, F♯ up! \u{1FA9C}",
       spec:{seq:[60,62,64,65,67,69,70,72, 60,62,64,66,67,69,71,72],
-        names:["C","D","E","F","G","A","B♭ (the Mixo bend!)","C","C again","D","E","F♯ (the Lydian bend!)","G","A","B","C"],
+        names:["C","D","E","F","G","A","B♭ (the lowered 7th!)","C","C again","D","E","F♯ (the raised 4th!)","G","A","B","C"],
         start:60, octaves:2, title:"C Mixolydian, then C Lydian"},
-      result:(score)=>score!==null?"Both bends played to perfection!":null },
+      result:(score)=>score!==null?"Both modes played perfectly!":null },
     { type:"symbol-hunt", title:"Game 3 · Mode Spotter",
       intro:"Three modes on C — click the one each round names!",
       miaIntro:"Check degree 4, check degree 7! \u{1F440}",
@@ -179,7 +180,7 @@ LESSON_CONTENT[62]={
         {label:"Ionian (plain major)", spec:{clef:"treble",notes:[{p:"C4",d:"q"},{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"F4",d:"q"},{p:"G4",d:"q"},{p:"A4",d:"q"},{p:"B4",d:"q"},{p:"C5",d:"q"}],width:250}},
         {label:"Mixolydian (♭7)", spec:{clef:"treble",notes:[{p:"C4",d:"q"},{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"F4",d:"q"},{p:"G4",d:"q"},{p:"A4",d:"q"},{p:"Bb4",d:"q"},{p:"C5",d:"q"}],width:250}},
         {label:"Lydian (♯4)", spec:{clef:"treble",notes:[{p:"C4",d:"q"},{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"F#4",d:"q"},{p:"G4",d:"q"},{p:"A4",d:"q"},{p:"B4",d:"q"},{p:"C5",d:"q"}],width:250}}]},
-      result:(score)=>score>=5?"No bent note escapes you!":null },
+      result:(score)=>score>=5?"No changed note escapes you!":null },
     { type:"order-tap", title:"Game 4 · The Seven-Mode Ladder",
       intro:"Tap the seven Greek names in white-key order, C through B!",
       miaIntro:"I Don't Particularly Like Modes A Lot — or make your own mnemonic! \u{1F3DB}\u{FE0F}",
@@ -187,21 +188,21 @@ LESSON_CONTENT[62]={
         title:"The modes in scale-degree order"},
       result:(stars)=>stars>=2?"The whole Greek family, in order!":null }
   ],
-  practiceIntro:"20 practice questions — names, recipes and bent notes. Answer right and the next appears automatically!",
+  practiceIntro:"20 practice questions — mode names, definitions and changed notes. Answer right and the next appears automatically!",
   practice:[
     { gen:"mode-id", params:{set:"major", ask:"both"}, count:7 },
     { gen:"term-match", params:{subject:"term", pool:[["Mode","8 notes, alphabetical, any degree of the parent scale"],["Ionian","the major scale"],["Mixolydian","major with lowered 7th"],["Lydian","major with raised 4th"],["Aeolian","the natural minor scale"]], reverse:true}, count:5 },
     { type:"mc", q:"A mode can begin on…", choices:["any scale degree of a major scale","only the tonic","only C"], answer:0,
       explain:"Seven degrees → seven modes (AEMT3 p.98)." },
-    { type:"mc", q:"How many modes are there altogether?", choices:["7","3","12"], answer:0,
+    { type:"mc", q:"How many modes are there?", choices:["7","3","12"], answer:0,
       explain:"One per scale degree, each with a Greek name." },
     { type:"mc", q:"The mode built on the 5th degree (G in C major) is…", choices:["Mixolydian","Lydian","Dorian"], answer:0,
       explain:"G→G on white keys = Mixolydian." },
     { type:"mc", q:"The mode built on the 4th degree (F in C major) is…", choices:["Lydian","Phrygian","Ionian"], answer:0,
       explain:"F→F on white keys = Lydian." },
-    { type:"mc", q:"C Mixolydian contains which accidental?", choices:["B♭","F♯","E♭"], answer:0,
+    { type:"mc", q:"Which note is lowered in C Mixolydian?", choices:["B♭","F♯","E♭"], answer:0,
       explain:"Major with its 7th lowered." },
-    { type:"mc", q:"C Lydian contains which accidental?", choices:["F♯","B♭","G♯"], answer:0,
+    { type:"mc", q:"Which note is raised in C Lydian?", choices:["F♯","B♭","G♯"], answer:0,
       explain:"Major with its 4th raised." },
     { type:"truefalse", q:"Ionian is another name for the major scale.", answer:true,
       explain:"Identical, note for note." },
@@ -212,19 +213,19 @@ LESSON_CONTENT[62]={
     { type:"truefalse", q:"G Mixolydian uses F natural instead of F♯.", answer:true,
       explain:"Lower G major's 7th: F♯→F." }
   ],
-  miaQuizIntro:"Quiz! Three modes, two bends: ♭7 relaxes, ♯4 floats.",
+  miaQuizIntro:"Quiz! Three modes, two changes: ♭7 for Mixolydian, ♯4 for Lydian.",
   quiz:[
-    { type:"mc", q:"A mode is…", choices:["a scale of eight notes in alphabetical order","a type of chord","a rhythm pattern","a tempo marking"], answer:0,
+    { type:"mc", q:"What is a mode?", choices:["a scale of eight notes in alphabetical order","a type of chord","a rhythm pattern","a tempo marking"], answer:0,
       explain:"The book's opening definition.", hint:"Eight notes, A-B-C order." },
     { type:"mc", q:"A mode can begin on…", choices:["any scale degree of a major scale","only the 1st degree","only the 5th degree"], answer:0,
       explain:"Seven starting points, seven modes.", hint:"That's why there are seven." },
     { type:"mc", q:"In the key of C, the mode beginning on G is…", choices:["Mixolydian","Lydian","Aeolian","Dorian"], answer:0,
       explain:"C-D-E-F-G: the 5th degree hosts Mixolydian.", hint:"The rock-and-roll mode." },
-    { type:"mc", q:"IONIAN mode is…", choices:["a major scale","a natural minor scale","major with a lowered 7th"], answer:0,
+    { type:"mc", q:"Ionian mode is…", choices:["a major scale","a natural minor scale","major with a lowered 7th"], answer:0,
       explain:"The major scale's Greek name.", hint:"The free one." },
-    { type:"mc", q:"MIXOLYDIAN mode is a major scale with…", choices:["the 7th lowered a half step","the 4th raised a half step","the 3rd lowered"], answer:0,
+    { type:"mc", q:"How is Mixolydian different from the major scale?", choices:["Its 7th is lowered a half step","Its 4th is raised a half step","Its 3rd is lowered"], answer:0,
       explain:"♭7 — the relaxed leading tone.", hint:"The hook's bend." },
-    { type:"mc", q:"LYDIAN mode is a major scale with…", choices:["the 4th raised a half step","the 7th lowered a half step","the 2nd lowered"], answer:0,
+    { type:"mc", q:"How is Lydian different from the major scale?", choices:["Its 4th is raised a half step","Its 7th is lowered a half step","Its 2nd is lowered"], answer:0,
       explain:"♯4 — the floating bend.", hint:"The flying-scene mode." },
     { type:"truefalse", q:"There are seven modes altogether, each with a Greek name.", answer:true,
       explain:"One per degree of the parent scale.", hint:"Count the white keys C to B." },
@@ -238,9 +239,9 @@ LESSON_CONTENT[62]={
       staff:{clef:"treble",notes:[{p:"C4",d:"q"},{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"F#4",d:"q"},{p:"G4",d:"q"},{p:"A4",d:"q"},{p:"B4",d:"q"},{p:"C5",d:"q"}],width:400},
       choices:["C Lydian","C Mixolydian","C Ionian"], answer:0,
       explain:"The F♯ = raised 4th = Lydian.", hint:"Which degree wears the sharp?" },
-    { type:"mc", q:"F Lydian (built on F with C major's white keys) sounds Lydian because…", choices:["its 4th (B) is naturally a raised 4th above F","F is a sharp key","it borrows notes from F major"], answer:0,
+    { type:"mc", q:"Why does F Lydian sound different from F major?", choices:["Its 4th degree is raised (B instead of B♭)","F is a sharp key","It borrows notes from F major"], answer:0,
       explain:"F to B = an augmented 4th — no accidental needed on white keys.", hint:"Measure F up to B." },
-    { type:"mc", q:"To build G Lydian, you would…", choices:["raise G major's 4th: C→C♯","lower G major's 7th: F♯→F","add a B♭"], answer:0,
+    { type:"mc", q:"To build G Lydian, which note changes?", choices:["Raise C to C♯","Lower F♯ to F","Add a B♭"], answer:0,
       explain:"Same recipe, any keynote: ♯4.", hint:"G major first, then bend degree 4 up." },
     /* generated */
     { gen:"mode-id", params:{set:"major", ask:"both"}, count:5 },
@@ -264,9 +265,9 @@ LESSON_CONTENT[62]={
     "✔ <b>Lydian = major with ♯4</b> (floating, cinematic)."
   ],
   tips:[
-    "Fast recall: Lydian's L points UP (♯4); Mixolydian relaxes DOWN (♭7).",
-    "Hum the plain scale, then bend one note — modes are easier to HEAR than to memorize.",
-    "White-key trick: any mode's flavor = play its home-to-home octave on white keys (G to G = instant Mixolydian).",
+    "Fast recall: Lydian = ♯4 (raised); Mixolydian = ♭7 (lowered).",
+    "Hum the plain scale, then change the one note — modes are easier to HEAR than to memorize.",
+    "White-key trick: any mode's flavor = play its home-to-home octave on white keys (G to G on white keys = Mixolydian).",
     "Lesson 63 finishes the family: the four modes that grow from the natural minor scale."
   ],
   rewards:{ badge:"Mode Traveler", icon:"\u{1F3DB}\u{FE0F}" },
@@ -285,7 +286,7 @@ LESSON_CONTENT[62]={
     example:{ label:"the examples",
       explain:"Example 1 bends C three ways (plain, ♭7, ♯4); example 2 shows the white-key origins — C→C, G→G, F→F." },
     game:{ label:"the games",
-      explain:"Sprint the modes, climb both bends, spot them on cards, then tap the seven Greek names in order.",
+      explain:"Sprint the modes, play both modes, spot them on cards, then tap the seven Greek names in order.",
       hint:"Degree 4 and degree 7 are the only suspects today." },
     quiz:{ label:"this question",
       explain:"Three modes, one method: compare with the plain major scale and locate the single bent degree.",

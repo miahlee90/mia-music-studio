@@ -18,7 +18,7 @@ function MF_L65_ear(container,fb){
     <div class="choices chips l65e-ch" style="display:none"><button>Block</button><button>Broken</button><button>Arpeggio</button></div>`;
   const q=container.querySelector(".l65e-q"), pl=container.querySelector(".l65e-play"), ch=container.querySelector(".l65e-ch");
   function ask(){
-    if(r>=order.length){ q.textContent="Every texture identified — your ears know their chords in any outfit!"; pl.style.display="none"; ch.style.display="none"; return; }
+    if(r>=order.length){ q.textContent="Great! You identified every texture."; pl.style.display="none"; ch.style.display="none"; return; }
     played=false; ch.style.display="none";
     q.innerHTML=`Round ${r+1} of ${order.length}: same C chord — which TEXTURE?`;
   }
@@ -28,7 +28,7 @@ function MF_L65_ear(container,fb){
     if(!played) return;
     const want=order[r];
     if(i===want){ MFAudio.yay();
-      fb(true,`✓ ${KINDS[want].name}! ${want===0?"All notes at once — a solid wall.":want===1?"The notes took turns but bounced around — broken.":"One after another, straight up like a harp sweep — arpeggio."}`);
+      fb(true,`✓ ${KINDS[want].name}! ${want===0?"All the notes at once — block chord.":want===1?"The notes played separately, out of order — broken chord.":"One at a time, in order — arpeggio."}`);
       r++; setTimeout(ask,1300); }
     else { MFAudio.tone(40,.2); fb(false,"Replay: together = block; taking turns = broken; climbing in ORDER = arpeggio."); }
   });
@@ -38,15 +38,15 @@ function MF_L65_ear(container,fb){
 /* arpeggio builder: sweep C and G chords over an octave-plus */
 function MF_L65_build(container,fb){
   const ROUNDS=[
-    {name:"C major arpeggio", pcs:[60,64,67,72,76], names:["C","E","G","C (octave!)","E — keep sweeping"]},
-    {name:"G major arpeggio", pcs:[55,59,62,67,71], names:["G","B","D","G (octave!)","B — the harp sweep"]}];
+    {name:"C major arpeggio", pcs:[60,64,67,72,76], names:["C","E","G","C (octave!)","E — keep going"]},
+    {name:"G major arpeggio", pcs:[55,59,62,67,71], names:["G","B","D","G (octave!)","B — past the octave"]}];
   let r=0,k=0;
   container.innerHTML=`<div class="big-q l65b-q" style="text-align:center"></div><div class="l65b-kb"></div>`;
   const q=container.querySelector(".l65b-q"), kh=container.querySelector(".l65b-kb");
   function ask(){
-    if(r>=ROUNDS.length){ q.textContent="Two arpeggios swept — arpeggiare achieved! \u{1F3B5}"; return; }
+    if(r>=ROUNDS.length){ q.textContent="Excellent! You played both arpeggios."; return; }
     k=0;
-    q.innerHTML=`Sweep a <b>${ROUNDS[r].name}</b> — chord tones one after another, past the octave. Start on <b>${ROUNDS[r].names[0]}</b>.`;
+    q.innerHTML=`Play a <b>${ROUNDS[r].name}</b> — one note at a time, in order. Start on <b>${ROUNDS[r].names[0]}</b>.`;
   }
   Keyboard.create(kh,{start:55,octaves:2,labels:true,
     onKey:m=>{
@@ -54,25 +54,25 @@ function MF_L65_build(container,fb){
       if(m===R.pcs[k]){
         k++;
         if(k>=R.pcs.length){ MFAudio.yay();
-          fb(true,`✓ ${R.name} — the chord stretched into a glittering line, an octave and beyond.`);
+          fb(true,`✓ ${R.name} — the chord played as a line, an octave and beyond.`);
           r++; setTimeout(ask,1400); }
-        else q.innerHTML=`Good — next: <b>${R.names[k]}</b>.`;
+        else q.innerHTML=`Now play <b>${R.names[k]}</b>.`;
       } else { MFAudio.tone(40,.2); fb(false,"Chord tones only, in rising order — root, 3rd, 5th, root again…"); }
     }});
   ask();
 }
 
 LESSON_CONTENT[65]={
-  welcome:"Same chords, new sparkle: today we un-stack the snowman. \u{1F3B5}",
+  welcome:"One chord, three textures: block, broken, and arpeggio. \u{1F3B5}",
   hook:{
-    say:"One C major chord, three costumes. <b>Which one sounds like a HARP?</b>",
+    say:"<b>One chord can be played in different ways.</b> Listen to the three examples. <b>Which example sounds like an arpeggio?</b>",
     interact:{ type:"custom",
       mount:(container,fb)=>{
         container.innerHTML=`<div style="text-align:center">
-          <button class="play hk-a">▶ Costume 1</button>
-          <button class="play hk-b">▶ Costume 2</button>
-          <button class="play hk-c">▶ Costume 3</button></div>
-          <div class="choices hk-ch" style="display:none"><button>Costume 3 — notes rippling upward one by one</button><button>Costume 1 — all at once is harp-like</button><button>Costume 2 — bouncing is the harp sound</button></div>`;
+          <button class="play hk-a">▶ Example 1</button>
+          <button class="play hk-b">▶ Example 2</button>
+          <button class="play hk-c">▶ Example 3</button></div>
+          <div class="choices hk-ch" style="display:none"><button>Example 3 — the notes play one at a time, in order</button><button>Example 1 — all the notes at once</button><button>Example 2 — the notes take turns out of order</button></div>`;
         const ch=container.querySelector(".hk-ch");
         let heard=new Set();
         const show=()=>{ if(heard.size>=3) setTimeout(()=>ch.style.display="",2200); };
@@ -80,8 +80,8 @@ LESSON_CONTENT[65]={
         container.querySelector(".hk-b").onclick=()=>{ [60,67,64,67].forEach((m,i)=>MFAudio.tone(m,.5,i*.42,.38)); heard.add(2); show(); };
         container.querySelector(".hk-c").onclick=()=>{ [60,64,67,72,76].forEach((m,i)=>MFAudio.tone(m,.5,i*.38,.38)); heard.add(3); show(); };
         [...ch.children].forEach((b,i)=>b.onclick=()=>{
-          if(i===0) fb(true,"✓ Costume 3 was an ARPEGGIO — from Italian arpeggiare, 'to play upon a harp': chord tones in sequence, sweeping past the octave. Costume 1 was a BLOCK chord, costume 2 a BROKEN chord. Today: all three textures!");
-          else fb(false,"A harp's strings ripple one after another, in order, climbing…");
+          if(i===0) fb(true,"✓ Example 3 was an ARPEGGIO — the notes of the chord played one at a time, in order. Example 1 was a BLOCK chord; example 2 a BROKEN chord. Today's lesson!");
+          else fb(false,"An arpeggio plays the notes one at a time, IN ORDER, often past the octave.");
         });
       } }
   },
@@ -94,41 +94,41 @@ LESSON_CONTENT[65]={
     "Know that a repeated chord's symbol isn't re-written"
   ],
   steps:[
-    { say:"Two words, one difference: play a chord's notes <b>together</b> and it's a <b>BLOCK CHORD</b>; play them <b>not together</b> and it's a <b>BROKEN CHORD</b>. Same notes, different delivery. \u{1F447} <b>What changes between block and broken?</b>",
+    { say:"<b>Block Chords and Broken Chords:</b> A <b>block chord</b> plays all notes together. A <b>broken chord</b> plays the notes separately. \u{1F447} <b>What is the difference?</b>",
       show:{ type:"staff", spec:{clef:"bass",tempo:80,time:"4/4",notes:[
         {p:"C3",d:"q",label:"block"},{p:"E3",d:"q",chord:true},{p:"G3",d:"q",chord:true},
         {p:"C3",d:"q",label:"broken…"},{p:"G3",d:"q"},{p:"E3",d:"q"},{bar:"final"}],width:420} },
       try:{ type:"mc", choices:["Only the TIMING — the notes are identical","The notes themselves","The key"], answer:0,
         success:"✓ C-E-G either way. Texture is about WHEN, not WHAT.",
         fail:"Compare the letters in both halves of the staff…",
-        hint:"Same snowman, different schedule." } },
-    { say:"The star of the day: when chord tones are played <b>sequentially, one after the other</b>, that's an <b>ARPEGGIO</b> — Italian <i>arpeggiare</i>, <b>\u{201C}to play upon a harp.\u{201D}</b> And it <b>may be extended an octave or more</b>. \u{1F447} <b>What separates an arpeggio from any broken chord?</b>",
+        hint:"Same notes — together vs. separately." } },
+    { say:"<b>Arpeggios:</b> An <b>arpeggio</b> plays the notes of a chord one at a time, usually in order. It may continue for more than one octave. <b>Remember: block chord = notes together · broken chord = notes played separately · arpeggio = a broken chord played in order.</b> \u{1F447} <b>How is an arpeggio different from a block chord?</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:100,notes:[
         {p:"C4",d:"8"},{p:"E4",d:"8"},{p:"G4",d:"8"},{p:"C5",d:"8"},{p:"E5",d:"8"},{p:"G5",d:"8"},{p:"C6",d:"q"},{bar:"final"}],
         beams:[[0,1],[2,3],[4,5]],width:460} },
-      try:{ type:"mc", choices:["Its tones run in ORDER, often past the octave","It uses different notes than the chord","It's always slower"], answer:0,
-        success:"✓ Sequential and sweeping — root, 3rd, 5th, root, 3rd… as far as your hands (or harp) can reach.",
-        fail:"Think of the harp image: strings brushed one after another…",
-        hint:"Broken = apart; arpeggio = apart AND in sequence." } },
-    { say:"Train your ear on the three textures. \u{1F447}",
+      try:{ type:"mc", choices:["Its notes are played one at a time, in order","It uses different notes","It is always slower"], answer:0,
+        success:"✓ Same notes — played one at a time, in order, often past the octave.",
+        fail:"A block chord sounds all at once; an arpeggio…",
+        hint:"One at a time, in order." } },
+    { say:"Listen to the three textures. \u{1F447}",
       try:{ type:"custom",
         hint:"Together = block; taking turns = broken; climbing in order = arpeggio.",
         mount:(container,fb)=>MF_L65_ear(container,fb) } },
-    { say:"Why bother? ACCOMPANIMENT. Under a melody, an arpeggiated left hand <b>outlines each chord in root position</b> — harmony AND motion at once. The book's German lullaby does exactly this. \u{1F447} <b>An arpeggiated accompaniment gives you…</b>",
-      try:{ type:"mc", choices:["The chord's harmony plus a gentle flowing motion","Louder chords","A different set of chords"], answer:0,
-        success:"✓ Same I-IV-V toolkit as Lesson 64, but liquid instead of solid — the lullaby texture.",
-        fail:"What does rippling add that a solid block doesn't have?",
-        hint:"Think of what a lullaby needs." } },
-    { say:"Score-reading detail from the book: <b>when a chord repeats in the following measures, its symbol is NOT written again</b> — no news is good news. \u{1F447} <b>Measure 2 has no chord symbol. What do you play?</b>",
+    { say:"<b>Arpeggiated Accompaniment:</b> Arpeggios create smooth, flowing accompaniment while outlining the harmony. \u{1F447} <b>Why are arpeggios often used as accompaniment?</b>",
+      try:{ type:"mc", choices:["They add smooth, flowing motion while sounding the harmony","They are louder","They change the chords"], answer:0,
+        success:"✓ The same chords, played as flowing lines — motion and harmony together.",
+        fail:"What does an arpeggio add that a block chord doesn't?",
+        hint:"Motion + harmony." } },
+    { say:"<b>Reading Chord Symbols:</b> If the chord does not change, the chord symbol may not be repeated. \u{1F447} <b>What chord do you play in the next measure?</b>",
       try:{ type:"mc", choices:["The same chord as the previous measure","No chord at all","The I chord automatically"], answer:0,
-        success:"✓ A missing symbol means 'carry on.' Chord charts stay clean this way.",
-        fail:"Would writers really re-stamp the same chord every bar?",
-        hint:"Silence = repetition." } },
-    { say:"Sweep them yourself — two arpeggios, past the octave. \u{1F447}",
+        success:"✓ No new symbol means the harmony continues.",
+        fail:"If nothing changes, nothing new is written…",
+        hint:"The harmony continues." } },
+    { say:"Play two arpeggios. \u{1F447}",
       try:{ type:"custom",
         hint:"Root → 3rd → 5th → root → 3rd, always climbing.",
         mount:(container,fb)=>MF_L65_build(container,fb) } },
-    { say:"Spot-check: here's a bass line from an accompaniment. \u{1F447} <b>Which chord does it outline?</b>",
+    { say:"<b>Which chord does this accompaniment outline?</b> \u{1F447}",
       show:{ type:"staff", spec:{clef:"bass",tempo:100,notes:[
         {p:"G2",d:"q"},{p:"B2",d:"q"},{p:"D3",d:"q"},{p:"G3",d:"q"},{bar:"final"}],width:340} },
       try:{ type:"mc", choices:["G major (G-B-D)","C major","E minor"], answer:0,
@@ -137,14 +137,14 @@ LESSON_CONTENT[65]={
         hint:"Collect the letters: G, B, D." } }
   ],
   examples:[
-    { caption:"One chord, three textures: block (solid), broken (taking turns), arpeggio (sweeping past the octave). Watch the keyboard ripple on the last one.",
+    { caption:"One chord, three textures: block (together), broken (separately), arpeggio (one at a time, in order, past the octave).",
       staff:{clef:"treble",tempo:90,notes:[
         {p:"C4",d:"h",label:"block"},{p:"E4",d:"h",chord:true},{p:"G4",d:"h",chord:true},
         {p:"C4",d:"q",label:"broken"},{p:"G4",d:"q"},{p:"E4",d:"q"},{p:"G4",d:"q"},
         {p:"C4",d:"8",label:"arpeggio"},{p:"E4",d:"8"},{p:"G4",d:"8"},{p:"C5",d:"8"},{p:"E5",d:"q"},{bar:"final"}],
         beams:[[7,8],[9,10]],width:620},
       kb:{start:60,octaves:2,labels:true} },
-    { caption:"A lullaby-style accompaniment: the bass arpeggiates I, then V, then I in root position — each measure's notes outline exactly one chord, just like the book's German lullaby.",
+    { caption:"An arpeggiated accompaniment: the bass arpeggiates I, then V, then I in root position — each measure's notes outline exactly one chord.",
       staff:{clef:"bass",tempo:90,time:"3/4",notes:[
         {p:"C3",d:"q",label:"I"},{p:"E3",d:"q"},{p:"G3",d:"q"},{bar:true},
         {p:"G2",d:"q",label:"V"},{p:"B2",d:"q"},{p:"D3",d:"q"},{bar:true},
@@ -164,13 +164,13 @@ LESSON_CONTENT[65]={
         ["Repeated chord in a chart","symbol not written again"],
         ["Arpeggiated accompaniment","outlines each chord as a flowing line"]], reverse:true}, seconds:45},
       result:(score)=>score>=8?score+" — texture vocabulary secured!":null },
-    { type:"key-climb", title:"Game 2 · Grand Arpeggio Sweep",
-      intro:"Sweep C major over TWO octaves — up like a harpist's glissando!",
+    { type:"key-climb", title:"Game 2 · Grand Arpeggio",
+      intro:"Play a C major arpeggio over TWO octaves — one note at a time, in order!",
       miaIntro:"Root-3rd-5th, rinse and rise! \u{1FA9C}",
       spec:{seq:[60,64,67,72,76,79,84],
         names:["C","E","G","C (octave 1!)","E","G","C (octave 2!)"],
         start:60, octaves:2, title:"C major arpeggio, two octaves up"},
-      result:(score)=>score!==null?"A true harp sweep — arpeggio royalty!":null },
+      result:(score)=>score!==null?"Two full octaves — excellent arpeggio!":null },
     { type:"symbol-hunt", title:"Game 3 · Texture Spotter",
       intro:"Block, broken and arpeggio in NOTATION — click what's called!",
       miaIntro:"Stacked or strung out? \u{1F440}",
@@ -202,12 +202,12 @@ LESSON_CONTENT[65]={
       explain:"Solid, vertical, all-at-once (AEMT3 p.103)." },
     { type:"mc", q:"When they are NOT played together, it is called a…", choices:["broken chord","block chord","rest"], answer:0,
       explain:"Same tones, spread over time." },
-    { type:"mc", q:"An arpeggio plays chord tones…", choices:["sequentially, one after another","all at once","in random order"], answer:0,
+    { type:"mc", q:"How are the notes of an arpeggio played?", choices:["sequentially, one after another","all at once","in random order"], answer:0,
       explain:"The defining word is SEQUENTIALLY." },
     { type:"mc", q:"The word arpeggio comes from Italian arpeggiare, meaning…", choices:["to play upon a harp","to break apart","to hurry"], answer:0,
       explain:"The harp's ripple, borrowed by every instrument." },
     { type:"mc", q:"An arpeggio may be extended…", choices:["an octave or more","only five notes","never past the 5th"], answer:0,
-      explain:"Sweep as far as the instrument allows." },
+      explain:"An arpeggio may extend an octave or more." },
     { type:"mc", q:"The rising bass line F-A-C-F outlines which chord?", choices:["F major","C major","D minor"], answer:0,
       explain:"F-A-C stacked = F major, root position." },
     { type:"truefalse", q:"Block and broken chords contain different notes.", answer:false,
@@ -219,20 +219,20 @@ LESSON_CONTENT[65]={
     { type:"truefalse", q:"Every broken chord is an arpeggio.", answer:false,
       explain:"Arpeggios are the SEQUENTIAL kind of broken chord." }
   ],
-  miaQuizIntro:"Quiz! Solid, scattered, or sweeping — you'll know each on sight and sound.",
+  miaQuizIntro:"Quiz! Block, broken, or arpeggio — know each by sight and sound.",
   quiz:[
     { type:"mc", q:"A BLOCK chord is played…", choices:["with all notes together","one note at a time","with the melody only"], answer:0,
       explain:"The vertical wall.", hint:"Think 'building block'." },
     { type:"mc", q:"A BROKEN chord is played…", choices:["with its notes not together","with wrong notes","without the root"], answer:0,
       explain:"Same tones, spread out.", hint:"Broken apart in TIME." },
-    { type:"mc", q:"An ARPEGGIO plays the chord tones…", choices:["sequentially, one after the other","simultaneously","backwards only"], answer:0,
-      explain:"The harp sweep.", hint:"Arpeggiare!" },
+    { type:"mc", q:"How are the notes of an arpeggio played?", choices:["One at a time, usually in order","All at once","Backwards only"], answer:0,
+      explain:"One at a time, in order.", hint:"Arpeggiare!" },
     { type:"mc", q:"Arpeggiare means…", choices:["to play upon a harp","to march","to whisper"], answer:0,
-      explain:"Italy named the ripple.", hint:"The instrument with 47 strings." },
+      explain:"Italian: 'to play upon a harp.'", hint:"Think of the instrument." },
     { type:"truefalse", q:"An arpeggio may extend an octave or more.", answer:true,
-      explain:"Sweeps love to climb.", hint:"How far did Game 2 go?" },
+      explain:"An arpeggio may extend an octave or more.", hint:"How far did Game 2 go?" },
     { type:"truefalse", q:"When a chord is repeated in following measures, the chord symbol must be repeated too.", answer:false,
-      explain:"The book: it is NOT necessary.", hint:"Clean charts." },
+      explain:"If the harmony stays the same, the symbol is not repeated.", hint:"The harmony continues." },
     { type:"mc", q:"Identify the texture.",
       staff:{clef:"treble",notes:[{p:"C4",d:"q"},{p:"E4",d:"q"},{p:"G4",d:"q"},{p:"C5",d:"q"}],width:280},
       choices:["A rising arpeggio (C major)","A block chord","A scale"], answer:0,
@@ -243,11 +243,11 @@ LESSON_CONTENT[65]={
       explain:"Stacked and simultaneous.", hint:"One stem, one moment." },
     { type:"mc", q:"This accompaniment bass plays G-B-D-G. The harmony is…", choices:["the V chord in C major (G major)","the I chord in C major","the IV chord"], answer:0,
       explain:"G-B-D = G major = V of C.", hint:"Stack, then place in the key." },
-    { type:"mc", q:"Why do lullabies love arpeggiated accompaniment?", choices:["Gentle, continuous motion instead of solid strikes","It's louder","It changes the melody"], answer:0,
-      explain:"The rocking ripple — the book's German lullaby is the model.", hint:"What rocks a cradle?" },
+    { type:"mc", q:"Why are arpeggios often used in accompaniment?", choices:["They create smooth, flowing motion while outlining the harmony","They are louder","They change the melody"], answer:0,
+      explain:"Flowing motion suits gentle accompaniment.", hint:"Motion + harmony." },
     { type:"mc", q:"Which is true of block vs broken chords?", choices:["Same notes, different timing","Different notes, same timing","Nothing in common"], answer:0,
       explain:"Texture ≠ content.", hint:"The step-1 discovery." },
-    { type:"mc", q:"A pianist sees the symbol 'C' over measure 1 and nothing over measure 2. Measure 2's harmony is…", choices:["still C major","silence","automatically G7"], answer:0,
+    { type:"mc", q:"If a chord symbol is not repeated, what harmony should you play?", choices:["The same chord as before","Silence","Automatically G7"], answer:0,
       explain:"No new symbol = carry on.", hint:"The score-reading rule." },
     /* generated */
     { gen:"term-match", params:{subject:"term", pool:[["Block","together"],["Broken","apart"],["Arpeggio","in sequence"],["Arpeggiare","play upon a harp"]], reverse:true}, count:3 },
@@ -274,26 +274,26 @@ LESSON_CONTENT[65]={
   tips:[
     "Reading trick: when a bass line skips (not steps), try stacking its notes — you're probably looking at an unrolled chord.",
     "Alberti bass — the classical pattern low-high-middle-high (C-G-E-G) — is history's most famous broken chord. Mozart built careers on it.",
-    "Play yesterday's harmonized scale again, but arpeggiate every chord: instant lullaby.",
+    "Play your harmonized scale from Lesson 64 again, but arpeggiate every chord for a flowing accompaniment.",
     "Next lesson: the melody itself gets decorated — passing tones and neighbors that don't belong to the chord (on purpose!)."
   ],
   rewards:{ badge:"Harp Whisperer", icon:"\u{1F3B5}" },
   sectionOrder:["secHook","secObjectives","secLearn","secExample","secReview",
     "secGame0","secGame1","secGame2","secGame3","secPractice","secQuiz","secTips","secNext"],
-  miaPerfect:"PERFECT! Solid, scattered or sweeping — chords obey you in every texture. \u{1F3B5}\u{1F389}",
-  miaPass:"Passed! Your chords have learned to ripple. Now let's decorate the melody…",
+  miaPerfect:"PERFECT! Block, broken, or arpeggio — you know every texture. \u{1F3B5}\u{1F389}",
+  miaPass:"Passed! You know all three textures. Next: decorating the melody…",
   mia:{
     hook:{ label:"the welcome",
-      explain:"Costume 1 = block (together), 2 = broken (taking turns), 3 = arpeggio — sequential, past the octave, the harp's signature.",
+      explain:"Example 1 = block (together), 2 = broken (separately), 3 = arpeggio — one at a time, in order, past the octave.",
       play:()=>{[60,64,67,72,76].forEach((m,i)=>MFAudio.tone(m,.5,i*.36,.38));} },
     learn:{ label:"chord textures",
       explain:"Block = together; broken = apart; arpeggio = apart AND in sequence, an octave or more. Accompaniments arpeggiate to add motion; repeated chords don't repeat their symbol.",
       hint:"Together / apart / in-order-apart.",
       play:()=>{[60,64,67].forEach(m=>MFAudio.tone(m,.9,0,.3));[60,64,67,72].forEach((m,i)=>MFAudio.tone(m,.45,1.1+i*.32,.36));} },
     example:{ label:"the examples",
-      explain:"Example 1 dresses one chord three ways; example 2 is a lullaby-style bass arpeggiating I-V-I." },
+      explain:"Example 1 plays one chord three ways; example 2 is an accompaniment bass arpeggiating I-V-I." },
     game:{ label:"the games",
-      explain:"Sprint the terms, sweep two octaves, spot textures in notation, then decode outlined chords.",
+      explain:"Match the terms, play a two-octave arpeggio, spot textures in notation, then identify outlined chords.",
       hint:"Skips in a line usually spell a chord." },
     quiz:{ label:"this question",
       explain:"Two axes: WHAT (the chord — stack the letters) and HOW (block/broken/arpeggio — the timing).",

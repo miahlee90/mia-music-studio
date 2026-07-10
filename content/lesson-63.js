@@ -15,16 +15,16 @@ function MF_L63_spot(container,fb){
     {name:"A Phrygian", ps:["A3","Bb3","C4","D4","E4","F4","G4","A4"], idxs:[1],
       expl:"Degree 2 dropped: B→B♭. Phrygian = natural minor with the 2nd LOWERED a half step."},
     {name:"A Locrian", ps:["A3","Bb3","C4","D4","Eb4","F4","G4","A4"], idxs:[1,4],
-      expl:"TWO bends: ♭2 (B♭) and ♭5 (E♭). Locrian = natural minor with the 2nd AND 5th lowered — the rare one."}];
+      expl:"TWO changes: ♭2 (B♭) and ♭5 (E♭). Locrian = natural minor with the 2nd AND 5th lowered — the rarely used one."}];
   let r=0, found=[];
   container.innerHTML=`<div class="big-q l63s-q" style="text-align:center"></div>
     <div class="l63s-staff"></div>
     <div style="text-align:center"><button class="play l63s-hear">▶ Hear it</button></div>`;
   const q=container.querySelector(".l63s-q"), holder=container.querySelector(".l63s-staff"), hear=container.querySelector(".l63s-hear");
   function ask(){
-    if(r>=ROUNDS.length){ q.textContent="All the minor-family bends found — Dorian, Phrygian AND the double-bent Locrian!"; holder.innerHTML=""; hear.style.display="none"; return; }
+    if(r>=ROUNDS.length){ q.textContent="Great! You found every changed note."; holder.innerHTML=""; hear.style.display="none"; return; }
     const R=ROUNDS[r]; found=[];
-    q.innerHTML=`This is <b>${R.name}</b>. Compared with A natural minor, ${R.idxs.length===1?"ONE note":"TWO notes"} moved. <b>Tap ${R.idxs.length===1?"it":"both"}.</b>`;
+    q.innerHTML=`Compare with A natural minor. This is <b>${R.name}</b> — tap the ${R.idxs.length===1?"changed note":"TWO changed notes"}.`;
     Staff.render(holder,{clef:"treble",notes:R.ps.map((p,i)=>({p,d:"q",label:String(i+1)})),width:520,clickNotes:true,
       onNote:(i,p)=>{
         MFAudio.tone(MFAudio.midi(p),.5,0,.4);
@@ -33,10 +33,10 @@ function MF_L63_spot(container,fb){
           found.push(i);
           if(found.length>=R2.idxs.length){ MFAudio.yay(); fb(true,`✓ ${R2.expl}`);
             r++; setTimeout(ask,1600); }
-          else { MFAudio.yay(); q.innerHTML=`✓ One found! There's another bent note — keep looking.`; }
+          else { MFAudio.yay(); q.innerHTML=`✓ One found! There is one more changed note.`; }
         }
         else if(R2.idxs.includes(i)) q.innerHTML="You found that one already — where's the other?";
-        else fb(false,`Degree ${i+1} matches natural minor (${NAT[i]}). Hunt for the accidentals.`);
+        else fb(false,`Degree ${i+1} matches natural minor (${NAT[i]}). Look for the accidentals.`);
       }});
   }
   hear.onclick=()=>{ const R=ROUNDS[r]; if(!R) return;
@@ -55,7 +55,7 @@ function MF_L63_build(container,fb){
   container.innerHTML=`<div class="big-q l63b-q" style="text-align:center"></div><div class="l63b-kb"></div>`;
   const q=container.querySelector(".l63b-q"), kh=container.querySelector(".l63b-kb");
   function ask(){
-    if(r>=ROUNDS.length){ q.textContent="Dorian's lift and Phrygian's shadow — both in your hands!"; return; }
+    if(r>=ROUNDS.length){ q.textContent="Excellent! You played both modes."; return; }
     k=0; last=null;
     q.innerHTML=`Play <b>${ROUNDS[r].name}</b>, bottom to top, starting on A. Watch for <b>${ROUNDS[r].hintNote}</b>.`;
   }
@@ -66,9 +66,9 @@ function MF_L63_build(container,fb){
       if(m%12===want && (last===null || m>last)){
         last=m; k++;
         if(k>=8){ MFAudio.yay();
-          fb(true,`✓ ${R.name} complete — ${r===0?"the raised 6th brightens the middle: jazzy, hopeful minor.":"the lowered 2nd darkens the very first step: instant Spanish shadow."}`);
+          fb(true,`✓ ${R.name} complete — ${r===0?"the 6th is raised (F♯).":"the 2nd is lowered (B♭)."}`);
           r++; setTimeout(ask,1400); }
-        else q.innerHTML=`Good — next: <b>${R.names[k]}</b>.`;
+        else q.innerHTML=`Now play <b>${R.names[k]}</b>.`;
       } else { MFAudio.tone(40,.2);
         fb(false, R.pcs[k]===6? "Degree 6 is RAISED — the black key F♯." : R.pcs[k]===10? "Degree 2 is LOWERED — the black key B♭." : "Follow A natural minor's letters — only one degree is bent."); }
     }});
@@ -76,22 +76,22 @@ function MF_L63_build(container,fb){
 }
 
 LESSON_CONTENT[63]={
-  welcome:"Four more Greeks — the minor side of the family. One is an old friend, one is a Spanish shadow, and one almost never leaves the house. \u{1F3FA}",
+  welcome:"Four modes based on the natural minor scale. \u{1F3FA}",
   hook:{
-    say:"A natural minor… and the same scale with its FIRST STEP darkened. That darkened step powers flamenco, film villains and metal riffs alike. <b>Hear the difference?</b>",
+    say:"<b>These modes are all based on the natural minor scale.</b> Listen to A natural minor, then to A Phrygian. <b>Can you hear how they sound different?</b>",
     interact:{ type:"custom",
       mount:(container,fb)=>{
         container.innerHTML=`<div style="text-align:center">
           <button class="play hk-a">▶ Scale 1 (natural minor)</button>
-          <button class="play hk-b">▶ Scale 2 (darkened)</button></div>
+          <button class="play hk-b">▶ Scale 2 (A Phrygian)</button></div>
           <div class="choices hk-ch" style="display:none"><button>Scale 2 lowered its 2nd note</button><button>Scale 2 raised its 7th note</button><button>They're the same</button></div>`;
         const ch=container.querySelector(".hk-ch");
         let hA=false,hB=false;
         container.querySelector(".hk-a").onclick=()=>{ [57,59,60,62,64,65,67,69].forEach((m,i)=>MFAudio.tone(m,.42,i*.3,.4)); hA=true; if(hB) setTimeout(()=>ch.style.display="",2900); };
         container.querySelector(".hk-b").onclick=()=>{ [57,58,60,62,64,65,67,69].forEach((m,i)=>MFAudio.tone(m,.42,i*.3,.4)); hB=true; if(hA) setTimeout(()=>ch.style.display="",2900); };
         [...ch.children].forEach((b,i)=>b.onclick=()=>{
-          if(i===0) fb(true,"✓ B fell to B♭ — the lowered 2nd — and A minor became A PHRYGIAN, the mode of flamenco guitars and looming soundtracks. Today: the four modes that grow from the natural minor scale!");
-          else fb(false,"The change happened IMMEDIATELY — listen to the very second note.");
+          if(i===0) fb(true,"✓ B was lowered to B♭ — the 2nd degree — and A natural minor became A PHRYGIAN. Today: the four modes based on the natural minor scale.");
+          else fb(false,"The change happens immediately — listen to the second note.");
         });
       } }
   },
@@ -104,61 +104,67 @@ LESSON_CONTENT[63]={
     "Recognize and build the minor modes by sight, sound and touch"
   ],
   steps:[
-    { say:"The anchor first: <b>AEOLIAN mode IS the natural minor scale</b> — A to A on white keys. You've owned it since Lesson 56. \u{1F447} <b>A Aeolian differs from A natural minor by…</b>",
+    { say:"<b>Aeolian Mode:</b> <b>Aeolian</b> is the <b>natural minor scale</b>. It uses the same notes and sounds exactly the same. \u{1F447} <b>How is Aeolian different from the natural minor scale?</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:110,notes:[
         {p:"A3",d:"q",label:"1"},{p:"B3",d:"q",label:"2"},{p:"C4",d:"q",label:"3"},{p:"D4",d:"q",label:"4"},
         {p:"E4",d:"q",label:"5"},{p:"F4",d:"q",label:"6"},{p:"G4",d:"q",label:"7"},{p:"A4",d:"q",label:"8"}],width:520} },
       try:{ type:"mc", choices:["Nothing — same scale, Greek name","One flat","The direction it's played"], answer:0,
-        success:"✓ Free mode #2! (Ionian was #1.) The remaining three are natural minor with small bends.",
+        success:"✓ Aeolian = natural minor, exactly. The remaining three are natural minor with small changes.",
         fail:"Like Ionian and major — it's a rename.",
         hint:"The book says 'a natural minor scale' — period." } },
-    { say:"Mode two: <b>DORIAN — natural minor with the 6th RAISED a half step</b>. The one ray of light in the minor gloom. \u{1F447} <b>In A Dorian, the raised 6th is…</b>",
+    { say:"<b>Dorian Mode:</b> Dorian is a <b>natural minor scale with a raised 6th</b>. \u{1F447} <b>Which note is raised in A Dorian?</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:110,notes:[
         {p:"A3",d:"q",label:"1"},{p:"B3",d:"q",label:"2"},{p:"C4",d:"q",label:"3"},{p:"D4",d:"q",label:"4"},
         {p:"E4",d:"q",label:"5"},{p:"F#4",d:"q",label:"♯6"},{p:"G4",d:"q",label:"7"},{p:"A4",d:"q",label:"8"}],width:520} },
       try:{ type:"mc", choices:["F♯","G♯","B♭"], answer:0,
-        success:"✓ F♯ — and careful: melodic minor raised 6 AND 7, but Dorian raises ONLY the 6th, up and down. It's the sound of jazz minor grooves and a thousand folk tunes.",
+        success:"✓ F♯ — and note the difference: melodic minor raises 6 AND 7, but Dorian raises ONLY the 6th, in both directions.",
         fail:"Degree 6 of A minor is F. Raise it…",
         hint:"Count to the 6th letter from A." } },
-    { say:"Mode three: <b>PHRYGIAN — natural minor with the 2nd LOWERED a half step</b> — the darkened first step you heard in the hook. \u{1F447} <b>Which half-step pair makes Phrygian instantly recognizable?</b>",
+    { say:"<b>Phrygian Mode:</b> Phrygian is a <b>natural minor scale with a lowered 2nd</b>. The half step between <b>1 and ♭2</b> gives Phrygian its unique sound. \u{1F447} <b>Which interval makes Phrygian easy to recognize?</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:110,notes:[
         {p:"A3",d:"q",label:"1"},{p:"Bb3",d:"q",label:"♭2"},{p:"C4",d:"q",label:"3"},{p:"D4",d:"q",label:"4"},
         {p:"E4",d:"q",label:"5"},{p:"F4",d:"q",label:"6"},{p:"G4",d:"q",label:"7"},{p:"A4",d:"q",label:"8"}],width:520} },
       try:{ type:"mc", choices:["1 → ♭2, right at the start","6 → 7 at the top","3 → 4 in the middle"], answer:0,
-        success:"✓ The half step lands on the VERY FIRST move (A→B♭) — no other mode does that with such menace. Flamenco's signature.",
-        fail:"Where did the hook's darkness strike — early or late in the scale?",
+        success:"✓ The half step comes on the very first move: 1 → ♭2 (A→B♭). No other mode starts this way.",
+        fail:"Where does the changed note appear — early or late in the scale?",
         hint:"The second note." } },
-    { say:"Mode four, the recluse: <b>LOCRIAN — natural minor with the 2nd AND the 5th lowered</b>. The book notes it was <b>not used in ancient times and is only occasionally used in modern music</b> — its home chord is a diminished triad, too unstable to rest on. \u{1F447} <b>Why is Locrian so rarely used?</b>",
+    { say:"<b>Locrian Mode:</b> Locrian is a <b>natural minor scale with a lowered 2nd and lowered 5th</b>. Because its tonic chord is <b>diminished</b>, it is used much less often than the other modes. \u{1F447} <b>Why is Locrian used less often?</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:110,notes:[
         {p:"A3",d:"q",label:"1"},{p:"Bb3",d:"q",label:"♭2"},{p:"C4",d:"q",label:"3"},{p:"D4",d:"q",label:"4"},
         {p:"Eb4",d:"q",label:"♭5"},{p:"F4",d:"q",label:"6"},{p:"G4",d:"q",label:"7"},{p:"A4",d:"q",label:"8"}],width:520} },
-      try:{ type:"mc", choices:["Its lowered 5th makes even the home chord unstable (diminished)","It has too many notes","It's too cheerful"], answer:0,
-        success:"✓ 1-♭3?-no — 1, 3, ♭5 gives a DIMINISHED home triad: nowhere to rest. Ancient musicians skipped it entirely; modern ones visit briefly for extreme tension.",
+      try:{ type:"mc", choices:["Its tonic chord is diminished, so it has no stable home","It has too many notes","It's too cheerful"], answer:0,
+        success:"✓ Its tonic triad (1, ♭3, ♭5) is diminished — there is no stable place to rest, so Locrian is rarely used.",
         fail:"What quality is a triad with a lowered 5th (Lesson 59)?",
         hint:"A-C-E♭…" } },
-    { say:"Find every bend by eye — including Locrian's double. \u{1F447}",
+    { say:"Compare each mode with the natural minor scale. <b>Which notes are different?</b> \u{1F447}",
+      show:{ type:"html", html:`<table style="border-collapse:collapse;margin:0 auto;font-size:14.5px;min-width:320px">
+        <tr><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:6px 14px">Mode</th><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:6px 14px">Compared with Natural Minor</th></tr>
+        <tr><td style="border:1.5px solid #cdd5e1;padding:4px 14px">Aeolian</td><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center">no changes</td></tr>
+        <tr><td style="border:1.5px solid #cdd5e1;padding:4px 14px">Dorian</td><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center;font-weight:800">♯6</td></tr>
+        <tr><td style="border:1.5px solid #cdd5e1;padding:4px 14px">Phrygian</td><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center;font-weight:800">♭2</td></tr>
+        <tr><td style="border:1.5px solid #cdd5e1;padding:4px 14px">Locrian</td><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center;font-weight:800">♭2, ♭5</td></tr></table>` },
       try:{ type:"custom",
         hint:"Compare with A natural minor: A B C D E F G A.",
         mount:(container,fb)=>MF_L63_spot(container,fb) } },
-    { say:"Play Dorian's lift and Phrygian's shadow. \u{1F447}",
+    { say:"Play each mode and compare the sound. \u{1F447}",
       try:{ type:"custom",
         hint:"Dorian: one black key at degree 6. Phrygian: one black key at degree 2.",
         mount:(container,fb)=>MF_L63_build(container,fb) } },
-    { say:"Full-family check! All seven modes, sorted by their base: <b>major-related — Ionian, Mixolydian, Lydian; minor-related — Aeolian, Dorian, Phrygian, Locrian</b>. \u{1F447} <b>A mode with a RAISED 4th belongs to which side?</b>",
-      try:{ type:"mc", choices:["Major side — that's Lydian","Minor side — that's Dorian","Neither — no mode raises the 4th"], answer:0,
-        success:"✓ Lydian (♯4) is major-family. The minor family's bends are ♯6 (Dorian), ♭2 (Phrygian), ♭2+♭5 (Locrian). Seven modes: COMPLETE!",
-        fail:"Which lesson taught the ♯4?",
-        hint:"Yesterday's floating mode." } }
+    { say:"<b>Review:</b> <b>Ionian, Lydian, and Mixolydian</b> are based on the <b>major scale</b>. <b>Aeolian, Dorian, Phrygian, and Locrian</b> are based on the <b>natural minor scale</b>. \u{1F447} <b>Which mode has a raised 4th?</b>",
+      try:{ type:"mc", choices:["Lydian — a major-family mode","Dorian — a minor-family mode","No mode raises the 4th"], answer:0,
+        success:"✓ Lydian (♯4) belongs to the major family. The minor family's changes are ♯6 (Dorian), ♭2 (Phrygian), and ♭2+♭5 (Locrian).",
+        fail:"Which mode did you learn in the previous lesson with a raised 4th?",
+        hint:"A major-family mode." } }
   ],
   examples:[
-    { caption:"The four minor-related modes on A: Aeolian (plain), Dorian (♯6 — a ray of light), Phrygian (♭2 — the Spanish shadow), Locrian (♭2 AND ♭5 — the unstable recluse).",
+    { caption:"The four minor-related modes on A: Aeolian (no changes), Dorian (♯6), Phrygian (♭2), Locrian (♭2 and ♭5).",
       staff:{clef:"treble",tempo:120,notes:[
         {p:"A3",d:"q",label:"Aeolian"},{p:"B3",d:"q"},{p:"C4",d:"q"},{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"F4",d:"q"},{p:"G4",d:"q"},{p:"A4",d:"q"},{bar:"double"},
         {p:"A3",d:"q",label:"Dorian"},{p:"B3",d:"q"},{p:"C4",d:"q"},{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"F#4",d:"q"},{p:"G4",d:"q"},{p:"A4",d:"q"},{bar:"double"},
         {p:"A3",d:"q",label:"Phrygian"},{p:"Bb3",d:"q"},{p:"C4",d:"q"},{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"F4",d:"q"},{p:"G4",d:"q"},{p:"A4",d:"q"},{bar:"double"},
         {p:"A3",d:"q",label:"Locrian"},{p:"Bb3",d:"q"},{p:"C4",d:"q"},{p:"D4",d:"q"},{p:"Eb4",d:"q"},{p:"F4",d:"q"},{p:"G4",d:"q"},{p:"A4",d:"q"},{bar:"final"}],width:680},
       kb:{start:57,octaves:2,labels:true} },
-    { caption:"The white-key origins: D to D gives Dorian, E to E gives Phrygian, B to B gives Locrian — the modes were hiding on the piano's white keys all along.",
+    { caption:"The white-key origins: D to D gives Dorian, E to E gives Phrygian, B to B gives Locrian — each white-key octave is a mode.",
       staff:{clef:"treble",tempo:120,notes:[
         {p:"D4",d:"q",label:"D→D: Dorian"},{p:"E4",d:"q"},{p:"F4",d:"q"},{p:"G4",d:"q"},{p:"A4",d:"q"},{p:"B4",d:"q"},{p:"C5",d:"q"},{p:"D5",d:"q"},{bar:"double"},
         {p:"E4",d:"q",label:"E→E: Phrygian"},{p:"F4",d:"q"},{p:"G4",d:"q"},{p:"A4",d:"q"},{p:"B4",d:"q"},{p:"C5",d:"q"},{p:"D5",d:"q"},{p:"E5",d:"q"},{bar:"double"},
@@ -168,16 +174,16 @@ LESSON_CONTENT[63]={
   games:[
     { type:"gen-race", title:"Game 1 · Minor-Mode Sprint (45s)",
       intro:"Aeolian, Dorian, Phrygian, Locrian — name them from staff or recipe!",
-      miaIntro:"♯6, ♭2, or the double bend! \u{26A1}",
+      miaIntro:"♯6, ♭2, or ♭2+♭5! \u{26A1}",
       spec:{gen:"mode-id", params:{set:"minor", ask:"both"}, seconds:45},
       result:(score)=>score>=8?score+" minor modes conquered!":null },
     { type:"key-climb", title:"Game 2 · Dorian & Phrygian Climb",
-      intro:"Play A Dorian up, then A Phrygian — feel the lift, then the shadow!",
-      miaIntro:"F♯ up, B♭ down! \u{1FA9C}",
+      intro:"Play A Dorian, then A Phrygian!",
+      miaIntro:"Raised 6th, then lowered 2nd! \u{1FA9C}",
       spec:{seq:[57,59,60,62,64,66,67,69, 57,58,60,62,64,65,67,69],
-        names:["A","B","C","D","E","F♯ (Dorian's lift!)","G","A","A again","B♭ (Phrygian's shadow!)","C","D","E","F","G","A"],
+        names:["A","B","C","D","E","F♯ (the raised 6th!)","G","A","A again","B♭ (the lowered 2nd!)","C","D","E","F","G","A"],
         start:57, octaves:2, title:"A Dorian, then A Phrygian"},
-      result:(score)=>score!==null?"Both minor bends mastered!":null },
+      result:(score)=>score!==null?"Both modes played perfectly!":null },
     { type:"symbol-hunt", title:"Game 3 · Minor-Mode Spotter",
       intro:"Four modes on A — click the one each round names!",
       miaIntro:"Degrees 2, 5 and 6 — the only suspects! \u{1F440}",
@@ -186,7 +192,7 @@ LESSON_CONTENT[63]={
         {label:"Dorian (♯6)", spec:{clef:"treble",notes:[{p:"A3",d:"q"},{p:"B3",d:"q"},{p:"C4",d:"q"},{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"F#4",d:"q"},{p:"G4",d:"q"},{p:"A4",d:"q"}],width:250}},
         {label:"Phrygian (♭2)", spec:{clef:"treble",notes:[{p:"A3",d:"q"},{p:"Bb3",d:"q"},{p:"C4",d:"q"},{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"F4",d:"q"},{p:"G4",d:"q"},{p:"A4",d:"q"}],width:250}},
         {label:"Locrian (♭2 ♭5)", spec:{clef:"treble",notes:[{p:"A3",d:"q"},{p:"Bb3",d:"q"},{p:"C4",d:"q"},{p:"D4",d:"q"},{p:"Eb4",d:"q"},{p:"F4",d:"q"},{p:"G4",d:"q"},{p:"A4",d:"q"}],width:250}}]},
-      result:(score)=>score>=5?"Even Locrian can't hide from you!":null },
+      result:(score)=>score>=5?"You identified every mode!":null },
     { type:"term-race", title:"Game 4 · UNIT 15 GRAND FINALE Race",
       intro:"The victory lap: minor primaries, progressions and ALL seven modes!",
       miaIntro:"Everything from Unit 15 — GO! \u{1F3C6}",
@@ -208,14 +214,14 @@ LESSON_CONTENT[63]={
     { gen:"mode-id", params:{set:"minor", ask:"both"}, count:6 },
     { gen:"mode-id", params:{set:"all", ask:"recipe"}, count:3 },
     { gen:"term-match", params:{subject:"term", pool:[["Aeolian","natural minor"],["Dorian","♯6"],["Phrygian","♭2"],["Locrian","♭2 and ♭5"],["Locrian's fame","not used in ancient times"]], reverse:true}, count:4 },
-    { type:"mc", q:"The four modes related to the natural minor scale are…", choices:["Aeolian, Dorian, Phrygian, Locrian","Ionian, Mixolydian, Lydian, Dorian","Aeolian, Ionian, Lydian, Locrian"], answer:0,
+    { type:"mc", q:"Which modes belong to the minor family?", choices:["Aeolian, Dorian, Phrygian, Locrian","Ionian, Mixolydian, Lydian, Dorian","Aeolian, Ionian, Lydian, Locrian"], answer:0,
       explain:"The minor side of the family (AEMT3 p.99)." },
-    { type:"mc", q:"Dorian raises which degree of the natural minor?", choices:["the 6th","the 7th","the 2nd"], answer:0,
+    { type:"mc", q:"Which scale degree is raised in Dorian?", choices:["the 6th","the 7th","the 2nd"], answer:0,
       explain:"F→F♯ in A Dorian — only the 6th, both directions." },
-    { type:"mc", q:"Phrygian lowers which degree?", choices:["the 2nd","the 5th","the 6th"], answer:0,
-      explain:"B→B♭ in A Phrygian — the shadowed first step." },
-    { type:"mc", q:"Locrian alters which degrees?", choices:["the 2nd and 5th (both lowered)","the 6th and 7th (both raised)","only the 4th"], answer:0,
-      explain:"The double bend — and a diminished home triad." },
+    { type:"mc", q:"Which scale degree is lowered in Phrygian?", choices:["the 2nd","the 5th","the 6th"], answer:0,
+      explain:"B→B♭ in A Phrygian — the changed note comes immediately." },
+    { type:"mc", q:"Which notes are lowered in Locrian?", choices:["the 2nd and 5th (both lowered)","the 6th and 7th (both raised)","only the 4th"], answer:0,
+      explain:"Two lowered notes — and a diminished tonic triad." },
     { type:"mc", q:"On white keys, D to D produces…", choices:["Dorian","Phrygian","Lydian"], answer:0,
       explain:"Each white-key octave hosts one mode; D hosts Dorian." },
     { type:"truefalse", q:"Aeolian mode is the natural minor scale.", answer:true,
@@ -227,18 +233,18 @@ LESSON_CONTENT[63]={
     { type:"truefalse", q:"Phrygian's lowered 2nd puts a half step at the very start of the scale.", answer:true,
       explain:"1→♭2: the instant-recognition move." }
   ],
-  miaQuizIntro:"The Unit 15 finale quiz! Seven modes, four minor bends — map them all.",
+  miaQuizIntro:"The Unit 15 finale quiz! Seven modes, four minor-family changes — map them all.",
   quiz:[
-    { type:"mc", q:"AEOLIAN mode is…", choices:["a natural minor scale","a major scale","minor with a raised 6th"], answer:0,
+    { type:"mc", q:"Aeolian mode is…", choices:["a natural minor scale","a major scale","minor with a raised 6th"], answer:0,
       explain:"The free one on the minor side.", hint:"A to A, white keys." },
     { type:"mc", q:"DORIAN mode is a natural minor scale with…", choices:["the 6th raised a half step","the 2nd lowered a half step","the 7th raised"], answer:0,
       explain:"One ray of light at degree 6.", hint:"The jazzy minor." },
     { type:"mc", q:"PHRYGIAN mode is a natural minor scale with…", choices:["the 2nd lowered a half step","the 6th raised a half step","the 4th raised"], answer:0,
-      explain:"The Spanish shadow at degree 2.", hint:"The hook's darkness." },
+      explain:"The lowered 2nd — the changed note comes immediately.", hint:"Listen to the second note." },
     { type:"mc", q:"LOCRIAN mode is a natural minor scale with…", choices:["the 2nd and 5th lowered","only the 5th lowered","the 2nd and 6th raised"], answer:0,
-      explain:"Two bends — and structural instability.", hint:"The double." },
-    { type:"truefalse", q:"Locrian was not used in ancient times and appears only occasionally in modern music.", answer:true,
-      explain:"Straight from the book.", hint:"The recluse." },
+      explain:"Two lowered notes — ♭2 and ♭5.", hint:"The mode with two changes." },
+    { type:"mc", q:"Why is Locrian used less often?", choices:["Its tonic triad is diminished","It has too many notes","It is too cheerful"], answer:0,
+      explain:"With a diminished tonic chord, there is no stable home.", hint:"Look at its tonic triad." },
     { type:"truefalse", q:"A Dorian contains an F♯.", answer:true,
       explain:"The raised 6th of A minor.", hint:"Count to degree 6." },
     { type:"mc", q:"Name this mode (built on A).",
@@ -251,16 +257,16 @@ LESSON_CONTENT[63]={
       explain:"♭2 only — the 5th is untouched, so it's Phrygian.", hint:"Check degree 5 before saying Locrian!" },
     { type:"mc", q:"On the white keys, E to E gives…", choices:["Phrygian","Dorian","Locrian"], answer:0,
       explain:"E-F is the immediate half step — Phrygian's signature.", hint:"Which mode starts with a half step?" },
-    { type:"mc", q:"Which mode's HOME TRIAD is diminished, making it nearly unusable as a key?", choices:["Locrian","Dorian","Aeolian"], answer:0,
-      explain:"1-3-♭5 = diminished — no stable home.", hint:"The ♭5 is the culprit." },
-    { type:"mc", q:"Which two modes are 'free' — identical to scales you already knew?", choices:["Ionian (major) and Aeolian (natural minor)","Dorian and Phrygian","Lydian and Locrian"], answer:0,
+    { type:"mc", q:"Why is Locrian less stable than the other modes?", choices:["Its tonic triad is diminished","Its 6th is raised","It has no 7th"], answer:0,
+      explain:"1, ♭3, ♭5 form a diminished triad — no stable home.", hint:"Look at the ♭5." },
+    { type:"mc", q:"Which two modes are identical to scales you already know?", choices:["Ionian (major) and Aeolian (natural minor)","Dorian and Phrygian","Lydian and Locrian"], answer:0,
       explain:"The two anchors of the system.", hint:"Degrees 1 and 6 of the white keys." },
-    { type:"mc", q:"A guitarist plays a minor scale but the 6th sounds strangely bright. They're most likely playing…", choices:["Dorian","Phrygian","Aeolian"], answer:0,
+    { type:"mc", q:"A minor melody has a raised 6th. Which mode is it most likely using?", choices:["Dorian","Phrygian","Aeolian"], answer:0,
       explain:"The raised 6th is Dorian's calling card.", hint:"Bright 6th = ?" },
     /* generated */
     { gen:"mode-id", params:{set:"minor", ask:"both"}, count:4 },
     { gen:"mode-id", params:{set:"all", ask:"recipe"}, count:2 },
-    { gen:"term-match", params:{subject:"term", pool:[["Dorian","♯6"],["Phrygian","♭2"],["Locrian","♭2 ♭5"],["Aeolian","no bends"]], reverse:true}, count:2 }
+    { gen:"term-match", params:{subject:"term", pool:[["Dorian","♯6"],["Phrygian","♭2"],["Locrian","♭2 ♭5"],["Aeolian","no changes"]], reverse:true}, count:2 }
   ],
   vocabulary:[
     {term:"Aeolian", def:"The mode on degree 6 — identical to the natural minor scale.",
@@ -276,13 +282,13 @@ LESSON_CONTENT[63]={
     "✔ Four minor-related modes: <b>Aeolian</b> (= natural minor), <b>Dorian</b> (♯6), <b>Phrygian</b> (♭2), <b>Locrian</b> (♭2 + ♭5).",
     "✔ <b>Dorian raises only the 6th</b> — don't confuse it with melodic minor (6 AND 7).",
     "✔ <b>Phrygian's half step hits immediately</b>: 1→♭2 — the flamenco signature.",
-    "✔ <b>Locrian is the recluse</b>: two bends, a diminished home triad, near-zero ancient use.",
+    "✔ <b>Locrian is rarely used</b>: two lowered notes (♭2, ♭5) and a diminished tonic triad.",
     "✔ All seven mapped: Ionian/Mixolydian/Lydian (major side) + these four. <b>UNIT 15 COMPLETE!</b> \u{1F389}"
   ],
   tips:[
-    "Ear tags: Dorian = 'minor with hope'; Phrygian = 'minor with menace'; Locrian = 'minor with vertigo'.",
+    "Quick tags: Dorian = minor with a raised 6th; Phrygian = minor with a lowered 2nd; Locrian = minor with ♭2 and ♭5.",
     "White-key map, complete: C-Ion, D-Dor, E-Phr, F-Lyd, G-Mix, A-Aeo, B-Loc. One octave of piano = the entire system.",
-    "So much pop and film music is really Dorian or Mixolydian — start listening for the bent 6ths and 7ths everywhere.",
+    "Much popular music uses Dorian or Mixolydian — listen for the changed 6ths and 7ths.",
     "Unit 16 turns you into a COMPOSER: harmonizing real melodies with the chords you now command."
   ],
   rewards:{ badge:"Keeper of the Seven Modes — Unit 15 Champion", icon:"\u{1F3FA}" },
@@ -292,19 +298,19 @@ LESSON_CONTENT[63]={
   miaPass:"Passed — and Unit 15 is COMPLETE! Seven modes, three minors, one smooth glide. \u{1F389}",
   mia:{
     hook:{ label:"the welcome",
-      explain:"Scale 2 lowered its 2nd (B→B♭): A Phrygian — natural minor with an immediate half-step shadow.",
+      explain:"Scale 2 lowered its 2nd (B→B♭): A Phrygian — natural minor with a half step at the very start.",
       play:()=>{[57,58,60,62,64,65,67,69].forEach((m,i)=>MFAudio.tone(m,.4,i*.28,.4));} },
     learn:{ label:"the minor modes",
-      explain:"Aeolian = natural minor. Dorian = ♯6. Phrygian = ♭2. Locrian = ♭2+♭5 (rare — diminished home). Compare with natural minor and find the bends.",
-      hint:"Suspect degrees: 2, 5 and 6.",
+      explain:"Aeolian = natural minor. Dorian = ♯6. Phrygian = ♭2. Locrian = ♭2+♭5 (rare — diminished home). Compare with natural minor and find the changes.",
+      hint:"Check degrees 2, 5 and 6.",
       play:()=>{[57,59,60,62,64,66,67,69].forEach((m,i)=>MFAudio.tone(m,.4,i*.28,.4));} },
     example:{ label:"the examples",
-      explain:"Example 1 bends A minor four ways; example 2 finds Dorian, Phrygian and Locrian hiding on the white keys (D→D, E→E, B→B)." },
+      explain:"Example 1 shows all four minor-family modes; example 2 finds Dorian, Phrygian and Locrian on the white keys (D→D, E→E, B→B)." },
     game:{ label:"the games",
       explain:"Sprint the minor modes, climb Dorian and Phrygian, spot all four on cards, then run the Unit 15 victory lap.",
       hint:"♯6 = Dorian, ♭2 = Phrygian, both-and-♭5 = Locrian." },
     quiz:{ label:"this question",
-      explain:"Method: line the scale against natural minor, find the bent degree(s), name the Greek. Check degree 5 before crying Locrian.",
+      explain:"Method: line the scale against natural minor, find the changed degree(s), name the Greek. Check degree 5 before crying Locrian.",
       play:()=>{[57,58,60,62,64,65,67,69].forEach((m,i)=>MFAudio.tone(m,.4,i*.28,.4));} }
   }
 };

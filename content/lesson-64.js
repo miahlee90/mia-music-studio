@@ -30,8 +30,8 @@ function MF_L64_harm(container,fb){
   }
   function ask(){
     draw();
-    if(k>=STEPS.length){ q.textContent="Scale fully harmonized — exactly like the book's model. Hear it!"; ch.style.display="none"; pl.style.display="inline-block"; return; }
-    q.innerHTML=`Melody note ${k+1} of 8 — scale degree <b>${STEPS[k].deg}</b>. Which primary chord harmonizes it? <i>(Chart: 1,3,5→I · 2,4,5,7→V7 · 1,4,6→IV)</i>`;
+    if(k>=STEPS.length){ q.textContent="Excellent! The melody is fully harmonized. Listen!"; ch.style.display="none"; pl.style.display="inline-block"; return; }
+    q.innerHTML=`Melody note ${k+1} of 8 — scale degree <b>${STEPS[k].deg}</b>. Which chord fits best? <i>(Chart: 1,3,5→I · 2,4,5,7→V7 · 1,4,6→IV)</i>`;
   }
   [...ch.children].forEach(b=>b.onclick=()=>{
     const S=STEPS[k]; if(!S) return;
@@ -41,28 +41,28 @@ function MF_L64_harm(container,fb){
       picked.push(b.textContent); k++;
       fb(true,`✓ ${S.why}`);
       setTimeout(ask,1200);
-    } else { MFAudio.tone(40,.2); fb(false,`Degree ${S.deg} isn't inside that chord — check the chart rows containing ${S.deg}.`); }
+    } else { MFAudio.tone(40,.2); fb(false,"Check which chord contains the melody note."); }
   });
   pl.onclick=()=>{
     STEPS.forEach((s,i)=>{
       MFAudio.tone(MFAudio.midi(s.note),.55,i*.62,.4);
       CH[picked[i]].forEach(m=>MFAudio.tone(m,.58,i*.62,.2));
     });
-    setTimeout(()=>fb(true,"✓ A full melody-plus-chords performance — YOUR harmonization."),5200);
+    setTimeout(()=>fb(true,"✓ Your harmonization — melody and chords together."),5200);
   };
   ask();
 }
 
 LESSON_CONTENT[64]={
-  welcome:"Unit 16 — the composer's unit! First skill: dressing a melody in chords. \u{1F3A8}",
+  welcome:"Harmonizing: adding chords to support a melody. \u{1F3A8}",
   hook:{
-    say:"The same little melody twice: once with chords chosen by the CHART… once with chords thrown on at random. <b>Which clothes fit?</b>",
+    say:"<b>The same melody can be harmonized in different ways.</b> Listen to both versions. <b>Which accompaniment fits the melody better?</b>",
     interact:{ type:"custom",
       mount:(container,fb)=>{
         container.innerHTML=`<div style="text-align:center">
           <button class="play hk-a">▶ Version A</button>
           <button class="play hk-b">▶ Version B</button></div>
-          <div class="choices hk-ch" style="display:none"><button>Version A — each chord contained its melody note</button><button>Version B — clashes are more exciting</button></div>`;
+          <div class="choices hk-ch" style="display:none"><button>Version A — each chord contains its melody note</button><button>Version B — the clashing chords fit better</button></div>`;
         const mel=[72,74,76,77,79];
         const goodCh=[[60,64,67],[59,62,67],[60,64,67],[60,65,69],[60,64,67]];
         const badCh=[[60,65,69],[60,64,67],[59,62,65],[59,62,67],[60,65,69]];
@@ -72,64 +72,71 @@ LESSON_CONTENT[64]={
         container.querySelector(".hk-a").onclick=()=>{ play(goodCh); hA=true; if(hB) setTimeout(()=>ch.style.display="",3600); };
         container.querySelector(".hk-b").onclick=()=>{ play(badCh); hB=true; if(hA) setTimeout(()=>ch.style.display="",3600); };
         [...ch.children].forEach((b,i)=>b.onclick=()=>{
-          if(i===0) fb(true,"✓ Version A followed today's rule: pick a chord that CONTAINS the melody note. That skill — dressing a melody in the right chords — is called HARMONIZING, and there's a chart for it!");
-          else fb(false,"Those 'exciting' clashes were chords that didn't contain their melody notes. Listen once more…");
+          if(i===0) fb(true,"✓ Version A chose chords that CONTAIN each melody note. Adding chords to support a melody is called HARMONIZING — today's lesson!");
+          else fb(false,"Version B's chords didn't contain their melody notes. Listen once more…");
         });
       } }
   },
   objectives:[
     "Define harmonizing: creating a chord accompaniment for a melody",
-    "Use the book's chart: 1,3,5 → I · 2,4,5,7 → V(7) · 1,4,6 → IV",
+    "Use the chart: 1,3,5 → I · 2,4,5,7 → V(7) · 1,4,6 → IV",
     "Let the EAR decide when more than one chord fits",
     "Begin and end with I; put V(7) just before the final chord",
     "Omit the V7's 5th when harmonizing (three smooth voices)",
     "Harmonize a full C major scale yourself"
   ],
   steps:[
-    { say:"The definition: <b>to HARMONIZE a melody means to create a chord accompaniment for it</b>. And because <b>I, IV and V(7) contain all the notes of the major scale</b>, MANY melodies need only those three chords. \u{1F447} <b>The key requirement for a harmonizing chord is…</b>",
-      try:{ type:"mc", choices:["It contains the melody note","It's louder than the melody","It's always the I chord"], answer:0,
-        success:"✓ Melody note ∈ chord — the golden rule. Everything else is taste.",
-        fail:"What went wrong in the hook's version B?",
-        hint:"The melody note must live INSIDE the chord." } },
-    { say:"The book's chart — memorize its three rows: <b>degrees 1, 3, 5 → the I chord · degrees 2, 4, 5, 7 → the V (or V7) chord · degrees 1, 4, 6 → the IV chord</b>. Some degrees appear in TWO rows; then <b>your ear is the final guide</b>. \u{1F447} <b>Melody note = degree 6. Which chord?</b>",
-      show:{ type:"html", html:`<div style="max-width:380px;margin:0 auto;font-size:15px;line-height:2;background:var(--card,#fff);border:1.5px solid #cdd5e1;border-radius:12px;padding:12px 18px;text-align:center">
-        <b>1, 3, 5</b> → I chord<br><b>2, 4, 5, 7</b> → V (or V7) chord<br><b>1, 4, 6</b> → IV chord</div>` },
+    { say:"<b>What Does It Mean to Harmonize a Melody?</b> Harmonizing means adding chords to support a melody. In a major key, many melodies can be harmonized with <b>I, IV, and V (or V7)</b>. \u{1F447} <b>What should a harmonizing chord contain?</b>",
+      try:{ type:"mc", choices:["The melody note","A louder note","Only the tonic"], answer:0,
+        success:"✓ A harmonizing chord must contain the melody note.",
+        fail:"What went wrong in version B of the hook?",
+        hint:"The chord must CONTAIN the melody note." } },
+    { say:"<b>Choosing the Right Chord:</b> Each melody note belongs to one or more primary chords. Use the chart to choose a chord that contains the melody note. \u{1F447} <b>Which chord should harmonize scale degree 6?</b>",
+      show:{ type:"html", html:`<table style="border-collapse:collapse;margin:0 auto;font-size:14.5px;min-width:260px">
+        <tr><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:6px 14px">Melody Note</th><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:6px 14px">Chord</th></tr>
+        <tr><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center">1</td><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center;font-weight:800">I, IV</td></tr>
+        <tr><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center">2</td><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center;font-weight:800">V</td></tr>
+        <tr><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center">3</td><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center;font-weight:800">I</td></tr>
+        <tr><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center">4</td><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center;font-weight:800">IV, V</td></tr>
+        <tr><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center">5</td><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center;font-weight:800">I, V</td></tr>
+        <tr><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center">6</td><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center;font-weight:800">IV</td></tr>
+        <tr><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center">7</td><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center;font-weight:800">V</td></tr></table>` },
       try:{ type:"mc", choices:["IV — degree 6 appears only in its row","I — six is close to five","V7 — sevens and sixes match"], answer:0,
         success:"✓ Degree 6 (A in C major) is the 3rd of F-A-C. One row only → no ear required.",
         fail:"Scan each row for the number 6…",
         hint:"Only one row lists 6." } },
-    { say:"Which degrees give you a CHOICE? Check the overlaps: <b>1</b> sits in I and IV; <b>4</b> in IV and V7; <b>5</b> in I and V. There, says the book, <b>\u{201C}your ear should always be the final guide.\u{201D}</b> \u{1F447} <b>Degree 5 can be harmonized by…</b>",
+    { say:"Some melody notes belong to more than one chord. When this happens, <b>use your ear</b> to choose the best harmony. \u{1F447} <b>Which chords can harmonize scale degree 5?</b>",
       try:{ type:"mc", choices:["I or V — it lives in both","only IV","any chord at all"], answer:0,
         success:"✓ G is the 5th of C-E-G AND the root of G-B-D. The most flexible note in the scale — your ear casts the deciding vote.",
         fail:"Find 5 in the chart — it appears twice.",
         hint:"Rows one and two both contain 5." } },
-    { say:"Two habits of good harmonizations, straight from the book: they <b>usually begin and end with a I chord</b>, and <b>a V (or V7) usually precedes the last chord</b>. Sound familiar? That's a CADENCE. \u{1F447} <b>The standard closing formula is…</b>",
+    { say:"<b>Ending the Progression:</b> Most harmonizations begin with <b>I</b>, end with <b>I</b>, and use <b>V (or V7)</b> before the final I. \u{1F447} <b>Which cadence is most common?</b>",
       try:{ type:"mc", choices:["V(7) → I","IV → ii","I → V, ending on V"], answer:0,
         success:"✓ The dominant hands the melody home. You've heard this ending in nearly every song you know.",
-        fail:"Which chord 'usually precedes the last chord'?",
-        hint:"The book's second closing rule." } },
-    { say:"One practical note: <b>when harmonizing with V7, the 5th is often omitted</b> (G-B-F instead of G-B-D-F) — three voices, cleaner texture, same character. That's Lesson 50's trick earning its keep. \u{1F447} <b>Omitting the V7's 5th…</b>",
-      try:{ type:"mc", choices:["keeps the chord's character with a lighter texture","destroys the chord","changes the key"], answer:0,
-        success:"✓ Root, 3rd and 7th carry the flavor; the 5th was only filler.",
-        fail:"Remember WHY the 5th is the dispensable note…",
-        hint:"Lesson 50: which notes do the real work?" } },
-    { say:"Now the main event — <b>harmonize the whole C major scale</b>, degree by degree, with the chart at your side. \u{1F447}",
+        fail:"Which chord usually comes just before the final I?",
+        hint:"Most harmonizations end V(7) → I." } },
+    { say:"<b>Using V7:</b> The 5th of a V7 chord is often omitted. The chord still keeps its harmonic function. \u{1F447} <b>Why is the 5th often omitted?</b>",
+      try:{ type:"mc", choices:["The root, 3rd and 7th carry the chord's character","The 5th is the most important note","It changes the key"], answer:0,
+        success:"✓ The root, 3rd and 7th keep the chord's function — the 5th can be left out.",
+        fail:"Which notes give V7 its character?",
+        hint:"Root, 3rd and 7th." } },
+    { say:"Harmonize the melody using the chart. \u{1F447}",
       try:{ type:"custom",
         hint:"1,3,5→I · 2,4,5,7→V7 · 1,4,6→IV. Start and end on I.",
         mount:(container,fb)=>MF_L64_harm(container,fb) } },
-    { say:"Transfer check: the chart works in EVERY major key, because it speaks in degrees, not letters. \u{1F447} <b>In G major, melody note E (degree 6) takes which chord?</b>",
+    { say:"<b>Try Another Key:</b> The same chart works in every major key. \u{1F447} <b>In G major, which chord harmonizes scale degree 6?</b>",
       try:{ type:"mc", choices:["C major — the IV chord of G","G major — the I chord","D7 — the V7"], answer:0,
         success:"✓ Degree 6 → IV, and IV of G major is C (C-E-G contains E). Same chart, any key.",
         fail:"First: which degree is E in G major? Then: which chord does the chart give that degree?",
         hint:"G-A-B-C-D-E: count." } }
   ],
   examples:[
-    { caption:"The book's model: a C major scale fully harmonized with I, IV and V7 — every melody note nestled inside its chord. Chart in action, top to bottom.",
+    { caption:"A C major scale fully harmonized with I, IV and V7 — every melody note is contained in its chord.",
       staff:{clef:"treble",tempo:80,notes:[
         {p:"C5",d:"q",label:"I"},{p:"D5",d:"q",label:"V7"},{p:"E5",d:"q",label:"I"},{p:"F5",d:"q",label:"IV"},
         {p:"G5",d:"q",label:"I"},{p:"A5",d:"q",label:"IV"},{p:"B5",d:"q",label:"V7"},{p:"C6",d:"q",label:"I"},{bar:"final"}],width:560},
       kb:{start:60,octaves:3,labels:true} },
-    { caption:"The closing rules, isolated: a mini-phrase that begins on I, wanders, then lands V7 → I. The cadence is the handshake at the end of every good harmonization.",
+    { caption:"The closing rules, isolated: a mini-phrase that begins on I, wanders, then lands V7 → I. This V7 → I cadence ends most harmonizations.",
       staff:{clef:"treble",tempo:80,notes:[
         {p:"C4",d:"h",label:"I"},{p:"E4",d:"h",chord:true},{p:"G4",d:"h",chord:true},
         {p:"F4",d:"h",label:"IV"},{p:"A4",d:"h",chord:true},{p:"C5",d:"h",chord:true},
@@ -152,7 +159,7 @@ LESSON_CONTENT[64]={
         ["The final chord","usually I, preceded by V(7)"]], reverse:true}, seconds:45},
       result:(score)=>score>=8?score+" — the chart is burned in!":null },
     { type:"key-climb", title:"Game 2 · Cadence Climb",
-      intro:"Play the closing handshake: IV, then V7 (5th omitted), then I — bottom to top!",
+      intro:"Play the closing cadence: IV, then V7 (5th omitted), then I — bottom to top!",
       miaIntro:"The last three chords of a thousand songs! \u{1FA9C}",
       spec:{seq:[65,69,72, 67,71,77, 72,76,79],
         names:["F (IV: root)","A","C","G (V7: root)","B","F (the 7th — no D needed!)","C (I: home)","E","G"],
@@ -179,7 +186,7 @@ LESSON_CONTENT[64]={
         ["When two chords fit","the ear is the final guide"],
         ["First and last chord","usually I"],
         ["Just before the last chord","V or V7"]]},
-      result:(score)=>score>=6?"Rulebook memorized — harmonize away!":null }
+      result:(score)=>score>=6?"Chart mastered — harmonize away!":null }
   ],
   practiceIntro:"20 practice questions — chart rows, choices and cadence rules. Answer right and the next appears automatically!",
   practice:[
@@ -193,24 +200,24 @@ LESSON_CONTENT[64]={
       explain:"A is the 3rd of F-A-C." },
     { type:"mc", q:"Melody note D (degree 2) is harmonized by…", choices:["V or V7","I","IV"], answer:0,
       explain:"D is the 5th of G-B-D." },
-    { type:"mc", q:"When more than one chord fits a melody note, the final guide is…", choices:["your ear","a coin flip","always the I chord"], answer:0,
-      explain:"The book says so verbatim." },
+    { type:"mc", q:"When more than one chord fits, what should guide your choice?", choices:["your ear","a coin flip","always the I chord"], answer:0,
+      explain:"When more than one chord fits, the ear decides." },
     { type:"mc", q:"Most harmonizations begin and end with…", choices:["the I chord","the V chord","the IV chord"], answer:0,
       explain:"Home at both ends." },
     { type:"truefalse", q:"A V or V7 chord usually comes just before the final chord.", answer:true,
-      explain:"The cadential handshake." },
-    { type:"truefalse", q:"When harmonizing with V7, the 5th is often omitted.", answer:true,
-      explain:"G-B-F — lighter, same flavor." },
+      explain:"The V(7) → I cadence." },
+    { type:"mc", q:"When using V7, which note is often omitted?", choices:["The 5th","The root","The 7th"], answer:0,
+      explain:"G-B-F keeps the chord's function without the 5th." },
     { type:"truefalse", q:"Degree 5 can only be harmonized by the V chord.", answer:false,
       explain:"It fits I (as the 5th) AND V (as the root)." },
     { type:"truefalse", q:"The harmonizing chart works only in C major.", answer:false,
       explain:"It speaks in DEGREES — any major key obeys." }
   ],
-  miaQuizIntro:"Quiz! Three rows, two habits, one golden rule: the chord must CONTAIN the note.",
+  miaQuizIntro:"Quiz! Remember: the chord must CONTAIN the melody note.",
   quiz:[
     { type:"mc", q:"Harmonizing a melody means…", choices:["creating a chord accompaniment for it","writing a new melody","changing its rhythm","adding dynamics"], answer:0,
       explain:"Chords under a tune.", hint:"Today's title." },
-    { type:"mc", q:"Why can many major-key melodies be harmonized with just I, IV and V(7)?", choices:["Those chords contain all the notes of the major scale","Melodies only use three notes","Other chords are forbidden"], answer:0,
+    { type:"mc", q:"Why can I, IV, and V harmonize many melodies?", choices:["Those chords contain all the notes of the major scale","Melodies only use three notes","Other chords are forbidden"], answer:0,
       explain:"Full scale coverage with three chords.", hint:"The Unit 13 fact returns." },
     { type:"mc", q:"According to the chart, scale degrees 1, 3 and 5 take which chord?", choices:["I","IV","V7"], answer:0,
       explain:"They ARE the I chord's tones.", hint:"Root, 3rd, 5th of the tonic." },
@@ -221,12 +228,12 @@ LESSON_CONTENT[64]={
     { type:"mc", q:"Degree 4 appears in TWO rows. Which two chords can harmonize it?", choices:["IV and V7","I and IV","I and V"], answer:0,
       explain:"F is IV's root and V7's 7th.", hint:"Scan both rows for 4." },
     { type:"truefalse", q:"When more than one chord fits, your ear should be the final guide.", answer:true,
-      explain:"The book's exact advice.", hint:"Who has the deciding vote?" },
+      explain:"When more than one chord fits, your ear decides.", hint:"Who has the deciding vote?" },
     { type:"truefalse", q:"Most harmonizations begin and end with a V7 chord.", answer:false,
       explain:"They begin and end with I; V(7) comes JUST BEFORE the end.", hint:"Where's home?" },
-    { type:"mc", q:"A melody in C major ends …B → C. The best final two chords are…", choices:["V7 → I","IV → IV","I → V"], answer:0,
+    { type:"mc", q:"Which cadence best ends this melody? (…B → C in C major)", choices:["V7 → I","IV → IV","I → V"], answer:0,
       explain:"B (degree 7) takes V7; the final C takes I — the classic cadence.", hint:"Leading tone, then home." },
-    { type:"mc", q:"Which chord CONTAINS melody note F in C major (choose all-in-one)?", choices:["IV (F-A-C) and V7 (G-B-D-F)","I and IV","only I"], answer:0,
+    { type:"mc", q:"Which chords contain melody note F?", choices:["IV (F-A-C) and V7 (G-B-D-F)","I and IV","only I"], answer:0,
       explain:"F = IV's root = V7's 7th.", hint:"Spell both chords." },
     { type:"mc", q:"When the V7 is used in these harmonizations, which note is often left out?", choices:["The 5th (D)","The root (G)","The 7th (F)"], answer:0,
       explain:"Lesson 50's omission rule, now in service.", hint:"The filler note." },
@@ -239,7 +246,7 @@ LESSON_CONTENT[64]={
   ],
   vocabulary:[
     {term:"Harmonize", def:"To create a chord accompaniment for a melody."},
-    {term:"The Harmonizing Chart", def:"Degrees 1,3,5 → I · degrees 2,4,5,7 → V(7) · degrees 1,4,6 → IV. Overlaps = the ear decides."},
+    {term:"The Harmonizing Chart", def:"Degrees 1,3,5 → I · degrees 2,4,5,7 → V(7) · degrees 1,4,6 → IV. When two chords fit, the ear decides."},
     {term:"Cadence Habit", def:"Harmonizations usually begin AND end on I, with V(7) just before the final chord."},
     {term:"Omitted 5th (V7)", def:"When harmonizing, V7 often drops its 5th: G-B-F — lighter texture, same pull.",
       staff:{clef:"treble",notes:[{p:"G4",d:"w"},{p:"B4",d:"w",chord:true},{p:"F5",d:"w",chord:true}],width:130}}
@@ -261,8 +268,8 @@ LESSON_CONTENT[64]={
   rewards:{ badge:"Melody Tailor", icon:"\u{1F3A8}" },
   sectionOrder:["secHook","secObjectives","secLearn","secExample","secReview",
     "secGame0","secGame1","secGame2","secGame3","secPractice","secQuiz","secTips","secNext"],
-  miaPerfect:"PERFECT! Every melody you meet now leaves your shop well-dressed. \u{1F3A8}\u{1F389}",
-  miaPass:"Passed! Chart in hand, ear in charge. Next: making those chords ripple…",
+  miaPerfect:"PERFECT! You can harmonize any simple melody now. \u{1F3A8}\u{1F389}",
+  miaPass:"Passed! Chart in hand, ear in charge. Next: broken chords and arpeggios…",
   mia:{
     hook:{ label:"the welcome",
       explain:"Version A chose chords CONTAINING each melody note (the chart's method); version B's chords clashed because they didn't.",
@@ -272,7 +279,7 @@ LESSON_CONTENT[64]={
       hint:"The chord must CONTAIN the melody note.",
       play:()=>{[60,64,67].forEach(m=>MFAudio.tone(m,.7,0,.3));[59,62,65,67].forEach(m=>MFAudio.tone(m,.7,.8,.3));[60,64,67,72].forEach(m=>MFAudio.tone(m,1,1.6,.3));} },
     example:{ label:"the examples",
-      explain:"Example 1 is the book's fully harmonized C major scale; example 2 isolates the closing handshake IV → V7 → I." },
+      explain:"Example 1 is a fully harmonized C major scale; example 2 isolates the closing cadence IV → V7 → I." },
     game:{ label:"the games",
       explain:"Sprint the chart, play the cadence, match notes to chords, then race the rulebook.",
       hint:"Three rows: I, V(7), IV." },
