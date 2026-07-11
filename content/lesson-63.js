@@ -111,7 +111,7 @@ LESSON_CONTENT[63]={
       try:{ type:"mc", choices:["Nothing — same scale, Greek name","One flat","The direction it's played"], answer:0,
         success:"✓ Aeolian = natural minor, exactly. The remaining three are natural minor with small changes.",
         fail:"Like Ionian and major — it's a rename.",
-        hint:"The book says 'a natural minor scale' — period." } },
+        hint:"Natural minor — no altered degrees." } },
     { say:"<b>Dorian Mode:</b> Dorian is a <b>natural minor scale with a raised 6th</b>. \u{1F447} <b>Which note is raised in A Dorian?</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:110,notes:[
         {p:"A3",d:"q",label:"1"},{p:"B3",d:"q",label:"2"},{p:"C4",d:"q",label:"3"},{p:"D4",d:"q",label:"4"},
@@ -215,7 +215,7 @@ LESSON_CONTENT[63]={
     { gen:"mode-id", params:{set:"all", ask:"recipe"}, count:3 },
     { gen:"term-match", params:{subject:"term", pool:[["Aeolian","natural minor"],["Dorian","♯6"],["Phrygian","♭2"],["Locrian","♭2 and ♭5"],["Locrian's fame","not used in ancient times"]], reverse:true}, count:4 },
     { type:"mc", q:"Which modes belong to the minor family?", choices:["Aeolian, Dorian, Phrygian, Locrian","Ionian, Mixolydian, Lydian, Dorian","Aeolian, Ionian, Lydian, Locrian"], answer:0,
-      explain:"The minor side of the family (AEMT3 p.99)." },
+      explain:"The minor side of the family." },
     { type:"mc", q:"Which scale degree is raised in Dorian?", choices:["the 6th","the 7th","the 2nd"], answer:0,
       explain:"F→F♯ in A Dorian — only the 6th, both directions." },
     { type:"mc", q:"Which scale degree is lowered in Phrygian?", choices:["the 2nd","the 5th","the 6th"], answer:0,
@@ -229,7 +229,7 @@ LESSON_CONTENT[63]={
     { type:"truefalse", q:"Dorian differs from melodic minor because it raises ONLY the 6th.", answer:true,
       explain:"Melodic minor raises 6 AND 7 (ascending)." },
     { type:"truefalse", q:"Locrian was a favorite mode of ancient musicians.", answer:false,
-      explain:"The book: NOT used in ancient times; only occasional today." },
+      explain:"Locrian: rarely used today, and not used in ancient music either." },
     { type:"truefalse", q:"Phrygian's lowered 2nd puts a half step at the very start of the scale.", answer:true,
       explain:"1→♭2: the instant-recognition move." }
   ],

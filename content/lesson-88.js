@@ -71,11 +71,11 @@ LESSON_CONTENT[88]={
         hint:"The period cadence." } },
     { say:"<b>The Period:</b> antecedent + consequent = a <b>period</b> — two phrases forming one complete musical sentence. <b>Remember: antecedent asks (half cadence) · consequent answers (authentic cadence).</b> \u{1F447} <b>A period contains…</b>",
       show:{ type:"html", html:`<div style="display:flex;gap:12px;justify-content:center;align-items:center;font-weight:800;font-size:15px;flex-wrap:wrap">
-        <div style="border:2px solid #A9821F;border-radius:10px;padding:10px 16px;background:#fff;color:#A9821F">Antecedent<br><span style="font-weight:400;font-size:12.5px;color:#555">question · half cadence</span></div>
+        <div style="border:2px solid #C05A21;border-radius:10px;padding:10px 16px;background:#fff;color:#C05A21">Antecedent<br><span style="font-weight:400;font-size:12.5px;color:#555">question · half cadence</span></div>
         <div style="font-size:20px">+</div>
         <div style="border:2px solid #2F6DA8;border-radius:10px;padding:10px 16px;background:#fff;color:#2F6DA8">Consequent<br><span style="font-weight:400;font-size:12.5px;color:#555">answer · authentic cadence</span></div>
         <div style="font-size:20px">=</div>
-        <div style="border:2px solid #C05A21;border-radius:10px;padding:10px 16px;background:#fff;color:#C05A21">PERIOD</div></div>` },
+        <div style="border:2px solid #A9821F;border-radius:10px;padding:10px 16px;background:#fff;color:#A9821F">PERIOD</div></div>` },
       try:{ type:"mc", choices:["Two phrases: a question and its answer","One phrase repeated","Four unrelated motives"], answer:0,
         success:"✓ Two phrases, one complete sentence.",
         fail:"Count the phrases in the diagram…",
@@ -191,9 +191,9 @@ LESSON_CONTENT[88]={
     "✔ The cadence pair (open → closed) is what makes the pairing work."
   ],
   tips:[
-    "Hum a familiar tune phrase by phrase — most begin with a textbook parallel period.",
+    "Hum a familiar tune phrase by phrase — most begin with a classic parallel period.",
     "Writing your own: copy the antecedent, change only its last measure to reach I — instant parallel period.",
-    "The half cadence is the antecedent's raised eyebrow; the PAC is the consequent's full stop.",
+    "The half cadence leaves the antecedent open; the PAC closes the consequent.",
     "Next lesson: repeating an idea at NEW pitch levels — the melodic sequence."
   ],
   rewards:{ badge:"Sentence Builder", icon:"\u{1F4AC}" },

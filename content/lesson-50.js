@@ -62,7 +62,7 @@ function MF_L50_resolve(container,fb){
 LESSON_CONTENT[50]={
   welcome:"The V chord saves its best trick for last: a 7th! \u{1F386}",
   hook:{
-    say:"Two versions of the classic ending. One uses the plain V triad; the other adds a SECRET NOTE that makes the arrival irresistible. <b>Which ending pulls home harder?</b>",
+    say:"Two versions of the classic ending. One uses the plain V triad; the other has an added 7th that makes the arrival irresistible. <b>Which ending pulls home harder?</b>",
     interact:{ type:"custom",
       mount:(container,fb)=>{
         container.innerHTML=`<div style="text-align:center">
@@ -74,7 +74,7 @@ LESSON_CONTENT[50]={
         container.querySelector(".hk-a").onclick=()=>{ [67,71,74].forEach(m=>MFAudio.tone(m,.8,0,.33)); [60,64,67].forEach(m=>MFAudio.tone(m,1.2,.9,.38)); hA=true; if(hB) setTimeout(()=>ch.style.display="",2300); };
         container.querySelector(".hk-b").onclick=()=>{ [67,71,74,77].forEach(m=>MFAudio.tone(m,.8,0,.3)); [60,64,67,72].forEach(m=>MFAudio.tone(m,1.2,.9,.35)); hB=true; if(hA) setTimeout(()=>ch.style.display="",2300); };
         [...ch.children].forEach((b,i)=>b.onclick=()=>{
-          if(i===0) fb(true,"✓ The secret note was F — a minor 7th above G — turning V into V7, the DOMINANT SEVENTH chord. That extra lean is today's whole lesson!");
+          if(i===0) fb(true,"✓ The added note was F — a minor 7th above G — turning V into V7, the DOMINANT SEVENTH chord. That extra lean is today's whole lesson!");
           else fb(false,"Play both once more — which second chord ACHES before resolving?");
         });
       } }
@@ -99,9 +99,9 @@ LESSON_CONTENT[50]={
     { say:"Terminology check: with <b>FOUR notes</b>, V7 is officially a <b>CHORD but not a triad</b> — triads have exactly three. Its full name: the <b>DOMINANT SEVENTH</b> chord. \u{1F447} <b>Why isn't V7 a triad?</b>",
       try:{ type:"mc", choices:["It has 4 notes — triads have exactly 3","It's too loud","It has no root"], answer:0,
         success:"✓ Tri- = three. Root, 3rd, 5th, PLUS 7th = four voices = a seventh chord.",
-        fail:"Count the snowballs in the stack…",
+        fail:"Count the noteheads in the stack…",
         hint:"Tri- means…" } },
-    { say:"Build it yourself, floor by floor. \u{1F447} <b>Assemble G7 on the keyboard:</b>",
+    { say:"Build it yourself, note by note. \u{1F447} <b>Assemble G7 on the keyboard:</b>",
       try:{ type:"custom",
         hint:"G, B, D — then the m7: F.",
         mount:(container,fb)=>MF_L50_factory(container,fb) } },
@@ -154,13 +154,13 @@ LESSON_CONTENT[50]={
       result:(score)=>score>=8?score+" facts — dominant mastery!":null },
     { type:"key-climb", title:"Game 2 · G7 Ladder",
       intro:"Climb G-B-D-F in order — the dominant seventh under your fingers!",
-      miaIntro:"Four floors to the top! \u{1FA9C}",
+      miaIntro:"Four notes to the top! \u{1FA9C}",
       spec:{seq:[67,71,74,77], names:["G (root)","B (3rd)","D (5th)","F (m7!)"], start:60, octaves:2,
         title:"Press G → B → D → F: the G7 chord"},
       result:(score)=>score!==null?"G7 climbed and conquered!":null },
     { type:"symbol-hunt", title:"Game 3 · Seventh Spotter",
       intro:"Triads and seventh chords mixed — click what each round names!",
-      miaIntro:"Count the snowballs! \u{1F50D}",
+      miaIntro:"Count the noteheads! \u{1F50D}",
       spec:{rounds:6, pool:[
         {label:"V7 (G-B-D-F)", spec:{clef:"treble",notes:[{p:"G4",d:"w"},{p:"B4",d:"w",chord:true},{p:"D5",d:"w",chord:true},{p:"F5",d:"w",chord:true}],width:150}},
         {label:"V (G-B-D)", spec:{clef:"treble",notes:[{p:"G4",d:"w"},{p:"B4",d:"w",chord:true},{p:"D5",d:"w",chord:true}],width:150}},
@@ -183,12 +183,12 @@ LESSON_CONTENT[50]={
         ["Circle of fifths","the key-signature map from Unit 8"]]},
       result:(score)=>score>=8?"REVIEW CHAMPION — inversions await in Lesson 51!":null }
   ],
-  practiceIntro:"20 practice questions — recipes, spellings, omissions and the big finale review. Answer right and the next appears automatically!",
+  practiceIntro:"16 practice questions — recipes, spellings, omissions and the big finale review. Answer right and the next appears automatically!",
   practice:[
     { gen:"term-match", params:{subject:"term", pool:[["V7","V triad + minor 7th above the root"],["G7","G-B-D-F"],["Not a triad because","V7 has four notes"],["Often omitted","the 5th of V7"]], reverse:true}, count:4 },
     { gen:"triad-id", params:{ask:"numeral"}, count:3 },
     { type:"mc", q:"To build a V7 chord, add a ____ above the root of the V triad.", choices:["minor 7th","Major 7th","Perfect 8th"], answer:0,
-      explain:"G→F = m7 (AEMT p.77)." },
+      explain:"G→F = m7." },
     { type:"mc", q:"Equivalently, add a ____ above the 5th of the V triad.", choices:["minor 3rd","Major 3rd","Perfect 4th"], answer:0,
       explain:"D→F = m3 — same F either way." },
     { type:"mc", q:"In C major, V7 is spelled…", choices:["G-B-D-F","G-B-D-F♯","G-A-B-C"], answer:0,
@@ -198,7 +198,7 @@ LESSON_CONTENT[50]={
     { type:"mc", q:"When the 5th of V7 is omitted, the remaining notes are…", choices:["G-B-F","G-D-F","B-D-F"], answer:0,
       explain:"Root + 3rd + 7th keep the chord's identity." },
     { type:"truefalse", q:"Omitting the 5th destroys the V7's seventh-chord quality.", answer:false,
-      explain:"The book: it RETAINS the quality — the 5th is the dispensable note." },
+      explain:"It RETAINS the quality — the 5th is the dispensable note." },
     { type:"truefalse", q:"After this lesson, the three primary chords are I, IV, and V7.", answer:true,
       explain:"The dominant almost always brings its 7th." },
     { type:"mc", q:"The tension inside V7 comes partly from B and F forming…", choices:["a tritone (dim 5th)","a perfect 5th","an octave"], answer:0,
@@ -221,7 +221,7 @@ LESSON_CONTENT[50]={
     { type:"truefalse", q:"The 5th of the V7 chord is often omitted.", answer:true,
       explain:"G-B-F still sounds fully like G7.", hint:"Which note adds bulk, not flavor?" },
     { type:"truefalse", q:"With the 5th omitted, V7 can be performed by just three singers.", answer:true,
-      explain:"The book's practical reason for the omission.", hint:"Three voices, three notes." },
+      explain:"A practical reason for the omission.", hint:"Three voices, three notes." },
     { type:"mc", q:"Name this chord (key of C).",
       staff:{clef:"treble",notes:[{p:"G4",d:"w"},{p:"B4",d:"w",chord:true},{p:"D5",d:"w",chord:true},{p:"F5",d:"w",chord:true}],width:200},
       choices:["V7 (G7)","V (G triad)","I7"], answer:0,

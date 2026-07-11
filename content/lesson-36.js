@@ -270,7 +270,7 @@ LESSON_CONTENT[36]={
     { type:"mc", q:"To turn M6 into m6 on the staff, you…", choices:["flat the upper note","sharp the upper note","raise the lower note","rename the top note down a letter"], answer:0,
       explain:"Lower the top one half step, letters untouched.", hint:"Smaller = lower the top." },
     { type:"mc", q:"Which pair shows a Major interval and its correct minor twin?", choices:["M3 → m3","M4 → m4","P5 → m5","M8 → m8"], answer:0,
-      explain:"Only 2,3,6,7 have minor twins — and 3 is on that list.", hint:"Two of these families don't exist!" },
+      explain:"Only 2,3,6,7 have minor twins — and 3 is on that list.", hint:"Most of these pairs don't exist!" },
     /* generated */
     { gen:"interval-quality", params:{qualities:["M","m"],ask:"full",min:2,max:7}, count:4 },
     { gen:"interval-quality", params:{qualities:["M","m"],ask:"quality",min:2,max:7}, count:2 },

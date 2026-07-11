@@ -66,7 +66,7 @@ LESSON_CONTENT[91]={
         hint:"The hook." } },
     { say:"<b>Telling Them Apart:</b> ask two questions — <b>does music repeat?</b> (no → through-composed) and <b>what kind of repeat?</b> (whole song each verse → strophic · AABA chorus → 32-bar · verse/chorus alternation → verse-chorus). \u{1F447} <b>A song runs: story-verse, HOOK, story-verse, HOOK, bridge, HOOK. Its form is…</b>",
       try:{ type:"mc", choices:["Verse-chorus (with bridge)","Strophic","Through-composed"], answer:0,
-        success:"✓ Alternating verse and returning chorus — modern pop's blueprint.",
+        success:"✓ Alternating verse and returning chorus — modern pop's standard form.",
         fail:"The HOOK keeps returning whole…",
         hint:"Story + hook alternation." } },
     { say:"<b>Review:</b> \u{1F447} <b>A hymn sings five verses to identical music. Its form is…</b>",
@@ -115,7 +115,7 @@ LESSON_CONTENT[91]={
       miaIntro:"Story, hook, story, hook! \u{1F3C1}",
       spec:{sequence:["Verse 1 — the story begins","Chorus — the hook","Verse 2 — story continues","Chorus — the hook again","Bridge — a new angle","Final chorus"],
         title:"A verse-chorus song, start to finish"},
-      result:(stars)=>stars>=2?"The pop blueprint, in order!":null },
+      result:(stars)=>stars>=2?"The pop form, in order!":null },
     { type:"term-race", title:"Game 4 · Name That Form",
       intro:"Describe → identify, at speed!",
       miaIntro:"Ask: what repeats? \u{1F3C1}",
@@ -166,7 +166,7 @@ LESSON_CONTENT[91]={
     "✔ ID method: does music repeat, and HOW?"
   ],
   tips:[
-    "Radio exercise: label tonight's songs V-C-V-C-B-C — you'll find the blueprint everywhere.",
+    "Radio exercise: label tonight's songs V-C-V-C-B-C — you'll find the form everywhere.",
     "AABA hides inside many verse-chorus songs: choruses themselves often run AABA internally.",
     "Writing strophic verses? Make the melody neutral enough to carry different words — that's the craft.",
     "Unit 22 complete! Next unit: chords grow a fourth note — the seventh chords."

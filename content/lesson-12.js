@@ -98,7 +98,7 @@ LESSON_CONTENT[12]={
             played=true;
           };
         } } },
-    { say:"Dotted half note vs three quarter notes — SAME total time, different slicing (remember the pizza?). \u{1F447} <b>Which lasts longer?</b>",
+    { say:"Dotted half note vs three quarter notes — SAME total time, different slicing. \u{1F447} <b>Which lasts longer?</b>",
       show:{ type:"staff", spec:{clef:"treble",notes:[{p:"B4",d:"h",dot:true,label:"1 sound, 3 beats"},{p:"B4",d:"q",label:"1"},{p:"B4",d:"q",label:"2"},{p:"B4",d:"q",label:"3"}],width:420} },
       try:{ type:"mc",
         choices:["They last the SAME — 3 beats each","The dotted half lasts longer","The three quarters last longer"], answer:0,
@@ -167,12 +167,12 @@ LESSON_CONTENT[12]={
   examples:[
     { caption:"The dotted half note fills a whole 3/4 measure: hold it through ONE-two-three.",
       staff:{clef:"treble",tempo:100,time:"3/4",notes:[{p:"G4",d:"h",dot:true,label:"1-2-3"},{bar:"single"},{p:"E4",d:"q",label:"1"},{p:"F4",d:"q",label:"2"},{p:"G4",d:"q",label:"3"},{bar:"single"},{p:"C4",d:"h",dot:true,label:"1-2-3"},{bar:"final"}],width:460} },
-    { caption:"2 + 1 = 3: a half note, its dot, and the equal team of three quarter notes.",
+    { caption:"2 + 1 = 3: a half note plus a quarter note fills one measure — the dotted half note fills the next in a single sound.",
       staff:{clef:"treble",tempo:100,time:"3/4",notes:[{p:"D4",d:"h",label:"1-2"},{p:"D4",d:"q",label:"3"},{bar:"single"},{p:"D4",d:"h",dot:true,label:"1-2-3"},{bar:"final"}],width:420} }
   ],
   games:[
     { type:"value-race", title:"Game 1 · Dot Flash",
-      intro:"Half? Dotted half? Quarter? The dot is tiny — spot it FAST! 10 rounds.",
+      intro:"Whole? Half? Dotted half? Quarter? The dot is tiny — spot it FAST! 10 rounds.",
       miaIntro:"Game time — don't let that little dot sneak past you! \u{1F50D}",
       spec:{rounds:10, ask:"name", values:["h","h.","q","w"]},
       result:(score)=>score>=9?"No dot escapes your eyes now!":null },

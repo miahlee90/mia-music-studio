@@ -13,7 +13,7 @@ LESSON_CONTENT[99]={
         container.innerHTML=`<div style="text-align:center">
           <button class="play hk-a">▶ Play the passage</button></div>
           <div class="choices hk-ch" style="display:none"><button>No — it cadenced in G major and stayed</button><button>Yes — it ended in C</button><button>It never left C</button></div>`;
-        const ROWS=[[60,64,67],[65,69,72],[62,66,69],[55,59,62],[62,65,67],[55,59,62,67]];
+        const ROWS=[[60,64,67],[65,69,72],[62,66,69],[55,59,62],[62,66,67],[55,59,62,67]];
         const ch=container.querySelector(".hk-ch");
         container.querySelector(".hk-a").onclick=()=>{ ROWS.forEach((row,i)=>row.forEach(m=>MFAudio.tone(m,.8,i*.85,.26))); setTimeout(()=>ch.style.display="",ROWS.length*850+300); };
         [...ch.children].forEach((b,i)=>b.onclick=()=>{
@@ -196,7 +196,7 @@ LESSON_CONTENT[99]={
     { type:"truefalse", q:"A single V/V followed by a return to the old key is a modulation.", answer:false,
       explain:"That is tonicization — a visit.", hint:"No cadence, no move." },
     { type:"mc", q:"From G major, which is NOT closely related?", choices:["E♭ major","D major","C major"], answer:0,
-      explain:"Three flats away — distant.", hint:"Count the signature gap." },
+      explain:"Four signature steps from G — distant.", hint:"Count the signature gap." },
     { type:"mc", q:"The typical pivot-modulation order is…", choices:["old key → pivot → new key's V → new-key cadence","cadence first, pivot last","new key → old key"], answer:0,
       explain:"The four stages.", hint:"Doorway before proof." }
   ],
@@ -205,7 +205,7 @@ LESSON_CONTENT[99]={
   mia:{
     hook:{ label:"the welcome",
       explain:"The F♯ arrived, then a cadence confirmed G major — the piece modulated and stayed.",
-      play:()=>{const ROWS=[[60,64,67],[65,69,72],[62,66,69],[55,59,62],[62,65,67],[55,59,62,67]];ROWS.forEach((row,i)=>row.forEach(m=>MFAudio.tone(m,.75,i*.8,.26)));} },
+      play:()=>{const ROWS=[[60,64,67],[65,69,72],[62,66,69],[55,59,62],[62,66,67],[55,59,62,67]];ROWS.forEach((row,i)=>row.forEach(m=>MFAudio.tone(m,.75,i*.8,.26)));} },
     learn:{ label:"modulation",
       explain:"Key change + confirming cadence. Closely related keys (±1 accidental + relatives). Pivot (shared chord), direct (abrupt), phrase (at the boundary).",
       hint:"Cadence = proof.",

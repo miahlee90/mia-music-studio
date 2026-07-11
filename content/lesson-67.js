@@ -196,7 +196,7 @@ LESSON_CONTENT[67]={
     { gen:"term-match", params:{subject:"term", pool:[["Compose","melody for a progression"],["Analyze first","numerals below, symbols above"],["Framework","chord tones"],["To add interest","passing & neighboring tones"],["R","the root as a melody note"],["P","a passing tone"]], reverse:true}, count:6 },
     { gen:"triad-id", params:{ask:"numeral"}, count:2 },
     { type:"mc", q:"What does composing mean in this lesson?", choices:["Creating a melody for a chord progression","Playing by ear","Writing a drum part"], answer:0,
-      explain:"The reverse of harmonizing (AEMT3 p.105)." },
+      explain:"The reverse of harmonizing." },
     { type:"mc", q:"What should you do before writing the melody?", choices:["Analyze the progression: numerals below, symbols above","Choose a tempo","Erase the chords"], answer:0,
       explain:"Know the palette first." },
     { type:"mc", q:"The melody's first and last note tends to be…", choices:["the root of the I chord","the leading tone","degree 5"], answer:0,
@@ -256,7 +256,7 @@ LESSON_CONTENT[67]={
   mistakes:[],
   summary:[
     "✔ <b>Composing</b> = writing a melody over a given progression — the reverse of harmonizing.",
-    "✔ Method: <b>analyze</b> (numerals below, symbols above) → <b>skeleton from chord tones</b> → <b>decorate</b> with passing/neighboring tones.",
+    "✔ Method: <b>analyze</b> (numerals below, symbols above) → <b>outline from chord tones</b> → <b>decorate</b> with passing/neighboring tones.",
     "✔ Frame: <b>first and last note = root of I</b>; <b>V(7) precedes the final chord</b>.",
     "✔ The labels <b>R / 3 / 5 / P</b> name each melody note's job.",
     "✔ Many melodies fit one progression — <b>your choices make yours</b>. UNIT 16 COMPLETE! \u{1F389}"
@@ -277,16 +277,16 @@ LESSON_CONTENT[67]={
       explain:"The melody's notes came from inside each measure's chord: C, A, E, D, C over C-F-C-G7-C. Chord tones are the composer's palette.",
       play:()=>{const chords=[[48,64,67],[53,65,69],[48,64,67],[43,67,71,77],[48,64,67]],mel=[72,69,76,74,72];chords.forEach((row,i)=>{row.forEach(m=>MFAudio.tone(m,.85,i*.9,.2));MFAudio.tone(mel[i],.8,i*.9,.44);});} },
     learn:{ label:"composing",
-      explain:"Analyze the progression, build a skeleton from chord tones, decorate with passing/neighboring tones, frame it: root of I at both ends, V(7) before the close.",
+      explain:"Analyze the progression, build a framework from chord tones, decorate with passing/neighboring tones, frame it: root of I at both ends, V(7) before the close.",
       hint:"Analyze → chord tones → non-harmonic tones → beginning and ending.",
       play:()=>{[72,76,79,76].forEach((m,i)=>MFAudio.tone(m,.5,i*.45,.42));} },
     example:{ label:"the examples",
-      explain:"Example 1 is a fully labeled composed melody (R/3/5/P); example 2 shows the same skeleton before and after decoration." },
+      explain:"Example 1 is a fully labeled composed melody (R/3/5/P); example 2 shows the same framework before and after decoration." },
     game:{ label:"the games",
       explain:"Sprint the checklist, perform the model, spot safe notes, then run the Unit 16 victory lap.",
       hint:"Chord tones first — always." },
     quiz:{ label:"this question",
-      explain:"Every question is one of the four steps: analyze, skeleton, decorate, frame. Identify which step, and the answer follows.",
+      explain:"Every question is one of the four steps: analyze, framework, decorate, frame. Identify which step, and the answer follows.",
       play:()=>{[67,71,74,77].forEach(m=>MFAudio.tone(m,.8,0,.3));[60,64,67,72].forEach(m=>MFAudio.tone(m,1,.9,.32));} }
   }
 };

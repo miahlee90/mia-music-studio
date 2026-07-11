@@ -64,7 +64,7 @@ LESSON_CONTENT[14]={
         success:"✓ The dots say “again!” — one more trip through the section.",
         fail:"Two dots + double bar = REPEAT.",
         hint:"What does “repeat” mean?" } },
-    { say:"Now the clever part: <b>1st and 2nd endings</b>. First time: play ending <b>1</b>, then repeat. Second time: <b>SKIP ending 1</b> and play ending <b>2</b>. Like taking a different exit on your second trip! \u{1F447} <b>Watch and listen — the player takes BOTH trips:</b>",
+    { say:"Now the clever part: <b>1st and 2nd endings</b>. First time: play ending <b>1</b>, then repeat. Second time: <b>SKIP ending 1</b> and play ending <b>2</b>. \u{1F447} <b>Watch and listen — the player takes BOTH trips:</b>",
       try:{ type:"custom",
         hint:"Trip 1: A → B → ending 1 → repeat. Trip 2: A → B → skip → ending 2.",
         mount:(container,fb)=>{
@@ -260,7 +260,7 @@ LESSON_CONTENT[14]={
   tips:[
     "Trace the route with your finger BEFORE playing — every wrong turn you catch early is a save.",
     "The dots always face the music they want repeated.",
-    "Think of endings as highway exits: first trip exit 1, second trip exit 2 — never both.",
+    "First time through, play ending 1; on the repeat, skip ending 1 and play ending 2 — never both.",
     "\u{1F3C3} Next lesson: notes get FASTER — eighth notes split the beat in two!"
   ],
   rewards:{ badge:"Roadmap Reader", icon:"\u{1F501}" },

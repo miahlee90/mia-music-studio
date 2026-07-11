@@ -43,7 +43,7 @@ LESSON_CONTENT[5]={
   ],
   steps:[
     /* Section 1 — Why do we need ledger lines? */
-    { say:"A five-line staff has limits — like a building that ran out of floors. Ledger lines add <b>temporary floors</b> exactly where a note needs one, keeping music neat. \u{1F447} Watch notes climb above the treble staff and sink below the bass staff:",
+    { say:"A five-line staff has limits — some notes sit too high or too low to fit. <b>Ledger lines</b> extend the staff above and below, adding a short line exactly where a note needs one, keeping music neat. \u{1F447} Watch notes climb above the treble staff and sink below the bass staff:",
       try:{ type:"custom",
         mount:(container,fb)=>{
           container.innerHTML=`<div class="lw-stage"></div><div style="text-align:center">

@@ -34,7 +34,7 @@ function MF_L79_ear(container,fb){
 LESSON_CONTENT[79]={
   welcome:"Asymmetrical meter: beats of unequal size. \u{2696}\u{FE0F}",
   hook:{
-    say:"<b>Most meters divide evenly — these do not.</b> Listen: one pattern marches in equal beats, the other limps in a 3+2 shape. \u{1F447} <b>Which pattern is uneven?</b>",
+    say:"<b>Most meters divide evenly — these do not.</b> Listen: one pattern marches in equal beats, the other moves in a deliberate long–short 3+2 grouping. \u{1F447} <b>Which pattern is uneven?</b>",
     interact:{ type:"custom",
       mount:(container,fb)=>{
         container.innerHTML=`<div style="text-align:center">
@@ -47,7 +47,7 @@ LESSON_CONTENT[79]={
         container.querySelector(".hk-b").onclick=()=>{ for(let m=0;m<2;m++) for(let b=0;b<5;b++){ const s=b===0||b===3; MFAudio.tone(s?43:55,.24,(m*5+b)*.42,s?.42:.22); } hB=true; if(hA) setTimeout(()=>ch.style.display="",4600); };
         [...ch.children].forEach((b,i)=>b.onclick=()=>{
           if(i===0) fb(true,"✓ Pattern 2 counted STRONG-2-3-STRONG-2 — five beats in unequal groups. Meters built from unequal groups are ASYMMETRICAL. Today's lesson!");
-          else fb(false,"Pattern 1's accents came at even distances. Listen for the limp — a long group then a short one…");
+          else fb(false,"Pattern 1's accents came at even distances. Listen for a long group followed by a short one…");
         });
       } }
   },
@@ -62,7 +62,7 @@ LESSON_CONTENT[79]={
   steps:[
     { say:"<b>Asymmetrical Meter:</b> In 4/4 every beat group is equal. An asymmetrical meter mixes <b>groups of 2 and groups of 3</b> inside one measure — the pulse feels uneven on purpose. 5/4 and 7/8 are the most common. \u{1F447} <b>What makes a meter asymmetrical?</b>",
       try:{ type:"mc", choices:["Its measure mixes unequal groups (2s and 3s)","It has no time signature","It is always slow"], answer:0,
-        success:"✓ Unequal groups inside the measure — a deliberate, energetic limp.",
+        success:"✓ Unequal groups inside the measure — a deliberate long–short grouping.",
         fail:"Compare 4/4's equal groups…",
         hint:"2s AND 3s together." } },
     { say:"<b>5/4 — Two Shapes:</b> five quarter-note beats group as <b style='color:#2F6DA8'>3+2</b> (STRONG-2-3-strong-2) or <b style='color:#C05A21'>2+3</b> (STRONG-2-strong-2-3). The accents mark the group starts. \u{1F447} <b>In 3+2 grouping, which beats are accented?</b>",
@@ -96,7 +96,7 @@ LESSON_CONTENT[79]={
     { say:"<b>Changing (Mixed) Meter:</b> the time signature itself can <b>change from measure to measure</b> — 4/4 to 3/4 and back. Each new signature applies until the next one. \u{1F447} <b>In the passage below, how many beats does the middle measure get?</b>",
       show:{ type:"html", html:`<div style="display:flex;gap:10px;justify-content:center;align-items:center;font-weight:800;font-size:16px">
         <div style="border:2px solid #2F6DA8;border-radius:10px;padding:10px 16px;background:#fff"><span style="color:#2F6DA8">4/4</span><br>♩ ♩ ♩ ♩</div>
-        <div style="border:2px solid #C05A21;border-radius:10px;padding:10px 16px;background:#fff"><span style="color:#C05A21">3/4</span><br>♩ ♩ ♩</div>
+        <div style="border:2px solid #2F6DA8;border-radius:10px;padding:10px 16px;background:#fff"><span style="color:#2F6DA8">3/4</span><br>♩ ♩ ♩</div>
         <div style="border:2px solid #2F6DA8;border-radius:10px;padding:10px 16px;background:#fff"><span style="color:#2F6DA8">4/4</span><br>♩ ♩ ♩ ♩</div></div>` },
       try:{ type:"mc", choices:["Three — its own signature rules it","Four — the first signature rules all","None"], answer:0,
         success:"✓ Each signature governs its measure until a new one appears.",
@@ -201,7 +201,7 @@ LESSON_CONTENT[79]={
   ],
   mistakes:[],
   summary:[
-    "✔ <b>Asymmetrical meter</b> mixes <b>unequal groups</b> — the limp is the point.",
+    "✔ <b>Asymmetrical meter</b> mixes <b>unequal groups</b> — the uneven grouping is deliberate.",
     "✔ <b>5/4</b> = 3+2 or 2+3 · <b>7/8</b> = 2+2+3, 2+3+2 or 3+2+2.",
     "✔ Think <b>additively</b>: the top number is a sum of 2s and 3s; count the group starts.",
     "✔ <b>Changing meter</b>: each new signature rules until the next.",
@@ -249,7 +249,7 @@ LESSON_CONTENT[79]={
   miaPass:"Passed — and UNIT 19 is COMPLETE! Rhythm's full toolkit is yours. \u{1F389}",
   mia:{
     hook:{ label:"the welcome",
-      explain:"Pattern 1 pulsed in equal fours; pattern 2 limped STRONG-2-3-STRONG-2 — five beats in unequal groups: asymmetrical meter.",
+      explain:"Pattern 1 pulsed in equal fours; pattern 2 went STRONG-2-3-STRONG-2 — five beats in unequal groups: asymmetrical meter.",
       play:()=>{for(let b=0;b<5;b++){ const s=b===0||b===3; MFAudio.tone(s?43:55,.24,b*.42,s?.42:.22);} } },
     learn:{ label:"asymmetrical & changing meter",
       explain:"Unequal groups of 2s and 3s: 5/4 = 3+2/2+3; 7/8 = 2+2+3 etc.; think additively; changing meter swaps signatures measure to measure.",

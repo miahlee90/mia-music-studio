@@ -238,7 +238,7 @@ LESSON_CONTENT[58]={
     { gen:"triad-quality", params:{quals:["M","m"], ask:"symbol"}, count:3 },
     { gen:"term-match", params:{subject:"term", pool:[["Minor triad","root + m3 + P5"],["Quality","a chord's sound character"],["Minor 3rd","3 half steps"],["Perfect 5th","7 half steps"],["ii iii vi","minor triads in a major key"]], reverse:true}, count:3 },
     { type:"mc", q:"A minor triad consists of…", choices:["root, minor 3rd, Perfect 5th","root, Major 3rd, Perfect 5th","root, minor 3rd, diminished 5th"], answer:0,
-      explain:"Only the 3rd differs from major (AEMT3 p.92)." },
+      explain:"Only the 3rd differs from major." },
     { type:"mc", q:"To change C major (C-E-G) into C minor…", choices:["lower E to E♭","raise G to G♯","lower C to B"], answer:0,
       explain:"Lower the 3rd a half step — the universal converter." },
     { type:"mc", q:"D minor is spelled…", choices:["D-F-A","D-F♯-A","D-G-A"], answer:0,

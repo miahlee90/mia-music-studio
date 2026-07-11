@@ -59,22 +59,22 @@ function MF_L41_calc(container,fb){
 }
 
 LESSON_CONTENT[41]={
-  welcome:"One tiny dot gives the rhythm a strut. Meet music's favorite limp: LONG–short. \u{1F998}",
+  welcome:"One tiny dot turns even eighths into a DOTTED rhythm: LONG–short. \u{1F998}",
   hook:{
-    say:"Same two pitches, two different walks. Press both. <b>Which one struts — LOOONG-short, LOOONG-short?</b>",
+    say:"Same two pitches, two rhythms: one is even eighth notes, one is the DOTTED rhythm — a long note followed by a quick short one. Press both. <b>Which one is LOOONG-short, LOOONG-short?</b>",
     interact:{ type:"custom",
       mount:(container,fb)=>{
         container.innerHTML=`<div style="text-align:center">
           <button class="play hk-a">▶ Walk A</button>
           <button class="play hk-b">▶ Walk B</button></div>
-          <div class="choices hk-ch" style="display:none"><button>Walk B struts (long–short)</button><button>Walk A struts (long–short)</button></div>`;
+          <div class="choices hk-ch" style="display:none"><button>Walk B is long–short</button><button>Walk A is long–short</button></div>`;
         const ch=container.querySelector(".hk-ch");
         let hA=false,hB=false;
         container.querySelector(".hk-a").onclick=()=>{ for(let k=0;k<4;k++){ MFAudio.tone(72,.3,k*.44,.5); MFAudio.tone(76,.3,k*.44+.22,.5);} hA=true; if(hB) setTimeout(()=>ch.style.display="",2200); };
         container.querySelector(".hk-b").onclick=()=>{ for(let k=0;k<4;k++){ MFAudio.tone(72,.4,k*.44,.5); MFAudio.tone(76,.12,k*.44+.33,.5);} hB=true; if(hA) setTimeout(()=>ch.style.display="",2200); };
         [...ch.children].forEach((b,i)=>b.onclick=()=>{
           if(i===0) fb(true,"✓ Walk B was the DOTTED rhythm — dotted 8th (¾ beat) then a quick 16th (¼ beat). Marches, jazz, film themes — that strut is everywhere. Today you'll learn its math and its notation.");
-          else fb(false,"Play them again — one walks flat and even, one swaggers.");
+          else fb(false,"Play them again — one is flat and even, one is long–short.");
         });
       } }
   },
@@ -113,7 +113,7 @@ LESSON_CONTENT[41]={
       try:{ type:"custom",
         hint:"Long–short limps; even eighths march flat.",
         mount:(container,fb)=>MF_L41_feel(container,fb) } },
-    { say:"One rhythm, THREE costumes (AEMT shows all three): (1) an 8th <b>tied</b> to a 16th plus a 16th, (2) the <b>dot</b> replacing the tie, (3) the beamed pair with a <b>stub beam</b> on the 16th. They SOUND identical — the dot is just the tidiest spelling. \u{1F447} <b>Play the example, then: what does the dot replace?</b>",
+    { say:"One rhythm, three equivalent spellings: (1) an 8th <b>tied</b> to a 16th plus a 16th, (2) the <b>dot</b> replacing the tie, (3) the beamed pair with a <b>stub beam</b> on the 16th. They SOUND identical — the dot is just the tidiest spelling. \u{1F447} <b>Play the example, then: what does the dot replace?</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:60,time:"2/4",notes:[
         {p:"B4",d:"8",x:130},{p:"B4",d:"16",x:190},{p:"B4",d:"16",x:250},
         {p:"B4",d:"8.",x:400},{p:"B4",d:"16",x:470},{bar:"final"}],
@@ -122,7 +122,7 @@ LESSON_CONTENT[41]={
         brackets:[{from:0,to:2,label:"tied spelling"},{from:3,to:4,label:"dotted spelling"}],width:560} },
       try:{ type:"mc", choices:["A tie to a sixteenth note","A rest","The second beam"], answer:0,
         success:"✓ The dot = a built-in tie to one more sixteenth. Same ¾-beat sound, half the ink.",
-        fail:"Costume 1 used a tie; costume 2 swapped it for…",
+        fail:"Spelling 1 used a tie; spelling 2 swapped it for…",
         hint:"Dot = tie, compressed." } },
     { say:"Reading detail: in the beamed pair, the 16th carries a <b>partial beam</b> — a short SECOND beam stub that doesn't reach the dotted 8th. One full beam = the pair; the stub = 'this one's a sixteenth'. \u{1F447} <b>The stub beam tells you…?</b>",
       try:{ type:"mc", choices:["Which note of the group is the sixteenth","Where the measure ends","That the note is staccato"], answer:0,
@@ -179,11 +179,11 @@ LESSON_CONTENT[41]={
     { gen:"note-value", params:{values:["8","8.","16","q","q.","h."],ask:"beats"}, count:4 },
     { gen:"term-match", params:{subject:"term", pool:[["Dotted Eighth Note","¾ beat — three sixteenths"],["The dot","adds half of the note's own value"],["Long–short rhythm","dotted 8th followed by a 16th"],["Partial beam","the stub that marks the 16th in a beamed pair"]], reverse:true}, count:3 },
     { type:"mc", q:"A dotted eighth note equals how many sixteenth notes?", choices:["3","2","4"], answer:0,
-      explain:"2 (the 8th) + 1 (the dot) = 3 (AEMT p.64)." },
+      explain:"2 (the 8th) + 1 (the dot) = 3." },
     { type:"mc", q:"A dotted eighth note receives…", choices:["¾ of a beat","½ of a beat","1 beat"], answer:0,
       explain:"3 of the beat's 4 sixteenth-slots." },
     { type:"mc", q:"A dotted 8th is usually followed by…", choices:["a single sixteenth note","a half note","another dotted 8th"], answer:0,
-      explain:"¾ + ¼ completes the beat (AEMT p.64)." },
+      explain:"¾ + ¼ completes the beat." },
     { type:"mc", q:"Starting on beat 1, a dotted 8th lasts through…", choices:["1 – e – &","1 – e","1 only"], answer:0,
       explain:"Three sixteenth-slots; the 16th then plays on 'a'." },
     { type:"truefalse", q:"A dot always adds half of the note's original value.", answer:true,
@@ -206,7 +206,7 @@ LESSON_CONTENT[41]={
     { type:"mc", q:"The dotted 8th + 16th figure adds up to…", choices:["one full beat","1½ beats","¾ of a beat","half a beat"], answer:0,
       explain:"¾ + ¼ = 1.", hint:"A tidy one-beat package." },
     { type:"truefalse", q:"A dotted eighth note is usually followed by a sixteenth note.", answer:true,
-      explain:"The classic long–short pairing (AEMT p.64).", hint:"What fills the last slot?" },
+      explain:"The classic long–short pairing.", hint:"What fills the last slot?" },
     { type:"truefalse", q:"The dotted-8th + 16th rhythm sounds identical to two even eighth notes.", answer:false,
       explain:"¾+¼ vs ½+½ — the strut vs the flat walk.", hint:"Remember the ear lab." },
     { type:"mc", q:"Counting '1 e & a', the 16th after a dotted 8th plays on…", choices:["a","e","&","1"], answer:0,
@@ -220,7 +220,7 @@ LESSON_CONTENT[41]={
     { type:"mc", q:"The short stub beam in the figure marks…", choices:["the sixteenth note","a repeat","a staccato note"], answer:0,
       explain:"It's the 16th's second beam, kept short.", hint:"Beam #2, abbreviated." },
     { type:"mc", q:"The long–short dotted rhythm is common in…", choices:["marches, jazz, and popular music","only slow ballads","only drum music"], answer:0,
-      explain:"It powers grooves everywhere (draft: marches, dances, jazz, pop).", hint:"Where have you heard the strut?" },
+      explain:"It powers grooves in marches, dances, jazz and pop.", hint:"Where have you heard the long–short rhythm?" },
     { type:"mc", q:"A dotted QUARTER note equals…", choices:["1½ beats","¾ beat","2 beats"], answer:0,
       explain:"1 + ½ — same dot rule, bigger note.", hint:"Scale the rule up." },
     /* generated */

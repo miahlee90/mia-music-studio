@@ -244,7 +244,7 @@ LESSON_CONTENT[52]={
     { gen:"inversion-id", params:{subject:"triad", ask:"position"}, count:6 },
     { gen:"term-match", params:{subject:"term", pool:[["2nd inversion","the 5th is the lowest note"],["6/4 chord","another name for 2nd inversion"],["1st inversion","the 3rd is the lowest note"],["Root position","the root is the lowest note"],["The 4th trick","the root is the UPPER note of the 4th"]], reverse:true}, count:4 },
     { type:"mc", q:"To create a 2nd inversion from a 1st-inversion triad, move the ____ up one octave.", choices:["bass note (the 3rd)","top note (the root)","middle note (the 5th)"], answer:0,
-      explain:"E-G-C → G-C-E: the lowest note keeps jumping (AEMT3 p.84)." },
+      explain:"E-G-C → G-C-E: the lowest note keeps jumping." },
     { type:"mc", q:"G-C-E is which chord, in which position?", choices:["C major, 2nd inversion","G major, root position","E minor, 1st inversion"], answer:0,
       explain:"Rearrange: C-E-G — with the 5th (G) in the bass." },
     { type:"mc", q:"C-F-A is F major in…", choices:["2nd inversion","root position","1st inversion"], answer:0,
@@ -289,7 +289,7 @@ LESSON_CONTENT[52]={
     { type:"mc", q:"A student says, \u{201C}G–C–E is a G major chord because G is the lowest note.\u{201D} Why is the student incorrect?", choices:["It's C major in 2nd inversion. The bass note shows the inversion, not the chord name.","The student is right","It's E minor"], answer:0,
       explain:"Rearrange in 3rds: C-E-G. G is merely the bass on duty.", hint:"Same trap as Lesson 51 — rearrange first!" },
     { type:"mc", q:"In close position, where does the ROOT sit relative to the interval of a 4th?", choices:["It is the upper note of the 4th","It is the lower note of the 4th","It never touches the 4th"], answer:0,
-      explain:"The book's shortcut for BOTH inversions — spot the 4th, grab its top.", hint:"G→C in our examples… and C is the root." },
+      explain:"The shortcut for BOTH inversions: spot the 4th interval, grab its upper note — that's the root.", hint:"G→C in our examples… and C is the root." },
     { type:"mc", q:"Which statement is correct?", choices:["Second inversion places the 5th in the bass","Second inversion places the 3rd in the bass","Second inversion changes a major chord into minor","Every 2nd inversion is in open position"], answer:0,
       explain:"5th in the bass — the other options mix up the rules.", hint:"Today's rule, verbatim." },
     { type:"mc", q:"Why is IV in 2nd inversion used in this progression? (C → F/C → C)", choices:["So the bass could stay on C while the harmony changed","To make the chord louder","To turn F major into F minor"], answer:0,
@@ -318,7 +318,7 @@ LESSON_CONTENT[52]={
   tips:[
     "Fast ID at a glance: root position = even stack; 1st inversion = gap on top; 2nd inversion = gap at the BOTTOM (the 4th sits between the two lowest notes).",
     "Piano drill: play C-E-G → E-G-C → G-C-E → C-E-G an octave up. Do it in F and G too — you just played every triad position that exists.",
-    "Hear it: 2nd inversion sounds like someone standing on tiptoe — beautiful, but ready to move.",
+    "Hear it: 2nd inversion sounds unstable — beautiful, but ready to move on.",
     "Lesson 53 asks the big question: a V7 chord has FOUR notes… so how many inversions can IT have?"
   ],
   rewards:{ badge:"6/4 Master", icon:"\u{2696}\u{FE0F}" },

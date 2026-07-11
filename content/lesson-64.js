@@ -193,7 +193,7 @@ LESSON_CONTENT[64]={
     { gen:"term-match", params:{subject:"term", pool:[["Degree 3","I only"],["Degree 6","IV only"],["Degree 2","V(7) only"],["Degree 7","V(7) only"],["Degree 5","I or V"],["Degree 4","IV or V7"]], reverse:true}, count:6 },
     { gen:"triad-id", params:{ask:"numeral"}, count:3 },
     { type:"mc", q:"To HARMONIZE a melody means to…", choices:["create a chord accompaniment for it","play it faster","transpose it"], answer:0,
-      explain:"The lesson's opening definition (AEMT3 p.102)." },
+      explain:"The lesson's opening definition." },
     { type:"mc", q:"Melody note E (degree 3 in C major) is harmonized by…", choices:["the I chord","the IV chord","the V7 chord"], answer:0,
       explain:"E lives only in C-E-G among the primaries." },
     { type:"mc", q:"Melody note A (degree 6 in C major) is harmonized by…", choices:["the IV chord","the I chord","the V7 chord"], answer:0,

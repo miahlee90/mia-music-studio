@@ -73,7 +73,7 @@ LESSON_CONTENT[18]={
         success:"✓ Mezzo = moderately. mp and mf live in the comfortable middle of the ladder.",
         fail:"Mezzo softens the extremes — it means MODERATELY.",
         hint:"mp = moderately soft." } },
-    { say:"Volume can also change <b>gradually</b>. <b>Crescendo ( &lt; )</b> = gradually LOUDER — a megaphone opening. <b>Decrescendo ( &gt; )</b> = gradually SOFTER — the megaphone closing. \u{1F447} <b>Listen and identify:</b>",
+    { say:"Volume can also change <b>gradually</b>, shown by a long wedge under the notes. <b>Crescendo ( &lt; )</b> = gradually LOUDER — the wedge opens wider. <b>Decrescendo ( &gt; )</b> = gradually SOFTER — the wedge closes. \u{1F447} <b>Listen and identify:</b>",
       try:{ type:"custom",
         hint:"Growing = crescendo, shrinking = decrescendo.",
         mount:(container,fb)=>{
@@ -101,7 +101,7 @@ LESSON_CONTENT[18]={
             const saidC=bi===0, ok=saidC===(seq[i]==="c");
             if(ok){ i++;
               if(i>=seq.length){ ch.style.display="none"; q.textContent="Gradual changes mastered!";
-                fb(true,"✓ Opening megaphone = crescendo (<), closing = decrescendo (>) — and you HEARD both!"); }
+                fb(true,"✓ Opening wedge = crescendo (<), closing wedge = decrescendo (>) — and you HEARD both!"); }
               else { fb(true,`✓ ${seq[i-1]==="c"?"Growing — crescendo!":"Fading — decrescendo!"} Next…`); ask(); } }
             else fb(false,"Did it GROW or SHRINK? Match the arrow's opening to the volume.");
           });
@@ -141,7 +141,7 @@ LESSON_CONTENT[18]={
   examples:[
     { caption:"The same phrase at two volumes: p whispers it, f declares it. Listen to the marking take effect.",
       staff:{clef:"treble",tempo:92,time:"4/4",notes:[{p:"C4",d:"q",dyn:"p",label:"soft…"},{p:"E4",d:"q"},{p:"G4",d:"h"},{bar:"single"},{p:"C4",d:"q",dyn:"f",label:"LOUD!"},{p:"E4",d:"q"},{p:"G4",d:"h"},{bar:"final"}],width:460} },
-    { caption:"A crescendo wedge: the notes grow from p to f as the megaphone opens.",
+    { caption:"A crescendo wedge: the notes grow from p to f as the wedge opens.",
       staff:{clef:"treble",tempo:92,time:"4/4",notes:[{p:"E4",d:"q",dyn:"p"},{p:"E4",d:"q"},{p:"E4",d:"q"},{p:"E4",d:"q",dyn:"f"},{bar:"final"}],hairpins:[{from:0,to:3,type:"cresc"}],width:420} }
   ],
   games:[
@@ -227,7 +227,7 @@ LESSON_CONTENT[18]={
     { type:"mc", q:"The Italian word forte means ____.", choices:["loud","soft","fast"], answer:0,
       explain:"Loud!", hint:"Think F = Full volume." },
     { type:"mc", q:"A crescendo means becoming gradually ____.", choices:["louder","softer","slower"], answer:0,
-      explain:"The opening megaphone.", hint:"<" },
+      explain:"The opening wedge.", hint:"<" },
     { type:"mc", q:"How many dynamic markings appear in this excerpt?",
       staff:{clef:"treble",notes:[{p:"C4",d:"q",dyn:"p"},{p:"E4",d:"q"},{p:"G4",d:"q",dyn:"mf"},{p:"C5",d:"q",dyn:"f"}],width:380},
       choices:["2","3","4"], answer:1,

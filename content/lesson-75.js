@@ -72,7 +72,7 @@ LESSON_CONTENT[75]={
         success:"✓ The A section keeps returning between contrasting sections.",
         fail:"Which section keeps returning?",
         hint:"The recurring A." } },
-    { say:"The most common rondo types: <b>ABABA · ABACA · ABACABA</b>. Look closely at what alternates in each. \u{1F447} <b>In ABACA, how many DIFFERENT contrasting sections appear?</b>",
+    { say:"The most common rondo types: <b>ABABA · ABACA · ABACABA</b>. Look closely at what alternates in each. <b>Remember: a rondo begins with A, returns to A, and ends with A.</b> \u{1F447} <b>In ABACA, how many DIFFERENT contrasting sections appear?</b>",
       show:{ type:"html", html:`<div style="max-width:420px;margin:0 auto;font-size:17px;line-height:2.2;background:var(--card,#fff);border:1.5px solid #cdd5e1;border-radius:12px;padding:12px 18px;text-align:center;font-weight:800;letter-spacing:3px">
         A B A B A<br>A B A C A<br>A B A C A B A</div>` },
       try:{ type:"mc", choices:["Two — B and C","One — only B","Four"], answer:0,
@@ -242,7 +242,7 @@ LESSON_CONTENT[75]={
   ],
   tips:[
     "Listen for rondos in classical finales — composers loved ending big works with the friendliest form.",
-    "Review path: each unit has an Ear Training & Review in your book — revisit any lesson here anytime; the games regenerate fresh questions forever.",
+    "Review path: revisit any lesson here anytime — the games regenerate fresh questions forever.",
     "Play REAL music now: hymnals, lead sheets, easy classics. You'll be shocked how much of the page simply… makes sense.",
     "From five staff lines to rondo form — thank you for taking all 75 steps with me. Keep playing, keep listening, keep going. \u{2764}\u{FE0F} — Mia"
   ],
@@ -250,7 +250,7 @@ LESSON_CONTENT[75]={
   sectionOrder:["secHook","secObjectives","secLearn","secExample","secReview",
     "secGame0","secGame1","secGame2","secGame3","secPractice","secQuiz","secTips","secNext"],
   miaPerfect:"A PERFECT SCORE ON THE FINAL LESSON — 75 OF 75, FLAWLESS! There has never been a prouder music teacher. \u{1F386}\u{1F3C6}\u{1F393}\u{1F389}\u{2764}\u{FE0F}",
-  miaPass:"PASSED — AND THE ENTIRE COURSE IS COMPLETE! 75 lessons, three books, one musician: YOU. \u{1F393}\u{1F386}\u{1F389}",
+  miaPass:"PASSED — AND THE ENTIRE COURSE IS COMPLETE! 75 lessons, one musician: YOU. \u{1F393}\u{1F386}\u{1F389}",
   mia:{
     hook:{ label:"the welcome",
       explain:"The main theme appeared THREE times (A), alternating with two different contrasts (B, then C): A-B-A-C-A — a rondo.",

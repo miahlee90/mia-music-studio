@@ -34,11 +34,11 @@ function MF_L16_noteRest(container,fb,rounds){
 LESSON_CONTENT[16]={
   welcome:"Even the fast notes need to breathe. \u{1F910}",
   hook:{
-    say:"Remember the silent twins? Every note has one — and today the <b>eighth note</b> meets its twin. Press play: the running notes suddenly hiccup with tiny <b>half-beat silences</b>. Hear them?",
+    say:"Remember the silent twins? Every note has one — and today the <b>eighth note</b> meets its twin. Press play: the running notes suddenly hiccup with a tiny <b>half-beat silence</b>. Hear it?",
     interact:{ type:"custom",
       mount:(container,fb)=>{
         container.innerHTML=`<div style="text-align:center"><button class="play hk-play">▶ Running… with hiccups</button></div>
-          <div class="choices hk-ch" style="display:none"><button>Tiny HALF-BEAT silences appeared</button><button>The notes slowed down</button><button>Nothing changed</button></div>`;
+          <div class="choices hk-ch" style="display:none"><button>A tiny HALF-BEAT silence appeared</button><button>The notes slowed down</button><button>Nothing changed</button></div>`;
         const ch=container.querySelector(".hk-ch");
         container.querySelector(".hk-play").onclick=()=>{
           const spb=60/84;
@@ -48,7 +48,7 @@ LESSON_CONTENT[16]={
           setTimeout(()=>{ ch.style.display=""; },4*spb*1000+400);
         };
         [...ch.children].forEach((b,i)=>b.onclick=()=>{
-          if(i===0) fb(true,"✓ Little gaps, exactly half a beat long — those are EIGHTH RESTS: the eighth note's silent twin!");
+          if(i===0) fb(true,"✓ A little gap, exactly half a beat long — that's an EIGHTH REST: the eighth note's silent twin!");
           else fb(false,"The beat never slowed — listen for the tiny hole in the running notes.");
         });
       } }

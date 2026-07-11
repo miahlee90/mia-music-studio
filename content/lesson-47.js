@@ -45,7 +45,7 @@ function MF_L47_build(container,fb){
 }
 
 LESSON_CONTENT[47]={
-  welcome:"Until today, notes took turns. Now they join hands: welcome to CHORDS. \u{2603}",
+  welcome:"Until today, notes took turns. Now they sound together: welcome to CHORDS. \u{1F3B6}",
   hook:{
     say:"One note… two notes… THREE. Press the buttons in order. <b>When does it start sounding like harmony?</b>",
     interact:{ type:"custom",
@@ -71,7 +71,7 @@ LESSON_CONTENT[47]={
     "Define a chord (3+ notes together)",
     "Define a triad: root + 3rd + 5th",
     "Name the root of any root-position triad",
-    "Spot the all-lines / all-spaces snowman shape",
+    "Spot the all-lines / all-spaces triad shape",
     "Build triads on any scale note",
     "Read triads in treble and bass clef"
   ],
@@ -89,15 +89,15 @@ LESSON_CONTENT[47]={
         success:"✓ Root = name. F-A-C is the F triad, wherever it appears.",
         fail:"Which note did the triad grow from?",
         hint:"Bottom note of the stack (in root position)." } },
-    { say:"Now the reading shortcut. In <b>ROOT POSITION</b> a triad takes <b>every other note</b> (C-E-G, D-F-A, E-G-B…) — so on the staff it's <b>ALL LINES or ALL SPACES</b>: a tidy snowman \u{2603}! \u{1F447} <b>A root-position triad on the staff looks like…?</b>",
+    { say:"Now the reading shortcut. In <b>ROOT POSITION</b> a triad takes <b>every other note</b> (C-E-G, D-F-A, E-G-B…) — so on the staff it's <b>ALL LINES or ALL SPACES</b> — a neat stack! \u{1F447} <b>A root-position triad on the staff looks like…?</b>",
       show:{ type:"staff", spec:{clef:"bass",tempo:60,notes:[
         {p:"G2",d:"w",x:160,label:"lines"},{p:"B2",d:"w",chord:true},{p:"D3",d:"w",chord:true},
         {p:"A2",d:"w",x:360,label:"spaces"},{p:"C3",d:"w",chord:true},{p:"E3",d:"w",chord:true}],width:480} },
-      try:{ type:"mc", choices:["All lines, or all spaces — a stacked snowman","One line, one space, one line","Notes side by side"], answer:0,
+      try:{ type:"mc", choices:["All lines, or all spaces — a neat stack","One line, one space, one line","Notes side by side"], answer:0,
         success:"✓ Skip-a-letter spacing = matching staff positions. If the stack mixes lines AND spaces, it's not in root position!",
         fail:"Skip-one-letter notes land on matching positions…",
         hint:"Remember the odd-interval rule from L33." } },
-    { say:"Hands on — stack some snowmen. \u{1F447} <b>Build each triad on the keyboard, bottom to top:</b>",
+    { say:"Hands on — stack some triads. \u{1F447} <b>Build each triad on the keyboard, bottom to top:</b>",
       try:{ type:"custom",
         hint:"Press the root, skip a white key, press the 3rd, skip again, the 5th.",
         mount:(container,fb)=>MF_L47_build(container,fb) } },
@@ -118,9 +118,9 @@ LESSON_CONTENT[47]={
       try:{ type:"mc",
         staff:{clef:"treble",notes:[{p:"G4",d:"w"},{p:"B4",d:"w",chord:true},{p:"D5",d:"w",chord:true}],width:200},
         choices:["G — so this is the G triad","D — the top note names it","B — the middle note"], answer:0,
-        success:"✓ Bottom note G → the G triad (G-B-D). Read snowmen from the ground up!",
+        success:"✓ Bottom note G → the G triad (G-B-D). Read triads from the bottom up!",
         fail:"Root position: the name lives at the BOTTOM.",
-        hint:"Which note is the snowman's base?" } }
+        hint:"Which note is at the bottom of the stack?" } }
   ],
   examples:[
     { caption:"The C major scale (the ingredients) followed by the C triad (the recipe): scale notes 1, 3, and 5 stacked into one sound.",
@@ -136,7 +136,7 @@ LESSON_CONTENT[47]={
   games:[
     { type:"gen-race", title:"Game 1 · Root Hunter Sprint (45s)",
       intro:"Triads flash on the staff — name each root before time runs out!",
-      miaIntro:"Read the snowman's feet! \u{2603}",
+      miaIntro:"Read the bottom of every stack!",
       spec:{gen:"triad-id", params:{}, seconds:45},
       result:(score)=>score>=8?score+" roots hunted — chord reader unlocked!":null },
     { type:"key-climb", title:"Game 2 · Triad Ladder",
@@ -145,9 +145,9 @@ LESSON_CONTENT[47]={
       spec:{seq:[60,64,67,72], names:["C (root)","E (3rd)","G (5th)","C (octave)"], start:60, octaves:1,
         title:"Press C → E → G → C: the triad and its octave"},
       result:(score)=>score!==null?"The triad lives in your fingers!":null },
-    { type:"symbol-hunt", title:"Game 3 · Snowman Hunt",
+    { type:"symbol-hunt", title:"Game 3 · Triad Hunt",
       intro:"Four stacked shapes — click the triad the round names!",
-      miaIntro:"Spot the right snowman! \u{1F50D}",
+      miaIntro:"Spot the right triad! \u{1F50D}",
       spec:{rounds:6, pool:[
         {label:"C triad", spec:{clef:"treble",notes:[{p:"C4",d:"w"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true}],width:150}},
         {label:"F triad", spec:{clef:"treble",notes:[{p:"F4",d:"w"},{p:"A4",d:"w",chord:true},{p:"C5",d:"w",chord:true}],width:150}},
@@ -162,11 +162,11 @@ LESSON_CONTENT[47]={
         ["Triad","a 3-note chord: root, 3rd, and 5th"],
         ["Root","the note a triad is named after"],
         ["Root position","root on the bottom — all lines or all spaces"],
-        ["The snowman shape","how a root-position triad looks on the staff"],
+        ["All lines or all spaces","how a root-position triad looks on the staff"],
         ["C triad","C-E-G"]]},
       result:(score)=>score>=7?"Chord vocabulary: stacked!":null }
   ],
-  practiceIntro:"20 practice questions — spelling, roots, snowman shapes and clefs. Answer right and the next appears automatically!",
+  practiceIntro:"19 practice questions — spelling, roots, triad shapes and clefs. Answer right and the next appears automatically!",
   practice:[
     { gen:"triad-id", params:{}, count:5 },
     { gen:"triad-id", params:{clef:"bass"}, count:3 },
@@ -178,9 +178,9 @@ LESSON_CONTENT[47]={
     { type:"mc", q:"Spell the E triad.", choices:["E-G-B","E-F-G","E-A-C"], answer:0,
       explain:"E-G-B — every other letter from E." },
     { type:"mc", q:"A chord is defined as…", choices:["three or more notes sounded together","two notes in a row","any loud note"], answer:0,
-      explain:"Three-plus, together (AEMT p.74)." },
+      explain:"Three-plus, together." },
     { type:"truefalse", q:"In root position, all notes are on lines or all are in spaces.", answer:true,
-      explain:"The snowman rule — skip-a-letter spacing." },
+      explain:"All lines or all spaces — skip-a-letter spacing." },
     { type:"truefalse", q:"The root of a root-position triad is the top note.", answer:false,
       explain:"The BOTTOM note names it." },
     { type:"mc", q:"Triads may be built on…", choices:["any note of the scale","only the keynote","only lines"], answer:0,
@@ -197,7 +197,7 @@ LESSON_CONTENT[47]={
     { type:"mc", q:"The triad gets its NAME from its…", choices:["root","3rd","5th","key signature"], answer:0,
       explain:"Root = name.", hint:"The note it grew from." },
     { type:"truefalse", q:"In root position, a triad's notes are all on lines or all in spaces.", answer:true,
-      explain:"The snowman shape.", hint:"Every-other-letter spacing." },
+      explain:"A neat stack — all lines or all spaces.", hint:"Every-other-letter spacing." },
     { type:"truefalse", q:"A triad can only be built on the first note of a scale.", answer:false,
       explain:"Every scale note grows one.", hint:"Seven letters, seven triads." },
     { type:"mc", q:"Name this triad.",
@@ -235,7 +235,7 @@ LESSON_CONTENT[47]={
   summary:[
     "✔ <b>Chord</b> = 3+ notes together; <b>triad</b> = the 3-note chord of <b>root + 3rd + 5th</b>.",
     "✔ The <b>root names the triad</b> — C-E-G is the C triad.",
-    "✔ Root position on the staff = <b>all lines or all spaces</b> — the snowman \u{2603}.",
+    "✔ Root position on the staff = <b>all lines or all spaces</b> — a neat stack.",
     "✔ Triads grow on <b>every</b> scale note: seven letters, seven triads.",
     "✔ Spelling shortcut: start at the root and take every other letter."
   ],
@@ -245,10 +245,10 @@ LESSON_CONTENT[47]={
     "If a stack mixes a line note with space notes, suspect an inversion (that story comes later).",
     "Next lesson: the three VIP triads of every key — I, IV, and V, the primary chords."
   ],
-  rewards:{ badge:"Chord Stacker", icon:"\u{2603}" },
+  rewards:{ badge:"Chord Stacker", icon:"\u{1F9F1}" },
   sectionOrder:["secHook","secObjectives","secLearn","secExample","secReview",
     "secGame0","secGame1","secGame2","secGame3","secPractice","secQuiz","secTips","secNext"],
-  miaPerfect:"A perfect score, stacked clean as a snowman! \u{2603}\u{1F389}",
+  miaPerfect:"A perfect score, stacked clean — root, 3rd, 5th! \u{1F389}",
   miaPass:"Passed! Keep chanting the recipe: root, 3rd, 5th.",
   mia:{
     hook:{ label:"the welcome",

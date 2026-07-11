@@ -139,7 +139,7 @@ LESSON_CONTENT[54]={
       try:{ type:"mc", choices:["4/2","6/5","4/3"], answer:0,
         success:"✓ V⁴₂ (sometimes just V²): the 7th sits in the bass, with the root a 2nd above it — hence the 2!",
         fail:"3rd inversion puts the crunch at the BOTTOM — the root is only a 2nd above the bass.",
-        hint:"The smallest number in any figure = the root's distance from the bass." },
+        hint:"The root sits at the upper number of the adjacent pair — in 4/2, just a 2nd above the bass." },
       },
     { say:"<b>Understanding the Numbers:</b> The numbers always show intervals <b>above the bass note</b>. In <b>V⁶₅</b>, the 7th of the chord is a <b>5th above the bass</b>. \u{1F447} <b>Why does V⁶₅ include the number 5?</b>",
       show:{ type:"html", html:`<table style="border-collapse:collapse;margin:0 auto;font-size:14.5px;min-width:320px">
@@ -223,7 +223,7 @@ LESSON_CONTENT[54]={
     { gen:"inversion-id", params:{subject:"both", ask:"figure"}, count:6 },
     { gen:"term-match", params:{subject:"term", pool:[["6","1st inversion (triad)"],["6/4","2nd inversion (triad)"],["6/5","1st inversion (V7)"],["4/3","2nd inversion (V7)"],["4/2","3rd inversion (V7)"],["5/3","root position — usually omitted"]], reverse:true}, count:5 },
     { type:"mc", q:"Figured bass numbers show intervals above the…", choices:["bass note","root","top note"], answer:0,
-      explain:"Always counted up from the lowest note (AEMT3 p.86)." },
+      explain:"Always counted up from the lowest note." },
     { type:"mc", q:"The figured bass system comes from which era?", choices:["Baroque (1600–1750)","Renaissance (1400–1600)","Romantic (1800s)"], answer:0,
       explain:"Baroque keyboardists improvised from bass + figures." },
     { type:"mc", q:"In the key of C, what does I⁶ mean?", choices:["E in the bass (1st inversion of C major)","G in the bass","C major with 6 notes"], answer:0,
@@ -233,7 +233,7 @@ LESSON_CONTENT[54]={
     { type:"mc", q:"Which figured bass symbols belong to seventh chords?", choices:["7, 6/5, 4/3, 4/2","5/3, 6, 6/4","1, 2, 3, 4"], answer:0,
       explain:"Four positions need four figures." },
     { type:"mc", q:"Where are slash chord symbols usually written?", choices:["above the staff","below the staff","inside the staff"], answer:0,
-      explain:"Letters above, Roman numerals below — the book's placement rule." },
+      explain:"Letters above, Roman numerals below — standard figured-bass placement." },
     { type:"truefalse", q:"A root-position triad must always show the figure 5/3.", answer:false,
       explain:"5/3 is so standard it's normally omitted." },
     { type:"truefalse", q:"The figure 6/5 means the 3rd of a seventh chord is in the bass.", answer:true,
@@ -294,7 +294,7 @@ LESSON_CONTENT[54]={
     "✔ Don't memorize blindly: <b>count the intervals from the bass</b> and every figure explains itself."
   ],
   tips:[
-    "The smallest number in a seventh-chord figure points at the root: in 6/5 the root is a 6th up; in 4/3 a 4th up; in 4/2 just a 2nd up.",
+    "The root sits at the upper number of the adjacent pair in a seventh-chord figure: in 6/5 the root is a 6th up; in 4/3 a 4th up; in 4/2 just a 2nd up.",
     "Guitar and pop charts still use the letter half of this system every day: C/E, G/B, D/F♯ — figured bass never really died!",
     "Speed drill: cover the figures in Example 2 and name them from the bass notes alone, then uncover to check.",
     "Next lesson these labels go to work: smooth chord progressions where I⁶₄ and V⁶₅ make the bass line sing."

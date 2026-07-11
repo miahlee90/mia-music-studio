@@ -43,11 +43,11 @@ function MF_L26_blueprint(container,fb){
       box.style.borderStyle="solid"; box.style.background="#eef1ff"; box.style.fontSize="13px"; box.style.padding="0 8px";
       blk.disabled=true; blk.style.opacity=".35"; blk.style.outline=""; sel=null; placed++;
       MFAudio.tone(58+placed*4,.3);
-      if(placed>=TGT.length) fb(true,"✓ W – W – H, laid like bricks — the tetrachord blueprint. Both halves of every major scale follow it!");
-      else fb(true,"✓ That brick fits! Keep building…");
+      if(placed>=TGT.length) fb(true,"✓ W – W – H — the tetrachord step pattern. Both halves of every major scale follow it!");
+      else fb(true,"✓ That block fits! Keep building…");
     } else {
       box.classList.add("shake"); setTimeout(()=>box.classList.remove("shake"),450); MFAudio.tone(40,.25);
-      fb(false, box.dataset.t==="H" ? "The LAST gap, E to F, is the narrow one — a Half Step brick goes there." : "The first two gaps are WIDE — Whole Step bricks go there.");
+      fb(false, box.dataset.t==="H" ? "The LAST gap, E to F, is the narrow one — a Half Step block goes there." : "The first two gaps are WIDE — Whole Step blocks go there.");
     }
   }
   boxes.forEach(box=>{
@@ -98,7 +98,7 @@ LESSON_CONTENT[26]={
         const ch=container.querySelector(".hk-ch");
         container.querySelector(".hk-play").onclick=()=>{ Staff.play(spec,api); setTimeout(()=>{ ch.style.display=""; },5000); };
         [...ch.children].forEach((b,i)=>b.onclick=()=>{
-          if(i===0) fb(true,"✓ It starts on C and ends on C, one octave higher. That note is called the KEYNOTE — and the ladder is a MAJOR SCALE. Today you'll learn its blueprint!");
+          if(i===0) fb(true,"✓ It starts on C and ends on C, one octave higher. That note is called the KEYNOTE — and the ladder is a MAJOR SCALE. Today you'll learn its step pattern!");
           else fb(false,"Listen once more — compare the very first note with the very last.");
         });
       } }
@@ -119,7 +119,7 @@ LESSON_CONTENT[26]={
         success:"✓ Four — TETRA means four, like a TETRApod has four legs.",
         fail:"Think of the word TETRA…",
         hint:"TETRA = four." } },
-    { say:"Build the blueprint yourself. \u{1F447} <b>Tap the three distances of a tetrachord in the correct order:</b>",
+    { say:"Build the step pattern yourself. \u{1F447} <b>Tap the three distances of a tetrachord in the correct order:</b>",
       try:{ type:"custom",
         hint:"Wide, wide, then narrow: W – W – H.",
         mount:(container,fb)=>MF_L26_blueprint(container,fb) } },
@@ -144,7 +144,7 @@ LESSON_CONTENT[26]={
     { say:"One last check on the complete pattern. The major-scale formula is <b>W – W – H – W – W – W – H</b>. \u{1F447} <b>Which two distances complete the pattern W – ? – H – W – ? – W – H?</b>",
       try:{ type:"mc", choices:["W and W","H and W","W and H","H and H"], answer:0,
         success:"✓ W–W–H–W–W–W–H — memorize the pattern once, and you can build a major scale from almost any note.",
-        fail:"Both tetrachords follow the SAME blueprint: W–W–H.",
+        fail:"Both tetrachords follow the SAME step pattern: W–W–H.",
         hint:"Two identical tetrachords." } }
   ],
   examples:[
@@ -158,7 +158,7 @@ LESSON_CONTENT[26]={
   games:[
     { type:"order-tap", title:"Game 1 · Tap the Major-Scale Pattern",
       intro:"Seven distances from keynote to keynote — tap them in order!",
-      miaIntro:"The blueprint, from memory! \u{1F3D7}",
+      miaIntro:"The W–W–H pattern, from memory!",
       spec:{sequence:["W","W","H","W","W","W","H"], title:"Tap the 7 distances of a major scale — from the keynote up!"},
       result:(stars)=>stars>=3?"The pattern is yours — W W H W W W H!":null },
     { type:"symbol-hunt", title:"Game 2 · Scale-Part Hunt",
@@ -195,7 +195,7 @@ LESSON_CONTENT[26]={
     { type:"mc", q:"The four notes of a tetrachord must be in ____ order.", choices:["alphabetical","reverse","random"], answer:0,
       explain:"C–D–E–F, G–A–B–C — always alphabetical." },
     { type:"truefalse", q:"Every major scale follows the same interval pattern.", answer:true,
-      explain:"W–W–H–W–W–W–H — the same blueprint from any keynote." },
+      explain:"W–W–H–W–W–W–H — the same step pattern from any keynote." },
     { type:"truefalse", q:"A tetrachord contains five notes.", answer:false,
       explain:"TETRA means four — a tetrachord has four notes." },
     { type:"mc", q:"Complete the tetrachord: C – D – E – ____", choices:["F","G","B"], answer:0,
@@ -207,8 +207,8 @@ LESSON_CONTENT[26]={
       explain:"W – W – H, always." },
     { type:"mc", q:"The major scale is made up of ____ tetrachords joined by a ____.", choices:["2 · whole step","2 · half step","3 · whole step"], answer:0,
       explain:"Two tetrachords + one whole step = one major scale." },
-    { type:"mc", q:"How many notes are in a major scale?", choices:["8","4","7"], answer:0,
-      explain:"Eight — two four-note tetrachords." },
+    { type:"mc", q:"How many notes are written in a major scale?", choices:["8","4","7"], answer:0,
+      explain:"Eight written notes — two four-note tetrachords. That's 7 different pitches, with the keynote written twice." },
     { type:"mc", q:"In a major scale, half steps occur between the ____ scale degrees.", choices:["3 & 4 and 7 & 8","2 & 3 and 6 & 7","1 & 2 and 4 & 5"], answer:0,
       explain:"3–4 and 7–8 in ALL major scales." },
     { type:"mc", q:"Write a tetrachord starting on G: G – A – B – ____", choices:["C","D","F"], answer:0,
@@ -216,14 +216,14 @@ LESSON_CONTENT[26]={
     { type:"mc", q:"The distances between all scale degrees OTHER than 3–4 and 7–8 are…", choices:["whole steps","half steps","octaves"], answer:0,
       explain:"Only 3–4 and 7–8 are half steps; the rest are whole steps." }
   ],
-  miaQuizIntro:"First scale quiz — show the blueprint who's boss!",
+  miaQuizIntro:"First scale quiz — you know the pattern by heart!",
   quiz:[
     { type:"mc", q:"A tetrachord contains:", choices:["Three notes","Four notes","Five notes","Eight notes"], answer:1,
       explain:"TETRA means four.", hint:"Think of the word TETRA." },
     { type:"mc", q:"Which interval pattern forms one tetrachord?", choices:["W–H–W","W–W–H","H–W–W","H–H–W"], answer:1,
       explain:"Whole step, whole step, half step.", hint:"Wide, wide, narrow." },
     { type:"truefalse", q:"Every major scale follows the same interval pattern.", answer:true,
-      explain:"W–W–H–W–W–W–H from any starting note.", hint:"That's why the blueprint matters." },
+      explain:"W–W–H–W–W–W–H from any starting note.", hint:"That's why the pattern matters." },
     { type:"truefalse", q:"A tetrachord contains five notes.", answer:false,
       explain:"Four notes — in alphabetical order.", hint:"TETRA = ?" },
     { type:"mc", q:"Which matching is correct?",
@@ -278,13 +278,13 @@ LESSON_CONTENT[26]={
   tips:[
     "Don't memorize scales one by one — memorize the PATTERN once and apply it anywhere.",
     "At a piano, play C to C on white keys and listen for the two 'automatic' half steps: E–F and B–C land exactly on degrees 3–4 and 7–8.",
-    "Next lesson the same blueprint starts on G and D — and you'll discover why sharps appear.",
+    "Next lesson the same pattern starts on G and D — and you'll discover why sharps appear.",
     "Say it like a chant: 'whole, whole, half — whole — whole, whole, half.'"
   ],
   rewards:{ badge:"Scale Architect", icon:"\u{1F3D7}" },
   sectionOrder:["secHook","secObjectives","secLearn","secExample","secReview",
     "secGame0","secGame1","secGame2","secGame3","secPractice","secQuiz","secTips","secNext"],
-  miaPerfect:"A perfect score on your very first scale lesson! The blueprint is officially yours. \u{1F3D7}\u{1F389}",
+  miaPerfect:"A perfect score on your very first scale lesson! The W–W–H pattern is officially yours. \u{1F389}",
   miaPass:"You passed! Keep the pattern humming in your head — W W H, W, W W H — and G major will feel easy next time.",
   mia:{
     hook:{ label:"the welcome",
@@ -300,7 +300,7 @@ LESSON_CONTENT[26]={
       explain:"Tap the interval pattern, hunt the building blocks, race the vocabulary, then assemble C major letter by letter.",
       hint:"The pattern chant helps in every game: W W H, W, W W H." },
     quiz:{ label:"this question",
-      explain:"Everything comes back to one blueprint: two W–W–H tetrachords joined by a whole step, eight degrees, half steps at 3–4 and 7–8.",
+      explain:"Everything comes back to one pattern: two W–W–H tetrachords joined by a whole step, eight degrees, half steps at 3–4 and 7–8.",
       play:()=>{MFAudio.tone(60,.3,0);MFAudio.tone(62,.3,.3);MFAudio.tone(64,.3,.6);MFAudio.tone(65,.5,.9);} }
   }
 };

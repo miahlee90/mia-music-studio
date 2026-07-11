@@ -222,7 +222,7 @@ LESSON_CONTENT[43]={
   practice:[
     { gen:"term-match", params:{subject:"value", pool:[["Eighth note in 6/8","1 beat"],["Quarter note in 6/8","2 beats"],["Dotted quarter in 6/8","3 beats"],["Dotted half in 6/8","6 beats"]], reverse:true}, count:4 },
     { type:"mc", q:"In 3/8 time, the 8 means…", choices:["the eighth note receives one beat","eight beats per measure","play eight measures"], answer:0,
-      explain:"Bottom number = the beat note (AEMT p.68)." },
+      explain:"Bottom number = the beat note." },
     { type:"mc", q:"In 6/8 time, the 6 means…", choices:["6 beats per measure","6 measures per line","six eighth notes only"], answer:0,
       explain:"Top number = beats per measure." },
     { type:"mc", q:"6/8 is usually FELT as…", choices:["two groups of three","three groups of two","six equal accents"], answer:0,

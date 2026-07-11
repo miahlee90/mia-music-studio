@@ -169,9 +169,9 @@ function MF_L34_walk(container,fb,dir){
 }
 
 LESSON_CONTENT[34]={
-  welcome:"Every key you've learned, connected in one elegant wheel — the musician's road map! \u{1F9ED}",
+  welcome:"Every key you've learned, connected in one circle — the Circle of Fifths! \u{1F9ED}",
   hook:{
-    say:"Here is the whole kingdom of keys arranged in a circle. Look at any two NEIGHBORING keys… <b>what do you think separates a key from its neighbor?</b>",
+    say:"Here are all the major keys arranged in a circle. Look at any two NEIGHBORING keys… <b>what do you think separates a key from its neighbor?</b>",
     interact:{ type:"custom",
       mount:(container,fb)=>{
         const c=document.createElement("div"); container.appendChild(c);
@@ -180,7 +180,7 @@ LESSON_CONTENT[34]={
         ch.innerHTML=`<button>Exactly ONE sharp or flat</button><button>A completely different alphabet</button><button>Nothing — they're identical</button>`;
         container.appendChild(ch);
         [...ch.children].forEach((b,i)=>b.onclick=()=>{
-          if(i===0) fb(true,"✓ One accidental — that's all! Move clockwise and gain a sharp; move counterclockwise and gain a flat. This wheel is the CIRCLE OF FIFTHS, and today you learn to drive it.");
+          if(i===0) fb(true,"✓ One accidental — that's all! Move clockwise and gain a sharp; move counterclockwise and gain a flat. This circle is the CIRCLE OF FIFTHS, and today you learn to use it.");
           else fb(false,"Compare C and G, or C and F — how different are their signatures really?");
         });
       } }
@@ -200,15 +200,15 @@ LESSON_CONTENT[34]={
         success:"✓ Perfect 5ths, one per step — that's why it's called the Circle of FIFTHS, and why each step gains exactly one sharp (or, backwards, one flat).",
         fail:"Count C up to G: C(1) D(2) E(3) F(4) G(5)…",
         hint:"The interval is in the circle's NAME." } },
-    { say:"Drive it <b>CLOCKWISE ↻</b>: each step moves UP a <b>perfect 5th</b> and adds <b>one sharp</b>: C → G → D → A → E… \u{1F447} <b>Step around the wheel yourself and watch the sharps pile up:</b>",
+    { say:"Move <b>CLOCKWISE ↻</b>: each step moves UP a <b>perfect 5th</b> and adds <b>one sharp</b>: C → G → D → A → E… \u{1F447} <b>Step around the circle yourself and watch the sharps pile up:</b>",
       try:{ type:"custom",
         hint:"Five letters up each time: C→G→D→A→E — and +1♯ per step.",
         mount:(container,fb)=>MF_L34_walk(container,fb,"cw") } },
-    { say:"Now drive it <b>COUNTERCLOCKWISE ↺</b>: each step adds <b>one flat</b>: C → F → B♭ → E♭ → A♭… \u{1F447} <b>Step the flat direction:</b>",
+    { say:"Now move <b>COUNTERCLOCKWISE ↺</b>: each step adds <b>one flat</b>: C → F → B♭ → E♭ → A♭… \u{1F447} <b>Step the flat direction:</b>",
       try:{ type:"custom",
         hint:"C→F→B♭→E♭→A♭ — +1♭ per step.",
         mount:(container,fb)=>MF_L34_walk(container,fb,"ccw") } },
-    { say:"Time to rebuild the wheel from memory — only C is in place. \u{1F447} <b>Put all eleven keys back on the circle:</b>",
+    { say:"Time to rebuild the circle from memory — only C is in place. \u{1F447} <b>Put all eleven keys back on the circle:</b>",
       try:{ type:"custom",
         hint:"Clockwise from C: G D A E B F♯ C♯. Counterclockwise: F B♭ E♭ A♭. The dual-name spots sit at the bottom.",
         mount:(container,fb)=>MF_L34_build(container,fb) } },
@@ -226,7 +226,7 @@ LESSON_CONTENT[34]={
   games:[
     { type:"gen-race", title:"Game 1 · Compass Sprint (45s) \u{1F9ED}",
       intro:"Start at a key, move N steps clockwise or counterclockwise — where do you land? Race the clock!",
-      miaIntro:"Navigator, take the wheel! \u{1F9ED}",
+      miaIntro:"Navigator, around the circle! \u{1F9ED}",
       spec:{gen:"circle-nav", params:{maxMove:3}, seconds:45},
       result:(score)=>score>=7?score+" landings in 45 seconds — a true navigator!":null },
     { type:"order-tap", title:"Game 2 · Clockwise Lap",
@@ -241,7 +241,7 @@ LESSON_CONTENT[34]={
       result:(stars)=>stars>=3?"A clean flat-side lap!":null },
     { type:"gen-race", title:"Game 4 · Signature Recall (10 rounds)",
       intro:"The circle in your head: signatures flash, you name the key.",
-      miaIntro:"No wheel to look at — just memory! \u{1F9E0}",
+      miaIntro:"No circle to look at — just memory! \u{1F9E0}",
       spec:{gen:"keysig-id", params:{max:7}, rounds:10},
       result:(score)=>score>=8?"The circle lives in your head now!":null }
   ],
@@ -254,7 +254,7 @@ LESSON_CONTENT[34]={
     { type:"mc", q:"Moving counterclockwise adds…", choices:["one flat","one sharp","two flats"], answer:0,
       explain:"Counterclockwise = +1♭ per step." },
     { type:"truefalse", q:"C Major is located at the top of the Circle of Fifths.", answer:true,
-      explain:"The empty signature crowns the wheel." },
+      explain:"The empty signature sits at the top of the circle." },
     { type:"truefalse", q:"Neighboring keys differ by one accidental.", answer:true,
       explain:"That's what makes neighbors closely related." },
     { type:"mc", q:"Moving clockwise from C Major, the next key is…", choices:["G Major","F Major","D Major"], answer:0,
@@ -271,7 +271,7 @@ LESSON_CONTENT[34]={
     { type:"mc", q:"Which pair are NEIGHBORS on the circle?", choices:["D and A","D and F","C and E"], answer:0,
       explain:"D (2♯) and A (3♯) sit side by side — one accidental apart." }
   ],
-  miaQuizIntro:"Hands on the wheel — navigate the whole kingdom of keys!",
+  miaQuizIntro:"Time to navigate the whole circle of keys!",
   quiz:[
     { type:"mc", q:"What does the Circle of Fifths show?",
       choices:["Rhythm patterns","The relationship among keys and their key signatures","Dynamic markings","Time signatures"], answer:1,
@@ -297,12 +297,12 @@ LESSON_CONTENT[34]={
       explain:"F(1♭) B♭(2♭) E♭(3♭) A♭(4♭).", hint:"3 steps = 3 flats." },
     { type:"mc", q:"Which statement is correct?",
       choices:["Moving clockwise adds one flat","Moving counterclockwise adds one sharp","Neighboring keys on the Circle of Fifths differ by one accidental","C Major has one sharp"], answer:2,
-      explain:"One step, one accidental — in either direction.", hint:"Test each claim against the wheel." },
+      explain:"One step, one accidental — in either direction.", hint:"Test each claim against the circle." },
     { type:"mc", q:"The interval that powers each clockwise step is a…", choices:["perfect 5th","3rd","half step"], answer:0,
       explain:"C→G→D→A… each leap is a perfect 5th — hence the circle's name.", hint:"It's in the title." },
     { type:"mc", q:"Which keys share the BOTTOM of the circle with two names each?",
       choices:["B/C♭ · F♯/G♭ · C♯/D♭","C/D · E/F · G/A","A/B♭ · C/C♯ · D/E♭"], answer:0,
-      explain:"The three enharmonic twin pairs from Lesson 31 meet at the bottom of the wheel.", hint:"Remember the twins!" },
+      explain:"The three enharmonic twin pairs from Lesson 31 meet at the bottom of the circle.", hint:"Remember the twins!" },
     /* generated */
     { gen:"circle-nav", params:{maxMove:3}, count:4 },
     { gen:"keysig-id", params:{max:7}, count:2 },
@@ -321,10 +321,10 @@ LESSON_CONTENT[34]={
     "✔ <b>Clockwise ↻ = +1♯</b> per step (C G D A E B F♯ C♯) · <b>Counterclockwise ↺ = +1♭</b> (C F B♭ E♭ A♭ D♭ G♭ C♭).",
     "✔ <b>Neighbors differ by exactly one accidental</b> — that's why they sound so closely related.",
     "✔ Each clockwise step is a <b>perfect 5th</b> up — the interval from Lesson 33!",
-    "✔ The three <b>enharmonic twins</b> (B/C♭ · F♯/G♭ · C♯/D♭) share the bottom of the wheel. \u{1F389} <b>UNIT 8 COMPLETE!</b>"
+    "✔ The three <b>enharmonic twins</b> (B/C♭ · F♯/G♭ · C♯/D♭) share the bottom of the circle. \u{1F389} <b>UNIT 8 COMPLETE!</b>"
   ],
   tips:[
-    "Your L29/L30 key ladders were the circle unrolled into straight lines — now they've curled into a wheel.",
+    "Your L29/L30 key ladders were the circle unrolled into straight lines — now they've curled into a circle.",
     "Stuck on a signature? Walk the circle from C in your head, counting accidentals as you go.",
     "The circle also predicts which keys blend beautifully in real music: neighbors first.",
     "Unit 9 sharpens the ruler: intervals gain QUALITIES — perfect, major, minor."
@@ -333,7 +333,7 @@ LESSON_CONTENT[34]={
   sectionOrder:["secHook","secObjectives","secLearn","secExample","secReview",
     "secGame0","secGame1","secGame2","secGame3","secPractice","secQuiz","secTips","secNext"],
   miaPerfect:"A perfect lap of the entire circle — Unit 8 conquered, navigator! \u{1F9ED}\u{1F389}\u{1F389}",
-  miaPass:"You passed — and finished Unit 8! Keep a mental hand on the wheel: right for sharps, left for flats.",
+  miaPass:"You passed — and finished Unit 8! Remember: clockwise for sharps, counterclockwise for flats.",
   mia:{
     hook:{ label:"the welcome",
       explain:"Neighboring keys differ by exactly one accidental — the whole circle is built from that single fact.",
@@ -345,7 +345,7 @@ LESSON_CONTENT[34]={
     example:{ label:"the examples",
       explain:"The perfect 5th is the engine: every clockwise step is that same leap, first melodic (C-G-D), then rung as harmony." },
     game:{ label:"the games",
-      explain:"Sprint the compass, lap the wheel both directions, then recall signatures with no wheel in sight.",
+      explain:"Sprint the compass, lap the circle both directions, then recall signatures from memory.",
       hint:"In the sprint: direction first (♯ or ♭?), then count the steps." },
     quiz:{ label:"this question",
       explain:"Steer with three facts: clockwise +1♯, counterclockwise +1♭, neighbors differ by one accidental.",

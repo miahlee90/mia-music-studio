@@ -102,7 +102,7 @@ function MF_L55_build(container,fb){
   pl.onclick=()=>{
     const rows=[[48,64,67,72],[48,65,69,72],[48,64,67,72],[47,67,71,74,77],[48,64,67,72]];
     rows.forEach((row,i)=>row.forEach(m=>MFAudio.tone(m,1.0,i*1.05,.28)));
-    setTimeout(()=>fb(true,"✓ I → IV⁶₄ → I → V⁶₅ → I: the book's smooth-progression recipe, built by you."),5400);
+    setTimeout(()=>fb(true,"✓ I → IV⁶₄ → I → V⁶₅ → I: the smooth-progression pattern, built by you."),5400);
   };
   ask();
 }
@@ -136,7 +136,7 @@ LESSON_CONTENT[55]={
     "Swap V7 in place of V",
     "Smooth a progression: IV → IV⁶₄, V → V⁶, V7 → V⁶₅",
     "Find common tones and keep them in the same voice",
-    "Play the book's smooth pattern: I → IV⁶₄ → I → V⁶ (or V⁶₅) → I"
+    "Play the smooth pattern: I → IV⁶₄ → I → V⁶ (or V⁶₅) → I"
   ],
   steps:[
     { say:"<b>What is a Chord Progression?</b> A <b>chord progression</b> is a series of chords played one after another. The three primary chords — <b>I, IV, and V</b> — contain all seven notes of the major scale, so they can accompany many simple melodies. \u{1F447} <b>Together, which notes do I, IV, and V contain in C major?</b>",
@@ -212,7 +212,7 @@ LESSON_CONTENT[55]={
       spec:{gen:"inversion-id", params:{subject:"both", ask:"both"}, seconds:45},
       result:(score)=>score>=8?score+" — the whole toolkit is sharp!":null },
     { type:"key-climb", title:"Game 2 · Smooth-Progression Climb",
-      intro:"Play the book's smooth progression chord by chord: I, IV⁶₄, V⁶₅, I — bottom to top!",
+      intro:"Play the smooth progression chord by chord: I, IV⁶₄, V⁶₅, I — bottom to top!",
       miaIntro:"Feel the bass hold its ground! \u{1FA9C}",
       spec:{seq:[60,64,67, 60,65,69, 59,62,65,67, 60,64,67],
         names:["C (I: bass)","E","G","C (IV⁶₄: same bass!)","F","A","B (V⁶₅: half step down)","D","F","G","C (I: home)","E","G"],
@@ -248,7 +248,7 @@ LESSON_CONTENT[55]={
     { gen:"inversion-id", params:{subject:"both", ask:"both"}, count:6 },
     { gen:"term-match", params:{subject:"term", pool:[["Chord progression","a sequence of moving chords"],["Common tone","a note two chords share"],["Voice leading","smooth movement between chords"],["Nearest motion","each voice moves the shortest distance"],["IV⁶₄","the IV chord with its 5th in the bass"]], reverse:true}, count:4 },
     { type:"mc", q:"Chords that move from one to another are called a…", choices:["chord progression","scale","cadenza"], answer:0,
-      explain:"Progress = move forward (AEMT3 p.87)." },
+      explain:"Progress = move forward." },
     { type:"mc", q:"Why can I, IV, and V accompany many simple melodies?", choices:["together they contain all the notes of the major scale","they are the loudest chords","they never change position"], answer:0,
       explain:"C-E-G + F-A-C + G-B-D = all seven letters." },
     { type:"mc", q:"In many progressions, the V chord is replaced by…", choices:["V7","IV","vii"], answer:0,
@@ -282,9 +282,9 @@ LESSON_CONTENT[55]={
       explain:"Exactly backwards — nearest motion wins.", hint:"Would you rather walk or jump?" },
     { type:"mc", q:"Which pair of chords shares the note C?", choices:["C major and F major","C major and D major","G major and D major","D major and A major"], answer:0,
       explain:"C-E-G and F-A-C both contain C.", hint:"Spell each pair." },
-    { type:"mc", q:"In this progression, which inversion is used for IV?", choices:["2nd inversion (IV⁶₄)","root position","3rd inversion"], answer:0,
+    { type:"mc", q:"In the lesson's smooth I → IV → I → V7 → I progression, which inversion is used for IV?", choices:["2nd inversion (IV⁶₄)","root position","3rd inversion"], answer:0,
       explain:"Its 5th (C) drops to the bass — the common tone with I.", hint:"Which figure kept the bass on C?" },
-    { type:"mc", q:"Which inversion is used for V (or V7)?", choices:["1st inversion (V⁶ or V⁶₅)","2nd inversion","root position"], answer:0,
+    { type:"mc", q:"In the same smooth progression, which inversion is used for V (or V7)?", choices:["1st inversion (V⁶ or V⁶₅)","2nd inversion","root position"], answer:0,
       explain:"3rd (B) in the bass — a half step from home.", hint:"The bass sang C-B-C." },
     { type:"mc", q:"What is the bass line of I → IV⁶₄ → I → V⁶₅ → I in C major?", choices:["C - C - C - B - C","C - F - C - G - C","C - A - C - F - C"], answer:0,
       explain:"Two common-tone basses plus one half-step neighbor.", hint:"Almost nothing moves." },
@@ -340,7 +340,7 @@ LESSON_CONTENT[55]={
       hint:"Common tones stay; everything else moves the least.",
       play:()=>{[[48,64,67,72],[48,65,69,72],[48,64,67,72],[47,67,71,74,77],[48,64,67,72]].forEach((row,i)=>row.forEach(m=>MFAudio.tone(m,1.0,i*1.0,.26)));} },
     example:{ label:"the examples",
-      explain:"Example 1 is the choppy all-root version; example 2 is the book's smooth rewrite — same chords, waking bass line C-C-C-B-C." },
+      explain:"Example 1 is the choppy all-root version; example 2 is the smooth rewrite — same chords, walking bass line C-C-C-B-C." },
     game:{ label:"the games",
       explain:"Sprint the whole toolkit, physically play the smooth progression, spot its four chords, then run the Unit 13 victory lap.",
       hint:"Bass first. Always bass first." },

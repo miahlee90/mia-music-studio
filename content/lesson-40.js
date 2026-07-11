@@ -177,7 +177,7 @@ LESSON_CONTENT[40]={
     { gen:"note-value", params:{values:["8","16","q","h"],kind:"rest",ask:"beats"}, count:4 },
     { gen:"term-match", params:{subject:"term", pool:[["Sixteenth Rest","¼ beat of silence — two hooks"],["Eighth Rest","½ beat of silence — one hook"],["Rest","a symbol for measured silence"],["Silent counting","the count continues through every rest"]], reverse:true}, count:3 },
     { type:"mc", q:"How many sixteenth rests equal one eighth rest?", choices:["2","4","3"], answer:0,
-      explain:"¼ + ¼ = ½ (AEMT p.63)." },
+      explain:"¼ + ¼ = ½." },
     { type:"mc", q:"How many sixteenth rests equal one quarter rest?", choices:["4","2","8"], answer:0,
       explain:"Four quarter-beat silences = one beat." },
     { type:"mc", q:"A sixteenth rest in 2/4, 3/4, or 4/4 receives…", choices:["¼ of a count","½ of a count","1 count"], answer:0,
@@ -222,7 +222,7 @@ LESSON_CONTENT[40]={
     { type:"mc", q:"Why must you keep counting through rests?", choices:["So the notes after the rest land exactly in time","Because rests are optional","To make the rest louder"], answer:0,
       explain:"The internal beat keeps everything aligned.", hint:"What happens to '&' if you pause the count?" },
     { type:"mc", q:"Adding a second hook to an eighth rest makes it…", choices:["a sixteenth rest","a quarter rest","a shorter eighth rest","a fermata"], answer:0,
-      explain:"Exactly like adding a second flag to an eighth note (AEMT p.63).", hint:"Hooks halve the silence." },
+      explain:"Exactly like adding a second flag to an eighth note.", hint:"Hooks halve the silence." },
     /* generated */
     { gen:"note-value", params:{values:["8","16","q"],kind:"rest",ask:"name"}, count:3 },
     { gen:"note-value", params:{values:["8","16","q","h"],kind:"rest",ask:"beats"}, count:3 },

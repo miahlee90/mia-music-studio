@@ -93,7 +93,7 @@ LESSON_CONTENT[96]={
     { caption:"A 4-3 suspension at a cadence: the C prepares over F (IV), holds over G (V) as a dissonant 4th, then falls to B — the 3rd. Prepare, suspend, resolve.",
       staff:{clef:"treble",tempo:63,notes:[
         {p:"C5",d:"h",label:"prep"},{p:"F4",d:"h",chord:true},{p:"A4",d:"h",chord:true},
-        {p:"C5",d:"h",label:"sus 4"},{p:"G4",d:"h",chord:true},{p:"B3",d:"h",chord:true},
+        {p:"C5",d:"h",label:"sus 4"},{p:"G4",d:"h",chord:true},{p:"D5",d:"h",chord:true},
         {p:"B4",d:"h",label:"res 3"},{p:"G4",d:"h",chord:true},{p:"D5",d:"h",chord:true},
         {p:"C5",d:"w",label:"I"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{bar:"final"}],width:600},
       kb:{start:48,octaves:2,labels:true} },

@@ -202,7 +202,7 @@ LESSON_CONTENT[45]={
         ["Triplet's total value","one beat in simple meter"]], reverse:true}, seconds:45},
       result:(score)=>score>=8?score+" triplet truths — flowing!":null },
     { type:"rhythm-tap", title:"Game 2 · Shuffle Tap Lab",
-      intro:"Patterns mixing straight eighths and triplet feels — tap them true! (Triplet beats are marked.)",
+      intro:"Patterns of quarters and straight eighths — tap them steady and true!",
       miaIntro:"Smooth, not lumpy! \u{1F54A}",
       spec:{tempo:70, rounds:2, patterns:[
         ["q","8","8","q"],
@@ -233,7 +233,7 @@ LESSON_CONTENT[45]={
   practice:[
     { gen:"term-match", params:{subject:"term", pool:[["Triplet","3 notes in the time of 2 of the same value"],["Eighth-note triplet","3 eighths in one beat"],["The small 3","labels a triplet group"],["Tuplet","general term for irregular groupings"]], reverse:true}, count:4 },
     { type:"mc", q:"A triplet is a group of three notes played in the time of…", choices:["two notes of the same value","three notes of the same value","one note of the same value"], answer:0,
-      explain:"3-in-the-time-of-2 (AEMT p.70)." },
+      explain:"3-in-the-time-of-2." },
     { type:"mc", q:"An eighth-note triplet equals…", choices:["one quarter note of time","one eighth note of time","1½ beats"], answer:0,
       explain:"Two eighths' worth = 1 beat." },
     { type:"mc", q:"A triplet group is marked with…", choices:["a small 3","a dot","a fermata"], answer:0,
@@ -278,7 +278,7 @@ LESSON_CONTENT[45]={
     { type:"mc", q:"The general term for irregular groupings like triplets is…", choices:["tuplet","doublet","bracket","tie"], answer:0,
       explain:"Triplets, quintuplets… all tuplets.", hint:"Starts like 'tuple'." },
     { type:"mc", q:"Which famous piece opens its march with triplet swirls?", choices:["Tchaikovsky's Nutcracker March","Beethoven's Ode to Joy","Twinkle Twinkle"], answer:0,
-      explain:"The AEMT example — with Debussy's Arabesque No. 1.", hint:"A Christmas ballet." },
+      explain:"Famously heard in Debussy's Arabesque No. 1 as well.", hint:"A Christmas ballet." },
     { type:"mc", q:"A triplet borrows the feel of…", choices:["6/8's three-per-pulse flow","cut time's two big beats","a whole rest"], answer:0,
       explain:"One beat of compound inside simple meter.", hint:"Last lesson's bundles." },
     /* generated */

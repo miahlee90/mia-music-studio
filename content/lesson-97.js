@@ -83,7 +83,7 @@ LESSON_CONTENT[97]={
         {p:"B3",d:"h",label:"V"},{p:"D4",d:"h",chord:true},{p:"G4",d:"h",chord:true},{p:"D5",d:"h",chord:true},
         {p:"C4",d:"w",label:"I"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{p:"C5",d:"w",chord:true},{bar:"final"}],width:620},
       kb:{start:48,octaves:2,labels:true} },
-    { caption:"Spacing on display: the first chord keeps S–A and A–T inside an octave (balanced); the second spreads the top voices too far (hollow). Hear the difference.",
+    { caption:"Spacing on display: the first chord spreads the top voices too far (hollow); the second keeps S–A and A–T inside an octave (balanced). Hear the difference.",
       staff:{clef:"treble",tempo:60,notes:[
         {p:"C4",d:"w",label:"balanced"},{p:"G4",d:"w",chord:true},{p:"E5",d:"w",chord:true,label:"…hmm"},{bar:"single"},
         {p:"C4",d:"w",label:"good"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{p:"C5",d:"w",chord:true},{bar:"final"}],width:420},

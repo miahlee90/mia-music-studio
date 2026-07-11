@@ -197,11 +197,11 @@ LESSON_CONTENT[37]={
     { gen:"interval-quality", params:{qualities:["P","M","m","A","d"],ask:"quality"}, count:3 },
     { gen:"term-match", params:{subject:"term", pool:[["Augmented","one half step larger than Perfect or Major"],["Diminished","one half step smaller than Perfect or minor"],["Double sharp 𝄪","raises an already-sharp note"],["Double flat 𝄫","lowers an already-flat note"],["Chromatic interval","upper note NOT from the keynote's major scale"]], reverse:true}, count:3 },
     { type:"mc", q:"A diminished interval occurs when a perfect or minor interval is made…", choices:["smaller","larger","louder"], answer:0,
-      explain:"Diminished = made smaller (Unit 9 Review Q6)." },
+      explain:"Diminished = made smaller." },
     { type:"mc", q:"An augmented interval occurs when a major or perfect interval is made…", choices:["larger","smaller","softer"], answer:0,
-      explain:"Augmented = made larger (Unit 9 Review Q7)." },
+      explain:"Augmented = made larger." },
     { type:"mc", q:"Minor, diminished, and augmented intervals are called ____ intervals.", choices:["chromatic","diatonic","enharmonic"], answer:0,
-      explain:"Their upper notes leave the keynote's major scale (Review Q8)." },
+      explain:"Their upper notes leave the keynote's major scale." },
     { type:"mc", q:"P5 raised one half step becomes…", choices:["aug 5","M5","P6"], answer:0,
       explain:"Perfect + half step = augmented." },
     { type:"mc", q:"P4 lowered one half step becomes…", choices:["dim 4","m4","M3"], answer:0,
@@ -211,7 +211,7 @@ LESSON_CONTENT[37]={
     { type:"mc", q:"m3 lowered one half step becomes…", choices:["dim 3","dim 2","M2"], answer:0,
       explain:"minor − half step = diminished; E♭ drops to E𝄫." },
     { type:"truefalse", q:"The perfect unison can be diminished.", answer:false,
-      explain:"Zero distance can't shrink — the unison can only be augmented." }
+      explain:"Zero distance can't shrink — a unison can only be perfect or augmented." }
   ],
   miaQuizIntro:"Stretch, shrink, spell — the full size line is yours. Sprint!",
   quiz:[

@@ -47,7 +47,7 @@ function MF_L27_kbScale(container,fb){
 }
 
 LESSON_CONTENT[27]={
-  welcome:"You know the blueprint — today we build it starting on G and D. Enter the sharps! \u{266F}",
+  welcome:"You know the W-W-H pattern — today we build it starting on G and D. Enter the sharps! \u{266F}",
   hook:{
     say:"Let's build a scale on G using only natural notes… and then with one small change. Listen to BOTH versions. Which one sounds like a true major scale?",
     interact:{ type:"custom",
@@ -76,7 +76,7 @@ LESSON_CONTENT[27]={
     "Recognize the relationship between neighboring major scales"
   ],
   steps:[
-    { say:"The interval pattern never changes: <b>W–W–H–W–W–W–H</b>. Build it on <b>G</b> and the natural notes fail at one spot — so <b>F must be raised to F♯</b> to create the whole step from E. (An F♯ is used instead of G♭ to stay in <b>alphabetical order</b>.) G is the 2nd tetrachord of the C major scale! \u{1F447} <b>Which note is sharped in the G major scale?</b>",
+    { say:"The interval pattern never changes: <b>W–W–H–W–W–W–H</b>. Build it on <b>G</b> and the natural notes fail at one spot — so <b>F must be raised to F♯</b> to create the whole step from E. (An F♯ is used instead of G♭ to stay in <b>alphabetical order</b>.) The G tetrachord (G–A–B–C) is the 2nd tetrachord of the C major scale! \u{1F447} <b>Which note is sharped in the G major scale?</b>",
       show:{ type:"custom", mount:(el)=>MF_L27_staffKb(el,
         {clef:"treble",notes:[{p:"G4",d:"q",label:"G"},{p:"A4",d:"q",label:"A"},{p:"B4",d:"q",label:"B"},{p:"C5",d:"q",label:"C"},{p:"D5",d:"q",label:"D"},{p:"E5",d:"q",label:"E"},{p:"F#5",d:"q",label:"F♯"},{p:"G5",d:"q",label:"G"}],steps:[{from:0,to:1,label:"W"},{from:1,to:2,label:"W"},{from:2,to:3,label:"H"},{from:3,to:4,label:"W"},{from:4,to:5,label:"W"},{from:5,to:6,label:"W"},{from:6,to:7,label:"H"}],brackets:[{from:0,to:3,label:"G tetrachord"},{from:4,to:7,label:"D tetrachord"}],width:540},
         {start:60,octaves:2,labels:true,marks:[67,69,71,72,74,76,78,79]}) },
@@ -106,7 +106,7 @@ LESSON_CONTENT[27]={
       try:{ type:"custom",
         hint:"G A B C D E F♯ G — the F♯ is the black key just above F.",
         mount:(container,fb)=>MF_L27_kbScale(container,fb) } },
-    { say:"Scale detective time. A completed scale appears below — read its accidentals carefully. \u{1F447} <b>Which major scale is this?</b>",
+    { say:"Find the scale's name. A completed scale appears below — read its accidentals carefully. \u{1F447} <b>Which major scale is this?</b>",
       show:{ type:"staff", spec:{clef:"treble",notes:[{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"F#4",d:"q"},{p:"G4",d:"q"},{p:"A4",d:"q"},{p:"B4",d:"q"},{p:"C#5",d:"q"},{p:"D5",d:"q"}],width:480} },
       try:{ type:"mc", choices:["G major","D major","C major"], answer:1,
         success:"✓ Two sharps (F♯ and C♯) starting on D — the D major scale.",
@@ -187,7 +187,7 @@ LESSON_CONTENT[27]={
     { type:"mc", q:"Which notes are sharped in the D major scale?", choices:["F♯ and G♯","F♯ and C♯","C♯ and D♯","B♯ and C♯"], answer:1,
       explain:"F♯ carries over from G major; C♯ is new.", hint:"One old, one new." },
     { type:"truefalse", q:"Every major scale follows the same interval pattern.", answer:true,
-      explain:"W–W–H–W–W–W–H — sharps exist to preserve it.", hint:"The blueprint never changes." },
+      explain:"W–W–H–W–W–W–H — sharps exist to preserve it.", hint:"The pattern never changes." },
     { type:"truefalse", q:"G major contains two sharps.", answer:false,
       explain:"Just one: F♯.", hint:"Count the sharps in the G scale." },
     { type:"mc", q:"Which matching is correct?",
@@ -254,7 +254,7 @@ LESSON_CONTENT[27]={
       explain:"Version A used natural F — its top tetrachord broke the W–W–H pattern. Version B raised F to F♯ and the scale snapped into place.",
       play:()=>{[67,69,71,72,74,76,78,79].forEach((m,i)=>MFAudio.tone(m,.3,i*.28));} },
     learn:{ label:"the sharp scales",
-      explain:"Same blueprint, new keynotes: G major needs F♯; D major needs F♯ and C♯. Sharps are chosen (not flats) to keep the letters alphabetical.",
+      explain:"Same pattern, new keynotes: G major needs F♯; D major needs F♯ and C♯. Sharps are chosen (not flats) to keep the letters alphabetical.",
       hint:"New sharp = degree 7 of the new scale.",
       play:()=>{MFAudio.tone(76,.35,0);MFAudio.tone(78,.35,.4);MFAudio.tone(79,.6,.8);} },
     example:{ label:"the examples",

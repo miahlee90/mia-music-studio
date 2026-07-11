@@ -131,7 +131,7 @@ LESSON_CONTENT[107]={
   ],
   practiceIntro:"20 practice questions — parallels, borrowings and the Picardy. Answer right and the next appears automatically!",
   practice:[
-    { gen:"term-match", params:{subject:"term", pool:[["Parallel keys","same tonic"],["Mixture","parallel borrowing"],["iv in major","borrowed"],["\u{266D}VI","A\u{266D} major in C"],["Picardy","major ending in minor"]], reverse:true}, count:6 },
+    { gen:"term-match", params:{subject:"term", pool:[["Parallel keys","same tonic"],["Mixture","parallel borrowing"],["iv in major","borrowed"],["\u{266D}VI","A\u{266D} major in C"],["Picardy","major I ending a minor piece"]], reverse:true}, count:6 },
     { gen:"triad-quality", params:{quals:["M","m"]}, count:2 },
     { type:"mc", q:"C major's parallel key is…", choices:["C minor","A minor","G major"], answer:0, explain:"Same tonic." },
     { type:"mc", q:"Modal mixture borrows chords from…", choices:["the parallel key","the relative key","no key"], answer:0, explain:"Across the tonic-sharing border." },

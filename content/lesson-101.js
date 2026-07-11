@@ -47,7 +47,7 @@ LESSON_CONTENT[101]={
         container.querySelector(".hk-b").onclick=()=>{ let t=0; [[60,.25],[62,.25],[64,.25],[65,.25],[67,.5],[65,.25],[64,.25],[60,1.0]].forEach(([m,d])=>{ MFAudio.tone(m,d*.9,t,.42); t+=d; }); hB=true; if(hA) setTimeout(()=>ch.style.display="",2900); };
         [...ch.children].forEach((b,i)=>b.onclick=()=>{
           if(i===0) fb(true,"✓ The C-E-G-E-C outline survived; passing tones decorated the path. THEME AND VARIATIONS: keep the identity, change the dress. Today's lesson!");
-          else fb(false,"Hum both — the same skeleton lives in each…");
+          else fb(false,"Hum both — the same core structure lives in each…");
         });
       } }
   },
@@ -65,11 +65,11 @@ LESSON_CONTENT[101]={
         success:"✓ A A\u{2032} A\u{2033} A\u{2034}… — one identity, many suits.",
         fail:"What returned, changed, each time?",
         hint:"The theme, again and again." } },
-    { say:"<b>What Stays:</b> variations usually preserve the theme's <b>length, phrase structure and harmonic outline</b> — the skeleton — while resurfacing everything else. \u{1F447} <b>A variation usually keeps the theme's…</b>",
+    { say:"<b>What Stays:</b> variations usually preserve the theme's <b>length, phrase structure and harmonic outline</b> — the core structure — while resurfacing everything else. \u{1F447} <b>A variation usually keeps the theme's…</b>",
       try:{ type:"mc", choices:["Length and harmonic outline","Exact notes only","Nothing"], answer:0,
         success:"✓ The frame holds; the surface transforms.",
         fail:"What made the hook's variation recognizable?",
-        hint:"The skeleton." } },
+        hint:"The core structure." } },
     { say:"<b>Melodic Ornamentation:</b> the commonest variation — <b>decorate the theme's notes</b> with passing tones, neighbors and Lesson 100's ornaments; the outline shines through the filigree. \u{1F447} <b>An ornamented variation adds…</b>",
       try:{ type:"mc", choices:["Extra notes around the theme's tones","A new theme","Silence"], answer:0,
         success:"✓ The theme wears jewelry — L66 and L100 at work.",
@@ -90,13 +90,13 @@ LESSON_CONTENT[101]={
         hint:"Extra notes = ornamentation · new values = rhythm · darker 3rd = mode.",
         mount:(container,fb)=>MF_L101_ear(container,fb) } },
     { say:"<b>Review:</b> \u{1F447} <b>Why can listeners follow a good set of variations?</b>",
-      try:{ type:"mc", choices:["Each variation keeps the theme's skeleton recognizable","The variations are identical","The theme never returns"], answer:0,
+      try:{ type:"mc", choices:["Each variation keeps the theme's core structure recognizable","The variations are identical","The theme never returns"], answer:0,
         success:"✓ Identity + transformation — the form's contract with the ear.",
         fail:"What thread runs through every variation?",
-        hint:"The skeleton." } }
+        hint:"The core structure." } }
   ],
   examples:[
-    { caption:"Theme (C-E-G-E-C outline), then an ornamented variation: passing tones fill the 3rds; the skeleton is untouched.",
+    { caption:"Theme (C-E-G-E-C outline), then an ornamented variation: passing tones fill the 3rds; the core structure is untouched.",
       staff:{clef:"treble",tempo:88,notes:[
         {p:"C4",d:"q",label:"theme"},{p:"E4",d:"q"},{p:"G4",d:"q"},{p:"E4",d:"q"},{p:"C4",d:"h"},{bar:"single"},
         {p:"C4",d:"8",label:"var. 1"},{p:"D4",d:"8"},{p:"E4",d:"8"},{p:"F4",d:"8"},{p:"G4",d:"q"},{p:"F4",d:"8"},{p:"E4",d:"8"},{p:"C4",d:"h"},{bar:"final"}],
@@ -110,7 +110,7 @@ LESSON_CONTENT[101]={
   games:[
     { type:"gen-race", title:"Game 1 · Variation Sprint (45s)",
       intro:"Dimensions and devices — race them!",
-      miaIntro:"Keep the skeleton! \u{26A1}",
+      miaIntro:"Keep the core structure! \u{26A1}",
       spec:{gen:"term-match", params:{subject:"term", pool:[
         ["Theme and variations","theme + transformed restatements"],
         ["What stays","length + harmonic outline"],
@@ -118,12 +118,12 @@ LESSON_CONTENT[101]={
         ["Rhythmic variation","new note values or meter"],
         ["Minore variation","major theme turned minor"],
         ["Texture variation","theme moves voice or becomes canon"],
-        ["The listener's thread","the recognizable skeleton"],
+        ["The listener's thread","the recognizable core structure"],
         ["Typical theme","a small binary tune"]], reverse:true}, seconds:45},
       result:(score)=>score>=8?score+" — variation master!":null },
     { type:"key-climb", title:"Game 2 · Theme, Then Ornament It",
       intro:"Play the theme C-E-G-E-C, then its filled-in variation!",
-      miaIntro:"Skeleton, then jewelry! \u{1FA9C}",
+      miaIntro:"Core structure, then ornament! \u{1FA9C}",
       spec:{seq:[60,64,67,64,60, 60,62,64,65,67,65,64,62,60],
         names:["C","E","G","E","C (theme)","C","D","E","F","G","F","E","D","C (ornamented!)"],
         start:60, octaves:1, title:"Theme and one variation"},
@@ -144,16 +144,16 @@ LESSON_CONTENT[101]={
         ["Theme sinks into the bass","texture change"],
         ["2/4 becomes 3/8","meter variation"],
         ["New chords under old notes","reharmonization"],
-        ["What every variation keeps","the skeleton"],
+        ["What every variation keeps","the core structure"],
         ["Changing everything at once","loses the theme"]]},
       result:(score)=>score>=6?"Dimensions sorted!":null }
   ],
-  practiceIntro:"20 practice questions — dimensions, devices and the skeleton. Answer right and the next appears automatically!",
+  practiceIntro:"20 practice questions — dimensions, devices and the core structure. Answer right and the next appears automatically!",
   practice:[
-    { gen:"term-match", params:{subject:"term", pool:[["Theme","stated plainly first"],["Variation","transformed restatement"],["Ornamentation","added notes"],["Minore","major→minor"],["Skeleton","what survives"]], reverse:true}, count:6 },
+    { gen:"term-match", params:{subject:"term", pool:[["Theme","stated plainly first"],["Variation","transformed restatement"],["Ornamentation","added notes"],["Minore","major→minor"],["Core Structure","what survives"]], reverse:true}, count:6 },
     { gen:"rhythm-count", params:{}, count:2 },
     { type:"mc", q:"A theme-and-variations set begins with…", choices:["the plain theme","the loudest variation","a cadenza"], answer:0, explain:"State it, then transform it." },
-    { type:"mc", q:"Variations usually preserve the theme's…", choices:["length and harmonic outline","dynamics only","title"], answer:0, explain:"The skeleton holds." },
+    { type:"mc", q:"Variations usually preserve the theme's…", choices:["length and harmonic outline","dynamics only","title"], answer:0, explain:"The core structure holds." },
     { type:"mc", q:"An ornamented variation uses…", choices:["passing tones, neighbors and ornaments","silence","a new key only"], answer:0, explain:"L66 + L100 devices." },
     { type:"mc", q:"A minore variation changes the theme's…", choices:["mode","meter","length"], answer:0, explain:"Major to minor." },
     { type:"truefalse", q:"A good variation changes every dimension at once.", answer:false, explain:"One at a time keeps the theme audible." },
@@ -164,14 +164,14 @@ LESSON_CONTENT[101]={
   ],
   vocabulary:[
     {term:"Theme and Variations", def:"A theme stated plainly, then restated in successive transformations — A A\u{2032} A\u{2033}…"},
-    {term:"The Skeleton", def:"What survives every variation: length, phrase structure, harmonic outline."},
+    {term:"Core Structure", def:"What survives every variation: length, phrase structure, harmonic outline."},
     {term:"Ornamented / Rhythmic Variation", def:"Added decorations around the theme's tones; or new note values and meters under its pitches."},
     {term:"Minore Variation", def:"The major theme recast in minor — one changed 3rd, a whole new color."}
   ],
   mistakes:[],
   summary:[
     "✔ Plan: <b>theme → transformed restatements</b>.",
-    "✔ The <b>skeleton</b> (length, phrases, harmony) survives every suit.",
+    "✔ The <b>core structure</b> (length, phrases, harmony) survives every variation.",
     "✔ Dimensions: <b>ornamentation · rhythm/meter · mode · harmony · texture</b>.",
     "✔ One dimension at a time keeps the theme audible.",
     "✔ Hearing a variation = asking <b>what changed?</b>"
@@ -179,16 +179,16 @@ LESSON_CONTENT[101]={
   tips:[
     "Write your own: take L67's composed melody, add passing tones (var. 1), dot the rhythm (var. 2), turn it minor (var. 3).",
     "In classical sets, the last variation often speeds up brilliantly and the minore sits near the middle.",
-    "Variation hearing is skeleton hearing — hum the theme UNDER each variation.",
+    "Variation hearing is structure hearing — hum the theme UNDER each variation.",
     "Next lesson: the largest form yet — SONATA FORM."
   ],
   rewards:{ badge:"Transformer", icon:"\u{1F3A0}" },
   sectionOrder:["secHook","secObjectives","secLearn","secExample","secReview",
     "secGame0","secGame1","secGame2","secGame3","secPractice","secQuiz","secTips","secNext"],
-  miaQuizIntro:"Quiz! Skeleton stays, surface transforms.",
+  miaQuizIntro:"Quiz! Core structure stays, surface transforms.",
   quiz:[
     { type:"mc", q:"Theme and variations is best described as…", choices:["a theme, then transformed restatements","two contrasting sections","a fugue"], answer:0, explain:"A A\u{2032} A\u{2033}…", hint:"One identity." },
-    { type:"mc", q:"What typically survives every variation?", choices:["Length, phrasing and harmonic outline","The exact notes","Nothing"], answer:0, explain:"The skeleton.", hint:"The frame." },
+    { type:"mc", q:"What typically survives every variation?", choices:["Length, phrasing and harmonic outline","The exact notes","Nothing"], answer:0, explain:"The core structure.", hint:"The frame." },
     { type:"mc", q:"Passing tones and trills all over the theme make…", choices:["an ornamented variation","a minore variation","a meter change"], answer:0, explain:"Melodic decoration.", hint:"Jewelry." },
     { type:"mc", q:"Quarters become running sixteenths. The variation is…", choices:["rhythmic","modal","textural"], answer:0, explain:"New values, same pitches.", hint:"Time changed." },
     { type:"mc", q:"The minore variation…", choices:["turns the major theme minor","removes the theme","doubles the tempo"], answer:0, explain:"E→E♭ and cousins.", hint:"Darker 3rd." },
@@ -198,23 +198,23 @@ LESSON_CONTENT[101]={
     { type:"mc", q:"Why change only one dimension per variation?", choices:["So the theme stays recognizable","To save paper","No reason"], answer:0, explain:"Identity + transformation.", hint:"The contract." },
     { type:"mc", q:"You hear the theme's outline with E♭ instead of E. The variation is…", choices:["minore","ornamented","rhythmic"], answer:0, explain:"Mode change.", hint:"One dark note." },
     { type:"mc", q:"Which earlier lessons power the ornamented variation?", choices:["L66 (non-chord tones) and L100 (ornaments)","L70 (blues)","L84 (transposition)"], answer:0, explain:"Decoration toolkits.", hint:"The decorators." },
-    { type:"mc", q:"The listener's test for any variation:", choices:["'What changed — and can I still hum the theme?'","'How loud is it?'","'Which clef?'"], answer:0, explain:"Skeleton first.", hint:"Two questions." }
+    { type:"mc", q:"The listener's test for any variation:", choices:["'What changed — and can I still hum the theme?'","'How loud is it?'","'Which clef?'"], answer:0, explain:"Core structure first.", hint:"Two questions." }
   ],
   miaPerfect:"PERFECT! One theme, endless suits — all traced. \u{1F3A0}\u{1F389}",
   miaPass:"Passed! Transformation with identity. Next: sonata form…",
   mia:{
     hook:{ label:"the welcome",
-      explain:"The variation decorated the C-E-G-E-C skeleton with passing tones — identity kept, surface changed.",
+      explain:"The variation decorated the C-E-G-E-C core structure with passing tones — identity kept, surface changed.",
       play:()=>{let t=0;[[60,.25],[62,.25],[64,.25],[65,.25],[67,.5],[65,.25],[64,.25],[60,1.0]].forEach(([m,d])=>{MFAudio.tone(m,d*.9,t,.42);t+=d;});} },
     learn:{ label:"theme and variations",
-      explain:"Theme stated, then transformed: ornamentation, rhythm/meter, mode (minore), harmony, texture — one dimension at a time over a surviving skeleton.",
+      explain:"Theme stated, then transformed: ornamentation, rhythm/meter, mode (minore), harmony, texture — one dimension at a time over a surviving core structure.",
       hint:"What changed?",
       play:()=>{let t=0;[[60,.5],[63,.5],[67,.5],[63,.5],[60,1.0]].forEach(([m,d])=>{MFAudio.tone(m,d*.9,t,.42);t+=d;});} },
     example:{ label:"the examples",
       explain:"Example 1 states the theme and ornaments it; example 2 recolors it minore." },
     game:{ label:"the games",
       explain:"Sprint the dimensions, play theme-plus-variation, order a set, then name what changed.",
-      hint:"Hum the skeleton." },
+      hint:"Hum the theme outline." },
     quiz:{ label:"this question",
       explain:"Every variation question reduces to: which single dimension moved — notes added, time changed, mode darkened, texture shifted?",
       play:()=>{let t=0;[[60,.25],[60,.25],[64,.25],[64,.25],[67,.5]].forEach(([m,d])=>{MFAudio.tone(m,d*.9,t,.4);t+=d;});} }

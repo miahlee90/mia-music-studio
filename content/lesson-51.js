@@ -194,7 +194,7 @@ LESSON_CONTENT[51]={
         {p:"C4",d:"w",label:"root position"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},
         {p:"E4",d:"w",label:"1st inversion"},{p:"G4",d:"w",chord:true},{p:"C5",d:"w",chord:true}],width:420},
       kb:{start:60,octaves:2,labels:true} },
-    { caption:"WHY musicians flip chords: listen to the BASS. With G major in 1st inversion in the middle, the bass line walks C → B → C — smooth as an escalator.",
+    { caption:"WHY musicians flip chords: listen to the BASS. With G major in 1st inversion in the middle, the bass line walks C → B → C.",
       staff:{clef:"treble",tempo:70,notes:[
         {p:"C4",d:"h",label:"C"},{p:"E4",d:"h",chord:true},{p:"G4",d:"h",chord:true},
         {p:"B3",d:"h",label:"G (1st inv.)"},{p:"D4",d:"h",chord:true},{p:"G4",d:"h",chord:true},
@@ -242,7 +242,7 @@ LESSON_CONTENT[51]={
     { gen:"inversion-id", params:{subject:"triad", ask:"position"}, count:6 },
     { gen:"term-match", params:{subject:"term", pool:[["Inversion","a new chord tone in the bass"],["1st inversion","3rd on the bottom"],["Root position","root on the bottom"],["Close position","within one octave"],["Open position","wider than an octave"]], reverse:true}, count:4 },
     { type:"mc", q:"To create a 1st inversion from root position, move the ____ up one octave.", choices:["root","3rd","5th"], answer:0,
-      explain:"C-E-G → E-G-C: the root goes to the top (AEMT3 p.83)." },
+      explain:"C-E-G → E-G-C: the root goes to the top." },
     { type:"mc", q:"E-G-C is which chord, in which position?", choices:["C major, 1st inversion","E major, root position","C major, root position"], answer:0,
       explain:"Rearranged into thirds: C-E-G. C major — with its 3rd (E) in the bass." },
     { type:"mc", q:"In 1st inversion, the root sits…", choices:["on top","in the bass","in the middle"], answer:0,
@@ -258,7 +258,7 @@ LESSON_CONTENT[51]={
     { type:"truefalse", q:"A 1st-inversion triad always has the 3rd in the bass.", answer:true,
       explain:"That IS the definition of 1st inversion." },
     { type:"truefalse", q:"Close position means all chord tones fit within one octave.", answer:true,
-      explain:"AEMT3 p.83: within an octave = close, wider = open." },
+      explain:"Within an octave = close voicing; wider = open voicing." },
     { type:"truefalse", q:"An open-position chord can still be in 1st inversion.", answer:true,
       explain:"Spacing and inversion are independent — check the bass note." }
   ],

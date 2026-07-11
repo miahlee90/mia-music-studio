@@ -39,8 +39,8 @@ function MF_L48_primary(container,fb){
 /* major-triad X-ray: M3 + m3 stack checker */
 function MF_L48_xray(container,fb){
   const ROUNDS=[
-    {q:"Bottom floor of a MAJOR triad — root up to 3rd — is a…",opts:["Major 3rd (4 half steps)","minor 3rd (3 half steps)","Perfect 4th"],a:0,exp:"Major on the bottom."},
-    {q:"Top floor — 3rd up to 5th — is a…",opts:["minor 3rd (3 half steps)","Major 3rd (4 half steps)","Major 2nd"],a:0,exp:"Minor on top."},
+    {q:"The lower 3rd of a MAJOR triad — root up to 3rd — is a…",opts:["Major 3rd (4 half steps)","minor 3rd (3 half steps)","Perfect 4th"],a:0,exp:"Major on the bottom."},
+    {q:"The upper 3rd — 3rd up to 5th — is a…",opts:["minor 3rd (3 half steps)","Major 3rd (4 half steps)","Major 2nd"],a:0,exp:"Minor on top."},
     {q:"Root all the way to the 5th spans a…",opts:["Perfect 5th (7 half steps)","Major 5th","diminished 5th"],a:0,exp:"4 + 3 = 7 half steps = P5."},
     {q:"So the full major-triad recipe is…",opts:["root + Major 3rd + Perfect 5th","root + minor 3rd + Perfect 5th","root + Major 3rd + Major 5th"],a:0,exp:"M3 above the root, P5 above the root."}];
   let i=0;
@@ -48,14 +48,14 @@ function MF_L48_xray(container,fb){
   const q=container.querySelector(".l48-xq"), ch=container.querySelector(".l48-xch");
   function ask(){
     const cur=ROUNDS[i];
-    q.innerHTML=`X-ray ${i+1} of ${ROUNDS.length}: ${cur.q}`;
+    q.innerHTML=`Check ${i+1} of ${ROUNDS.length}: ${cur.q}`;
     ch.innerHTML="";
     cur.opts.map((o,oi)=>({o,oi})).sort(()=>Math.random()-.5).forEach(({o,oi})=>{
       const b=document.createElement("button"); b.textContent=o;
       b.onclick=()=>{
         const c=ROUNDS[i];
         if(oi===c.a){ i++; MFAudio.yay();
-          if(i>=ROUNDS.length){ ch.style.display="none"; q.textContent="X-ray complete — the major triad has no secrets!";
+          if(i>=ROUNDS.length){ ch.style.display="none"; q.textContent="Check complete — the major triad has no secrets!";
             fb(true,`✓ ${c.exp} Both recipes agree: (M3 + m3 stacked) = (root + M3 + P5).`); }
           else { fb(true,`✓ ${c.exp}`); setTimeout(ask,1100); } }
         else { MFAudio.tone(40,.2); fb(false,"Count half steps: C→E is 4, E→G is 3, C→G is 7."); }
@@ -112,20 +112,20 @@ LESSON_CONTENT[48]={
       try:{ type:"custom",
         hint:"I = C, IV = F, V = G — degrees 1, 4, 5.",
         mount:(container,fb)=>MF_L48_primary(container,fb) } },
-    { say:"Why do these three sound so bright? They are <b>MAJOR TRIADS</b>: each is a <b>root + MAJOR 3rd + PERFECT 5th</b> — your Unit 9 intervals at work! \u{1F447} <b>X-ray the major triad, floor by floor:</b>",
+    { say:"Why do these three sound so bright? They are <b>MAJOR TRIADS</b>: each is a <b>root + MAJOR 3rd + PERFECT 5th</b> — your Unit 9 intervals at work! \u{1F447} <b>Check the major triad, one 3rd at a time:</b>",
       try:{ type:"custom",
         hint:"C→E = 4 half steps; E→G = 3; C→G = 7.",
         mount:(container,fb)=>MF_L48_xray(container,fb) } },
-    { say:"The second recipe (the book gives both): a major triad is also a <b>minor 3rd stacked on TOP of a Major 3rd</b>. M3 on the bottom floor, m3 upstairs — 4 + 3 = 7 half steps to the perfect 5th roof. \u{1F447} <b>Which stack builds a MAJOR triad?</b>",
+    { say:"The second recipe: a major triad is also a <b>minor 3rd stacked on TOP of a Major 3rd</b>. M3 as the lower 3rd, m3 as the upper 3rd — 4 + 3 = 7 half steps, a perfect 5th from root to top. \u{1F447} <b>Which stack builds a MAJOR triad?</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:60,notes:[
         {p:"C4",d:"w"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true}],
         brackets:[{from:0,to:1,label:"M3 below"},{from:1,to:2,label:"m3 on top"}],width:240},
         kb:{start:60,octaves:1,labels:true,marks:[60,64,67]} },
       try:{ type:"mc", choices:["Major 3rd on the bottom, minor 3rd on top","Minor 3rd on the bottom, Major 3rd on top","Two Major 3rds"], answer:0,
-        success:"✓ M3 + m3, in that order. (Flip the floors and you get a MINOR triad — a story for Lesson 58!)",
-        fail:"Which floor was 4 half steps? Bottom or top?",
+        success:"✓ M3 + m3, in that order. (Flip the two 3rds and you get a MINOR triad — a story for Lesson 58!)",
+        fail:"Which 3rd was 4 half steps? Lower or upper?",
         hint:"C→E (4), then E→G (3)." } },
-    { say:"One more remarkable fact from the book: <b>the three primary triads together contain EVERY tone of the major scale.</b> C-E-G + F-A-C + G-B-D = C, D, E, F, G, A, B — the whole scale! That's why three chords can harmonize practically any melody. \u{1F447} <b>Which scale tone is missing from I, IV, and V combined?</b>",
+    { say:"One more remarkable fact: <b>the three primary triads together contain EVERY tone of the major scale.</b> C-E-G + F-A-C + G-B-D = C, D, E, F, G, A, B — the whole scale! That's why three chords can harmonize practically any melody. \u{1F447} <b>Which scale tone is missing from I, IV, and V combined?</b>",
       try:{ type:"mc", choices:["None — all seven tones are covered","D — no chord contains it","B — no chord contains it"], answer:0,
         success:"✓ All seven! (D lives in V, B lives in V, A lives in IV…) One trio, complete coverage — the secret of three-chord songs.",
         fail:"Check V (G-B-D) and IV (F-A-C) again…",
@@ -139,7 +139,7 @@ LESSON_CONTENT[48]={
         {p:"G4",d:"h",label:"V"},{p:"B4",d:"h",chord:true},{p:"D5",d:"h",chord:true},
         {p:"C4",d:"w",label:"I"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{bar:"final"}],width:600},
       kb:{start:60,octaves:2,labels:true} },
-    { caption:"Anatomy of the major triad: Major 3rd bottom floor + minor 3rd top floor = Perfect 5th roof.",
+    { caption:"Anatomy of the major triad: Major 3rd below + minor 3rd above = a Perfect 5th from root to top.",
       staff:{clef:"bass",tempo:60,notes:[
         {p:"C3",d:"w"},{p:"E3",d:"w",chord:true},{p:"G3",d:"w",chord:true}],
         brackets:[{from:0,to:1,label:"Major 3rd — 4 half steps"},{from:1,to:2,label:"minor 3rd — 3"}],width:340} }
@@ -177,13 +177,13 @@ LESSON_CONTENT[48]={
         ["I + IV + V together","contain every tone of the major scale"]]},
       result:(score)=>score>=7?"Primary vocabulary: crowned!":null }
   ],
-  practiceIntro:"20 practice questions — numerals, spellings, recipes and the every-tone fact. Answer right and the next appears automatically!",
+  practiceIntro:"19 practice questions — numerals, spellings, recipes and the every-tone fact. Answer right and the next appears automatically!",
   practice:[
     { gen:"triad-id", params:{ask:"numeral"}, count:5 },
     { gen:"triad-id", params:{}, count:3 },
     { gen:"term-match", params:{subject:"term", pool:[["Primary triads","built on degrees 1, 4, and 5"],["I in C major","C-E-G"],["IV in C major","F-A-C"],["V in C major","G-B-D"],["Major triad","root + M3 + P5"]], reverse:true}, count:3 },
     { type:"mc", q:"The primary triads are identified by the Roman numerals…", choices:["I, IV, V","i, ii, iii","I, III, V"], answer:0,
-      explain:"Degrees 1, 4, 5 (AEMT p.75)." },
+      explain:"Degrees 1, 4, 5." },
     { type:"mc", q:"In C major, the V chord is spelled…", choices:["G-B-D","G-A-B","F-A-C"], answer:0,
       explain:"Triad on degree 5: G-B-D." },
     { type:"mc", q:"A major triad consists of a root, a…", choices:["Major 3rd and a Perfect 5th","minor 3rd and a Perfect 5th","Major 3rd and a Major 5th"], answer:0,
@@ -216,7 +216,7 @@ LESSON_CONTENT[48]={
     { type:"mc", q:"A major triad = root + …", choices:["Major 3rd + Perfect 5th","minor 3rd + Perfect 5th","Major 3rd + Major 5th","Perfect 3rd + Perfect 5th"], answer:0,
       explain:"Two impossible interval names hide in the wrong answers!", hint:"Unit 9: no P3, no M5." },
     { type:"mc", q:"As stacked 3rds, the major triad is…", choices:["Major 3rd below, minor 3rd above","minor 3rd below, Major 3rd above","two minor 3rds"], answer:0,
-      explain:"4 + 3 = P5 roof.", hint:"Big floor, small ceiling." },
+      explain:"4 + 3 = a perfect 5th.", hint:"Large 3rd below, small 3rd above." },
     { type:"mc", q:"Name this chord's Roman numeral (key of C).",
       staff:{clef:"treble",notes:[{p:"F4",d:"w"},{p:"A4",d:"w",chord:true},{p:"C5",d:"w",chord:true}],width:200},
       choices:["IV","I","V"], answer:0,
@@ -269,7 +269,7 @@ LESSON_CONTENT[48]={
       hint:"Location 1-4-5; spelling 1-3-5.",
       play:()=>{[60,64,67].forEach(m=>MFAudio.tone(m,.8,0,.38));} },
     example:{ label:"the examples",
-      explain:"Example 1 plays the I-IV-V-I progression with numerals; example 2 x-rays the major triad's two floors." },
+      explain:"Example 1 plays the I-IV-V-I progression with numerals; example 2 breaks the major triad into its lower and upper 3rds." },
     game:{ label:"the games",
       explain:"Sprint the numerals, walk the primary path, hunt I-IV-V by sight, then race the vocabulary.",
       hint:"Root → degree → numeral, in that order." },

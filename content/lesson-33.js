@@ -160,7 +160,7 @@ LESSON_CONTENT[33]={
         hint:"Overlapping sound = harmonic; taking turns = melodic.",
         mount:(container,fb)=>MF_L33_ear(container,fb) } },
     { say:"A reading shortcut: <b>EVEN-numbered intervals</b> (2nds, 4ths, 6ths, octaves) go <b>line→space</b> or <b>space→line</b>; <b>ODD-numbered intervals</b> (unisons, 3rds, 5ths, 7ths) go <b>line→line</b> or <b>space→space</b>. \u{1F447} <b>A 5th written on the staff goes from…?</b>",
-      show:{ type:"staff", spec:{clef:"treble",notes:[{p:"F4",d:"w",x:150},{p:"G4",d:"w",chord:true},{p:"E4",d:"w",x:360},{p:"B4",d:"w",chord:true}],brackets:[{from:0,to:1,label:"2nd — line to space"},{from:2,to:3,label:"5th — line to line"}],width:480} },
+      show:{ type:"staff", spec:{clef:"treble",notes:[{p:"F4",d:"w",x:150},{p:"G4",d:"w",chord:true},{p:"E4",d:"w",x:360},{p:"B4",d:"w",chord:true}],brackets:[{from:0,to:1,label:"2nd — space to line"},{from:2,to:3,label:"5th — line to line"}],width:480} },
       try:{ type:"mc", choices:["Line to line, or space to space","Line to space only","Anywhere at all"], answer:0,
         success:"✓ Odd numbers match: line↔line or space↔space. Even numbers mix them.",
         fail:"5 is an ODD number — check the odd rule.",

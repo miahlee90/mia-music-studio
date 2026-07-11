@@ -193,7 +193,7 @@ LESSON_CONTENT[53]={
         {p:"D4",d:"w",label:"G7/D"},{p:"F4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{p:"B4",d:"w",chord:true},
         {p:"F4",d:"w",label:"G7/F"},{p:"G4",d:"w",chord:true},{p:"B4",d:"w",chord:true},{p:"D5",d:"w",chord:true}],width:600},
       kb:{start:48,octaves:3,labels:true} },
-    { caption:"Why the 3rd inversion is a composer's favorite: the 7th in the bass (F) aches downward — and lands on E, giving I in 1st inversion. Bass line F → E: gravity you can hear.",
+    { caption:"Why the 3rd inversion is a composer's favorite: the 7th in the bass (F) resolves down by step to E, giving I in 1st inversion. Bass line F → E.",
       staff:{clef:"treble",tempo:70,notes:[
         {p:"F4",d:"h",label:"G7/F (3rd inv.)"},{p:"G4",d:"h",chord:true},{p:"B4",d:"h",chord:true},{p:"D5",d:"h",chord:true},
         {p:"E4",d:"w",label:"C/E (1st inv.)"},{p:"G4",d:"w",chord:true},{p:"C5",d:"w",chord:true},{bar:"final"}],width:440},
@@ -240,7 +240,7 @@ LESSON_CONTENT[53]={
     { gen:"inversion-id", params:{subject:"v7", ask:"position"}, count:6 },
     { gen:"term-match", params:{subject:"term", pool:[["3rd inversion","7th in the bass"],["2nd inversion","5th in the bass"],["1st inversion","3rd in the bass"],["Root position","root in the bass"],["G7/B","G7 in 1st inversion"]], reverse:true}, count:4 },
     { type:"mc", q:"A seventh chord can be written in how many positions?", choices:["4","3","2"], answer:0,
-      explain:"Four notes → four possible bass notes (AEMT3 p.85)." },
+      explain:"Four notes → four possible bass notes." },
     { type:"mc", q:"Which position exists for V7 but NOT for a triad?", choices:["3rd inversion","1st inversion","2nd inversion"], answer:0,
       explain:"Only a 4-note chord can put a 7th in the bass." },
     { type:"mc", q:"In G7's 2nd inversion, the bass note is…", choices:["D","B","F"], answer:0,
@@ -317,7 +317,7 @@ LESSON_CONTENT[53]={
   tips:[
     "Spot a seventh-chord inversion instantly: find the 2nd (the crunch pair) inside the stack. Bass ladder position = how far that pair has climbed from the top.",
     "Piano drill: play G7 → G7/B → G7/D → G7/F, then land on C/E. Your left hand just learned a week of voice-leading.",
-    "The nicknames 6/5, 4/3 and 4/2 you may have spotted in the book — next lesson decodes that entire number system. It's called figured bass!",
+    "The nicknames 6/5, 4/3 and 4/2 you'll see in figured bass — next lesson decodes that entire number system. It's called figured bass!",
     "Listen to any gospel or jazz pianist: those rich low notes under dominant chords are usually 3rds and 7ths in the bass — inversions at work."
   ],
   rewards:{ badge:"Four-Position Pilot", icon:"\u{1F504}" },

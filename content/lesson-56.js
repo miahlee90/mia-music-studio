@@ -181,7 +181,7 @@ LESSON_CONTENT[56]={
     { gen:"rel-key", params:{ask:"both"}, count:8 },
     { gen:"term-match", params:{subject:"term", pool:[["Relative minor","same signature, tonic on the major's 6th degree"],["Relative major","same signature, a m3 above the minor tonic"],["Tonic","the home note of a scale"],["Key signature","the sharps or flats at the start of the staff"]], reverse:true}, count:4 },
     { type:"mc", q:"The relative minor begins on which degree of the major scale?", choices:["6th","5th","3rd"], answer:0,
-      explain:"Degree 6 becomes the minor keynote (AEMT3 p.90)." },
+      explain:"Degree 6 becomes the minor keynote." },
     { type:"mc", q:"How can you quickly find the relative minor?", choices:["a minor 3rd down","a whole step down","a perfect 5th up"], answer:0,
       explain:"3 half steps below — C down to A." },
     { type:"mc", q:"The relative minor of D major is…", choices:["B minor","D minor","F# minor"], answer:0,

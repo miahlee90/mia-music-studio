@@ -62,7 +62,7 @@ function MF_L49_logic(container,fb){
 }
 
 LESSON_CONTENT[49]={
-  welcome:"Scale notes have numbers — today they get NAMES and job titles. \u{1F3F0}",
+  welcome:"Scale notes have numbers — today each one gets a NAME. \u{1F4DB}",
   hook:{
     say:"Listen: the scale's 7th note stops just below home… and hangs there. Feel the pull? Press play — the last note wants SO badly to resolve. <b>Which note does it pull toward?</b>",
     interact:{ type:"custom",
@@ -94,17 +94,17 @@ LESSON_CONTENT[49]={
       show:{ type:"staff", spec:{clef:"grand",tempo:90,notes:[
         {p:"F3",d:"h",clef:"bass",x:150,label:"Subdominant — 5th below"},{p:"C4",d:"h",clef:"treble",x:345,label:"TONIC"},{p:"G4",d:"h",clef:"treble",x:540,label:"Dominant — 5th above"}],width:660} },
       try:{ type:"mc", choices:["It sits a 5th BELOW the tonic — the dominant's mirror","It is slightly weaker than the dominant","It sits just below the dominant"], answer:0,
-        success:"✓ The book is emphatic: subdominant = same distance BELOW the tonic as the dominant is ABOVE — not 'just under the dominant'!",
+        success:"✓ Remember: subdominant = same distance BELOW the tonic as the dominant is ABOVE — not 'just under the dominant'!",
         fail:"'Sub' measures from the TONIC, not from the dominant.",
         hint:"Dominant: 5th up. Subdominant: 5th…" } },
-    { say:"The middle managers: degree 3 is the <b>MEDIANT (iii)</b> — Latin for 'in the middle', midway from tonic UP to dominant. Degree 6 is the <b>SUBMEDIANT (vi)</b> — midway from tonic DOWN to subdominant. \u{1F447} <b>The mediant sits midway between…?</b>",
+    { say:"The middle degrees: degree 3 is the <b>MEDIANT (iii)</b> — Latin for 'in the middle', midway from tonic UP to dominant. Degree 6 is the <b>SUBMEDIANT (vi)</b> — midway from tonic DOWN to subdominant. \u{1F447} <b>The mediant sits midway between…?</b>",
       try:{ type:"mc", choices:["Tonic and dominant (going up)","Tonic and subdominant (going down)","Dominant and octave"], answer:0,
         success:"✓ C→E→G: the mediant E splits tonic-to-dominant. (Its mirror, the SUBmediant, splits the way down.)",
         fail:"Mediant = middle of the UPWARD 5th.",
         hint:"C-?-G: what's in the middle?" } },
     { say:"The last two: degree 2, one step <b>above</b> the tonic, is the <b>SUPERTONIC (ii)</b> ('super' = above). Degree 7, one step <b>below</b>, is the <b>LEADING TONE (vii)</b> — because it strains to LEAD up into the tonic (you felt it in the hook!). \u{1F447} <b>Degree 7 is called the leading tone because…?</b>",
       try:{ type:"mc", choices:["It pulls strongly upward to the tonic","It comes first in the scale","It leads the left hand"], answer:0,
-        success:"✓ One half step below home, it aches to arrive. (The book notes it's occasionally called the subtonic, but leading tone is the standard.)",
+        success:"✓ One half step below home, it aches to arrive. (It's occasionally called the subtonic, but leading tone is the standard.)",
         fail:"Sing the hook again: B…C. What did the B want?",
         hint:"'Leading'… to where?" } },
     { say:"The full ladder, in degree order: <b>Tonic, Supertonic, Mediant, Subdominant, Dominant, Submediant, Leading Tone</b> — then Tonic again. \u{1F447} <b>Climb it by name:</b>",
@@ -125,16 +125,16 @@ LESSON_CONTENT[49]={
     { caption:"The C major scale with every degree's name and numeral — play and recite: Tonic, Supertonic, Mediant, Subdominant, Dominant, Submediant, Leading Tone, Tonic.",
       staff:{clef:"treble",tempo:100,notes:[
         {p:"C4",d:"q",label:"Tonic I"},{p:"D4",d:"q",label:"Supertonic ii"},{p:"E4",d:"q",label:"Mediant iii"},{p:"F4",d:"q",label:"Subdom. IV"},{p:"G4",d:"q",label:"Dominant V"},{p:"A4",d:"q",label:"Submed. vi"},{p:"B4",d:"q",label:"L. Tone vii"},{p:"C5",d:"q",label:"Tonic I"}],width:660} },
-    { caption:"The tonic as the CENTER: subdominant a 5th below, dominant a 5th above — the arrangement that named them (the book's 'important!' diagram).",
+    { caption:"The tonic as the CENTER: subdominant a 5th below, dominant a 5th above — the arrangement that named them.",
       staff:{clef:"grand",tempo:80,notes:[
         {p:"F3",d:"h",clef:"bass",label:"IV — 5th below"},{p:"C4",d:"h",clef:"treble",label:"I — TONIC"},{p:"G4",d:"h",clef:"treble",label:"V — 5th above"}],width:480} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Title Sprint (45s)",
       intro:"Degree numbers flash — name their titles at speed!",
-      miaIntro:"Know everyone's job title! \u{1F3F0}",
+      miaIntro:"Know every degree's name! \u{1F4DB}",
       spec:{gen:"degree-name", params:{ask:"name"}, seconds:45},
-      result:(score)=>score>=8?score+" titles — court herald level!":null },
+      result:(score)=>score>=8?score+" names at full speed!":null },
     { type:"gen-race", title:"Game 2 · Find the Note (10 rounds)",
       intro:"Reverse: given the NAME, find its note in C major!",
       miaIntro:"Names to notes — go! \u{1F50D}",
@@ -151,15 +151,15 @@ LESSON_CONTENT[49]={
       miaIntro:"One through seven, by title! \u{23F1}",
       spec:{sequence:["Tonic","Supertonic","Mediant","Subdominant","Dominant","Submediant","Leading Tone"], timer:25,
         title:"Tap the degree names in order, 1 → 7!"},
-      result:(score)=>score!==null?"Perfect order — the court is assembled!":null }
+      result:(score)=>score!==null?"Perfect order — all seven names in place!":null }
   ],
-  practiceIntro:"20 practice questions — names, numerals, notes, and the name-logic. Answer right and the next appears automatically!",
+  practiceIntro:"21 practice questions — names, numerals, notes, and the name-logic. Answer right and the next appears automatically!",
   practice:[
     { gen:"degree-name", params:{ask:"name"}, count:5 },
     { gen:"degree-name", params:{ask:"note"}, count:4 },
     { gen:"term-match", params:{subject:"term", pool:[["Tonic","degree 1 — the keynote"],["Dominant","degree 5 — a 5th above the tonic"],["Subdominant","degree 4 — a 5th below the tonic"],["Leading Tone","degree 7 — pulls up to the tonic"],["Mediant","degree 3 — midway tonic→dominant"]], reverse:true}, count:3 },
     { type:"mc", q:"The keynote of a scale is called the…", choices:["tonic","dominant","mediant"], answer:0,
-      explain:"Degree 1 — home (AEMT p.76)." },
+      explain:"Degree 1 — home." },
     { type:"mc", q:"The tone a 5th ABOVE the tonic is the…", choices:["dominant","subdominant","supertonic"], answer:0,
       explain:"Degree 5 = dominant (V)." },
     { type:"mc", q:"The tone a 5th BELOW the tonic is the…", choices:["subdominant","dominant","submediant"], answer:0,
@@ -173,11 +173,11 @@ LESSON_CONTENT[49]={
     { type:"truefalse", q:"The leading tone tends to lead upward to the tonic.", answer:true,
       explain:"A half step below home, it pulls hard." },
     { type:"truefalse", q:"The subdominant is named for sitting just below the dominant.", answer:false,
-      explain:"The book's warning! It's a 5th BELOW THE TONIC — the dominant's mirror." },
+      explain:"Watch out: it's a 5th BELOW THE TONIC — the dominant's mirror." },
     { type:"mc", q:"Which degrees carry the primary chords?", choices:["Tonic, Subdominant, Dominant","Supertonic, Mediant, Submediant","Tonic, Mediant, Dominant"], answer:0,
       explain:"I, IV, V — degrees 1, 4, 5." }
   ],
-  miaQuizIntro:"The whole court by name — final roll call!",
+  miaQuizIntro:"All seven degrees by name — final roll call!",
   quiz:[
     { type:"mc", q:"Scale degree 1 is called the…", choices:["tonic","dominant","mediant","leading tone"], answer:0,
       explain:"The keynote — home base.", hint:"The key is named after it." },
@@ -194,15 +194,15 @@ LESSON_CONTENT[49]={
     { type:"mc", q:"Scale degree 7 is called the…", choices:["leading tone","supertonic","dominant","mediant"], answer:0,
       explain:"It leads up to the tonic (sometimes 'subtonic').", hint:"You felt its pull in the hook." },
     { type:"truefalse", q:"The subdominant is the same distance below the tonic as the dominant is above it.", answer:true,
-      explain:"The book's 'Important!' — both are 5ths from home.", hint:"The mirror image." },
+      explain:"Both are 5ths from home.", hint:"The mirror image." },
     { type:"truefalse", q:"In C major, the dominant note is F.", answer:false,
       explain:"Dominant = degree 5 = G. (F is the subdominant.)", hint:"Count: C D E F G." },
     { type:"mc", q:"In C major, the leading tone is…", choices:["B","A","D","F"], answer:0,
       explain:"Degree 7 — a half step under C.", hint:"One key below home." },
     { type:"mc", q:"Which numerals match Tonic-Subdominant-Dominant?", choices:["I - IV - V","I - II - III","ii - IV - vi"], answer:0,
-      explain:"The primary-chord trio by another name.", hint:"Lesson 48's crowns." },
+      explain:"The primary-chord trio by another name.", hint:"Lesson 48's primary triads." },
     { type:"mc", q:"'Go to the dominant chord' in C major means play…", choices:["G-B-D","F-A-C","C-E-G"], answer:0,
-      explain:"Dominant = degree 5 = the G triad (V).", hint:"Degree 5's snowman." },
+      explain:"Dominant = degree 5 = the G triad (V).", hint:"Degree 5's triad." },
     /* generated */
     { gen:"degree-name", params:{ask:"name"}, count:3 },
     { gen:"degree-name", params:{ask:"note"}, count:3 },
@@ -228,10 +228,10 @@ LESSON_CONTENT[49]={
     "Composers speak this language constantly: 'rest on the dominant', 'pivot on the submediant' — now you're fluent.",
     "Next lesson: the dominant grows a 7th — the mighty V7 chord."
   ],
-  rewards:{ badge:"Court Herald", icon:"\u{1F3F0}" },
+  rewards:{ badge:"Degree Namer", icon:"\u{1F4DB}" },
   sectionOrder:["secHook","secObjectives","secLearn","secExample","secReview",
     "secGame0","secGame1","secGame2","secGame3","secPractice","secQuiz","secTips","secNext"],
-  miaPerfect:"A perfect score — every noble named without a stumble! \u{1F3F0}\u{1F389}",
+  miaPerfect:"A perfect score — every degree named without a stumble! \u{1F389}",
   miaPass:"Passed! Recite the ladder once more before bed: Tonic, Supertonic, Mediant…",
   mia:{
     hook:{ label:"the welcome",
@@ -244,7 +244,7 @@ LESSON_CONTENT[49]={
     example:{ label:"the examples",
       explain:"Example 1 labels the whole ladder; example 2 shows the tonic as center with its two flanking 5ths — the diagram that explains the names." },
     game:{ label:"the games",
-      explain:"Sprint the titles, find the notes, climb the named ladder, then order the whole court.",
+      explain:"Sprint the names, find the notes, climb the named ladder, then put all seven in order.",
       hint:"When stuck, rebuild from the three anchors: Tonic 1, Subdominant 4, Dominant 5." },
     quiz:{ label:"this question",
       explain:"Recite and match: 1 Tonic, 2 Supertonic, 3 Mediant, 4 Subdominant, 5 Dominant, 6 Submediant, 7 Leading Tone.",

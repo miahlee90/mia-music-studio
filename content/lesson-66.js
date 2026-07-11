@@ -182,7 +182,7 @@ LESSON_CONTENT[66]={
     { gen:"term-match", params:{subject:"term", pool:[["Non-harmonic tone","outside the chord"],["Passing tone","bridges two different chord tones"],["Upper neighbor","above, then back"],["Lower neighbor","below, then back"],["Weak beat","where non-harmonic tones usually occur"]], reverse:true}, count:6 },
     { gen:"triad-id", params:{}, count:2 },
     { type:"mc", q:"Tones not part of the harmony chord are called…", choices:["non-harmonic tones","rest tones","grace notes"], answer:0,
-      explain:"The umbrella term (AEMT3 p.104)." },
+      explain:"The umbrella term." },
     { type:"mc", q:"A passing tone connects…", choices:["two DIFFERENT chord tones","the same chord tone twice","two rests"], answer:0,
       explain:"It travels through to a new destination." },
     { type:"mc", q:"A neighboring tone…", choices:["leaves and returns to the SAME chord tone","connects two different chord tones","is always the tonic"], answer:0,

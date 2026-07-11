@@ -72,7 +72,7 @@ LESSON_CONTENT[80]={
     "Know where each mode lives in real music"
   ],
   steps:[
-    { say:"<b>The Seven Modes — Review:</b> four feel <b style='color:#2F6DA8'>major-type</b> (major 3rd): Ionian, Lydian, Mixolydian; three feel <b style='color:#C05A21'>minor-type</b> (minor 3rd): Dorian, Phrygian, Aeolian — plus unstable Locrian. \u{1F447} <b>Which modes are major-type?</b>",
+    { say:"<b>The Seven Modes — Review:</b> three feel <b style='color:#2F6DA8'>major-type</b> (major 3rd): Ionian, Lydian, Mixolydian; three feel <b style='color:#C05A21'>minor-type</b> (minor 3rd): Dorian, Phrygian, Aeolian — plus unstable Locrian. \u{1F447} <b>Which modes are major-type?</b>",
       show:{ type:"html", html:`<table style="border-collapse:collapse;margin:0 auto;font-size:14px;min-width:300px">
         <tr><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:5px 12px;color:#2F6DA8">Major-type</th><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:5px 12px;color:#C05A21">Minor-type</th><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:5px 12px">Unstable</th></tr>
         <tr><td style="border:1.5px solid #cdd5e1;padding:4px 12px;text-align:center;color:#2F6DA8">Ionian · Lydian · Mixolydian</td><td style="border:1.5px solid #cdd5e1;padding:4px 12px;text-align:center;color:#C05A21">Dorian · Phrygian · Aeolian</td><td style="border:1.5px solid #cdd5e1;padding:4px 12px;text-align:center">Locrian</td></tr></table>` },

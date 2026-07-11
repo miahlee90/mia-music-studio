@@ -30,7 +30,7 @@ function MF_L2_nameDrill(container,fb,items,doneMsg){
 LESSON_CONTENT[2]={
   welcome:"Welcome back! Today we unlock the staff with the treble clef. \u{1F511}\u{1F3B5}",
   hook:{
-    say:"Great job learning the musical staff!<br><br>Think of the staff as a <b>map</b>. Every map needs a <b>key</b> to help you understand it — and in music, that key is called a <b>clef</b>.<br><br>Today we'll learn the <b>Treble Clef</b>, used for higher-pitched instruments and voices. Let's unlock the staff together!"
+    say:"Great job learning the musical staff!<br><br>On its own, a staff position has no name. A <b>clef</b> fixes that: it assigns a letter name to one line — and every other line and space follows from it.<br><br>Today we'll learn the <b>Treble Clef</b>, used for higher-pitched instruments and voices. Ready to name every note on the staff?"
   },
   objectives:[
     "Identify the Treble Clef",
@@ -221,8 +221,8 @@ LESSON_CONTENT[2]={
     { type:"mc", q:"Bottom to top, the treble SPACES spell…", choices:["FACE","FADE","CAGE"], answer:0,
       explain:"F-A-C-E, bottom space to top space.", hint:"It's a real English word you can see in the mirror." },
     { type:"truefalse", q:"A clef gives the notes on the staff their names.", answer:true,
-      explain:"Without a clef, staff positions have no names — the clef is the key to the map.",
-      hint:"What did Mia call the clef at the start?" },
+      explain:"Without a clef, staff positions have no names — the clef assigns them.",
+      hint:"What did Mia say a clef does at the start?" },
     /* generated — reading */
     { gen:"note-name", params:{clef:"treble"}, count:5 },
     { gen:"line-space", count:2 },
@@ -276,7 +276,7 @@ LESSON_CONTENT[2]={
   miaPerfect:"A perfect 20?! Treble Clef Explorer barely covers it — Lesson 3 and the bass clef await! \u{1F3B5}",
   mia:{
     hook:{ label:"the welcome",
-      explain:"The staff is a map, and the clef is its key. The treble clef names line 2 “G,” and from that anchor every line and space gets its name.",
+      explain:"A clef assigns a letter name to one line. The treble clef names line 2 “G,” and from that anchor every line and space gets its name.",
       play:()=>{[64,67,71,74,77].forEach((m,i)=>MFAudio.tone(m,.3,i*.3));} },
     learn:{ label:"the treble staff",
       explain:"Lines bottom-up: E-G-B-D-F (Every Good Boy Does Fine). Spaces bottom-up spell F-A-C-E. Always decide line-or-space first, then count from the bottom.",

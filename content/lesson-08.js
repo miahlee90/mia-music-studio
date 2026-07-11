@@ -79,7 +79,7 @@ LESSON_CONTENT[8]={
         fail:"The TOP number counts the beats per container.",
         hint:"Top = how many. (Bottom is coming next!)" } },
     /* Step 2 — bottom number */
-    { say:"The <b>BOTTOM number</b> answers a different question: <b>which note gets one beat?</b> A bottom <b>4</b> means the <b>Quarter Note</b> is the beat. So 4/4 = four beats per measure, quarter note gets the beat. \u{1F447} <b>What does the BOTTOM number tell you?</b>",
+    { say:"The <b>BOTTOM number</b> answers a different question: <b>which note gets one beat?</b> A bottom <b>4</b> means the <b>Quarter Note</b> is the beat. So 4/4 = four beats per measure, quarter note gets the beat. \u{1F447} <b>In 4/4, which note receives one beat?</b>",
       try:{ type:"mc",
         choices:["The Quarter Note","The Whole Note","The Half Note"], answer:0,
         success:"✓ Bottom 4 = quarter note gets one beat. (So a half note takes 2 of those beats, and a whole note takes all 4!)",
@@ -90,8 +90,8 @@ LESSON_CONTENT[8]={
       show:{ type:"staff", spec:{clef:"treble",time:"C",notes:[{p:"G4",d:"q",label:"1"},{p:"G4",d:"q",label:"2"},{p:"G4",d:"h",label:"3-4"},{bar:"final"}],width:380} },
       try:{ type:"mc",
         choices:["Exactly the same as 4/4","A different, faster meter","“Coda” — jump to the end"], answer:0,
-        success:"✓ C = Common Time = 4/4. Two costumes, one meaning!",
-        fail:"The big C is just 4/4 wearing a different costume.",
+        success:"✓ C = Common Time = 4/4. Two symbols, one meaning!",
+        fail:"The big C is just 4/4 written with a different symbol.",
         hint:"C stands for Common Time." } },
     /* Step 4 — count the beat (Activity 1: tap rhythm) */
     { say:"Time to FEEL it. 4/4 pulses like a heartbeat: <b>1 - 2 - 3 - 4</b>, over and over. \u{1F447} <b>Tap along with the metronome:</b>",
@@ -209,7 +209,7 @@ LESSON_CONTENT[8]={
       result:(stars)=>stars>=3?"All four combinations, zero overflow — master builder of Common Time!":null },
     { type:"symbol-hunt", title:"Game 4 · Find the Time Signature",
       intro:"Click the symbol Mia names — <b>4/4</b>, <b>Common Time</b>, clefs, bars… can you tell them apart at a glance?",
-      miaIntro:"Last game! 4/4 and its costume C are hiding among the other symbols. \u{1F3AF}",
+      miaIntro:"Last game! 4/4 and its shorthand C are hiding among the other symbols. \u{1F3AF}",
       spec:{rounds:6, pool:[
         {label:"4/4 Time Signature", spec:{clef:"treble",time:"4/4",notes:[]}},
         {label:"Common Time (C)", spec:{clef:"treble",time:"C",notes:[]}},
@@ -328,7 +328,7 @@ LESSON_CONTENT[8]={
       hint:"Say it as a sentence: “four beats per measure, quarter note gets the beat.”",
       play:()=>{const s=.6;[60,64,67,64].forEach((m,i)=>MFAudio.tone(m,s*.9,i*s));} },
     example:{ label:"the examples",
-      explain:"Both examples are the SAME rhythm — one written 4/4, one written C. Common Time is just 4/4 in costume." },
+      explain:"Both examples are the SAME rhythm — one written 4/4, one written C. Common Time is just 4/4 written with a different symbol." },
     game:{ label:"the games",
       explain:"Tap full measures, inspect for missing beats, build every 4-beat combination, and hunt the symbols.",
       hint:"Everything comes back to one rule: the beats in a measure must total the top number." },

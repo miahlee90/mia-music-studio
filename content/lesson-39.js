@@ -193,7 +193,7 @@ LESSON_CONTENT[39]={
     { type:"mc", q:"Two sixteenth notes equal…", choices:["one eighth note","one quarter note","one whole beat"], answer:0,
       explain:"¼ + ¼ = ½ = an eighth note." },
     { type:"mc", q:"A sixteenth note in 2/4, 3/4, or 4/4 time is worth…", choices:["¼ beat","½ beat","1 beat"], answer:0,
-      explain:"One quarter-count in all simple meters (AEMT p.62)." },
+      explain:"One quarter-count in all simple meters." },
     { type:"mc", q:"The sixteenth count for one full beat is…", choices:["1 e & a","1 & 2 &","1 a & e"], answer:0,
       explain:"Four slots, four syllables, in that order." },
     { type:"truefalse", q:"Grouped sixteenth notes are connected by two beams.", answer:true,
@@ -230,7 +230,7 @@ LESSON_CONTENT[39]={
     { type:"mc", q:"The pattern two-sixteenths-then-eighth is counted…", choices:["1 e &","1 & a","1 e a"], answer:0,
       explain:"Attacks on 1, e, and & — the eighth holds through 'a'.", hint:"The eighth comes LAST here." },
     { type:"mc", q:"Adding a second flag to an eighth note makes it…", choices:["a sixteenth note","a quarter note","a dotted eighth","a grace note"], answer:0,
-      explain:"Each added flag halves the value (AEMT p.62).", hint:"Flags halve values." },
+      explain:"Each added flag halves the value.", hint:"Flags halve values." },
     { type:"mc", q:"Which shows one FULL beat?",
       staff:{clef:"treble",notes:[{p:"B4",d:"16"},{p:"B4",d:"16"},{p:"B4",d:"16"},{p:"B4",d:"16"}],beams:[[0,3,2]],width:220},
       choices:["Yes — four sixteenths = 1 beat","No — it's half a beat","No — it's two beats"], answer:0,
@@ -258,7 +258,7 @@ LESSON_CONTENT[39]={
   ],
   tips:[
     "Practice slow: sixteenths at ♩=60 with perfect evenness beat sixteenths at ♩=120 with lumps.",
-    "Say 'ti-ri-ti-ri' (AEMT's alternative) if '1 e & a' twists your tongue at speed.",
+    "Say 'ti-ri-ti-ri' (an alternative count) if '1 e & a' twists your tongue at speed.",
     "Watch the SECOND beam like a hawk — it's the only difference between a run of eighths and a run of sixteenths.",
     "Next lesson: the sixteenth REST — a quarter-beat of precisely-placed silence."
   ],

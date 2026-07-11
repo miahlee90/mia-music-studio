@@ -64,7 +64,7 @@ LESSON_CONTENT[95]={
         success:"✓ Predominant, dominant, tonic — the flow in miniature.",
         fail:"Map each numeral to its function…",
         hint:"Lesson 86's colors." } },
-    { say:"<b>The Circle Progression:</b> roots <b>falling in 5ths</b>: vi → ii → V → I (A-D-G-C in C major). Each root is the next chord's dominant position — harmony's gravity slide. \u{1F447} <b>In the circle progression, each root falls by a…</b>",
+    { say:"<b>The Circle Progression:</b> roots <b>falling in 5ths</b>: vi → ii → V → I (A-D-G-C in C major). Each root acts as the dominant of the next root. \u{1F447} <b>In the circle progression, each root falls by a…</b>",
       try:{ type:"mc", choices:["5th","2nd","3rd"], answer:0,
         success:"✓ Falling 5ths: A→D→G→C — the strongest root motion in tonal music.",
         fail:"A down to D is a…",
@@ -102,7 +102,7 @@ LESSON_CONTENT[95]={
         {p:"G3",d:"h",label:"V"},{p:"B3",d:"h",chord:true},{p:"D4",d:"h",chord:true},
         {p:"C4",d:"w",label:"I"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{bar:"final"}],width:560},
       kb:{start:45,octaves:3,labels:true} },
-    { caption:"Harmonic rhythm demonstrated: the same I-IV-V-I first at one chord per measure, then two chords per measure — feel the energy double.",
+    { caption:"Harmonic rhythm demonstrated: first I and IV at one chord per measure, then the full I-IV-V-I at two chords per measure — feel the energy double.",
       staff:{clef:"treble",tempo:84,notes:[
         {p:"C4",d:"w",label:"1 per bar"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{bar:"single"},
         {p:"F4",d:"w"},{p:"A4",d:"w",chord:true},{p:"C5",d:"w",chord:true},{bar:"single"},

@@ -68,7 +68,7 @@ function MF_L7_barSpots(container,fb){
 LESSON_CONTENT[7]={
   welcome:"Lesson 7! Today we tidy up the music. \u{1F4E6}",
   hook:{
-    say:"For today's lesson, we'll keep counting in <b>4/4 Time</b>.<br>That means every measure has <b>4 beats</b>.<br>Your job today is to discover where the <b>bar lines</b> belong so the music is organized into easy-to-read measures.<br>Next lesson, you'll learn why every measure has 4 beats!<br><br>Have you ever tried reading a book with no spaces or punctuation? It would be very difficult! Music has the same problem, so musicians divide it into small sections called <b>measures</b>. \u{1F447} <b>Which staff is easier to read?</b>",
+    say:"Music is divided into small sections called <b>measures</b>, and the vertical lines that divide them are called <b>bar lines</b>.<br><br>For today's lesson, we'll keep counting in <b>4/4 Time</b>.<br>That means every measure has <b>4 beats</b>.<br>Your job today is to discover where the <b>bar lines</b> belong so the music is organized into easy-to-read measures.<br>Next lesson, you'll learn why every measure has 4 beats!<br><br>\u{1F447} <b>Which staff is easier to read?</b>",
     interact:{ type:"custom",
       mount:(container,fb)=>{
         container.innerHTML=`<p style="text-align:center;font-weight:700">A</p><div class="hk-a"></div>
@@ -158,7 +158,7 @@ LESSON_CONTENT[7]={
       result:(score)=>score>=5?"Sharp eyes! No symbol can fool you now.":null },
     { type:"measure-build", title:"Game 3 · Fill the Container",
       intro:"Each measure is a container holding exactly <b>4 beats</b>. Fill it — then find every DIFFERENT way to fill it!",
-      miaIntro:"Remember the pizza? Now the pizza lives inside a measure. Fill those containers! \u{1F355}",
+      miaIntro:"Note values now live inside measures. Fill those containers! \u{1F3B5}",
       spec:{beats:4, unique:true},
       result:(stars)=>stars>=3?"Every combination, no overflow — the containers are in perfect order!":null },
     { type:"rhythm-tap", title:"Game 4 · Tap One Full Measure",
@@ -236,7 +236,7 @@ LESSON_CONTENT[7]={
       hint:"Which one means “the end”?" },
     { type:"mc", q:"Why do musicians use measures?", choices:["To change the pitch","To organize music into equal sections","To make notes louder","To make notes higher"], answer:1,
       explain:"Like spaces and punctuation in a sentence — organization makes music readable.",
-      hint:"Remember the book with no spaces." },
+      hint:"Music without bar lines is hard to read." },
     /* generated — fresh every attempt */
     { gen:"measure-count", params:{min:2,max:4}, count:3 },
     { gen:"rhythm-count", params:{values:["h","q"],maxNotes:3}, count:2 },
@@ -258,7 +258,7 @@ LESSON_CONTENT[7]={
     "✔ Counting restarts at every bar line: 1-2-3-4 | 1-2-3-4."
   ],
   tips:[
-    "Think of measures like rooms in a house — the notes live inside, and bar lines are the walls.",
+    "To count measures, add the beats: in 4/4, every time the count reaches 4, a bar line follows and the count restarts at 1.",
     "Say “bar” or say “measure” — musicians use both, so get comfortable with each.",
     "When counting measures, run your finger along the staff and count the containers, never the lines.",
     "\u{1F4E6} Next lesson: the TIME SIGNATURE — the sign that announces exactly how many beats each container holds!"

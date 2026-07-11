@@ -63,7 +63,7 @@ function MF_L21_case(container,fb,cfg){
 LESSON_CONTENT[21]={
   welcome:"Grab the map — music has GPS! \u{1F5FA}\u{FE0F}",
   hook:{
-    say:"Have you ever followed a treasure map? Music has maps too! Composers use special symbols to tell musicians <b>where to go, when to repeat, and where to finish</b>. \u{1F447} <b>What would you guess “Fine” (FEE-neh) means?</b>",
+    say:"Composers use <b>navigation signs</b> — special symbols that tell musicians <b>where to go next: when to repeat, and where to finish</b>. \u{1F447} <b>What would you guess “Fine” (FEE-neh) means?</b>",
     interact:{ type:"custom",
       mount:(container,fb)=>{
         container.innerHTML=`<div class="choices hk-ch"><button>\u{1F6D1} “The end” — stop here</button><button>“Play finely and delicately”</button><button>“Speed up”</button></div>`;
@@ -290,7 +290,7 @@ LESSON_CONTENT[21]={
     "✔ Trace the route with your finger BEFORE you play."
   ],
   tips:[
-    "Read the signs like a treasure map: home \u{1F3E0}, bookmark \u{1F516}, stop \u{1F6D1}, flag \u{1F3C1}.",
+    "Know each sign's destination: D.C. = the beginning, D.S. = the sign \u{1F516}, Fine = stop \u{1F6D1}, Coda = the ending \u{1F3C1}.",
     "In real scores, mark your route with a pencil — every pro does it!",
     "Meet the instruction at the END of the written music — it always sends you somewhere you've been.",
     "\u{1F389} Unit 5 complete! Next: Unit 6 — accidentals! Flats make notes lower…"
@@ -309,7 +309,7 @@ LESSON_CONTENT[21]={
       hint:"Home, bookmark, stop sign, finish flag.",
       play:()=>{[60,64,67,72,67,64,60].forEach((m,k)=>MFAudio.tone(m,.25,k*.25));} },
     example:{ label:"the examples",
-      explain:"Example 1 shows every landmark in place; example 2 is a real D.C. al Fine — trace it with your finger." },
+      explain:"Example 1 is a real D.C. al Fine — back to the top, stop at Fine. Example 2 is a D.S. al Coda — back to the Segno, then jump to the Coda. Trace each with your finger." },
     game:{ label:"the games",
       explain:"Race the signs, hunt the landmarks, run the expert D.S. al Coda route, and reverse-match under time.",
       hint:"Always know your destination BEFORE you move." },

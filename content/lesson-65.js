@@ -199,7 +199,7 @@ LESSON_CONTENT[65]={
     { gen:"term-match", params:{subject:"term", pool:[["Block chord","notes together"],["Broken chord","notes apart"],["Arpeggio","notes in sequence"],["Arpeggiare","to play upon a harp"],["Octave or more","how far an arpeggio may extend"]], reverse:true}, count:6 },
     { gen:"triad-id", params:{}, count:3 },
     { type:"mc", q:"When the notes of a chord are played together, it is called a…", choices:["block chord","broken chord","cluster"], answer:0,
-      explain:"Solid, vertical, all-at-once (AEMT3 p.103)." },
+      explain:"Solid, vertical, all-at-once." },
     { type:"mc", q:"When they are NOT played together, it is called a…", choices:["broken chord","block chord","rest"], answer:0,
       explain:"Same tones, spread over time." },
     { type:"mc", q:"How are the notes of an arpeggio played?", choices:["sequentially, one after another","all at once","in random order"], answer:0,

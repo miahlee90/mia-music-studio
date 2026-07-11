@@ -101,14 +101,14 @@ LESSON_CONTENT[46]={
     "Read accents (>) on off-beat notes"
   ],
   steps:[
-    { say:"Some pieces begin with an <b>incomplete measure</b>. The note (or notes) in it are called <b>PICK-UP NOTES</b>. The classic deal: if the pick-up measure has 1 beat of a 3/4 piece, the <b>missing 2 beats are found in the LAST measure</b> — the piece balances its books! \u{1F447} <b>A 3/4 piece starts with a 1-beat pick-up. Its final measure holds…?</b>",
+    { say:"Some pieces begin with an <b>incomplete measure</b>. The note (or notes) in it are called <b>PICK-UP NOTES</b>. The rule: if the pick-up measure has 1 beat of a 3/4 piece, the <b>missing 2 beats are found in the LAST measure</b> — the final measure completes the pick-up's beats. \u{1F447} <b>A 3/4 piece starts with a 1-beat pick-up. Its final measure holds…?</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:100,time:"3/4",notes:[
         {p:"G4",d:"q",label:"3"},{bar:"single"},
         {p:"C5",d:"q",label:"1"},{p:"C5",d:"q",label:"2"},{p:"D5",d:"q",label:"3"},{bar:"single"},
         {p:"E5",d:"h",label:"1-2"},{bar:"final"}],
         brackets:[{from:0,to:0,label:"pick-up"}],width:640} },
       try:{ type:"mc", choices:["2 beats — the ones the pick-up borrowed","3 beats as usual","1 beat only"], answer:0,
-        success:"✓ 1 + 2 = 3: the first and last measures share one full measure between them. Composers keep tidy books!",
+        success:"✓ 1 + 2 = 3: the first and last measures share one full measure between them.",
         fail:"The piece 'owes' the beats the pick-up skipped…",
         hint:"First measure 1 beat + last measure ? = 3." } },
     { say:"Counting a pick-up: silently count the missing beats, then speak the pick-up's beat. A 1-beat pick-up in 3/4 counts '<b>(1 2) 3</b>' — parentheses silent, 3 out loud, and the next measure restarts at 1. \u{1F447} <b>A 4/4 piece opens with a single-beat pick-up. You count…?</b>",
@@ -135,7 +135,7 @@ LESSON_CONTENT[46]={
         mount:(container,fb)=>MF_L46_sync(container,fb) } },
     { say:"Why do these two tricks matter together? Both play <b>against the expected downbeat</b>: the pick-up arrives before it, syncopation dodges it. Control the downbeat's gravity and rhythm comes alive. \u{1F447} <b>What do pick-ups and syncopation have in common?</b>",
       try:{ type:"mc", choices:["Both play against the expected strong beat","Both make the music slower","Both require 6/8 time"], answer:0,
-        success:"✓ Rhythm's rulebook exists so these two can bend it — arrival early, accent askew. Unit 11 complete!",
+        success:"✓ Rhythm's rules exist so these two can bend them — arrival early, accent askew. Unit 11 complete!",
         fail:"Where's the strong beat in each trick?",
         hint:"Both tease the downbeat." } }
   ],
@@ -172,8 +172,8 @@ LESSON_CONTENT[46]={
         ["8","8","q","8","8"]]},
       result:(score)=>score!==null?"Your off-beats hit dead center!":null },
     { type:"gen-race", title:"Game 3 · Measure Detective (10 rounds)",
-      intro:"Is the measure complete? Pick-up bookkeeping at speed!",
-      miaIntro:"Balance the books! \u{1F9EE}",
+      intro:"Is the measure complete? Pick-up beat-math at speed!",
+      miaIntro:"Count every beat! \u{1F9EE}",
       spec:{gen:"measure-complete", params:{beats:4}, rounds:10},
       result:(score)=>score>=8?"Every measure audited!":null },
     { type:"term-race", title:"Game 4 · Unit 11 Grand Vocabulary Race",
@@ -188,12 +188,12 @@ LESSON_CONTENT[46]={
         ["Compound meter","beats grouped in threes"]]},
       result:(score)=>score>=7?"UNIT 11 COMPLETE — rhythm virtuoso!":null }
   ],
-  practiceIntro:"20 practice questions — pick-up bookkeeping, counting, accents and grooves. Answer right and the next appears automatically!",
+  practiceIntro:"20 practice questions — pick-up beats, counting, accents and grooves. Answer right and the next appears automatically!",
   practice:[
     { gen:"term-match", params:{subject:"term", pool:[["Pick-up note","a note in an incomplete first measure"],["Syncopation","accent on the weak beat"],["The > sign","marks an accent"],["Missing pick-up beats","live in the final measure"]], reverse:true}, count:4 },
     { gen:"measure-complete", params:{beats:4}, count:3 },
     { type:"mc", q:"A piece that begins with an incomplete measure starts with…", choices:["pick-up notes","grace notes","rest measures"], answer:0,
-      explain:"Also called an anacrusis (AEMT p.71)." },
+      explain:"Also called an anacrusis." },
     { type:"mc", q:"A 3/4 piece has a 1-beat pick-up. The last measure contains…", choices:["2 beats","3 beats","1 beat"], answer:0,
       explain:"First + last = one complete measure." },
     { type:"mc", q:"A 1-beat pick-up in 3/4 is counted…", choices:["(1 2) 3","1 (2 3)","(3) 1 2"], answer:0,
@@ -216,7 +216,7 @@ LESSON_CONTENT[46]={
     { type:"mc", q:"Pick-up notes are…", choices:["notes in an incomplete measure at the start of a piece","the loudest notes of a piece","notes added after the final bar line","ornamental fast notes"], answer:0,
       explain:"An incomplete opening measure.", hint:"They 'pick up' into measure 1." },
     { type:"mc", q:"If the pick-up measure of a 3/4 piece has 1 beat, the missing 2 beats appear…", choices:["in the last measure","in measure 2","nowhere — they're lost"], answer:0,
-      explain:"Tidy bookkeeping (AEMT p.71).", hint:"Where does the piece balance its books?" },
+      explain:"The final measure completes the pick-up's beats.", hint:"Which measure completes the pick-up's beats?" },
     { type:"mc", q:"A 1-beat pick-up in 4/4 is counted…", choices:["(1 2 3) 4","(1) 2 3 4","4 (3 2 1)"], answer:0,
       explain:"Silent 1-2-3, sing on 4.", hint:"The pick-up takes the LAST beat." },
     { type:"truefalse", q:"After a pick-up, the next full measure begins again on count 1.", answer:true,
@@ -262,7 +262,7 @@ LESSON_CONTENT[46]={
   tips:[
     "Famous pick-up openings: Happy Birthday, The Star-Spangled Banner, Auld Lang Syne — sing any of them and feel the run-in.",
     "To perform syncopation, keep your foot IRON-steady on the beat and let your hands fight it.",
-    "Writers: check your books! Pick-up beats + final-measure beats must total one full measure.",
+    "Writers: check your beat-math! Pick-up beats + final-measure beats must total one full measure.",
     "UNIT 11 COMPLETE! Next: Unit 12 — triads and chords, where notes finally stack into harmony."
   ],
   rewards:{ badge:"Groove Bender", icon:"\u{1FA98}" },
@@ -279,12 +279,12 @@ LESSON_CONTENT[46]={
       hint:"Both tease the downbeat.",
       play:()=>{for(let k=0;k<4;k++)MFAudio.tone(72,.15,k*.3,k%2?.7:.25);} },
     example:{ label:"the examples",
-      explain:"Example 1 balances a pick-up against its short final measure; example 2 kicks its accents onto the &s." },
+      explain:"Example 1 pairs a pick-up with its short final measure; example 2 kicks its accents onto the &s." },
     game:{ label:"the games",
       explain:"Sprint the tricks, tap the off-beats, audit measures, then run the Unit 11 grand vocabulary race.",
       hint:"Foot on the beat, always." },
     quiz:{ label:"this question",
-      explain:"Two definitions cover it: pick-up = incomplete first measure (books balanced at the end); syncopation = accent on the weak beat.",
+      explain:"Two definitions cover it: pick-up = incomplete first measure (the final measure completes the missing beats); syncopation = accent on the weak beat.",
       play:()=>{MFAudio.tone(67,.2,0,.4);MFAudio.tone(72,.4,.33,.6);} }
   }
 };

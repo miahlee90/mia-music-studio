@@ -61,9 +61,9 @@ LESSON_CONTENT[68]={
         container.innerHTML=`<div style="text-align:center">
           <button class="play hk-a">▶ Version A</button>
           <button class="play hk-b">▶ Version B</button></div>
-          <div class="choices hk-ch" style="display:none"><button>A — i, iv and V7 of A minor, raised 7th included</button><button>B — the C major chords fit better</button></div>`;
+          <div class="choices hk-ch" style="display:none"><button>A — i and V7 of A minor, raised 7th included</button><button>B — the C major chords fit better</button></div>`;
         const mel=[69,72,71,68,69];
-        const goodCh=[[57,60,64],[57,62,65],[56,59,64],[56,59,64],[57,60,64]];
+        const goodCh=[[57,60,64],[57,60,64],[56,59,64],[56,59,64],[57,60,64]];
         const badCh=[[60,64,67],[60,65,69],[59,62,67],[60,64,67],[60,64,67]];
         const ch=container.querySelector(".hk-ch");
         let hA=false,hB=false;
@@ -71,7 +71,7 @@ LESSON_CONTENT[68]={
         container.querySelector(".hk-a").onclick=()=>{ play(goodCh); hA=true; if(hB) setTimeout(()=>ch.style.display="",3800); };
         container.querySelector(".hk-b").onclick=()=>{ play(badCh); hB=true; if(hA) setTimeout(()=>ch.style.display="",3800); };
         [...ch.children].forEach((b,i)=>b.onclick=()=>{
-          if(i===0) fb(true,"✓ Version A used the MINOR key's own primary chords — i, iv, V7 with the raised G♯. Harmonizing in minor works like major, using the minor chart. Today's lesson!");
+          if(i===0) fb(true,"✓ Version A used the MINOR key's own primary chords — i and V7 with the raised G♯. Harmonizing in minor works like major, using the minor chart. Today's lesson!");
           else fb(false,"Version B's borrowed chords clashed with the melody's minor tones. Listen again…");
         });
       } }
@@ -210,7 +210,7 @@ LESSON_CONTENT[68]={
     { type:"truefalse", q:"Degree 5 in minor can be harmonized by i or V.", answer:true,
       explain:"E = i's 5th = V's root; ear decides." },
     { type:"mc", q:"Why does the raised 7th appear in a minor melody?", choices:["The harmonization draws on the harmonic minor scale","It is a printing error","It comes from the major scale"], answer:0,
-      explain:"iv OR V7 (as its 7th) — a tie for the ear." },
+      explain:"The harmonic minor's raised 7th lives in V(7) — it pulls to the tonic." },
     { type:"truefalse", q:"In E minor, the V7 chord contains D♯.", answer:true,
       explain:"B-D♯-F♯-A — the raised 7th of E minor." }
   ],

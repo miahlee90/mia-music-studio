@@ -166,7 +166,7 @@ LESSON_CONTENT[19]={
     { type:"rhythm-tap", title:"Game 4 · Vivace Tap",
       intro:"Same idea at VIVACE — hold on tight! Quick taps, steady heart.",
       miaIntro:"Now the lightning round! \u{26A1}",
-      spec:{tempo:152, rounds:2, patterns:[["q","q","q","q"],["q","q","h"],["h","h"]]},
+      spec:{tempo:160, rounds:2, patterns:[["q","q","q","q"],["q","q","h"],["h","h"]]},
       result:(score)=>score>=6?"Lightning-fast AND accurate — Vivace mastered!":null }
   ],
   practiceIntro:"20 practice questions — Italian terms, the tempo line, and matching moods. Answer right and the next appears automatically!",

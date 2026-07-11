@@ -69,7 +69,7 @@ LESSON_CONTENT[87]={
         success:"✓ Every phrase ends with one — pieces contain many cadences.",
         fail:"Where do phrases breathe?",
         hint:"Lesson 72's phrase endings." } },
-    { say:"<b>Authentic Cadence — V(7) → I:</b> dominant resolving to tonic: the strongest close, music's <b>period</b>. \u{1F447} <b>An authentic cadence moves…</b>",
+    { say:"<b>Authentic Cadence — V(7) → I:</b> dominant resolving to tonic — the strongest close a phrase can have. \u{1F447} <b>An authentic cadence moves…</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:80,notes:[
         {p:"G4",d:"h",label:"V7"},{p:"B4",d:"h",chord:true},{p:"D5",d:"h",chord:true},{p:"F5",d:"h",chord:true},
         {p:"C4",d:"w",label:"I"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{p:"C5",d:"w",chord:true},{bar:"final"}],width:440} },
@@ -82,7 +82,7 @@ LESSON_CONTENT[87]={
         success:"✓ Still authentic, but imperfect: full closure demands the tonic on top.",
         fail:"Check BOTH conditions…",
         hint:"Root positions + tonic soprano = PAC." } },
-    { say:"<b>Half Cadence — ends ON V:</b> the phrase stops at the dominant and <b>waits</b> — music's <b>comma</b>. Any chord may precede the V. \u{1F447} <b>A half cadence ends on…</b>",
+    { say:"<b>Half Cadence — ends ON V:</b> the phrase stops at the dominant and <b>waits</b> — an open, unfinished ending. Any chord may precede the V. \u{1F447} <b>A half cadence ends on…</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:80,notes:[
         {p:"C4",d:"h",label:"I"},{p:"E4",d:"h",chord:true},{p:"G4",d:"h",chord:true},
         {p:"D4",d:"h",label:"ii"},{p:"F4",d:"h",chord:true},{p:"A4",d:"h",chord:true},
@@ -90,7 +90,7 @@ LESSON_CONTENT[87]={
       try:{ type:"mc", choices:["The V chord — unresolved","The I chord","The vi chord"], answer:0,
         success:"✓ Stopping ON the dominant leaves the phrase open — the next phrase must answer.",
         fail:"HALF-way home…",
-        hint:"The comma chord." } },
+        hint:"The waiting chord." } },
     { say:"<b>Plagal Cadence — IV → I:</b> subdominant to tonic — a <b>gentle</b> close without a leading tone, familiar from the sung \u{201C}A-men\u{201D} at hymn endings. \u{1F447} <b>The plagal cadence moves…</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:80,notes:[
         {p:"F4",d:"h",label:"IV"},{p:"A4",d:"h",chord:true},{p:"C5",d:"h",chord:true},
@@ -115,7 +115,7 @@ LESSON_CONTENT[87]={
       try:{ type:"mc", choices:["The half cadence — it stops on V","The perfect authentic","The plagal"], answer:0,
         success:"✓ Ending on the dominant = an open door. (L73's section A ended exactly this way.)",
         fail:"Which one never reaches I?",
-        hint:"The comma." } }
+        hint:"The one that stops on the dominant." } }
   ],
   examples:[
     { caption:"Four endings from one phrase: authentic (V7-I), half (…V), plagal (IV-I), deceptive (V7-vi). Same music, four punctuation marks.",
@@ -205,7 +205,7 @@ LESSON_CONTENT[87]={
     { gen:"triad-quality", params:{quals:["M","m"]}, count:1 }
   ],
   vocabulary:[
-    {term:"Cadence", def:"The two-chord resting point that ends a phrase — harmony's punctuation."},
+    {term:"Cadence", def:"The two-chord resting point that ends a phrase."},
     {term:"Authentic Cadence (PAC / IAC)", def:"V(7) → I. Perfect = root positions + tonic soprano; otherwise imperfect."},
     {term:"Half Cadence", def:"The phrase stops ON V — open, waiting for an answer."},
     {term:"Plagal & Deceptive", def:"Plagal: IV → I, the gentle close. Deceptive: V → vi, the surprise that keeps music moving."}
@@ -213,8 +213,8 @@ LESSON_CONTENT[87]={
   mistakes:[],
   summary:[
     "✔ <b>Cadence</b> = the resting point ending every phrase.",
-    "✔ <b>Authentic V(7)→I</b>: the period — <b>PAC</b> (roots + tonic on top) vs <b>IAC</b>.",
-    "✔ <b>Half</b>: ends ON V — the comma.",
+    "✔ <b>Authentic V(7)→I</b>: the strongest close — <b>PAC</b> (roots + tonic on top) vs <b>IAC</b>.",
+    "✔ <b>Half</b>: ends ON V — open, waiting.",
     "✔ <b>Plagal IV→I</b>: the gentle close · <b>Deceptive V→vi</b>: the surprise.",
     "✔ Ear test: finished or not? From V or IV? On V or vi?"
   ],

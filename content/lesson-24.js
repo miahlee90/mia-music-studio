@@ -198,7 +198,7 @@ LESSON_CONTENT[24]={
       hint:"Mid-measure undo." },
     { type:"mc", q:"Which statement is correct?",
       choices:["A sharp lowers a note","A natural raises every note","An accidental affects every note of the same letter on the same line or space for the rest of the measure","Accidentals remain in effect throughout the entire piece"], answer:2,
-      explain:"The Big Rule, straight from the textbook.", hint:"The one-measure rule." },
+      explain:"The Big Rule of accidentals.", hint:"The one-measure rule." },
     /* generated */
     { gen:"term-match", params:{subject:"sign", pool:[["♯","Raises a note by one half step"],["♭","Lowers a note by one half step"],["♮","Cancels a previous sharp or flat"],["Bar line","Resets all accidentals"]], reverse:true}, count:4 },
     { gen:"click-key", params:{letters:["F","B"], octaves:[4]}, count:2 },

@@ -130,7 +130,7 @@ LESSON_CONTENT[72]={
         success:"✓ Phrase 1 sounds unfinished — it ends away from the tonic and leads to another phrase.",
         fail:"Did the pause on G feel finished?",
         hint:"Tonic = complete." } },
-    { say:"<b>Finding Similar Phrases:</b> Some phrases begin the same because they use the same motive. In our example, phrase a and phrase c start identically. \u{1F447} <b>What does it mean when two phrases begin alike?</b>",
+    { say:"<b>Finding Similar Phrases:</b> Some phrases begin the same because they use the same motive. When two phrases start identically but end differently, the pair still feels related. \u{1F447} <b>What does it mean when two phrases begin alike?</b>",
       try:{ type:"mc", choices:["They use the same motive","A printing error","The song has no form"], answer:0,
         success:"✓ They share a motive — recognizing similar phrases is the first step of form analysis, which the next three lessons build on.",
         fail:"Why would a composer bring an idea back?",

@@ -36,7 +36,7 @@ function MF_L20_articListen(container,fb){
 LESSON_CONTENT[20]={
   welcome:"Same note, a hundred personalities. \u{1F3A8}",
   hook:{
-    say:"Imagine saying the same word quickly, carefully, or with LOTS of excitement — same word, different delivery! Music works the same way. Press play: the same four notes, two deliveries. <b>What changed?</b>",
+    say:"The same notes can be played in very different ways — that's called <b>articulation</b>. Press play: the same four notes, two deliveries. <b>What changed?</b>",
     interact:{ type:"custom",
       mount:(container,fb)=>{
         container.innerHTML=`<div style="text-align:center"><button class="play hk-play">▶ Two deliveries</button></div>

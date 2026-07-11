@@ -80,7 +80,7 @@ function MF_L57_ear(container,fb){
 }
 
 LESSON_CONTENT[57]={
-  welcome:"Major scales come in one flavor. Minor scales come in THREE. Let's taste them all. \u{1F3AD}",
+  welcome:"Major scales have one form. Minor scales come in THREE. \u{1F3AD}",
   hook:{
     say:"<b>There are three common forms of the minor scale.</b> Listen carefully. <b>Which ending creates the strongest pull to the tonic?</b>",
     interact:{ type:"custom",
@@ -149,7 +149,7 @@ LESSON_CONTENT[57]={
       try:{ type:"mc", choices:["Melodic minor","Harmonic minor","Natural minor"], answer:0,
         success:"✓ The shape-shifter itself. One name per behavior: natural never changes, harmonic changes once forever, melodic changes going up and repents coming down.",
         fail:"Which form has a two-way personality?",
-        hint:"Up ♯6♯7, down natural — the book's exact description." } },
+        hint:"Up ♯6♯7, down natural — the standard description." } },
     { say:"<b>Extra:</b> In harmonic minor, the interval from the tonic to the raised 7th is a <b>Major 7th</b>. \u{1F447} <b>What is the interval from the tonic to the raised 7th?</b>",
       show:{ type:"staff", spec:{clef:"treble",notes:[
         {p:"A3",d:"w",label:"tonic → ♯7 = Major 7th"},{p:"G#4",d:"w",chord:true}],width:280} },
@@ -223,7 +223,7 @@ LESSON_CONTENT[57]={
     { gen:"term-match", params:{subject:"term", pool:[["Natural minor","no raised tones"],["Harmonic minor","raised 7th only"],["Melodic minor ascending","raised 6th and 7th"],["Melodic minor descending","identical to natural minor"],["Leading tone","half step below tonic"]], reverse:true}, count:6 },
     { gen:"rel-key", params:{ask:"both"}, count:3 },
     { type:"mc", q:"The natural minor scale uses…", choices:["only the tones of the relative major","one added sharp","two added sharps"], answer:0,
-      explain:"It IS the relative major's material, re-homed (AEMT3 p.91)." },
+      explain:"It IS the relative major's material, re-homed." },
     { type:"mc", q:"The harmonic minor raises which degree?", choices:["the 7th","the 6th","the 3rd"], answer:0,
       explain:"G→G♯ in A minor — ascending AND descending." },
     { type:"mc", q:"The melodic minor ascending raises…", choices:["the 6th and 7th","only the 7th","the 2nd and 3rd"], answer:0,
@@ -239,7 +239,7 @@ LESSON_CONTENT[57]={
     { type:"truefalse", q:"The raised 7th of a minor scale acts as a leading tone.", answer:true,
       explain:"Half step below tonic = maximum pull." },
     { type:"truefalse", q:"In the harmonic minor, the interval tonic→7th is a Major 7th.", answer:true,
-      explain:"A→G♯ = M7 (the book's interval chart)." },
+      explain:"A→G♯ = M7." },
     { type:"mc", q:"Why was the melodic minor scale developed?", choices:["To make the large gap between 6 and ♯7 easier to sing","To add more sharps","To replace the major scale"], answer:0,
       explain:"Raising the 6th makes the melody smoother." }
   ],
@@ -256,7 +256,7 @@ LESSON_CONTENT[57]={
     { type:"truefalse", q:"The melodic minor descends exactly like the natural minor.", answer:true,
       explain:"No leading-tone job downhill — the lifts cancel.", hint:"The round-trip game." },
     { type:"truefalse", q:"The harmonic minor is the most frequently used minor form.", answer:true,
-      explain:"Straight from the book.", hint:"Its name hints at chords — music's engine." },
+      explain:"The standard definition.", hint:"Its name hints at chords — music's engine." },
     { type:"mc", q:"Why is the 7th raised in the harmonic minor scale?", choices:["To create a leading tone that pulls to the tonic","To make the scale louder","To change the key signature"], answer:0,
       explain:"Half step below home = the tug you heard in the hook.", hint:"What did G♯ do to A?" },
     { type:"mc", q:"Which two scale degrees create the large interval in harmonic minor?", choices:["degrees 6 and ♯7","degrees 1 and 2","degrees 4 and 5"], answer:0,

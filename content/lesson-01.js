@@ -2,9 +2,9 @@
    v2 — built from the instructor's design document (drafts/Music Fundamental Website Unit 1 - Lesson 1.md)
    NOTE: edit by FULL-FILE REWRITE only. */
 LESSON_CONTENT[1]={
-  welcome:"Welcome to your very first music lesson! I'm Mia — let's read the map of music together. \u{1F3B5}",
+  welcome:"Welcome to your very first music lesson! I'm Mia — let's learn to read music together. \u{1F3B5}",
   hook:{
-    say:"Welcome to your very first music lesson!<br><br>Music is a language — and just like every language has letters and words, music has its own symbols. The <b>musical staff</b> is the place where those symbols live.<br><br>Think of it as a <b>map</b> that tells musicians exactly which sounds to play. Today you'll learn how to read that map!"
+    say:"Welcome to your very first music lesson!<br><br>Music is a language — and just like every language has letters and words, music has its own symbols. The <b>musical staff</b> is the place where those symbols live.<br><br>The staff shows musicians exactly which sounds to play. Ready to learn how to read it?"
   },
   objectives:[
     "Explain what a musical staff is",
@@ -31,7 +31,7 @@ LESSON_CONTENT[1]={
             this.disabled=true;
             lines.forEach((l,i)=>setTimeout(()=>{ l.style.opacity=1; MFAudio.tone(64+i*3,.25,0,.3); }, 400+i*450));
             setTimeout(()=>{ if(clef)clef.style.opacity=1;
-              fb(true,"✓ Five lines appeared — and the four gaps between them are the spaces. Your musical map is ready!");
+              fb(true,"✓ Five lines appeared — and the four gaps between them are the spaces. Your staff is ready!");
               this.disabled=false; this.textContent="▶ Draw it again"; }, 400+5*450+300);
           };
         } } },
@@ -67,7 +67,7 @@ LESSON_CONTENT[1]={
             }});
         } } },
     /* Section 3 — What Is a Pitch? */
-    { say:"<b>Pitch</b> means how HIGH or LOW a sound is. Think of a mountain \u{26F0}: the higher you climb, the higher the pitch — the lower you go, the lower the pitch. Watch the note climb the mountain, then come back down:",
+    { say:"<b>Pitch</b> means how HIGH or LOW a sound is. On the staff, a higher position means a higher pitch — a lower position means a lower pitch. Watch the note move up the staff, then come back down:",
       try:{ type:"custom",
         mount:(container,fb)=>{
           container.innerHTML=`<div class="pa-stage"></div>
@@ -141,7 +141,7 @@ LESSON_CONTENT[1]={
         } } }
   ],
   examples:[
-    { caption:"Hear the map in action: five notes stepping up — line, space, line, space, line — each position a new pitch.",
+    { caption:"Hear the staff in action: five notes stepping up — line, space, line, space, line — each position a new pitch.",
       staff:{clef:"treble",notes:[{p:"E4",d:"q",label:"line 1"},{p:"F4",d:"q",label:"space 1"},{p:"G4",d:"q",label:"line 2"},{p:"A4",d:"q",label:"space 2"},{p:"B4",d:"q",label:"line 3"}],width:440} }
   ],
   /* Games — exactly the four from the design document */
@@ -186,7 +186,7 @@ LESSON_CONTENT[1]={
       explain:"Notes live on lines AND in spaces — every position is a different pitch." },
     { type:"mc", q:"A note placed higher on the staff sounds…",
       choices:["higher","lower","the same"], answer:0,
-      explain:"Higher position = higher pitch, like climbing the mountain." },
+      explain:"Higher position on the staff = higher pitch." },
     /* — from the unit review sheet — */
     { type:"mc", q:"Is the 5th line at the bottom or the top of the staff?", choices:["The top","The bottom"], answer:0, explain:"Lines are numbered from the bottom up — line 5 is the highest." }
   ],
@@ -201,7 +201,7 @@ LESSON_CONTENT[1]={
     { type:"truefalse", q:"Lines and spaces are counted from the bottom up.", answer:true,
       explain:"Always bottom-up — the lowest line is line 1.", hint:"Where did our counting start in the games?" },
     { type:"mc", q:"Pitch describes…", choices:["speed","how high or low a sound is","volume"], answer:1,
-      explain:"Pitch = the highness or lowness of a sound.", hint:"Remember the mountain." },
+      explain:"Pitch = the highness or lowness of a sound.", hint:"Think higher or lower, not faster or louder." },
     { type:"truefalse", q:"A note is the symbol used to represent a musical sound.", answer:true,
       explain:"Note = the written symbol; pitch = the sound itself.", hint:"One is written, one is heard." },
     { type:"mc", q:"Notes can be placed…", choices:["only on lines","only in spaces","on lines and in spaces"], answer:2,
@@ -216,10 +216,10 @@ LESSON_CONTENT[1]={
       explain:"Line 1 is lowest, space 1 sits just above it, then line 2.", hint:"The very bottom of the staff is a LINE." },
     { type:"mc", q:"A note on line 5 compared to a note in space 1 is…", choices:["lower","higher","the same pitch"], answer:1,
       explain:"Line 5 is the top of the staff — far higher than space 1 near the bottom.", hint:"Which one sits closer to the top?" },
-    { type:"truefalse", q:"Two notes in different staff positions can have the same pitch.", answer:false,
-      explain:"Every staff position is its own pitch — that's the whole point of the map!", hint:"What did each position represent?" },
+    { type:"truefalse", q:"Two notes at different positions on the same staff can have the same pitch.", answer:false,
+      explain:"Every position on a staff is its own pitch — that's the whole point of the staff!", hint:"What did each position represent?" },
     { type:"mc", q:"Why does music use a staff?", choices:["to decorate the page","to show exactly which sounds to play","to count the beats"], answer:1,
-      explain:"The staff is the map that tells musicians precisely which pitches to play.", hint:"Mia's first words: a map of…?" },
+      explain:"The staff tells musicians precisely which pitches to play.", hint:"Why write music down at all?" },
     { type:"mc", q:"The highest-sounding position among these is…", choices:["line 1","space 2","space 4"], answer:2,
       explain:"Space 4 is the top space — the highest of the three.", hint:"Count each one from the bottom and compare." }
   ],
@@ -253,7 +253,7 @@ LESSON_CONTENT[1]={
   miaPerfect:"A perfect 20?! Staff Explorer doesn't even cover it — see you in Lesson 2! \u{1F3B5}",
   mia:{
     hook:{ label:"the welcome",
-      explain:"Music is a language and the staff is its map — five lines and four spaces where every symbol lives.",
+      explain:"Music is a language and the staff is where its symbols live — five lines and four spaces.",
       play:()=>{[64,67,71,74,77].forEach((m,i)=>MFAudio.tone(m,.3,i*.3));} },
     learn:{ label:"the staff",
       explain:"5 lines + 4 spaces, always counted from the BOTTOM. Notes sit on lines or in spaces, and higher position = higher pitch.",

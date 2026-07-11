@@ -63,7 +63,7 @@ LESSON_CONTENT[109]={
         hint:"Four notes." } }
   ],
   examples:[
-    { caption:"The sus resolution vs the sus that stays: Gsus4→G→C (classical), then Csus2 held as pure color (modern).",
+    { caption:"The sus resolution vs the sus that stays: Gsus4→G (classical), then Csus2 held as pure color (modern).",
       staff:{clef:"treble",tempo:69,notes:[
         {p:"G3",d:"h",label:"sus4"},{p:"C4",d:"h",chord:true},{p:"D4",d:"h",chord:true},
         {p:"G3",d:"h",label:"resolves"},{p:"B3",d:"h",chord:true},{p:"D4",d:"h",chord:true},

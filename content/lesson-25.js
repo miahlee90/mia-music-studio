@@ -105,7 +105,7 @@ LESSON_CONTENT[25]={
           ["D♭","E♭","G♭","A♭","B♭"].forEach(o=>{ const b=document.createElement("button"); b.textContent=o;
             b.onclick=()=>{
               const cur=seq[i];
-              if(o===cur[1]){ MFAudio.tone(61+"CDFGA".indexOf(cur[0][0])*2,.35); i++;
+              if(o===cur[1]){ MFAudio.tone({C:61,D:63,F:66,G:68,A:70}[cur[0][0]],.35); i++;
                 if(i>=seq.length){ ch.style.display="none"; q.textContent="All five pairs matched!";
                   fb(true,"✓ C♯=D♭ · D♯=E♭ · F♯=G♭ · G♯=A♭ · A♯=B♭ — five keys, ten names!"); }
                 else { fb(true,`✓ ${cur[0]} = ${cur[1]} — same key, two names. Next…`); ask(); } }
@@ -151,7 +151,7 @@ LESSON_CONTENT[25]={
       result:(score)=>score>=5?"The accidental family holds no secrets!":null },
     { type:"term-race", title:"Game 3 · Step & Twin Vocabulary",
       intro:"Half steps, whole steps, enharmonics — the final vocabulary dash of the unit!",
-      miaIntro:"Last vocabulary race of the book! \u{1F3C1}",
+      miaIntro:"Last vocabulary race of the unit! \u{1F3C1}",
       spec:{rounds:8, pool:[
         ["Half Step","The distance to the VERY next key"],
         ["Whole Step","Two half steps — one key skipped"],

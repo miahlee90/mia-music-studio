@@ -242,7 +242,7 @@ LESSON_CONTENT[86]={
     { type:"truefalse", q:"IV has dominant function.", answer:false,
       explain:"IV is predominant — it precedes the dominant.", hint:"The gold column." },
     { type:"mc", q:"A progression runs I → IV → V → I. Its function story is…", choices:["T → PD → D → T","T → D → PD → T","all tonic"], answer:0,
-      explain:"The textbook cycle.", hint:"Map each numeral." }
+      explain:"T→PD→D→T — the standard function cycle.", hint:"Map each numeral." }
   ],
   miaPerfect:"PERFECT! Degrees, cases, functions — analysis complete. \u{1F3DB}\u{FE0F}\u{1F389}",
   miaPass:"Passed! You read harmony's universal language. Next: cadences…",

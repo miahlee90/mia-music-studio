@@ -179,7 +179,7 @@ LESSON_CONTENT[102]={
     { type:"mc", q:"Sonata form's sections, in order:", choices:["exposition, development, recapitulation","development, exposition, coda","recapitulation, development, exposition"], answer:0, explain:"E-D-R.", hint:"Present first." },
     { type:"mc", q:"The exposition presents…", choices:["two themes in two keys","one theme once","only chords"], answer:0, explain:"T1 tonic, T2 new key.", hint:"The conflict." },
     { type:"mc", q:"In a C major movement, theme 2's usual expo key is…", choices:["G major","C minor","B♭ major"], answer:0, explain:"The dominant.", hint:"Closest neighbor." },
-    { type:"mc", q:"In a minor-key movement, theme 2 often appears in…", choices:["the relative major","the subdominant minor","no key"], answer:0, explain:"iii of the system — the bright cousin.", hint:"L56's pairing." },
+    { type:"mc", q:"In a minor-key movement, theme 2 often appears in…", choices:["the relative major","the subdominant minor","no key"], answer:0, explain:"III of the system — the bright cousin.", hint:"L56's pairing." },
     { type:"mc", q:"The development is characterized by…", choices:["fragmentation, sequence and modulation","complete silence","exact repetition"], answer:0, explain:"Instability by design.", hint:"The argument." },
     { type:"mc", q:"The recapitulation's crucial change:", choices:["theme 2 returns in the TONIC","theme 1 is cut","the meter doubles"], answer:0, explain:"Conflict resolved.", hint:"Home for everyone." },
     { type:"mc", q:"A coda is…", choices:["an added ending after the recapitulation","the second theme","the development's nickname"], answer:0, explain:"The tail.", hint:"Extra closing." },

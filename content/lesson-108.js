@@ -60,7 +60,7 @@ LESSON_CONTENT[108]={
         hint:"Home again." } },
     { say:"<b>Review:</b> \u{1F447} <b>C13's essential voicing keeps…</b>",
       try:{ type:"mc", choices:["C, E, B♭ and A (root, 3rd, 7th, 13th)","All seven notes always","Only C and G"], answer:0,
-        success:"✓ The skeleton crew: root, quality-teller (3rd), tension (7th), color (13th).",
+        success:"✓ The essential four: root (bass), 3rd (quality), 7th (tension), extension (color).",
         fail:"Essentials = root, 3rd, 7th + extension…",
         hint:"Four notes." } }
   ],
@@ -167,7 +167,7 @@ LESSON_CONTENT[108]={
     { type:"truefalse", q:"A full 13th chord contains all seven scale notes.", answer:true, explain:"The complete stack.", hint:"Count them." },
     { type:"truefalse", q:"Extensions can continue meaningfully past the 13th.", answer:false, explain:"The 15th = the root.", hint:"The ceiling." },
     { type:"mc", q:"Dm9 → G13 → Cmaj9 is an extended…", choices:["ii-V-I","12-bar blues","plagal cadence"], answer:0, explain:"L95's engine, dressed up.", hint:"Count degrees." },
-    { type:"mc", q:"The essential tones of any extended chord:", choices:["root, 3rd, 7th + the extension","root and 5th","all notes always"], answer:0, explain:"The skeleton crew.", hint:"Four notes." }
+    { type:"mc", q:"The essential tones of any extended chord:", choices:["root, 3rd, 7th + the extension","root and 5th","all notes always"], answer:0, explain:"The essential four.", hint:"Four notes." }
   ],
   miaPerfect:"PERFECT! The whole skyline, floor by floor. \u{1F5FC}\u{1F389}",
   miaPass:"Passed! Ninths and thirteenths at your service. Next: sus and add, revisited…",

@@ -102,7 +102,7 @@ LESSON_CONTENT[6]={
           });
         } } },
     /* Step 2 — the pizza (Activity 2) */
-    { say:"Think of a Whole Note as a <b>whole pizza</b> \u{1F355}. Cut it in half → two Half Notes. Cut again → four Quarter Notes. The measure stays the same size — you just slice the time differently. \u{1F447} <b>Grab the cutter:</b>",
+    { say:"One <b>Whole Note</b> fills 4 beats. Cut that time in half → two Half Notes (2 beats each). Cut again → four Quarter Notes (1 beat each). The measure stays the same size — you just divide the time differently. \u{1F447} <b>Grab the cutter:</b>",
       try:{ type:"custom",
         hint:"Each cut doubles the number of pieces and halves each piece's length.",
         mount:(container,fb)=>{
@@ -111,7 +111,7 @@ LESSON_CONTENT[6]={
             <svg class="pz" width="150" height="150" viewBox="0 0 150 150"></svg>
             <div class="pz-staff" style="flex:1;min-width:220px"></div></div>
             <div class="big-q pz-cap" style="text-align:center"></div>
-            <div style="text-align:center"><button class="play pz-cut">\u{1F52A} Cut the pizza!</button></div>`;
+            <div style="text-align:center"><button class="play pz-cut">\u{1F52A} Cut it!</button></div>`;
           const svg=container.querySelector(".pz"), stf=container.querySelector(".pz-staff"),
                 cap=container.querySelector(".pz-cap"), btn=container.querySelector(".pz-cut");
           function draw(){
@@ -124,7 +124,7 @@ LESSON_CONTENT[6]={
               <circle cx="78" cy="72" r="7" fill="#c0392b"/>${cuts}`;
             const specs=[[{p:"B4",d:"w"}],[{p:"B4",d:"h"},{p:"B4",d:"h"}],[{p:"B4",d:"q"},{p:"B4",d:"q"},{p:"B4",d:"q"},{p:"B4",d:"q"}]];
             Staff.render(stf,{clef:"treble",notes:specs[state],width:240});
-            cap.textContent=state===0?"1 whole pizza = 1 Whole Note (4 beats)"
+            cap.textContent=state===0?"1 whole = 1 Whole Note (4 beats)"
               :state===1?"2 halves = 2 Half Notes (2 + 2 = 4 beats)"
               :"4 quarters = 4 Quarter Notes (1 × 4 = 4 beats)";
           }
@@ -236,7 +236,7 @@ LESSON_CONTENT[6]={
     { type:"mc", q:"A note ON the middle line gets its stem…", choices:["up, on the right side","down, on the left side"], answer:1,
       explain:"On or above the middle line → stem down on the left." },
     { type:"truefalse", q:"Four Quarter Notes fill the same time as one Whole Note.", answer:true,
-      explain:"1 × 4 = 4 beats — four quarter-pizza slices make a whole." },
+      explain:"1 × 4 = 4 beats — four quarter notes make one whole." },
     { type:"mc", q:"Duration means…", choices:["how high a note sounds","how long a sound lasts","how loud a note is"], answer:1,
       explain:"Duration = length in time. Note values are music's way of writing duration." },
     { type:"truefalse", q:"The stem direction changes how long a note lasts.", answer:false,
@@ -250,9 +250,9 @@ LESSON_CONTENT[6]={
   quiz:[
     /* draft Q1–Q12, adapted */
     { type:"mc", q:"In 4/4 time, how many beats does a Whole Note receive?", choices:["1","2","4","8"], answer:2,
-      explain:"The whole note fills a whole 4/4 measure — 4 beats.", hint:"Think of the whole pizza." },
+      explain:"The whole note fills a whole 4/4 measure — 4 beats.", hint:"It fills the whole measure." },
     { type:"mc", q:"In 4/4 time, how many beats does a Half Note receive?", choices:["1","2","3","4"], answer:1,
-      explain:"Half of a whole measure — 2 beats.", hint:"Cut the pizza once." },
+      explain:"Half of a whole measure — 2 beats.", hint:"Half of 4 beats." },
     { type:"mc", q:"In 4/4 time, how many beats does a Quarter Note receive?", choices:["1","2","3","4"], answer:0,
       explain:"A quarter of the measure — exactly 1 beat.", hint:"Four of them fill a measure." },
     { type:"truefalse", q:"Two Quarter Notes equal one Half Note.", answer:true,
@@ -266,7 +266,7 @@ LESSON_CONTENT[6]={
       hint:"Hollow head + stem." },
     { type:"mc", q:"Which matching is correct?",
       choices:["Whole → 4 · Half → 2 · Quarter → 1","Whole → 2 · Half → 4 · Quarter → 1","Whole → 4 · Half → 1 · Quarter → 2"], answer:0,
-      explain:"Whole 4, half 2, quarter 1 — each cut halves the value.", hint:"Each pizza cut halves the piece." },
+      explain:"Whole 4, half 2, quarter 1 — each cut halves the value.", hint:"Whole → half → quarter: halve each time." },
     { type:"mc", q:"In 4/4 time, a Whole Note lasts ____ beats.", choices:["1","2","3","4"], answer:3,
       explain:"Four — it fills the entire 4/4 measure.", hint:"Its name says it all." },
     { type:"mc", q:"This note sits BELOW the middle line. Which way should its stem point?",
@@ -308,7 +308,7 @@ LESSON_CONTENT[6]={
   summary:[
     "✔ Music tells you <b>what</b> to play AND <b>how long</b>.",
     "✔ In <b>4/4 time</b>: Whole = <b>4</b> beats · Half = <b>2</b> · Quarter = <b>1</b>.",
-    "✔ 1 whole = 2 halves = 4 quarters — <b>the pizza rule</b>.",
+    "✔ <b>1 whole = 2 halves = 4 quarters</b> — same total time.",
     "✔ A note = <b>notehead + stem</b> (whole notes skip the stem).",
     "✔ Below the middle line → stem <b>up-right</b>; on or above → <b>down-left</b>."
   ],

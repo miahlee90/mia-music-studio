@@ -105,7 +105,7 @@ LESSON_CONTENT[15]={
             else fb(false,"The beat count stays 1-2-3-4 — eighth notes just add “and” BETWEEN the numbers.");
           });
         } } },
-    { say:"The pizza rule returns: <b>2 eighths = 1 quarter</b>, and <b>8 eighths = 1 whole note</b>. \u{1F447} <b>How many eighth notes equal one whole note?</b>",
+    { say:"<b>2 eighths = 1 quarter</b>, and <b>8 eighths = 1 whole note</b>. \u{1F447} <b>How many eighth notes equal one whole note?</b>",
       show:{ type:"staff", spec:{clef:"treble",notes:[{p:"B4",d:"8"},{p:"B4",d:"8",label:"= "},{p:"B4",d:"q",label:"1 quarter"}],beams:[[0,1]],width:300} },
       try:{ type:"mc",
         choices:["8","4","2"], answer:0,

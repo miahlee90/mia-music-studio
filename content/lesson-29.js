@@ -100,7 +100,7 @@ function MF_L29_nameKey(container,fb){
 }
 
 LESSON_CONTENT[29]={
-  welcome:"Imagine writing a sharp before EVERY F in a whole piece… there's a much smarter way. \u{1F5DD}",
+  welcome:"A key signature states the sharps ONCE, right after the clef — no more writing a sharp before every F. \u{1F5DD}",
   hook:{
     say:"Both staffs below play the exact same G-major melody. One writes a sharp before every single F; the other states it ONCE. Which would you rather read?",
     interact:{ type:"custom",

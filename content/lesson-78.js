@@ -87,7 +87,7 @@ LESSON_CONTENT[78]={
         success:"✓ Early arrival + hold = anticipation, one of pop music's signature sounds.",
         fail:"Anticipate = act early…",
         hint:"Before, not after." } },
-    { say:"<b>The 3+3+2 Pattern:</b> eight eighth notes grouped <b>3+3+2</b> put accents on 1, the 'a' of 2, and 4 — a built-in syncopation used worldwide, from Latin dance to rock. <b>Remember: syncopation = steady pulse + shifted accent.</b> \u{1F447} <b>Where do the 3+3+2 accents fall?</b>",
+    { say:"<b>The 3+3+2 Pattern:</b> eight eighth notes grouped <b>3+3+2</b> put accents on 1, the '&' of 2, and 4 — a built-in syncopation used worldwide, from Latin dance to rock. <b>Remember: syncopation = steady pulse + shifted accent.</b> \u{1F447} <b>Where do the 3+3+2 accents fall?</b>",
       show:{ type:"staff", spec:{clef:"treble",time:"4/4",tempo:92,notes:[
         {p:"C5",d:"8",artic:"accent"},{p:"G4",d:"8"},{p:"G4",d:"8"},
         {p:"C5",d:"8",artic:"accent"},{p:"G4",d:"8"},{p:"G4",d:"8"},

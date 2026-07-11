@@ -43,7 +43,7 @@ LESSON_CONTENT[103]={
         hint:"B at large scale." } },
     { say:"<b>Scherzo:</b> the minuet's successor — same ABA-with-trio plan, but <b>much faster and playful</b> (scherzo = \u{201C}joke\u{201D}). Beethoven made it the standard third movement. \u{1F447} <b>A scherzo differs from a minuet mainly in…</b>",
       try:{ type:"mc", choices:["Tempo and character — fast and playful","Meter — it abandons three","Having no trio"], answer:0,
-        success:"✓ Same skeleton, triple the mischief.",
+        success:"✓ Same structure, triple the mischief.",
         fail:"The plan stayed; what accelerated?",
         hint:"The joke." } },
     { say:"<b>March:</b> <b>duple meter</b>, steady tread, strong downbeats — and like the minuet, marches carry a contrasting <b>trio</b> (often in the subdominant, smoother in character). \u{1F447} <b>A march moves in…</b>",
@@ -182,7 +182,7 @@ LESSON_CONTENT[103]={
     { type:"mc", q:"The concerto's movement plan:", choices:["fast - slow - fast","slow - slow - slow","one movement"], answer:0, explain:"Three movements.", hint:"Outer speed." },
     { type:"mc", q:"The cadenza occurs…", choices:["near the first movement's end, soloist alone","at the very beginning","in the trio"], answer:0, explain:"On a held dominant, historically improvised.", hint:"The spotlight." },
     { type:"truefalse", q:"Each section of a minuet & trio is internally a small binary form.", answer:true, explain:"Binary inside ternary.", hint:"Forms nest." },
-    { type:"truefalse", q:"The scherzo abandoned the trio section.", answer:false, explain:"It kept the plan, changed the speed.", hint:"Same skeleton." },
+    { type:"truefalse", q:"The scherzo abandoned the trio section.", answer:false, explain:"It kept the plan, changed the speed.", hint:"Same structure." },
     { type:"mc", q:"In a classical symphony, the dance movement is number…", choices:["3","1","4"], answer:0, explain:"Minuet/scherzo slot.", hint:"After the slow movement." },
     { type:"mc", q:"Fast, playful, triple meter, trio in the middle:", choices:["scherzo","march","concerto"], answer:0, explain:"The joke in three.", hint:"Not stately." }
   ],
