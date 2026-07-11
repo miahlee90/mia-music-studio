@@ -91,7 +91,11 @@ const LESSONS=[
  {n:88, title:"Phrases and Periods", unit:22, book:4, time:15, kw:["period","antecedent","consequent","parallel","contrasting"]},
  {n:89, title:"Melodic Sequence", unit:22, book:4, time:15, kw:["sequence","tonal","exact","motive development"]},
  {n:90, title:"Texture", unit:22, book:4, time:15, kw:["texture","monophonic","homophonic","polyphonic","heterophonic"]},
- {n:91, title:"Song Forms", unit:22, book:4, time:15, kw:["strophic","through-composed","AABA","verse-chorus","bridge"]}
+ {n:91, title:"Song Forms", unit:22, book:4, time:15, kw:["strophic","through-composed","AABA","verse-chorus","bridge"]},
+ {n:92, title:"The Five Seventh Chords", unit:23, book:4, time:15, kw:["seventh chords","maj7","m7","dominant 7","half-diminished","diminished 7"]},
+ {n:93, title:"Lead Sheet Chord Symbols", unit:23, book:4, time:15, kw:["lead sheet","chord symbols","sus","add9","slash chord"]},
+ {n:94, title:"Inversions of Seventh Chords", unit:23, book:4, time:15, kw:["inversion","6/5","4/3","4/2","figured bass"]},
+ {n:95, title:"Common Chord Progressions", unit:23, book:4, time:15, kw:["ii-V-I","circle progression","pop loop","harmonic rhythm"]}
 ];
 const UNITS=[
  {unit:1, book:1, name:"The Staff and Clefs", lessons:[1,5]},
@@ -115,8 +119,9 @@ const UNITS=[
  {unit:19, book:4, name:"Rhythm & Meter Expanded", lessons:[76,79]},
  {unit:20, book:4, name:"Scales & Modes", lessons:[80,83]},
  {unit:21, book:4, name:"Keys & Harmony Foundations", lessons:[84,87]},
- {unit:22, book:4, name:"Musical Structure", lessons:[88,91]}
+ {unit:22, book:4, name:"Musical Structure", lessons:[88,91]},
+ {unit:23, book:4, name:"Seventh Chords", lessons:[92,95]}
 ];
 /* built lessons so far (index pages link only these) */
-const BUILT_THROUGH=91;
+const BUILT_THROUGH=95;
 const LESSON_CONTENT={}; /* filled by content/lesson-NN.js */
