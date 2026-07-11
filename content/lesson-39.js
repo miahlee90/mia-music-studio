@@ -241,11 +241,9 @@ LESSON_CONTENT[39]={
     { gen:"term-match", params:{subject:"term", pool:[["Sixteenth Note","a note worth ¼ of a beat"],["Two beams","how grouped sixteenths are written"],["1 e & a","the sixteenth-note count"],["Subdivision","dividing a beat into smaller equal parts"]], reverse:true}, count:2 }
   ],
   vocabulary:[
-    {term:"Sixteenth Note", def:"A note worth one-fourth of a beat in simple meter. A single sixteenth has two flags; grouped sixteenths are connected by two beams.",
-      staff:{clef:"treble",notes:[{p:"B4",d:"16"},{p:"B4",d:"16"},{p:"B4",d:"16"},{p:"B4",d:"16"}],beams:[[0,3,2]],width:180}},
+    {term:"Sixteenth Note", def:"A note worth one-fourth of a beat in simple meter. A single sixteenth has two flags; grouped sixteenths are connected by two beams."},
     {term:"Subdivision", def:"Dividing a beat into smaller, equal parts — eighths split it in two, sixteenths in four."},
-    {term:"Beam", def:"A horizontal line connecting note groups: one beam for eighths, two beams for sixteenths.",
-      staff:{clef:"treble",notes:[{p:"C5",d:"8"},{p:"C5",d:"8"},{p:"C5",d:"16"},{p:"C5",d:"16"},{p:"C5",d:"16"},{p:"C5",d:"16"}],beams:[[0,1],[2,5,2]],width:220}},
+    {term:"Beam", def:"A horizontal line connecting note groups: one beam for eighths, two beams for sixteenths."},
     {term:"1 e & a", def:"The counting syllables for four sixteenth notes in one beat — 'one-ee-and-uh'."}
   ],
   mistakes:[],

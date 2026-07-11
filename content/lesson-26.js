@@ -261,8 +261,7 @@ LESSON_CONTENT[26]={
   ],
   vocabulary:[
     {term:"Tetra", def:"Four."},
-    {term:"Tetrachord", def:"A series of four notes having a pattern of whole step, whole step, half step. The four notes of a tetrachord must be in alphabetical order.",
-      staff:{clef:"treble",notes:[{p:"C4",d:"q"},{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"F4",d:"q"}],steps:[{from:0,to:1,label:"W"},{from:1,to:2,label:"W"},{from:2,to:3,label:"H"}],width:200}},
+    {term:"Tetrachord", def:"A series of four notes having a pattern of whole step, whole step, half step. The four notes of a tetrachord must be in alphabetical order."},
     {term:"Major Scale", def:"A seven-note (diatonic) scale in the pattern W–W–H–W–W–W–H — for example, C major: C, D, E, F, G, A, B, plus the repeated keynote. Built from two tetrachords joined by a whole step, it establishes the key center that melodies and chords are built around."},
     {term:"Keynote", def:"The note on which a scale begins and ends."},
     {term:"Degrees", def:"The tones or steps of a scale. There are eight degrees in a major scale."}

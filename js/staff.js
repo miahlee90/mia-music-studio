@@ -210,7 +210,9 @@ const Staff=(()=>{
       return `<line class="barline thick" x1="${x-2}" y1="${yTop}" x2="${x-2}" y2="${yBot}"/><line class="barline" x1="${x+5}" y1="${yTop}" x2="${x+5}" y2="${yBot}"/>`+dots(11);
     return `<line class="barline" x1="${x}" y1="${yTop}" x2="${x}" y2="${yBot}"/>`;
   }
-  function accSVG(x,y,a){
+  /* v8.3 - accidentals wrapped in .accg for a bolder, clearer stroke */
+  function accSVG(x,y,a){ return `<g class="accg">`+accRaw(x,y,a)+`</g>`; }
+  function accRaw(x,y,a){
     const L=(x1,y1,x2,y2)=>`<line class="acc" x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}"/>`;
     if(a==="#") return L(x-2,y-9,x-2,y+10)+L(x+2,y-10,x+2,y+9)
       +L(x-6,y-3,x+6,y-5.5)+L(x-6,y+5.5,x+6,y+3);
@@ -313,7 +315,10 @@ const Staff=(()=>{
       if(n.letter!==undefined) return 84;
       let b=beatsOf(n); if(!(b>0)) b=1;
       {const _tp=tupOf(i); if(_tp) b*=(_tp.n===2?3/2:2/3);}
-      return Math.max(MINW, Math.min(MAXW, b*BEATW));
+      /* v8.3 - notes carrying an accidental get extra room so the glyph never
+         overlaps the previous notehead (instructor: clear accidental slots) */
+      const acW=(n.p&&n.acc!=="none"&&(n.acc||/[#b]/.test(String(n.p).slice(1))))?(n.acc==="bb"?24:16):0;
+      return Math.max(MINW, Math.min(MAXW, b*BEATW))+acW;
     }
     const wN=items.map((n,i)=>itemW(n,i));
     const natural=wN.reduce((a,b)=>a+b,0)||1;
@@ -393,7 +398,7 @@ const Staff=(()=>{
     if(hasDyn) maxEl=Math.max(maxEl,dynY+8);
     if(hasLabel&&maxNoteBottom===-Infinity) maxNoteBottom=staffBottom;
     const labelY = hasLabel? Math.max(staffBottom+22, maxNoteBottom+18, hasDyn?dynY+16:0) : 0;
-    if(hasLabel) maxEl=Math.max(maxEl,labelY+6);
+    if(hasLabel) maxEl=Math.max(maxEl,labelY+10);
     /* v7.8 - chord groups share one stem: collect members */
     const chordMembers=new Set(), chordGroups={};
     items.forEach((n,i)=>{ if(n&&n.chord&&!n.rest){ let b=i-1; while(b>0&&items[b]&&items[b].chord)b--;
@@ -428,7 +433,15 @@ const Staff=(()=>{
       }
       if(n.label){ const hw=Math.min(W/2-4, 4+String(n.label).length*3.4);
         const lx=Math.max(hw+4, Math.min(W-hw-4, x));
-        parts.push(`<text class="lbl" x="${lx}" y="${labelY}" text-anchor="middle">${n.label}</text>`); }
+        /* v8.3 - figured-bass labels: real stacked figures (6 over 5), larger + bold */
+        const fm=String(n.label).match(/^(.+?)([⁰¹²³⁴-⁹]+)([₀-₉]*)$/);
+        if(fm){
+          const SUP={"⁰":0,"¹":1,"²":2,"³":3,"⁴":4,"⁵":5,"⁶":6,"⁷":7,"⁸":8,"⁹":9};
+          const top=[...fm[2]].map(c=>SUP[c]).join(""), bot=[...fm[3]].map(c=>c.charCodeAt(0)-0x2080).join("");
+          parts.push(`<text class="lbl" x="${lx+1}" y="${labelY}" text-anchor="end">${fm[1]}</text>`);
+          parts.push(`<text class="lbl fig" x="${lx+2}" y="${labelY-4}">${top}</text>`);
+          if(bot) parts.push(`<text class="lbl fig" x="${lx+2}" y="${labelY+7}">${bot}</text>`);
+        } else parts.push(`<text class="lbl" x="${lx}" y="${labelY}" text-anchor="middle">${n.label}</text>`); }
     });
     /* v7.8 - one shared stem per stemmed chord group */
     Object.keys(chordGroups).forEach(b=>{

@@ -275,8 +275,7 @@ LESSON_CONTENT[71]={
     { gen:"triad-id", params:{ask:"numeral"}, count:1 }
   ],
   vocabulary:[
-    {term:"Blues Scale", def:"A 7-note scale with flatted 3rd, 5th and 7th. In C: C-E♭-F-G♭-G-B♭-C.",
-      staff:{clef:"treble",notes:[{p:"C4",d:"q"},{p:"Eb4",d:"q"},{p:"Gb4",d:"q"},{p:"Bb4",d:"q"}],width:130}},
+    {term:"Blues Scale", def:"A 7-note scale with flatted 3rd, 5th and 7th. In C: C-E♭-F-G♭-G-B♭-C."},
     {term:"Blue Notes", def:"The flatted 3rd, 5th and 7th — the lowered notes that create the blues sound."},
     {term:"Building the Scale", def:"Major → blues: 1) remove degrees 2 & 6 · 2) lower 3 & 7 · 3) add a lowered 5th."},
     {term:"Improvise", def:"To create music as you play — blues-scale notes over a blues progression."}

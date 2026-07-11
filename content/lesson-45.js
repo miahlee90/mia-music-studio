@@ -286,8 +286,7 @@ LESSON_CONTENT[45]={
     { gen:"note-value", params:{values:["8","q","q."],ask:"beats"}, count:2 }
   ],
   vocabulary:[
-    {term:"Triplet", def:"A group of three notes played in the time normally occupied by two notes of the same value — marked with a small 3.",
-      staff:{clef:"treble",notes:[{p:"B4",d:"8"},{p:"B4",d:"8"},{p:"B4",d:"8"}],beams:[[0,2]],tuplets:[{from:0,to:2}],width:160}},
+    {term:"Triplet", def:"A group of three notes played in the time normally occupied by two notes of the same value — marked with a small 3."},
     {term:"Eighth-Note Triplet", def:"Three eighth notes performed in the time of one quarter note (two regular eighths) — one full beat."},
     {term:"Tuplet", def:"The general term for rhythmic groupings that divide the beat into irregular numbers of notes."},
     {term:"Bracket", def:"A curved or straight line with the number 3, marking a triplet when the notes aren't joined by a beam."}

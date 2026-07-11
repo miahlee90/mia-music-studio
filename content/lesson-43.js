@@ -277,10 +277,8 @@ LESSON_CONTENT[43]={
     { gen:"note-value", params:{values:["8","q","q."],ask:"name"}, count:2 }
   ],
   vocabulary:[
-    {term:"3/8 Time", def:"A meter with 3 eighth-note beats per measure — the eighth note receives one beat.",
-      staff:{clef:"treble",time:"3/8",notes:[{p:"B4",d:"8"},{p:"B4",d:"8"},{p:"B4",d:"8"},{bar:"final"}],beams:[[0,2]],width:220}},
-    {term:"6/8 Time", def:"A compound meter with 6 eighth-note beats per measure, felt as two groups of three (strong beats 1 and 4).",
-      staff:{clef:"treble",time:"6/8",notes:[{p:"B4",d:"8"},{p:"B4",d:"8"},{p:"B4",d:"8"},{p:"B4",d:"8"},{p:"B4",d:"8"},{p:"B4",d:"8"},{bar:"final"}],beams:[[0,2],[3,5]],width:280}},
+    {term:"3/8 Time", def:"A meter with 3 eighth-note beats per measure — the eighth note receives one beat."},
+    {term:"6/8 Time", def:"A compound meter with 6 eighth-note beats per measure, felt as two groups of three (strong beats 1 and 4)."},
     {term:"Compound Meter", def:"A meter in which the beats group naturally into threes — 6/8 is the most common example."},
     {term:"Beat Unit", def:"The note value that receives one beat — named by the time signature's bottom number (8 = eighth note)."}
   ],

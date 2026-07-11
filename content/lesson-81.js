@@ -171,10 +171,8 @@ LESSON_CONTENT[81]={
   vocabulary:[
     {term:"Pentatonic Scale", def:"A scale of five different pitch classes per octave (penta = five)."},
     {term:"Gapped Scale", def:"A term sometimes used for scales with omitted notes — major and minor pentatonic scales omit two degrees of a seven-note scale."},
-    {term:"Major Pentatonic", def:"Major scale minus degrees 4 and 7. C: C-D-E-G-A.",
-      staff:{clef:"treble",notes:[{p:"C4",d:"q"},{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"G4",d:"q"},{p:"A4",d:"q"}],width:150}},
-    {term:"Minor Pentatonic", def:"Natural minor minus degrees 2 and 6. A: A-C-D-E-G.",
-      staff:{clef:"treble",notes:[{p:"A3",d:"q"},{p:"C4",d:"q"},{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"G4",d:"q"}],width:150}}
+    {term:"Major Pentatonic", def:"Major scale minus degrees 4 and 7. C: C-D-E-G-A."},
+    {term:"Minor Pentatonic", def:"Natural minor minus degrees 2 and 6. A: A-C-D-E-G."}
   ],
   mistakes:[],
   summary:[

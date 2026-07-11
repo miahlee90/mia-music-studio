@@ -269,12 +269,9 @@ LESSON_CONTENT[63]={
     { gen:"term-match", params:{subject:"term", pool:[["Dorian","♯6"],["Phrygian","♭2"],["Locrian","♭2 ♭5"],["Aeolian","no changes"]], reverse:true}, count:2 }
   ],
   vocabulary:[
-    {term:"Aeolian", def:"The mode on degree 6 — identical to the natural minor scale.",
-      staff:{clef:"treble",notes:[{p:"A3",d:"q"},{p:"C4",d:"q"},{p:"E4",d:"q"},{p:"A4",d:"q"}],width:130}},
-    {term:"Dorian", def:"Natural minor with the 6th RAISED a half step — the brightened minor.",
-      staff:{clef:"treble",notes:[{p:"E4",d:"q"},{p:"F#4",d:"q"},{p:"G4",d:"q"},{p:"A4",d:"q"}],width:130}},
-    {term:"Phrygian", def:"Natural minor with the 2nd LOWERED a half step — a half step right out of the gate.",
-      staff:{clef:"treble",notes:[{p:"A3",d:"q"},{p:"Bb3",d:"q"},{p:"C4",d:"q"},{p:"D4",d:"q"}],width:130}},
+    {term:"Aeolian", def:"The mode on degree 6 — identical to the natural minor scale."},
+    {term:"Dorian", def:"Natural minor with the 6th RAISED a half step — the brightened minor."},
+    {term:"Phrygian", def:"Natural minor with the 2nd LOWERED a half step — a half step right out of the gate."},
     {term:"Locrian", def:"Natural minor with the 2nd AND 5th lowered. Unused in ancient times; only occasional in modern music — its home triad is diminished."}
   ],
   mistakes:[],

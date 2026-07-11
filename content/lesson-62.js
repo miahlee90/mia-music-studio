@@ -249,12 +249,9 @@ LESSON_CONTENT[62]={
   ],
   vocabulary:[
     {term:"Mode", def:"A scale of eight notes in alphabetical order, beginning on any degree of a parent major scale (using its signature). Seven exist, all with Greek names."},
-    {term:"Ionian", def:"The mode on degree 1 — identical to the major scale.",
-      staff:{clef:"treble",notes:[{p:"C4",d:"q"},{p:"E4",d:"q"},{p:"G4",d:"q"},{p:"C5",d:"q"}],width:130}},
-    {term:"Mixolydian", def:"The mode on degree 5 — a major scale with its 7th LOWERED a half step.",
-      staff:{clef:"treble",notes:[{p:"G4",d:"q"},{p:"A4",d:"q"},{p:"Bb4",d:"q"},{p:"C5",d:"q"}],width:130}},
-    {term:"Lydian", def:"The mode on degree 4 — a major scale with its 4th RAISED a half step.",
-      staff:{clef:"treble",notes:[{p:"C4",d:"q"},{p:"F#4",d:"q"},{p:"G4",d:"q"},{p:"C5",d:"q"}],width:130}}
+    {term:"Ionian", def:"The mode on degree 1 — identical to the major scale."},
+    {term:"Mixolydian", def:"The mode on degree 5 — a major scale with its 7th LOWERED a half step."},
+    {term:"Lydian", def:"The mode on degree 4 — a major scale with its 4th RAISED a half step."}
   ],
   mistakes:[],
   summary:[

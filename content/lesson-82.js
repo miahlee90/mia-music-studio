@@ -184,8 +184,7 @@ LESSON_CONTENT[82]={
     { gen:"enharmonic", params:{}, count:2 }
   ],
   vocabulary:[
-    {term:"Whole-Tone Scale", def:"Six pitch classes per octave, every step a whole step. Two distinct collections exist.",
-      staff:{clef:"treble",notes:[{p:"C4",d:"q"},{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"F#4",d:"q"},{p:"G#4",d:"q"},{p:"A#4",d:"q"}],width:170}},
+    {term:"Whole-Tone Scale", def:"Six pitch classes per octave, every step a whole step. Two distinct collections exist."},
     {term:"Chromatic Scale", def:"All twelve pitch classes, moving by half steps. Its enharmonic spelling depends on direction, tonal context, and notational clarity."},
     {term:"Equal-Interval (Symmetrical) Scale", def:"A scale built from one repeating interval, giving each pitch a similar structural position."},
     {term:"Tonic Hierarchy", def:"The sense of a central home note, supported by uneven step patterns. Equal-interval scales give it little internal support, though musical context can still create a tonal center."}

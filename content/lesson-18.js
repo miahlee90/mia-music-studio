@@ -246,8 +246,8 @@ LESSON_CONTENT[18]={
     {def:"Soft.", term:"piano (p)", staff:{clef:"none",notes:[{p:"B4",d:"q",dyn:"p"}],width:140}},
     {def:"Loud.", term:"forte (f)", staff:{clef:"none",notes:[{p:"B4",d:"q",dyn:"f"}],width:140}},
     {def:"Moderately — mp is moderately soft, mf is moderately loud.", term:"mezzo (m)"},
-    {def:"Gradually louder.", term:"Crescendo", staff:{clef:"none",notes:[{p:"B4",d:"q"},{p:"B4",d:"q"},{p:"B4",d:"q"}],hairpins:[{from:0,to:2,type:"cresc"}],width:150}},
-    {def:"Gradually softer.", term:"Decrescendo", staff:{clef:"none",notes:[{p:"B4",d:"q"},{p:"B4",d:"q"},{p:"B4",d:"q"}],hairpins:[{from:0,to:2,type:"decresc"}],width:150}}
+    {def:"Gradually louder.", term:"Crescendo"},
+    {def:"Gradually softer.", term:"Decrescendo"}
   ],
   mistakes:[],
   summary:[

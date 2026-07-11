@@ -244,10 +244,8 @@ LESSON_CONTENT[46]={
     { gen:"measure-complete", params:{beats:4}, count:2 }
   ],
   vocabulary:[
-    {term:"Pick-up Note(s)", def:"The note or notes of an incomplete measure at the beginning of a piece. The missing beats are found in the last measure. Also called an anacrusis.",
-      staff:{clef:"treble",time:"3/4",notes:[{p:"G4",d:"q"},{bar:"single"},{p:"C5",d:"q"},{p:"E5",d:"q"},{p:"G5",d:"q"},{bar:"final"}],width:280}},
-    {term:"Syncopation", def:"When the accent in a passage falls on the weak beat (&) rather than the strong beat.",
-      staff:{clef:"treble",notes:[{p:"C5",d:"8"},{p:"E5",d:"q",artic:"accent"},{p:"C5",d:"8"}],width:200}},
+    {term:"Pick-up Note(s)", def:"The note or notes of an incomplete measure at the beginning of a piece. The missing beats are found in the last measure. Also called an anacrusis."},
+    {term:"Syncopation", def:"When the accent in a passage falls on the weak beat (&) rather than the strong beat."},
     {term:"Accent (>)", def:"A sign directing one note to be played louder — the tool that makes syncopation visible."},
     {term:"Anacrusis", def:"The formal name for pick-up notes — the up-push before the first downbeat."}
   ],

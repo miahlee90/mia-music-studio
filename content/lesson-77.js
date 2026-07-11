@@ -191,10 +191,8 @@ LESSON_CONTENT[77]={
   ],
   vocabulary:[
     {term:"Irregular Division (Borrowed Division)", def:"A beat division borrowed from the other meter family — the time signature does not change."},
-    {term:"Triplet", def:"Three notes in the time of two, marked with a small 3. Simple meter's borrowed division.",
-      staff:{clef:"treble",time:"2/4",notes:[{p:"G4",d:"8"},{p:"G4",d:"8"},{p:"G4",d:"8"},{p:"G4",d:"q"}],beams:[[0,2]],tuplets:[{from:0,to:2}],width:150}},
-    {term:"Duplet", def:"Two notes in the time of three, marked with a small 2. Compound meter's borrowed division.",
-      staff:{clef:"treble",time:"6/8",notes:[{p:"B4",d:"8"},{p:"B4",d:"8"},{p:"B4",d:"q."}],beams:[[0,1]],tuplets:[{from:0,to:1,n:2}],width:150}},
+    {term:"Triplet", def:"Three notes in the time of two, marked with a small 3. Simple meter's borrowed division."},
+    {term:"Duplet", def:"Two notes in the time of three, marked with a small 2. Compound meter's borrowed division."},
     {term:"Other Tuplets", def:"Quintuplet (5), sextuplet (6) and beyond — the small number identifies how many notes the group contains; the notes they replace depend on the meter, note values, and context."}
   ],
   mistakes:[],

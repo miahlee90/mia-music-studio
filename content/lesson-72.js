@@ -246,8 +246,7 @@ LESSON_CONTENT[72]={
     { gen:"note-value", params:{}, count:1 }
   ],
   vocabulary:[
-    {term:"Motive", def:"A short melodic, rhythmic or harmonic element used repeatedly throughout a piece — the seed most music grows from.",
-      staff:{clef:"treble",notes:[{p:"G4",d:"8"},{p:"G4",d:"8"},{p:"G4",d:"8"},{p:"Eb4",d:"q"}],beams:[[0,2]],width:130}},
+    {term:"Motive", def:"A short melodic, rhythmic or harmonic element used repeatedly throughout a piece — the seed most music grows from."},
     {term:"Phrase", def:"A short section of music — a complete or incomplete musical idea, often containing motives."},
     {term:"The Breath", def:"A phrase ends with a 'lift' or breath — where a performer would naturally breathe."},
     {term:"Transposition", def:"Restating a motive or phrase at a different pitch level — same shape, new height."}

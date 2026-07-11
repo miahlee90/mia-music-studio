@@ -262,11 +262,9 @@ LESSON_CONTENT[38]={
     { gen:"term-match", params:{subject:"term", pool:[["Solfège","syllables for the scale degrees"],["Movable Do","Do = the keynote of the current key"],["Transposition","rewriting a melody in a different key"],["Ti","scale degree 7"]], reverse:true}, count:2 }
   ],
   vocabulary:[
-    {term:"Solfège", def:"A system that assigns syllables — Do, Re, Mi, Fa, Sol, La, Ti — to the scale degrees of a major scale.",
-      staff:{clef:"treble",notes:[{p:"C4",d:"q",label:"Do"},{p:"D4",d:"q",label:"Re"},{p:"E4",d:"q",label:"Mi"}],width:200}},
+    {term:"Solfège", def:"A system that assigns syllables — Do, Re, Mi, Fa, Sol, La, Ti — to the scale degrees of a major scale."},
     {term:"Movable Do", def:"The system in which Do is always the keynote (tonic) of the current major key — syllables follow the key, not fixed pitches."},
-    {term:"Transposition", def:"Rewriting or performing a melody in a different key while preserving the same intervals and melodic relationships.",
-      staff:{clef:"treble",notes:[{p:"C4",d:"q"},{p:"E4",d:"q"},{p:"G4",d:"q"},{p:"A4",d:"q"},{p:"B4",d:"q"},{p:"D5",d:"q"}],width:280}},
+    {term:"Transposition", def:"Rewriting or performing a melody in a different key while preserving the same intervals and melodic relationships."},
     {term:"Scale Degree", def:"The position of a note within a scale — degree 1 is the keynote, degree 5 is Sol, and so on."}
   ],
   mistakes:[],

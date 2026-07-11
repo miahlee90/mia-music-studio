@@ -230,8 +230,7 @@ LESSON_CONTENT[42]={
     { gen:"note-value", params:{values:["w","h","q","8"],ask:"name"}, count:2 }
   ],
   vocabulary:[
-    {term:"Common Time (C)", def:"A symbol meaning 4/4 time — four beats per measure, quarter note = one beat.",
-      staff:{clef:"treble",time:"C",notes:[{p:"B4",d:"q"},{p:"B4",d:"q"},{p:"B4",d:"q"},{p:"B4",d:"q"},{bar:"final"}],width:240}},
+    {term:"Common Time (C)", def:"A symbol meaning 4/4 time — four beats per measure, quarter note = one beat."},
     {term:"Cut Time (𝄵) / Alla Breve", def:"A symbol meaning 2/2 time — two beats per measure, HALF note = one beat. Every note is worth half its 4/4 count.",
       staff:{clef:"treble",time:"C|",notes:[{p:"B4",d:"h"},{p:"B4",d:"h"},{bar:"final"}],width:200}},
     {term:"Beat Unit", def:"The note value that receives one beat — named by the BOTTOM number of the time signature."},

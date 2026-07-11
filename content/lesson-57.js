@@ -278,12 +278,9 @@ LESSON_CONTENT[57]={
     { gen:"rel-key", params:{ask:"both"}, count:3 }
   ],
   vocabulary:[
-    {term:"Natural Minor", def:"The basic form — only the tones of the relative major, re-centered on the minor tonic.",
-      staff:{clef:"treble",notes:[{p:"E4",d:"q"},{p:"F4",d:"q"},{p:"G4",d:"q"},{p:"A4",d:"q"}],width:130}},
-    {term:"Harmonic Minor", def:"Natural minor with a raised 7th — ascending AND descending. The most used form; its ♯7 is a leading tone.",
-      staff:{clef:"treble",notes:[{p:"F4",d:"q"},{p:"G#4",d:"q"},{p:"A4",d:"h"}],width:130}},
-    {term:"Melodic Minor", def:"Raised 6th and 7th ascending; descends as the natural minor.",
-      staff:{clef:"treble",notes:[{p:"F#4",d:"q"},{p:"G#4",d:"q"},{p:"A4",d:"h"}],width:130}},
+    {term:"Natural Minor", def:"The basic form — only the tones of the relative major, re-centered on the minor tonic."},
+    {term:"Harmonic Minor", def:"Natural minor with a raised 7th — ascending AND descending. The most used form; its ♯7 is a leading tone."},
+    {term:"Melodic Minor", def:"Raised 6th and 7th ascending; descends as the natural minor."},
     {term:"Leading Tone", def:"A note one half step below the tonic, pulling strongly toward it — the raised 7th's new job."}
   ],
   mistakes:[],

@@ -257,10 +257,8 @@ LESSON_CONTENT[65]={
   vocabulary:[
     {term:"Block Chord", def:"All chord tones played together — solid and vertical.",
       staff:{clef:"treble",notes:[{p:"C4",d:"h"},{p:"E4",d:"h",chord:true},{p:"G4",d:"h",chord:true}],width:130}},
-    {term:"Broken Chord", def:"Chord tones NOT played together — spread over time.",
-      staff:{clef:"treble",notes:[{p:"C4",d:"q"},{p:"G4",d:"q"},{p:"E4",d:"q"}],width:130}},
-    {term:"Arpeggio", def:"Chord tones played sequentially, one after another — may extend an octave or more. From arpeggiare, 'to play upon a harp.'",
-      staff:{clef:"treble",notes:[{p:"C4",d:"q"},{p:"E4",d:"q"},{p:"G4",d:"q"},{p:"C5",d:"q"}],width:130}},
+    {term:"Broken Chord", def:"Chord tones NOT played together — spread over time."},
+    {term:"Arpeggio", def:"Chord tones played sequentially, one after another — may extend an octave or more. From arpeggiare, 'to play upon a harp.'"},
     {term:"Arpeggiated Accompaniment", def:"A flowing accompaniment whose arpeggios outline each chord of the harmony."}
   ],
   mistakes:[],

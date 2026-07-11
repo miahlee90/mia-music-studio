@@ -239,10 +239,8 @@ LESSON_CONTENT[66]={
   ],
   vocabulary:[
     {term:"Non-Harmonic Tone", def:"A melody tone that is not part of the chord used for the harmony."},
-    {term:"Passing Tone", def:"A non-harmonic tone stepping between two DIFFERENT chord tones.",
-      staff:{clef:"treble",notes:[{p:"C4",d:"q"},{p:"D4",d:"q"},{p:"E4",d:"q"}],width:130}},
-    {term:"Neighboring Tone", def:"A non-harmonic tone that leaves and returns to the SAME chord tone — upper (above) or lower (below).",
-      staff:{clef:"treble",notes:[{p:"E4",d:"q"},{p:"F4",d:"q"},{p:"E4",d:"q"}],width:130}},
+    {term:"Passing Tone", def:"A non-harmonic tone stepping between two DIFFERENT chord tones."},
+    {term:"Neighboring Tone", def:"A non-harmonic tone that leaves and returns to the SAME chord tone — upper (above) or lower (below)."},
     {term:"The Weak-Beat Rule", def:"Passing and neighboring tones usually occur on weak beats — and never influence chord choice."}
   ],
   mistakes:[],
