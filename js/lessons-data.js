@@ -79,7 +79,11 @@ const LESSONS=[
  {n:76, title:"Compound Meter Expanded", unit:19, book:4, time:15, kw:["compound meter","6/8","9/8","12/8","conducting"]},
  {n:77, title:"Triplets and Duplets", unit:19, book:4, time:15, kw:["triplet","duplet","tuplet","irregular division"]},
  {n:78, title:"Syncopation", unit:19, book:4, time:15, kw:["syncopation","off-beat","tie","anticipation"]},
- {n:79, title:"Asymmetrical and Changing Meter", unit:19, book:4, time:15, kw:["5/4","7/8","mixed meter","additive"]}
+ {n:79, title:"Asymmetrical and Changing Meter", unit:19, book:4, time:15, kw:["5/4","7/8","mixed meter","additive"]},
+ {n:80, title:"Modes in Practice", unit:20, book:4, time:15, kw:["modes","dorian","mixolydian","lydian","phrygian"]},
+ {n:81, title:"Pentatonic Scales", unit:20, book:4, time:15, kw:["pentatonic","gapped scale"]},
+ {n:82, title:"Whole Tone and Chromatic Scales", unit:20, book:4, time:15, kw:["whole tone","chromatic","symmetrical"]},
+ {n:83, title:"Interval Inversions and Compound Intervals", unit:20, book:4, time:15, kw:["inversion","compound interval","rule of 9"]}
 ];
 const UNITS=[
  {unit:1, book:1, name:"The Staff and Clefs", lessons:[1,5]},
@@ -100,8 +104,9 @@ const UNITS=[
  {unit:16, book:3, name:"Harmonizing and Composing in Major", lessons:[64,67]},
  {unit:17, book:3, name:"Minor Harmonization and the Blues", lessons:[68,71]},
  {unit:18, book:3, name:"Form", lessons:[72,75]},
- {unit:19, book:4, name:"Rhythm & Meter Expanded", lessons:[76,79]}
+ {unit:19, book:4, name:"Rhythm & Meter Expanded", lessons:[76,79]},
+ {unit:20, book:4, name:"Scales & Modes", lessons:[80,83]}
 ];
 /* built lessons so far (index pages link only these) */
-const BUILT_THROUGH=79;
+const BUILT_THROUGH=83;
 const LESSON_CONTENT={}; /* filled by content/lesson-NN.js */
