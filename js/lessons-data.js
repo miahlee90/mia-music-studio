@@ -87,7 +87,11 @@ const LESSONS=[
  {n:84, title:"Transposition", unit:21, book:4, time:15, kw:["transposition","transposing instruments","key change"]},
  {n:85, title:"Diatonic Triads", unit:21, book:4, time:15, kw:["diatonic triads","chord quality","seven triads"]},
  {n:86, title:"Roman Numeral Analysis", unit:21, book:4, time:15, kw:["roman numerals","harmonic function","tonic","predominant","dominant"]},
- {n:87, title:"Cadences", unit:21, book:4, time:15, kw:["cadence","authentic","half","plagal","deceptive","PAC","IAC"]}
+ {n:87, title:"Cadences", unit:21, book:4, time:15, kw:["cadence","authentic","half","plagal","deceptive","PAC","IAC"]},
+ {n:88, title:"Phrases and Periods", unit:22, book:4, time:15, kw:["period","antecedent","consequent","parallel","contrasting"]},
+ {n:89, title:"Melodic Sequence", unit:22, book:4, time:15, kw:["sequence","tonal","exact","motive development"]},
+ {n:90, title:"Texture", unit:22, book:4, time:15, kw:["texture","monophonic","homophonic","polyphonic","heterophonic"]},
+ {n:91, title:"Song Forms", unit:22, book:4, time:15, kw:["strophic","through-composed","AABA","verse-chorus","bridge"]}
 ];
 const UNITS=[
  {unit:1, book:1, name:"The Staff and Clefs", lessons:[1,5]},
@@ -110,8 +114,9 @@ const UNITS=[
  {unit:18, book:3, name:"Form", lessons:[72,75]},
  {unit:19, book:4, name:"Rhythm & Meter Expanded", lessons:[76,79]},
  {unit:20, book:4, name:"Scales & Modes", lessons:[80,83]},
- {unit:21, book:4, name:"Keys & Harmony Foundations", lessons:[84,87]}
+ {unit:21, book:4, name:"Keys & Harmony Foundations", lessons:[84,87]},
+ {unit:22, book:4, name:"Musical Structure", lessons:[88,91]}
 ];
 /* built lessons so far (index pages link only these) */
-const BUILT_THROUGH=87;
+const BUILT_THROUGH=91;
 const LESSON_CONTENT={}; /* filled by content/lesson-NN.js */
