@@ -107,7 +107,10 @@ const LESSONS=[
  {n:104, title:"Leading-Tone Chords", unit:26, book:4, time:15, kw:["vii dim","leading-tone seventh","diminished seventh","dominant function"]},
  {n:105, title:"The Neapolitan Chord", unit:26, book:4, time:15, kw:["neapolitan","flat II","N6","predominant"]},
  {n:106, title:"Augmented Sixth Chords", unit:26, book:4, time:15, kw:["augmented sixth","italian","french","german"]},
- {n:107, title:"Borrowed Chords (Modal Mixture)", unit:26, book:4, time:15, kw:["modal mixture","borrowed chords","parallel keys","picardy third"]}
+ {n:107, title:"Borrowed Chords (Modal Mixture)", unit:26, book:4, time:15, kw:["modal mixture","borrowed chords","parallel keys","picardy third"]},
+ {n:108, title:"Extended Chords", unit:27, book:4, time:15, kw:["ninth","eleventh","thirteenth","extensions"]},
+ {n:109, title:"Suspended and Added Tone Chords", unit:27, book:4, time:15, kw:["sus2","sus4","add9","sixth chord"]},
+ {n:110, title:"Chord Substitution", unit:27, book:4, time:15, kw:["tritone substitution","chromatic mediant","reharmonization"]}
 ];
 const UNITS=[
  {unit:1, book:1, name:"The Staff and Clefs", lessons:[1,5]},
@@ -135,8 +138,9 @@ const UNITS=[
  {unit:23, book:4, name:"Seventh Chords", lessons:[92,95]},
  {unit:24, book:4, name:"Harmony in Practice", lessons:[96,99]},
  {unit:25, book:4, name:"Musical Expression & Forms", lessons:[100,103]},
- {unit:26, book:4, name:"Chromatic Harmony", lessons:[104,107]}
+ {unit:26, book:4, name:"Chromatic Harmony", lessons:[104,107]},
+ {unit:27, book:4, name:"Expanded Tonality", lessons:[108,111]}
 ];
 /* built lessons so far (index pages link only these) */
-const BUILT_THROUGH=107;
+const BUILT_THROUGH=110;
 const LESSON_CONTENT={}; /* filled by content/lesson-NN.js */
