@@ -35,30 +35,33 @@ function MF_L65_ear(container,fb){
   ask();
 }
 
-/* arpeggio builder: sweep C and G chords over an octave-plus */
+/* arpeggio builder: play the C and G arpeggios — FOUR notes, root to the root
+   above. Each round rebuilds a ONE-OCTAVE keyboard so exactly one starting
+   note can complete the arpeggio (instructor round: no double-start ambiguity). */
 function MF_L65_build(container,fb){
   const ROUNDS=[
-    {name:"C major arpeggio", pcs:[60,64,67,72,76], names:["C","E","G","C (octave!)","E — keep going"]},
-    {name:"G major arpeggio", pcs:[55,59,62,67,71], names:["G","B","D","G (octave!)","B — past the octave"]}];
+    {name:"C major arpeggio", pcs:[60,64,67,72], names:["C","E","G","C (the root above)"], start:60},
+    {name:"G major arpeggio", pcs:[55,59,62,67], names:["G","B","D","G (the root above)"], start:55}];
   let r=0,k=0;
   container.innerHTML=`<div class="big-q l65b-q" style="text-align:center"></div><div class="l65b-kb"></div>`;
   const q=container.querySelector(".l65b-q"), kh=container.querySelector(".l65b-kb");
+  function onKey(m){
+    const R=ROUNDS[r]; if(!R) return;
+    if(m===R.pcs[k]){
+      k++;
+      if(k>=R.pcs.length){ MFAudio.yay();
+        fb(true,`✓ ${R.name} — root, 3rd, 5th, and the root above, played as a line.`);
+        r++; setTimeout(ask,1400); }
+      else q.innerHTML=`Now play <b>${R.names[k]}</b>.`;
+    } else { MFAudio.tone(40,.2); fb(false,"Chord tones only, in rising order — root, 3rd, 5th, then the root above."); }
+  }
   function ask(){
     if(r>=ROUNDS.length){ q.textContent="Excellent! You played both arpeggios."; return; }
     k=0;
     q.innerHTML=`Play a <b>${ROUNDS[r].name}</b> — one note at a time, in order. Start on <b>${ROUNDS[r].names[0]}</b>.`;
+    kh.innerHTML="";
+    Keyboard.create(kh,{start:ROUNDS[r].start,octaves:1,labels:true,onKey});
   }
-  Keyboard.create(kh,{start:55,octaves:2,labels:true,
-    onKey:m=>{
-      const R=ROUNDS[r]; if(!R) return;
-      if(m===R.pcs[k]){
-        k++;
-        if(k>=R.pcs.length){ MFAudio.yay();
-          fb(true,`✓ ${R.name} — the chord played as a line, an octave and beyond.`);
-          r++; setTimeout(ask,1400); }
-        else q.innerHTML=`Now play <b>${R.names[k]}</b>.`;
-      } else { MFAudio.tone(40,.2); fb(false,"Chord tones only, in rising order — root, 3rd, 5th, root again…"); }
-    }});
   ask();
 }
 
@@ -126,13 +129,13 @@ LESSON_CONTENT[65]={
         hint:"The harmony continues." } },
     { say:"Play two arpeggios. \u{1F447}",
       try:{ type:"custom",
-        hint:"Root → 3rd → 5th → root → 3rd, always climbing.",
+        hint:"Root → 3rd → 5th → root, always climbing.",
         mount:(container,fb)=>MF_L65_build(container,fb) } },
-    { say:"<b>Which chord does this accompaniment outline?</b> \u{1F447}",
+    { say:"<b>This accompaniment plays one chord as an arpeggio.</b> \u{1F447} <b>Which chord do these four notes outline?</b>",
       show:{ type:"staff", spec:{clef:"bass",tempo:100,notes:[
         {p:"G2",d:"q"},{p:"B2",d:"q"},{p:"D3",d:"q"},{p:"G3",d:"q"},{bar:"final"}],width:340} },
-      try:{ type:"mc", choices:["G major (G-B-D)","C major","E minor"], answer:0,
-        success:"✓ G-B-D-G: a root-position G chord, unrolled into a line. Arpeggios ARE chords — just read them vertically in your head.",
+      try:{ type:"mc", choices:["The G chord (G-B-D)","The C chord","The E chord"], answer:0,
+        success:"✓ G-B-D-G: the G chord in root position, played one note at a time.",
         fail:"Stack the four notes into 3rds…",
         hint:"Collect the letters: G, B, D." } }
   ],
