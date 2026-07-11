@@ -83,7 +83,11 @@ const LESSONS=[
  {n:80, title:"Modes in Practice", unit:20, book:4, time:15, kw:["modes","dorian","mixolydian","lydian","phrygian"]},
  {n:81, title:"Pentatonic Scales", unit:20, book:4, time:15, kw:["pentatonic","gapped scale"]},
  {n:82, title:"Whole Tone and Chromatic Scales", unit:20, book:4, time:15, kw:["whole tone","chromatic","symmetrical"]},
- {n:83, title:"Interval Inversions and Compound Intervals", unit:20, book:4, time:15, kw:["inversion","compound interval","rule of 9"]}
+ {n:83, title:"Interval Inversions and Compound Intervals", unit:20, book:4, time:15, kw:["inversion","compound interval","rule of 9"]},
+ {n:84, title:"Transposition", unit:21, book:4, time:15, kw:["transposition","transposing instruments","key change"]},
+ {n:85, title:"Diatonic Triads", unit:21, book:4, time:15, kw:["diatonic triads","chord quality","seven triads"]},
+ {n:86, title:"Roman Numeral Analysis", unit:21, book:4, time:15, kw:["roman numerals","harmonic function","tonic","predominant","dominant"]},
+ {n:87, title:"Cadences", unit:21, book:4, time:15, kw:["cadence","authentic","half","plagal","deceptive","PAC","IAC"]}
 ];
 const UNITS=[
  {unit:1, book:1, name:"The Staff and Clefs", lessons:[1,5]},
@@ -105,8 +109,9 @@ const UNITS=[
  {unit:17, book:3, name:"Minor Harmonization and the Blues", lessons:[68,71]},
  {unit:18, book:3, name:"Form", lessons:[72,75]},
  {unit:19, book:4, name:"Rhythm & Meter Expanded", lessons:[76,79]},
- {unit:20, book:4, name:"Scales & Modes", lessons:[80,83]}
+ {unit:20, book:4, name:"Scales & Modes", lessons:[80,83]},
+ {unit:21, book:4, name:"Keys & Harmony Foundations", lessons:[84,87]}
 ];
 /* built lessons so far (index pages link only these) */
-const BUILT_THROUGH=83;
+const BUILT_THROUGH=87;
 const LESSON_CONTENT={}; /* filled by content/lesson-NN.js */
