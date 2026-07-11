@@ -75,7 +75,11 @@ const LESSONS=[
  {n:72, title:"Basic Forms of Music — Motive and Phrase", unit:18, book:3, time:15, kw:["motive","phrase","form"]},
  {n:73, title:"AB (Binary) Form", unit:18, book:3, time:15, kw:["binary","AB form"]},
  {n:74, title:"ABA (Ternary) Form", unit:18, book:3, time:15, kw:["ternary","ABA form"]},
- {n:75, title:"Rondo Form", unit:18, book:3, time:15, kw:["rondo"]}
+ {n:75, title:"Rondo Form", unit:18, book:3, time:15, kw:["rondo"]},
+ {n:76, title:"Compound Meter Expanded", unit:19, book:4, time:15, kw:["compound meter","6/8","9/8","12/8","conducting"]},
+ {n:77, title:"Triplets and Duplets", unit:19, book:4, time:15, kw:["triplet","duplet","tuplet","irregular division"]},
+ {n:78, title:"Syncopation", unit:19, book:4, time:15, kw:["syncopation","off-beat","tie","anticipation"]},
+ {n:79, title:"Asymmetrical and Changing Meter", unit:19, book:4, time:15, kw:["5/4","7/8","mixed meter","additive"]}
 ];
 const UNITS=[
  {unit:1, book:1, name:"The Staff and Clefs", lessons:[1,5]},
@@ -95,8 +99,9 @@ const UNITS=[
  {unit:15, book:3, name:"Minor Keys and Modes", lessons:[60,63]},
  {unit:16, book:3, name:"Harmonizing and Composing in Major", lessons:[64,67]},
  {unit:17, book:3, name:"Minor Harmonization and the Blues", lessons:[68,71]},
- {unit:18, book:3, name:"Form", lessons:[72,75]}
+ {unit:18, book:3, name:"Form", lessons:[72,75]},
+ {unit:19, book:4, name:"Rhythm & Meter Expanded", lessons:[76,79]}
 ];
 /* built lessons so far (index pages link only these) */
-const BUILT_THROUGH=75;
+const BUILT_THROUGH=79;
 const LESSON_CONTENT={}; /* filled by content/lesson-NN.js */

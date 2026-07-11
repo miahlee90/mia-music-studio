@@ -291,7 +291,8 @@ const Staff=(()=>{
       ((items[i+1]&&items[i+1].bar!==undefined) || (i>0&&items[i-1].bar!==undefined)));
     /* v8.0 (DD-32) - duration-proportional spacing */
     const BEATW=110, MINW=26, MAXW=150;
-    const inTuplet=i=>(spec.tuplets||[]).some(tp=>i>=tp.from&&i<=tp.to);
+    const tupOf=i=>(spec.tuplets||[]).find(tp=>i>=tp.from&&i<=tp.to);
+    const inTuplet=i=>!!tupOf(i);
     function itemW(n,i){
       if(attachedMark[i]||n.chord) return 0;
       if(n.bar!==undefined) return 30;
@@ -299,7 +300,7 @@ const Staff=(()=>{
       if(n.mark!==undefined) return 46;
       if(n.letter!==undefined) return 84;
       let b=beatsOf(n); if(!(b>0)) b=1;
-      if(inTuplet(i)) b*=2/3;
+      {const _tp=tupOf(i); if(_tp) b*=(_tp.n===2?3/2:2/3);}
       return Math.max(MINW, Math.min(MAXW, b*BEATW));
     }
     const wN=items.map((n,i)=>itemW(n,i));
@@ -475,7 +476,7 @@ const Staff=(()=>{
       else
         parts.push(`<line class="acc" x1="${x1}" y1="${y}" x2="${x2}" y2="${y-5}"/><line class="acc" x1="${x1}" y1="${y}" x2="${x2}" y2="${y+5}"/>`);
     });
-    /* v7.7 — triplet "3" markers (with bracket when unbeamed) */
+    /* v7.7 — triplet "3" markers (with bracket when unbeamed); v8.1: tp.n renders any tuplet number (2 = duplet, played 3-in-2 reversed) */
     (spec.tuplets||[]).forEach(tp=>{
       const A=placed[tp.from], B=placed[tp.to];
       if(!A||!B) return;
@@ -490,7 +491,7 @@ const Staff=(()=>{
       let beamed=false;
       (spec.beams||[]).forEach(bm=>{ if(bm[0]<=tp.from&&bm[1]>=tp.to) beamed=true; });
       if(!beamed) parts.push(`<path class="acc" fill="none" d="M ${A.x-4} ${yB+6} L ${A.x-4} ${yB} L ${mid-8} ${yB} M ${mid+8} ${yB} L ${B.x+4} ${yB} L ${B.x+4} ${yB+6}"/>`);
-      parts.push(`<text class="lbl" x="${mid}" y="${yB+4}" text-anchor="middle" font-style="italic">3</text>`);
+      parts.push(`<text class="lbl" x="${mid}" y="${yB+4}" text-anchor="middle" font-style="italic">${tp.n||3}</text>`);
     });
     /* v7 — W/H step carets above the staff (scale/tetrachord teaching)
        v7.1: each caret sits a constant distance above its two notes (stems included)
@@ -578,7 +579,7 @@ const Staff=(()=>{
       }
       if(n.dyn&&VOLS[n.dyn]!==undefined) vol=VOLS[n.dyn];
       let base=tempo? beatsOf(n)*spb : DURSEC[normD(n.d||n.rest)]*(isDotted(n)?1.5:1);
-      if((spec.tuplets||[]).some(tp=>i>=tp.from&&i<=tp.to)) base*=2/3;
+      {const _tp2=(spec.tuplets||[]).find(tp=>i>=tp.from&&i<=tp.to); if(_tp2) base*=(_tp2.n===2?3/2:2/3);}
       const dur=n.artic==="fermata"? base*1.8 : base;
       if(n.chord&&!n.rest){ /* harmonic interval: sound with the previous note, BOTH stay lit */
         MFAudio.tone(MFAudio.midi(n.sound||n.p), lastDur||Math.min(dur,1.8), lastStart, vol*.9);
