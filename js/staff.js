@@ -284,6 +284,18 @@ const Staff=(()=>{
     const startX=(grand?70:(spec.clef==="none"?30:80))+(ts?30:0)+ksW;
     const beamSet=new Set();
     (spec.beams||[]).forEach(([a,b])=>{ for(let i=a;i<=b;i++) beamSet.add(i); });
+    /* v8.2 - ONE stem direction per beam group (the note farthest from the middle
+       line decides, standard engraving); stub groups [i,i,lv] inherit their host */
+    const beamDir=new Map();
+    (spec.beams||[]).forEach(bm=>{ if(bm[0]>=bm[1]) return;
+      let far=-1, up=true;
+      for(let i=bm[0];i<=bm[1];i++){ const n=items[i]; if(!n||!n.p) continue;
+        const clef=n.clef||(grand?"treble":(spec.clef||"treble"));
+        const yy0=clef==="bass"? y0b:y0t;
+        const dY=yFor(n.p,clef,yy0)-(yy0+2*GAP);
+        if(Math.abs(dY)>far){ far=Math.abs(dY); up=dY>0; } }
+      for(let i=bm[0];i<=bm[1];i++) if(!beamDir.has(i)) beamDir.set(i,up);
+    });
     const placed=[];
     let minEl=0, maxEl=H0, maxNoteBottom=-Infinity, hasLabel=false, hasDyn=false;
     /* marks adjacent to a bar line align WITH that bar (terms above bar lines) and take no layout slot */
@@ -338,7 +350,8 @@ const Staff=(()=>{
       const y = yFor(n.p,clef,y0);
       const s = durShape(n.d);
       let top=y-8, bottom=y+8;
-      if(s.stem){ if(y > y0+2*GAP) top=Math.min(top,y-40); else bottom=Math.max(bottom,y+40); }
+      if(s.stem){ const sUp=beamDir.has(i)? beamDir.get(i) : (y > y0+2*GAP), rs=beamDir.has(i)?52:40;
+        if(sUp) top=Math.min(top,y-rs); else bottom=Math.max(bottom,y+rs); }
       if(n.artic==="fermata") top=Math.min(top,y0-24);
       if(n.artic) { top=Math.min(top, n.articPos==="above"? y0-22 : y-18); bottom=Math.max(bottom,y+18); }
       minEl=Math.min(minEl,top-6); maxEl=Math.max(maxEl,bottom+6);
@@ -407,7 +420,7 @@ const Staff=(()=>{
         const accCh = n.acc==="none"? undefined : n.acc==="n"?"n" : (n.acc==="bb"||n.acc==="x"||n.acc==="#"||n.acc==="b")? n.acc : (n.p.match(/^[A-G]([#b])\d$/)||[])[1];
         const idx=dia(n.p)-baseIdx(clef);
         const onLine=idx%2===0;
-        let inner=noteSVG(x,y,normD(n.d),(spec.clickNotes?" clickable":""),y0,beamSet.has(i),isDotted(n),onLine,chordMembers.has(i));
+        let inner=noteSVG(x,y,normD(n.d),(spec.clickNotes?" clickable":""),y0,beamSet.has(i),isDotted(n),onLine,chordMembers.has(i)||beamSet.has(i));
         if(accCh) inner=accSVG(x-18-(accCh==="bb"?6:0)-(accShift||0),y,accCh==="n"?"nat":accCh)+inner;
         if(n.artic) inner+=articSVG(x,y,y0,n.artic,n.articPos);
         parts.push(`<g class="notegroup" data-i="${i}" data-p="${n.p}">${inner}</g>`);
@@ -430,25 +443,51 @@ const Staff=(()=>{
       minEl=Math.min(minEl, up? yTop-38 : yTop);
       maxEl=Math.max(maxEl, up? yBot : yBot+38);
     });
-    /* beams: connect stem tips of first/last beamed note in each group */
-    (spec.beams||[]).forEach(bm=>{ const [a,b]=bm, bmLv=bm[2];
-      const A=placed[a], B=placed[b];
-      if(!A||!B||A.y===undefined||B.y===undefined) return;
-      const up=A.y > A.y0+2*GAP;
-      const xa=up? A.x+8.4 : A.x-8.4, xb=up? B.x+8.4 : B.x-8.4;
-      const ya=up? A.y-38 : A.y+38, yb=up? B.y-38 : B.y+38;
-      const lv=bmLv||1, slope=(xb===xa)?0:(yb-ya)/(xb-xa);
-      /* v7.8b - interior stems extend to meet the beam (no detached middle notes) */
-      if(xa!==xb) for(let i2=a+1;i2<b;i2++){
-        const P=placed.find(pl=>pl.i===i2&&pl.y!==undefined); if(!P) continue;
-        const xs=up? P.x+8.4 : P.x-8.4;
-        parts.push(`<line class="stem" x1="${xs}" y1="${P.y+(up?-2:2)}" x2="${xs}" y2="${ya+slope*(xs-xa)}"/>`);
+    /* v8.2 - beams: one direction per group, slope capped, and EVERY stem drawn
+       from its notehead to the beam line (per-note stems are suppressed for
+       beamed notes, so nothing can detach) */
+    const beamGeo=[];
+    (spec.beams||[]).forEach(bm=>{ const [a,b]=bm;
+      if(a>=b) return;
+      const grp=[]; for(let i2=a;i2<=b;i2++){ const P=placed.find(pl=>pl.i===i2&&pl.y!==undefined); if(P) grp.push(P); }
+      if(grp.length<2) return;
+      const up=beamDir.has(a)? beamDir.get(a) : (grp[0].y > grp[0].y0+2*GAP);
+      const sx=P=> up? P.x+8.4 : P.x-8.4;
+      const A=grp[0], B=grp[grp.length-1];
+      const xa=sx(A), xb=sx(B);
+      let ya=up? A.y-38 : A.y+38, yb=up? B.y-38 : B.y+38;
+      const RISE=10; /* max beam rise over a group */
+      if(Math.abs(yb-ya)>RISE){ const m=(ya+yb)/2, s2=(yb>ya?1:-1); ya=m-s2*RISE/2; yb=m+s2*RISE/2; }
+      let slope=(xb===xa)?0:(yb-ya)/(xb-xa);
+      /* every stem at least 26px long: push the whole beam outward if needed */
+      let shift=0;
+      grp.forEach(P=>{ const bY=ya+slope*(sx(P)-xa);
+        const len= up? P.y-bY : bY-P.y;
+        if(len<26) shift=Math.max(shift,26-len); });
+      if(shift){ if(up){ya-=shift;yb-=shift;} else {ya+=shift;yb+=shift;} }
+      beamGeo.push({a,b,up,xa,ya,yb,slope,grp,sx,lv:bm[2]||1});
+    });
+    beamGeo.forEach(g=>{
+      g.grp.forEach(P=>{ if(chordMembers.has(P.i)) return;
+        const xs=g.sx(P), yTip=g.ya+g.slope*(xs-g.xa);
+        parts.push(`<line class="stem" x1="${xs}" y1="${P.y+(g.up?-2:2)}" x2="${xs}" y2="${yTip}"/>`);
+        minEl=Math.min(minEl,yTip); maxEl=Math.max(maxEl,yTip);
+      });
+      const xB=g.sx(g.grp[g.grp.length-1]);
+      for(let L=1;L<=g.lv;L++){ const off=(L-1)*7.5*(g.up?1:-1);
+        parts.push(`<line class="beam" x1="${g.xa}" y1="${g.ya+off}" x2="${xB}" y2="${g.yb+off}"/>`);
       }
-      for(let L=1;L<=lv;L++){
-        if(xa===xb&&L===1) continue; /* stub entry: only the upper level(s) */
-        const off=(L-1)*7.5*(up?1:-1);
-        if(xa===xb) parts.push(`<line class="beam" x1="${xa-14}" y1="${ya+off}" x2="${xa}" y2="${ya+off}"/>`);
-        else parts.push(`<line class="beam" x1="${xa}" y1="${ya+off}" x2="${xb}" y2="${yb+off}"/>`);
+    });
+    /* stub entries [i,i,lv] hang their upper level(s) off the host group's beam line */
+    (spec.beams||[]).forEach(bm=>{ const [a,b]=bm; if(a!==b) return;
+      const P=placed.find(pl=>pl.i===a&&pl.y!==undefined); if(!P) return;
+      const host=beamGeo.find(g=>g.a<=a&&g.b>=a);
+      const up=host? host.up : (P.y > P.y0+2*GAP);
+      const xs=up? P.x+8.4 : P.x-8.4;
+      const yTip=host? host.ya+host.slope*(xs-host.xa) : (up? P.y-38 : P.y+38);
+      if(!host) parts.push(`<line class="stem" x1="${xs}" y1="${P.y+(up?-2:2)}" x2="${xs}" y2="${yTip}"/>`);
+      for(let L=2;L<=(bm[2]||1);L++){ const off=(L-1)*7.5*(up?1:-1);
+        parts.push(`<line class="beam" x1="${xs-14}" y1="${yTip+off}" x2="${xs}" y2="${yTip+off}"/>`);
       }
     });
     /* ties & slurs */
