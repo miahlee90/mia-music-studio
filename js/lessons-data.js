@@ -99,7 +99,11 @@ const LESSONS=[
  {n:96, title:"Nonharmonic Tones Expanded", unit:24, book:4, time:15, kw:["suspension","appoggiatura","escape tone","anticipation","pedal point","retardation"]},
  {n:97, title:"Voice Leading Basics", unit:24, book:4, time:15, kw:["SATB","voice leading","spacing","voice crossing","parallel fifths"]},
  {n:98, title:"Secondary Dominants", unit:24, book:4, time:15, kw:["secondary dominant","V/V","tonicization","applied chords"]},
- {n:99, title:"Modulation", unit:24, book:4, time:15, kw:["modulation","pivot chord","closely related keys","phrase modulation"]}
+ {n:99, title:"Modulation", unit:24, book:4, time:15, kw:["modulation","pivot chord","closely related keys","phrase modulation"]},
+ {n:100, title:"Ornaments", unit:25, book:4, time:15, kw:["trill","mordent","turn","grace notes"]},
+ {n:101, title:"Theme and Variations", unit:25, book:4, time:15, kw:["theme","variations","minore","ornamentation"]},
+ {n:102, title:"Sonata Form", unit:25, book:4, time:15, kw:["sonata form","exposition","development","recapitulation","coda"]},
+ {n:103, title:"Larger Instrumental Forms", unit:25, book:4, time:15, kw:["minuet","trio","scherzo","march","concerto","cadenza"]}
 ];
 const UNITS=[
  {unit:1, book:1, name:"The Staff and Clefs", lessons:[1,5]},
@@ -125,8 +129,9 @@ const UNITS=[
  {unit:21, book:4, name:"Keys & Harmony Foundations", lessons:[84,87]},
  {unit:22, book:4, name:"Musical Structure", lessons:[88,91]},
  {unit:23, book:4, name:"Seventh Chords", lessons:[92,95]},
- {unit:24, book:4, name:"Harmony in Practice", lessons:[96,99]}
+ {unit:24, book:4, name:"Harmony in Practice", lessons:[96,99]},
+ {unit:25, book:4, name:"Musical Expression & Forms", lessons:[100,103]}
 ];
 /* built lessons so far (index pages link only these) */
-const BUILT_THROUGH=99;
+const BUILT_THROUGH=103;
 const LESSON_CONTENT={}; /* filled by content/lesson-NN.js */
