@@ -12,9 +12,10 @@ const Nav=(()=>{
     </div></header>`;
   }
   function footer(n){
+    const LAST=LESSONS[LESSONS.length-1].n;
     const prev=n>1?`<a href="${href(n-1)}">← Lesson ${n-1}</a>`:`<a class="disabled">← Previous</a>`;
-    const next=(n<75&&n<BUILT_THROUGH)?`<a href="${href(n+1)}">Lesson ${n+1} →</a>`:
-               n<75?`<a class="disabled" title="Coming soon">Lesson ${n+1} (soon)</a>`:`<a class="disabled">—</a>`;
+    const next=(n<LAST&&n<BUILT_THROUGH)?`<a href="${href(n+1)}">Lesson ${n+1} →</a>`:
+               n<LAST?`<a class="disabled" title="Coming soon">Lesson ${n+1} (soon)</a>`:`<a class="disabled">—</a>`;
     const opts=LESSONS.map(l=>{
       const built=l.n<=BUILT_THROUGH;
       return `<option value="${built?href(l.n):""}" ${l.n===n?"selected":""} ${built?"":"disabled"}>${l.n}. ${l.title}${built?"":" (soon)"}</option>`;
@@ -24,7 +25,7 @@ const Nav=(()=>{
       `<option value="">Jump to any lesson…</option>${opts}</select></div>`;
   }
   function nextInvite(n){
-    if(n>=75) return "";
+    if(n>=LESSONS[LESSONS.length-1].n) return "";
     const N=lesson(n+1);
     const soon=n+1>BUILT_THROUGH?" (coming soon)":"";
     return `<section class="card next-invite"><h2>Nice work! 🎉</h2>
