@@ -5,22 +5,22 @@
    reduce by subtracting 7. NOTE: edit by FULL-FILE REWRITE only. */
 
 LESSON_CONTENT[83]={
-  welcome:"Flip an interval, keep the rules. \u{1F503}",
+  welcome:"Invert intervals and identify intervals larger than an octave.",
   hook:{
-    say:"<b>One pair of notes, two intervals.</b> C up to E is a 3rd. Move the C up an octave — now E up to C. \u{1F447} <b>Listen to both. Is the second interval still a 3rd?</b>",
+    say:"C up to E forms a third. Move the lower C up one octave, placing it above E. The resulting interval, E up to C, is an inversion of the original interval. \u{1F447} <b>Listen to both intervals. What is the second interval?</b>",
     interact:{ type:"custom",
       mount:(container,fb)=>{
         container.innerHTML=`<div style="text-align:center">
-          <button class="play hk-a">▶ C up to E (the 3rd)</button>
-          <button class="play hk-b">▶ E up to C (flipped)</button></div>
-          <div class="choices hk-ch" style="display:none"><button>No — it became a 6th</button><button>Yes — flipping changes nothing</button><button>It became a 2nd</button></div>`;
+          <button class="play hk-a">▶ C up to E — a third</button>
+          <button class="play hk-b">▶ E up to C — the inversion</button></div>
+          <div class="choices hk-ch" style="display:none"><button>A sixth</button><button>A third</button><button>A second</button></div>`;
         const ch=container.querySelector(".hk-ch");
         let hA=false,hB=false;
         container.querySelector(".hk-a").onclick=()=>{ MFAudio.tone(60,.6,0,.42); MFAudio.tone(64,.6,.7,.42); MFAudio.tone(60,.8,1.5,.3); MFAudio.tone(64,.8,1.5,.3); hA=true; if(hB) setTimeout(()=>ch.style.display="",2400); };
         container.querySelector(".hk-b").onclick=()=>{ MFAudio.tone(64,.6,0,.42); MFAudio.tone(72,.6,.7,.42); MFAudio.tone(64,.8,1.5,.3); MFAudio.tone(72,.8,1.5,.3); hB=true; if(hA) setTimeout(()=>ch.style.display="",2400); };
         [...ch.children].forEach((b,i)=>b.onclick=()=>{
-          if(i===0) fb(true,"✓ E up to C is a 6th. Flipping an interval INVERTS it — and the numbers always add to 9 (3+6). Today: inversions and intervals beyond the octave!");
-          else fb(false,"Count the letter names E-F-G-A-B-C: six of them…");
+          if(i===0) fb(true,"✓ Correct. E up to C is a sixth. A third and its inversion, a sixth, have interval numbers that add to 9.");
+          else fb(false,"Count the letter names inclusively from E through C: E–F–G–A–B–C.");
         });
       } }
   },
@@ -33,54 +33,54 @@ LESSON_CONTENT[83]={
     "Name 9ths, 10ths, 11ths, 12ths and 13ths"
   ],
   steps:[
-    { say:"<b>Interval Inversion:</b> to invert an interval, <b>move the bottom note up one octave</b> (or the top note down one). C–E (3rd) becomes E–C (6th). \u{1F447} <b>How do you invert an interval?</b>",
+    { say:"<b>Interval Inversion:</b> To invert an interval, <b>move the lower note up one octave</b> or move the upper note down one octave. The two notes exchange positions. For example, C–E, a third, becomes E–C, a sixth. \u{1F447} <b>Which action inverts a simple interval?</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:90,notes:[
         {p:"C4",d:"h",label:"3rd"},{p:"E4",d:"h",chord:true},
         {p:"E4",d:"h",label:"6th"},{p:"C5",d:"h",chord:true},{bar:"final"}],width:380} },
-      try:{ type:"mc", choices:["Move the bottom note up an octave","Play it backwards","Add a sharp"], answer:0,
-        success:"✓ The bottom becomes the top — the interval flips.",
-        fail:"The notes stay the same letters…",
-        hint:"Octave transfer." } },
-    { say:"<b>The Rule of 9:</b> an interval and its inversion always <b>add up to nine</b>: 2nd↔7th · 3rd↔6th · 4th↔5th · unison↔octave. \u{1F447} <b>A 4th inverts to a…</b>",
+      try:{ type:"mc", choices:["Move the lower note up one octave","Move both notes up one octave","Add an accidental to the upper note"], answer:0,
+        success:"✓ Correct. Moving the lower note up an octave places it above the original upper note and inverts the interval.",
+        fail:"Keep the same pitch classes, but exchange their vertical positions.",
+        hint:"Transfer one note by an octave so that the lower note becomes the upper note." } },
+    { say:"<b>The Rule of 9:</b> The numbers of a simple interval and its inversion <b>add to 9</b>: second ↔ seventh, third ↔ sixth, fourth ↔ fifth, and unison ↔ octave. \u{1F447} <b>A fourth inverts to a…</b>",
       show:{ type:"html", html:`<table style="border-collapse:collapse;margin:0 auto;font-size:14.5px">
         <tr><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:6px 14px">Interval</th><td style="border:1.5px solid #cdd5e1;padding:4px 12px;text-align:center">unison</td><td style="border:1.5px solid #cdd5e1;padding:4px 12px;text-align:center">2nd</td><td style="border:1.5px solid #cdd5e1;padding:4px 12px;text-align:center">3rd</td><td style="border:1.5px solid #cdd5e1;padding:4px 12px;text-align:center">4th</td></tr>
         <tr><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:6px 14px">Inversion</th><td style="border:1.5px solid #cdd5e1;padding:4px 12px;text-align:center;font-weight:800">octave</td><td style="border:1.5px solid #cdd5e1;padding:4px 12px;text-align:center;font-weight:800">7th</td><td style="border:1.5px solid #cdd5e1;padding:4px 12px;text-align:center;font-weight:800">6th</td><td style="border:1.5px solid #cdd5e1;padding:4px 12px;text-align:center;font-weight:800">5th</td></tr>
         <tr><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:6px 14px">Sum</th><td style="border:1.5px solid #cdd5e1;padding:4px 12px;text-align:center;color:#A9821F;font-weight:800">9</td><td style="border:1.5px solid #cdd5e1;padding:4px 12px;text-align:center;color:#A9821F;font-weight:800">9</td><td style="border:1.5px solid #cdd5e1;padding:4px 12px;text-align:center;color:#A9821F;font-weight:800">9</td><td style="border:1.5px solid #cdd5e1;padding:4px 12px;text-align:center;color:#A9821F;font-weight:800">9</td></tr></table>` },
-      try:{ type:"mc", choices:["5th (4 + 5 = 9)","6th","4th — it never changes"], answer:0,
-        success:"✓ 4 + 5 = 9 — the rule of 9 never misses.",
-        fail:"Subtract from nine…",
-        hint:"9 − 4 = ?" } },
-    { say:"<b>Quality Flips Too:</b> <b>major ↔ minor</b> · <b>augmented ↔ diminished</b> · <b>perfect stays perfect</b>. A major 3rd inverts to a minor 6th; a perfect 5th inverts to a perfect 4th. \u{1F447} <b>A major 2nd inverts to…</b>",
-      try:{ type:"mc", choices:["A minor 7th","A major 7th","A perfect 7th"], answer:0,
-        success:"✓ Number: 2→7. Quality: major→minor. M2 inverts to m7.",
-        fail:"Both the number AND the quality flip…",
-        hint:"M↔m." } },
-    { say:"<b>Why Perfect Stays Perfect:</b> the perfect intervals (unison, 4th, 5th, octave) invert into each other — P4↔P5, P1↔P8 — so their family never changes. That stability is why they are called perfect. \u{1F447} <b>A perfect 5th inverts to…</b>",
+      try:{ type:"mc", choices:["fifth","sixth","fourth"], answer:0,
+        success:"✓ Correct. A fourth inverts to a fifth because 4 + 5 = 9.",
+        fail:"Subtract the original interval number from 9.",
+        hint:"9 − 4 = 5." } },
+    { say:"<b>Interval Quality Under Inversion:</b> Major intervals invert to minor intervals, and minor intervals invert to major intervals. Augmented intervals invert to diminished intervals, and diminished intervals invert to augmented intervals. <b>Perfect intervals remain perfect.</b> Therefore, a major third inverts to a minor sixth, and a perfect fifth inverts to a perfect fourth. \u{1F447} <b>A major second inverts to…</b>",
+      try:{ type:"mc", choices:["a minor seventh","a major seventh","a perfect seventh"], answer:0,
+        success:"✓ Correct. The interval number changes from 2 to 7, and the quality changes from major to minor. Therefore, M2 inverts to m7.",
+        fail:"Apply both the interval-number rule and the quality-inversion rule.",
+        hint:"2 ↔ 7 and major ↔ minor." } },
+    { say:"<b>Perfect Intervals Under Inversion:</b> Perfect unisons, fourths, fifths, and octaves invert to other perfect intervals. A perfect fourth inverts to a perfect fifth, and a perfect unison inverts to a perfect octave. Unlike major and minor qualities, <b>the perfect quality does not change under inversion</b>. \u{1F447} <b>A perfect fifth inverts to…</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:90,notes:[
         {p:"C4",d:"h",label:"P5"},{p:"G4",d:"h",chord:true},
         {p:"G4",d:"h",label:"P4"},{p:"C5",d:"h",chord:true},{bar:"final"}],width:380} },
-      try:{ type:"mc", choices:["A perfect 4th","A diminished 5th","A major 4th"], answer:0,
-        success:"✓ P5 → P4: still perfect, numbers summing to nine.",
-        fail:"Perfect flips to…",
-        hint:"P↔P." } },
-    { say:"<b>Compound Intervals:</b> intervals <b>larger than an octave</b>. A 9th = a 2nd plus an octave; a 10th = a 3rd plus an octave. To find the simple interval, <b>subtract 7</b>. <b>Remember: rule of 9 for inversions · subtract 7 for compounds.</b> \u{1F447} <b>A 10th reduces to a…</b>",
+      try:{ type:"mc", choices:["a perfect fourth","a diminished fifth","an augmented fourth"], answer:0,
+        success:"✓ Correct. A perfect fifth inverts to a perfect fourth: 5 + 4 = 9, and the perfect quality remains unchanged.",
+        fail:"Which interval quality remains perfect under inversion?",
+        hint:"Perfect ↔ perfect." } },
+    { say:"<b>Compound Intervals:</b> Compound intervals are <b>larger than an octave</b>. A ninth is a second plus an octave, and a tenth is a third plus an octave. To reduce a compound interval between a ninth and a fifteenth to its simple equivalent, <b>subtract 7</b> from its interval number. For larger intervals, subtract 7 repeatedly until the result is between 1 and 8. \u{1F447} <b>A tenth reduces to which simple interval?</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:90,notes:[
         {p:"C4",d:"h",label:"9th"},{p:"D5",d:"h",chord:true},
         {p:"C4",d:"h",label:"10th"},{p:"E5",d:"h",chord:true},{bar:"final"}],width:380} },
-      try:{ type:"mc", choices:["3rd (10 − 7 = 3)","2nd","5th"], answer:0,
-        success:"✓ A 10th is a 3rd stretched past the octave.",
-        fail:"Subtract seven from the compound number…",
-        hint:"10 − 7." } },
-    { say:"<b>The Compound Family:</b> 9th = 2nd · 10th = 3rd · 11th = 4th · 12th = 5th · 13th = 6th (all plus an octave). These numbers return in jazz chord symbols — C9, C11, C13. \u{1F447} <b>An 11th is a compound…</b>",
-      try:{ type:"mc", choices:["4th","5th","2nd"], answer:0,
-        success:"✓ 11 − 7 = 4. The 11th is a 4th plus an octave.",
-        fail:"Apply the subtraction…",
-        hint:"11 − 7 = ?" } },
-    { say:"<b>Review:</b> \u{1F447} <b>A minor 3rd inverts to…</b>",
-      try:{ type:"mc", choices:["A major 6th","A minor 6th","A perfect 6th"], answer:0,
-        success:"✓ 3→6 by the rule of 9; minor→major by the quality flip.",
-        fail:"Flip BOTH parts…",
-        hint:"m↔M, 3↔6." } }
+      try:{ type:"mc", choices:["A third","A second","A fifth"], answer:0,
+        success:"✓ Correct. A tenth is a third plus one octave: 10 − 7 = 3.",
+        fail:"Subtract 7 from the compound interval number.",
+        hint:"10 − 7 = 3." } },
+    { say:"<b>Common Compound Intervals:</b> A ninth is the compound equivalent of a second; a tenth of a third; an eleventh of a fourth; a twelfth of a fifth; and a thirteenth of a sixth. The numbers 9, 11, and 13 also appear in extended-chord symbols such as C9, C11, and C13. In chord symbols, these numbers identify chord extensions measured conceptually above the root, although actual voicings may place them in other octaves. \u{1F447} <b>An eleventh is the compound equivalent of a…</b>",
+      try:{ type:"mc", choices:["fourth","fifth","second"], answer:0,
+        success:"✓ Correct. An eleventh is a fourth plus an octave: 11 − 7 = 4.",
+        fail:"Subtract 7 from the compound interval number.",
+        hint:"11 − 7 = 4." } },
+    { say:"<b>Review:</b> \u{1F447} <b>A minor third inverts to…</b>",
+      try:{ type:"mc", choices:["a major sixth","a minor sixth","an augmented sixth"], answer:0,
+        success:"✓ Correct. A third inverts to a sixth, and minor quality inverts to major quality. Therefore, m3 inverts to M6.",
+        fail:"Apply both the number and quality rules.",
+        hint:"3 ↔ 6 and minor ↔ major." } }
   ],
   examples:[
     { caption:"Inversion pairs played back to back: M3→m6, then P5→P4. Same letter names, flipped stacking — numbers always summing to nine.",
@@ -90,7 +90,7 @@ LESSON_CONTENT[83]={
         {p:"D4",d:"h",label:"P5"},{p:"A4",d:"h",chord:true},
         {p:"A4",d:"h",label:"P4"},{p:"D5",d:"h",chord:true},{bar:"final"}],width:560},
       kb:{start:48,octaves:2,labels:true} },
-    { caption:"Compound intervals from C: a 9th (D), a 10th (E) and a 13th (A) — each a simple interval pushed past the octave. Jazz chords borrow these numbers.",
+    { caption:"Compound intervals from C: a 9th (D), a 10th (E) and a 13th (A) — each a simple interval pushed past the octave. Jazz chord symbols use these numbers as theoretical extensions.",
       staff:{clef:"treble",tempo:80,notes:[
         {p:"C4",d:"h",label:"9th"},{p:"D5",d:"h",chord:true},
         {p:"C4",d:"h",label:"10th"},{p:"E5",d:"h",chord:true},
@@ -99,8 +99,8 @@ LESSON_CONTENT[83]={
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Rule-of-9 Sprint (45s)",
-      intro:"Inversion pairs and quality flips — race them!",
-      miaIntro:"Sum to nine! \u{26A1}",
+      intro:"Identify inversion pairs and interval-quality changes before time runs out.",
+      miaIntro:"The interval numbers of an inversion pair add to 9.",
       spec:{gen:"term-match", params:{subject:"term", pool:[
         ["2nd inverts to","7th"],
         ["3rd inverts to","6th"],
@@ -110,25 +110,25 @@ LESSON_CONTENT[83]={
         ["Perfect inverts to","perfect"],
         ["The inversion rule","numbers sum to 9"],
         ["To invert","move the bottom note up an octave"]], reverse:true}, seconds:45},
-      result:(score)=>score>=8?score+" — rule of 9 automatic!":null },
+      result:(score)=>score>=8?score+" — Rule-of-9 challenge completed!":null },
     { type:"symbol-hunt", title:"Game 2 · Find the Inversion",
-      intro:"An interval is called — click its INVERSION!",
-      miaIntro:"Flip the stack! \u{1F440}",
+      intro:"Select the correct inversion of each interval.",
+      miaIntro:"Exchange the upper and lower notes.",
       spec:{rounds:6, pool:[
         {label:"m6 (inverts M3)", spec:{clef:"treble",notes:[{p:"E4",d:"w"},{p:"C5",d:"w",chord:true}],width:140}},
         {label:"P4 (inverts P5)", spec:{clef:"treble",notes:[{p:"G4",d:"w"},{p:"C5",d:"w",chord:true}],width:140}},
         {label:"m7 (inverts M2)", spec:{clef:"treble",notes:[{p:"D4",d:"w"},{p:"C5",d:"w",chord:true}],width:140}},
         {label:"M6 (inverts m3)", spec:{clef:"treble",notes:[{p:"E4",d:"w"},{p:"C#5",d:"w",chord:true}],width:140}}]},
-      result:(score)=>score>=5?"Inversions found on sight!":null },
+      result:(score)=>score>=5?"You identified the interval inversions correctly.":null },
     { type:"order-tap", title:"Game 3 · Compound Ladder",
-      intro:"Tap the compound intervals from SMALLEST to LARGEST!",
-      miaIntro:"Past the octave and climbing! \u{1F3C1}",
+      intro:"Arrange the compound intervals from smallest to largest.",
+      miaIntro:"Begin with the interval closest to the octave.",
       spec:{sequence:["9th (= 2nd)","10th (= 3rd)","11th (= 4th)","12th (= 5th)","13th (= 6th)"],
         title:"The compound interval ladder"},
-      result:(stars)=>stars>=2?"The ladder, in order!":null },
+      result:(stars)=>stars>=2?"You arranged the compound intervals correctly.":null },
     { type:"term-race", title:"Game 4 · Reduce the Compound",
-      intro:"Subtract 7 at speed — name each compound's simple interval!",
-      miaIntro:"Minus seven! \u{1F3C1}",
+      intro:"Reduce each compound interval to its simple equivalent before time runs out.",
+      miaIntro:"Subtract 7, repeating when necessary.",
       spec:{rounds:8, reverse:true, pool:[
         ["9th","a compound 2nd"],
         ["10th","a compound 3rd"],
@@ -138,25 +138,25 @@ LESSON_CONTENT[83]={
         ["Compound interval","larger than an octave"],
         ["Reduction rule","subtract 7"],
         ["C9, C11, C13 chords","named for compound intervals"]]},
-      result:(score)=>score>=6?"Compounds reduced instantly!":null }
+      result:(score)=>score>=6?"You reduced the compound intervals correctly.":null }
   ],
-  practiceIntro:"20 practice questions — inversions, qualities and compounds. Answer right and the next appears automatically!",
+  practiceIntro:"Complete 20 practice questions on interval inversions, qualities, and compound intervals. The next question will appear after each correct answer.",
   practice:[
     { gen:"term-match", params:{subject:"term", pool:[["2nd↔","7th"],["3rd↔","6th"],["4th↔","5th"],["M↔","m"],["P↔","P"],["Sum","9"]], reverse:true}, count:6 },
     { gen:"interval-quality", params:{ask:"quality"}, count:3 },
-    { type:"mc", q:"To invert an interval, you…", choices:["move the bottom note up an octave","remove a note","change the clef"], answer:0,
-      explain:"Bottom becomes top." },
-    { type:"mc", q:"A 6th inverts to a…", choices:["3rd","4th","6th"], answer:0,
+    { type:"mc", q:"Which action inverts a simple interval?", choices:["Move the lower note up one octave","Remove one of the notes","Change the clef"], answer:0,
+      explain:"The lower note moves above the original upper note." },
+    { type:"mc", q:"A sixth inverts to a…", choices:["third","fourth","sixth"], answer:0,
       explain:"6 + 3 = 9." },
-    { type:"mc", q:"A major interval inverts to a…", choices:["minor interval","major interval","perfect interval"], answer:0,
-      explain:"M↔m always." },
-    { type:"mc", q:"A perfect 4th inverts to a…", choices:["perfect 5th","major 5th","diminished 5th"], answer:0,
+    { type:"mc", q:"A major interval inverts to which quality?", choices:["Minor","Major","Perfect"], answer:0,
+      explain:"Major and minor qualities exchange under inversion." },
+    { type:"mc", q:"A perfect 4th inverts to a…", choices:["Perfect fifth","Augmented fifth","Diminished fifth"], answer:0,
       explain:"Perfect stays perfect; 4+5=9." },
-    { type:"truefalse", q:"An interval and its inversion sum to nine.", answer:true,
+    { type:"truefalse", q:"The numbers of a simple interval and its inversion add to 9.", answer:true,
       explain:"The rule of 9." },
-    { type:"truefalse", q:"A compound interval is smaller than an octave.", answer:false,
+    { type:"truefalse", q:"A compound interval is larger than an octave.", answer:true,
       explain:"LARGER than an octave." },
-    { type:"truefalse", q:"A 9th reduces to a 2nd.", answer:true,
+    { type:"truefalse", q:"A ninth reduces to a second.", answer:true,
       explain:"9 − 7 = 2." },
     { gen:"term-match", params:{subject:"term", pool:[["9th","compound 2nd"],["10th","compound 3rd"],["11th","compound 4th"],["13th","compound 6th"]], reverse:true}, count:3 },
     { gen:"interval-quality", params:{ask:"quality"}, count:2 }
@@ -184,37 +184,37 @@ LESSON_CONTENT[83]={
   rewards:{ badge:"Interval Flipper", icon:"\u{1F503}" },
   sectionOrder:["secHook","secObjectives","secLearn","secExample","secReview",
     "secGame0","secGame1","secGame2","secGame3","secPractice","secQuiz","secTips","secNext"],
-  miaQuizIntro:"Quiz! Sum to 9, flip the quality, subtract 7.",
+  miaQuizIntro:"Quiz: Apply the rule of 9, invert interval qualities, and reduce compound intervals.",
   quiz:[
-    { type:"mc", q:"How is an interval inverted?", choices:["The bottom note moves up an octave","Both notes move up","The interval is played twice"], answer:0,
+    { type:"mc", q:"Which action inverts a simple interval?", choices:["Move the lower note up one octave","Move both notes up one octave","Repeat the same interval"], answer:0,
       explain:"Bottom becomes top.", hint:"Octave transfer." },
-    { type:"mc", q:"An interval and its inversion always sum to…", choices:["9","8","10"], answer:0,
+    { type:"mc", q:"The interval numbers of a simple interval and its inversion add to…", choices:["9","8","10"], answer:0,
       explain:"The rule of 9.", hint:"3+6, 4+5…" },
     { type:"mc", q:"A 2nd inverts to a…", choices:["7th","6th","5th"], answer:0,
-      explain:"2 + 7 = 9.", hint:"Subtract from 9." },
+      explain:"A second inverts to a seventh because 2 + 7 = 9.", hint:"Subtract from 9." },
     { type:"mc", q:"A major 3rd inverts to a…", choices:["minor 6th","major 6th","minor 3rd"], answer:0,
-      explain:"3→6 and M→m.", hint:"Both parts flip." },
-    { type:"mc", q:"An augmented 4th inverts to a…", choices:["diminished 5th","augmented 5th","perfect 5th"], answer:0,
-      explain:"A↔d and 4↔5 — the tritone flips into itself.", hint:"A↔d." },
-    { type:"mc", q:"Which quality stays the same under inversion?", choices:["Perfect","Major","Augmented"], answer:0,
-      explain:"P4↔P5, P1↔P8.", hint:"The stable family." },
+      explain:"A major third inverts to a minor sixth: 3 ↔ 6 and major ↔ minor.", hint:"Both parts flip." },
+    { type:"mc", q:"An augmented fourth inverts to a…", choices:["diminished fifth","augmented fifth","perfect fifth"], answer:0,
+      explain:"Augmented quality inverts to diminished quality, and a fourth inverts to a fifth. An augmented fourth and diminished fifth span the same number of half steps in twelve-tone equal temperament but use different spellings.", hint:"A↔d." },
+    { type:"mc", q:"Which interval quality remains unchanged under inversion?", choices:["Perfect","Major","Augmented"], answer:0,
+      explain:"P4↔P5, P1↔P8.", hint:"Perfect intervals invert to other perfect intervals." },
     { type:"mc", q:"A compound interval is…", choices:["larger than an octave","smaller than a 2nd","always dissonant"], answer:0,
-      explain:"9ths and beyond.", hint:"Past the octave." },
-    { type:"mc", q:"A 13th reduces to a…", choices:["6th","5th","7th"], answer:0,
+      explain:"Common compound intervals include ninths, tenths, elevenths, and larger intervals.", hint:"Past the octave." },
+    { type:"mc", q:"A thirteenth reduces to a…", choices:["sixth","fifth","seventh"], answer:0,
       explain:"13 − 7 = 6.", hint:"Subtract 7." },
     { type:"mc", q:"Identify the interval.",
       staff:{clef:"treble",notes:[{p:"C4",d:"w"},{p:"D5",d:"w",chord:true}],width:160},
-      choices:["A 9th — a compound 2nd","A 2nd","An octave"], answer:0,
-      explain:"C to the D past the octave = 9th.", hint:"Count past 8." },
-    { type:"truefalse", q:"A minor 7th inverts to a major 2nd.", answer:true,
+      choices:["A ninth—a compound second","A second","An octave"], answer:0,
+      explain:"C up to the D above the octave forms a ninth. Its simple equivalent is a second.", hint:"Count past 8." },
+    { type:"truefalse", q:"A minor seventh inverts to a major second.", answer:true,
       explain:"7→2, m→M.", hint:"Run the flips." },
-    { type:"truefalse", q:"A compound interval's quality differs from its simple form.", answer:false,
-      explain:"A major 10th is a major 3rd — quality carries over.", hint:"Only the octave is added." },
-    { type:"mc", q:"Jazz chords called C9, C11 and C13 take their numbers from…", choices:["compound intervals above the root","measure numbers","fingerings"], answer:0,
-      explain:"9th, 11th, 13th above C.", hint:"The interval ladder." }
+    { type:"truefalse", q:"A compound interval retains the quality of its simple equivalent.", answer:true,
+      explain:"For example, a major tenth reduces to a major third. Adding or removing an octave does not change the interval quality.", hint:"Only the octave is added." },
+    { type:"mc", q:"In extended-chord symbols such as C9, C11, and C13, what do the numbers represent?", choices:["Chord extensions measured conceptually above the root","Measure numbers","Piano fingerings"], answer:0,
+      explain:"The numbers identify theoretical chord extensions above the root. Actual voicings may place these notes in different octaves or omit certain chord members.", hint:"The interval ladder." }
   ],
-  miaPerfect:"PERFECT! Nines summed, sevens subtracted — intervals flip at your command. \u{1F503}\u{1F389}",
-  miaPass:"Passed — and UNIT 20 is COMPLETE! Scales and intervals, fully expanded. \u{1F389}",
+  miaPerfect:"Perfect score! You accurately inverted simple intervals and reduced compound intervals.",
+  miaPass:"You passed and completed unit 20. Next, you will study transposition.",
   mia:{
     hook:{ label:"the welcome",
       explain:"C–E (a 3rd) flipped into E–C (a 6th): inversion. The numbers 3 and 6 sum to nine — they always will.",

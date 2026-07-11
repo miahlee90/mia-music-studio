@@ -16,7 +16,7 @@ function MF_L76_conduct(container,fb){
     {meter:"6/8", beats:2, why:"6 ÷ 3 = 2 beats — compound DUPLE conducts a 2-beat pattern."},
     {meter:"9/8", beats:3, why:"9 ÷ 3 = 3 beats — compound TRIPLE conducts a 3-beat pattern."},
     {meter:"12/8", beats:4, why:"12 ÷ 3 = 4 beats — compound QUADRUPLE conducts a 4-beat pattern."},
-    {meter:"6/8", beats:2, why:"Conducting follows the BEATS (2 dotted quarters), never the six divisions."}];
+    {meter:"6/8", beats:2, why:"Conducting normally follows the BEATS (2 dotted quarters) rather than the six divisions."}];
   let r=0;
   container.innerHTML=`<div class="big-q l76c-q" style="text-align:center"></div>
     <div class="l76c-pats" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap"></div>`;
@@ -60,15 +60,15 @@ function MF_L76_ear(container,fb){
     const comp=ROUNDS[r]===1;
     if((i===1)===comp){ fb(true,comp?"✓ Each beat carried THREE quick notes — compound meter.":"✓ Each beat carried TWO quick notes — simple meter."); r++; played=false; ch.style.display="none";
       if(r>=ROUNDS.length){ q.textContent="Excellent! Your ear tells simple from compound."; pl.style.display="none"; } else q.innerHTML=`Round ${r+1} of ${ROUNDS.length}: listen, then decide.`;
-    } else { MFAudio.tone(40,.2); fb(false,"Listen again — count how many quick notes fill each low beat: two or three?"); }
+    } else { MFAudio.tone(40,.2); fb(false,"Listen again — count how many quick notes fill each main beat: two or three?"); }
   });
   q.innerHTML="Round 1 of 4: listen, then decide.";
 }
 
 LESSON_CONTENT[76]={
-  welcome:"Compound meter: every beat divides into three. \u{1F3B5}",
+  welcome:"In compound meter, each beat divides into three equal parts.",
   hook:{
-    say:"<b>Two patterns use the same beat.</b> In one, each beat divides into TWO parts; in the other, into THREE. Listen to both. \u{1F447} <b>Which pattern divides each beat into three?</b>",
+    say:"<b>Listen to the two patterns.</b> In one, each beat divides into two equal parts; in the other, each beat divides into three. \u{1F447} <b>Which pattern is in compound meter?</b>",
     interact:{ type:"custom",
       mount:(container,fb)=>{
         container.innerHTML=`<div style="text-align:center">
@@ -80,8 +80,8 @@ LESSON_CONTENT[76]={
         container.querySelector(".hk-a").onclick=()=>{ for(let b=0;b<4;b++){ MFAudio.tone(48,.3,b*.5,.42); MFAudio.tone(74,.12,b*.5+.25,.16); } hA=true; if(hB) setTimeout(()=>ch.style.display="",2300); };
         container.querySelector(".hk-b").onclick=()=>{ for(let b=0;b<4;b++){ MFAudio.tone(48,.3,b*.6,.42); MFAudio.tone(74,.12,b*.6+.2,.16); MFAudio.tone(74,.12,b*.6+.4,.16); } hB=true; if(hA) setTimeout(()=>ch.style.display="",2700); };
         [...ch.children].forEach((b,i)=>b.onclick=()=>{
-          if(i===0) fb(true,"✓ Pattern 2 divided each beat into THREE equal parts. Meters whose beats divide into three are called COMPOUND meters — today's lesson!");
-          else fb(false,"Pattern 1's beats split in half — two parts. Listen again for the beat that splits into THREE…");
+          if(i===0) fb(true,"✓ Correct. In Pattern 2, each beat divides into three equal parts. This is the defining feature of compound meter.");
+          else fb(false,"Pattern 1 divides each beat into two equal parts. Listen again for the pattern that divides each beat into three.");
         });
       } }
   },
@@ -94,65 +94,65 @@ LESSON_CONTENT[76]={
     "Hear the difference between simple and compound meter"
   ],
   steps:[
-    { say:"<b>Compound Meter:</b> In a compound meter, <b>each beat divides into three equal parts</b>. In a simple meter, each beat divides into two. The beat in compound meter is a <b>dotted note</b> — usually the dotted quarter. \u{1F447} <b>In compound meter, each beat divides into…</b>",
+    { say:"<b>Compound Meter:</b> In compound meter, <b>each beat divides into three equal parts</b>. By contrast, each beat in simple meter normally divides into two equal parts. In compound meters with 8 as the bottom number, the beat is usually a <b>dotted quarter note</b>. \u{1F447} <b>In compound meter, each beat divides into…</b>",
       show:{ type:"html", html:`<table style="border-collapse:collapse;margin:0 auto;font-size:14.5px;min-width:300px">
         <tr><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:6px 14px"></th><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:6px 14px;color:#2F6DA8">Simple Meter</th><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:6px 14px;color:#C05A21">Compound Meter</th></tr>
         <tr><td style="border:1.5px solid #cdd5e1;padding:4px 14px;font-weight:800">Beat divides into</td><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center;color:#2F6DA8;font-weight:800">2 parts</td><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center;color:#C05A21;font-weight:800">3 parts</td></tr>
         <tr><td style="border:1.5px solid #cdd5e1;padding:4px 14px;font-weight:800">Beat note</td><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center">plain note (♩)</td><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center">dotted note (♩.)</td></tr>
         <tr><td style="border:1.5px solid #cdd5e1;padding:4px 14px;font-weight:800">Examples</td><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center">2/4, 3/4, 4/4</td><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center">6/8, 9/8, 12/8</td></tr></table>` },
       try:{ type:"mc", choices:["Three equal parts","Two equal parts","Four equal parts"], answer:0,
-        success:"✓ Three equal parts — that is the definition of compound meter.",
-        fail:"Compare with simple meter, which divides in two…",
-        hint:"Com-POUND = beats of three." } },
-    { say:"<b>Beat vs. Division:</b> 6/8 contains six eighth notes, but at normal tempos it has only <b>TWO beats</b> — each a <b>dotted quarter</b>. The six eighth notes are the <b>divisions</b> of those two beats. The bottom number names the division note, not the beat. \u{1F447} <b>In 6/8 at a normal tempo, which note gets the beat?</b>",
+        success:"✓ Correct. Each beat in compound meter divides into three equal parts.",
+        fail:"In simple meter, each beat divides into two equal parts. Compound meter divides each beat into three.",
+        hint:"Compound beats divide into three equal parts." } },
+    { say:"<b>Beat and Division:</b> A measure of 6/8 contains six eighth-note <b>divisions</b>. At a moderate tempo, these divisions form <b>two beats</b>, with three eighth notes in each beat. Each beat is therefore represented by a <b>dotted quarter note</b>. In compound meter, the bottom number identifies the division value rather than the beat value. \u{1F447} <b>In 6/8 at a moderate tempo, which note represents one beat?</b>",
       show:{ type:"staff", spec:{clef:"treble",time:"6/8",tempo:60,notes:[
         {p:"G4",d:"8",label:"1"},{p:"G4",d:"8",label:"&"},{p:"G4",d:"8",label:"a"},
         {p:"D5",d:"8",label:"2"},{p:"D5",d:"8",label:"&"},{p:"D5",d:"8",label:"a"},{bar:"final"}],
         beams:[[0,2],[3,5]],width:420} },
       try:{ type:"mc", choices:["The dotted quarter note","The eighth note","The whole note"], answer:0,
-        success:"✓ The dotted quarter — one beat containing three eighth-note divisions.",
-        fail:"Which note equals three eighth notes?",
-        hint:"♪+♪+♪ = ♩." } },
-    { say:"<b>The Three Compound Meters:</b> <b style='color:#C05A21'>6/8 = compound DUPLE</b> (2 beats) · <b style='color:#C05A21'>9/8 = compound TRIPLE</b> (3 beats) · <b style='color:#C05A21'>12/8 = compound QUADRUPLE</b> (4 beats). <b>Remember: beats = top number ÷ 3.</b> \u{1F447} <b>How many beats does 9/8 have?</b>",
+        success:"✓ Correct. One dotted quarter note equals three eighth-note divisions.",
+        fail:"Which note value equals three eighth notes?",
+        hint:"Three eighth notes equal one dotted quarter note." } },
+    { say:"<b>Three Common Compound Meters:</b> <b style='color:#C05A21'>6/8</b> is compound duple meter with two beats; <b style='color:#C05A21'>9/8</b> is compound triple meter with three beats; and <b style='color:#C05A21'>12/8</b> is compound quadruple meter with four beats. <b>For these meters, divide the top number by 3 to find the number of beats.</b> \u{1F447} <b>How many beats are in a measure of 9/8?</b>",
       show:{ type:"html", html:`<table style="border-collapse:collapse;margin:0 auto;font-size:14.5px;min-width:300px">
         <tr><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:6px 14px">Meter</th><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:6px 14px">Beats</th><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:6px 14px">Name</th></tr>
         <tr><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center;font-weight:800;color:#C05A21">6/8</td><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center">6 ÷ 3 = 2</td><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center;color:#C05A21;font-weight:800">Compound Duple</td></tr>
         <tr><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center;font-weight:800;color:#C05A21">9/8</td><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center">9 ÷ 3 = 3</td><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center;color:#C05A21;font-weight:800">Compound Triple</td></tr>
         <tr><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center;font-weight:800;color:#C05A21">12/8</td><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center">12 ÷ 3 = 4</td><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center;color:#C05A21;font-weight:800">Compound Quadruple</td></tr></table>` },
       try:{ type:"mc", choices:["3 beats","9 beats","2 beats"], answer:0,
-        success:"✓ 9 ÷ 3 = 3 dotted-quarter beats — compound triple.",
-        fail:"Divide the top number by 3…",
-        hint:"9 ÷ 3." } },
-    { say:"<b>9/8 and 12/8 on the staff:</b> the eighth notes are beamed <b>in groups of three</b> — one group per beat. The beaming shows the beat structure at a glance. \u{1F447} <b>In 12/8, how many groups of three appear in each measure?</b>",
+        success:"✓ Correct. A measure of 9/8 contains three dotted-quarter beats, so it is compound triple meter.",
+        fail:"Divide the top number by 3.",
+        hint:"9 ÷ 3 = 3." } },
+    { say:"In <b>9/8</b> and <b>12/8</b>, eighth notes are normally beamed <b>in groups of three</b>, with one group representing each beat. Correct beaming makes the beat structure easy to recognize. \u{1F447} <b>In 12/8, how many groups of three eighth notes normally appear in each measure?</b>",
       show:{ type:"staff", spec:{clef:"treble",time:"12/8",tempo:60,notes:[
         {p:"C4",d:"8"},{p:"E4",d:"8"},{p:"G4",d:"8"},{p:"C5",d:"8"},{p:"G4",d:"8"},{p:"E4",d:"8"},
         {p:"F4",d:"8"},{p:"A4",d:"8"},{p:"C5",d:"8"},{p:"G4",d:"q."},{bar:"final"}],
         beams:[[0,2],[3,5],[6,8]],width:520} },
       try:{ type:"mc", choices:["Four groups","Three groups","Twelve groups"], answer:0,
-        success:"✓ Four groups of three eighths — four dotted-quarter beats.",
-        fail:"12 ÷ 3 = …",
-        hint:"One beamed group = one beat." } },
-    { say:"<b>Conducting Patterns:</b> conductors show the <b>beats</b>, never the divisions. 6/8 uses a <b>2-beat</b> pattern, 9/8 a <b>3-beat</b> pattern, 12/8 a <b>4-beat</b> pattern — the same patterns as 2/4, 3/4 and 4/4. \u{1F447} <b>Match each meter to its pattern:</b>",
+        success:"✓ Correct. Four groups of three eighth notes form four dotted-quarter beats.",
+        fail:"Divide 12 by 3.",
+        hint:"Each beamed group of three eighth notes represents one beat." } },
+    { say:"<b>Conducting Patterns:</b> Conductors normally show the <b>main beats</b> rather than every division. At a moderate tempo, 6/8 uses a <b>two-beat</b> pattern, 9/8 uses a <b>three-beat</b> pattern, and 12/8 uses a <b>four-beat</b> pattern. These correspond to the basic conducting patterns used for duple, triple, and quadruple meter. \u{1F447} <b>Match each meter with its conducting pattern.</b>",
       try:{ type:"custom",
-        hint:"Beats = top ÷ 3. Conduct the beats.",
+        hint:"Divide the top number by 3 to find the number of main beats.",
         mount:(container,fb)=>MF_L76_conduct(container,fb) } },
-    { say:"<b>6/8 vs. 3/4 — same six eighths, different grouping:</b> <b style='color:#2F6DA8'>3/4 groups them 2+2+2</b> (three beats); <b style='color:#C05A21'>6/8 groups them 3+3</b> (two beats). The grouping — not the count — makes the meter. \u{1F447} <b>Six eighth notes beamed 3+3 belong to…</b>",
+    { say:"<b>6/8 and 3/4</b> can both contain six eighth notes, but they organize them differently. <b style='color:#2F6DA8'>In 3/4, the eighth notes form three groups of two.</b> <b style='color:#C05A21'>In 6/8, they form two groups of three.</b> The <b>grouping and accent pattern</b> determine how the meter is heard. \u{1F447} <b>Six eighth notes beamed 3 + 3 most strongly suggest…</b>",
       show:{ type:"staff", spec:{clef:"treble",time:"6/8",tempo:60,notes:[
         {p:"C5",d:"8"},{p:"B4",d:"8"},{p:"A4",d:"8"},{p:"G4",d:"8"},{p:"F4",d:"8"},{p:"E4",d:"8"},{bar:"final"}],
         beams:[[0,2],[3,5]],width:380} },
-      try:{ type:"mc", choices:["6/8 — two beats of three","3/4 — three beats of two","4/4"], answer:0,
-        success:"✓ 3+3 grouping = 6/8. The same notes beamed 2+2+2 would be 3/4.",
-        fail:"Count the notes inside each beam group…",
-        hint:"Groups of three = compound." } },
-    { say:"Listen to the difference. \u{1F447}",
+      try:{ type:"mc", choices:["6/8 — two beats, each divided into three","3/4 — three beats, each divided into two","4/4 — four beats"], answer:0,
+        success:"✓ Correct. Grouping the eighth notes 3 + 3 indicates two compound beats and strongly suggests 6/8. Grouping them 2 + 2 + 2 would suggest 3/4.",
+        fail:"Count the eighth notes in each beamed group.",
+        hint:"Each group of three represents one compound beat." } },
+    { say:"Listen and identify whether each beat divides into two or three equal parts. \u{1F447}",
       try:{ type:"custom",
-        hint:"Count the quick notes inside each low beat: two = simple, three = compound.",
+        hint:"Listen to the notes within each main beat: two divisions suggest simple meter; three divisions suggest compound meter.",
         mount:(container,fb)=>MF_L76_ear(container,fb) } },
-    { say:"<b>Review:</b> \u{1F447} <b>Which time signature is compound duple?</b>",
+    { say:"<b>Review</b> \u{1F447} <b>Which time signature represents compound duple meter?</b>",
       try:{ type:"mc", choices:["6/8","3/4","9/8"], answer:0,
-        success:"✓ 6/8 — two dotted-quarter beats, each dividing into three.",
-        fail:"Duple = 2 beats; compound = top ÷ 3…",
-        hint:"Top number 6." } }
+        success:"✓ Correct. A measure of 6/8 normally contains two dotted-quarter beats, each divided into three eighth notes.",
+        fail:"Duple meter has two main beats. Divide the top number by 3.",
+        hint:"6 ÷ 3 = 2 beats." } }
   ],
   examples:[
     { caption:"A 6/8 melody: two dotted-quarter beats per measure, eighth notes beamed 3+3. Count '1-&-a 2-&-a' while it plays.",
@@ -172,8 +172,8 @@ LESSON_CONTENT[76]={
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Compound Meter Sprint (45s)",
-      intro:"Beats, divisions and the three compound meters — race the facts!",
-      miaIntro:"Top ÷ 3! \u{26A1}",
+      intro:"Identify beats, divisions, and common compound meters before time runs out.",
+      miaIntro:"Divide the top number by 3 to find the beats.",
       spec:{gen:"term-match", params:{subject:"term", pool:[
         ["Compound meter","each beat divides into THREE"],
         ["Simple meter","each beat divides into two"],
@@ -183,25 +183,25 @@ LESSON_CONTENT[76]={
         ["12/8","compound quadruple — 4 beats"],
         ["Finding the beats","top number ÷ 3"],
         ["Conducting","follows the beats, not the divisions"]], reverse:true}, seconds:45},
-      result:(score)=>score>=8?score+" — compound meter mastered!":null },
+      result:(score)=>score>=8?score+" — Compound meter challenge completed!":null },
     { type:"symbol-hunt", title:"Game 2 · Spot the Meter",
-      intro:"Beamed rhythms on cards — click the meter each round names!",
-      miaIntro:"Read the beam groups! \u{1F440}",
+      intro:"Examine each beamed rhythm and select the correct meter.",
+      miaIntro:"Use the beaming to identify the beat groups.",
       spec:{rounds:6, pool:[
         {label:"6/8 (3+3)", spec:{clef:"treble",time:"6/8",notes:[{p:"G4",d:"8"},{p:"G4",d:"8"},{p:"G4",d:"8"},{p:"G4",d:"8"},{p:"G4",d:"8"},{p:"G4",d:"8"}],beams:[[0,2],[3,5]],width:190}},
         {label:"9/8 (3+3+3)", spec:{clef:"treble",time:"9/8",notes:[{p:"B4",d:"8"},{p:"B4",d:"8"},{p:"B4",d:"8"},{p:"B4",d:"8"},{p:"B4",d:"8"},{p:"B4",d:"8"},{p:"B4",d:"8"},{p:"B4",d:"8"},{p:"B4",d:"8"}],beams:[[0,2],[3,5],[6,8]],width:240}},
         {label:"3/4 (2+2+2)", spec:{clef:"treble",time:"3/4",notes:[{p:"G4",d:"8"},{p:"G4",d:"8"},{p:"G4",d:"8"},{p:"G4",d:"8"},{p:"G4",d:"8"},{p:"G4",d:"8"}],beams:[[0,1],[2,3],[4,5]],width:190}},
         {label:"12/8 (four groups)", spec:{clef:"treble",time:"12/8",notes:[{p:"D5",d:"q."},{p:"D5",d:"q."},{p:"D5",d:"q."},{p:"D5",d:"q."}],width:220}}]},
-      result:(score)=>score>=5?"Meters spotted on sight!":null },
+      result:(score)=>score>=5?"You identified the meters from their beat groupings.":null },
     { type:"order-tap", title:"Game 3 · Small to Large",
-      intro:"Tap the compound meters from FEWEST beats to MOST!",
-      miaIntro:"2, then 3, then 4! \u{1F3C1}",
+      intro:"Arrange the compound meters from the fewest beats to the most.",
+      miaIntro:"Begin with two beats, then three, then four.",
       spec:{sequence:["6/8 — compound duple (2 beats)","9/8 — compound triple (3 beats)","12/8 — compound quadruple (4 beats)"],
         title:"The compound meters, by beat count"},
-      result:(stars)=>stars>=2?"The compound family, in order!":null },
+      result:(stars)=>stars>=2?"You arranged the compound meters correctly.":null },
     { type:"term-race", title:"Game 4 · Beat or Division?",
-      intro:"Every fact about beats vs divisions — at speed!",
-      miaIntro:"Beats carry, divisions fill! \u{1F3C1}",
+      intro:"Decide whether each statement describes a beat or a division.",
+      miaIntro:"A beat contains three divisions in compound meter.",
       spec:{rounds:8, reverse:true, pool:[
         ["The BEAT in 6/8","the dotted quarter"],
         ["The DIVISION in 6/8","the eighth note"],
@@ -211,26 +211,26 @@ LESSON_CONTENT[76]={
         ["Six eighths beamed 2+2+2","3/4"],
         ["Beats in 12/8","four"],
         ["The conductor shows","beats only"]]},
-      result:(score)=>score>=6?"Beat and division never confused again!":null }
+      result:(score)=>score>=6?"You distinguished beats from divisions.":null }
   ],
-  practiceIntro:"20 practice questions — compound meters, beats and divisions. Answer right and the next appears automatically!",
+  practiceIntro:"Complete 20 practice questions on compound meters, beats, and divisions. The next question will appear after each correct answer.",
   practice:[
     { gen:"term-match", params:{subject:"term", pool:[["Compound meter","beats divide into three"],["6/8","compound duple"],["9/8","compound triple"],["12/8","compound quadruple"],["Beat note","dotted quarter"],["Division note","eighth note"]], reverse:true}, count:6 },
     { gen:"rhythm-count", params:{}, count:2 },
-    { type:"mc", q:"How many beats are in one measure of 6/8?", choices:["2","6","3"], answer:0,
+    { type:"mc", q:"At a moderate tempo, how many main beats are in a measure of 6/8?", choices:["2","6","3"], answer:0,
       explain:"6 ÷ 3 = 2 dotted-quarter beats." },
-    { type:"mc", q:"How many beats are in one measure of 12/8?", choices:["4","12","6"], answer:0,
-      explain:"12 ÷ 3 = 4." },
-    { type:"mc", q:"Which note receives the beat in compound meter (bottom number 8)?", choices:["The dotted quarter","The eighth","The half note"], answer:0,
-      explain:"One beat = three eighths = a dotted quarter." },
-    { type:"mc", q:"Which meter is compound triple?", choices:["9/8","3/4","6/8"], answer:0,
+    { type:"mc", q:"How many main beats are normally in a measure of 12/8?", choices:["4","12","6"], answer:0,
+      explain:"12 ÷ 3 = 4 dotted-quarter beats." },
+    { type:"mc", q:"In a compound meter with 8 as the bottom number, which note value normally represents one beat?", choices:["The dotted quarter note","The eighth note","The half note"], answer:0,
+      explain:"One beat contains three eighth-note divisions and is represented by a dotted quarter note." },
+    { type:"mc", q:"Which time signature represents compound triple meter?", choices:["9/8","3/4","6/8"], answer:0,
       explain:"9 ÷ 3 = 3 beats." },
-    { type:"truefalse", q:"In compound meter, each beat divides into three equal parts.", answer:true,
-      explain:"The defining feature." },
+    { type:"truefalse", q:"In compound meter, each beat normally divides into three equal parts.", answer:true,
+      explain:"This three-part beat division is the defining feature of compound meter." },
     { type:"truefalse", q:"3/4 is a compound meter.", answer:false,
-      explain:"3/4 is simple triple — its beats divide in two." },
-    { type:"truefalse", q:"Conducting patterns follow the divisions, not the beats.", answer:false,
-      explain:"Conductors show the BEATS." },
+      explain:"3/4 is simple triple meter; each beat normally divides into two equal parts." },
+    { type:"truefalse", q:"Conductors normally show every division rather than the main beats.", answer:false,
+      explain:"Conducting patterns normally show the main beats." },
     { gen:"term-match", params:{subject:"term", pool:[["Top ÷ 3","the beat count"],["3+3 beaming","compound"],["2+2+2 beaming","simple triple"],["Dotted note","the compound beat"]], reverse:true}, count:3 },
     { gen:"note-value", params:{}, count:2 }
   ],
@@ -257,37 +257,37 @@ LESSON_CONTENT[76]={
   rewards:{ badge:"Compound Conductor", icon:"\u{1F3B5}" },
   sectionOrder:["secHook","secObjectives","secLearn","secExample","secReview",
     "secGame0","secGame1","secGame2","secGame3","secPractice","secQuiz","secTips","secNext"],
-  miaQuizIntro:"Quiz! Beats = top ÷ 3, divisions come in threes.",
+  miaQuizIntro:"In compound meter, divide the top number by 3 to find the main beats. Each beat divides into three equal parts.",
   quiz:[
-    { type:"mc", q:"In compound meter, each beat divides into…", choices:["three equal parts","two equal parts","four equal parts"], answer:0,
-      explain:"The definition of compound meter.", hint:"Not two." },
-    { type:"mc", q:"Which note gets the beat in 6/8, 9/8 and 12/8?", choices:["The dotted quarter","The eighth","The quarter"], answer:0,
-      explain:"Three eighths = one dotted quarter.", hint:"A dotted note." },
-    { type:"mc", q:"6/8 is called…", choices:["compound duple","compound triple","simple duple"], answer:0,
-      explain:"6 ÷ 3 = 2 beats.", hint:"Count the beats." },
-    { type:"mc", q:"9/8 has how many beats per measure?", choices:["3","9","4"], answer:0,
-      explain:"9 ÷ 3 = 3 — compound triple.", hint:"Top ÷ 3." },
-    { type:"mc", q:"12/8 is called…", choices:["compound quadruple","compound duple","simple quadruple"], answer:0,
-      explain:"12 ÷ 3 = 4 beats.", hint:"Four beats of three." },
-    { type:"mc", q:"How do you find the number of beats in a compound meter?", choices:["Divide the top number by 3","Read the top number directly","Divide the bottom number by 2"], answer:0,
+    { type:"mc", q:"In compound meter, each beat normally divides into…", choices:["three equal parts","two equal parts","four equal parts"], answer:0,
+      explain:"Three-part beat division is the defining feature of compound meter.", hint:"Compound beats divide into three parts." },
+    { type:"mc", q:"At a moderate tempo, which note value represents one beat in 6/8, 9/8, and 12/8?", choices:["The dotted quarter note","The eighth note","The quarter note"], answer:0,
+      explain:"Three eighth notes equal one dotted quarter note.", hint:"Add three eighth-note values together." },
+    { type:"mc", q:"How is 6/8 classified?", choices:["compound duple","compound triple","simple duple"], answer:0,
+      explain:"6/8 contains two main beats, each divided into three eighth notes.", hint:"Count the beats." },
+    { type:"mc", q:"How many main beats are normally in a measure of 9/8?", choices:["3","9","4"], answer:0,
+      explain:"9 ÷ 3 = 3, so 9/8 is compound triple meter.", hint:"Top ÷ 3." },
+    { type:"mc", q:"How is 12/8 classified?", choices:["compound quadruple","compound duple","simple quadruple"], answer:0,
+      explain:"12/8 contains four main beats, each divided into three eighth notes.", hint:"Four beats of three." },
+    { type:"mc", q:"For 6/8, 9/8, and 12/8, how do you determine the number of main beats?", choices:["Divide the top number by 3","Use the top number as the number of beats","Divide the bottom number by 2"], answer:0,
       explain:"6→2, 9→3, 12→4.", hint:"÷ 3." },
     { type:"mc", q:"Identify the meter.", 
       staff:{clef:"treble",time:"9/8",notes:[{p:"G4",d:"8"},{p:"G4",d:"8"},{p:"G4",d:"8"},{p:"B4",d:"8"},{p:"B4",d:"8"},{p:"B4",d:"8"},{p:"D5",d:"8"},{p:"D5",d:"8"},{p:"D5",d:"8"}],beams:[[0,2],[3,5],[6,8]],width:300},
       choices:["9/8 — compound triple","6/8 — compound duple","3/4 — simple triple"], answer:0,
-      explain:"Three groups of three eighths.", hint:"Count the beam groups." },
-    { type:"mc", q:"Six eighth notes beamed 2+2+2 belong to which meter?", choices:["3/4","6/8","12/8"], answer:0,
-      explain:"Groups of two = simple meter — 3/4.", hint:"Pairs, not triples." },
-    { type:"mc", q:"Which conducting pattern fits 12/8?", choices:["The 4-beat pattern","The 12-beat pattern","The 3-beat pattern"], answer:0,
-      explain:"Conduct the four beats, not the twelve divisions.", hint:"Beats only." },
-    { type:"truefalse", q:"The bottom number of 6/8 names the beat note.", answer:false,
-      explain:"It names the DIVISION (the eighth); the beat is the dotted quarter.", hint:"Beat vs division." },
-    { type:"truefalse", q:"You hear three quick notes inside every beat. The meter is compound.", answer:true,
-      explain:"Three-part divisions define compound meter.", hint:"The ear test." },
-    { type:"mc", q:"Which pair shows the SAME six eighth notes in two different meters?", choices:["6/8 (3+3) and 3/4 (2+2+2)","6/8 and 12/8","4/4 and 2/4"], answer:0,
-      explain:"The grouping — not the count — makes the meter.", hint:"Beaming decides." }
+      explain:"Three groups of three eighth notes indicate three compound beats.", hint:"Count the beam groups." },
+    { type:"mc", q:"Six eighth notes beamed 2 + 2 + 2 most strongly suggest which meter?", choices:["3/4","6/8","12/8"], answer:0,
+      explain:"Three groups of two eighth notes indicate three simple beats and therefore suggest 3/4.", hint:"Count the number of beamed groups." },
+    { type:"mc", q:"At a moderate tempo, which conducting pattern is normally used for 12/8?", choices:["The four-beat pattern","The twelve-beat pattern","The three-beat pattern"], answer:0,
+      explain:"Conduct the four main beats rather than all twelve eighth-note divisions.", hint:"Beats only." },
+    { type:"truefalse", q:"In 6/8, the bottom number identifies the beat value.", answer:false,
+      explain:"The bottom number identifies the eighth-note division. At a moderate tempo, the beat is represented by a dotted quarter note.", hint:"Beat vs division." },
+    { type:"truefalse", q:"You hear each main beat divide into three equal parts. This suggests compound meter.", answer:true,
+      explain:"Compound meter is characterized by three equal divisions within each beat.", hint:"The ear test." },
+    { type:"mc", q:"Which pair can contain the same total duration of six eighth notes organized into different beat groupings?", choices:["6/8 (3+3) and 3/4 (2+2+2)","6/8 and 12/8","4/4 and 2/4"], answer:0,
+      explain:"6/8 organizes the eighth notes into two groups of three, while 3/4 organizes them into three groups of two.", hint:"Compare the 3 + 3 and 2 + 2 + 2 groupings." }
   ],
-  miaPerfect:"PERFECT! Beats, divisions, patterns — compound meter is yours. \u{1F3B5}\u{1F389}",
-  miaPass:"Passed! You count in threes now. Next: triplets and duplets…",
+  miaPerfect:"Perfect score! You accurately identified the beats, divisions, and conducting patterns of compound meter.",
+  miaPass:"You passed! Next, you will compare triplets and duplets.",
   mia:{
     hook:{ label:"the welcome",
       explain:"Pattern 1 divided each beat into two (simple); pattern 2 divided each beat into three (compound). That three-part division is today's subject.",

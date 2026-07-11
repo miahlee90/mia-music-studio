@@ -15,7 +15,7 @@ function MF_L84_play(container,fb){
     <div class="l84p-kb"></div>`;
   const q=container.querySelector(".l84p-q"), kh=container.querySelector(".l84p-kb");
   function ask(){
-    if(r>=ROUNDS.length){ q.textContent="Excellent! Same shape, new pitch level — you transposed it."; return; }
+    if(r>=ROUNDS.length){ q.textContent="Excellent! Same scale-degree pattern and melodic contour, new pitch level — you transposed it."; return; }
     const R=ROUNDS[r];
     q.innerHTML=`${R.name}: play <b>${R.names[k]}</b> (${k+1} of ${R.seq.length}).`;
   }
@@ -23,31 +23,31 @@ function MF_L84_play(container,fb){
     onKey:m=>{
       const R=ROUNDS[r]; if(!R) return;
       if(m%12===R.seq[k]%12){ k++;
-        if(k>=R.seq.length){ MFAudio.yay(); fb(true, r===0? "✓ The motive in C. Now the SAME shape starting on G — every note up a perfect 5th.":"✓ Transposed! Every note moved up a P5; the shape and the scale degrees never changed."); r++; k=0; setTimeout(ask,1200); }
+        if(k>=R.seq.length){ MFAudio.yay(); fb(true, r===0? "✓ The motive in C. Now the same scale-degree pattern starting on G — every note up a perfect 5th.":"✓ Transposed! Every note moved up a P5; the melodic contour and the scale-degree pattern stayed the same."); r++; k=0; setTimeout(ask,1200); }
         else ask();
-      } else { MFAudio.tone(40,.2); fb(false,`Play ${R.names[k]} — the same melodic shape, note by note.`); }
+      } else { MFAudio.tone(40,.2); fb(false,`Play ${R.names[k]} — the same melodic contour, note by note.`); }
     }});
   ask();
 }
 
 LESSON_CONTENT[84]={
-  welcome:"Transposition: the same music, moved to a new key. \u{1F4E6}",
+  welcome:"Transposition moves music to a different pitch level.",
   hook:{
-    say:"<b>The same melody, twice.</b> The second time it starts higher — but nothing about its SHAPE changes. \u{1F447} <b>What happened between the two versions?</b>",
+    say:"Listen to two versions of the same melody. The second begins at a higher pitch, but its contour and rhythm remain the same. \u{1F447} <b>What happened?</b>",
     interact:{ type:"custom",
       mount:(container,fb)=>{
         container.innerHTML=`<div style="text-align:center">
           <button class="play hk-a">▶ Version 1</button>
           <button class="play hk-b">▶ Version 2</button></div>
-          <div class="choices hk-ch" style="display:none"><button>Every note moved UP the same distance</button><button>The rhythm changed</button><button>Random notes changed</button></div>`;
+          <div class="choices hk-ch" style="display:none"><button>Every note moved up by the same interval</button><button>The rhythm changed</button><button>Each note moved by a random interval</button></div>`;
         const A=[60,62,64,65,67,64,60], B=[67,69,71,72,74,71,67];
         const ch=container.querySelector(".hk-ch");
         let hA=false,hB=false;
         container.querySelector(".hk-a").onclick=()=>{ A.forEach((m,i)=>MFAudio.tone(m,.36,i*.3,.42)); hA=true; if(hB) setTimeout(()=>ch.style.display="",2400); };
         container.querySelector(".hk-b").onclick=()=>{ B.forEach((m,i)=>MFAudio.tone(m,.36,i*.3,.42)); hB=true; if(hA) setTimeout(()=>ch.style.display="",2400); };
         [...ch.children].forEach((b,i)=>b.onclick=()=>{
-          if(i===0) fb(true,"✓ Every note rose a perfect 5th — the melody was TRANSPOSED from C major to G major. Same shape, same degrees, new key. Today's lesson!");
-          else fb(false,"The rhythm and shape were identical — compare the STARTING pitch of each version…");
+          if(i===0) fb(true,"✓ Correct. Every note moved up a perfect fifth, transposing the melody from C major to G major. Its rhythm, melodic contour, and scale-degree pattern remain the same.");
+          else fb(false,"The rhythm and melodic contour remain the same. Compare the opening pitches of the two versions.");
         });
       } }
   },
@@ -60,43 +60,43 @@ LESSON_CONTENT[84]={
     "Perform a motive in two keys"
   ],
   steps:[
-    { say:"<b>Transposition:</b> to transpose is to <b>rewrite or perform music at a different pitch level</b>. Every note moves by the <b>same interval</b>, so the shape, rhythm and scale degrees stay identical — only the key changes. \u{1F447} <b>What stays the same in a transposition?</b>",
-      try:{ type:"mc", choices:["The shape, rhythm and scale degrees","Only the first note","Nothing"], answer:0,
-        success:"✓ Everything musical survives — only the pitch level moves.",
-        fail:"Compare the hook's two versions…",
-        hint:"Only the key changes." } },
-    { say:"<b>Method 1 — By Interval:</b> choose the interval and move <b>every note</b> by it. C-D-E up a major 2nd becomes D-E-F♯. Watch the accidentals: the interval must stay EXACT. \u{1F447} <b>C-D-E transposed up a M2 is…</b>",
+    { say:"<b>Transposition:</b> To transpose music is to <b>rewrite or perform it at a different pitch level</b>. In exact interval transposition, every pitch moves by the <b>same interval</b>. In tonal transposition from one key to another, the <b>scale-degree relationships</b> are preserved. The rhythm normally remains unchanged. \u{1F447} <b>What normally remains unchanged when a melody is transposed?</b>",
+      try:{ type:"mc", choices:["Its rhythm and melodic contour","Only its opening note","Its original pitch level"], answer:0,
+        success:"✓ Correct. The pitch level changes, while the rhythm and intervallic or scale-degree relationships are preserved.",
+        fail:"Compare the rhythm and melodic contour of the two versions.",
+        hint:"Focus on what remains unchanged when the pitch level moves." } },
+    { say:"<b>Method 1 — Transpose by Interval:</b> Choose a direction and interval, and move <b>every pitch</b> by that exact interval. C–D–E transposed up a major second becomes D–E–F♯. Check each accidental to preserve the interval exactly. \u{1F447} <b>C–D–E transposed up a major second becomes…</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:100,notes:[
         {p:"C4",d:"q",label:"1"},{p:"D4",d:"q",label:"2"},{p:"E4",d:"q",label:"3"},
         {p:"D4",d:"q",label:"1"},{p:"E4",d:"q",label:"2"},{p:"F#4",d:"q",label:"3"},{bar:"final"}],width:460} },
-      try:{ type:"mc", choices:["D-E-F♯","D-E-F","C♯-D♯-E♯"], answer:0,
-        success:"✓ E up a M2 is F♯, not F — exact intervals need the right accidentals.",
-        fail:"E up a whole step lands on…",
-        hint:"Whole step above E." } },
-    { say:"<b>Method 2 — By Key:</b> think in <b>scale degrees</b>. Write the new key signature, then place each note on the <b>same degree</b> of the new key. Degrees 1-2-3 in C (C-D-E) become 1-2-3 in F (F-G-A). \u{1F447} <b>Degrees 5-3-1 in G major are…</b>",
-      try:{ type:"mc", choices:["D-B-G","G-E-C","D-B♭-G"], answer:0,
-        success:"✓ In G major: degree 5 = D, 3 = B, 1 = G. Degrees make transposition automatic.",
-        fail:"Count up the G major scale…",
-        hint:"G major: G-A-B-C-D…" } },
-    { say:"<b>Why Transpose?</b> to fit a <b>singer's range</b> (the song is too high or low), to suit an <b>instrument's range</b>, or to make a key easier to play. The music itself is unchanged. \u{1F447} <b>A song sits too high for a singer. You should…</b>",
-      try:{ type:"mc", choices:["Transpose it down to a comfortable key","Ask the singer to strain","Delete the high notes"], answer:0,
-        success:"✓ Transposing preserves the song and rescues the singer.",
-        fail:"The melody must survive intact…",
-        hint:"Move the whole song." } },
-    { say:"<b>Transposing Instruments (Introduction):</b> some instruments sound a <b>different pitch than written</b>. A B♭ trumpet playing written C sounds B♭ — so its parts are written a <b>major 2nd higher</b> than the desired sound. F horns and E♭ saxes work the same way with their own intervals. <b>Remember: every note moves the same interval; degrees never change.</b> \u{1F447} <b>A B♭ trumpet plays written C. What pitch sounds?</b>",
-      try:{ type:"mc", choices:["B♭ — a major 2nd below the written note","C — exactly as written","F♯"], answer:0,
-        success:"✓ Written C sounds B♭ — the instrument's name tells you its sounding pitch.",
-        fail:"The instrument's name is the clue…",
-        hint:"B♭ instrument → sounds B♭." } },
-    { say:"Perform a transposition yourself. \u{1F447}",
+      try:{ type:"mc", choices:["D–E–F♯","D–E–F","C♯–D♯–E♯"], answer:0,
+        success:"✓ Correct. A major second above E is F♯. F♮ would be only a minor second above E.",
+        fail:"A major second equals one whole step. Which note is one whole step above E?",
+        hint:"E to F♯ is a whole step." } },
+    { say:"<b>Method 2 — Transpose by Key:</b> Identify each note's <b>scale degree</b> in the original key. Write the new key signature, and then place each note on the <b>corresponding scale degree</b> of the new key. Scale degrees 1–2–3 in C major, C–D–E, become scale degrees 1–2–3 in F major, F–G–A. \u{1F447} <b>Which notes are scale degrees 5–3–1 in G major?</b>",
+      try:{ type:"mc", choices:["D–B–G","G–E–C","D–B♭–G"], answer:0,
+        success:"✓ Correct. In G major, scale degree 5 is D, scale degree 3 is B, and scale degree 1 is G.",
+        fail:"Identify the first, third, and fifth degrees of the G major scale.",
+        hint:"G major begins G–A–B–C–D." } },
+    { say:"<b>Why Transpose?</b> Musicians transpose music to fit a <b>singer's comfortable range</b>, accommodate an <b>instrument's range or tuning</b>, create a more practical key, or prepare music for a transposing instrument. The musical relationships remain recognizable, although register, tone color, and technical difficulty may change. \u{1F447} <b>A song lies too high for a singer's comfortable range. What is the most appropriate solution?</b>",
+      try:{ type:"mc", choices:["Transpose the entire song down to a suitable key","Ask the singer to continue above a comfortable range","Remove individual high notes without adjusting the melody"], answer:0,
+        success:"✓ Correct. Transposing the complete song downward preserves its melodic relationships while placing it in a more comfortable range.",
+        fail:"Preserve the melody's relationships while changing its overall pitch level.",
+        hint:"Move the complete song to a lower key." } },
+    { say:"<b>Transposing Instruments — Introduction:</b> Some instruments produce a <b>sounding pitch different from the written pitch</b>. On a standard B♭ trumpet, written C sounds concert B♭, a <b>major second lower</b>. Therefore, a B♭ trumpet part is written a <b>major second above</b> the desired concert pitch. Instruments in F and E♭ use different transposition intervals, and some also include an octave displacement. \u{1F447} <b>On a standard B♭ trumpet, what concert pitch sounds when the performer plays written C?</b>",
+      try:{ type:"mc", choices:["B♭, a major second below written C","C, exactly as written","D, a major second above written C"], answer:0,
+        success:"✓ Correct. On a B♭ trumpet, written C sounds concert B♭, a major second lower.",
+        fail:"For many conventional transposing instruments, the instrument's designation identifies the concert pitch produced by written C.",
+        hint:"On a B♭ trumpet, written C sounds concert B♭." } },
+    { say:"Perform the same scale-degree pattern in two different keys. \u{1F447}",
       try:{ type:"custom",
-        hint:"Same shape: 1-3-5-3-1 in C, then in G.",
+        hint:"Play scale degrees 1–3–5–3–1 in C major, and then play the same scale-degree pattern in G major.",
         mount:(container,fb)=>MF_L84_play(container,fb) } },
-    { say:"<b>Review:</b> \u{1F447} <b>A melody in F major is transposed to A major. Each note moves…</b>",
-      try:{ type:"mc", choices:["Up a major 3rd — the same interval for every note","A different interval per note","Only the first note moves"], answer:0,
-        success:"✓ F to A is a M3; every single note travels exactly that far.",
-        fail:"One interval fits all…",
-        hint:"F up to A = ?" } }
+    { say:"<b>Review:</b> \u{1F447} <b>A melody is transposed from F major to A major by moving upward. Each pitch moves…</b>",
+      try:{ type:"mc", choices:["Up a major third — the same interval is applied consistently","Up a perfect fourth","Up a major second"], answer:0,
+        success:"✓ Correct. A is a major third above F, so every pitch moves up by a major third.",
+        fail:"Apply the same upward interval to every pitch.",
+        hint:"Determine the ascending interval from F to A." } }
   ],
   examples:[
     { caption:"One motive, three keys: C major, F major, G major. The scale degrees (1-2-3-5-3-1) never change — only the starting pitch.",
@@ -114,8 +114,8 @@ LESSON_CONTENT[84]={
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Transposition Sprint (45s)",
-      intro:"Methods, reasons and rules — race the facts!",
-      miaIntro:"Same shape, new home! \u{26A1}",
+      intro:"Identify transposition methods, purposes, and interval relationships before time runs out.",
+      miaIntro:"Preserve the musical relationships at a new pitch level.",
       spec:{gen:"term-match", params:{subject:"term", pool:[
         ["Transpose","perform music at a new pitch level"],
         ["What moves","every note, by the SAME interval"],
@@ -125,26 +125,26 @@ LESSON_CONTENT[84]={
         ["Why transpose","singer or instrument range"],
         ["B♭ trumpet's written C","sounds B♭"],
         ["Exact intervals need","the right accidentals"]], reverse:true}, seconds:45},
-      result:(score)=>score>=8?score+" — transposition fluent!":null },
+      result:(score)=>score>=8?score+" — Transposition challenge completed!":null },
     { type:"key-climb", title:"Game 2 · One Motive, Two Keys",
-      intro:"Play 1-2-3-1 in C major, then in F major!",
-      miaIntro:"Degrees never lie! \u{1FA9C}",
+      intro:"Play scale degrees 1–2–3–1 in C major and then in F major.",
+      miaIntro:"Preserve the scale-degree pattern in both keys.",
       spec:{seq:[60,62,64,60, 65,67,69,65],
         names:["C (1)","D (2)","E (3)","C (1)","F (new 1!)","G (2)","A (3)","F (1)"],
         start:60, octaves:2, title:"The same degrees in two keys"},
-      result:(score)=>score!==null?"Two keys, one motive — transposed by hand!":null },
+      result:(score)=>score!==null?"You performed the motive correctly in both keys.":null },
     { type:"symbol-hunt", title:"Game 3 · Find the Transposition",
-      intro:"The original is C-E-G. Click what each round asks for!",
-      miaIntro:"Track the interval! \u{1F440}",
+      intro:"The original pattern is C–E–G. Select the requested transposition in each round.",
+      miaIntro:"Apply the same interval and direction to every note.",
       spec:{rounds:6, pool:[
         {label:"Up a P5 (G-B-D)", spec:{clef:"treble",notes:[{p:"G4",d:"q"},{p:"B4",d:"q"},{p:"D5",d:"q"}],width:160}},
         {label:"Up a M2 (D-F♯-A)", spec:{clef:"treble",notes:[{p:"D4",d:"q"},{p:"F#4",d:"q"},{p:"A4",d:"q"}],width:160}},
         {label:"Up a P4 (F-A-C)", spec:{clef:"treble",notes:[{p:"F4",d:"q"},{p:"A4",d:"q"},{p:"C5",d:"q"}],width:160}},
         {label:"The original (C-E-G)", spec:{clef:"treble",notes:[{p:"C4",d:"q"},{p:"E4",d:"q"},{p:"G4",d:"q"}],width:160}}]},
-      result:(score)=>score>=5?"Every transposition tracked!":null },
-    { type:"term-race", title:"Game 4 · Degree Translator Race",
-      intro:"Name the note for each degree in each key — at speed!",
-      miaIntro:"Degrees → notes! \u{1F3C1}",
+      result:(score)=>score>=5?"You identified each transposition correctly.":null },
+    { type:"term-race", title:"Game 4 · Scale-Degree Translator",
+      intro:"Identify the pitch that corresponds to each scale degree in the given key.",
+      miaIntro:"Begin with the key's tonic and count through the scale.",
       spec:{rounds:8, reverse:true, pool:[
         ["Degree 1 in G major","G"],
         ["Degree 3 in G major","B"],
@@ -154,26 +154,26 @@ LESSON_CONTENT[84]={
         ["Degree 5 in G major","D"],
         ["Degree 2 in D major","E"],
         ["Degree 3 in D major","F♯"]]},
-      result:(score)=>score>=6?"Instant degree translation!":null }
+      result:(score)=>score>=6?"You matched the scale degrees and pitches correctly.":null }
   ],
-  practiceIntro:"20 practice questions — intervals, degrees and transposing instruments. Answer right and the next appears automatically!",
+  practiceIntro:"Complete 20 practice questions on interval transposition, scale degrees, and transposing instruments. The next question will appear after each correct answer.",
   practice:[
     { gen:"term-match", params:{subject:"term", pool:[["Transpose","new pitch level"],["Same interval","every note"],["Degrees","stay identical"],["New key","new signature"],["B♭ instrument","sounds B♭ on written C"]], reverse:true}, count:6 },
     { gen:"degree-name", params:{ask:"name"}, count:3 },
-    { type:"mc", q:"Transposing means…", choices:["performing music at a different pitch level","playing faster","changing the rhythm"], answer:0,
-      explain:"Same music, new key." },
-    { type:"mc", q:"C-D-E transposed up a P4 becomes…", choices:["F-G-A","G-A-B","E-F-G"], answer:0,
+    { type:"mc", q:"Transposing music means…", choices:["performing or rewriting it at a different pitch level","increasing its tempo","changing its rhythm"], answer:0,
+      explain:"The pitch level changes while the essential musical relationships are preserved." },
+    { type:"mc", q:"C–D–E transposed up a perfect fourth becomes…", choices:["F–G–A","G–A–B","E–F–G"], answer:0,
       explain:"Every note up a perfect 4th." },
-    { type:"mc", q:"In a key transposition, each note keeps its…", choices:["scale degree","exact pitch","accidental"], answer:0,
+    { type:"mc", q:"In a tonal transposition from one key to another, each diatonic note normally retains its…", choices:["scale-degree function","original pitch","original written accidental"], answer:0,
       explain:"Degree 3 stays degree 3 in the new key." },
-    { type:"mc", q:"A song is too low for a singer. Transpose it…", choices:["up to a comfortable key","down further","not at all"], answer:0,
+    { type:"mc", q:"A song lies too low for a singer. To place it in a more comfortable range, transpose the complete song…", choices:["upward","farther downward","by changing only its lowest note"], answer:0,
       explain:"Move the whole song up." },
-    { type:"truefalse", q:"In transposition, every note moves by the same interval.", answer:true,
+    { type:"truefalse", q:"In exact interval transposition, every pitch moves in the same direction by the same interval.", answer:true,
       explain:"That is the definition." },
-    { type:"truefalse", q:"Transposing changes the melody's rhythm.", answer:false,
+    { type:"truefalse", q:"Transposition normally changes a melody's rhythm.", answer:false,
       explain:"Only pitch level changes." },
-    { type:"truefalse", q:"A B♭ trumpet sounds exactly the pitches written in its part.", answer:false,
-      explain:"It sounds a M2 lower — written C sounds B♭." },
+    { type:"truefalse", q:"On a standard B♭ trumpet, written C sounds concert C.", answer:false,
+      explain:"Written C sounds concert B♭, a major second lower." },
     { gen:"term-match", params:{subject:"term", pool:[["Up a M2 from E","F♯"],["Up a P5 from C","G"],["Up a P4 from D","G"],["Up a M3 from F","A"]], reverse:true}, count:3 },
     { gen:"interval-quality", params:{ask:"quality"}, count:2 }
   ],
@@ -200,37 +200,37 @@ LESSON_CONTENT[84]={
   rewards:{ badge:"Key Mover", icon:"\u{1F4E6}" },
   sectionOrder:["secHook","secObjectives","secLearn","secExample","secReview",
     "secGame0","secGame1","secGame2","secGame3","secPractice","secQuiz","secTips","secNext"],
-  miaQuizIntro:"Quiz! One interval for every note; degrees never change.",
+  miaQuizIntro:"Quiz: Apply one interval consistently and preserve scale-degree relationships between keys.",
   quiz:[
     { type:"mc", q:"Transposition means…", choices:["performing music at a different pitch level","repeating a motive","changing the meter"], answer:0,
-      explain:"New key, same music.", hint:"Move the whole thing." },
-    { type:"mc", q:"In transposition every note moves…", choices:["by the same interval","by different intervals","only if it is sharp"], answer:0,
-      explain:"One interval for all.", hint:"Uniform motion." },
-    { type:"mc", q:"C-E-G transposed up a P5 is…", choices:["G-B-D","F-A-C","A-C-E"], answer:0,
-      explain:"Each note up a perfect 5th.", hint:"C→G leads the way." },
+      explain:"Transposition moves music to a different pitch level while preserving its essential relationships.", hint:"Move the whole thing." },
+    { type:"mc", q:"In exact interval transposition, every pitch moves…", choices:["by the same interval","by different intervals","only if it is sharp"], answer:0,
+      explain:"In exact interval transposition, every pitch moves in the same direction by the same interval.", hint:"Uniform motion." },
+    { type:"mc", q:"C–E–G transposed up a perfect fifth becomes…", choices:["G–B–D","F–A–C","A–C–E"], answer:0,
+      explain:"C–E–G transposed up a perfect fifth becomes G–B–D.", hint:"C→G leads the way." },
     { type:"mc", q:"E transposed up a major 2nd is…", choices:["F♯","F","G"], answer:0,
-      explain:"A whole step above E is F♯.", hint:"Watch the accidental." },
+      explain:"A major second above E is F♯.", hint:"Watch the accidental." },
     { type:"mc", q:"In the key method, notes keep their…", choices:["scale degrees","letter names","octave"], answer:0,
-      explain:"Degree 5 stays degree 5.", hint:"Think numbers." },
-    { type:"mc", q:"Degrees 1-2-3 of F major are…", choices:["F-G-A","F-G-A♭","C-D-E"], answer:0,
-      explain:"The first three notes of F major.", hint:"F major has one flat — B♭." },
+      explain:"In tonal transposition, diatonic notes retain their corresponding scale degrees.", hint:"Think numbers." },
+    { type:"mc", q:"Scale degrees 1–2–3 of F major are…", choices:["F–G–A","F–G–A♭","C–D–E"], answer:0,
+      explain:"Scale degrees 1–2–3 of F major are F–G–A.", hint:"F major has one flat — B♭." },
     { type:"mc", q:"Identify the relationship.",
       staff:{clef:"treble",notes:[{p:"C4",d:"q"},{p:"E4",d:"q"},{p:"G4",d:"q"},{p:"D4",d:"q"},{p:"F#4",d:"q"},{p:"A4",d:"q"}],width:340},
-      choices:["The second group is the first transposed up a M2","They are unrelated","The second is an inversion"], answer:0,
-      explain:"C-E-G → D-F♯-A: everything up a whole step.", hint:"Compare note by note." },
-    { type:"mc", q:"Why do musicians transpose songs for singers?", choices:["To fit the singer's comfortable range","To make songs longer","To change the lyrics"], answer:0,
-      explain:"Range rescue.", hint:"Too high? Move it down." },
-    { type:"mc", q:"A B♭ trumpet plays written C. The sounding pitch is…", choices:["B♭","C","D"], answer:0,
-      explain:"The instrument name = the sounding pitch of written C.", hint:"Named for its note." },
-    { type:"truefalse", q:"Transposition changes the scale degrees of a melody.", answer:false,
+      choices:["The second group is the first transposed up a major second","The groups are unrelated","The second group is an inversion of the first"], answer:0,
+      explain:"C–E–G becomes D–F♯–A. Each pitch moves up a major second.", hint:"Compare note by note." },
+    { type:"mc", q:"Why might a song be transposed for a singer?", choices:["To place it within the singer's comfortable range","To increase its duration","To change its lyrics"], answer:0,
+      explain:"Transposition can place the song's highest and lowest pitches within a suitable vocal range.", hint:"Too high? Move it down." },
+    { type:"mc", q:"On a standard B♭ trumpet, written C sounds which concert pitch?", choices:["B♭","C","D"], answer:0,
+      explain:"On a B♭ trumpet, written C sounds concert B♭.", hint:"Named for its note." },
+    { type:"truefalse", q:"In tonal transposition, corresponding notes retain their scale-degree functions in the new key.", answer:true,
       explain:"Degrees are exactly what it preserves.", hint:"1-3-5 stays 1-3-5." },
-    { type:"truefalse", q:"To keep intervals exact, transposed notes may need new accidentals.", answer:true,
-      explain:"E up a M2 = F♯, never F.", hint:"Exactness first." },
-    { type:"mc", q:"A melody in D major is transposed to G major. Every note moves…", choices:["up a perfect 4th","up a major 3rd","down a 5th only"], answer:0,
-      explain:"D up to G = P4 (or down a P5 — one consistent choice).", hint:"D→G distance." }
+    { type:"truefalse", q:"Preserving exact intervals during transposition may require different accidentals.", answer:true,
+      explain:"For example, a major second above E is F♯ rather than F♮.", hint:"Exactness first." },
+    { type:"mc", q:"A melody in D major is transposed upward to G major. Every pitch moves…", choices:["up a perfect fourth","up a major third","up a perfect fifth"], answer:0,
+      explain:"G is a perfect fourth above D. If the direction were downward, G would be a perfect fifth below D.", hint:"Determine the ascending interval from D to G." }
   ],
-  miaPerfect:"PERFECT! Any melody, any key, on demand. \u{1F4E6}\u{1F389}",
-  miaPass:"Passed! Music moves where you send it. Next: triads on every degree…",
+  miaPerfect:"Perfect score! You accurately transposed melodies by interval and by scale degree.",
+  miaPass:"You passed! Next, you will construct diatonic triads on every scale degree.",
   mia:{
     hook:{ label:"the welcome",
       explain:"Version 2 was version 1 moved up a perfect 5th — a transposition from C major to G major. Shape and degrees untouched.",

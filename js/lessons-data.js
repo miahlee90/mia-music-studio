@@ -82,7 +82,7 @@ const LESSONS=[
  {n:79, title:"Asymmetrical and Changing Meter", unit:19, book:4, time:15, kw:["5/4","7/8","mixed meter","additive"]},
  {n:80, title:"Modes in Practice", unit:20, book:4, time:15, kw:["modes","dorian","mixolydian","lydian","phrygian"]},
  {n:81, title:"Pentatonic Scales", unit:20, book:4, time:15, kw:["pentatonic","gapped scale"]},
- {n:82, title:"Whole Tone and Chromatic Scales", unit:20, book:4, time:15, kw:["whole tone","chromatic","symmetrical"]},
+ {n:82, title:"Whole-Tone and Chromatic Scales", unit:20, book:4, time:15, kw:["whole-tone","whole tone","chromatic","symmetrical"]},
  {n:83, title:"Interval Inversions and Compound Intervals", unit:20, book:4, time:15, kw:["inversion","compound interval","rule of 9"]},
  {n:84, title:"Transposition", unit:21, book:4, time:15, kw:["transposition","transposing instruments","key change"]},
  {n:85, title:"Diatonic Triads", unit:21, book:4, time:15, kw:["diatonic triads","chord quality","seven triads"]},
