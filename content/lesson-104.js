@@ -5,19 +5,19 @@
    function (III+) gets one step. NOTE: edit by FULL-FILE REWRITE only. */
 
 LESSON_CONTENT[104]={
-  welcome:"Leading-tone chords: dominants without a root. \u{1F511}",
+  welcome:"Leading-tone chords provide dominant function without the dominant root.",
   hook:{
-    say:"<b>A tense little chord built on the leading tone</b> pushes home just like V7. \u{1F447} <b>Listen: where does it resolve?</b>",
+    say:"<b>Listen to a diminished triad built on the leading tone. Its tendency tones resolve toward the tonic chord.</b> \u{1F447} <b>Where does the chord resolve?</b>",
     interact:{ type:"custom",
       mount:(container,fb)=>{
         container.innerHTML=`<div style="text-align:center">
-          <button class="play hk-a">▶ vii° → ?</button></div>
-          <div class="choices hk-ch" style="display:none"><button>To I — it acts like a dominant</button><button>To IV</button><button>Nowhere</button></div>`;
+          <button class="play hk-a">▶ Play vii°–I</button></div>
+          <div class="choices hk-ch" style="display:none"><button>To I — it provides dominant function</button><button>To IV — it provides predominant function</button><button>It remains unresolved</button></div>`;
         const ch=container.querySelector(".hk-ch");
         container.querySelector(".hk-a").onclick=()=>{ [59,62,65].forEach(m=>MFAudio.tone(m,.9,.05,.3)); [60,64,67].forEach(m=>MFAudio.tone(m,1.1,1.0,.3)); setTimeout(()=>ch.style.display="",2300); };
         [...ch.children].forEach((b,i)=>b.onclick=()=>{
-          if(i===0) fb(true,"✓ B-D-F pushed into C — vii° shares three notes with G7 and does the same job: DOMINANT FUNCTION without the root. Today's lesson!");
-          else fb(false,"The B rose to C, the F fell to E — that motion is a dominant resolving…");
+          if(i===0) fb(true,"✓ Correct. In C major, B–D–F resolves to the tonic harmony. The chord shares its three pitches with the upper three members of G7 and commonly provides dominant function without the dominant root G.");
+          else fb(false,"Follow the tendency tones: B resolves upward to C, and F resolves downward to E.");
         });
       } }
   },
@@ -27,42 +27,42 @@ LESSON_CONTENT[104]={
     "Build vii°7 (fully diminished) and viiø7 (half-diminished)",
     "Resolve leading-tone chords to I (leading tone rises)",
     "Use vii°7's symmetry: any note can act as root",
-    "One step for the augmented triad's function (III+ in minor)"
+    "Introduce secondary leading-tone chords (vii°/V)"
   ],
   steps:[
-    { say:"<b>vii° = V7 Without a Root:</b> in C major, vii° is <b>B-D-F</b> — exactly G7's upper three notes. Same tritone, same pull, <b>dominant function</b>. \u{1F447} <b>vii° shares how many notes with V7?</b>",
-      try:{ type:"mc", choices:["Three — all but V7's root","One","None"], answer:0,
-        success:"✓ B, D, F live in both — vii° is the rootless V7.",
-        fail:"Spell both: G-B-D-F vs B-D-F…",
-        hint:"Remove G." } },
-    { say:"<b>The Seventh Versions:</b> add a 7th to vii°: in major, <b>viiø7</b> (B-D-F-A, half-diminished); borrow harmonic minor's ♭6 and you get <b>vii°7</b> (B-D-F-A♭, fully diminished) — usable in major AND minor. \u{1F447} <b>vii°7 in C contains…</b>",
+    { say:"<b>The Leading-Tone Triad:</b> In C major, vii° is <b>B–D–F</b>. These are the upper three chord members of G7, G–B–D–F. Both chords contain the tritone B–F and commonly provide dominant function, although they are distinct chords with different roots. \u{1F447} <b>How many pitches does vii° share with V7 in the same major key?</b>",
+      try:{ type:"mc", choices:["Three—the third, fifth, and seventh of V7","One","None"], answer:0,
+        success:"✓ Correct. In C major, B, D, and F belong to both vii° and V7.",
+        fail:"Compare G–B–D–F with B–D–F.",
+        hint:"Remove the dominant root G from G7." } },
+    { say:"<b>Leading-Tone Seventh Chords:</b> In a major key, the diatonic seventh chord on the leading tone is half-diminished. In C major, <b>viiø7</b> is B–D–F–A. Lowering scale degree 6 from A to A♭ produces the fully diminished leading-tone seventh chord <b>vii°7</b>, B–D–F–A♭. This chromatic form may be understood as drawing scale degree ♭6 from the parallel minor. In minor keys, the raised leading tone and the minor-mode sixth scale degree naturally produce a fully diminished leading-tone seventh chord; in C minor, B–D–F–A♭ is vii°7. \u{1F447} <b>Which pitches form vii°7 in C?</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:70,notes:[
         {p:"B3",d:"h",label:"vii\u{00F8}7"},{p:"D4",d:"h",chord:true},{p:"F4",d:"h",chord:true},{p:"A4",d:"h",chord:true},
         {p:"B3",d:"h",label:"vii\u{00B0}7"},{p:"D4",d:"h",chord:true},{p:"F4",d:"h",chord:true},{p:"Ab4",d:"h",chord:true},{bar:"final"}],width:440} },
-      try:{ type:"mc", choices:["B-D-F-A♭ — all minor 3rds","B-D-F-A","B-D-F-G"], answer:0,
-        success:"✓ The symmetrical stack (L92's °7) built on the leading tone.",
-        fail:"Fully diminished needs the LOWERED 7th above B…",
-        hint:"A♭, not A." } },
-    { say:"<b>Resolution:</b> leading-tone chords resolve to <b>I</b> (or i): the <b>leading tone rises</b> to the tonic; the chord's dissonances fall. Usually used in <b>first inversion</b> (vii°6) as a passing chord between I and I6. \u{1F447} <b>In vii° → I, the leading tone…</b>",
-      try:{ type:"mc", choices:["Rises a half step to the tonic","Falls a 5th","Stays"], answer:0,
-        success:"✓ B → C: the chord's whole reason for existing.",
-        fail:"Where does a leading tone always want to go?",
-        hint:"Up a half step." } },
-    { say:"<b>vii°7's Symmetry:</b> all minor 3rds means <b>any of its four notes can behave as the leading tone</b> — one chord, four possible resolutions. Composers use it as a pivot into distant keys. \u{1F447} <b>Why is vii°7 so flexible?</b>",
-      try:{ type:"mc", choices:["Its equal stacking lets any note act as root/leading tone","It has five notes","It is always loud"], answer:0,
-        success:"✓ Symmetry = ambiguity = doors into many keys (L82's principle, harmonized).",
-        fail:"What did L92 say about the °7's structure?",
-        hint:"m3 + m3 + m3." } },
-    { say:"<b>The Augmented Triad's Function:</b> III+ (harmonic minor's augmented triad, L85) usually intensifies motion to <b>iv or VI</b> — its raised note behaves like a leading tone inside the chord. <b>Remember: vii° family = dominant function; the leading tone always rises.</b> \u{1F447} <b>Leading-tone chords carry which function?</b>",
-      try:{ type:"mc", choices:["Dominant (D)","Predominant","Tonic"], answer:0,
-        success:"✓ D — beside V and V7 in Lesson 86's orange column.",
-        fail:"Which chords share the leading tone?",
-        hint:"The orange column." } },
-    { say:"<b>Review:</b> \u{1F447} <b>vii°6 placed between I and I6 acts as…</b>",
-      try:{ type:"mc", choices:["A passing chord — dominant color connecting two tonics","A final cadence","A key change"], answer:0,
-        success:"✓ The classic use: I - vii°6 - I6, bass walking C-D-E.",
-        fail:"What does the stepwise bass suggest?",
-        hint:"Connecting, not closing." } }
+      try:{ type:"mc", choices:["B–D–F–A♭","B–D–F–A","B–D–F–G"], answer:0,
+        success:"✓ Correct. B–D–F–A♭ consists of three stacked minor thirds and forms a fully diminished seventh chord on the leading tone.",
+        fail:"Compare the seventh above B: A is minor, while A♭ is diminished.",
+        hint:"Use A♭ rather than A♮." } },
+    { say:"<b>Resolution:</b> Leading-tone chords normally resolve toward <b>I</b> or <b>i</b>. The leading tone typically rises by half step to the tonic, while the diminished fifth above the root normally resolves downward by step. In a leading-tone seventh chord, the chordal seventh also normally resolves downward by step. The leading-tone triad frequently appears in <b>first inversion</b>, vii°6; one common passing progression is I–vii°6–I6, in which the bass moves by step from scale degree 1 through 2 to 3. \u{1F447} <b>In a conventional vii°–I resolution, how does the leading tone normally move?</b>",
+      try:{ type:"mc", choices:["Up by half step to the tonic","Down by fifth","It must remain on the same pitch"], answer:0,
+        success:"✓ Correct. In C major or minor, B normally resolves upward by half step to C.",
+        fail:"Identify the tonic a half step above the leading tone.",
+        hint:"The leading tone normally resolves upward by half step." } },
+    { say:"<b>Enharmonic Flexibility of vii°7:</b> A fully diminished seventh chord divides the octave into four equal minor thirds. Through enharmonic respelling, any one of its four pitch classes can be interpreted as the root of a leading-tone seventh chord, so each spelling can point toward a different tonic. For example, B–D–F–A♭ may be enharmonically respelled to function as leading-tone seventh chords resolving toward C, E♭, G♭, or A, allowing the chord to connect distantly related keys. \u{1F447} <b>Why can a fully diminished seventh chord lead toward several different tonics?</b>",
+      try:{ type:"mc", choices:["Its symmetrical pitch structure allows enharmonic respelling with different chord members interpreted as the leading-tone root","It contains five chord members","It must be performed loudly"], answer:0,
+        success:"✓ Correct. Enharmonic respelling allows the same sounding pitch collection to assume different leading-tone functions.",
+        fail:"Examine the equal minor-third divisions of the chord.",
+        hint:"Three stacked minor thirds create a symmetrical pitch collection." } },
+    { say:"<b>Secondary Leading-Tone Chords:</b> Just as a secondary dominant tonicizes a nontonic chord, a secondary leading-tone chord may provide dominant function to a temporary target. Its Roman numeral is written <b>vii°/X</b> or <b>vii°7/X</b>. In C major, F♯–A–C is vii°/V because F♯ is the temporary leading tone to G, and the chord normally resolves to G major, the V chord. \u{1F447} <b>In C major, F♯–A–C resolving to G major is labeled…</b>",
+      try:{ type:"mc", choices:["vii°/V","vii°/I","ii"], answer:0,
+        success:"✓ Correct. F♯ is the temporary leading tone to G, so the chord is the leading-tone triad of V.",
+        fail:"Look at the chord after the slash — F♯ leads to G.",
+        hint:"Identify the target chord after the slash." } },
+    { say:"<b>Review:</b> \u{1F447} <b>In the progression I–vii°6–I6, what role does vii°6 commonly serve?</b>",
+      try:{ type:"mc", choices:["A passing chord connecting two tonic positions","A final cadence by itself","A modulation by itself"], answer:0,
+        success:"✓ Correct. In C major, the bass moves C–D–E while vii°6 connects root-position I with first-inversion I.",
+        fail:"Follow the stepwise bass motion between the two tonic positions.",
+        hint:"I → vii°6 → I6." } }
   ],
   examples:[
     { caption:"I – vii°6 – I6: the leading-tone chord as a passing chord; the bass walks C-D-E while dominant color flickers between two tonics.",
@@ -78,9 +78,9 @@ LESSON_CONTENT[104]={
       kb:{start:47,octaves:2,labels:true} }
   ],
   games:[
-    { type:"gen-race", title:"Game 1 · Leading-Tone Sprint (45s)",
-      intro:"Spellings, functions, resolutions — race them!",
-      miaIntro:"Rootless dominants! \u{26A1}",
+    { type:"gen-race", title:"Game 1 · Leading-Tone Chord Identification",
+      intro:"Identify leading-tone chord spellings, qualities, functions, and resolutions.",
+      miaIntro:"Find the leading tone and its expected tonic.",
       spec:{gen:"term-match", params:{subject:"term", pool:[
         ["vii° in C","B-D-F"],
         ["vii° is","V7 without its root"],
@@ -90,26 +90,26 @@ LESSON_CONTENT[104]={
         ["Leading-tone chords' function","dominant"],
         ["vii°7's structure","all minor 3rds — symmetrical"],
         ["Classic usage","vii°6 passing between I and I6"]], reverse:true}, seconds:45},
-      result:(score)=>score>=8?score+" — the key chord unlocked!":null },
-    { type:"key-climb", title:"Game 2 · Resolve vii°7 by Hand",
-      intro:"Play B-D-F-A♭, then resolve to C!",
-      miaIntro:"Tension, then home! \u{1FA9C}",
+      result:(score)=>score>=8?"Leading-tone chords identified!":null },
+    { type:"key-climb", title:"Game 2 · Resolve vii°7",
+      intro:"Play B–D–F–A♭ and resolve it smoothly to a C-minor or C-major tonic voicing. Follow B upward to C, F downward to E♭ or E, and A♭ downward to G.",
+      miaIntro:"Resolve each tendency tone by step.",
       spec:{seq:[59,62,65,68,60],
         names:["B (leading tone)","D","F","A♭ (the °7)","C — resolution!"],
         start:55, octaves:2, title:"vii°7 into the tonic"},
-      result:(score)=>score!==null?"Resolution performed!":null },
-    { type:"symbol-hunt", title:"Game 3 · Which Chord Is It?",
-      intro:"Chords on the leading tone — click what each round names!",
-      miaIntro:"Count the 3rds! \u{1F440}",
+      result:(score)=>score!==null?"You performed the leading-tone resolution.":null },
+    { type:"symbol-hunt", title:"Game 3 · Identify the Chord",
+      intro:"Examine each leading-tone chord and identify its triad or seventh-chord quality.",
+      miaIntro:"Spell the chord and check its seventh.",
       spec:{rounds:6, pool:[
         {label:"vii° (B-D-F)", spec:{clef:"treble",notes:[{p:"B3",d:"w"},{p:"D4",d:"w",chord:true},{p:"F4",d:"w",chord:true}],width:150}},
         {label:"viiø7 (B-D-F-A)", spec:{clef:"treble",notes:[{p:"B3",d:"w"},{p:"D4",d:"w",chord:true},{p:"F4",d:"w",chord:true},{p:"A4",d:"w",chord:true}],width:150}},
         {label:"vii°7 (B-D-F-A♭)", spec:{clef:"treble",notes:[{p:"B3",d:"w"},{p:"D4",d:"w",chord:true},{p:"F4",d:"w",chord:true},{p:"Ab4",d:"w",chord:true}],width:150}},
         {label:"V7 (G-B-D-F)", spec:{clef:"treble",notes:[{p:"G3",d:"w"},{p:"B3",d:"w",chord:true},{p:"D4",d:"w",chord:true},{p:"F4",d:"w",chord:true}],width:150}}]},
-      result:(score)=>score>=5?"Leading-tone chords on sight!":null },
-    { type:"term-race", title:"Game 4 · Function & Resolution Race",
-      intro:"Where does each chord go — at speed!",
-      miaIntro:"Everything resolves! \u{1F3C1}",
+      result:(score)=>score>=5?"You identified the leading-tone chords correctly.":null },
+    { type:"term-race", title:"Game 4 · Function and Resolution",
+      intro:"Identify the expected target and tendency-tone resolutions of each leading-tone chord.",
+      miaIntro:"Read the Roman numeral and follow the tendency tones.",
       spec:{rounds:8, reverse:true, pool:[
         ["vii° resolves to","I (or i)"],
         ["vii°7 resolves to","I (or i)"],
@@ -117,22 +117,22 @@ LESSON_CONTENT[104]={
         ["The chord's dissonances","fall by step"],
         ["vii° shares its tritone with","V7"],
         ["vii°7 as a pivot","opens distant keys"],
-        ["III+ (minor) intensifies motion to","iv or VI"],
-        ["D-function chords","V, V7, vii°, vii°7"]]},
-      result:(score)=>score>=6?"Every resolution tracked!":null }
+        ["vii°/V resolves to","V"],
+        ["D-function chords","V, V7, vii°, viiø7, vii°7"]]},
+      result:(score)=>score>=6?"You identified the expected resolutions correctly.":null }
   ],
-  practiceIntro:"20 practice questions — spellings, functions and resolutions. Answer right and the next appears automatically!",
+  practiceIntro:"Complete 20 practice questions on leading-tone chord spellings, qualities, functions, and resolutions.",
   practice:[
     { gen:"term-match", params:{subject:"term", pool:[["vii°","B-D-F in C"],["viiø7","+A"],["vii°7","+A\u{266D}"],["Function","dominant"],["Resolution","to I"]], reverse:true}, count:6 },
     { gen:"triad-quality", params:{}, count:2 },
-    { type:"mc", q:"vii° in C major is spelled…", choices:["B-D-F","B-D-F♯","G-B-D"], answer:0, explain:"The diminished triad on the leading tone." },
-    { type:"mc", q:"vii° functions as…", choices:["a dominant","a tonic","a predominant"], answer:0, explain:"V7 minus the root." },
-    { type:"mc", q:"vii°7 adds which 7th above B (in C)?", choices:["A♭","A","G"], answer:0, explain:"Fully diminished — all m3s." },
-    { type:"mc", q:"In vii° → I, the leading tone…", choices:["rises to the tonic","falls to the dominant","disappears"], answer:0, explain:"B→C." },
-    { type:"truefalse", q:"vii° shares its tritone (B-F) with V7.", answer:true, explain:"Same engine." },
-    { type:"truefalse", q:"vii°7's symmetry lets any note act as leading tone.", answer:true, explain:"Four doors, one chord." },
-    { type:"truefalse", q:"viiø7 and vii°7 are identical.", answer:false, explain:"A vs A♭ — half vs fully diminished." },
-    { gen:"term-match", params:{subject:"term", pool:[["I - vii°6 - I6","the passing use"],["Symmetry","distant-key pivot"],["III+","intensifies iv/VI"],["Tritone","B-F"]], reverse:true}, count:3 },
+    { type:"mc", q:"vii° in C major is spelled…", choices:["B-D-F","B-D-F♯","G-B-D"], answer:0, explain:"In C major, vii° is B–D–F." },
+    { type:"mc", q:"vii° functions as…", choices:["a dominant","a tonic","a predominant"], answer:0, explain:"The leading-tone triad commonly serves dominant function." },
+    { type:"mc", q:"vii°7 adds which 7th above B (in C)?", choices:["A♭","A","G"], answer:0, explain:"In C, vii°7 contains A♭, a diminished seventh above B." },
+    { type:"mc", q:"In vii° → I, the leading tone…", choices:["rises by half step to the tonic","falls to the dominant","disappears"], answer:0, explain:"The leading tone normally resolves upward by half step to the tonic." },
+    { type:"truefalse", q:"vii° shares its tritone (B-F) with V7.", answer:true, explain:"Both vii° and V7 contain the tritone B–F in C major." },
+    { type:"truefalse", q:"Through enharmonic respelling, any pitch class of a fully diminished seventh chord may be reinterpreted as the root of a leading-tone chord.", answer:true, explain:"Enharmonic respelling reinterprets each pitch class as a leading tone." },
+    { type:"truefalse", q:"viiø7 and vii°7 have different seventh qualities.", answer:true, explain:"In C, viiø7 contains A♮, while vii°7 contains A♭." },
+    { gen:"term-match", params:{subject:"term", pool:[["I - vii°6 - I6","the passing use"],["Symmetry","distant-key pivot"],["vii°/V","tonicizes V"],["Tritone","B-F"]], reverse:true}, count:3 },
     { gen:"inversion-id", params:{subject:"triad", ask:"position"}, count:2 }
   ],
   vocabulary:[
@@ -158,25 +158,25 @@ LESSON_CONTENT[104]={
   rewards:{ badge:"Key Holder", icon:"\u{1F511}" },
   sectionOrder:["secHook","secObjectives","secLearn","secExample","secReview",
     "secGame0","secGame1","secGame2","secGame3","secPractice","secQuiz","secTips","secNext"],
-  miaQuizIntro:"Quiz! Rootless dominants, rising leading tones.",
+  miaQuizIntro:"Quiz: Identify leading-tone chords, their qualities, targets, and tendency-tone resolutions.",
   quiz:[
     { type:"mc", q:"vii° in C major is…", choices:["B-D-F","B♭-D-F","B-D♯-F♯"], answer:0, explain:"Diminished, on the leading tone.", hint:"Two m3s." },
-    { type:"mc", q:"vii° relates to V7 as…", choices:["V7 without its root","V7 with an added root","no relation"], answer:0, explain:"B-D-F ⊂ G-B-D-F.", hint:"Remove G." },
-    { type:"mc", q:"The leading-tone chords carry which function?", choices:["Dominant","Tonic","Predominant"], answer:0, explain:"L86's orange column.", hint:"They push home." },
+    { type:"mc", q:"vii° relates to V7 as…", choices:["V7 without its root","V7 with an added root","no relation"], answer:0, explain:"The leading-tone triad contains the upper three chord members of V7 but has its own root and Roman numeral.", hint:"Remove G." },
+    { type:"mc", q:"Which function do leading-tone chords most commonly provide?", choices:["Dominant","Tonic","Predominant"], answer:0, explain:"They contain tendency tones that normally resolve toward tonic.", hint:"They push home." },
     { type:"mc", q:"vii°7 in C is spelled…", choices:["B-D-F-A♭","B-D-F-A","B-D-F-G♯"], answer:0, explain:"All minor 3rds.", hint:"Lowered 7th." },
     { type:"mc", q:"viiø7 differs from vii°7 by…", choices:["its 7th: A vs A♭","its root","its 3rd"], answer:0, explain:"Half vs fully diminished.", hint:"Top note." },
-    { type:"mc", q:"vii° resolves to…", choices:["I","IV","vi"], answer:0, explain:"Dominant home.", hint:"Where V goes." },
-    { type:"mc", q:"In the resolution, the leading tone…", choices:["rises a half step","falls a whole step","leaps an octave"], answer:0, explain:"B→C, always.", hint:"Its name says so." },
-    { type:"mc", q:"Identify (key: C).",
+    { type:"mc", q:"In its standard dominant-function use, vii° normally resolves to…", choices:["I or i","IV","vi"], answer:0, explain:"Dominant home.", hint:"Where V goes." },
+    { type:"mc", q:"In a standard leading-tone-chord resolution, the leading tone normally…", choices:["Rises by half step to tonic","Falls by whole step","Leaps by octave"], answer:0, explain:"For example, B normally resolves upward to C.", hint:"Its name says so." },
+    { type:"mc", q:"Identify the chord in C.",
       staff:{clef:"treble",notes:[{p:"B3",d:"w"},{p:"D4",d:"w",chord:true},{p:"F4",d:"w",chord:true},{p:"Ab4",d:"w",chord:true}],width:160},
-      choices:["vii°7","viiø7","V7"], answer:0, explain:"B-D-F-A♭ — fully diminished.", hint:"Check the top note." },
-    { type:"truefalse", q:"vii°6 often passes between I and I6.", answer:true, explain:"Bass walks 1-2-3.", hint:"The passing use." },
-    { type:"truefalse", q:"vii°7 may only appear in minor keys.", answer:false, explain:"Borrowed freely into major.", hint:"Both modes." },
-    { type:"mc", q:"vii°7's usefulness as a distant-key pivot comes from…", choices:["its symmetrical structure","its loudness","its major 3rd"], answer:0, explain:"Any note can lead.", hint:"m3 stack." },
-    { type:"mc", q:"The full dominant-function team is…", choices:["V, V7, vii°, vii°7","I and vi","ii and IV"], answer:0, explain:"All carry the leading tone.", hint:"The pushers." }
+      choices:["vii°7","viiø7","V7"], answer:0, explain:"B–D–F–A♭ forms a fully diminished seventh chord on the leading tone.", hint:"Check the top note." },
+    { type:"truefalse", q:"vii°6 commonly appears as a passing chord between I and I6.", answer:true, explain:"Bass walks 1-2-3.", hint:"The passing use." },
+    { type:"truefalse", q:"A fully diminished leading-tone seventh chord can appear in both major- and minor-key contexts.", answer:true, explain:"In major, it may be created by lowering scale degree 6 through mixture with the parallel minor.", hint:"Both modes." },
+    { type:"mc", q:"Why can a fully diminished seventh chord connect several possible keys?", choices:["Its symmetrical structure permits multiple enharmonic spellings and leading-tone interpretations","Its dynamic level is always high","It contains a major third"], answer:0, explain:"Enharmonic respelling lets different chord members act as the leading tone.", hint:"m3 stack." },
+    { type:"mc", q:"Which list contains the principal dominant-function chord types introduced in this course?", choices:["V, V7, vii°, viiø7, and vii°7","I and vi","ii and IV"], answer:0, explain:"V and leading-tone chords contain tendency tones that commonly resolve toward tonic. Their exact function still depends on musical context.", hint:"The pushers." }
   ],
-  miaPerfect:"PERFECT! The rootless dominant serves you now. \u{1F511}\u{1F389}",
-  miaPass:"Passed! Leading tones rise on command. Next: the Neapolitan…",
+  miaPerfect:"Perfect score! You accurately identified leading-tone chords and their expected resolutions.",
+  miaPass:"You passed! Next, you will study the Neapolitan chord.",
   mia:{
     hook:{ label:"the welcome",
       explain:"B-D-F resolved into C-E-G — vii°, the rootless V7, doing dominant work.",

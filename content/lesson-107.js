@@ -5,19 +5,19 @@
    NOTE: edit by FULL-FILE REWRITE only. */
 
 LESSON_CONTENT[107]={
-  welcome:"Borrowed chords: colors from the parallel key. \u{1F3A8}",
+  welcome:"Modal mixture introduces pitches and chords from the parallel mode.",
   hook:{
-    say:"<b>A C major phrase suddenly darkens</b> — one chord came from C MINOR — then brightens home. \u{1F447} <b>Listen for the shadow.</b>",
+    say:"A phrase in C major includes an F minor chord drawn from the parallel minor mode before returning to C major. \u{1F447} <b>Which chord demonstrates modal mixture?</b>",
     interact:{ type:"custom",
       mount:(container,fb)=>{
         container.innerHTML=`<div style="text-align:center">
-          <button class="play hk-a">▶ I → iv → V → I</button></div>
-          <div class="choices hk-ch" style="display:none"><button>The IV became MINOR — borrowed from C minor</button><button>The key changed permanently</button><button>Nothing changed</button></div>`;
+          <button class="play hk-a">▶ Play IV–iv–I in C major</button></div>
+          <div class="choices hk-ch" style="display:none"><button>F minor, iv — drawn from the parallel minor mode</button><button>C major, I — the diatonic tonic chord</button><button>The passage permanently modulates to C minor</button></div>`;
         const ch=container.querySelector(".hk-ch");
-        container.querySelector(".hk-a").onclick=()=>{ [[60,64,67],[53,56,60],[55,59,62],[60,64,67]].forEach((row,i)=>row.forEach(m=>MFAudio.tone(m,.85,i*.9,.27))); setTimeout(()=>ch.style.display="",4*900+300); };
+        container.querySelector(".hk-a").onclick=()=>{ [[65,69,72],[65,68,72],[60,64,67]].forEach((row,i)=>row.forEach(m=>MFAudio.tone(m,.85,i*.9,.27))); setTimeout(()=>ch.style.display="",3*900+300); };
         [...ch.children].forEach((b,i)=>b.onclick=()=>{
-          if(i===0) fb(true,"✓ F-A♭-C — the minor iv inside C major, borrowed from C minor. MODAL MIXTURE: today's lesson!");
-          else fb(false,"The A♭ was the shadow — one chord on loan from the parallel minor…");
+          if(i===0) fb(true,"✓ Correct. F–A♭–C is iv in C minor. Its use within a passage that remains centered on C major demonstrates modal mixture.");
+          else fb(false,"Listen for A♭, the pitch that changes the diatonic F-major triad into F minor.");
         });
       } }
   },
@@ -30,46 +30,49 @@ LESSON_CONTENT[107]={
     "Read mixture accidentals (♭6, ♭3, ♭7 of the key)"
   ],
   steps:[
-    { say:"<b>Parallel Keys:</b> C major and C minor share a <b>tonic</b> but differ in mode — unlike RELATIVE keys (C/Am), which share a signature. Mixture trades between PARALLELS. \u{1F447} <b>C major's parallel minor is…</b>",
-      try:{ type:"mc", choices:["C minor — same tonic","A minor — same signature","G minor"], answer:0,
-        success:"✓ Same letter, different color — the mixture partners.",
-        fail:"Parallel = same TONIC…",
-        hint:"Not the relative." } },
-    { say:"<b>Modal Mixture:</b> using a chord <b>borrowed from the parallel key</b> — most often minor-key chords imported into major for <b>instant darkening</b>, without leaving the key. \u{1F447} <b>Modal mixture borrows from…</b>",
-      try:{ type:"mc", choices:["The parallel key","The dominant key","A distant key"], answer:0,
-        success:"✓ Across the parallel border — C major shops in C minor.",
-        fail:"Same tonic, other mode…",
-        hint:"The shadow twin." } },
-    { say:"<b>The Common Borrowings:</b> into C major come C minor's <b>iv</b> (F-A♭-C), <b>ii°</b> (D-F-A♭), <b>♭VI</b> (A♭-C-E♭), <b>♭III</b> (E♭-G-B♭) and <b>♭VII</b> (B♭-D-F). The imported accidentals are the key's <b>♭6, ♭3 and ♭7</b>. \u{1F447} <b>♭VI in C major is spelled…</b>",
+    { say:"<b>Parallel and Relative Keys:</b> Parallel keys share the same tonic but use different modes and key signatures. C major and C minor are parallel keys. Relative major and minor keys share a key signature but have different tonics; C major and A minor are relative keys. Modal mixture draws pitches or chords from the parallel mode. \u{1F447} <b>What is the parallel minor of C major?</b>",
+      try:{ type:"mc", choices:["C minor — the same tonic in a different mode","A minor — the relative minor","G minor"], answer:0,
+        success:"✓ Correct. C major and C minor share the tonic C but use different modal collections.",
+        fail:"Identify the minor key that shares the tonic C.",
+        hint:"Parallel keys share a tonic; relative keys share a key signature." } },
+    { say:"<b>Modal Mixture:</b> Modal mixture occurs when music in a major or minor key uses pitches or chords associated with its parallel mode. Major-key passages frequently use chords from the parallel minor, and minor-key passages may use chords or scale degrees associated with the parallel major. Modal mixture does not by itself establish a new tonic. \u{1F447} <b>Modal mixture draws material from…</b>",
+      try:{ type:"mc", choices:["The parallel mode","The dominant key by definition","A key with an unrelated tonic by definition"], answer:0,
+        success:"✓ Correct. Modal mixture combines material from parallel major and minor modes, which share the same tonic.",
+        fail:"Identify the mode that shares the current tonic.",
+        hint:"Parallel modes share the same tonic pitch." } },
+    { say:"<b>Common Mixture Chords in Major:</b> A passage in C major may draw chords from the parallel minor collection. These chords commonly introduce scale degrees <b>♭3, ♭6, and ♭7</b> into the major mode; their function must be determined from context. \u{1F447} <b>How is ♭VI spelled in C major?</b>",
       show:{ type:"html", html:`<table style="border-collapse:collapse;margin:0 auto;font-size:14px;min-width:300px">
         <tr><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:5px 12px">Borrowed</th><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:5px 12px">In C major</th><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:5px 12px">Imported note</th></tr>
         <tr><td style="border:1.5px solid #cdd5e1;padding:4px 12px;text-align:center;font-weight:800;color:#C05A21">iv</td><td style="border:1.5px solid #cdd5e1;padding:4px 12px;text-align:center">F-A\u{266D}-C</td><td style="border:1.5px solid #cdd5e1;padding:4px 12px;text-align:center">\u{266D}6</td></tr>
+        <tr><td style="border:1.5px solid #cdd5e1;padding:4px 12px;text-align:center;font-weight:800;color:#C05A21">ii\u{00B0}</td><td style="border:1.5px solid #cdd5e1;padding:4px 12px;text-align:center">D-F-A\u{266D}</td><td style="border:1.5px solid #cdd5e1;padding:4px 12px;text-align:center">\u{266D}6</td></tr>
+        <tr><td style="border:1.5px solid #cdd5e1;padding:4px 12px;text-align:center;font-weight:800;color:#C05A21">ii\u{00F8}7</td><td style="border:1.5px solid #cdd5e1;padding:4px 12px;text-align:center">D-F-A\u{266D}-C</td><td style="border:1.5px solid #cdd5e1;padding:4px 12px;text-align:center">\u{266D}6</td></tr>
+        <tr><td style="border:1.5px solid #cdd5e1;padding:4px 12px;text-align:center;font-weight:800;color:#C05A21">\u{266D}III</td><td style="border:1.5px solid #cdd5e1;padding:4px 12px;text-align:center">E\u{266D}-G-B\u{266D}</td><td style="border:1.5px solid #cdd5e1;padding:4px 12px;text-align:center">\u{266D}3, \u{266D}7</td></tr>
         <tr><td style="border:1.5px solid #cdd5e1;padding:4px 12px;text-align:center;font-weight:800;color:#C05A21">\u{266D}VI</td><td style="border:1.5px solid #cdd5e1;padding:4px 12px;text-align:center">A\u{266D}-C-E\u{266D}</td><td style="border:1.5px solid #cdd5e1;padding:4px 12px;text-align:center">\u{266D}6, \u{266D}3</td></tr>
         <tr><td style="border:1.5px solid #cdd5e1;padding:4px 12px;text-align:center;font-weight:800;color:#C05A21">\u{266D}VII</td><td style="border:1.5px solid #cdd5e1;padding:4px 12px;text-align:center">B\u{266D}-D-F</td><td style="border:1.5px solid #cdd5e1;padding:4px 12px;text-align:center">\u{266D}7</td></tr></table>` },
       try:{ type:"mc", choices:["A♭-C-E♭","A-C-E","A♭-C♭-E♭"], answer:0,
-        success:"✓ A major triad on the lowered 6th — the most beloved borrowing.",
-        fail:"Lower the 6th, build major…",
-        hint:"A♭ major." } },
-    { say:"<b>The Sound:</b> mixture <b>darkens without modulating</b> — the tonic stays C; the borrowed chord passes like a cloud. Pop and film use iv and ♭VI constantly (\u{201C}the sad plagal\u{201D} IV→iv→I). \u{1F447} <b>Mixture changes the key's…</b>",
-      try:{ type:"mc", choices:["Color only — the tonic stays","Tonic","Meter"], answer:0,
-        success:"✓ A shadow, not a move — that is its charm.",
-        fail:"Did the hook leave C?",
-        hint:"Clouds, not relocation." } },
-    { say:"<b>The Picardy Third:</b> mixture's oldest trick runs the OTHER way — a <b>minor piece ends on a MAJOR tonic chord</b> (the raised 3rd). <b>Remember: mixture = parallel-key borrowing; major borrows ♭6/♭3/♭7 chords; minor borrows the major I to end.</b> \u{1F447} <b>A Picardy third is…</b>",
-      try:{ type:"mc", choices:["A major I ending a minor piece","A minor iv in major","A type of trill"], answer:0,
-        success:"✓ Centuries of minor works end on borrowed sunshine.",
-        fail:"Which direction does THIS borrowing go?",
-        hint:"Minor borrows major's ending." } },
-    { say:"<b>Spotting Mixture:</b> look for the key's <b>♭6, ♭3 or ♭7</b> in a chord that then returns to normal — a borrowed cloud, not a modulation (no new-key cadence, L99's test). \u{1F447} <b>A♭ appears in one C major chord, then the music continues in C. That was…</b>",
-      try:{ type:"mc", choices:["Modal mixture","A modulation to A♭","An error"], answer:0,
-        success:"✓ One borrowed shadow — the tonic never moved.",
-        fail:"Was there a cadence in a new key?",
-        hint:"L99's boundary test." } },
-    { say:"<b>Review:</b> \u{1F447} <b>IV → iv → I (F major, F minor, C major) is…</b>",
-      try:{ type:"mc", choices:["The 'sad plagal' — mixture darkening the close","A circle progression","A half cadence"], answer:0,
-        success:"✓ The borrowed iv melts the plagal cadence — pop's favorite tear.",
-        fail:"Which chord got borrowed mid-cadence?",
-        hint:"A♭ inside the second chord." } }
+        success:"✓ Correct. A♭–C–E♭ is an A♭ major triad rooted on scale degree ♭6.",
+        fail:"Lower scale degree 6 from A to A♭ and build a major triad.",
+        hint:"♭VI in C major is A♭ major." } },
+    { say:"<b>Modal Mixture and Tonal Center:</b> Modal mixture changes the available pitch and chord collection while the prevailing tonic may remain unchanged. The progression IV–iv–I in major is a common example: the diatonic IV moves to a minor iv drawn from the parallel minor before resolving to I. At a phrase ending, iv–I may create a minor plagal cadence. \u{1F447} <b>Which statement best describes modal mixture?</b>",
+      try:{ type:"mc", choices:["It introduces material from the parallel mode without necessarily establishing a new tonic","It must permanently change the tonic","It changes the meter"], answer:0,
+        success:"✓ Correct. A borrowed chord can alter the harmonic collection while the prevailing tonic remains active.",
+        fail:"Determine whether another tonic receives structural confirmation.",
+        hint:"Identify the tonal center before and after the mixture chord." } },
+    { say:"<b>The Picardy Third:</b> A Picardy third occurs when a composition or substantial section in a minor key ends with a major tonic triad; the third of the tonic chord is raised by half step, changing i to I at the final cadence. Mixture in minor is not limited to the Picardy third — minor-key passages may also use chords such as major IV or other pitches associated with the parallel major. \u{1F447} <b>What is a Picardy third?</b>",
+      try:{ type:"mc", choices:["A raised third that creates a major tonic at the end of a minor-key composition or section","A minor iv chord in a major key","A melodic ornament"], answer:0,
+        success:"✓ Correct. Raising the tonic triad's third changes the final chord from minor to major.",
+        fail:"Compare the final tonic triad with the parallel major tonic.",
+        hint:"The final i chord becomes I." } },
+    { say:"<b>Identifying Modal Mixture:</b> First, identify the prevailing tonic and mode. Next, spell the chromatic chord and determine whether its pitches correspond to a chord associated with the parallel mode. Finally, analyze its function and confirm the passage does not establish another tonic more strongly — a single altered pitch is not sufficient evidence. \u{1F447} <b>In C major, an F–A♭–C chord functions as iv and resolves to C major without establishing another tonic. How should it be analyzed?</b>",
+      try:{ type:"mc", choices:["Modal mixture from the parallel minor","Modulation to A♭ major","A notation error"], answer:0,
+        success:"✓ Correct. F minor is iv in the parallel minor mode and functions here within C major.",
+        fail:"Identify the chord and determine whether another tonic is structurally established.",
+        hint:"F–A♭–C is iv in C minor." } },
+    { say:"<b>Review:</b> \u{1F447} <b>In C major, how is IV–iv–I best described?</b>",
+      try:{ type:"mc", choices:["A mixture progression using minor iv before tonic","A descending-fifths progression","A half cadence"], answer:0,
+        success:"✓ Correct. The minor iv is drawn from the parallel minor and resolves to I. At a phrase ending, the iv–I motion may form a minor plagal cadence.",
+        fail:"Identify the chord containing A♭.",
+        hint:"F minor is iv in C minor." } }
   ],
   examples:[
     { caption:"The sad plagal in C: IV (F-A-C) → iv (F-A♭-C) → I. One half-step darkening, maximum emotion.",
@@ -86,9 +89,9 @@ LESSON_CONTENT[107]={
       kb:{start:56,octaves:2,labels:true} }
   ],
   games:[
-    { type:"gen-race", title:"Game 1 · Mixture Sprint (45s)",
-      intro:"Parallels, borrowings and colors — race them!",
-      miaIntro:"Shop next door! \u{26A1}",
+    { type:"gen-race", title:"Game 1 · Modal-Mixture Identification",
+      intro:"Identify parallel modes and common borrowed-chord spellings.",
+      miaIntro:"Same tonic, parallel mode.",
       spec:{gen:"term-match", params:{subject:"term", pool:[
         ["Parallel keys","same tonic, different mode"],
         ["Modal mixture","borrowing from the parallel key"],
@@ -98,28 +101,28 @@ LESSON_CONTENT[107]={
         ["The imported notes","\u{266D}6, \u{266D}3, \u{266D}7"],
         ["Picardy third","minor piece ends on major I"],
         ["Mixture vs modulation","color change vs key change"]], reverse:true}, seconds:45},
-      result:(score)=>score>=8?score+" — borrowing license granted!":null },
-    { type:"key-climb", title:"Game 2 · Play the Sad Plagal",
-      intro:"Play A (IV's 3rd), A♭ (borrowed!), then G (I's 5th)!",
-      miaIntro:"The melting half step! \u{1FA9C}",
-      spec:{seq:[69,68,67],
-        names:["A (bright IV)","A♭ (the borrowed shadow)","G (home in I)"],
-        start:64, octaves:1, title:"IV → iv → I, in one voice"},
-      result:(score)=>score!==null?"The tear, performed!":null },
+      result:(score)=>score>=8?score+" — modal-mixture chords identified!":null },
+    { type:"key-climb", title:"Game 2 · Perform the Minor Plagal Progression",
+      intro:"Play the complete progression F major → F minor → C major. Listen to the inner line A–A♭–G.",
+      miaIntro:"Follow the chromatic inner voice A–A♭–G.",
+      spec:{seq:[65,69,72,65,68,72,60,64,67],
+        names:["F (root of IV)","A (3rd of IV)","C (5th of IV)","F (root of iv)","A♭ (borrowed 3rd of iv)","C (5th of iv)","C (root of I)","E (3rd of I)","G (5th of I)"],
+        start:60, octaves:2, title:"Play each complete chord: IV → iv → I"},
+      result:(score)=>score!==null?"You performed the mixture progression.":null },
     { type:"symbol-hunt", title:"Game 3 · Borrowed or Diatonic?",
-      intro:"Chords in C major — click what each round names!",
-      miaIntro:"Hunt the flats! \u{1F440}",
+      intro:"Examine each chord in a C-major context and determine whether it is diatonic or drawn from the parallel minor.",
+      miaIntro:"Spell the complete chord and identify its function.",
       spec:{rounds:6, pool:[
         {label:"Borrowed iv (F-A♭-C)", spec:{clef:"treble",notes:[{p:"F4",d:"w"},{p:"Ab4",d:"w",chord:true},{p:"C5",d:"w",chord:true}],width:150}},
         {label:"Diatonic IV (F-A-C)", spec:{clef:"treble",notes:[{p:"F4",d:"w"},{p:"A4",d:"w",chord:true},{p:"C5",d:"w",chord:true}],width:150}},
         {label:"♭VI (A♭-C-E♭)", spec:{clef:"treble",notes:[{p:"Ab4",d:"w"},{p:"C5",d:"w",chord:true},{p:"Eb5",d:"w",chord:true}],width:150}},
         {label:"♭VII (B♭-D-F)", spec:{clef:"treble",notes:[{p:"Bb3",d:"w"},{p:"D4",d:"w",chord:true},{p:"F4",d:"w",chord:true}],width:150}}]},
-      result:(score)=>score>=5?"Borrowings spotted!":null },
-    { type:"term-race", title:"Game 4 · Color Race",
-      intro:"Which device makes which color — at speed!",
-      miaIntro:"Clouds and sunshine! \u{1F3C1}",
+      result:(score)=>score>=5?"You classified the chords correctly.":null },
+    { type:"term-race", title:"Game 4 · Identify the Mixture Device",
+      intro:"Match each musical description with the appropriate mixture technique.",
+      miaIntro:"Parallel minor borrowing or parallel major inflection?",
       spec:{rounds:8, reverse:true, pool:[
-        ["IV \u{2192} iv \u{2192} I","the sad plagal"],
+        ["IV \u{2192} iv \u{2192} I","minor iv borrowed from the parallel minor"],
         ["\u{266D}VI \u{2192} \u{266D}VII \u{2192} I","the borrowed climb"],
         ["Minor ending on major I","Picardy third"],
         ["A\u{266D} in one C major chord","mixture, not modulation"],
@@ -127,20 +130,20 @@ LESSON_CONTENT[107]={
         ["Parallel of G major","G minor"],
         ["Parallel of A minor","A major"],
         ["Relative vs parallel","signature-share vs tonic-share"]]},
-      result:(score)=>score>=6?"Every color mixed!":null }
+      result:(score)=>score>=6?"You identified the mixture techniques correctly.":null }
   ],
-  practiceIntro:"20 practice questions — parallels, borrowings and the Picardy. Answer right and the next appears automatically!",
+  practiceIntro:"Complete 20 practice questions on parallel keys, borrowed chords, modal mixture, and the Picardy third.",
   practice:[
     { gen:"term-match", params:{subject:"term", pool:[["Parallel keys","same tonic"],["Mixture","parallel borrowing"],["iv in major","borrowed"],["\u{266D}VI","A\u{266D} major in C"],["Picardy","major I ending a minor piece"]], reverse:true}, count:6 },
     { gen:"triad-quality", params:{quals:["M","m"]}, count:2 },
-    { type:"mc", q:"C major's parallel key is…", choices:["C minor","A minor","G major"], answer:0, explain:"Same tonic." },
-    { type:"mc", q:"Modal mixture borrows chords from…", choices:["the parallel key","the relative key","no key"], answer:0, explain:"Across the tonic-sharing border." },
-    { type:"mc", q:"The borrowed iv in C major is…", choices:["F-A♭-C","F-A-C","F♯-A-C"], answer:0, explain:"♭6 inside." },
-    { type:"mc", q:"♭VII in C major is…", choices:["B♭-D-F","B-D-F","B♭-D♭-F"], answer:0, explain:"Major triad on ♭7." },
-    { type:"truefalse", q:"Mixture changes the tonic.", answer:false, explain:"Color changes; home stays." },
-    { type:"truefalse", q:"The Picardy third ends a minor piece on a major tonic.", answer:true, explain:"Borrowed sunshine." },
-    { type:"truefalse", q:"Mixture chords import the key's ♭6, ♭3 or ♭7.", answer:true, explain:"The three shadows." },
-    { gen:"term-match", params:{subject:"term", pool:[["IV\u{2192}iv\u{2192}I","sad plagal"],["\u{266D}VI-\u{266D}VII-I","borrowed climb"],["G major's parallel","G minor"],["No new-key cadence","not a modulation"]], reverse:true}, count:3 },
+    { type:"mc", q:"C major's parallel minor is…", choices:["C minor","A minor","G major"], answer:0, explain:"The same tonic in a different mode." },
+    { type:"mc", q:"Modal mixture draws material from…", choices:["the parallel mode","the relative mode","no other key"], answer:0, explain:"The tonic-sharing parallel mode." },
+    { type:"mc", q:"The borrowed iv in C major is…", choices:["F-A♭-C","F-A-C","F♯-A-C"], answer:0, explain:"Contains ♭6 (A♭)." },
+    { type:"mc", q:"♭VII in C major is…", choices:["B♭-D-F","B-D-F","B♭-D♭-F"], answer:0, explain:"B♭–D–F; context determines whether it functions as mixture or broader modal harmony." },
+    { type:"truefalse", q:"Modal mixture necessarily establishes a new tonic.", answer:false, explain:"Mixture may occur while the prevailing tonic remains active, although borrowed chords can participate in a larger modulation." },
+    { type:"truefalse", q:"A Picardy third creates a major final tonic in a minor-key composition or section.", answer:true, explain:"The tonic triad's third is raised at the final cadence." },
+    { type:"truefalse", q:"Common mixture chords in a major key often introduce ♭3, ♭6, or ♭7.", answer:true, explain:"These characteristic altered scale degrees still require context to confirm function." },
+    { gen:"term-match", params:{subject:"term", pool:[["IV\u{2192}iv\u{2192}I","minor plagal progression"],["\u{266D}VI-\u{266D}VII-I","borrowed climb"],["G major's parallel","G minor"],["No new-key cadence","not a modulation"]], reverse:true}, count:3 },
     { gen:"rel-key", params:{ask:"both"}, count:2 }
   ],
   vocabulary:[
@@ -166,25 +169,25 @@ LESSON_CONTENT[107]={
   rewards:{ badge:"Color Borrower", icon:"\u{1F3A8}" },
   sectionOrder:["secHook","secObjectives","secLearn","secExample","secReview",
     "secGame0","secGame1","secGame2","secGame3","secPractice","secQuiz","secTips","secNext"],
-  miaQuizIntro:"Quiz! Same tonic, borrowed shadows.",
+  miaQuizIntro:"Quiz: Identify material drawn from parallel major and minor modes.",
   quiz:[
     { type:"mc", q:"Parallel keys share…", choices:["the same tonic","the same signature","nothing"], answer:0, explain:"C major / C minor.", hint:"Not relatives." },
-    { type:"mc", q:"Modal mixture means…", choices:["borrowing chords from the parallel key","changing meter","adding trills"], answer:0, explain:"Cross-border shopping.", hint:"The shadow twin." },
+    { type:"mc", q:"Modal mixture means…", choices:["using material associated with the parallel mode","changing meter","adding trills"], answer:0, explain:"Parallel major and minor share the tonic.", hint:"The parallel mode." },
     { type:"mc", q:"The borrowed iv of C major is spelled…", choices:["F-A♭-C","F-A-C","D-F-A"], answer:0, explain:"♭6 darkens the IV.", hint:"One flat." },
     { type:"mc", q:"♭VI in C major is…", choices:["A♭ major","A minor","A♭ minor"], answer:0, explain:"A♭-C-E♭.", hint:"Major on ♭6." },
-    { type:"mc", q:"Which notes do major-key borrowings import?", choices:["♭6, ♭3, ♭7","♯4, ♯5","the leading tone"], answer:0, explain:"Minor's colors.", hint:"The flat trio." },
-    { type:"mc", q:"IV → iv → I is nicknamed…", choices:["the sad plagal","the circle","the Picardy"], answer:0, explain:"The melting close.", hint:"A tear in the cadence." },
-    { type:"mc", q:"Identify (key: C major).",
+    { type:"mc", q:"Which altered scale degrees commonly appear in mixture chords borrowed from the parallel minor?", choices:["♭3, ♭6, and ♭7","♯4 and ♯5 only","the unchanged leading tone only"], answer:0, explain:"The characteristic scale degrees of the parallel minor.", hint:"The lowered degrees." },
+    { type:"mc", q:"In C major, IV–iv–I demonstrates…", choices:["Modal mixture through the minor iv chord","A circle-of-fifths sequence","A Picardy third"], answer:0, explain:"F minor is drawn from the parallel minor mode.", hint:"The minor iv is borrowed." },
+    { type:"mc", q:"Identify the chord in C major.",
       staff:{clef:"treble",notes:[{p:"Ab4",d:"w"},{p:"C5",d:"w",chord:true},{p:"Eb5",d:"w",chord:true}],width:160},
-      choices:["♭VI — borrowed A♭ major","vi — A minor","IV"], answer:0, explain:"Two imported flats.", hint:"Root on ♭6." },
-    { type:"mc", q:"A Picardy third is…", choices:["a major I ending a minor piece","a minor I ending a major piece","an augmented 6th"], answer:0, explain:"Borrowed sunshine at the close.", hint:"The reverse borrow." },
-    { type:"truefalse", q:"Mixture requires a cadence in the new key.", answer:false, explain:"That would be modulation — mixture never moves the tonic.", hint:"L99's test." },
-    { type:"truefalse", q:"♭VII (B♭ major in C) is a common borrowed chord.", answer:true, explain:"The rock-and-film staple.", hint:"The ♭7 chord." },
-    { type:"mc", q:"G major's parallel minor is…", choices:["G minor","E minor","B minor"], answer:0, explain:"Same tonic G.", hint:"Not the relative." },
-    { type:"mc", q:"Mixture's overall effect is…", choices:["color change while home stays","permanent relocation","tempo change"], answer:0, explain:"Clouds across the tonic sun.", hint:"Shadow, not move." }
+      choices:["♭VI — A♭ major","vi — A minor","IV — F major"], answer:0, explain:"A♭–C–E♭ is a major triad rooted on scale degree ♭6.", hint:"Root on ♭6." },
+    { type:"mc", q:"What is a Picardy third?", choices:["A raised third that creates a major final tonic in a minor-key work or section","A minor tonic ending a major-key work","An augmented-sixth chord"], answer:0, explain:"The tonic triad's third is raised at the final cadence.", hint:"i becomes I at the end." },
+    { type:"truefalse", q:"Modal mixture by itself requires the establishment of a new tonic.", answer:false, explain:"Mixture may occur while the prevailing tonic remains active, though borrowed chords can also participate in a modulation.", hint:"L99's test." },
+    { type:"truefalse", q:"In a clearly established C-major context, B♭ major may function as ♭VII drawn from the parallel minor collection.", answer:true, explain:"In other contexts, ♭VII may be better understood as part of Mixolydian or other modal harmony.", hint:"The ♭7 chord." },
+    { type:"mc", q:"What is the parallel minor of G major?", choices:["G minor","E minor","B minor"], answer:0, explain:"Same tonic G, different mode.", hint:"Not the relative." },
+    { type:"mc", q:"Which statement best distinguishes modal mixture from modulation?", choices:["Mixture may introduce parallel-mode material while the prevailing tonic remains active","Mixture always establishes a permanent new tonic","Mixture changes only the tempo"], answer:0, explain:"Determine whether another tonic receives structural confirmation before labeling a modulation.", hint:"Is a new tonic confirmed?" }
   ],
-  miaPerfect:"PERFECT! Every shadow borrowed and returned. \u{1F3A8}\u{1F389}",
-  miaPass:"Passed — and UNIT 26 is COMPLETE! Chromatic harmony's core is yours. \u{1F389}",
+  miaPerfect:"Perfect score! You accurately identified common borrowed chords and modal-mixture procedures.",
+  miaPass:"You passed and completed unit 26. Next, you will study extended chords.",
   mia:{
     hook:{ label:"the welcome",
       explain:"F-A♭-C inside C major — the borrowed iv from C minor: modal mixture's signature shadow.",

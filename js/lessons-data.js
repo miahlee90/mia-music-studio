@@ -96,21 +96,21 @@ const LESSONS=[
  {n:93, title:"Lead-Sheet Chord Symbols", unit:23, book:4, time:15, kw:["lead sheet","lead-sheet","chord symbols","sus","add9","slash chord"]},
  {n:94, title:"Inversions of Seventh Chords", unit:23, book:4, time:15, kw:["inversion","6/5","4/3","4/2","figured bass"]},
  {n:95, title:"Common Chord Progressions", unit:23, book:4, time:15, kw:["ii-V-I","circle progression","pop loop","harmonic rhythm"]},
- {n:96, title:"Nonharmonic Tones Expanded", unit:24, book:4, time:15, kw:["suspension","appoggiatura","escape tone","anticipation","pedal point","retardation"]},
- {n:97, title:"Voice Leading Basics", unit:24, book:4, time:15, kw:["SATB","voice leading","spacing","voice crossing","parallel fifths"]},
+ {n:96, title:"Nonchord Tones Expanded", unit:24, book:4, time:15, kw:["nonchord tones","suspension","appoggiatura","escape tone","anticipation","pedal point","retardation"]},
+ {n:97, title:"Voice-Leading Basics", unit:24, book:4, time:15, kw:["SATB","voice leading","spacing","voice crossing","parallel fifths"]},
  {n:98, title:"Secondary Dominants", unit:24, book:4, time:15, kw:["secondary dominant","V/V","tonicization","applied chords"]},
  {n:99, title:"Modulation", unit:24, book:4, time:15, kw:["modulation","pivot chord","closely related keys","phrase modulation"]},
  {n:100, title:"Ornaments", unit:25, book:4, time:15, kw:["trill","mordent","turn","grace notes"]},
  {n:101, title:"Theme and Variations", unit:25, book:4, time:15, kw:["theme","variations","minore","ornamentation"]},
  {n:102, title:"Sonata Form", unit:25, book:4, time:15, kw:["sonata form","exposition","development","recapitulation","coda"]},
- {n:103, title:"Larger Instrumental Forms", unit:25, book:4, time:15, kw:["minuet","trio","scherzo","march","concerto","cadenza"]},
+ {n:103, title:"Instrumental Forms and Multi-Movement Genres", unit:25, book:4, time:15, kw:["minuet","trio","scherzo","march","concerto","cadenza","symphony"]},
  {n:104, title:"Leading-Tone Chords", unit:26, book:4, time:15, kw:["vii dim","leading-tone seventh","diminished seventh","dominant function"]},
  {n:105, title:"The Neapolitan Chord", unit:26, book:4, time:15, kw:["neapolitan","flat II","N6","predominant"]},
- {n:106, title:"Augmented Sixth Chords", unit:26, book:4, time:15, kw:["augmented sixth","italian","french","german"]},
- {n:107, title:"Borrowed Chords (Modal Mixture)", unit:26, book:4, time:15, kw:["modal mixture","borrowed chords","parallel keys","picardy third"]},
+ {n:106, title:"Augmented-Sixth Chords", unit:26, book:4, time:15, kw:["augmented sixth","augmented-sixth","italian","french","german"]},
+ {n:107, title:"Borrowed Chords and Modal Mixture", unit:26, book:4, time:15, kw:["modal mixture","borrowed chords","parallel keys","picardy third"]},
  {n:108, title:"Extended Chords", unit:27, book:4, time:15, kw:["ninth","eleventh","thirteenth","extensions"]},
- {n:109, title:"Suspended and Added Tone Chords", unit:27, book:4, time:15, kw:["sus2","sus4","add9","sixth chord"]},
- {n:110, title:"Chord Substitution", unit:27, book:4, time:15, kw:["tritone substitution","chromatic mediant","reharmonization"]}
+ {n:109, title:"Suspended and Added-Tone Chords", unit:27, book:4, time:15, kw:["sus2","sus4","add9","added-tone","sixth chord"]},
+ {n:110, title:"Chord Substitution and Chromatic Reharmonization", unit:27, book:4, time:15, kw:["tritone substitution","chromatic mediant","reharmonization"]}
 ];
 const UNITS=[
  {unit:1, book:1, name:"The Staff and Clefs", lessons:[1,5]},
