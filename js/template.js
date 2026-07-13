@@ -298,7 +298,9 @@
    slash form ("6/4") and the unicode super/subscript form ("I⁶₄") are stacked. */
 (function(){
   const N=+(document.body&&document.body.dataset&&document.body.dataset.lesson);
-  if(!N||!(window.LESSON_CONTENT&&LESSON_CONTENT[N]&&LESSON_CONTENT[N].stackFigures)) return;
+  /* LESSON_CONTENT is a script-scope `const` (not a window property), so read it
+     by bare name — window.LESSON_CONTENT would be undefined and skip the walker. */
+  if(!N||typeof LESSON_CONTENT==="undefined"||!LESSON_CONTENT[N]||!LESSON_CONTENT[N].stackFigures) return;
   const SUP={"⁰":0,"¹":1,"²":2,"³":3,"⁴":4,"⁵":5,"⁶":6,"⁷":7,"⁸":8,"⁹":9};
   const FIG={"6/4":1,"6/5":1,"4/3":1,"4/2":1,"6/3":1,"5/3":1,"7/5":1,"7/3":1,"9/7":1,"6/2":1};
   const SUPSRC="([IiVv]{0,4})([⁰¹²³⁴-⁹]+)([₀-₉]+)";
