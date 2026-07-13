@@ -166,17 +166,19 @@ LESSON_CONTENT[52]={
         success:"✓ Rearranged into thirds: C-E-G. The bass G is the 5th → 2nd inversion. (G major would be G-B-D — the B gives it away.)",
         fail:"Rearrange G-C-E into thirds. What root do you get?",
         hint:"Rearrange the notes into thirds to name the chord, THEN check the lowest note." } },
-    { say:"<b>Why is it called a 6/4 chord?</b> Figured bass measures intervals <b>above the bass note</b>. In <b>G–C–E</b>, C is a <b>4th</b> above G, and E is a <b>6th</b> above G. That's why this inversion is called a <b>6/4 chord</b>. \u{1F447} <b>The numbers in 6/4 are measured from which note?</b>",
+    { say:"<b>Why is it called a 6/4 chord?</b> Figured bass measures intervals <b>above the bass note</b>. In <b>G–C–E</b>, C is a <b>4th</b> above G, and E is a <b>6th</b> above G. That's why this inversion is called a <b>6/4 chord</b> — the 6 written above the 4. \u{1F447} <b>The numbers in 6/4 are measured from which note?</b>",
+      show:{ type:"staff", spec:{clef:"treble",notes:[
+        {p:"G4",d:"w",label:"6/4"},{p:"C5",d:"w",chord:true},{p:"E5",d:"w",chord:true}],width:200} },
       try:{ type:"mc", choices:["The bass (lowest) note","The root","The top note"], answer:0,
         success:"✓ Always from the BASS. This idea grows into a whole system next lesson — figured bass!",
         fail:"6 what and 4 what? Sixth and fourth ABOVE something…",
         hint:"The same note that decides the inversion." } },
     { say:"<b>Finding the Root in Close Position:</b> In close-position inversions, look for the <b>4th</b> inside the chord. The <b>upper note of the 4th</b> is always the <b>root</b>. In E-G-C the 4th is G→C; in G-C-E it's G→C again — and C is the root both times! \u{1F447} <b>In close position, where is the root?</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:80,notes:[
-        {p:"G4",d:"h",label:"the 4th…"},{p:"C5",d:"h"},
-        {p:"E4",d:"w",label:"1st inv. (G→C on top)"},{p:"G4",d:"w",chord:true},{p:"C5",d:"w",chord:true},
-        {p:"G4",d:"w",label:"2nd inv. (G→C at bottom)"},{p:"C5",d:"w",chord:true},{p:"E5",d:"w",chord:true}],
-        steps:[{from:0,to:1,label:"4th"}],width:560} },
+        {p:"G4",d:"h",label:"the 4th"},{p:"C5",d:"h"},
+        {p:"E4",d:"w",label:"1st inv."},{p:"G4",d:"w",chord:true},{p:"C5",d:"w",chord:true},
+        {p:"G4",d:"w",label:"2nd inv."},{p:"C5",d:"w",chord:true},{p:"E5",d:"w",chord:true}],
+        steps:[{from:0,to:1,label:"4th"}],width:640} },
       try:{ type:"mc", choices:["on TOP of the 4th","below the 4th","outside the chord"], answer:0,
         success:"✓ Find the 4th, take its top note — that's your root and your chord name. Instant identification!",
         fail:"G up to C… which of those two is the root of C major?",
@@ -304,8 +306,7 @@ LESSON_CONTENT[52]={
       staff:{clef:"treble",notes:[{p:"G4",d:"w"},{p:"C5",d:"w",chord:true},{p:"E5",d:"w",chord:true}],width:130}},
     {term:"6/4 Chord", def:"The nickname for 2nd inversion: the intervals above the bass are a 6th and a 4th."},
     {term:"Bass Note", def:"The lowest note of a chord. It decides the POSITION — never the chord's name."},
-    {term:"The 4th Trick", def:"In close position, both inversions contain an interval of a 4th — and the ROOT is always its upper note.",
-      staff:{clef:"treble",notes:[{p:"G4",d:"h"},{p:"C5",d:"h"}],steps:[{from:0,to:1,label:"4th"}],width:130}}
+    {term:"The 4th Trick", def:"In close position, both inversions contain an interval of a 4th — and the ROOT is always its upper note."}
   ],
   mistakes:[],
   summary:[

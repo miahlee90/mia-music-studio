@@ -433,14 +433,26 @@ const Staff=(()=>{
       }
       if(n.label){ const hw=Math.min(W/2-4, 4+String(n.label).length*3.4);
         const lx=Math.max(hw+4, Math.min(W-hw-4, x));
-        /* v8.3 - figured-bass labels: real stacked figures (6 over 5), larger + bold */
-        const fm=String(n.label).match(/^(.+?)([⁰¹²³⁴-⁹]+)([₀-₉]*)$/);
+        /* v8.3 - figured-bass labels: real stacked figures (6 over 5), larger + bold.
+           Two accepted forms: unicode super/subscript ("I⁶₄") and a plain slash
+           form ("6/4", "V6/5") — the slash form is restricted to Roman-numeral
+           bases or a whitelist of true figured-bass figures so time-signature
+           labels like "3/4" or "4/4 Time Signature" are never stacked. */
+        const lab=String(n.label);
+        const fm=lab.match(/^(.+?)([⁰¹²³⁴-⁹]+)([₀-₉]*)$/);
+        const FIGSET={"6/4":1,"6/5":1,"4/3":1,"4/2":1,"6/3":1,"5/3":1,"7/5":1,"7/3":1,"9/7":1,"6/2":1};
+        const sl=lab.match(/^([IViv]*)(\d)\/(\d)$/);
+        function stackFig(base,top,bot){
+          const cx=base? lx+2 : lx, an=base? "start":"middle";
+          if(base) parts.push(`<text class="lbl" x="${lx+1}" y="${labelY}" text-anchor="end">${base}</text>`);
+          parts.push(`<text class="lbl fig" x="${cx}" y="${labelY-4}" text-anchor="${an}">${top}</text>`);
+          if(bot!=="") parts.push(`<text class="lbl fig" x="${cx}" y="${labelY+7}" text-anchor="${an}">${bot}</text>`);
+        }
         if(fm){
           const SUP={"⁰":0,"¹":1,"²":2,"³":3,"⁴":4,"⁵":5,"⁶":6,"⁷":7,"⁸":8,"⁹":9};
-          const top=[...fm[2]].map(c=>SUP[c]).join(""), bot=[...fm[3]].map(c=>c.charCodeAt(0)-0x2080).join("");
-          parts.push(`<text class="lbl" x="${lx+1}" y="${labelY}" text-anchor="end">${fm[1]}</text>`);
-          parts.push(`<text class="lbl fig" x="${lx+2}" y="${labelY-4}">${top}</text>`);
-          if(bot) parts.push(`<text class="lbl fig" x="${lx+2}" y="${labelY+7}">${bot}</text>`);
+          stackFig(fm[1], [...fm[2]].map(c=>SUP[c]).join(""), [...fm[3]].map(c=>c.charCodeAt(0)-0x2080).join(""));
+        } else if(sl && (sl[1] || FIGSET[sl[2]+"/"+sl[3]])){
+          stackFig(sl[1], sl[2], sl[3]);
         } else parts.push(`<text class="lbl" x="${lx}" y="${labelY}" text-anchor="middle">${n.label}</text>`); }
     });
     /* v7.8 - one shared stem per stemmed chord group */

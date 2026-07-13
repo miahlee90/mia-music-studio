@@ -303,7 +303,8 @@ LESSON_CONTENT[51]={
       staff:{clef:"treble",notes:[{p:"C4",d:"w"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true}],width:130}},
     {term:"1st Inversion", def:"The 3rd is the lowest note — made by moving the root up an octave.",
       staff:{clef:"treble",notes:[{p:"E4",d:"w"},{p:"G4",d:"w",chord:true},{p:"C5",d:"w",chord:true}],width:130}},
-    {term:"Close Position", def:"All chord tones fit within one octave."},
+    {term:"Close Position", def:"All chord tones fit within one octave.",
+      staff:{clef:"treble",notes:[{p:"C4",d:"w"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true}],width:130}},
     {term:"Open Position", def:"Chord tones are spread wider than one octave.",
       staff:{clef:"treble",notes:[{p:"C4",d:"w"},{p:"G4",d:"w",chord:true},{p:"E5",d:"w",chord:true}],width:130}}
   ],
