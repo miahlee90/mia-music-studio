@@ -296,8 +296,7 @@ LESSON_CONTENT[58]={
       staff:{clef:"treble",notes:[{p:"C4",d:"w"},{p:"Eb4",d:"w",chord:true},{p:"G4",d:"w",chord:true}],width:130}},
     {term:"Chord Quality", def:"The sound character of a chord — decided by the intervals above its root."},
     {term:"Minor 3rd", def:"3 half steps above the root — the note that makes minor minor."},
-    {term:"ii · iii · vi", def:"The naturally minor triads of every major key (Dm, Em, Am in C major) — lowercase numerals.",
-      staff:{clef:"treble",notes:[{p:"D4",d:"w"},{p:"F4",d:"w",chord:true},{p:"A4",d:"w",chord:true}],width:130}}
+    {term:"ii · iii · vi", def:"The naturally minor triads of every major key (Dm, Em, Am in C major) — lowercase numerals."}
   ],
   mistakes:[],
   summary:[
