@@ -303,14 +303,18 @@
   if(!N||typeof LESSON_CONTENT==="undefined"||!LESSON_CONTENT[N]||!LESSON_CONTENT[N].stackFigures) return;
   const SUP={"⁰":0,"¹":1,"²":2,"³":3,"⁴":4,"⁵":5,"⁶":6,"⁷":7,"⁸":8,"⁹":9};
   const FIG={"6/4":1,"6/5":1,"4/3":1,"4/2":1,"6/3":1,"5/3":1,"7/5":1,"7/3":1,"9/7":1,"6/2":1};
-  const SUPSRC="([IiVv]{0,4})([⁰¹²³⁴-⁹]+)([₀-₉]+)";
-  const SLSRC="(^|[^\\d\\/])(\\d)\\/(\\d)(?![\\d\\/])";
-  const TEST=new RegExp(SUPSRC+"|"+SLSRC,"u");
+  const SUPSRC="([IiVv]{0,4})([⁰¹²³⁴-⁹]+)([₀-₉]+)";      /* stacked: I⁶₄ */
+  const SUPSINGLE="([IiVv]{1,4})([⁰¹²³⁴-⁹]+)";           /* single: I⁶, V⁷ */
+  const SLSRC="(^|[^\\d\\/])(\\d)\\/(\\d)(?![\\d\\/])";   /* slash: 6/4 */
+  const TEST=new RegExp(SUPSINGLE+"|"+SLSRC,"u");         /* SUPSINGLE also detects the stacked form */
+  const supDigits=s=>[...s].map(c=>SUP[c]).join("");
   function fbx(t,b){ return '<span class="fb"><span>'+t+'</span><span>'+b+'</span></span>'; }
+  function fbx1(t){ return '<span class="fb"><span>'+t+'</span><span class="fbh">0</span></span>'; } /* single figure, same size/position as a stacked figure's top digit */
   function esc(s){ return s.replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c])); }
   function toHTML(text){
     let s=esc(text)
-      .replace(new RegExp(SUPSRC,"gu"),(m,base,sup,sub)=>base+fbx([...sup].map(c=>SUP[c]).join(""),[...sub].map(c=>c.charCodeAt(0)-0x2080).join("")))
+      .replace(new RegExp(SUPSRC,"gu"),(m,base,sup,sub)=>base+fbx(supDigits(sup),[...sub].map(c=>c.charCodeAt(0)-0x2080).join("")))
+      .replace(new RegExp(SUPSINGLE,"gu"),(m,base,sup)=>base+fbx1(supDigits(sup)))
       .replace(new RegExp(SLSRC,"g"),(m,pre,a,b)=>FIG[a+"/"+b]?pre+fbx(a,b):m);
     return s;
   }

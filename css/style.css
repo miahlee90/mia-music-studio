@@ -135,6 +135,7 @@ hr.sep{border:none;border-top:1px solid var(--hairline);margin:20px 0}
    vertical-align:middle keeps the stacked pair centered on the text line (not sinking below it). */
 .fb{display:inline-flex;flex-direction:column;align-items:center;line-height:.9;font-weight:700;font-size:.82em;vertical-align:middle;margin:0 .12em;position:relative;top:-.06em}
 .fb>span{display:block}
+.fb .fbh{visibility:hidden} /* single figures (I6, V7): reserve the bottom line so the digit sits at the same size/height as a stacked figure's top digit */
 .mf-kb{position:relative;height:150px;max-width:460px;margin:12px auto;user-select:none;
   border-radius:0 0 8px 8px;box-shadow:var(--shadow)}
 .mf-kb .w{position:absolute;top:0;box-sizing:border-box;background:#fff;border:2px solid #23263e;border-left:none;border-radius:0 0 6px 6px;cursor:pointer;transition:background .1s}
