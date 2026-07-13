@@ -131,10 +131,16 @@ LESSON_CONTENT[64]={
         hint:"G-A-B-C-D-E: count." } }
   ],
   examples:[
-    { caption:"A C major scale fully harmonized with I, IV and V7 — every melody note is contained in its chord.",
+    { caption:"The C major scale harmonized: each melody note (the top note) rides on its primary chord — I, IV or V7. Press play to hear the FULL harmony, not just the tune.",
       staff:{clef:"treble",tempo:80,notes:[
-        {p:"C5",d:"q",label:"I"},{p:"D5",d:"q",label:"V7"},{p:"E5",d:"q",label:"I"},{p:"F5",d:"q",label:"IV"},
-        {p:"G5",d:"q",label:"I"},{p:"A5",d:"q",label:"IV"},{p:"B5",d:"q",label:"V7"},{p:"C6",d:"q",label:"I"},{bar:"final"}],width:560},
+        {p:"E4",d:"q",label:"I"},{p:"G4",d:"q",chord:true},{p:"C5",d:"q",chord:true},
+        {p:"F4",d:"q",label:"V7"},{p:"G4",d:"q",chord:true},{p:"B4",d:"q",chord:true},{p:"D5",d:"q",chord:true},
+        {p:"G4",d:"q",label:"I"},{p:"C5",d:"q",chord:true},{p:"E5",d:"q",chord:true},
+        {p:"A4",d:"q",label:"IV"},{p:"C5",d:"q",chord:true},{p:"F5",d:"q",chord:true},
+        {p:"C5",d:"q",label:"I"},{p:"E5",d:"q",chord:true},{p:"G5",d:"q",chord:true},
+        {p:"C5",d:"q",label:"IV"},{p:"F5",d:"q",chord:true},{p:"A5",d:"q",chord:true},
+        {p:"D5",d:"q",label:"V7"},{p:"F5",d:"q",chord:true},{p:"G5",d:"q",chord:true},{p:"B5",d:"q",chord:true},
+        {p:"E5",d:"q",label:"I"},{p:"G5",d:"q",chord:true},{p:"C6",d:"q",chord:true},{bar:"final"}],width:620},
       kb:{start:60,octaves:3,labels:true} },
     { caption:"The closing rules, isolated: a mini-phrase that begins on I, wanders, then lands V7 → I. This V7 → I cadence ends most harmonizations.",
       staff:{clef:"treble",tempo:80,notes:[
