@@ -140,12 +140,12 @@ LESSON_CONTENT[65]={
         hint:"Collect the letters: G, B, D." } }
   ],
   examples:[
-    { caption:"One chord, three textures: block (together), broken (separately), arpeggio (one at a time, in order, past the octave).",
-      staff:{clef:"treble",tempo:90,notes:[
-        {p:"C4",d:"w",label:"block"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},
-        {p:"C4",d:"q",label:"broken"},{p:"G4",d:"q"},{p:"E4",d:"q"},{p:"G4",d:"q"},
-        {p:"C4",d:"8",label:"arpeggio"},{p:"E4",d:"8"},{p:"G4",d:"8"},{p:"C5",d:"8"},{p:"E5",d:"q"},{bar:"final"}],
-        beams:[[7,8],[9,10]],width:620},
+    { caption:"One chord, three textures in 4/4: block (all together — a whole note), broken (chord tones one at a time — quarter notes), arpeggio (up through the chord, past the octave — eighth notes).",
+      staff:{clef:"treble",time:"4/4",tempo:90,notes:[
+        {p:"C4",d:"w",label:"block"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{bar:"double"},
+        {p:"C4",d:"q",label:"broken"},{p:"G4",d:"q"},{p:"E4",d:"q"},{p:"G4",d:"q"},{bar:"double"},
+        {p:"C4",d:"8",label:"arpeggio"},{p:"E4",d:"8"},{p:"G4",d:"8"},{p:"C5",d:"8"},{p:"E5",d:"8"},{p:"G5",d:"8"},{p:"C6",d:"q"},{bar:"final"}],
+        beams:[[9,12],[13,14]],width:660},
       kb:{start:60,octaves:2,labels:true} },
     { caption:"An arpeggiated accompaniment: the bass arpeggiates I, then V, then I in root position — each measure's notes outline exactly one chord.",
       staff:{clef:"bass",tempo:90,time:"3/4",notes:[
