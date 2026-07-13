@@ -67,10 +67,10 @@ function MF_L55_smooth(container,fb){
 /* build-a-smooth-progression: choose the position for each chord */
 function MF_L55_build(container,fb){
   const SLOTS=[
-    {q:"Slot 2 — the IV chord. Which position keeps the bass ON C (the common tone with I)?",
+    {q:"The IV chord (the first blank): which position keeps the bass ON C (the common tone with I)?",
       choices:["IV⁶₄ (C-F-A)","IV root position (F-A-C)"], right:0,
       expl:"2nd inversion puts the IV chord's 5th — C — in the bass: no leap at all."},
-    {q:"Slot 4 — the V7 chord. Which position lets the bass slide just a half step from C?",
+    {q:"The V7 chord (the next blank): which position lets the bass slide just a half step from C?",
       choices:["V⁶₅ (B-D-F-G)","V7 root position (G-B-D-F)"], right:0,
       expl:"1st inversion puts B in the bass — one half step below C. The bass melts home: C-B-C."}];
   let s=0;
