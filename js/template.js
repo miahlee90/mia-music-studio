@@ -319,20 +319,27 @@
     return s;
   }
   function fix(root){
-    if(!root||root.nodeType!==1) return;
-    const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,null), hits=[];
-    while(w.nextNode()){ const t=w.currentNode, pe=t.parentElement;
-      if(!TEST.test(t.nodeValue)) continue;
-      if(pe&&(pe.classList.contains("fb")||pe.closest(".fb")||pe.closest("svg"))) continue;
-      hits.push(t); }
-    hits.forEach(t=>{ const span=document.createElement("span"); span.innerHTML=toHTML(t.nodeValue);
-      t.parentNode.replaceChild(span,t); });
+    if(!root) return;
+    try{
+      let nodes=[];
+      if(root.nodeType===3) nodes=[root];
+      else if(root.nodeType===1){ const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,null); while(w.nextNode()) nodes.push(w.currentNode); }
+      else return;
+      const hits=nodes.filter(t=>{ const pe=t.parentElement;
+        if(!t.nodeValue||!TEST.test(t.nodeValue)) return false;
+        if(pe&&(pe.classList.contains("fb")||pe.closest(".fb")||pe.closest("svg"))) return false;
+        return true; });
+      hits.forEach(t=>{ if(!t.parentNode) return; const span=document.createElement("span"); span.innerHTML=toHTML(t.nodeValue); t.parentNode.replaceChild(span,t); });
+    }catch(e){}
   }
   let mo=null;
+  /* Lightweight: only react to ADDED nodes (new quiz questions, game buttons),
+     not characterData — so Mia's typing, progress-bar ticks and quiz/answer
+     interactions don't trigger a full re-walk (which froze/interfered before). */
   function watch(){ mo=new MutationObserver(muts=>{ mo.disconnect();
-    muts.forEach(m=>fix(m.target.nodeType===3? m.target.parentElement : m.target));
-    mo.observe(document.body,{childList:true,subtree:true,characterData:true}); });
-    mo.observe(document.body,{childList:true,subtree:true,characterData:true}); }
+    try{ muts.forEach(m=>{ if(m.type==="childList") m.addedNodes.forEach(n=>fix(n)); }); }catch(e){}
+    mo.observe(document.body,{childList:true,subtree:true}); });
+    mo.observe(document.body,{childList:true,subtree:true}); }
   if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",()=>{ fix(document.body); watch(); });
   else setTimeout(()=>{ fix(document.body); watch(); },450);
 })();
