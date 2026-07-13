@@ -269,10 +269,10 @@ LESSON_CONTENT[63]={
     { gen:"term-match", params:{subject:"term", pool:[["Dorian","♯6"],["Phrygian","♭2"],["Locrian","♭2 ♭5"],["Aeolian","no changes"]], reverse:true}, count:2 }
   ],
   vocabulary:[
-    {term:"Aeolian", def:"The mode on degree 6 — identical to the natural minor scale."},
-    {term:"Dorian", def:"Natural minor with the 6th RAISED a half step — the brightened minor."},
-    {term:"Phrygian", def:"Natural minor with the 2nd LOWERED a half step — a half step right out of the gate."},
-    {term:"Locrian", def:"Natural minor with the 2nd AND 5th lowered. Unused in ancient times; only occasional in modern music — its home triad is diminished."}
+    {term:"Aeolian", sym:"W–H–W–W–H–W–W", def:"The mode on degree 6 — identical to the natural minor scale."},
+    {term:"Dorian", sym:"W–H–W–W–W–H–W", def:"Natural minor with the 6th RAISED a half step — the brightened minor."},
+    {term:"Phrygian", sym:"H–W–W–W–H–W–W", def:"Natural minor with the 2nd LOWERED a half step — a half step right out of the gate."},
+    {term:"Locrian", sym:"H–W–W–H–W–W–W", def:"Natural minor with the 2nd AND 5th lowered. Unused in ancient times; only occasional in modern music — its home triad is diminished."}
   ],
   mistakes:[],
   summary:[
