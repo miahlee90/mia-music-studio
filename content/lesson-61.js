@@ -3,7 +3,7 @@
    Core: i, iv, V(7) contain all the notes of the harmonic minor scale →
    they accompany minor melodies; V7 often replaces V; smooth version:
    iv → iv⁶₄ (5th drops an octave), V → V⁶, V7 → V⁶₅; common tones connect
-   neighbors. Smooth pattern: i → iv⁶₄ → i → V⁶(₅) → i, bass A-A-A-G♯-A.
+   neighbors. Smooth pattern: i → iv⁶₄ → i → V⁶₅ → i, bass A-A-A-G♯-A.
    Root-finding reminders: triads — root on top of the 4th; sevenths — on top of the 2nd.
    NOTE: edit by FULL-FILE REWRITE only. */
 
@@ -103,7 +103,7 @@ function MF_L61_build(container,fb){
   ask();
 }
 
-LESSON_CONTENT[61]={
+LESSON_CONTENT[61]={stackFigures:true,
   welcome:"Minor chord progressions — with smooth voice leading. \u{1F32B}\u{FE0F}",
   hook:{
     say:"<b>Both examples use the same chord progression.</b> Listen carefully. <b>Which one has the smoother bass line?</b>",
@@ -129,7 +129,7 @@ LESSON_CONTENT[61]={
   objectives:[
     "Accompany minor melodies with i, iv and V(7) — they hold the whole scale",
     "Swap V7 in place of V, exactly as in major",
-    "Smooth the progression: iv → iv⁶₄ and V(7) → V⁶(₅)",
+    "Smooth the progression: iv → iv⁶₄ and V → V⁶, V7 → V⁶₅",
     "Track the bass line: A - A - A - G♯ - A",
     "Keep common tones between neighboring chords",
     "Recall the root-finder tricks: top of the 4th (triads), top of the 2nd (sevenths)"
@@ -227,7 +227,7 @@ LESSON_CONTENT[61]={
       intro:"Inversions, the bass line and common tones — at speed!",
       miaIntro:"A-A-A-G♯-A forever! \u{1F3C1}",
       spec:{rounds:8, reverse:true, pool:[
-        ["Smooth minor formula","i → iv⁶₄ → i → V⁶(₅) → i"],
+        ["Smooth minor formula","i → iv⁶₄ → i → V⁶₅ → i"],
         ["The smooth bass line","A - A - A - G♯ - A"],
         ["iv⁶₄","iv with its 5th (the tonic!) in the bass"],
         ["V⁶₅ in minor","V7 with the leading tone in the bass"],
@@ -308,8 +308,8 @@ LESSON_CONTENT[61]={
   mistakes:[],
   summary:[
     "✔ <b>i, iv, V(7)</b> hold every note of the harmonic minor scale → they accompany minor melodies.",
-    "✔ Smoothing recipe: <b>iv → iv⁶₄</b> (5th = tonic drops to the bass), <b>V(7) → V⁶(₅)</b> (leading tone takes the bass).",
-    "✔ The formula: <b>i → iv⁶₄ → i → V⁶(₅) → i</b>, bass <b>A-A-A-G♯-A</b>.",
+    "✔ Smoothing recipe: <b>iv → iv⁶₄</b> (5th = tonic drops to the bass), <b>V → V⁶, V7 → V⁶₅</b> (leading tone takes the bass).",
+    "✔ The formula: <b>i → iv⁶₄ → i → V⁶₅ → i</b>, bass <b>A-A-A-G♯-A</b>.",
     "✔ A <b>common tone</b> connects every pair of chords (A between i/iv, E between i/V).",
     "✔ Root-finders still work: triads — <b>top of the 4th</b>; sevenths — <b>top of the 2nd</b>."
   ],
