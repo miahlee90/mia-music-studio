@@ -289,3 +289,44 @@
   if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",()=>{ fix(document.body); watch(); });
   else setTimeout(()=>{ fix(document.body); watch(); },400);
 })();
+
+/* v3.5 — figured-bass inversion symbols (6/4, 6/5, 4/3, 4/2, I⁶₄ …) are SYMBOLS,
+   not fractions, and must be typeset as stacked, top-bottom-aligned digits like a
+   theory text (instructor: "이런 inversion 숫자는 기호라서 표처럼"). OPT-IN per lesson
+   via LESSON_CONTENT[n].stackFigures — only the chord/inversion lessons — so time
+   signatures (3/4, 6/8) in the meter lessons are never touched. Both the plain
+   slash form ("6/4") and the unicode super/subscript form ("I⁶₄") are stacked. */
+(function(){
+  const N=+(document.body&&document.body.dataset&&document.body.dataset.lesson);
+  if(!N||!(window.LESSON_CONTENT&&LESSON_CONTENT[N]&&LESSON_CONTENT[N].stackFigures)) return;
+  const SUP={"⁰":0,"¹":1,"²":2,"³":3,"⁴":4,"⁵":5,"⁶":6,"⁷":7,"⁸":8,"⁹":9};
+  const FIG={"6/4":1,"6/5":1,"4/3":1,"4/2":1,"6/3":1,"5/3":1,"7/5":1,"7/3":1,"9/7":1,"6/2":1};
+  const SUPSRC="([IiVv]{0,4})([⁰¹²³⁴-⁹]+)([₀-₉]+)";
+  const SLSRC="(^|[^\\d\\/])(\\d)\\/(\\d)(?![\\d\\/])";
+  const TEST=new RegExp(SUPSRC+"|"+SLSRC,"u");
+  function fbx(t,b){ return '<span class="fb"><span>'+t+'</span><span>'+b+'</span></span>'; }
+  function esc(s){ return s.replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c])); }
+  function toHTML(text){
+    let s=esc(text)
+      .replace(new RegExp(SUPSRC,"gu"),(m,base,sup,sub)=>base+fbx([...sup].map(c=>SUP[c]).join(""),[...sub].map(c=>c.charCodeAt(0)-0x2080).join("")))
+      .replace(new RegExp(SLSRC,"g"),(m,pre,a,b)=>FIG[a+"/"+b]?pre+fbx(a,b):m);
+    return s;
+  }
+  function fix(root){
+    if(!root||root.nodeType!==1) return;
+    const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,null), hits=[];
+    while(w.nextNode()){ const t=w.currentNode, pe=t.parentElement;
+      if(!TEST.test(t.nodeValue)) continue;
+      if(pe&&(pe.classList.contains("fb")||pe.closest(".fb")||pe.closest("svg"))) continue;
+      hits.push(t); }
+    hits.forEach(t=>{ const span=document.createElement("span"); span.innerHTML=toHTML(t.nodeValue);
+      t.parentNode.replaceChild(span,t); });
+  }
+  let mo=null;
+  function watch(){ mo=new MutationObserver(muts=>{ mo.disconnect();
+    muts.forEach(m=>fix(m.target.nodeType===3? m.target.parentElement : m.target));
+    mo.observe(document.body,{childList:true,subtree:true,characterData:true}); });
+    mo.observe(document.body,{childList:true,subtree:true,characterData:true}); }
+  if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",()=>{ fix(document.body); watch(); });
+  else setTimeout(()=>{ fix(document.body); watch(); },450);
+})();

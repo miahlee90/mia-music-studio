@@ -112,7 +112,7 @@ function MF_L52_build(container,fb){
   ask();
 }
 
-LESSON_CONTENT[52]={
+LESSON_CONTENT[52]={stackFigures:true,
   welcome:"Lesson 51 flipped the chord once. Today… we flip it AGAIN! \u{2696}\u{FE0F}",
   hook:{
     say:"<b>Three C major chords — same notes, different positions.</b> Listen carefully. <b>Which chord has the 5th as the lowest note?</b>",

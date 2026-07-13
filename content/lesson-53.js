@@ -114,7 +114,7 @@ function MF_L53_build(container,fb){
   ask();
 }
 
-LESSON_CONTENT[53]={
+LESSON_CONTENT[53]={stackFigures:true,
   welcome:"A triad flips three ways. Today's chord flips FOUR — because it brought an extra note. \u{1F504}",
   hook:{
     say:"<b>A V7 chord has four notes, so it can be played in four different positions.</b> Listen carefully. <b>Which chord has the 7th as the lowest note?</b>",

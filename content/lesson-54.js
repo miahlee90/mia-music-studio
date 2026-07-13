@@ -81,7 +81,7 @@ function MF_L54_build(container,fb){
   ask();
 }
 
-LESSON_CONTENT[54]={
+LESSON_CONTENT[54]={stackFigures:true,
   welcome:"Today you learn to read a 400-year-old secret code. \u{1F5DD}\u{FE0F}",
   hook:{
     say:"<b>A composer writes only one bass note and the number 6.</b> \u{1F447} <b>What chord should you play?</b>",

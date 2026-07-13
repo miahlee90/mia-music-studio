@@ -107,7 +107,7 @@ function MF_L55_build(container,fb){
   ask();
 }
 
-LESSON_CONTENT[55]={
+LESSON_CONTENT[55]={stackFigures:true,
   welcome:"The Unit 13 finale — where inversions stop being theory and start making music flow. \u{1F30A}",
   hook:{
     say:"<b>A chord progression is a series of chords.</b> Listen to these two examples. Both use the same chords. <b>Which one sounds smoother?</b>",
