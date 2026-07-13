@@ -84,14 +84,14 @@ LESSON_CONTENT[66]={
         fail:"The D over a C chord in the hook was one…",
         hint:"Non-harmonic = not in the harmony." } },
     { say:"<b>Passing Tone:</b> A <b>passing tone</b> connects <b>two different chord tones</b> by step. C→D→E over a C chord: D is the passing tone. \u{1F447} <b>What surrounds a passing tone?</b>",
-      show:{ type:"staff", spec:{clef:"treble",tempo:90,notes:[
-        {p:"C4",d:"q",label:"chord tone"},{p:"D4",d:"q",label:"P"},{p:"E4",d:"q",label:"chord tone"},{p:"G4",d:"h"},{bar:"final"}],width:400} },
+      show:{ type:"staff", spec:{clef:"treble",time:"4/4",tempo:90,notes:[
+        {p:"C4",d:"q",label:"chord tone"},{p:"D4",d:"q",label:"P"},{p:"E4",d:"q",label:"chord tone"},{p:"G4",d:"q"},{bar:"final"}],width:400} },
       try:{ type:"mc", choices:["Two DIFFERENT chord tones","The same chord tone twice","Two rests"], answer:0,
         success:"✓ Two DIFFERENT chord tones — the passing tone steps between them.",
         fail:"Where did the melody start and land — same place or new place?",
         hint:"PASSING = moving through to a new chord tone." } },
     { say:"<b>Neighboring Tone:</b> A neighboring tone leaves a chord tone and returns to the <b>same chord tone</b>. Upper neighbor = above · lower neighbor = below. <b>Remember: passing tone = different → different · neighboring tone = same → different → same.</b> \u{1F447} <b>E→F→E over a C chord: what is the F?</b>",
-      show:{ type:"staff", spec:{clef:"treble",tempo:90,notes:[
+      show:{ type:"staff", spec:{clef:"treble",time:"6/4",tempo:90,notes:[
         {p:"E4",d:"q",label:"chord tone"},{p:"F4",d:"q",label:"U"},{p:"E4",d:"q",label:"same tone!"},
         {p:"G4",d:"q",label:"chord tone"},{p:"F#4",d:"q",label:"L"},{p:"G4",d:"q",label:"same tone!"},{bar:"final"}],width:480} },
       try:{ type:"mc", choices:["An upper neighboring tone","A passing tone","A chord tone"], answer:0,
@@ -113,8 +113,8 @@ LESSON_CONTENT[66]={
         hint:"Different frame = passing; same frame = neighbor (upper/lower by direction).",
         mount:(container,fb)=>MF_L66_detect(container,fb) } },
     { say:"<b>Review:</b> Classify each non-harmonic tone. The harmony is C throughout. \u{1F447} <b>In C-B-C-D-E, what is the B?</b>",
-      show:{ type:"staff", spec:{clef:"treble",tempo:90,notes:[
-        {p:"C4",d:"q"},{p:"B3",d:"q"},{p:"C4",d:"q"},{p:"D4",d:"q"},{p:"E4",d:"h"},{bar:"final"}],width:420} },
+      show:{ type:"staff", spec:{clef:"treble",time:"4/4",tempo:90,notes:[
+        {p:"C4",d:"q"},{p:"B3",d:"q"},{p:"C4",d:"q"},{p:"D4",d:"q"},{bar:"single"},{p:"E4",d:"w"},{bar:"final"}],width:420} },
       try:{ type:"mc", choices:["A lower neighboring tone (and the D is a passing tone)","A passing tone (and the D is a neighbor)","Both are chord tones"], answer:0,
         success:"✓ C→B→C = same tone, from below → LOWER neighbor. Then C→D→E = different tones → PASSING. One phrase, both types!",
         fail:"Frame check: C…C (same) then C…E (different).",
@@ -122,16 +122,17 @@ LESSON_CONTENT[66]={
   ],
   examples:[
     { caption:"A melody over I-IV-V7-I where every arrow-note is a passing tone, connecting chord tones on weak beats.",
-      staff:{clef:"treble",tempo:100,notes:[
-        {p:"C4",d:"q",label:"I"},{p:"D4",d:"q",label:"P"},{p:"E4",d:"q"},{p:"G4",d:"q"},
-        {p:"F4",d:"q",label:"IV"},{p:"G4",d:"q",label:"P"},{p:"A4",d:"q"},{p:"C5",d:"q"},
-        {p:"B4",d:"q",label:"V7"},{p:"A4",d:"q",label:"P"},{p:"G4",d:"q"},{p:"F4",d:"q"},
-        {p:"C5",d:"w",label:"I"},{bar:"final"}],width:640},
+      staff:{clef:"treble",time:"4/4",tempo:100,notes:[
+        {p:"C4",d:"q",label:"I"},{p:"D4",d:"q",label:"P"},{p:"E4",d:"q"},{p:"G4",d:"q"},{bar:"single"},
+        {p:"F4",d:"q",label:"IV"},{p:"G4",d:"q",label:"P"},{p:"A4",d:"q"},{p:"C5",d:"q"},{bar:"single"},
+        {p:"B4",d:"q",label:"V7"},{p:"A4",d:"q",label:"P"},{p:"G4",d:"q"},{p:"F4",d:"q"},{bar:"single"},
+        {p:"C5",d:"w",label:"I"},{bar:"final"}],width:680},
       kb:{start:60,octaves:2,labels:true} },
     { caption:"Neighbors at work: the melody keeps returning home — E-F-E (upper), G-F♯-G (lower) — while the C harmony holds still underneath.",
-      staff:{clef:"treble",tempo:100,notes:[
-        {p:"E4",d:"q",label:"C chord"},{p:"F4",d:"q",label:"U"},{p:"E4",d:"q"},{p:"G4",d:"q"},
-        {p:"F#4",d:"q",label:"L"},{p:"G4",d:"q"},{p:"C5",d:"h"},{bar:"final"}],width:520},
+      staff:{clef:"treble",time:"3/4",tempo:100,notes:[
+        {p:"E4",d:"q",label:"C chord"},{p:"F4",d:"q",label:"U"},{p:"E4",d:"q"},{bar:"single"},
+        {p:"G4",d:"q"},{p:"F#4",d:"q",label:"L"},{p:"G4",d:"q"},{bar:"single"},
+        {p:"C5",d:"h."},{bar:"final"}],width:560},
       kb:{start:60,octaves:2,labels:true} }
   ],
   games:[
