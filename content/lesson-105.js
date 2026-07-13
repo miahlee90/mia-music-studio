@@ -3,7 +3,7 @@
    INVERSION (N6); PREDOMINANT function → V; darkest in minor keys.
    NOTE: edit by FULL-FILE REWRITE only. */
 
-LESSON_CONTENT[105]={
+LESSON_CONTENT[105]={stackFigures:true,
   welcome:"The Neapolitan is a chromatic predominant chord built on the lowered second scale degree.",
   hook:{
     say:"<b>In A minor, a B♭ major chord appears</b> and moves toward the dominant. Listen to the progression. \u{1F447} <b>What harmonic function does the B♭ major chord perform?</b>",

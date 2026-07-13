@@ -35,7 +35,7 @@ function MF_L86_label(container,fb){
   ask();
 }
 
-LESSON_CONTENT[86]={
+LESSON_CONTENT[86]={stackFigures:true,
   welcome:"Roman-numeral analysis shows how chords relate to a key.",
   hook:{
     say:"<b>Two progressions in different keys can share the same harmonic pattern.</b> Listen to one in C major and one in G major. \u{1F447} <b>What do they have in common?</b>",

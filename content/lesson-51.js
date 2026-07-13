@@ -110,7 +110,7 @@ function MF_L51_build(container,fb){
   ask();
 }
 
-LESSON_CONTENT[51]={
+LESSON_CONTENT[51]={stackFigures:true,
   welcome:"Welcome back! Today's magic trick: turning a chord upside down. \u{1F503}",
   hook:{
     say:"<b>Both of these are C major chords.</b> They use the same three notes, but in a different order. <b>Which one is in root position?</b>",

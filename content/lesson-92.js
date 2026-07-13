@@ -25,7 +25,7 @@ function MF_L92_ear(container,fb){
   q.innerHTML="Round 1 of 4: listen, then name the type.";
 }
 
-LESSON_CONTENT[92]={
+LESSON_CONTENT[92]={stackFigures:true,
   welcome:"Compare five common types of seventh chords.",
   hook:{
     say:"Listen to five seventh chords built on the same root. Each combines a triad with a seventh above the root. \u{1F447} <b>Do they have the same chord quality?</b>",

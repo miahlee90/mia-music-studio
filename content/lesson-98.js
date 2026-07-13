@@ -4,7 +4,7 @@
    accidental; they TONICIZE their target briefly.
    NOTE: edit by FULL-FILE REWRITE only. */
 
-LESSON_CONTENT[98]={
+LESSON_CONTENT[98]={stackFigures:true,
   welcome:"Secondary dominants temporarily tonicize chords other than the tonic.",
   hook:{
     say:"<b>In C major, a D major chord containing F♯ appears and resolves to G.</b> \u{1F447} <b>What function does the D major chord perform?</b>",

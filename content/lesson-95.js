@@ -28,7 +28,7 @@ function MF_L95_ear(container,fb){
   q.innerHTML="Round 1 of 3: listen, then name it.";
 }
 
-LESSON_CONTENT[95]={
+LESSON_CONTENT[95]={stackFigures:true,
   welcome:"Recognize and perform several common chord progressions.",
   hook:{
     say:"<b>Many songs use recurring chord patterns.</b> Listen to this four-chord loop. \u{1F447} <b>How many different chords occur before the pattern repeats?</b>",

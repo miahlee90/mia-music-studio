@@ -27,7 +27,7 @@ function MF_L94_pos(container,fb){
   ask();
 }
 
-LESSON_CONTENT[94]={
+LESSON_CONTENT[94]={stackFigures:true,
   welcome:"A seventh chord can appear in root position or three inversions.",
   hook:{
     say:"<b>A complete seventh chord has four chord members, and each one can appear in the bass.</b> Listen to Cmaj7 in root position and three inversions. \u{1F447} <b>Which chord member changes in the bass?</b>",

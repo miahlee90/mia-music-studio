@@ -4,7 +4,7 @@
    major too; resolves to I with the leading tone rising. Augmented triad's
    function (III+) gets one step. NOTE: edit by FULL-FILE REWRITE only. */
 
-LESSON_CONTENT[104]={
+LESSON_CONTENT[104]={stackFigures:true,
   welcome:"Leading-tone chords provide dominant function without the dominant root.",
   hook:{
     say:"<b>Listen to a diminished triad built on the leading tone. Its tendency tones resolve toward the tonic chord.</b> \u{1F447} <b>Where does the chord resolve?</b>",

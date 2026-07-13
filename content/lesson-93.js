@@ -32,7 +32,7 @@ function MF_L93_read(container,fb){
   ask();
 }
 
-LESSON_CONTENT[93]={
+LESSON_CONTENT[93]={stackFigures:true,
   welcome:"Lead-sheet symbols communicate chords in a compact form.",
   hook:{
     say:"<b>A lead sheet presents a melody with chord symbols such as Cmaj7, Am7, and G7.</b> \u{1F447} <b>What information do the chord symbols communicate?</b>",
