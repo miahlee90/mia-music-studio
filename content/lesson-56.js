@@ -234,8 +234,7 @@ LESSON_CONTENT[56]={
     {term:"Relative Minor", def:"The minor key sharing a major key's signature. Its keynote is the 6th degree of the major scale."},
     {term:"Relative Major", def:"The major key sharing a minor key's signature — a minor 3rd above the minor keynote."},
     {term:"Tonic (Keynote)", def:"The home note a scale starts from, ends on, and is named after."},
-    {term:"C major ↔ A minor", def:"The simplest relative pair: no sharps, no flats, two different homes.",
-      staff:{clef:"treble",notes:[{p:"C4",d:"h",label:"C"},{p:"A3",d:"h",label:"A"}],width:130}}
+    {term:"C major ↔ A minor", def:"The simplest relative pair: no sharps, no flats, two different homes."}
   ],
   mistakes:[],
   summary:[
