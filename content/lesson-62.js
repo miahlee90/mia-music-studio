@@ -149,9 +149,9 @@ LESSON_CONTENT[62]={
   examples:[
     { caption:"The three major-related modes on C, back to back: Ionian (plain), Mixolydian (♭7), Lydian (♯4).",
       staff:{clef:"treble",tempo:120,notes:[
-        {p:"C4",d:"q",label:"Ionian"},{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"F4",d:"q"},{p:"G4",d:"q"},{p:"A4",d:"q"},{p:"B4",d:"q"},{p:"C5",d:"q"},{bar:"double"},
-        {p:"C4",d:"q",label:"Mixolydian"},{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"F4",d:"q"},{p:"G4",d:"q"},{p:"A4",d:"q"},{p:"Bb4",d:"q"},{p:"C5",d:"q"},{bar:"double"},
-        {p:"C4",d:"q",label:"Lydian"},{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"F#4",d:"q"},{p:"G4",d:"q"},{p:"A4",d:"q"},{p:"B4",d:"q"},{p:"C5",d:"q"},{bar:"final"}],width:680},
+        {p:"C4",d:"q",label:"Ionian"},{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"F4",d:"q"},{p:"G4",d:"q"},{p:"A4",d:"q"},{p:"B4",d:"q"},{bar:"double"},
+        {p:"C4",d:"q",label:"Mixolydian"},{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"F4",d:"q"},{p:"G4",d:"q"},{p:"A4",d:"q"},{p:"Bb4",d:"q"},{bar:"double"},
+        {p:"C4",d:"q",label:"Lydian"},{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"F#4",d:"q"},{p:"G4",d:"q"},{p:"A4",d:"q"},{p:"B4",d:"q"},{bar:"final"}],width:720},
       kb:{start:60,octaves:2,labels:true} },
     { caption:"The white-key family: the same seven notes starting on C (Ionian), then on G (Mixolydian), then on F (Lydian) — one reliable way of finding every mode.",
       staff:{clef:"treble",tempo:120,notes:[

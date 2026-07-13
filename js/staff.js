@@ -317,7 +317,7 @@ const Staff=(()=>{
       {const _tp=tupOf(i); if(_tp) b*=(_tp.n===2?3/2:2/3);}
       /* v8.3 - notes carrying an accidental get extra room so the glyph never
          overlaps the previous notehead (instructor: clear accidental slots) */
-      const acW=(n.p&&n.acc!=="none"&&(n.acc||/[#b]/.test(String(n.p).slice(1))))?(n.acc==="bb"?24:16):0;
+      const acW=(n.p&&n.acc!=="none"&&(n.acc||/[#b]/.test(String(n.p).slice(1))))?(n.acc==="bb"?34:26):0;
       return Math.max(MINW, Math.min(MAXW, b*BEATW))+acW;
     }
     const wN=items.map((n,i)=>itemW(n,i));

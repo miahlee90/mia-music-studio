@@ -159,10 +159,10 @@ LESSON_CONTENT[63]={
   examples:[
     { caption:"The four minor-related modes on A: Aeolian (no changes), Dorian (♯6), Phrygian (♭2), Locrian (♭2 and ♭5).",
       staff:{clef:"treble",tempo:120,notes:[
-        {p:"A3",d:"q",label:"Aeolian"},{p:"B3",d:"q"},{p:"C4",d:"q"},{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"F4",d:"q"},{p:"G4",d:"q"},{p:"A4",d:"q"},{bar:"double"},
-        {p:"A3",d:"q",label:"Dorian"},{p:"B3",d:"q"},{p:"C4",d:"q"},{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"F#4",d:"q"},{p:"G4",d:"q"},{p:"A4",d:"q"},{bar:"double"},
-        {p:"A3",d:"q",label:"Phrygian"},{p:"Bb3",d:"q"},{p:"C4",d:"q"},{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"F4",d:"q"},{p:"G4",d:"q"},{p:"A4",d:"q"},{bar:"double"},
-        {p:"A3",d:"q",label:"Locrian"},{p:"Bb3",d:"q"},{p:"C4",d:"q"},{p:"D4",d:"q"},{p:"Eb4",d:"q"},{p:"F4",d:"q"},{p:"G4",d:"q"},{p:"A4",d:"q"},{bar:"final"}],width:680},
+        {p:"A3",d:"q",label:"Aeolian"},{p:"B3",d:"q"},{p:"C4",d:"q"},{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"F4",d:"q"},{bar:"double"},
+        {p:"A3",d:"q",label:"Dorian"},{p:"B3",d:"q"},{p:"C4",d:"q"},{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"F#4",d:"q"},{bar:"double"},
+        {p:"A3",d:"q",label:"Phrygian"},{p:"Bb3",d:"q"},{p:"C4",d:"q"},{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"F4",d:"q"},{bar:"double"},
+        {p:"A3",d:"q",label:"Locrian"},{p:"Bb3",d:"q"},{p:"C4",d:"q"},{p:"D4",d:"q"},{p:"Eb4",d:"q"},{p:"F4",d:"q"},{bar:"final"}],width:780},
       kb:{start:57,octaves:2,labels:true} },
     { caption:"The white-key origins: D to D gives Dorian, E to E gives Phrygian, B to B gives Locrian — each white-key octave is a mode.",
       staff:{clef:"treble",tempo:120,notes:[
