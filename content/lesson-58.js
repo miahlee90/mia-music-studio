@@ -190,9 +190,9 @@ LESSON_CONTENT[58]={
       kb:{start:60,octaves:2,labels:true} },
     { caption:"The minor residents of C major: ii, iii and vi — Dm, Em, Am — played in a row, then resolved home to I. All white keys; the minors were hiding in plain sight.",
       staff:{clef:"treble",tempo:70,notes:[
-        {p:"D4",d:"h",label:"ii"},{p:"F4",d:"h",chord:true},{p:"A4",d:"h",chord:true},
-        {p:"E4",d:"h",label:"iii"},{p:"G4",d:"h",chord:true},{p:"B4",d:"h",chord:true},
-        {p:"A4",d:"h",label:"vi"},{p:"C5",d:"h",chord:true},{p:"E5",d:"h",chord:true},
+        {p:"D4",d:"w",label:"ii"},{p:"F4",d:"w",chord:true},{p:"A4",d:"w",chord:true},
+        {p:"E4",d:"w",label:"iii"},{p:"G4",d:"w",chord:true},{p:"B4",d:"w",chord:true},
+        {p:"A4",d:"w",label:"vi"},{p:"C5",d:"w",chord:true},{p:"E5",d:"w",chord:true},
         {p:"C4",d:"w",label:"I"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{bar:"final"}],width:560},
       kb:{start:60,octaves:2,labels:true} }
   ],
