@@ -142,7 +142,7 @@ LESSON_CONTENT[65]={
   examples:[
     { caption:"One chord, three textures: block (together), broken (separately), arpeggio (one at a time, in order, past the octave).",
       staff:{clef:"treble",tempo:90,notes:[
-        {p:"C4",d:"h",label:"block"},{p:"E4",d:"h",chord:true},{p:"G4",d:"h",chord:true},
+        {p:"C4",d:"w",label:"block"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},
         {p:"C4",d:"q",label:"broken"},{p:"G4",d:"q"},{p:"E4",d:"q"},{p:"G4",d:"q"},
         {p:"C4",d:"8",label:"arpeggio"},{p:"E4",d:"8"},{p:"G4",d:"8"},{p:"C5",d:"8"},{p:"E5",d:"q"},{bar:"final"}],
         beams:[[7,8],[9,10]],width:620},
@@ -178,7 +178,7 @@ LESSON_CONTENT[65]={
       intro:"Block, broken and arpeggio in NOTATION — click what's called!",
       miaIntro:"Stacked or strung out? \u{1F440}",
       spec:{rounds:6, pool:[
-        {label:"Block chord", spec:{clef:"treble",notes:[{p:"C4",d:"h"},{p:"E4",d:"h",chord:true},{p:"G4",d:"h",chord:true}],width:150}},
+        {label:"Block chord", spec:{clef:"treble",notes:[{p:"C4",d:"w"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true}],width:150}},
         {label:"Broken chord", spec:{clef:"treble",notes:[{p:"C4",d:"q"},{p:"G4",d:"q"},{p:"E4",d:"q"},{p:"G4",d:"q"}],width:170}},
         {label:"Arpeggio (rising)", spec:{clef:"treble",notes:[{p:"C4",d:"q"},{p:"E4",d:"q"},{p:"G4",d:"q"},{p:"C5",d:"q"}],width:170}},
         {label:"Scale (not a chord!)", spec:{clef:"treble",notes:[{p:"C4",d:"q"},{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"F4",d:"q"}],width:170}}]},
@@ -241,7 +241,7 @@ LESSON_CONTENT[65]={
       choices:["A rising arpeggio (C major)","A block chord","A scale"], answer:0,
       explain:"Chord tones in order = arpeggio.", hint:"Are these steps or skips?" },
     { type:"mc", q:"Identify the texture.",
-      staff:{clef:"treble",notes:[{p:"F4",d:"h"},{p:"A4",d:"h",chord:true},{p:"C5",d:"h",chord:true}],width:220},
+      staff:{clef:"treble",notes:[{p:"F4",d:"w"},{p:"A4",d:"w",chord:true},{p:"C5",d:"w",chord:true}],width:220},
       choices:["A block chord (F major)","A broken chord","An arpeggio"], answer:0,
       explain:"Stacked and simultaneous.", hint:"One stem, one moment." },
     { type:"mc", q:"This accompaniment bass plays G-B-D-G. The harmony is…", choices:["the V chord in C major (G major)","the I chord in C major","the IV chord"], answer:0,
@@ -259,7 +259,7 @@ LESSON_CONTENT[65]={
   ],
   vocabulary:[
     {term:"Block Chord", def:"All chord tones played together — solid and vertical.",
-      staff:{clef:"treble",notes:[{p:"C4",d:"h"},{p:"E4",d:"h",chord:true},{p:"G4",d:"h",chord:true}],width:130}},
+      staff:{clef:"treble",notes:[{p:"C4",d:"w"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true}],width:130}},
     {term:"Broken Chord", def:"Chord tones NOT played together — spread over time."},
     {term:"Arpeggio", def:"Chord tones played sequentially, one after another — may extend an octave or more. From arpeggiare, 'to play upon a harp.'"},
     {term:"Arpeggiated Accompaniment", def:"A flowing accompaniment whose arpeggios outline each chord of the harmony."}

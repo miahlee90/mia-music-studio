@@ -41,8 +41,8 @@ LESSON_CONTENT[110]={
         hint:"Begin with function, then check melody and voice leading." } },
     { say:"<b>Why Tritone Substitution Works:</b> G7 contains the tritone <b>B–F</b>, formed by its third and seventh. D♭7 contains <b>F–C♭</b>, also its third and seventh. In twelve-tone equal temperament, C♭ sounds like B, so the two chords contain enharmonically equivalent guide-tone pitch classes with their chord-member roles reversed.<br>In G7: B is the third and F is the seventh<br>In D♭7: F is the third and C♭ is the seventh<br>The roots G and D♭ are a tritone apart. Both chords can direct their guide tones toward C tonic harmony, but they use different root motion and spelling. \u{1F447} <b>Which chord members create the connection between G7 and D♭7?</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:66,notes:[
-        {p:"G3",d:"h",label:"G7"},{p:"B3",d:"h",chord:true},{p:"F4",d:"h",chord:true},
-        {p:"Db4",d:"h",label:"D\u{266D}7"},{p:"F4",d:"h",chord:true},{p:"B4",d:"h",chord:true},{bar:"final"}],width:400} },
+        {p:"G3",d:"w",label:"G7"},{p:"B3",d:"w",chord:true},{p:"F4",d:"w",chord:true},
+        {p:"Db4",d:"w",label:"D\u{266D}7"},{p:"F4",d:"w",chord:true},{p:"B4",d:"w",chord:true},{bar:"final"}],width:400} },
       try:{ type:"mc", choices:["Their enharmonically equivalent thirds and sevenths","Their roots","Their perfect fifths only"], answer:0,
         success:"✓ Correct. B–F in G7 is enharmonically equivalent to C♭–F in D♭7. The guide tones resolve toward the C tonic chord.",
         fail:"Spell the third and seventh of both dominant seventh chords.",
@@ -54,8 +54,8 @@ LESSON_CONTENT[110]={
         hint:"Each root descends by half step." } },
     { say:"<b>Chromatic Mediant Relationships:</b> In the conventional definition introduced here, chromatic mediants are major or minor triads whose roots are a major or minor third apart, have the same chord quality, and share one common tone. At least one chord is chromatic within the prevailing key.<br>Examples:<br>C major → E major: the roots are a major third apart, and the chords share E<br>C major → A♭ major: the roots are a major third apart, and the chords share C<br>Chromatic mediant describes a chord relationship, not a single fixed harmonic function. In context, E major in C may function as V/vi, while A♭ major may function as the borrowed ♭VI chord. In other passages, the relationship may support chromatic planing, modulation, or nonfunctional color. \u{1F447} <b>Which pitch is shared by C major and E major?</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:66,notes:[
-        {p:"C4",d:"h",label:"C"},{p:"E4",d:"h",chord:true},{p:"G4",d:"h",chord:true},
-        {p:"E4",d:"h",label:"E!"},{p:"G#4",d:"h",chord:true},{p:"B4",d:"h",chord:true},{bar:"final"}],width:380} },
+        {p:"C4",d:"w",label:"C"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},
+        {p:"E4",d:"w",label:"E!"},{p:"G#4",d:"w",chord:true},{p:"B4",d:"w",chord:true},{bar:"final"}],width:380} },
       try:{ type:"mc", choices:["E","G","C"], answer:0,
         success:"✓ Correct. C–E–G and E–G♯–B share E, while the remaining voices may move chromatically or by small intervals.",
         fail:"Compare the pitch content of the two triads.",
@@ -74,15 +74,15 @@ LESSON_CONTENT[110]={
   examples:[
     { caption:"ii - ♭II7 - I: the tritone sub in place, bass sliding D-D♭-C — same landing, silkier road.",
       staff:{clef:"treble",tempo:69,notes:[
-        {p:"D4",d:"h",label:"ii7"},{p:"F4",d:"h",chord:true},{p:"A4",d:"h",chord:true},{p:"C5",d:"h",chord:true},
-        {p:"Db4",d:"h",label:"\u{266D}II7"},{p:"F4",d:"h",chord:true},{p:"Ab4",d:"h",chord:true},{p:"B4",d:"h",chord:true},
+        {p:"D4",d:"w",label:"ii7"},{p:"F4",d:"w",chord:true},{p:"A4",d:"w",chord:true},{p:"C5",d:"w",chord:true},
+        {p:"Db4",d:"w",label:"\u{266D}II7"},{p:"F4",d:"w",chord:true},{p:"Ab4",d:"w",chord:true},{p:"B4",d:"w",chord:true},
         {p:"C4",d:"w",label:"I"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{bar:"final"}],width:560},
       kb:{start:48,octaves:2,labels:true} },
     { caption:"Chromatic mediants: C → E → A♭ → C — three same-quality chords hinged on common tones, circling home in major 3rds.",
       staff:{clef:"treble",tempo:72,notes:[
-        {p:"C4",d:"h",label:"C"},{p:"E4",d:"h",chord:true},{p:"G4",d:"h",chord:true},
-        {p:"E4",d:"h",label:"E"},{p:"G#4",d:"h",chord:true},{p:"B4",d:"h",chord:true},
-        {p:"Eb4",d:"h",label:"A\u{266D}"},{p:"Ab4",d:"h",chord:true},{p:"C5",d:"h",chord:true},
+        {p:"C4",d:"w",label:"C"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},
+        {p:"E4",d:"w",label:"E"},{p:"G#4",d:"w",chord:true},{p:"B4",d:"w",chord:true},
+        {p:"Eb4",d:"w",label:"A\u{266D}"},{p:"Ab4",d:"w",chord:true},{p:"C5",d:"w",chord:true},
         {p:"C4",d:"w",label:"C"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{bar:"final"}],width:560},
       kb:{start:48,octaves:2,labels:true} }
   ],

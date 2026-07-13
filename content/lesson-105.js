@@ -65,9 +65,9 @@ LESSON_CONTENT[105]={
   examples:[
     { caption:"The signature route in A minor: i → N6 → V → i. The chromatic B♭ sits over the diatonic D bass, then resolves through V to i.",
       staff:{clef:"treble",tempo:72,notes:[
-        {p:"A3",d:"h",label:"i"},{p:"C4",d:"h",chord:true},{p:"E4",d:"h",chord:true},
-        {p:"D4",d:"h",label:"N6"},{p:"F4",d:"h",chord:true},{p:"Bb4",d:"h",chord:true},
-        {p:"E4",d:"h",label:"V"},{p:"G#4",d:"h",chord:true},{p:"B4",d:"h",chord:true},
+        {p:"A3",d:"w",label:"i"},{p:"C4",d:"w",chord:true},{p:"E4",d:"w",chord:true},
+        {p:"D4",d:"w",label:"N6"},{p:"F4",d:"w",chord:true},{p:"Bb4",d:"w",chord:true},
+        {p:"E4",d:"w",label:"V"},{p:"G#4",d:"w",chord:true},{p:"B4",d:"w",chord:true},
         {p:"A3",d:"w",label:"i"},{p:"C4",d:"w",chord:true},{p:"E4",d:"w",chord:true},{bar:"final"}],width:560},
       kb:{start:45,octaves:2,labels:true} },
     { caption:"The melodic move: ♭2 (B♭) falls to the leading tone (G♯) — a diminished third.",

@@ -77,14 +77,14 @@ LESSON_CONTENT[107]={
   examples:[
     { caption:"The sad plagal in C: IV (F-A-C) → iv (F-A♭-C) → I. One half-step darkening, maximum emotion.",
       staff:{clef:"treble",tempo:69,notes:[
-        {p:"F4",d:"h",label:"IV"},{p:"A4",d:"h",chord:true},{p:"C5",d:"h",chord:true},
-        {p:"F4",d:"h",label:"iv!"},{p:"Ab4",d:"h",chord:true},{p:"C5",d:"h",chord:true},
+        {p:"F4",d:"w",label:"IV"},{p:"A4",d:"w",chord:true},{p:"C5",d:"w",chord:true},
+        {p:"F4",d:"w",label:"iv!"},{p:"Ab4",d:"w",chord:true},{p:"C5",d:"w",chord:true},
         {p:"E4",d:"w",label:"I"},{p:"G4",d:"w",chord:true},{p:"C5",d:"w",chord:true},{bar:"final"}],width:520},
       kb:{start:52,octaves:2,labels:true} },
     { caption:"♭VI and ♭VII climbing home: A♭ → B♭ → C — the borrowed 'Mario cadence' of film and game scores.",
       staff:{clef:"treble",tempo:76,notes:[
-        {p:"Ab4",d:"h",label:"\u{266D}VI"},{p:"C5",d:"h",chord:true},{p:"Eb5",d:"h",chord:true},
-        {p:"Bb4",d:"h",label:"\u{266D}VII"},{p:"D5",d:"h",chord:true},{p:"F5",d:"h",chord:true},
+        {p:"Ab4",d:"w",label:"\u{266D}VI"},{p:"C5",d:"w",chord:true},{p:"Eb5",d:"w",chord:true},
+        {p:"Bb4",d:"w",label:"\u{266D}VII"},{p:"D5",d:"w",chord:true},{p:"F5",d:"w",chord:true},
         {p:"C5",d:"w",label:"I"},{p:"E5",d:"w",chord:true},{p:"G5",d:"w",chord:true},{bar:"final"}],width:520},
       kb:{start:56,octaves:2,labels:true} }
   ],

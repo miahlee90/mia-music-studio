@@ -35,8 +35,8 @@ LESSON_CONTENT[83]={
   steps:[
     { say:"<b>Interval Inversion:</b> To invert an interval, <b>move the lower note up one octave</b> or move the upper note down one octave. The two notes exchange positions. For example, C–E, a third, becomes E–C, a sixth. \u{1F447} <b>Which action inverts a simple interval?</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:90,notes:[
-        {p:"C4",d:"h",label:"3rd"},{p:"E4",d:"h",chord:true},
-        {p:"E4",d:"h",label:"6th"},{p:"C5",d:"h",chord:true},{bar:"final"}],width:380} },
+        {p:"C4",d:"w",label:"3rd"},{p:"E4",d:"w",chord:true},
+        {p:"E4",d:"w",label:"6th"},{p:"C5",d:"w",chord:true},{bar:"final"}],width:380} },
       try:{ type:"mc", choices:["Move the lower note up one octave","Move both notes up one octave","Add an accidental to the upper note"], answer:0,
         success:"✓ Correct. Moving the lower note up an octave places it above the original upper note and inverts the interval.",
         fail:"Keep the same pitch classes, but exchange their vertical positions.",
@@ -57,16 +57,16 @@ LESSON_CONTENT[83]={
         hint:"2 ↔ 7 and major ↔ minor." } },
     { say:"<b>Perfect Intervals Under Inversion:</b> Perfect unisons, fourths, fifths, and octaves invert to other perfect intervals. A perfect fourth inverts to a perfect fifth, and a perfect unison inverts to a perfect octave. Unlike major and minor qualities, <b>the perfect quality does not change under inversion</b>. \u{1F447} <b>A perfect fifth inverts to…</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:90,notes:[
-        {p:"C4",d:"h",label:"P5"},{p:"G4",d:"h",chord:true},
-        {p:"G4",d:"h",label:"P4"},{p:"C5",d:"h",chord:true},{bar:"final"}],width:380} },
+        {p:"C4",d:"w",label:"P5"},{p:"G4",d:"w",chord:true},
+        {p:"G4",d:"w",label:"P4"},{p:"C5",d:"w",chord:true},{bar:"final"}],width:380} },
       try:{ type:"mc", choices:["a perfect fourth","a diminished fifth","an augmented fourth"], answer:0,
         success:"✓ Correct. A perfect fifth inverts to a perfect fourth: 5 + 4 = 9, and the perfect quality remains unchanged.",
         fail:"Which interval quality remains perfect under inversion?",
         hint:"Perfect ↔ perfect." } },
     { say:"<b>Compound Intervals:</b> Compound intervals are <b>larger than an octave</b>. A ninth is a second plus an octave, and a tenth is a third plus an octave. To reduce a compound interval between a ninth and a fifteenth to its simple equivalent, <b>subtract 7</b> from its interval number. For larger intervals, subtract 7 repeatedly until the result is between 1 and 8. \u{1F447} <b>A tenth reduces to which simple interval?</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:90,notes:[
-        {p:"C4",d:"h",label:"9th"},{p:"D5",d:"h",chord:true},
-        {p:"C4",d:"h",label:"10th"},{p:"E5",d:"h",chord:true},{bar:"final"}],width:380} },
+        {p:"C4",d:"w",label:"9th"},{p:"D5",d:"w",chord:true},
+        {p:"C4",d:"w",label:"10th"},{p:"E5",d:"w",chord:true},{bar:"final"}],width:380} },
       try:{ type:"mc", choices:["A third","A second","A fifth"], answer:0,
         success:"✓ Correct. A tenth is a third plus one octave: 10 − 7 = 3.",
         fail:"Subtract 7 from the compound interval number.",
@@ -85,16 +85,16 @@ LESSON_CONTENT[83]={
   examples:[
     { caption:"Inversion pairs played back to back: M3→m6, then P5→P4. Same letter names, flipped stacking — numbers always summing to nine.",
       staff:{clef:"treble",tempo:80,notes:[
-        {p:"C4",d:"h",label:"M3"},{p:"E4",d:"h",chord:true},
-        {p:"E4",d:"h",label:"m6"},{p:"C5",d:"h",chord:true},{bar:"single"},
-        {p:"D4",d:"h",label:"P5"},{p:"A4",d:"h",chord:true},
-        {p:"A4",d:"h",label:"P4"},{p:"D5",d:"h",chord:true},{bar:"final"}],width:560},
+        {p:"C4",d:"w",label:"M3"},{p:"E4",d:"w",chord:true},
+        {p:"E4",d:"w",label:"m6"},{p:"C5",d:"w",chord:true},{bar:"single"},
+        {p:"D4",d:"w",label:"P5"},{p:"A4",d:"w",chord:true},
+        {p:"A4",d:"w",label:"P4"},{p:"D5",d:"w",chord:true},{bar:"final"}],width:560},
       kb:{start:48,octaves:2,labels:true} },
     { caption:"Compound intervals from C: a 9th (D), a 10th (E) and a 13th (A) — each a simple interval pushed past the octave. Jazz chord symbols use these numbers as theoretical extensions.",
       staff:{clef:"treble",tempo:80,notes:[
-        {p:"C4",d:"h",label:"9th"},{p:"D5",d:"h",chord:true},
-        {p:"C4",d:"h",label:"10th"},{p:"E5",d:"h",chord:true},
-        {p:"C4",d:"h",label:"13th"},{p:"A5",d:"h",chord:true},{bar:"final"}],width:520},
+        {p:"C4",d:"w",label:"9th"},{p:"D5",d:"w",chord:true},
+        {p:"C4",d:"w",label:"10th"},{p:"E5",d:"w",chord:true},
+        {p:"C4",d:"w",label:"13th"},{p:"A5",d:"w",chord:true},{bar:"final"}],width:520},
       kb:{start:48,octaves:2,labels:true} }
   ],
   games:[

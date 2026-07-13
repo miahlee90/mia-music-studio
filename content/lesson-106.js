@@ -37,7 +37,7 @@ LESSON_CONTENT[106]={
         hint:"♭6 is below scale degree 5; ♯4 is above scale degree 4." } },
     { say:"<b>The Characteristic Resolution:</b> The two notes of the augmented-sixth interval normally resolve outward by half step. Scale degree ♭6 descends to 5, while ♯4 ascends to 5 in a higher octave. This contrary motion produces an octave on the dominant scale degree. Augmented-sixth chords normally serve predominant function and approach V, either directly or through a cadential 6/4. \u{1F447} <b>How does the characteristic augmented-sixth interval normally resolve?</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:66,notes:[
-        {p:"F4",d:"h",label:"\u{266D}6"},{p:"D#5",d:"h",chord:true,label:"\u{266F}4"},
+        {p:"F4",d:"w",label:"\u{266D}6"},{p:"D#5",d:"w",chord:true,label:"\u{266F}4"},
         {p:"E4",d:"w",label:"5"},{p:"E5",d:"w",chord:true,label:"octave!"},{bar:"final"}],width:380} },
       try:{ type:"mc", choices:["Outward to two statements of scale degree 5 an octave apart","Inward to a unison on scale degree 1","To a third on scale degree 2"], answer:0,
         success:"✓ Correct. Both tendency tones approach scale degree 5 by contrary half-step motion.",
@@ -77,15 +77,15 @@ LESSON_CONTENT[106]={
   examples:[
     { caption:"Italian sixth resolving in A minor: F-A-D♯ opens outward into E — the octave on V — then V leads home.",
       staff:{clef:"treble",tempo:69,notes:[
-        {p:"F4",d:"h",label:"It+6"},{p:"A4",d:"h",chord:true},{p:"D#5",d:"h",chord:true},
-        {p:"E4",d:"h",label:"V"},{p:"G#4",d:"h",chord:true},{p:"E5",d:"h",chord:true},
+        {p:"F4",d:"w",label:"It+6"},{p:"A4",d:"w",chord:true},{p:"D#5",d:"w",chord:true},
+        {p:"E4",d:"w",label:"V"},{p:"G#4",d:"w",chord:true},{p:"E5",d:"w",chord:true},
         {p:"A4",d:"w",label:"i"},{p:"C5",d:"w",chord:true},{p:"E5",d:"w",chord:true},{bar:"final"}],width:520},
       kb:{start:52,octaves:2,labels:true} },
     { caption:"The three flavors side by side: Italian (3 notes), French (+2), German (+♭3). One frame, three national colors.",
       staff:{clef:"treble",tempo:66,notes:[
-        {p:"F4",d:"h",label:"It"},{p:"A4",d:"h",chord:true},{p:"D#5",d:"h",chord:true},
-        {p:"F4",d:"h",label:"Fr"},{p:"A4",d:"h",chord:true},{p:"B4",d:"h",chord:true},{p:"D#5",d:"h",chord:true},
-        {p:"F4",d:"h",label:"Ger"},{p:"A4",d:"h",chord:true},{p:"C5",d:"h",chord:true},{p:"D#5",d:"h",chord:true},{bar:"final"}],width:560},
+        {p:"F4",d:"w",label:"It"},{p:"A4",d:"w",chord:true},{p:"D#5",d:"w",chord:true},
+        {p:"F4",d:"w",label:"Fr"},{p:"A4",d:"w",chord:true},{p:"B4",d:"w",chord:true},{p:"D#5",d:"w",chord:true},
+        {p:"F4",d:"w",label:"Ger"},{p:"A4",d:"w",chord:true},{p:"C5",d:"w",chord:true},{p:"D#5",d:"w",chord:true},{bar:"final"}],width:560},
       kb:{start:53,octaves:2,labels:true} }
   ],
   games:[

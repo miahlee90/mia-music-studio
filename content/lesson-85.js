@@ -62,10 +62,10 @@ LESSON_CONTENT[85]={
   steps:[
     { say:"<b>Diatonic Triads:</b> Build a diatonic triad by stacking two thirds above a scale degree while using only notes from the given scale. A seven-note scale produces one diatonic triad on each of its seven degrees. \u{1F447} <b>A triad diatonic to a given scale uses…</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:80,notes:[
-        {p:"C4",d:"h",label:"I"},{p:"E4",d:"h",chord:true},{p:"G4",d:"h",chord:true},
-        {p:"D4",d:"h",label:"ii"},{p:"F4",d:"h",chord:true},{p:"A4",d:"h",chord:true},
-        {p:"E4",d:"h",label:"iii"},{p:"G4",d:"h",chord:true},{p:"B4",d:"h",chord:true},
-        {p:"F4",d:"h",label:"IV"},{p:"A4",d:"h",chord:true},{p:"C5",d:"h",chord:true},{bar:"final"}],width:560} },
+        {p:"C4",d:"w",label:"I"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},
+        {p:"D4",d:"w",label:"ii"},{p:"F4",d:"w",chord:true},{p:"A4",d:"w",chord:true},
+        {p:"E4",d:"w",label:"iii"},{p:"G4",d:"w",chord:true},{p:"B4",d:"w",chord:true},
+        {p:"F4",d:"w",label:"IV"},{p:"A4",d:"w",chord:true},{p:"C5",d:"w",chord:true},{bar:"final"}],width:560} },
       try:{ type:"mc", choices:["Only notes from that scale","Any chromatic notes","Only notes played on black keys"], answer:0,
         success:"✓ Correct. A triad diatonic to a specific scale is constructed entirely from notes in that scale.",
         fail:"Check whether every chord member belongs to the given scale.",
@@ -113,7 +113,7 @@ LESSON_CONTENT[85]={
         {p:"G4",d:"q",label:"V"},{p:"B4",d:"q",chord:true},{p:"D5",d:"q",chord:true},
         {p:"A4",d:"q",label:"vi"},{p:"C5",d:"q",chord:true},{p:"E5",d:"q",chord:true},
         {p:"B4",d:"q",label:"vii°"},{p:"D5",d:"q",chord:true},{p:"F5",d:"q",chord:true},
-        {p:"C5",d:"h",label:"I"},{p:"E5",d:"h",chord:true},{p:"G5",d:"h",chord:true},{bar:"final"}],width:680},
+        {p:"C5",d:"w",label:"I"},{p:"E5",d:"w",chord:true},{p:"G5",d:"w",chord:true},{bar:"final"}],width:680},
       kb:{start:48,octaves:3,labels:true} },
     { caption:"A harmonic-minor ladder in A minor: i ii° III+ iv V VI vii° — the G♯ colors III+ augmented, V major and vii° diminished.",
       staff:{clef:"treble",tempo:76,notes:[
@@ -124,7 +124,7 @@ LESSON_CONTENT[85]={
         {p:"E4",d:"q",label:"V"},{p:"G#4",d:"q",chord:true},{p:"B4",d:"q",chord:true},
         {p:"F4",d:"q",label:"VI"},{p:"A4",d:"q",chord:true},{p:"C5",d:"q",chord:true},
         {p:"G#4",d:"q",label:"vii°"},{p:"B4",d:"q",chord:true},{p:"D5",d:"q",chord:true},
-        {p:"A4",d:"h",label:"i"},{p:"C5",d:"h",chord:true},{p:"E5",d:"h",chord:true},{bar:"final"}],width:680},
+        {p:"A4",d:"w",label:"i"},{p:"C5",d:"w",chord:true},{p:"E5",d:"w",chord:true},{bar:"final"}],width:680},
       kb:{start:45,octaves:3,labels:true} }
   ],
   games:[

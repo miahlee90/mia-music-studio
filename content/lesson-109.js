@@ -35,8 +35,8 @@ LESSON_CONTENT[109]={
         hint:"Check the third above the root." } },
     { say:"<b>Sus2 and Sus4 Pitch Collections:</b> Csus2, C–D–G, and Gsus4, G–C–D, contain the same three pitch classes. However, their chord symbols imply different roots and harmonic interpretations. They should not automatically be described as inversions of the same chord. A sus4 may resolve downward from scale degree 4 to 3, while a sus2 may move upward from 2 to 3. In many contemporary styles, either chord may also remain unresolved. \u{1F447} <b>Which pitches form Csus2?</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:72,notes:[
-        {p:"C4",d:"h",label:"sus2"},{p:"D4",d:"h",chord:true},{p:"G4",d:"h",chord:true},
-        {p:"C4",d:"h",label:"sus4"},{p:"F4",d:"h",chord:true},{p:"G4",d:"h",chord:true},{bar:"final"}],width:400} },
+        {p:"C4",d:"w",label:"sus2"},{p:"D4",d:"w",chord:true},{p:"G4",d:"w",chord:true},
+        {p:"C4",d:"w",label:"sus4"},{p:"F4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{bar:"final"}],width:400} },
       try:{ type:"mc", choices:["C-D-G","C-E-G","C-D-E"], answer:0,
         success:"✓ Correct. D, the second above C, replaces E, the third of the C triad.",
         fail:"Construct the chord from the root, second, and fifth.",
@@ -65,13 +65,13 @@ LESSON_CONTENT[109]={
   examples:[
     { caption:"The sus resolution vs the sus that stays: Gsus4→G (classical), then Csus2 held as pure color (modern).",
       staff:{clef:"treble",tempo:69,notes:[
-        {p:"G3",d:"h",label:"sus4"},{p:"C4",d:"h",chord:true},{p:"D4",d:"h",chord:true},
-        {p:"G3",d:"h",label:"resolves"},{p:"B3",d:"h",chord:true},{p:"D4",d:"h",chord:true},
+        {p:"G3",d:"w",label:"sus4"},{p:"C4",d:"w",chord:true},{p:"D4",d:"w",chord:true},
+        {p:"G3",d:"w",label:"resolves"},{p:"B3",d:"w",chord:true},{p:"D4",d:"w",chord:true},
         {p:"C4",d:"w",label:"sus2 — stays!"},{p:"D4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{bar:"final"}],width:520},
       kb:{start:43,octaves:2,labels:true} },
     { caption:"add9 and 6 side by side: Cadd9 (C-E-G-D) and C6 (C-E-G-A) — two ways to sweeten one triad.",
       staff:{clef:"treble",tempo:66,notes:[
-        {p:"C4",d:"h",label:"add9"},{p:"E4",d:"h",chord:true},{p:"G4",d:"h",chord:true},{p:"D5",d:"h",chord:true},
+        {p:"C4",d:"w",label:"add9"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{p:"D5",d:"w",chord:true},
         {p:"C4",d:"w",label:"C6"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{p:"A4",d:"w",chord:true},{bar:"final"}],width:440},
       kb:{start:48,octaves:2,labels:true} }
   ],

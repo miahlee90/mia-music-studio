@@ -76,10 +76,10 @@ LESSON_CONTENT[99]={
   examples:[
     { caption:"A pivot modulation C→G: I – IV – vi(=ii of G) – V of G – I of G. The Am turns the corner; the cadence confirms the new home.",
       staff:{clef:"treble",tempo:72,notes:[
-        {p:"C4",d:"h",label:"I (C)"},{p:"E4",d:"h",chord:true},{p:"G4",d:"h",chord:true},
-        {p:"F4",d:"h",label:"IV"},{p:"A4",d:"h",chord:true},{p:"C5",d:"h",chord:true},
-        {p:"A3",d:"h",label:"pivot vi=ii"},{p:"C4",d:"h",chord:true},{p:"E4",d:"h",chord:true},
-        {p:"D4",d:"h",label:"V (of G)"},{p:"F#4",d:"h",chord:true},{p:"A4",d:"h",chord:true},
+        {p:"C4",d:"w",label:"I (C)"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},
+        {p:"F4",d:"w",label:"IV"},{p:"A4",d:"w",chord:true},{p:"C5",d:"w",chord:true},
+        {p:"A3",d:"w",label:"pivot vi=ii"},{p:"C4",d:"w",chord:true},{p:"E4",d:"w",chord:true},
+        {p:"D4",d:"w",label:"V (of G)"},{p:"F#4",d:"w",chord:true},{p:"A4",d:"w",chord:true},
         {p:"G3",d:"w",label:"I (G!)"},{p:"B3",d:"w",chord:true},{p:"D4",d:"w",chord:true},{bar:"final"}],width:640},
       kb:{start:43,octaves:3,labels:true} },
     { caption:"A phrase modulation: the phrase ends in C; the next phrase simply begins in D major — the pop lift, up a whole step.",

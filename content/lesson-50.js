@@ -119,9 +119,9 @@ LESSON_CONTENT[50]={
         hint:"Keep the name-note, the quality-note, and the tension-note." } },
     { say:"A Common Chord Group: in many songs, the three most common harmonic functions are <b>I, IV, and V7</b>. Together, they create a strong sense of <b>home, movement, and resolution</b>. \u{1F447} <b>Which three chords make up this common progression?</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:80,notes:[
-        {p:"C4",d:"h",x:140,label:"I"},{p:"E4",d:"h",chord:true},{p:"G4",d:"h",chord:true},
-        {p:"F4",d:"h",x:310,label:"IV"},{p:"A4",d:"h",chord:true},{p:"C5",d:"h",chord:true},
-        {p:"G4",d:"h",x:480,label:"V7"},{p:"B4",d:"h",chord:true},{p:"D5",d:"h",chord:true},{p:"F5",d:"h",chord:true}],width:580} },
+        {p:"C4",d:"w",x:140,label:"I"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},
+        {p:"F4",d:"w",x:310,label:"IV"},{p:"A4",d:"w",chord:true},{p:"C5",d:"w",chord:true},
+        {p:"G4",d:"w",x:480,label:"V7"},{p:"B4",d:"w",chord:true},{p:"D5",d:"w",chord:true},{p:"F5",d:"w",chord:true}],width:580} },
       try:{ type:"mc", choices:["I, IV, and V7","I, ii, and V7","I7, IV7, and V7"], answer:0,
         success:"✓ I, IV, V7 — home, movement, resolution: the harmonization toolkit for everything ahead. Take a bow! \u{1F386}",
         fail:"Only the DOMINANT gets the 7th upgrade (for now).",
@@ -135,9 +135,9 @@ LESSON_CONTENT[50]={
       kb:{start:60,octaves:2,labels:true} },
     { caption:"The upgraded primary chords — I, IV, V7, and the triumphant return to I: home, movement, and resolution in one cadence.",
       staff:{clef:"treble",tempo:80,notes:[
-        {p:"C4",d:"h",label:"I"},{p:"E4",d:"h",chord:true},{p:"G4",d:"h",chord:true},
-        {p:"F4",d:"h",label:"IV"},{p:"A4",d:"h",chord:true},{p:"C5",d:"h",chord:true},
-        {p:"G4",d:"h",label:"V7"},{p:"B4",d:"h",chord:true},{p:"D5",d:"h",chord:true},{p:"F5",d:"h",chord:true},
+        {p:"C4",d:"w",label:"I"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},
+        {p:"F4",d:"w",label:"IV"},{p:"A4",d:"w",chord:true},{p:"C5",d:"w",chord:true},
+        {p:"G4",d:"w",label:"V7"},{p:"B4",d:"w",chord:true},{p:"D5",d:"w",chord:true},{p:"F5",d:"w",chord:true},
         {p:"C4",d:"w",label:"I"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{p:"C5",d:"w",chord:true},{bar:"final"}],width:640} }
   ],
   games:[

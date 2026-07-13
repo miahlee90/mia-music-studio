@@ -85,8 +85,8 @@ LESSON_CONTENT[92]={
         hint:"Minor triad + minor seventh." } },
     { say:"<b>The Two Diminished-Triad Seventh Chords:</b> <b>half-diminished seventh</b>: Cø7 or Cm7♭5 = diminished triad + minor 7th, spelled C-E♭-G♭-B♭ · <b>fully diminished seventh</b>: C°7 = diminished triad + <b>diminished 7th</b>, spelled C-E♭-G♭-B𝄫. A root-position fully diminished seventh chord consists of three stacked minor 3rds; its pitch-class structure is symmetrical in twelve-tone equal temperament. <b>Remember the five common types introduced here: maj7, 7, m7, ø7 or m7♭5, and °7.</b> \u{1F447} <b>How is a root-position fully diminished seventh chord constructed?</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:80,notes:[
-        {p:"C4",d:"h",label:"Cø7"},{p:"Eb4",d:"h",chord:true},{p:"Gb4",d:"h",chord:true},{p:"Bb4",d:"h",chord:true},
-        {p:"C4",d:"h",label:"C°7"},{p:"Eb4",d:"h",chord:true},{p:"Gb4",d:"h",chord:true},{p:"B4",d:"h",chord:true,acc:"bb",sound:"A4"},{bar:"final"}],width:420} },
+        {p:"C4",d:"w",label:"Cø7"},{p:"Eb4",d:"w",chord:true},{p:"Gb4",d:"w",chord:true},{p:"Bb4",d:"w",chord:true},
+        {p:"C4",d:"w",label:"C°7"},{p:"Eb4",d:"w",chord:true},{p:"Gb4",d:"w",chord:true},{p:"B4",d:"w",chord:true,acc:"bb",sound:"A4"},{bar:"final"}],width:420} },
       try:{ type:"mc", choices:["Three stacked minor 3rds","Three stacked major 3rds","Three stacked perfect 4ths"], answer:0,
         success:"✓ Correct. A fully diminished seventh chord contains three stacked minor thirds and divides the octave into four equal parts.",
         fail:"Measure each written third in C-E♭-G♭-B𝄫.",
@@ -104,16 +104,16 @@ LESSON_CONTENT[92]={
   examples:[
     { caption:"Five common seventh chords on one root: Cmaj7 · C7 · Cm7 · Cø7 · C°7. One chord member changes at a time — follow the spellings.",
       staff:{clef:"treble",tempo:66,notes:[
-        {p:"C4",d:"h",label:"maj7"},{p:"E4",d:"h",chord:true},{p:"G4",d:"h",chord:true},{p:"B4",d:"h",chord:true},
-        {p:"C4",d:"h",label:"7"},{p:"E4",d:"h",chord:true},{p:"G4",d:"h",chord:true},{p:"Bb4",d:"h",chord:true},
-        {p:"C4",d:"h",label:"m7"},{p:"Eb4",d:"h",chord:true},{p:"G4",d:"h",chord:true},{p:"Bb4",d:"h",chord:true},
-        {p:"C4",d:"h",label:"\u{00F8}7"},{p:"Eb4",d:"h",chord:true},{p:"Gb4",d:"h",chord:true},{p:"Bb4",d:"h",chord:true},
-        {p:"C4",d:"h",label:"\u{00B0}7"},{p:"Eb4",d:"h",chord:true},{p:"Gb4",d:"h",chord:true},{p:"B4",d:"h",chord:true,acc:"bb",sound:"A4"},{bar:"final"}],width:680},
+        {p:"C4",d:"w",label:"maj7"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{p:"B4",d:"w",chord:true},
+        {p:"C4",d:"w",label:"7"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{p:"Bb4",d:"w",chord:true},
+        {p:"C4",d:"w",label:"m7"},{p:"Eb4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{p:"Bb4",d:"w",chord:true},
+        {p:"C4",d:"w",label:"\u{00F8}7"},{p:"Eb4",d:"w",chord:true},{p:"Gb4",d:"w",chord:true},{p:"Bb4",d:"w",chord:true},
+        {p:"C4",d:"w",label:"\u{00B0}7"},{p:"Eb4",d:"w",chord:true},{p:"Gb4",d:"w",chord:true},{p:"B4",d:"w",chord:true,acc:"bb",sound:"A4"},{bar:"final"}],width:680},
       kb:{start:48,octaves:2,labels:true} },
     { caption:"Sevenths in context: Dm7 → G7 → Cmaj7 — three of the five types chained into the smoothest progression in jazz (a preview of Lesson 95's ii-V-I).",
       staff:{clef:"treble",tempo:72,notes:[
-        {p:"D4",d:"h",label:"Dm7"},{p:"F4",d:"h",chord:true},{p:"A4",d:"h",chord:true},{p:"C5",d:"h",chord:true},
-        {p:"G3",d:"h",label:"G7"},{p:"B3",d:"h",chord:true},{p:"D4",d:"h",chord:true},{p:"F4",d:"h",chord:true},
+        {p:"D4",d:"w",label:"Dm7"},{p:"F4",d:"w",chord:true},{p:"A4",d:"w",chord:true},{p:"C5",d:"w",chord:true},
+        {p:"G3",d:"w",label:"G7"},{p:"B3",d:"w",chord:true},{p:"D4",d:"w",chord:true},{p:"F4",d:"w",chord:true},
         {p:"C4",d:"w",label:"Cmaj7"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{p:"B4",d:"w",chord:true},{bar:"final"}],width:560},
       kb:{start:43,octaves:3,labels:true} }
   ],

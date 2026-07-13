@@ -59,7 +59,7 @@ LESSON_CONTENT[98]={
         hint:"Tonicization is temporary and locally focused." } },
     { say:"<b>Expected Resolution:</b> A secondary dominant normally resolves to its indicated target: V/V → V, V/ii → ii, and V/vi → vi. The temporary leading tone normally resolves upward by step to the target root; when the applied dominant includes a chordal seventh, that seventh normally resolves downward by step. The notation V/X identifies X as the expected tonicized target, though secondary dominants may occasionally resolve deceptively or move elsewhere, so the full context must be examined. \u{1F447} <b>What is the expected resolution of V/ii?</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:72,notes:[
-        {p:"A3",d:"h",label:"V/ii"},{p:"C#4",d:"h",chord:true},{p:"E4",d:"h",chord:true},
+        {p:"A3",d:"w",label:"V/ii"},{p:"C#4",d:"w",chord:true},{p:"E4",d:"w",chord:true},
         {p:"D4",d:"w",label:"ii"},{p:"F4",d:"w",chord:true},{p:"A4",d:"w",chord:true},{bar:"final"}],width:380} },
       try:{ type:"mc", choices:["ii","I","V"], answer:0,
         success:"✓ Correct. In C major, A major or A7 functions as V/ii and normally resolves to D minor.",
@@ -79,15 +79,15 @@ LESSON_CONTENT[98]={
   examples:[
     { caption:"I → V/V → V → I in C major: the D major chord (F♯) loads the arrival on G, which then closes home. Hear the double push.",
       staff:{clef:"treble",tempo:72,notes:[
-        {p:"C4",d:"h",label:"I"},{p:"E4",d:"h",chord:true},{p:"G4",d:"h",chord:true},
-        {p:"D4",d:"h",label:"V/V"},{p:"F#4",d:"h",chord:true},{p:"A4",d:"h",chord:true},
-        {p:"G3",d:"h",label:"V"},{p:"B3",d:"h",chord:true},{p:"D4",d:"h",chord:true},
+        {p:"C4",d:"w",label:"I"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},
+        {p:"D4",d:"w",label:"V/V"},{p:"F#4",d:"w",chord:true},{p:"A4",d:"w",chord:true},
+        {p:"G3",d:"w",label:"V"},{p:"B3",d:"w",chord:true},{p:"D4",d:"w",chord:true},
         {p:"C4",d:"w",label:"I"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{bar:"final"}],width:560},
       kb:{start:48,octaves:2,labels:true} },
     { caption:"I → V/vi → vi: E major's G♯ tonicizes A minor — for one moment, Am sounds like home. Brief homeness = tonicization.",
       staff:{clef:"treble",tempo:72,notes:[
-        {p:"C4",d:"h",label:"I"},{p:"E4",d:"h",chord:true},{p:"G4",d:"h",chord:true},
-        {p:"E4",d:"h",label:"V/vi"},{p:"G#4",d:"h",chord:true},{p:"B4",d:"h",chord:true},
+        {p:"C4",d:"w",label:"I"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},
+        {p:"E4",d:"w",label:"V/vi"},{p:"G#4",d:"w",chord:true},{p:"B4",d:"w",chord:true},
         {p:"A4",d:"w",label:"vi"},{p:"C5",d:"w",chord:true},{p:"E5",d:"w",chord:true},{bar:"final"}],width:480},
       kb:{start:48,octaves:2,labels:true} }
   ],

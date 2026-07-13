@@ -195,7 +195,7 @@ LESSON_CONTENT[53]={stackFigures:true,
       kb:{start:48,octaves:3,labels:true} },
     { caption:"Why the 3rd inversion is a composer's favorite: the 7th in the bass (F) resolves down by step to E, giving I in 1st inversion. Bass line F → E.",
       staff:{clef:"treble",tempo:70,notes:[
-        {p:"F4",d:"h",label:"G7/F (3rd inv.)"},{p:"G4",d:"h",chord:true},{p:"B4",d:"h",chord:true},{p:"D5",d:"h",chord:true},
+        {p:"F4",d:"w",label:"G7/F (3rd inv.)"},{p:"G4",d:"w",chord:true},{p:"B4",d:"w",chord:true},{p:"D5",d:"w",chord:true},
         {p:"E4",d:"w",label:"C/E (1st inv.)"},{p:"G4",d:"w",chord:true},{p:"C5",d:"w",chord:true},{bar:"final"}],width:440},
       kb:{start:60,octaves:2,labels:true} }
   ],

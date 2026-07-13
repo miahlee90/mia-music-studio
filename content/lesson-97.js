@@ -58,8 +58,8 @@ LESSON_CONTENT[97]={
         hint:"Maintain S above A above T above B in these exercises." } },
     { say:"<b>Efficient Voice Leading:</b> When appropriate, retain common tones in the same voice and move the remaining upper voices primarily by step or small interval. Larger leaps may be used when they create a singable line and support the harmonic progression. The bass often moves by larger intervals because it frequently presents chord roots, but it should still form a coherent melodic line. \u{1F447} <b>Two adjacent chords share the pitch G. Which choice often creates efficient voice leading?</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:72,notes:[
-        {p:"C4",d:"h",label:"I"},{p:"E4",d:"h",chord:true},{p:"G4",d:"h",chord:true},{p:"C5",d:"h",chord:true},
-        {p:"B3",d:"h",label:"V"},{p:"D4",d:"h",chord:true},{p:"G4",d:"h",chord:true,label:"G stays!"},{p:"D5",d:"h",chord:true},{bar:"final"}],width:440} },
+        {p:"C4",d:"w",label:"I"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{p:"C5",d:"w",chord:true},
+        {p:"B3",d:"w",label:"V"},{p:"D4",d:"w",chord:true},{p:"G4",d:"w",chord:true,label:"G stays!"},{p:"D5",d:"w",chord:true},{bar:"final"}],width:440} },
       try:{ type:"mc", choices:["Retain G in the same voice when other considerations allow","Move G by an unnecessary octave","Omit G automatically"], answer:0,
         success:"✓ Correct. Retaining a common tone can connect the chords smoothly, provided the result also follows range, spacing, doubling, and tendency-tone guidelines.",
         fail:"Check whether the common tone can remain in the same voice without creating another problem.",
@@ -83,9 +83,9 @@ LESSON_CONTENT[97]={
   examples:[
     { caption:"I–IV–V–I with smooth voice leading (upper voices on one staff): common tones held, steps everywhere else, bass doing the leaping.",
       staff:{clef:"treble",tempo:69,notes:[
-        {p:"C4",d:"h",label:"I"},{p:"E4",d:"h",chord:true},{p:"G4",d:"h",chord:true},{p:"C5",d:"h",chord:true},
-        {p:"C4",d:"h",label:"IV"},{p:"F4",d:"h",chord:true},{p:"A4",d:"h",chord:true},{p:"C5",d:"h",chord:true},
-        {p:"B3",d:"h",label:"V"},{p:"D4",d:"h",chord:true},{p:"G4",d:"h",chord:true},{p:"D5",d:"h",chord:true},
+        {p:"C4",d:"w",label:"I"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{p:"C5",d:"w",chord:true},
+        {p:"C4",d:"w",label:"IV"},{p:"F4",d:"w",chord:true},{p:"A4",d:"w",chord:true},{p:"C5",d:"w",chord:true},
+        {p:"B3",d:"w",label:"V"},{p:"D4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{p:"D5",d:"w",chord:true},
         {p:"C4",d:"w",label:"I"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{p:"C5",d:"w",chord:true},{bar:"final"}],width:620},
       kb:{start:48,octaves:2,labels:true} },
     { caption:"Spacing on display: the first chord spreads the top voices too far (hollow); the second keeps S–A and A–T inside an octave (balanced). Hear the difference.",
@@ -120,8 +120,8 @@ LESSON_CONTENT[97]={
       spec:{rounds:6, pool:[
         {label:"Balanced spacing", spec:{clef:"treble",notes:[{p:"C4",d:"w"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{p:"C5",d:"w",chord:true}],width:150}},
         {label:"Hollow top (S–A over an octave)", spec:{clef:"treble",notes:[{p:"C4",d:"w"},{p:"E4",d:"w",chord:true},{p:"G5",d:"w",chord:true}],width:150}},
-        {label:"Common tone held (I→V)", spec:{clef:"treble",notes:[{p:"G4",d:"h"},{p:"C5",d:"h",chord:true},{p:"G4",d:"h"},{p:"B4",d:"h",chord:true}],width:170}},
-        {label:"Leaping upper voices (rough)", spec:{clef:"treble",notes:[{p:"E4",d:"h"},{p:"C5",d:"h",chord:true},{p:"A4",d:"h"},{p:"F5",d:"h",chord:true}],width:170}}]},
+        {label:"Common tone held (I→V)", spec:{clef:"treble",notes:[{p:"G4",d:"w"},{p:"C5",d:"w",chord:true},{p:"G4",d:"w"},{p:"B4",d:"w",chord:true}],width:170}},
+        {label:"Leaping upper voices (rough)", spec:{clef:"treble",notes:[{p:"E4",d:"w"},{p:"C5",d:"w",chord:true},{p:"A4",d:"w"},{p:"F5",d:"w",chord:true}],width:170}}]},
       result:(score)=>score>=5?"You evaluated the voicings correctly.":null },
     { type:"term-race", title:"Game 4 · Guideline or Misconception?",
       intro:"Distinguish common-practice SATB guidelines from inaccurate absolute statements.",

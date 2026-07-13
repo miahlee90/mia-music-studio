@@ -71,7 +71,7 @@ LESSON_CONTENT[87]={
         hint:"Recall the phrase endings introduced in Lesson 72." } },
     { say:"<b>Authentic Cadence — V or V⁷ to I:</b> an authentic cadence occurs when a <b>dominant chord resolves to the tonic</b> at a phrase ending. A perfect authentic cadence provides the strongest conventional closure; an imperfect authentic cadence provides a less conclusive form of the same dominant-to-tonic motion. \u{1F447} <b>Which harmonic motion defines an authentic cadence in a major key?</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:80,notes:[
-        {p:"G4",d:"h",label:"V7"},{p:"B4",d:"h",chord:true},{p:"D5",d:"h",chord:true},{p:"F5",d:"h",chord:true},
+        {p:"G4",d:"w",label:"V7"},{p:"B4",d:"w",chord:true},{p:"D5",d:"w",chord:true},{p:"F5",d:"w",chord:true},
         {p:"C4",d:"w",label:"I"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{p:"C5",d:"w",chord:true},{bar:"final"}],width:440} },
       try:{ type:"mc", choices:["V or V⁷ to I","IV to I","I to V"], answer:0,
         success:"✓ Correct. An authentic cadence moves from dominant to tonic at a phrase ending.",
@@ -84,8 +84,8 @@ LESSON_CONTENT[87]={
         hint:"A PAC requires root-position V–I and the tonic in the final soprano." } },
     { say:"<b>Half Cadence — ends on V:</b> a half cadence occurs when a phrase ends on a <b>root-position dominant chord</b>. Various chords may precede V. Because the dominant does not resolve to tonic, the cadence creates an expectation of continuation. \u{1F447} <b>A half cadence normally ends on…</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:80,notes:[
-        {p:"C4",d:"h",label:"I"},{p:"E4",d:"h",chord:true},{p:"G4",d:"h",chord:true},
-        {p:"D4",d:"h",label:"ii"},{p:"F4",d:"h",chord:true},{p:"A4",d:"h",chord:true},
+        {p:"C4",d:"w",label:"I"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},
+        {p:"D4",d:"w",label:"ii"},{p:"F4",d:"w",chord:true},{p:"A4",d:"w",chord:true},
         {p:"G4",d:"w",label:"V — wait…"},{p:"B4",d:"w",chord:true},{p:"D5",d:"w",chord:true},{bar:"final"}],width:480} },
       try:{ type:"mc", choices:["A root-position V chord","A I chord","A vi chord"], answer:0,
         success:"✓ Correct. Ending on the dominant creates an open cadence that commonly suggests continuation.",
@@ -93,7 +93,7 @@ LESSON_CONTENT[87]={
         hint:"The phrase ends on V." } },
     { say:"<b>Plagal Cadence — IV to I:</b> a plagal cadence occurs when <b>IV moves to I</b> at a phrase ending. It provides tonic arrival without the dominant-to-tonic motion of an authentic cadence. Plagal motion also frequently appears after an authentic cadence as a post-cadential extension. \u{1F447} <b>Which harmonic motion defines a plagal cadence?</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:80,notes:[
-        {p:"F4",d:"h",label:"IV"},{p:"A4",d:"h",chord:true},{p:"C5",d:"h",chord:true},
+        {p:"F4",d:"w",label:"IV"},{p:"A4",d:"w",chord:true},{p:"C5",d:"w",chord:true},
         {p:"C4",d:"w",label:"I"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{p:"C5",d:"w",chord:true},{bar:"final"}],width:400} },
       try:{ type:"mc", choices:["IV to I","V to I","V to vi"], answer:0,
         success:"✓ Correct. A plagal cadence moves from IV to I without dominant-to-tonic harmonic motion.",
@@ -101,7 +101,7 @@ LESSON_CONTENT[87]={
         hint:"Subdominant to tonic." } },
     { say:"<b>Deceptive Cadence:</b> a deceptive cadence begins with V but <b>avoids the expected resolution to I</b>. In a major key, V commonly moves to vi; in a minor key, V commonly moves to VI. This motion delays tonic arrival and often allows the phrase or progression to continue. <b>Remember: Authentic V–I · Half ends on root-position V · Plagal IV–I · Deceptive V–vi in major or V–VI in minor.</b> \u{1F447} <b>Why is V–vi in a major key called deceptive?</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:80,notes:[
-        {p:"G4",d:"h",label:"V7"},{p:"B4",d:"h",chord:true},{p:"D5",d:"h",chord:true},{p:"F5",d:"h",chord:true},
+        {p:"G4",d:"w",label:"V7"},{p:"B4",d:"w",chord:true},{p:"D5",d:"w",chord:true},{p:"F5",d:"w",chord:true},
         {p:"A4",d:"w",label:"vi — surprise!"},{p:"C5",d:"w",chord:true},{p:"E5",d:"w",chord:true},{bar:"final"}],width:440} },
       try:{ type:"mc", choices:["V creates an expectation of I but moves to vi instead","The progression contains no dominant chord","The dynamic level changes unexpectedly"], answer:0,
         success:"✓ Correct. The dominant creates an expectation of tonic, but the progression moves to vi instead.",
@@ -131,10 +131,10 @@ LESSON_CONTENT[87]={
       kb:{start:48,octaves:2,labels:true} },
     { caption:"PAC vs IAC: the same V7-I twice — first with the tonic proudly on top (perfect), then with the 3rd on top (imperfect). Hear the difference in finality.",
       staff:{clef:"treble",tempo:80,notes:[
-        {p:"G4",d:"h",label:"V7"},{p:"B4",d:"h",chord:true},{p:"F5",d:"h",chord:true},
-        {p:"C4",d:"h",label:"I (C on top)"},{p:"E4",d:"h",chord:true},{p:"G4",d:"h",chord:true},{p:"C5",d:"h",chord:true},{bar:"single"},
-        {p:"G4",d:"h",label:"V7"},{p:"B4",d:"h",chord:true},{p:"F5",d:"h",chord:true},
-        {p:"C4",d:"h",label:"I (E on top)"},{p:"G4",d:"h",chord:true},{p:"C5",d:"h",chord:true},{p:"E5",d:"h",chord:true},{bar:"final"}],width:640},
+        {p:"G4",d:"w",label:"V7"},{p:"B4",d:"w",chord:true},{p:"F5",d:"w",chord:true},
+        {p:"C4",d:"w",label:"I (C on top)"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{p:"C5",d:"w",chord:true},{bar:"single"},
+        {p:"G4",d:"w",label:"V7"},{p:"B4",d:"w",chord:true},{p:"F5",d:"w",chord:true},
+        {p:"C4",d:"w",label:"I (E on top)"},{p:"G4",d:"w",chord:true},{p:"C5",d:"w",chord:true},{p:"E5",d:"w",chord:true},{bar:"final"}],width:640},
       kb:{start:48,octaves:2,labels:true} }
   ],
   games:[
@@ -162,10 +162,10 @@ LESSON_CONTENT[87]={
       intro:"Examine each phrase ending and select the correct cadence type.",
       miaIntro:"Identify the final harmonies and check the phrase ending.",
       spec:{rounds:6, pool:[
-        {label:"Authentic (V \u{2192} I)", spec:{clef:"treble",notes:[{p:"G4",d:"h"},{p:"B4",d:"h",chord:true},{p:"D5",d:"h",chord:true},{p:"C4",d:"h"},{p:"E4",d:"h",chord:true},{p:"G4",d:"h",chord:true}],width:210}},
-        {label:"Plagal (IV \u{2192} I)", spec:{clef:"treble",notes:[{p:"F4",d:"h"},{p:"A4",d:"h",chord:true},{p:"C5",d:"h",chord:true},{p:"C4",d:"h"},{p:"E4",d:"h",chord:true},{p:"G4",d:"h",chord:true}],width:210}},
-        {label:"Deceptive (V \u{2192} vi)", spec:{clef:"treble",notes:[{p:"G4",d:"h"},{p:"B4",d:"h",chord:true},{p:"D5",d:"h",chord:true},{p:"A4",d:"h"},{p:"C5",d:"h",chord:true},{p:"E5",d:"h",chord:true}],width:210}},
-        {label:"Half (ends on V)", spec:{clef:"treble",notes:[{p:"C4",d:"h"},{p:"E4",d:"h",chord:true},{p:"G4",d:"h",chord:true},{p:"G4",d:"h"},{p:"B4",d:"h",chord:true},{p:"D5",d:"h",chord:true}],width:210}}]},
+        {label:"Authentic (V \u{2192} I)", spec:{clef:"treble",notes:[{p:"G4",d:"w"},{p:"B4",d:"w",chord:true},{p:"D5",d:"w",chord:true},{p:"C4",d:"w"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true}],width:210}},
+        {label:"Plagal (IV \u{2192} I)", spec:{clef:"treble",notes:[{p:"F4",d:"w"},{p:"A4",d:"w",chord:true},{p:"C5",d:"w",chord:true},{p:"C4",d:"w"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true}],width:210}},
+        {label:"Deceptive (V \u{2192} vi)", spec:{clef:"treble",notes:[{p:"G4",d:"w"},{p:"B4",d:"w",chord:true},{p:"D5",d:"w",chord:true},{p:"A4",d:"w"},{p:"C5",d:"w",chord:true},{p:"E5",d:"w",chord:true}],width:210}},
+        {label:"Half (ends on V)", spec:{clef:"treble",notes:[{p:"C4",d:"w"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{p:"G4",d:"w"},{p:"B4",d:"w",chord:true},{p:"D5",d:"w",chord:true}],width:210}}]},
       result:(score)=>score>=5?"You identified the cadences correctly.":null },
     { type:"term-race", title:"Game 4 · Cadence Effect",
       intro:"Match each cadence with its typical harmonic effect.",
@@ -244,7 +244,7 @@ LESSON_CONTENT[87]={
     { type:"mc", q:"In a major key, a deceptive cadence most commonly moves from V to…", choices:["vi","I","IV"], answer:0,
       explain:"The expected tonic is avoided when V moves to vi.", hint:"The surprise chord." },
     { type:"mc", q:"Name the cadence.",
-      staff:{clef:"treble",notes:[{p:"G4",d:"h"},{p:"B4",d:"h",chord:true},{p:"D5",d:"h",chord:true},{p:"A4",d:"h"},{p:"C5",d:"h",chord:true},{p:"E5",d:"h",chord:true},{bar:"final"}],width:240},
+      staff:{clef:"treble",notes:[{p:"G4",d:"w"},{p:"B4",d:"w",chord:true},{p:"D5",d:"w",chord:true},{p:"A4",d:"w"},{p:"C5",d:"w",chord:true},{p:"E5",d:"w",chord:true},{bar:"final"}],width:240},
       choices:["Deceptive cadence — V moves to vi","Authentic cadence","Plagal cadence"], answer:0,
       explain:"In C major, G–B–D moves to A–C–E, producing V–vi at the phrase ending.", hint:"Where did V land?" },
     { type:"truefalse", q:"A phrase ending on a root-position V chord normally creates a half cadence.", answer:true,

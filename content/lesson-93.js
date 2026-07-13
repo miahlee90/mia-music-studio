@@ -77,8 +77,8 @@ LESSON_CONTENT[93]={
         hint:"C7 contains B♭; Cmaj7 contains B♮." } },
     { say:"<b>Suspended Chords:</b> In a <b>sus4</b> chord, the fourth replaces the third: Csus4 is C-F-G. In a <b>sus2</b> chord, the second replaces the third: Csus2 is C-D-G. Because these chords omit the third, they are not classified as major or minor triads. A sus4 chord may resolve to a major or minor triad, but resolution is not required in many contemporary styles. \u{1F447} <b>In Csus4, which chord member replaces the third?</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:80,notes:[
-        {p:"C4",d:"h",label:"Csus4"},{p:"F4",d:"h",chord:true},{p:"G4",d:"h",chord:true},
-        {p:"C4",d:"h",label:"C"},{p:"E4",d:"h",chord:true},{p:"G4",d:"h",chord:true},{bar:"final"}],width:400} },
+        {p:"C4",d:"w",label:"Csus4"},{p:"F4",d:"w",chord:true},{p:"G4",d:"w",chord:true},
+        {p:"C4",d:"w",label:"C"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{bar:"final"}],width:400} },
       try:{ type:"mc", choices:["The fourth","The root","The fifth"], answer:0,
         success:"✓ Correct. F, the fourth above C, replaces E, the third. In some contexts, F may resolve to E.",
         fail:"A suspended chord omits the third and replaces it with the second or fourth.",
@@ -106,15 +106,15 @@ LESSON_CONTENT[93]={
   examples:[
     { caption:"A lead-sheet progression realized: Cmaj7 · Am7 · Dm7 · G7 — the symbols above, the sounding chords below.",
       staff:{clef:"treble",tempo:72,notes:[
-        {p:"C4",d:"h",label:"Cmaj7"},{p:"E4",d:"h",chord:true},{p:"G4",d:"h",chord:true},{p:"B4",d:"h",chord:true},
-        {p:"A3",d:"h",label:"Am7"},{p:"C4",d:"h",chord:true},{p:"E4",d:"h",chord:true},{p:"G4",d:"h",chord:true},
-        {p:"D4",d:"h",label:"Dm7"},{p:"F4",d:"h",chord:true},{p:"A4",d:"h",chord:true},{p:"C5",d:"h",chord:true},
-        {p:"G3",d:"h",label:"G7"},{p:"B3",d:"h",chord:true},{p:"D4",d:"h",chord:true},{p:"F4",d:"h",chord:true},{bar:"final"}],width:640},
+        {p:"C4",d:"w",label:"Cmaj7"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{p:"B4",d:"w",chord:true},
+        {p:"A3",d:"w",label:"Am7"},{p:"C4",d:"w",chord:true},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},
+        {p:"D4",d:"w",label:"Dm7"},{p:"F4",d:"w",chord:true},{p:"A4",d:"w",chord:true},{p:"C5",d:"w",chord:true},
+        {p:"G3",d:"w",label:"G7"},{p:"B3",d:"w",chord:true},{p:"D4",d:"w",chord:true},{p:"F4",d:"w",chord:true},{bar:"final"}],width:640},
       kb:{start:43,octaves:3,labels:true} },
     { caption:"Sus resolving: Gsus4 → G → C. The suspended 4th (C) steps down to the 3rd (B) — tension released before the cadence.",
       staff:{clef:"treble",tempo:72,notes:[
-        {p:"G3",d:"h",label:"Gsus4"},{p:"C4",d:"h",chord:true},{p:"D4",d:"h",chord:true},
-        {p:"G3",d:"h",label:"G"},{p:"B3",d:"h",chord:true},{p:"D4",d:"h",chord:true},
+        {p:"G3",d:"w",label:"Gsus4"},{p:"C4",d:"w",chord:true},{p:"D4",d:"w",chord:true},
+        {p:"G3",d:"w",label:"G"},{p:"B3",d:"w",chord:true},{p:"D4",d:"w",chord:true},
         {p:"C4",d:"w",label:"C"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{bar:"final"}],width:480},
       kb:{start:43,octaves:2,labels:true} }
   ],

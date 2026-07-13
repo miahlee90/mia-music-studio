@@ -37,8 +37,8 @@ LESSON_CONTENT[104]={
         hint:"Remove the dominant root G from G7." } },
     { say:"<b>Leading-Tone Seventh Chords:</b> In a major key, the diatonic seventh chord on the leading tone is half-diminished. In C major, <b>viiø7</b> is B–D–F–A. Lowering scale degree 6 from A to A♭ produces the fully diminished leading-tone seventh chord <b>vii°7</b>, B–D–F–A♭. This chromatic form may be understood as drawing scale degree ♭6 from the parallel minor. In minor keys, the raised leading tone and the minor-mode sixth scale degree naturally produce a fully diminished leading-tone seventh chord; in C minor, B–D–F–A♭ is vii°7. \u{1F447} <b>Which pitches form vii°7 in C?</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:70,notes:[
-        {p:"B3",d:"h",label:"vii\u{00F8}7"},{p:"D4",d:"h",chord:true},{p:"F4",d:"h",chord:true},{p:"A4",d:"h",chord:true},
-        {p:"B3",d:"h",label:"vii\u{00B0}7"},{p:"D4",d:"h",chord:true},{p:"F4",d:"h",chord:true},{p:"Ab4",d:"h",chord:true},{bar:"final"}],width:440} },
+        {p:"B3",d:"w",label:"vii\u{00F8}7"},{p:"D4",d:"w",chord:true},{p:"F4",d:"w",chord:true},{p:"A4",d:"w",chord:true},
+        {p:"B3",d:"w",label:"vii\u{00B0}7"},{p:"D4",d:"w",chord:true},{p:"F4",d:"w",chord:true},{p:"Ab4",d:"w",chord:true},{bar:"final"}],width:440} },
       try:{ type:"mc", choices:["B–D–F–A♭","B–D–F–A","B–D–F–G"], answer:0,
         success:"✓ Correct. B–D–F–A♭ consists of three stacked minor thirds and forms a fully diminished seventh chord on the leading tone.",
         fail:"Compare the seventh above B: A is minor, while A♭ is diminished.",
@@ -67,13 +67,13 @@ LESSON_CONTENT[104]={
   examples:[
     { caption:"I – vii°6 – I6: the leading-tone chord as a passing chord; the bass walks C-D-E while dominant color flickers between two tonics.",
       staff:{clef:"treble",tempo:76,notes:[
-        {p:"C4",d:"h",label:"I"},{p:"E4",d:"h",chord:true},{p:"G4",d:"h",chord:true},
-        {p:"D4",d:"h",label:"vii\u{00B0}6"},{p:"F4",d:"h",chord:true},{p:"B4",d:"h",chord:true},
-        {p:"E4",d:"h",label:"I6"},{p:"G4",d:"h",chord:true},{p:"C5",d:"h",chord:true},{bar:"final"}],width:480},
+        {p:"C4",d:"w",label:"I"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},
+        {p:"D4",d:"w",label:"vii\u{00B0}6"},{p:"F4",d:"w",chord:true},{p:"B4",d:"w",chord:true},
+        {p:"E4",d:"w",label:"I6"},{p:"G4",d:"w",chord:true},{p:"C5",d:"w",chord:true},{bar:"final"}],width:480},
       kb:{start:48,octaves:2,labels:true} },
     { caption:"vii°7 resolving to i in C minor: every tendency tone obeys — B rises, the dissonances fall — maximum tension into calm.",
       staff:{clef:"treble",tempo:70,notes:[
-        {p:"B3",d:"h",label:"vii\u{00B0}7"},{p:"D4",d:"h",chord:true},{p:"F4",d:"h",chord:true},{p:"Ab4",d:"h",chord:true},
+        {p:"B3",d:"w",label:"vii\u{00B0}7"},{p:"D4",d:"w",chord:true},{p:"F4",d:"w",chord:true},{p:"Ab4",d:"w",chord:true},
         {p:"C4",d:"w",label:"i"},{p:"Eb4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{bar:"final"}],width:420},
       kb:{start:47,octaves:2,labels:true} }
   ],

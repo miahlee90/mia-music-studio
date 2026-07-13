@@ -114,9 +114,9 @@ LESSON_CONTENT[74]={
       kb:{start:57,octaves:2,labels:true} },
     { caption:"The same shape drawn with chords: I, then IV and V7, then I again — the harmony returns with the melody.",
       staff:{clef:"treble",tempo:90,notes:[
-        {p:"C4",d:"h",label:"A: I chord"},{p:"E4",d:"h",chord:true},{p:"G4",d:"h",chord:true},
-        {p:"F4",d:"h",label:"B: away…"},{p:"A4",d:"h",chord:true},{p:"C5",d:"h",chord:true},
-        {p:"G4",d:"h",label:"…farther…"},{p:"B4",d:"h",chord:true},{p:"F5",d:"h",chord:true},
+        {p:"C4",d:"w",label:"A: I chord"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},
+        {p:"F4",d:"w",label:"B: away…"},{p:"A4",d:"w",chord:true},{p:"C5",d:"w",chord:true},
+        {p:"G4",d:"w",label:"…farther…"},{p:"B4",d:"w",chord:true},{p:"F5",d:"w",chord:true},
         {p:"C4",d:"w",label:"A: I again"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{bar:"final"}],width:560},
       kb:{start:57,octaves:2,labels:true} }
   ],

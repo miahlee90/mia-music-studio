@@ -120,18 +120,18 @@ LESSON_CONTENT[70]={
   examples:[
     { caption:"The C major 12-bar blues: four bars of I, two of IV, two of I, one V7, one IV, and two bars of I. Follow the numerals!",
       staff:{clef:"treble",tempo:120,notes:[
-        {p:"C4",d:"h",label:"I (bars 1-4)"},{p:"E4",d:"h",chord:true},{p:"G4",d:"h",chord:true},
-        {p:"F4",d:"h",label:"IV (5-6)"},{p:"A4",d:"h",chord:true},{p:"C5",d:"h",chord:true},
-        {p:"C4",d:"h",label:"I (7-8)"},{p:"E4",d:"h",chord:true},{p:"G4",d:"h",chord:true},
-        {p:"G4",d:"h",label:"V7 (9)"},{p:"B4",d:"h",chord:true},{p:"F5",d:"h",chord:true},
-        {p:"F4",d:"h",label:"IV (10)"},{p:"A4",d:"h",chord:true},{p:"C5",d:"h",chord:true},
+        {p:"C4",d:"w",label:"I (bars 1-4)"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},
+        {p:"F4",d:"w",label:"IV (5-6)"},{p:"A4",d:"w",chord:true},{p:"C5",d:"w",chord:true},
+        {p:"C4",d:"w",label:"I (7-8)"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},
+        {p:"G4",d:"w",label:"V7 (9)"},{p:"B4",d:"w",chord:true},{p:"F5",d:"w",chord:true},
+        {p:"F4",d:"w",label:"IV (10)"},{p:"A4",d:"w",chord:true},{p:"C5",d:"w",chord:true},
         {p:"C4",d:"w",label:"I (11-12)"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{bar:"final"}],width:660},
       kb:{start:48,octaves:3,labels:true} },
     { caption:"The same pattern in B♭: B♭, E♭ and F7 take the same positions. The numerals never change; the letters follow the key.",
       staff:{clef:"treble",tempo:120,notes:[
-        {p:"Bb3",d:"h",label:"I = B♭"},{p:"D4",d:"h",chord:true},{p:"F4",d:"h",chord:true},
-        {p:"Eb4",d:"h",label:"IV = E♭"},{p:"G4",d:"h",chord:true},{p:"Bb4",d:"h",chord:true},
-        {p:"F4",d:"h",label:"V7 = F7"},{p:"A4",d:"h",chord:true},{p:"Eb5",d:"h",chord:true},
+        {p:"Bb3",d:"w",label:"I = B♭"},{p:"D4",d:"w",chord:true},{p:"F4",d:"w",chord:true},
+        {p:"Eb4",d:"w",label:"IV = E♭"},{p:"G4",d:"w",chord:true},{p:"Bb4",d:"w",chord:true},
+        {p:"F4",d:"w",label:"V7 = F7"},{p:"A4",d:"w",chord:true},{p:"Eb5",d:"w",chord:true},
         {p:"Bb3",d:"w",label:"I"},{p:"D4",d:"w",chord:true},{p:"F4",d:"w",chord:true},{bar:"final"}],width:560},
       kb:{start:46,octaves:2,labels:true} }
   ],
@@ -233,7 +233,7 @@ LESSON_CONTENT[70]={
     {term:"Bar", def:"Another word for measure — the blues is counted in bars."},
     {term:"12-Bar Blues Progression", def:"The traditional form: I (4 bars) · IV (2) · I (2) · V or V7 (1) · IV (1) · I (2)."},
     {term:"The V→IV Descent", def:"Bars 9-10: the dominant steps DOWN through IV before landing home — a signature blues move.",
-      staff:{clef:"treble",notes:[{p:"G4",d:"h",label:"V7"},{p:"B4",d:"h",chord:true},{p:"F5",d:"h",chord:true},{p:"F4",d:"h",label:"IV"},{p:"A4",d:"h",chord:true},{p:"C5",d:"h",chord:true}],width:130}}
+      staff:{clef:"treble",notes:[{p:"G4",d:"w",label:"V7"},{p:"B4",d:"w",chord:true},{p:"F5",d:"w",chord:true},{p:"F4",d:"w",label:"IV"},{p:"A4",d:"w",chord:true},{p:"C5",d:"w",chord:true}],width:130}}
   ],
   mistakes:[],
   summary:[

@@ -108,14 +108,14 @@ LESSON_CONTENT[90]={
         {p:"E5",d:"q",label:"melody"},{p:"C4",d:"q",chord:true},{p:"E4",d:"q",chord:true},{p:"G4",d:"q",chord:true},
         {p:"F5",d:"q"},{p:"C4",d:"q",chord:true},{p:"F4",d:"q",chord:true},{p:"A4",d:"q",chord:true},
         {p:"G5",d:"q"},{p:"B3",d:"q",chord:true},{p:"D4",d:"q",chord:true},{p:"G4",d:"q",chord:true},
-        {p:"E5",d:"h"},{p:"C4",d:"h",chord:true},{p:"E4",d:"h",chord:true},{p:"G4",d:"h",chord:true},{bar:"final"}],width:620},
+        {p:"E5",d:"w"},{p:"C4",d:"w",chord:true},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{bar:"final"}],width:620},
       kb:{start:48,octaves:3,labels:true} },
     { caption:"Polyphonic texture: two independent lines — the upper climbs while the lower descends, each with its own path. (Played together.)",
       staff:{clef:"treble",tempo:88,notes:[
         {p:"C4",d:"q",label:"line 2"},{p:"E5",d:"q",chord:true,label:"line 1"},
         {p:"B3",d:"q"},{p:"F5",d:"q",chord:true},
         {p:"A3",d:"q"},{p:"G5",d:"q",chord:true},
-        {p:"G3",d:"h"},{p:"E5",d:"h",chord:true},{bar:"final"}],width:520},
+        {p:"G3",d:"w"},{p:"E5",d:"w",chord:true},{bar:"final"}],width:520},
       kb:{start:43,octaves:3,labels:true} }
   ],
   games:[
@@ -148,7 +148,7 @@ LESSON_CONTENT[90]={
         {label:"Monophonic (single line)", spec:{clef:"treble",notes:[{p:"E4",d:"q"},{p:"F4",d:"q"},{p:"G4",d:"q"},{p:"E4",d:"q"}],width:190}},
         {label:"Homophonic (melody + chords)", spec:{clef:"treble",notes:[{p:"E5",d:"q"},{p:"C4",d:"q",chord:true},{p:"G4",d:"q",chord:true},{p:"F5",d:"q"},{p:"C4",d:"q",chord:true},{p:"A4",d:"q",chord:true}],width:210}},
         {label:"Polyphonic (two directions)", spec:{clef:"treble",notes:[{p:"C4",d:"q"},{p:"E5",d:"q",chord:true},{p:"D4",d:"q"},{p:"D5",d:"q",chord:true},{p:"E4",d:"q"},{p:"C5",d:"q",chord:true}],width:210}},
-        {label:"Chordal homophony (block motion)", spec:{clef:"treble",notes:[{p:"C4",d:"h"},{p:"E4",d:"h",chord:true},{p:"G4",d:"h",chord:true},{p:"D4",d:"h"},{p:"F4",d:"h",chord:true},{p:"A4",d:"h",chord:true}],width:210}}]},
+        {label:"Chordal homophony (block motion)", spec:{clef:"treble",notes:[{p:"C4",d:"w"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{p:"D4",d:"w"},{p:"F4",d:"w",chord:true},{p:"A4",d:"w",chord:true}],width:210}}]},
       result:(score)=>score>=5?"You identified the notated textures correctly.":null },
     { type:"term-race", title:"Game 4 · Texture in Context",
       intro:"Match each musical description with its most likely texture.",

@@ -106,7 +106,7 @@ LESSON_CONTENT[68]={
         hint:"One row only." } },
     { say:"<b>The Raised 7th:</b> The raised 7th belongs to the <b>V (or V7)</b> chord. It creates the leading tone that pulls to the tonic. \u{1F447} <b>Which chord should harmonize G♯ in A minor?</b>",
       show:{ type:"staff", spec:{clef:"treble",notes:[
-        {p:"G#4",d:"h",label:"the melody's ♯7…"},
+        {p:"G#4",d:"w",label:"the melody's ♯7…"},
         {p:"E4",d:"w",label:"…lives in V"},{p:"G#4",d:"w",chord:true},{p:"B4",d:"w",chord:true}],width:400} },
       try:{ type:"mc", choices:["V or V7","iv","i"], answer:0,
         success:"✓ G♯ is the 3rd of V (E-G♯-B) — no other primary chord contains it.",
@@ -140,8 +140,8 @@ LESSON_CONTENT[68]={
       kb:{start:56,octaves:3,labels:true} },
     { caption:"The minor cadence: iv → V7 → i. The leading tone G♯ pulls to the tonic.",
       staff:{clef:"treble",tempo:80,notes:[
-        {p:"D4",d:"h",label:"iv"},{p:"F4",d:"h",chord:true},{p:"A4",d:"h",chord:true},
-        {p:"E4",d:"h",label:"V7"},{p:"G#4",d:"h",chord:true},{p:"D5",d:"h",chord:true},
+        {p:"D4",d:"w",label:"iv"},{p:"F4",d:"w",chord:true},{p:"A4",d:"w",chord:true},
+        {p:"E4",d:"w",label:"V7"},{p:"G#4",d:"w",chord:true},{p:"D5",d:"w",chord:true},
         {p:"A3",d:"w",label:"i"},{p:"C4",d:"w",chord:true},{p:"E4",d:"w",chord:true},{bar:"final"}],width:480},
       kb:{start:56,octaves:2,labels:true} }
   ],

@@ -89,9 +89,9 @@ LESSON_CONTENT[86]={
         hint:"PD → D → T." } },
     { say:"<b>Analyzing a Chord on the Staff:</b> <b>1)</b> identify the key, <b>2)</b> arrange or imagine the chord in stacked thirds to find its root, <b>3)</b> determine the root's scale degree, <b>4)</b> identify the chord quality, <b>5)</b> determine its inversion from the bass note, <b>6)</b> write the Roman numeral with the correct capitalization, quality symbol, and figured-bass symbol, <b>7)</b> use the musical context to determine its likely function. \u{1F447} <b>In C major, how is the root-position chord F-A-C labeled?</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:80,notes:[
-        {p:"C4",d:"h",label:"I"},{p:"E4",d:"h",chord:true},{p:"G4",d:"h",chord:true},
-        {p:"F4",d:"h",label:"?"},{p:"A4",d:"h",chord:true},{p:"C5",d:"h",chord:true},
-        {p:"G4",d:"h",label:"V"},{p:"B4",d:"h",chord:true},{p:"D5",d:"h",chord:true},
+        {p:"C4",d:"w",label:"I"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},
+        {p:"F4",d:"w",label:"?"},{p:"A4",d:"w",chord:true},{p:"C5",d:"w",chord:true},
+        {p:"G4",d:"w",label:"V"},{p:"B4",d:"w",chord:true},{p:"D5",d:"w",chord:true},
         {p:"C4",d:"w",label:"I"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{bar:"final"}],width:560} },
       try:{ type:"mc", choices:["IV — a major triad rooted on scale degree 4","iv — a minor triad rooted on scale degree 4","ii — a minor triad rooted on scale degree 2"], answer:0,
         success:"✓ Correct. F is scale degree 4 in C major, and F-A-C is a major triad in root position. It is labeled IV and commonly serves predominant function.",
@@ -120,16 +120,16 @@ LESSON_CONTENT[86]={
   examples:[
     { caption:"I-IV-V7-I in C major with its analysis — hear T (home), PD (departure), D (tension), T (return).",
       staff:{clef:"treble",tempo:80,notes:[
-        {p:"C4",d:"h",label:"I"},{p:"E4",d:"h",chord:true},{p:"G4",d:"h",chord:true},
-        {p:"F4",d:"h",label:"IV"},{p:"A4",d:"h",chord:true},{p:"C5",d:"h",chord:true},
-        {p:"G4",d:"h",label:"V7"},{p:"B4",d:"h",chord:true},{p:"D5",d:"h",chord:true},{p:"F5",d:"h",chord:true},
+        {p:"C4",d:"w",label:"I"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},
+        {p:"F4",d:"w",label:"IV"},{p:"A4",d:"w",chord:true},{p:"C5",d:"w",chord:true},
+        {p:"G4",d:"w",label:"V7"},{p:"B4",d:"w",chord:true},{p:"D5",d:"w",chord:true},{p:"F5",d:"w",chord:true},
         {p:"C4",d:"w",label:"I"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{p:"C5",d:"w",chord:true},{bar:"final"}],width:600},
       kb:{start:48,octaves:2,labels:true} },
     { caption:"I-vi-ii-V — the classic turnaround: two tonics' worth of rest, then predominant and dominant hand in hand back to the top.",
       staff:{clef:"treble",tempo:80,notes:[
-        {p:"C4",d:"h",label:"I"},{p:"E4",d:"h",chord:true},{p:"G4",d:"h",chord:true},
-        {p:"A3",d:"h",label:"vi"},{p:"C4",d:"h",chord:true},{p:"E4",d:"h",chord:true},
-        {p:"D4",d:"h",label:"ii"},{p:"F4",d:"h",chord:true},{p:"A4",d:"h",chord:true},
+        {p:"C4",d:"w",label:"I"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},
+        {p:"A3",d:"w",label:"vi"},{p:"C4",d:"w",chord:true},{p:"E4",d:"w",chord:true},
+        {p:"D4",d:"w",label:"ii"},{p:"F4",d:"w",chord:true},{p:"A4",d:"w",chord:true},
         {p:"G4",d:"w",label:"V"},{p:"B4",d:"w",chord:true},{p:"D5",d:"w",chord:true},{bar:"final"}],width:600},
       kb:{start:45,octaves:2,labels:true} }
   ],

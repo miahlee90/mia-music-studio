@@ -57,8 +57,8 @@ LESSON_CONTENT[95]={
   steps:[
     { say:"<b>The ii–V–I Progression:</b> The progression ii–V–I follows a common <b>predominant–dominant–tonic</b> pattern. In jazz and related styles, the chords frequently appear as seventh chords. In C major, ii⁷-V⁷-Imaj7 is Dm7-G7-Cmaj7. \u{1F447} <b>Which functional pattern does ii–V–I represent?</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:72,notes:[
-        {p:"D4",d:"h",label:"ii7"},{p:"F4",d:"h",chord:true},{p:"A4",d:"h",chord:true},{p:"C5",d:"h",chord:true},
-        {p:"G3",d:"h",label:"V7"},{p:"B3",d:"h",chord:true},{p:"D4",d:"h",chord:true},{p:"F4",d:"h",chord:true},
+        {p:"D4",d:"w",label:"ii7"},{p:"F4",d:"w",chord:true},{p:"A4",d:"w",chord:true},{p:"C5",d:"w",chord:true},
+        {p:"G3",d:"w",label:"V7"},{p:"B3",d:"w",chord:true},{p:"D4",d:"w",chord:true},{p:"F4",d:"w",chord:true},
         {p:"C4",d:"w",label:"Imaj7"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{p:"B4",d:"w",chord:true},{bar:"final"}],width:520} },
       try:{ type:"mc", choices:["Predominant → dominant → tonic","Tonic → tonic → tonic","Dominant → predominant → tonic"], answer:0,
         success:"✓ Correct. ii commonly serves predominant function, V serves dominant function, and I serves tonic function.",
@@ -97,19 +97,19 @@ LESSON_CONTENT[95]={
   examples:[
     { caption:"Descending fifths in action: vi-ii-V-I with roots falling in 5ths, or rising in 4ths (A-D-G-C).",
       staff:{clef:"treble",tempo:76,notes:[
-        {p:"A3",d:"h",label:"vi"},{p:"C4",d:"h",chord:true},{p:"E4",d:"h",chord:true},
-        {p:"D4",d:"h",label:"ii"},{p:"F4",d:"h",chord:true},{p:"A4",d:"h",chord:true},
-        {p:"G3",d:"h",label:"V"},{p:"B3",d:"h",chord:true},{p:"D4",d:"h",chord:true},
+        {p:"A3",d:"w",label:"vi"},{p:"C4",d:"w",chord:true},{p:"E4",d:"w",chord:true},
+        {p:"D4",d:"w",label:"ii"},{p:"F4",d:"w",chord:true},{p:"A4",d:"w",chord:true},
+        {p:"G3",d:"w",label:"V"},{p:"B3",d:"w",chord:true},{p:"D4",d:"w",chord:true},
         {p:"C4",d:"w",label:"I"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{bar:"final"}],width:560},
       kb:{start:45,octaves:3,labels:true} },
     { caption:"Harmonic rhythm demonstrated: first I and IV at one chord per measure, then the full I-IV-V-I at two chords per measure — the rate of harmonic change doubles.",
       staff:{clef:"treble",tempo:84,notes:[
         {p:"C4",d:"w",label:"1 per bar"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{bar:"single"},
         {p:"F4",d:"w"},{p:"A4",d:"w",chord:true},{p:"C5",d:"w",chord:true},{bar:"single"},
-        {p:"C4",d:"h",label:"2 per bar"},{p:"E4",d:"h",chord:true},{p:"G4",d:"h",chord:true},
-        {p:"F4",d:"h"},{p:"A4",d:"h",chord:true},{p:"C5",d:"h",chord:true},{bar:"single"},
-        {p:"G4",d:"h"},{p:"B4",d:"h",chord:true},{p:"D5",d:"h",chord:true},
-        {p:"C4",d:"h"},{p:"E4",d:"h",chord:true},{p:"G4",d:"h",chord:true},{bar:"final"}],width:680},
+        {p:"C4",d:"w",label:"2 per bar"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},
+        {p:"F4",d:"w"},{p:"A4",d:"w",chord:true},{p:"C5",d:"w",chord:true},{bar:"single"},
+        {p:"G4",d:"w"},{p:"B4",d:"w",chord:true},{p:"D5",d:"w",chord:true},
+        {p:"C4",d:"w"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{bar:"final"}],width:680},
       kb:{start:48,octaves:2,labels:true} }
   ],
   games:[
