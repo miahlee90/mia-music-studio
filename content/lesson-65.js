@@ -98,9 +98,9 @@ LESSON_CONTENT[65]={
   ],
   steps:[
     { say:"<b>Block Chords and Broken Chords:</b> A <b>block chord</b> plays all notes together. A <b>broken chord</b> plays the notes separately. \u{1F447} <b>What is the difference?</b>",
-      show:{ type:"staff", spec:{clef:"bass",tempo:80,time:"4/4",notes:[
-        {p:"C3",d:"q",label:"block"},{p:"E3",d:"q",chord:true},{p:"G3",d:"q",chord:true},
-        {p:"C3",d:"q",label:"broken…"},{p:"G3",d:"q"},{p:"E3",d:"q"},{bar:"final"}],width:420} },
+      show:{ type:"staff", spec:{clef:"bass",tempo:80,time:"3/4",notes:[
+        {p:"C3",d:"h.",label:"block"},{p:"E3",d:"h.",chord:true},{p:"G3",d:"h.",chord:true},{bar:"double"},
+        {p:"C3",d:"q",label:"broken…"},{p:"G3",d:"q"},{p:"E3",d:"q"},{bar:"final"}],width:440} },
       try:{ type:"mc", choices:["Only the TIMING — the notes are identical","The notes themselves","The key"], answer:0,
         success:"✓ C-E-G either way. Texture is about WHEN, not WHAT.",
         fail:"Compare the letters in both halves of the staff…",
@@ -259,9 +259,11 @@ LESSON_CONTENT[65]={
   ],
   vocabulary:[
     {term:"Block Chord", def:"All chord tones played together — solid and vertical.",
-      staff:{clef:"treble",notes:[{p:"C4",d:"w"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true}],width:130}},
-    {term:"Broken Chord", def:"Chord tones NOT played together — spread over time."},
-    {term:"Arpeggio", def:"Chord tones played sequentially, one after another — may extend an octave or more. From arpeggiare, 'to play upon a harp.'"},
+      staff:{clef:"treble",notes:[{p:"C4",d:"w"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true}],width:380}},
+    {term:"Broken Chord", def:"Chord tones NOT played together — spread over time.",
+      staff:{clef:"treble",notes:[{p:"C4",d:"q"},{p:"E4",d:"q"},{p:"G4",d:"q"},{p:"E4",d:"q"}],width:380}},
+    {term:"Arpeggio", def:"Chord tones played sequentially, one after another — may extend an octave or more. From arpeggiare, 'to play upon a harp.'",
+      staff:{clef:"treble",notes:[{p:"C4",d:"q"},{p:"E4",d:"q"},{p:"G4",d:"q"},{p:"C5",d:"q"}],width:380}},
     {term:"Arpeggiated Accompaniment", def:"A flowing accompaniment whose arpeggios outline each chord of the harmony."}
   ],
   mistakes:[],
