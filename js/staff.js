@@ -550,11 +550,13 @@ const Staff=(()=>{
         const up=pl.y > pl.y0+2*GAP;
         return (s.stem&&up)? pl.y-42 : pl.y-12;
       };
-      const yB=Math.min(topT(A),topT(B))-6, mid=(A.x+B.x)/2;
+      let yB=Math.min(topT(A),topT(B))-6; const mid=(A.x+B.x)/2;
+      const host=beamGeo.find(g=>g.a<=tp.from&&g.b>=tp.to);
+      /* v8.4: when an up-stem beam sits above the noteheads, lift the number
+         clear of the beam so it is never hidden behind it (duplets/triplets) */
+      if(host&&host.up) yB=Math.min(yB, Math.min(host.ya,host.yb)-12);
       minEl=Math.min(minEl,yB-18);
-      let beamed=false;
-      (spec.beams||[]).forEach(bm=>{ if(bm[0]<=tp.from&&bm[1]>=tp.to) beamed=true; });
-      if(!beamed) parts.push(`<path class="acc" fill="none" d="M ${A.x-4} ${yB+6} L ${A.x-4} ${yB} L ${mid-8} ${yB} M ${mid+8} ${yB} L ${B.x+4} ${yB} L ${B.x+4} ${yB+6}"/>`);
+      if(!host) parts.push(`<path class="acc" fill="none" d="M ${A.x-4} ${yB+6} L ${A.x-4} ${yB} L ${mid-8} ${yB} M ${mid+8} ${yB} L ${B.x+4} ${yB} L ${B.x+4} ${yB+6}"/>`);
       parts.push(`<text class="lbl" x="${mid}" y="${yB+4}" text-anchor="middle" font-style="italic">${tp.n||3}</text>`);
     });
     /* v7 — W/H step carets above the staff (scale/tetrachord teaching)

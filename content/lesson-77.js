@@ -114,8 +114,8 @@ LESSON_CONTENT[77]={
       staff:{clef:"treble",time:"4/4",tempo:80,notes:[
         {p:"C4",d:"8"},{p:"E4",d:"8"},{p:"G4",d:"8"},{p:"E4",d:"8"},
         {p:"C5",d:"8"},{p:"B4",d:"8"},{p:"A4",d:"8"},
-        {p:"G4",d:"8"},{p:"F4",d:"8"},{p:"E4",d:"8"},
-        {p:"C4",d:"q"},{bar:"final"}],
+        {p:"G4",d:"8"},{p:"F4",d:"8"},{p:"E4",d:"8"},{bar:"single"},
+        {p:"C4",d:"w"},{bar:"final"}],
         beams:[[0,1],[2,3],[4,6],[7,9]], tuplets:[{from:4,to:6},{from:7,to:9}], width:600},
       kb:{start:48,octaves:2,labels:true} },
     { caption:"A duplet in 6/8: the first beat rolls normally in three; the second stretches two even notes across the same time — marked 2.",
