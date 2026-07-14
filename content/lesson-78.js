@@ -18,8 +18,8 @@ function MF_L78_ear(container,fb){
     if(r>=ROUNDS.length) return;
     const sync=ROUNDS[r]===1;
     for(let b=0;b<4;b++) MFAudio.tone(48,.22,b*.5,.34);
-    if(sync){ [0,.75,1.25,1.75,2.5,3.25].forEach(t=>MFAudio.tone(76,.16,t,.3)); }
-    else { [0,.5,1,1.5,2,2.5,3,3.5].forEach(t=>MFAudio.tone(76,.13,t,.24)); }
+    if(sync){ [0,.75,1.25,1.75].forEach(t=>MFAudio.tone(76,.16,t,.3)); }
+    else { [0,.5,1,1.5].forEach(t=>MFAudio.tone(76,.15,t,.28)); }
     played=true; setTimeout(()=>ch.style.display="",2500);
   };
   [...ch.children].forEach((b,i)=>b.onclick=()=>{
@@ -189,9 +189,9 @@ LESSON_CONTENT[78]={
   ],
   vocabulary:[
     {term:"Syncopation", def:"An accent shifted to a weak beat or off-beat while the pulse stays steady.",
-      staff:{clef:"treble",time:"2/4",notes:[{p:"B4",d:"8"},{p:"B4",d:"q"},{p:"B4",d:"8"}],width:200}},
+      staff:{clef:"none",bare:true,notes:[{p:"B4",d:"8"},{p:"B4",d:"q"},{p:"B4",d:"8"}],width:220}},
     {term:"Off-beat", def:"The space between beats — the '&' when counting '1 & 2 &'.",
-      staff:{clef:"treble",time:"2/4",notes:[{rest:"8"},{p:"B4",d:"8"},{rest:"8"},{p:"B4",d:"8"}],width:210}},
+      staff:{clef:"none",bare:true,notes:[{rest:"8"},{p:"B4",d:"8"},{rest:"8"},{p:"B4",d:"8"}],width:260}},
     {term:"Rhythmic Anticipation", def:"A note that arrives just before the beat it belongs to and holds through it."}
   ],
   mistakes:[],

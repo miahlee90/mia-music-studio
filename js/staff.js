@@ -85,6 +85,7 @@ const Staff=(()=>{
   function beatsOf(n){ return BEATS[normD(n.d||n.rest)]*(isDotted(n)?1.5:1); }
 
   function drawOneStaff(parts,y0,W,clef,opts){
+    if(opts.bare) return; /* v8.5: symbol cards — no staff lines, clef, key sig or time */
     for(let i=0;i<5;i++){
       const y=y0+i*GAP;
       parts.push(`<line class="staffline" x1="${LEFT}" y1="${y}" x2="${W-10}" y2="${y}"/>`);
