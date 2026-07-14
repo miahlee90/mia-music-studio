@@ -63,7 +63,7 @@ LESSON_CONTENT[83]={
         success:"✓ Correct. A perfect fifth inverts to a perfect fourth: 5 + 4 = 9, and the perfect quality remains unchanged.",
         fail:"Which interval quality remains perfect under inversion?",
         hint:"Perfect ↔ perfect." } },
-    { say:"<b>Compound Intervals:</b> Compound intervals are <b>larger than an octave</b>. A ninth is a second plus an octave, and a tenth is a third plus an octave. To reduce a compound interval between a ninth and a fifteenth to its simple equivalent, <b>subtract 7</b> from its interval number. For larger intervals, subtract 7 repeatedly until the result is between 1 and 8. \u{1F447} <b>A tenth reduces to which simple interval?</b>",
+    { say:"<b>Compound Intervals:</b> Compound intervals are <b>larger than an octave</b>. To find the simple interval, <b>subtract 7</b> from the interval number. \u{1F447} <b>A tenth reduces to which simple interval?</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:90,notes:[
         {p:"C4",d:"w",label:"9th"},{p:"D5",d:"w",chord:true},
         {p:"C4",d:"w",label:"10th"},{p:"E5",d:"w",chord:true},{bar:"final"}],width:380} },
@@ -71,7 +71,14 @@ LESSON_CONTENT[83]={
         success:"✓ Correct. A tenth is a third plus one octave: 10 − 7 = 3.",
         fail:"Subtract 7 from the compound interval number.",
         hint:"10 − 7 = 3." } },
-    { say:"<b>Common Compound Intervals:</b> A ninth is the compound equivalent of a second; a tenth of a third; an eleventh of a fourth; a twelfth of a fifth; and a thirteenth of a sixth. The numbers 9, 11, and 13 also appear in extended-chord symbols such as C9, C11, and C13. In chord symbols, these numbers identify chord extensions measured conceptually above the root, although actual voicings may place them in other octaves. \u{1F447} <b>An eleventh is the compound equivalent of a…</b>",
+    { say:"<b>Common Compound Intervals:</b> Each compound interval is a simple interval plus an octave — just <b>subtract 7</b>. \u{1F447} <b>An eleventh is the compound equivalent of a…</b>",
+      show:{ type:"html", html:`<table style="border-collapse:collapse;margin:0 auto;font-size:15px;min-width:220px">
+        <tr><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:5px 20px">Compound</th><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:5px 20px">Simple</th></tr>
+        <tr><td style="border:1.5px solid #cdd5e1;padding:4px 20px;text-align:center;font-weight:800">9th</td><td style="border:1.5px solid #cdd5e1;padding:4px 20px;text-align:center">2nd</td></tr>
+        <tr><td style="border:1.5px solid #cdd5e1;padding:4px 20px;text-align:center;font-weight:800">10th</td><td style="border:1.5px solid #cdd5e1;padding:4px 20px;text-align:center">3rd</td></tr>
+        <tr><td style="border:1.5px solid #cdd5e1;padding:4px 20px;text-align:center;font-weight:800">11th</td><td style="border:1.5px solid #cdd5e1;padding:4px 20px;text-align:center">4th</td></tr>
+        <tr><td style="border:1.5px solid #cdd5e1;padding:4px 20px;text-align:center;font-weight:800">12th</td><td style="border:1.5px solid #cdd5e1;padding:4px 20px;text-align:center">5th</td></tr>
+        <tr><td style="border:1.5px solid #cdd5e1;padding:4px 20px;text-align:center;font-weight:800">13th</td><td style="border:1.5px solid #cdd5e1;padding:4px 20px;text-align:center">6th</td></tr></table>` },
       try:{ type:"mc", choices:["fourth","fifth","second"], answer:0,
         success:"✓ Correct. An eleventh is a fourth plus an octave: 11 − 7 = 4.",
         fail:"Subtract 7 from the compound interval number.",
@@ -90,7 +97,7 @@ LESSON_CONTENT[83]={
         {p:"D4",d:"w",label:"P5"},{p:"A4",d:"w",chord:true},
         {p:"A4",d:"w",label:"P4"},{p:"D5",d:"w",chord:true},{bar:"final"}],width:560},
       kb:{start:60,octaves:2,labels:true} },
-    { caption:"Compound intervals from C: a 9th (D), a 10th (E) and a 13th (A) — each a simple interval pushed past the octave. Jazz chord symbols use these numbers as theoretical extensions.",
+    { caption:"Compound intervals from C: a 9th (D), a 10th (E) and a 13th (A) — each a simple interval pushed past the octave.",
       staff:{clef:"treble",tempo:80,notes:[
         {p:"C4",d:"w",label:"9th"},{p:"D5",d:"w",chord:true},
         {p:"C4",d:"w",label:"10th"},{p:"E5",d:"w",chord:true},
@@ -137,7 +144,7 @@ LESSON_CONTENT[83]={
         ["13th","a compound 6th"],
         ["Compound interval","larger than an octave"],
         ["Reduction rule","subtract 7"],
-        ["C9, C11, C13 chords","named for compound intervals"]]},
+        ["Subtract 7","reduces any compound interval"]]},
       result:(score)=>score>=6?"You reduced the compound intervals correctly.":null }
   ],
   practiceIntro:"Complete 20 practice questions on interval inversions, qualities, and compound intervals. The next question will appear after each correct answer.",
@@ -173,7 +180,7 @@ LESSON_CONTENT[83]={
     "✔ <b>Rule of 9</b>: 2↔7, 3↔6, 4↔5, 1↔8.",
     "✔ Qualities flip: <b>M↔m, A↔d, P↔P</b>.",
     "✔ <b>Compound</b> = past the octave; <b>subtract 7</b> to reduce (9th→2nd, 13th→6th).",
-    "✔ Jazz chord numbers (9, 11, 13) come from compound intervals."
+    "✔ Two formulas do it all: <b>rule of 9</b> for inversions, <b>subtract 7</b> for compounds."
   ],
   tips:[
     "Fast check: M3 up from C is E; m6 up from E is C. If you return to your starting letter, the inversion is right.",
