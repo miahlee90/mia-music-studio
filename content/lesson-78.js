@@ -45,7 +45,7 @@ LESSON_CONTENT[78]={
         const ch=container.querySelector(".hk-ch");
         let hA=false,hB=false;
         container.querySelector(".hk-a").onclick=()=>{ for(let b=0;b<4;b++){ MFAudio.tone(48,.22,b*.5,.34); MFAudio.tone(76,.15,b*.5,.28); } hA=true; if(hB) setTimeout(()=>ch.style.display="",2300); };
-        container.querySelector(".hk-b").onclick=()=>{ for(let b=0;b<4;b++) MFAudio.tone(48,.22,b*.5,.34); [0,.75,1.25,2,2.75,3.25].forEach(t=>MFAudio.tone(76,.16,t,.3)); hB=true; if(hA) setTimeout(()=>ch.style.display="",2300); };
+        container.querySelector(".hk-b").onclick=()=>{ for(let b=0;b<4;b++) MFAudio.tone(48,.22,b*.5,.34); [0,.75,1.25,1.75].forEach(t=>MFAudio.tone(76,.16,t,.3)); hB=true; if(hA) setTimeout(()=>ch.style.display="",2300); };
         [...ch.children].forEach((b,i)=>b.onclick=()=>{
           if(i===0) fb(true,"✓ Correct. Version B emphasizes the offbeats between the main beats. Shifting emphasis away from the expected strong beats creates syncopation.");
           else fb(false,"Version A emphasizes the main beats. Listen again for the version whose accents fall between the steady pulse beats.");
@@ -188,8 +188,10 @@ LESSON_CONTENT[78]={
     { gen:"note-value", params:{}, count:2 }
   ],
   vocabulary:[
-    {term:"Syncopation", def:"An accent shifted to a weak beat or off-beat while the pulse stays steady."},
-    {term:"Off-beat", def:"The space between beats — the '&' when counting '1 & 2 &'."},
+    {term:"Syncopation", def:"An accent shifted to a weak beat or off-beat while the pulse stays steady.",
+      staff:{clef:"treble",time:"2/4",notes:[{p:"B4",d:"8"},{p:"B4",d:"q"},{p:"B4",d:"8"}],width:200}},
+    {term:"Off-beat", def:"The space between beats — the '&' when counting '1 & 2 &'.",
+      staff:{clef:"treble",time:"2/4",notes:[{rest:"8"},{p:"B4",d:"8"},{rest:"8"},{p:"B4",d:"8"}],width:210}},
     {term:"Rhythmic Anticipation", def:"A note that arrives just before the beat it belongs to and holds through it."}
   ],
   mistakes:[],
@@ -244,7 +246,7 @@ LESSON_CONTENT[78]={
   mia:{
     hook:{ label:"the welcome",
       explain:"Version A attacked on every beat; version B attacked between them — syncopation: a steady pulse with shifted accents.",
-      play:()=>{for(let b=0;b<4;b++) MFAudio.tone(48,.22,b*.5,.34); [0,.75,1.25,2,2.75,3.25].forEach(t=>MFAudio.tone(76,.16,t,.3));} },
+      play:()=>{for(let b=0;b<4;b++) MFAudio.tone(48,.22,b*.5,.34); [0,.75,1.25,1.75].forEach(t=>MFAudio.tone(76,.16,t,.3));} },
     learn:{ label:"syncopation",
       explain:"Accent shifted to weak beats/off-beats; made by off-beat accents, ties through strong beats, and rhythmic anticipation; 3+3+2 = built-in syncopation.",
       hint:"Steady pulse + shifted accent.",
