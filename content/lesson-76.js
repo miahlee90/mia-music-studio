@@ -89,7 +89,7 @@ LESSON_CONTENT[76]={
     "Define compound meter: each beat divides into THREE equal parts",
     "Separate the BEAT (dotted quarter) from the DIVISION (eighth notes)",
     "Read 6/8 (duple), 9/8 (triple) and 12/8 (quadruple)",
-    "Find the beat count: top number ÷ 3",
+    "Determine the number of beats by dividing the top number by three",
     "Match each compound meter to its conducting pattern",
     "Hear the difference between simple and compound meter"
   ],
@@ -152,7 +152,12 @@ LESSON_CONTENT[76]={
       try:{ type:"mc", choices:["6/8","3/4","9/8"], answer:0,
         success:"✓ Correct. A measure of 6/8 normally contains two dotted-quarter beats, each divided into three eighth notes.",
         fail:"Duple meter has two main beats. Divide the top number by 3.",
-        hint:"6 ÷ 3 = 2 beats." } }
+        hint:"6 ÷ 3 = 2 beats." } },
+    { say:"<b>Review</b> \u{1F447} <b>Which meter is compound triple?</b>",
+      try:{ type:"mc", choices:["9/8","6/8","4/4"], answer:0,
+        success:"✓ Correct. 9 ÷ 3 = 3 dotted-quarter beats, so 9/8 is compound triple (6/8 is compound duple; 4/4 is simple quadruple).",
+        fail:"Compound triple has three main beats. Divide the top number by 3.",
+        hint:"9 ÷ 3 = 3 beats." } }
   ],
   examples:[
     { caption:"A 6/8 melody: two dotted-quarter beats per measure, eighth notes beamed 3+3. Count '1-&-a 2-&-a' while it plays.",
@@ -235,10 +240,10 @@ LESSON_CONTENT[76]={
     { gen:"note-value", params:{}, count:2 }
   ],
   vocabulary:[
-    {term:"Compound Meter", def:"A meter in which each beat divides into three equal parts. The beat is a dotted note."},
-    {term:"Beat vs. Division", def:"The beat is the pulse you conduct (dotted quarter); the divisions are the three notes inside it (eighths)."},
-    {term:"Compound Duple / Triple / Quadruple", def:"6/8 (2 beats) · 9/8 (3 beats) · 12/8 (4 beats). Beats = top number ÷ 3."},
-    {term:"Conducting Pattern", def:"The shape a conductor traces — one motion per BEAT: 2-beat, 3-beat or 4-beat."}
+    {term:"Compound Meter", def:"A meter in which each beat naturally divides into three equal parts. In compound meter, the beat is usually a dotted note."},
+    {term:"Beat vs. Division", def:"The beat is the pulse you feel and conduct. Each beat divides into three equal divisions, usually written as eighth notes."},
+    {term:"Compound Duple / Triple / Quadruple", def:"6/8 = compound duple · 9/8 = compound triple · 12/8 = compound quadruple. The number of beats equals the top number divided by three."},
+    {term:"Conducting Pattern", def:"Conductors make one conducting motion for each beat, not for each written eighth note — a 2-beat, 3-beat, or 4-beat pattern."}
   ],
   mistakes:[],
   summary:[
