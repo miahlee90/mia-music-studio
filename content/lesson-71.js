@@ -161,13 +161,13 @@ LESSON_CONTENT[71]={
     { caption:"C major vs C blues, side by side: two notes are removed, three are lowered.",
       staff:{clef:"treble",tempo:110,notes:[
         {p:"C4",d:"q",label:"C major"},{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"F4",d:"q"},{p:"G4",d:"q"},{p:"A4",d:"q"},{p:"B4",d:"q"},{p:"C5",d:"q"},{bar:"double"},
-        {p:"C4",d:"q",label:"C blues"},{p:"Eb4",d:"q"},{p:"F4",d:"q"},{p:"Gb4",d:"q"},{p:"G4",d:"q"},{p:"Bb4",d:"q"},{p:"C5",d:"q"},{bar:"final"}],width:640},
+        {p:"C4",d:"q",label:"C blues"},{p:"Eb4",d:"q"},{p:"F4",d:"q"},{p:"Gb4",d:"q"},{p:"G4",d:"q",acc:"n"},{p:"Bb4",d:"q"},{p:"C5",d:"q"},{bar:"final"}],width:640},
       kb:{start:60,octaves:2,labels:true} },
     { caption:"A written blues melody — blues-scale notes over the I chord. The ♭3 against the chord's natural 3rd creates the blues sound.",
       staff:{clef:"treble",tempo:100,time:"4/4",notes:[
-        {p:"C4",d:"8"},{p:"Eb4",d:"8"},{p:"F4",d:"8"},{p:"Gb4",d:"8"},{p:"G4",d:"q"},{p:"Bb4",d:"q"},
+        {p:"C4",d:"8"},{p:"Eb4",d:"8"},{p:"F4",d:"8"},{p:"Gb4",d:"8"},{p:"G4",d:"q",acc:"n"},{p:"Bb4",d:"q"},{bar:"single"},
         {p:"G4",d:"8"},{p:"Gb4",d:"8"},{p:"F4",d:"8"},{p:"Eb4",d:"8"},{p:"C4",d:"h"},{bar:"final"}],
-        beams:[[0,1],[2,3],[6,7],[8,9]],width:600},
+        beams:[[0,1],[2,3],[7,8],[9,10]],width:600},
       kb:{start:60,octaves:2,labels:true} }
   ],
   games:[
