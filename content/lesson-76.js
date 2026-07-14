@@ -65,6 +65,41 @@ function MF_L76_ear(container,fb){
   q.innerHTML="Round 1 of 4: listen, then decide.";
 }
 
+/* example player: faster playback + pulsing beat dots so the compound
+   DUPLE (6/8) or QUADRUPLE (12/8) main beats can be felt AND seen */
+function MF_L76_playex(host, staff, kb, beatsPerBar, beatSec){
+  host.innerHTML=`<div id="l76bt" style="display:flex;gap:12px;justify-content:center;margin-bottom:10px"></div>
+    <div id="l76st"></div>
+    <div id="l76kb" style="margin-top:10px"></div>
+    <div style="text-align:center;margin-top:12px"><button class="play" id="l76btn">▶ Play the example</button></div>`;
+  const api=Staff.render(host.querySelector("#l76st"), staff);
+  const kbApi=Keyboard.create(host.querySelector("#l76kb"), kb);
+  const row=host.querySelector("#l76bt"), dots=[];
+  for(let i=0;i<beatsPerBar;i++){ const d=document.createElement("div"); d.textContent=(i+1);
+    d.style.cssText="width:34px;height:34px;border-radius:50%;border:2px solid #cdd5e1;display:flex;align-items:center;justify-content:center;font-weight:800;color:#8a93a3;transition:all .09s";
+    row.appendChild(d); dots.push(d); }
+  const label=document.createElement("div");
+  label.style.cssText="align-self:center;font-weight:700;color:var(--muted,#667);font-size:13px";
+  label.textContent=beatsPerBar===2?"= 2 beats (compound duple)":"= 4 beats (compound quadruple)";
+  row.appendChild(label);
+  const DUR={"8":1/3,"q.":1,"q":2/3,"h.":2}, seq=[];
+  staff.notes.forEach((n,i)=>{ if(n.bar!==undefined||n.rest!==undefined||!n.p) return; seq.push({m:MFAudio.midi(n.p), frac:DUR[n.d]||1, i}); });
+  function clearDots(){ dots.forEach(d=>{ d.style.background=""; d.style.color="#8a93a3"; d.style.borderColor="#cdd5e1"; d.style.transform="scale(1)"; }); }
+  host.querySelector("#l76btn").onclick=()=>{
+    const btn=host.querySelector("#l76btn"); btn.disabled=true;
+    let tb=0;
+    seq.forEach(o=>{ const t=tb*beatSec;
+      MFAudio.tone(o.m, Math.max(.12,o.frac*beatSec*0.9), t, .42);
+      setTimeout(()=>{ api.highlight(o.i,false); kbApi.press(o.m,true); }, t*1000);
+      tb+=o.frac; });
+    const totalBeats=Math.round(tb);
+    for(let b=0;b<totalBeats;b++){ setTimeout(()=>{ const bi=b%beatsPerBar;
+      dots.forEach((d,i)=>{ const on=i===bi; d.style.background=on?"var(--accent,#4f7cff)":""; d.style.color=on?"#fff":"#8a93a3"; d.style.borderColor=on?"var(--accent,#4f7cff)":"#cdd5e1"; d.style.transform=on?"scale(1.18)":"scale(1)"; });
+    }, b*beatSec*1000); }
+    setTimeout(()=>{ api.highlight(null); clearDots(); btn.disabled=false; }, totalBeats*beatSec*1000+260);
+  };
+}
+
 LESSON_CONTENT[76]={
   welcome:"In compound meter, each beat divides into three equal parts.",
   hook:{
@@ -160,20 +195,22 @@ LESSON_CONTENT[76]={
         hint:"9 ÷ 3 = 3 beats." } }
   ],
   examples:[
-    { caption:"A 6/8 melody: two dotted-quarter beats per measure, eighth notes beamed 3+3. Count '1-&-a 2-&-a' while it plays.",
-      staff:{clef:"treble",time:"6/8",tempo:66,notes:[
-        {p:"G4",d:"8"},{p:"A4",d:"8"},{p:"B4",d:"8"},{p:"C5",d:"8"},{p:"B4",d:"8"},{p:"A4",d:"8"},{bar:"single"},
-        {p:"G4",d:"q."},{p:"D5",d:"q."},{bar:"single"},
-        {p:"E5",d:"8"},{p:"D5",d:"8"},{p:"C5",d:"8"},{p:"B4",d:"8"},{p:"A4",d:"8"},{p:"B4",d:"8"},{bar:"single"},
-        {p:"G4",d:"q."},{p:"G4",d:"q."},{bar:"final"}],
-        beams:[[0,2],[3,5],[10,12],[13,15]],width:660},
-      kb:{start:55,octaves:2,labels:true} },
-    { caption:"The same rhythm idea in 12/8: four beats, each a group of three. 12/8 is common in slow ballads and the blues shuffle.",
-      staff:{clef:"treble",time:"12/8",tempo:56,notes:[
-        {p:"C4",d:"8"},{p:"E4",d:"8"},{p:"G4",d:"8"},{p:"C5",d:"8"},{p:"G4",d:"8"},{p:"E4",d:"8"},
-        {p:"F4",d:"8"},{p:"A4",d:"8"},{p:"C5",d:"8"},{p:"C4",d:"q."},{bar:"final"}],
-        beams:[[0,2],[3,5],[6,8]],width:560},
-      kb:{start:48,octaves:2,labels:true} }
+    { caption:"A 6/8 melody played a bit quicker so you FEEL two main beats per measure (compound duple). Watch the two beat dots pulse — '1-&-a 2-&-a'.",
+      mount:(host)=>MF_L76_playex(host,
+        {clef:"treble",time:"6/8",notes:[
+          {p:"G4",d:"8"},{p:"A4",d:"8"},{p:"B4",d:"8"},{p:"C5",d:"8"},{p:"B4",d:"8"},{p:"A4",d:"8"},{bar:"single"},
+          {p:"G4",d:"q."},{p:"D5",d:"q."},{bar:"single"},
+          {p:"E5",d:"8"},{p:"D5",d:"8"},{p:"C5",d:"8"},{p:"B4",d:"8"},{p:"A4",d:"8"},{p:"B4",d:"8"},{bar:"single"},
+          {p:"G4",d:"q."},{p:"G4",d:"q."},{bar:"final"}],
+          beams:[[0,2],[3,5],[10,12],[13,15]],width:660},
+        {start:55,octaves:2,labels:true}, 2, 0.55) },
+    { caption:"The same idea in 12/8, played quicker so the FOUR main beats emerge (compound quadruple) — the slow-ballad and blues-shuffle feel. Watch the four beat dots.",
+      mount:(host)=>MF_L76_playex(host,
+        {clef:"treble",time:"12/8",notes:[
+          {p:"C4",d:"8"},{p:"E4",d:"8"},{p:"G4",d:"8"},{p:"C5",d:"8"},{p:"G4",d:"8"},{p:"E4",d:"8"},
+          {p:"F4",d:"8"},{p:"A4",d:"8"},{p:"C5",d:"8"},{p:"C4",d:"q."},{bar:"final"}],
+          beams:[[0,2],[3,5],[6,8]],width:560},
+        {start:48,octaves:2,labels:true}, 4, 0.5) }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Compound Meter Sprint (45s)",
