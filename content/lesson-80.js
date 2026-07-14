@@ -205,11 +205,9 @@ LESSON_CONTENT[80]={
   ],
   mistakes:[],
   summary:[
-    "✔ <b>Major-type:</b><br>Ionian • Lydian • Mixolydian",
-    "✔ <b>Minor-type:</b><br>Dorian • Phrygian • Aeolian<br>Locrian is a special case.",
-    "✔ <b>Characteristic Notes</b><br>Lydian ♯4<br>Mixolydian ♭7<br>Dorian ♮6<br>Phrygian ♭2<br>Locrian ♭5",
+    "✔ <b>Characteristic Notes</b><br><br><b>Major Family</b><br>Ionian = Major<br>Lydian = Major + ♯4<br>Mixolydian = Major + ♭7<br><br><b>Minor Family</b><br>Aeolian = Natural Minor<br>Dorian = Natural Minor + ♮6<br>Phrygian = Natural Minor + ♭2<br>Locrian = Natural Minor + ♭2 + ♭5",
     "✔ One changed note creates a new modal sound.",
-    "✔ <b>By ear:</b><br>Find the tonic → identify the major/minor family → listen for the characteristic note."
+    "✔ By ear: Find the tonic → identify the major/minor family → listen for the characteristic note."
   ],
   tips:[
     "Fast ID at the keyboard: play white-key scales from each note — D=Dorian, E=Phrygian, F=Lydian, G=Mixolydian, A=Aeolian.",
