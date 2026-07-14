@@ -92,8 +92,8 @@ LESSON_CONTENT[66]={
         hint:"PASSING = moving through to a new chord tone." } },
     { say:"<b>Neighboring Tone:</b> A neighboring tone leaves a chord tone and returns to the <b>same chord tone</b>. Upper neighbor = above · lower neighbor = below. <b>Remember: passing tone = different → different · neighboring tone = same → different → same.</b> \u{1F447} <b>E→F→E over a C chord: what is the F?</b>",
       show:{ type:"staff", spec:{clef:"treble",time:"6/4",tempo:90,notes:[
-        {p:"E4",d:"q",label:"chord tone"},{p:"F4",d:"q",label:"U"},{p:"E4",d:"q",label:"same tone!"},
-        {p:"G4",d:"q",label:"chord tone"},{p:"F#4",d:"q",label:"L"},{p:"G4",d:"q",label:"same tone!"},{bar:"final"}],width:480} },
+        {p:"E4",d:"q",label:"chord tone"},{p:"F4",d:"q",label:"U"},{p:"E4",d:"q",label:"same"},
+        {p:"G4",d:"q",label:"chord tone"},{p:"F#4",d:"q",label:"L"},{p:"G4",d:"q",label:"same"},{bar:"final"}],width:720} },
       try:{ type:"mc", choices:["An upper neighboring tone","A passing tone","A chord tone"], answer:0,
         success:"✓ An UPPER neighboring tone — it leaves E and returns to the same E from above. (G→F♯→G shows the LOWER neighbor.)",
         fail:"Did the melody land on a NEW chord tone, or the SAME one?",
