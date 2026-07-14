@@ -58,13 +58,13 @@ LESSON_CONTENT[70]={
           <div class="choices hk-ch" style="display:none"><button>Yes — it's the famous BLUES progression</button><button>No — it's a classical symphony pattern</button><button>No — it sounds brand new</button></div>`;
         const CH={I:[48,64,67,70],IV:[53,69,72,75],V7:[43,67,71,77]}; /* dominant 7ths on every chord — THE blues sound */
         const BASS={I:36,IV:41,V7:43};
-        const PROG=["I","I","I","I","IV","IV","I","I","V7","IV","I","I"], BAR=0.9;
+        const PROG=["I","I","I","I","IV","IV","I","I","V7","IV","I","I"], BAR=0.85;
         const ch=container.querySelector(".hk-ch");
         container.querySelector(".hk-a").onclick=()=>{
           PROG.forEach((sym,i)=>{
             const t=i*BAR;
-            CH[sym].forEach(m=>{ MFAudio.tone(m,.32,t,.22); MFAudio.tone(m,.28,t+BAR*.5,.18); }); /* comp on beats 1 & 3 */
-            MFAudio.tone(BASS[sym],.42,t,.30); MFAudio.tone(BASS[sym],.34,t+BAR*.5,.22);          /* bass pulse */
+            CH[sym].forEach(m=>MFAudio.tone(m,BAR*.9,t,.24)); /* ONE held chord per bar → exactly 12 bars, 12 chords */
+            MFAudio.tone(BASS[sym],BAR*.9,t,.30);
           });
           setTimeout(()=>ch.style.display="", PROG.length*BAR*1000+400);
         };
