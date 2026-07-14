@@ -247,7 +247,7 @@ LESSON_CONTENT[68]={
   ],
   vocabulary:[
     {term:"Minor Harmonizing Chart", def:"Degrees 1,3,5 → i · 2,4,5,7 → V(7) · 1,4,6 → iv — read from the HARMONIC minor scale."},
-    {term:"The G♯ Rule", def:"A raised-7th melody note can only be harmonized by V(7) — it is that chord's 3rd.",
+    {term:"The Raised 7th", def:"A raised-7th melody note can only be harmonized by V(7) — it is that chord's 3rd.",
       staff:{clef:"treble",notes:[{p:"E4",d:"w"},{p:"G#4",d:"w",chord:true},{p:"B4",d:"w",chord:true}],width:130}},
     {term:"Minor Cadence", def:"iv (or i) → V(7) → i — the dominant-to-tonic close in a minor key."},
     {term:"The Ear", def:"Still the final guide whenever two chords fit one melody note."}
