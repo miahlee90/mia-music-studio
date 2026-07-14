@@ -77,7 +77,7 @@ const LESSONS=[
  {n:74, title:"ABA (Ternary) Form", unit:18, book:3, time:15, kw:["ternary","ABA form"]},
  {n:75, title:"Rondo Form", unit:18, book:3, time:15, kw:["rondo"]},
  {n:76, title:"Compound Meter Expanded", unit:19, book:4, time:15, kw:["compound meter","6/8","9/8","12/8","conducting"]},
- {n:77, title:"Triplets and Duplets", unit:19, book:4, time:15, kw:["triplet","duplet","tuplet","irregular division"]},
+ {n:77, title:"Tuplets: Triplets and Duplets", unit:19, book:4, time:15, kw:["tuplet","triplet","duplet","quintuplet","sextuplet"]},
  {n:78, title:"Syncopation", unit:19, book:4, time:15, kw:["syncopation","off-beat","tie","anticipation"]},
  {n:79, title:"Asymmetrical and Changing Meter", unit:19, book:4, time:15, kw:["5/4","7/8","mixed meter","additive"]},
  {n:80, title:"Modes in Practice", unit:20, book:4, time:15, kw:["modes","dorian","mixolydian","lydian","phrygian"]},

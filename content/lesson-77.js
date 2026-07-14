@@ -1,7 +1,9 @@
-/* Lesson 77 — Triplets & Duplets (Book 4, Unit 19 — SELF-AUTHORED)
-   Core: IRREGULAR DIVISION = a borrowed division. Simple meter borrows the
-   three-part division (TRIPLET, "3"); compound meter borrows the two-part
-   division (DUPLET, "2"). Other tuplets exist (quintuplet, sextuplet).
+/* Lesson 77 — Tuplets: Triplets and Duplets (Book 4, Unit 19 — SELF-AUTHORED)
+   Core: a TUPLET is a group of equal notes dividing a beat into a different
+   number of parts than normal. TRIPLET ("3") = 3 in the time of 2 (simple
+   meter); DUPLET ("2") = 2 in the time of 3 (compound meter). Other tuplets
+   exist (quintuplet, sextuplet). Introduce "tuplet" (the general category)
+   BEFORE triplet/duplet so students don't read it as a typo of "triplet."
    Uses staff.js v8.1 tuplets:[{from,to,n}] — n=2 renders a duplet.
    NOTE: edit by FULL-FILE REWRITE only. */
 
@@ -30,9 +32,9 @@ function MF_L77_ear(container,fb){
 }
 
 LESSON_CONTENT[77]={
-  welcome:"Triplets and duplets temporarily change the normal division of a beat.",
+  welcome:"A tuplet divides a beat into a different number of equal parts than normal — triplets and duplets are the common types.",
   hook:{
-    say:"<b>In simple meter, a beat normally divides into two equal parts.</b> Listen to the two patterns. \u{1F447} <b>What happens to the beat division in Pattern 2?</b>",
+    say:"<b>In simple meter, each beat normally divides into two equal parts; in compound meter, each beat normally divides into three.</b> But composers sometimes divide a beat into a different number of equal parts — these special note groups are called <b>tuplets</b>. Listen to the two patterns. \u{1F447} <b>What changes in Pattern 2?</b>",
     interact:{ type:"custom",
       mount:(container,fb)=>{
         container.innerHTML=`<div style="text-align:center">
@@ -44,29 +46,29 @@ LESSON_CONTENT[77]={
         container.querySelector(".hk-a").onclick=()=>{ for(let b=0;b<4;b++){ MFAudio.tone(48,.3,b*.55,.4); for(let j=0;j<2;j++) MFAudio.tone(76,.11,b*.55+j*.275,.17); } hA=true; if(hB) setTimeout(()=>ch.style.display="",2400); };
         container.querySelector(".hk-b").onclick=()=>{ for(let b=0;b<4;b++){ MFAudio.tone(48,.3,b*.55,.4); for(let j=0;j<3;j++) MFAudio.tone(76,.11,b*.55+j*(.55/3),.17); } hB=true; if(hA) setTimeout(()=>ch.style.display="",2400); };
         [...ch.children].forEach((b,i)=>b.onclick=()=>{
-          if(i===0) fb(true,"✓ Correct. Pattern 2 divides the beat into three equal notes in the time normally occupied by two. This is a triplet, indicated by a small 3.");
+          if(i===0) fb(true,"✓ Correct. Pattern 2 divides the beat into three equal notes in the time normally occupied by two. This is a triplet — a type of tuplet — indicated by a small 3.");
           else fb(false,"The beat remains steady. Listen again and count the notes within each beat.");
         });
       } }
   },
   objectives:[
-    "Define irregular division: a division borrowed from the other meter family",
-    "Triplet: THREE notes in the time of two (simple meter borrows)",
-    "Duplet: TWO notes in the time of three (compound meter borrows)",
+    "Define a tuplet and explain why it is used",
+    "Recognize triplets and duplets as types of tuplets",
+    "Understand how a triplet divides a simple-meter beat into three equal parts",
+    "Understand how a duplet divides a compound-meter beat into two equal parts",
     "Read the small 3 and 2 markings",
-    "Know the values: eighth-note triplet = one quarter beat; duplet = one dotted-quarter beat",
-    "Meet other tuplets: quintuplet, sextuplet"
+    "Recognize other tuplets, including quintuplets and sextuplets"
   ],
   steps:[
-    { say:"<b>Irregular Beat Division:</b> A <b>tuplet</b> temporarily divides a beat differently from its normal division. <b style='color:#2F6DA8'>In simple meter, a triplet divides the beat into three equal parts instead of two</b>. <b style='color:#C05A21'>In compound meter, a duplet divides the beat into two equal parts instead of three</b>. \u{1F447} <b>What is an irregular beat division?</b>",
-      show:{ type:"html", html:`<table style="border-collapse:collapse;margin:0 auto;font-size:14.5px;min-width:300px">
-        <tr><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:6px 14px">Meter</th><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:6px 14px">Normal division</th><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:6px 14px">Borrowed division</th></tr>
-        <tr><td style="border:1.5px solid #cdd5e1;padding:4px 14px;color:#2F6DA8;font-weight:800">Simple</td><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center">2 parts</td><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center;font-weight:800">Triplet (3)</td></tr>
-        <tr><td style="border:1.5px solid #cdd5e1;padding:4px 14px;color:#C05A21;font-weight:800">Compound</td><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center">3 parts</td><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center;font-weight:800">Duplet (2)</td></tr></table>` },
-      try:{ type:"mc", choices:["A temporary division that differs from the beat's normal division","An incorrectly performed rhythm","A change of time signature"], answer:0,
-        success:"✓ Correct. The beat division changes temporarily, but the time signature remains the same.",
-        fail:"The time signature remains unchanged. Consider what changes within the beat.",
-        hint:"The beat division changes, not the meter." } },
+    { say:"<b>What Is a Tuplet?</b> A <b>tuplet</b> is a group of equal notes that divides a beat or note value into a different number of parts than normally expected. <b>Triplets</b> and <b>duplets</b> are two common types of tuplets. <b style='color:#2F6DA8'>In simple meter, a triplet divides a beat into three equal parts instead of the usual two.</b> <b style='color:#C05A21'>In compound meter, a duplet divides a beat into two equal parts instead of the usual three.</b> The time signature does not change. \u{1F447} <b>What is a tuplet?</b>",
+      show:{ type:"html", html:`<table style="border-collapse:collapse;margin:0 auto;font-size:14.5px;min-width:320px">
+        <tr><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:6px 14px">Meter</th><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:6px 14px">Normal Beat Division</th><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:6px 14px">Common Tuplet Division</th></tr>
+        <tr><td style="border:1.5px solid #cdd5e1;padding:4px 14px;color:#2F6DA8;font-weight:800">Simple</td><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center">2 equal parts</td><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center;font-weight:800">Triplet: 3 equal parts</td></tr>
+        <tr><td style="border:1.5px solid #cdd5e1;padding:4px 14px;color:#C05A21;font-weight:800">Compound</td><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center">3 equal parts</td><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center;font-weight:800">Duplet: 2 equal parts</td></tr></table>` },
+      try:{ type:"mc", choices:["A group of equal notes that divides a beat or note value differently from its normal division","An incorrectly performed rhythm","A change of time signature"], answer:0,
+        success:"✓ Correct. A tuplet changes how a beat is divided, but the time signature stays the same. Triplets and duplets are its two common types.",
+        fail:"A tuplet is a note grouping, not an error or a change of meter.",
+        hint:"It regroups how a beat divides." } },
     { say:"<b>The Triplet:</b> A triplet places <b>three notes of equal written value</b> in the time normally occupied by two. For example, three eighth-note triplets fill <b>one quarter-note beat</b> and are indicated by a small <b>3</b>. \u{1F447} <b>Three eighth-note triplets have the same total duration as…</b>",
       show:{ type:"staff", spec:{clef:"treble",time:"4/4",tempo:76,notes:[
         {p:"G4",d:"8"},{p:"G4",d:"8"},
@@ -108,7 +110,7 @@ LESSON_CONTENT[77]={
         hint:"Look for the small 2." } }
   ],
   examples:[
-    { caption:"Triplets among straight eighths in 4/4: beats 1–2 divide in two, beats 3–4 borrow the triplet. Listen for the shift from '1-and' to '1-trip-let'.",
+    { caption:"Triplets among straight eighths in 4/4: beats 1–2 divide in two, beats 3–4 use the triplet. Listen for the shift from '1-and' to '1-trip-let'.",
       staff:{clef:"treble",time:"4/4",tempo:80,notes:[
         {p:"C4",d:"8"},{p:"E4",d:"8"},{p:"G4",d:"8"},{p:"E4",d:"8"},
         {p:"C5",d:"8"},{p:"B4",d:"8"},{p:"A4",d:"8"},
@@ -130,11 +132,11 @@ LESSON_CONTENT[77]={
       intro:"Identify triplets, duplets, and their rhythmic values before time runs out.",
       miaIntro:"A triplet is three in the time of two; a duplet is two in the time of three.",
       spec:{gen:"term-match", params:{subject:"term", pool:[
-        ["Irregular division","a borrowed division"],
+        ["Tuplet","a group that divides a beat differently than normal"],
         ["Triplet","three notes in the time of two"],
         ["Duplet","two notes in the time of three"],
-        ["Simple meter borrows","the triplet"],
-        ["Compound meter borrows","the duplet"],
+        ["Simple meter's common tuplet","the triplet"],
+        ["Compound meter's common tuplet","the duplet"],
         ["Eighth-note triplet equals","one quarter-note beat"],
         ["Duplet in 6/8 equals","one dotted-quarter beat"],
         ["Quintuplet","a group of five tuplet notes"]], reverse:true}, seconds:45},
@@ -148,12 +150,12 @@ LESSON_CONTENT[77]={
         {label:"Duplet (2 in a compound beat)", spec:{clef:"treble",time:"6/8",notes:[{p:"B4",d:"8"},{p:"B4",d:"8"},{p:"B4",d:"q."}],beams:[[0,1]],tuplets:[{from:0,to:1,n:2}],width:190}},
         {label:"Normal 6/8 beat (3 eighths)", spec:{clef:"treble",time:"6/8",notes:[{p:"B4",d:"8"},{p:"B4",d:"8"},{p:"B4",d:"8"},{p:"B4",d:"q."}],beams:[[0,2]],width:190}}]},
       result:(score)=>score>=5?"You identified the tuplets correctly.":null },
-    { type:"order-tap", title:"Game 3 · Build the Borrowing Rule",
-      intro:"Arrange the meter types and their irregular divisions in the correct order.",
+    { type:"order-tap", title:"Game 3 · Match Meter to Tuplet",
+      intro:"Arrange each meter type with the tuplet that fits it.",
       miaIntro:"Simple meter uses triplets; compound meter uses duplets.",
-      spec:{sequence:["Simple meter divides in 2","It borrows 3 — the triplet","Compound meter divides in 3","It borrows 2 — the duplet"],
-        title:"The borrowed-division rule"},
-      result:(stars)=>stars>=2?"You matched each meter with its irregular beat division.":null },
+      spec:{sequence:["Simple meter divides in 2","Its tuplet: the triplet (3)","Compound meter divides in 3","Its tuplet: the duplet (2)"],
+        title:"Each meter and its common tuplet"},
+      result:(stars)=>stars>=2?"You matched each meter with its tuplet.":null },
     { type:"term-race", title:"Game 4 · Tuplet Value Race",
       intro:"Determine the total duration of each tuplet group before time runs out.",
       miaIntro:"Compare each tuplet with the notes it replaces.",
@@ -170,7 +172,7 @@ LESSON_CONTENT[77]={
   ],
   practiceIntro:"Complete 20 practice questions on triplets, duplets, and other tuplets. The next question will appear after each correct answer.",
   practice:[
-    { gen:"term-match", params:{subject:"term", pool:[["Triplet","3 in the time of 2"],["Duplet","2 in the time of 3"],["Irregular division","borrowed division"],["Quintuplet","a five-note group"],["Sextuplet","a six-note group"]], reverse:true}, count:6 },
+    { gen:"term-match", params:{subject:"term", pool:[["Tuplet","divides a beat differently than normal"],["Triplet","3 in the time of 2"],["Duplet","2 in the time of 3"],["Quintuplet","a five-note group"],["Sextuplet","a six-note group"]], reverse:true}, count:6 },
     { gen:"rhythm-count", params:{}, count:2 },
     { type:"mc", q:"How many equal notes does a triplet place in the time normally occupied by two?", choices:["3","2","4"], answer:0,
       explain:"A triplet places three equal notes in the time normally occupied by two." },
@@ -186,22 +188,22 @@ LESSON_CONTENT[77]={
       explain:"The beat division changes temporarily, but the time signature remains the same." },
     { type:"truefalse", q:"A quintuplet contains five evenly spaced tuplet notes.", answer:true,
       explain:"The number 5 identifies the five notes in the tuplet group. Its total duration depends on the notation and context." },
-    { gen:"term-match", params:{subject:"term", pool:[["Simple borrows","triplet"],["Compound borrows","duplet"],["Small 3","triplet"],["Small 2","duplet"]], reverse:true}, count:3 },
+    { gen:"term-match", params:{subject:"term", pool:[["Simple meter's tuplet","triplet"],["Compound meter's tuplet","duplet"],["Small 3","triplet"],["Small 2","duplet"]], reverse:true}, count:3 },
     { gen:"note-value", params:{}, count:2 }
   ],
   vocabulary:[
-    {term:"Irregular Division (Borrowed Division)", def:"A beat division borrowed from the other meter family — the time signature does not change."},
-    {term:"Triplet", def:"Three notes in the time of two, marked with a small 3. Simple meter's borrowed division."},
-    {term:"Duplet", def:"Two notes in the time of three, marked with a small 2. Compound meter's borrowed division."},
-    {term:"Other Tuplets", def:"Quintuplet (5), sextuplet (6) and beyond — the small number identifies how many notes the group contains; the notes they replace depend on the meter, note values, and context."}
+    {term:"Tuplet", def:"A group of equal notes that divides a beat or note value into a different number of parts than normally expected."},
+    {term:"Triplet", def:"A type of tuplet that places three equal notes in the time normally occupied by two (marked with a small 3)."},
+    {term:"Duplet", def:"A type of tuplet that places two equal notes in the time normally occupied by three (marked with a small 2)."},
+    {term:"Other Tuplets", def:"Tuplets may contain other numbers of equal notes, such as five in a quintuplet or six in a sextuplet."}
   ],
   mistakes:[],
   summary:[
-    "✔ <b>Irregular division</b> = a division <b>borrowed</b> from the other meter family.",
-    "✔ <b>Triplet</b>: 3 in the time of 2 — simple meter borrows; count <b>1-trip-let</b>.",
-    "✔ <b>Duplet</b>: 2 in the time of 3 — compound meter borrows.",
+    "✔ A <b>tuplet</b> divides a beat into a different number of equal parts than normal.",
+    "✔ <b>Triplet</b>: 3 in the time of 2 — simple meter's tuplet; count <b>1-trip-let</b>.",
+    "✔ <b>Duplet</b>: 2 in the time of 3 — compound meter's tuplet.",
     "✔ Eighth triplet = one <b>quarter</b> beat; 6/8 duplet = one <b>dotted-quarter</b> beat.",
-    "✔ Any number can borrow: <b>quintuplet (5), sextuplet (6)</b> — the number counts the notes."
+    "✔ Other tuplets exist: <b>quintuplet (5), sextuplet (6)</b> — the small number counts the notes."
   ],
   tips:[
     "Keep the BEAT steady and let the tuplet bend inside it — tap your foot while saying 1-trip-let.",
@@ -214,8 +216,8 @@ LESSON_CONTENT[77]={
     "secGame0","secGame1","secGame2","secGame3","secPractice","secQuiz","secTips","secNext"],
   miaQuizIntro:"A triplet places three notes in the time of two; a duplet places two notes in the time of three.",
   quiz:[
-    { type:"mc", q:"What is an irregular beat division?", choices:["A temporary beat division that differs from the meter's normal division","A rhythmic performance error","A change in tempo"], answer:0,
-      explain:"The division changes temporarily while the meter remains the same.", hint:"The division changes, not the meter." },
+    { type:"mc", q:"What is a tuplet?", choices:["A group of equal notes that divides a beat differently from its normal division","A rhythmic performance error","A change in tempo"], answer:0,
+      explain:"A tuplet regroups a beat's division; the meter stays the same.", hint:"The division changes, not the meter." },
     { type:"mc", q:"A triplet places…", choices:["three equal notes in the time normally occupied by two","two equal notes in the time normally occupied by three","three measures within one beat"], answer:0,
       explain:"A small 3 identifies the triplet group.", hint:"Look for three notes replacing the usual two-part division." },
     { type:"mc", q:"A duplet places…", choices:["two equal notes in the time normally occupied by three","three equal notes in the time normally occupied by two","two beats at the same time"], answer:0,
@@ -238,26 +240,26 @@ LESSON_CONTENT[77]={
       explain:"A tuplet temporarily changes the rhythmic division without changing the time signature.", hint:"The meter stays." },
     { type:"mc", q:"In 4/4, beats 1 and 2 divide into two equal eighth notes, while beats 3 and 4 each divide into three equal notes. Which rhythmic device is used on beats 3 and 4?", choices:["eighth-note triplets","eighth-note duplets","a new time signature"], answer:0,
       explain:"In simple meter, dividing a beat into three equal parts produces a triplet.", hint:"Which family is 4/4?" },
-    { type:"mc", q:"Which pairing correctly matches each meter type with its common irregular beat division?", choices:["Simple meter → triplet; compound meter → duplet","Simple meter → duplet; compound meter → triplet","Both meter types use only triplets"], answer:0,
-      explain:"A triplet introduces a three-part division in simple meter, while a duplet introduces a two-part division in compound meter.", hint:"Compare each irregular division with the meter's normal beat division." }
+    { type:"mc", q:"Which pairing correctly matches each meter type with its common tuplet?", choices:["Simple meter → triplet; compound meter → duplet","Simple meter → duplet; compound meter → triplet","Both meter types use only triplets"], answer:0,
+      explain:"A triplet introduces a three-part division in simple meter, while a duplet introduces a two-part division in compound meter.", hint:"Compare each tuplet with the meter's normal beat division." }
   ],
   miaPerfect:"Perfect score! You accurately identified triplets, duplets, and other tuplets.",
   miaPass:"You passed! Next, you will explore syncopation.",
   mia:{
     hook:{ label:"the welcome",
-      explain:"Pattern 2 squeezed three notes into a beat that normally holds two — a triplet, simple meter's borrowed division.",
+      explain:"Pattern 2 squeezed three notes into a beat that normally holds two — a triplet, simple meter's common tuplet.",
       play:()=>{for(let b=0;b<4;b++){ MFAudio.tone(48,.3,b*.55,.4); for(let j=0;j<3;j++) MFAudio.tone(76,.11,b*.55+j*(.55/3),.17); }} },
     learn:{ label:"triplets & duplets",
-      explain:"Irregular division = borrowed division. Triplet: 3 in the time of 2 (simple borrows). Duplet: 2 in the time of 3 (compound borrows). Quintuplet/sextuplet extend the idea.",
+      explain:"A tuplet divides a beat differently than normal. Triplet: 3 in the time of 2 (simple meter). Duplet: 2 in the time of 3 (compound meter). Quintuplet/sextuplet extend the idea.",
       hint:"3 in 2 · 2 in 3.",
       play:()=>{MFAudio.tone(48,.3,0,.4);for(let j=0;j<3;j++) MFAudio.tone(76,.11,j*.18,.17);MFAudio.tone(48,.3,.6,.4);for(let j=0;j<2;j++) MFAudio.tone(76,.13,.6+j*.27,.17);} },
     example:{ label:"the examples",
       explain:"Example 1 mixes straight eighths with triplets in 4/4; example 2 places a duplet inside 6/8." },
     game:{ label:"the games",
-      explain:"Sprint the facts, spot tuplets on cards, build the borrowing rule, then race the values.",
+      explain:"Sprint the facts, spot tuplets on cards, match each meter to its tuplet, then race the values.",
       hint:"The small number counts the notes." },
     quiz:{ label:"this question",
-      explain:"One rule answers everything: the small number tells how many notes belong to the tuplet group — and each family borrows the other's number.",
+      explain:"One rule answers everything: the small number tells how many notes belong to the tuplet group — and each meter's common tuplet uses the other meter's division count.",
       play:()=>{MFAudio.tone(48,.3,0,.4);for(let j=0;j<3;j++) MFAudio.tone(76,.11,j*.18,.17);} }
   }
 };
