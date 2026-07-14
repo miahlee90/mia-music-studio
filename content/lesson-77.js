@@ -194,9 +194,22 @@ LESSON_CONTENT[77]={
   vocabulary:[
     {term:"Tuplet", def:"A group of equal notes that divides a beat or note value into a different number of parts than normally expected."},
     {term:"Triplet", def:"A type of tuplet that places three equal notes in the time normally occupied by two (marked with a small 3).",
-      staff:{clef:"treble",notes:[{p:"G4",d:"q"},{p:"G4",d:"q"},{p:"G4",d:"q"}],tuplets:[{from:0,to:2}],width:240}},
+      sym:`<svg viewBox="0 0 152 96" style="height:76px;width:auto;max-width:150px" xmlns="http://www.w3.org/2000/svg">
+        <path d="M24 30 L24 22 L62 22 M86 22 L130 22 L130 30" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+        <text x="74" y="28" text-anchor="middle" font-size="19" font-style="italic" font-weight="700" fill="currentColor">3</text>
+        <g stroke="currentColor" stroke-width="2.6" fill="currentColor">
+          <line x1="29.5" y1="74" x2="29.5" y2="30"/><ellipse cx="22" cy="74" rx="8" ry="5.6" transform="rotate(-20 22 74)"/>
+          <line x1="79.5" y1="74" x2="79.5" y2="30"/><ellipse cx="72" cy="74" rx="8" ry="5.6" transform="rotate(-20 72 74)"/>
+          <line x1="129.5" y1="74" x2="129.5" y2="30"/><ellipse cx="122" cy="74" rx="8" ry="5.6" transform="rotate(-20 122 74)"/>
+        </g></svg>`},
     {term:"Duplet", def:"A type of tuplet that places two equal notes in the time normally occupied by three (marked with a small 2).",
-      staff:{clef:"treble",notes:[{p:"G4",d:"q"},{p:"G4",d:"q"}],tuplets:[{from:0,to:1,n:2}],width:190}},
+      sym:`<svg viewBox="0 0 102 96" style="height:76px;width:auto;max-width:110px" xmlns="http://www.w3.org/2000/svg">
+        <path d="M24 30 L24 22 L42 22 M60 22 L80 22 L80 30" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+        <text x="51" y="28" text-anchor="middle" font-size="19" font-style="italic" font-weight="700" fill="currentColor">2</text>
+        <g stroke="currentColor" stroke-width="2.6" fill="currentColor">
+          <line x1="29.5" y1="74" x2="29.5" y2="30"/><ellipse cx="22" cy="74" rx="8" ry="5.6" transform="rotate(-20 22 74)"/>
+          <line x1="79.5" y1="74" x2="79.5" y2="30"/><ellipse cx="72" cy="74" rx="8" ry="5.6" transform="rotate(-20 72 74)"/>
+        </g></svg>`},
     {term:"Other Tuplets", def:"Tuplets may contain other numbers of equal notes, such as five in a quintuplet or six in a sextuplet."}
   ],
   mistakes:[],
