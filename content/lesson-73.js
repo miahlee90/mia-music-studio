@@ -60,15 +60,21 @@ function MF_L73_ex1(host){
     <div id="l73ex1st"></div>
     <div style="text-align:center;margin-top:12px"><button class="play" id="l73ex1btn">▶ Play the complete binary example</button></div>`;
   Staff.render(host.querySelector("#l73ex1st"),{clef:"treble",tempo:96,time:"4/4",notes:[
-    {p:"C4",d:"q",label:"A: I → V"},{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"G4",d:"q"},{bar:"single"},
-    {p:"A4",d:"q"},{p:"G4",d:"q"},{p:"D4",d:"h",label:"ends on V"},{bar:"double"},
-    {p:"D4",d:"q",label:"B: V → I"},{p:"E4",d:"q"},{p:"F4",d:"q"},{p:"G4",d:"q"},{bar:"single"},
-    {p:"E4",d:"q"},{p:"D4",d:"q"},{p:"C4",d:"h",label:"ends on I"},{bar:"final"}],width:660});
+    {bar:"repeat-start"},
+    {p:"C4",d:"q",label:"A"},{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"G4",d:"q"},{bar:"single"},
+    {p:"A4",d:"q"},{p:"G4",d:"q"},{p:"D4",d:"h",label:"→ V"},{bar:"repeat-end"},
+    {bar:"repeat-start"},
+    {p:"D4",d:"q",label:"B"},{p:"E4",d:"q"},{p:"F4",d:"q"},{p:"G4",d:"q"},{bar:"single"},
+    {p:"E4",d:"q"},{p:"D4",d:"q"},{p:"C4",d:"h",label:"→ I"},{bar:"repeat-end"}],width:720});
   host.querySelector("#l73ex1btn").onclick=()=>{
-    const A=[60,62,64,67,69,67,62]; A.forEach((m,i)=>MFAudio.tone(m,.42,i*.44,.4));
-    let t=A.length*.44+.1; [55,59,62].forEach(m=>MFAudio.tone(m,1.3,t,.2));   /* V chord closes A */
-    t+=1.5; const B=[62,64,65,67,64,62,60]; B.forEach((m,i)=>MFAudio.tone(m,.42,t+i*.44,.4));
-    let t2=t+B.length*.44+.1; [48,64,67].forEach(m=>MFAudio.tone(m,1.7,t2,.2)); /* I chord closes B */
+    const beat=.5;
+    /* play the melody exactly as written: even quarters, held half at each cadence */
+    const A=[[60,1],[62,1],[64,1],[67,1],[69,1],[67,1],[62,2]];
+    const B=[[62,1],[64,1],[65,1],[67,1],[64,1],[62,1],[60,2]];
+    let t=0; A.forEach(([m,b])=>{ MFAudio.tone(m,beat*b*.92,t,.4); t+=beat*b; });
+    [55,59,62].forEach(m=>MFAudio.tone(m,beat*2*.9,t-beat*2,.14));  /* soft V under A's held note */
+    B.forEach(([m,b])=>{ MFAudio.tone(m,beat*b*.92,t,.4); t+=beat*b; });
+    [48,55,64].forEach(m=>MFAudio.tone(m,beat*2*.9,t-beat*2,.14));  /* soft I under B's held note */
   };
 }
 
@@ -78,14 +84,18 @@ function MF_L73_ex2(host){
     <div id="l73ex2st"></div>
     <div style="text-align:center;margin-top:12px"><button class="play" id="l73ex2btn">▶ Listen for the return of A</button></div>`;
   Staff.render(host.querySelector("#l73ex2st"),{clef:"treble",tempo:100,time:"4/4",notes:[
-    {p:"G4",d:"q",label:"A"},{p:"E4",d:"q"},{p:"C4",d:"q"},{p:"E4",d:"q"},{bar:"double"},
+    {bar:"repeat-start"},
+    {p:"G4",d:"q",label:"A"},{p:"E4",d:"q"},{p:"C4",d:"q"},{p:"E4",d:"q"},{bar:"repeat-end"},
+    {bar:"repeat-start"},
     {p:"F4",d:"q",label:"B"},{p:"G4",d:"q"},{p:"A4",d:"q"},{p:"B4",d:"q"},{bar:"single"},
-    {p:"G4",d:"q",label:"A′ (return)"},{p:"E4",d:"q"},{p:"C4",d:"h"},{bar:"final"}],width:620});
+    {p:"G4",d:"q",label:"A′"},{p:"E4",d:"q"},{p:"C4",d:"h"},{bar:"repeat-end"}],width:680});
   host.querySelector("#l73ex2btn").onclick=()=>{
-    const A=[67,64,60,64]; A.forEach((m,i)=>MFAudio.tone(m,.44,i*.46,.4));
-    let t=A.length*.46+.4; const B=[65,67,69,71]; B.forEach((m,i)=>MFAudio.tone(m,.44,t+i*.46,.4));
-    let t2=t+B.length*.46+.5; const Ap=[67,64,60]; Ap.forEach((m,i)=>MFAudio.tone(m,.5,t2+i*.5,.44)); /* A' returns */
-    let t3=t2+Ap.length*.5+.05; [48,64,67].forEach(m=>MFAudio.tone(m,1.7,t3,.2));
+    /* play the melody exactly as written: ten even quarters, then a held half */
+    const MEL=[67,64,60,64, 65,67,69,71, 67,64]; const beat=.5;
+    MEL.forEach((m,i)=>MFAudio.tone(m,beat*.92,i*beat,.4));
+    const tEnd=MEL.length*beat;
+    MFAudio.tone(60,beat*2*.95,tEnd,.42);                       /* final C4 held (half note) */
+    [48,55,64].forEach(m=>MFAudio.tone(m,beat*2*.9,tEnd,.14));  /* soft tonic close */
   };
 }
 
