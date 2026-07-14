@@ -47,6 +47,32 @@ function MF_L70_build(container,fb){
   ask();
 }
 
+/* the 12-bar blues as it is REALLY played: a boogie-woogie shuffle —
+   walking bass (1-3-5-6-b7-6-5-3, swung eighths) under backbeat chord stabs */
+function MF_L70_shuffle(host){
+  const FORM=["I","I","I","I","IV","IV","I","I","V","IV","I","I"];
+  const COL={I:["#e3f0fb","#8fbce0"],IV:["#f8e0e0","#dc9a9a"],V:["#dcecd6","#94c384"]};
+  const ROOT={I:36,IV:41,V:43};                                 /* boogie bass root: C2, F2, G2 */
+  const WALK=[0,4,7,9,10,9,7,4];                                /* 1-3-5-6-b7-6-5-3 */
+  const COMP={I:[64,67,70,74],IV:[65,69,72,75],V:[67,71,74,77]}; /* dominant comp voicings */
+  const BPM=132, beat=60/BPM, BAR=beat*4, sw=beat*2/3;           /* swung eighths */
+  host.innerHTML=`<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:5px;max-width:360px;margin:0 auto">${
+    FORM.map((s,i)=>`<span data-b="${i}" style="background:${COL[s][0]};border:1.5px solid ${COL[s][1]};border-radius:6px;padding:12px 0;text-align:center;font-weight:800;font-size:17px;color:#243244;transition:transform .12s,box-shadow .12s">${s}<sup style="font-size:.62em">7</sup></span>`).join("")
+  }</div>
+  <div style="text-align:center;margin-top:14px"><button class="play" id="l70shuffleBtn">\u{25B6} Play the blues shuffle</button></div>`;
+  const cells=[...host.querySelectorAll("[data-b]")], btn=host.querySelector("#l70shuffleBtn");
+  btn.onclick=()=>{
+    btn.disabled=true;
+    FORM.forEach((sym,i)=>{
+      const t0=i*BAR;
+      WALK.forEach((off,e)=>{ const t=t0+(e>>1)*beat+((e&1)?sw:0); MFAudio.tone(ROOT[sym]+off, beat*0.44, t, .32); });
+      [beat, beat*3].forEach(ht=>COMP[sym].forEach(m=>MFAudio.tone(m, beat*0.5, t0+ht, .18)));
+      setTimeout(()=>{ cells.forEach(x=>{x.style.boxShadow="";x.style.transform="";}); const c=cells[i]; if(c){ c.style.boxShadow="0 0 0 3px rgba(79,124,255,.55)"; c.style.transform="translateY(-2px)"; } }, i*BAR*1000);
+    });
+    setTimeout(()=>{ cells.forEach(x=>{x.style.boxShadow="";x.style.transform="";}); btn.disabled=false; }, FORM.length*BAR*1000+200);
+  };
+}
+
 LESSON_CONTENT[70]={
   welcome:"The 12-bar blues: one pattern, thousands of songs. \u{1F3B7}",
   hook:{
@@ -129,22 +155,8 @@ LESSON_CONTENT[70]={
         hint:"Count up 4 and 5 from G." } }
   ],
   examples:[
-    { caption:"The C major 12-bar blues: four bars of I, two of IV, two of I, one V7, one IV, and two bars of I. Follow the numerals!",
-      staff:{clef:"treble",tempo:120,notes:[
-        {p:"C4",d:"w",label:"I (bars 1-4)"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},
-        {p:"F4",d:"w",label:"IV (5-6)"},{p:"A4",d:"w",chord:true},{p:"C5",d:"w",chord:true},
-        {p:"C4",d:"w",label:"I (7-8)"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},
-        {p:"G4",d:"w",label:"V7 (9)"},{p:"B4",d:"w",chord:true},{p:"F5",d:"w",chord:true},
-        {p:"F4",d:"w",label:"IV (10)"},{p:"A4",d:"w",chord:true},{p:"C5",d:"w",chord:true},
-        {p:"C4",d:"w",label:"I (11-12)"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{bar:"final"}],width:660},
-      kb:{start:48,octaves:3,labels:true} },
-    { caption:"The same pattern in B♭: B♭, E♭ and F7 take the same positions. The numerals never change; the letters follow the key.",
-      staff:{clef:"treble",tempo:120,notes:[
-        {p:"Bb3",d:"w",label:"I = B♭"},{p:"D4",d:"w",chord:true},{p:"F4",d:"w",chord:true},
-        {p:"Eb4",d:"w",label:"IV = E♭"},{p:"G4",d:"w",chord:true},{p:"Bb4",d:"w",chord:true},
-        {p:"F4",d:"w",label:"V7 = F7"},{p:"A4",d:"w",chord:true},{p:"Eb5",d:"w",chord:true},
-        {p:"Bb3",d:"w",label:"I"},{p:"D4",d:"w",chord:true},{p:"F4",d:"w",chord:true},{bar:"final"}],width:560},
-      kb:{start:46,octaves:2,labels:true} }
+    { caption:"Now hear it the way it is really played — a boogie-woogie <b>shuffle</b>: a walking bass in the left hand under chord stabs on the backbeat, all over the same 12-bar I-IV-V form. Watch each bar light up as it plays.",
+      mount:(host)=>MF_L70_shuffle(host) }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Blues Pattern Sprint (45s)",
@@ -273,8 +285,9 @@ LESSON_CONTENT[70]={
       explain:"Born in America's south (African rhythms + gospel + European harmony). 12 bars: I×4, IV×2, I×2, V(7), IV, I×2 — three chords total.",
       hint:"4-2-2-1-1-2.",
       play:()=>{[48,64,67,72].forEach(m=>MFAudio.tone(m,.8,0,.26));[53,65,69,72].forEach(m=>MFAudio.tone(m,.8,.9,.26));[43,67,71,77].forEach(m=>MFAudio.tone(m,.8,1.8,.26));} },
-    example:{ label:"the examples",
-      explain:"Example 1 charts the full C blues with bar numbers; example 2 moves the same pattern to B♭." },
+    example:{ label:"the shuffle",
+      explain:"This is the real thing — a boogie-woogie shuffle: a walking bass under backbeat chord stabs, all over the same 12-bar I-IV-V form.",
+      play:()=>{const b=document.getElementById("l70shuffleBtn"); if(b)b.click();} },
     game:{ label:"the games",
       explain:"Sprint the pattern, walk the bass, spot the three chords, then assemble the segments in order.",
       hint:"Segments: 4-2-2-1-1-2." },

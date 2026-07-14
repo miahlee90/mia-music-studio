@@ -41,7 +41,7 @@
   let ex=`<section class="card step" id="secExample"><h2>Hear it in real music</h2>`;
   C.examples.forEach((e,i)=>{
     ex+=`${e.caption?Teacher.bubbleHTML(e.caption):""}<div id="ex${i}"></div>
-      ${e.playable!==false?`<div style="text-align:center"><button class="play" id="exBtn${i}">▶ Play the example</button></div>`:""}`;
+      ${(!e.mount && e.playable!==false)?`<div style="text-align:center"><button class="play" id="exBtn${i}">▶ Play the example</button></div>`:""}`;
   });
   S.secExample=ex+`</section>`;
 
@@ -189,6 +189,7 @@
      staff note — each note flashes its matching key, instructor 2026-07-06) */
   C.examples.forEach((e,i)=>{
     const host=document.getElementById("ex"+i);
+    if(typeof e.mount==="function"){ e.mount(host); return; }
     const api=Staff.render(host,e.staff);
     let kbApi=null;
     if(e.kb){ const k=document.createElement("div"); k.style.marginTop="10px"; host.appendChild(k); kbApi=Keyboard.create(k,e.kb); }
