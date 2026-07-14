@@ -193,8 +193,10 @@ LESSON_CONTENT[77]={
   ],
   vocabulary:[
     {term:"Tuplet", def:"A group of equal notes that divides a beat or note value into a different number of parts than normally expected."},
-    {term:"Triplet", def:"A type of tuplet that places three equal notes in the time normally occupied by two (marked with a small 3)."},
-    {term:"Duplet", def:"A type of tuplet that places two equal notes in the time normally occupied by three (marked with a small 2)."},
+    {term:"Triplet", def:"A type of tuplet that places three equal notes in the time normally occupied by two (marked with a small 3).",
+      staff:{clef:"treble",notes:[{p:"G4",d:"q"},{p:"G4",d:"q"},{p:"G4",d:"q"}],tuplets:[{from:0,to:2}],width:240}},
+    {term:"Duplet", def:"A type of tuplet that places two equal notes in the time normally occupied by three (marked with a small 2).",
+      staff:{clef:"treble",notes:[{p:"G4",d:"q"},{p:"G4",d:"q"}],tuplets:[{from:0,to:1,n:2}],width:190}},
     {term:"Other Tuplets", def:"Tuplets may contain other numbers of equal notes, such as five in a quintuplet or six in a sextuplet."}
   ],
   mistakes:[],
