@@ -4,31 +4,28 @@
    symmetry — one repeating interval, so only a weak internal tonic
    hierarchy. NOTE: edit by FULL-FILE REWRITE only. */
 
-/* ear lab: major vs whole tone vs chromatic */
-function MF_L82_ear(container,fb){
-  const SC={maj:[60,62,64,65,67,69,71,72], wt:[60,62,64,66,68,70,72], chr:[60,61,62,63,64,65,66,67]};
+/* ear lab: three short examples (A=major, B=whole-tone, C=chromatic) — which is which? */
+function MF_L82_compare(container,fb){
+  const VER={ A:[60,62,64,65,67,69,71,72], B:[60,62,64,66,68,70,72], C:[60,61,62,63,64,65,66,67] };
   const ROUNDS=[
-    {play:"wt", ans:1, expl:"All whole steps — the WHOLE-TONE scale."},
-    {play:"chr", ans:2, expl:"Every half step in a row — the CHROMATIC scale."},
-    {play:"maj", ans:0, expl:"Whole and half steps mixed, with a clear pull home — a MAJOR scale."},
-    {play:"wt", ans:1, expl:"Six evenly spaced notes — the whole-tone scale again."}];
-  let r=0, played=false;
-  container.innerHTML=`<div class="big-q l82e-q" style="text-align:center"></div>
-    <div style="text-align:center"><button class="play l82e-play">▶ Play the scale</button></div>
-    <div class="choices l82e-ch" style="display:none"><button>Major — a mixture of whole and half steps</button><button>Whole-tone — all whole steps</button><button>Chromatic — all half steps</button></div>`;
-  const q=container.querySelector(".l82e-q"), pl=container.querySelector(".l82e-play"), ch=container.querySelector(".l82e-ch");
-  pl.onclick=()=>{
-    const R=ROUNDS[r]; if(!R) return;
-    SC[R.play].forEach((m,i)=>MFAudio.tone(m,.36,i*.3,.4));
-    played=true; setTimeout(()=>ch.style.display="",SC[R.play].length*300+300);
-  };
-  [...ch.children].forEach((b,i)=>b.onclick=()=>{
-    const R=ROUNDS[r]; if(!R||!played) return;
-    if(i===R.ans){ fb(true,"✓ "+R.expl); r++; played=false; ch.style.display="none";
-      if(r>=ROUNDS.length){ q.textContent="Excellent! Three scale colors, all identified."; pl.style.display="none"; } else q.innerHTML=`Round ${r+1} of ${ROUNDS.length}: listen, then decide.`;
-    } else { MFAudio.tone(40,.2); fb(false,"Listen to the interval sizes: all whole steps (whole-tone), all half steps (chromatic), or a mixture of whole and half steps (major)?"); }
-  });
-  q.innerHTML="Round 1 of 4: listen, then decide.";
+    {q:"Which one is the <b>Whole-tone</b> scale (all whole steps)?", ans:"B", expl:"B moved by equal whole steps — the whole-tone scale."},
+    {q:"Which one is the <b>Chromatic</b> scale (all half steps)?", ans:"C", expl:"C moved by half steps the whole way — the chromatic scale."},
+    {q:"Which one is the <b>Major</b> scale (a mix, with a clear home)?", ans:"A", expl:"A mixed whole and half steps and pulled home — the major scale."}];
+  let r=0;
+  container.innerHTML=`<div class="big-q l82c-q" style="text-align:center"></div>
+    <div style="text-align:center">
+      <button class="play" data-v="A">▶ Example A</button>
+      <button class="play" data-v="B">▶ Example B</button>
+      <button class="play" data-v="C">▶ Example C</button></div>
+    <div class="choices chips l82c-ch"><button>A</button><button>B</button><button>C</button></div>`;
+  const q=container.querySelector(".l82c-q"), ch=container.querySelector(".l82c-ch");
+  container.querySelectorAll("[data-v]").forEach(btn=>btn.onclick=()=>VER[btn.dataset.v].forEach((m,i)=>MFAudio.tone(m,.34,i*.3,.42)));
+  function ask(){ if(r>=ROUNDS.length){ q.textContent="✓ You can hear all three scales apart."; ch.style.display="none"; return; }
+    q.innerHTML=`${ROUNDS[r].q}<br><span style="font-weight:400;font-size:13px">Play A, B and C and compare their step sizes.</span>`; }
+  [...ch.children].forEach(b=>b.onclick=()=>{ const R=ROUNDS[r]; if(!R) return;
+    if(b.textContent===R.ans){ fb(true,"✓ "+R.expl); r++; setTimeout(ask,1200); }
+    else { MFAudio.tone(40,.2); fb(false,"Listen to the step sizes: all whole (whole-tone), all half (chromatic), or a mixture (major)?"); } });
+  ask();
 }
 
 LESSON_CONTENT[82]={
@@ -65,11 +62,11 @@ LESSON_CONTENT[82]={
         success:"✓ Correct. Six whole steps fill an octave: 6 × 2 half steps = 12 half steps.",
         fail:"Count the different pitches before the opening pitch class returns at the octave.",
         hint:"Divide the octave's 12 half steps by 2." } },
-    { say:"<b>Two Distinct Collections:</b> In twelve-tone equal temperament, there are two distinct whole-tone pitch collections. One contains C, D, E, F♯, G♯, and A♯; the other contains C♯, D♯, F, G, A, and B. Beginning on another member of either collection produces the same pitch collection in a different order. \u{1F447} <b>How many distinct whole-tone pitch collections are available in twelve-tone equal temperament?</b>",
+    { say:"<b>Two Distinct Collections:</b> There are only <b>two</b> different whole-tone collections. One of them is <b>C–D–E–F♯–G♯–A♯</b> (the other simply uses the six remaining notes). You don't need to memorize every note — just remember there are only two. \u{1F447} <b>How many distinct whole-tone collections are there?</b>",
       try:{ type:"mc", choices:["Two","Twelve","Seven"], answer:0,
-        success:"✓ Correct. Any whole-tone scale uses one of two distinct pitch collections. Beginning on another note reorders one of these collections.",
-        fail:"A whole-tone scale beginning on D uses the same pitch classes as the collection beginning on C.",
-        hint:"Think of the C collection and the C♯ collection." } },
+        success:"✓ Correct. Every whole-tone scale is one of just two collections — no need to memorize both.",
+        fail:"The heading gives the number.",
+        hint:"Only two." } },
     { say:"<b>The Chromatic Scale — Review:</b> The chromatic scale contains all twelve pitch classes within the octave and moves entirely by half steps. On the piano, it uses every key within the octave. Its enharmonic spelling depends on melodic direction, tonal context, and notational clarity. \u{1F447} <b>What is the interval pattern of the chromatic scale?</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:140,notes:[
         {p:"C4",d:"8"},{p:"C#4",d:"8"},{p:"D4",d:"8"},{p:"D#4",d:"8"},{p:"E4",d:"8"},{p:"F4",d:"8"},
@@ -78,21 +75,21 @@ LESSON_CONTENT[82]={
         success:"✓ Correct. The chromatic scale moves by half step and includes all twelve pitch classes.",
         fail:"On the piano, each adjacent key is included.",
         hint:"It uses the smallest interval in the twelve-tone system." } },
-    { say:"<b>Equal-Interval Symmetry:</b> Both scales repeat a single interval throughout the octave. The whole-tone scale repeats six whole steps, while the chromatic scale repeats twelve half steps. Because their internal step patterns treat every pitch position alike, the scales themselves do not establish the strong tonic hierarchy found in major and minor scales. Musical context, however, can still create a tonal center. \u{1F447} <b>Why does an equal-interval scale create less tonic hierarchy than a major scale?</b>",
+    { say:"<b>Equal-Interval Symmetry:</b> Whole-tone and chromatic scales <b>repeat the same interval</b> throughout the octave. Because every note has a similar role, neither scale naturally creates a strong feeling of <b>“home”</b> the way a major or minor scale does. \u{1F447} <b>Why does an equal-interval scale give a weaker sense of “home” than a major scale?</b>",
       show:{ type:"html", html:`<table style="border-collapse:collapse;margin:0 auto;font-size:14px;min-width:300px">
-        <tr><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:5px 12px">Scale</th><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:5px 12px">Pattern</th><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:5px 12px">Notes</th><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:5px 12px">Tonic hierarchy</th></tr>
+        <tr><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:5px 12px">Scale</th><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:5px 12px">Pattern</th><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:5px 12px">Notes</th><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:5px 12px">Feeling of “home”</th></tr>
         <tr><td style="border:1.5px solid #cdd5e1;padding:4px 12px;font-weight:800;color:#2F6DA8">Major</td><td style="border:1.5px solid #cdd5e1;padding:4px 12px;text-align:center">W W H W W W H</td><td style="border:1.5px solid #cdd5e1;padding:4px 12px;text-align:center">7</td><td style="border:1.5px solid #cdd5e1;padding:4px 12px;text-align:center">strong</td></tr>
         <tr><td style="border:1.5px solid #cdd5e1;padding:4px 12px;font-weight:800;color:#C05A21">Whole-tone</td><td style="border:1.5px solid #cdd5e1;padding:4px 12px;text-align:center">W W W W W W</td><td style="border:1.5px solid #cdd5e1;padding:4px 12px;text-align:center">6</td><td style="border:1.5px solid #cdd5e1;padding:4px 12px;text-align:center;font-weight:800">weak</td></tr>
         <tr><td style="border:1.5px solid #cdd5e1;padding:4px 12px;font-weight:800;color:#C05A21">Chromatic</td><td style="border:1.5px solid #cdd5e1;padding:4px 12px;text-align:center">H ×12</td><td style="border:1.5px solid #cdd5e1;padding:4px 12px;text-align:center">12</td><td style="border:1.5px solid #cdd5e1;padding:4px 12px;text-align:center;font-weight:800">weak</td></tr></table>` },
-      try:{ type:"mc", choices:["Its repeated interval pattern gives each pitch a similar structural position","Its notes must be played quietly","It contains too few pitches"], answer:0,
-        success:"✓ Correct. Major scales contain an unequal arrangement of whole and half steps that distinguishes individual scale degrees. Equal-interval scales lack those internal distinctions.",
-        fail:"Compare the repeated interval with the unequal whole- and half-step arrangement of a major scale.",
-        hint:"In an equal-interval pattern, every starting point produces the same sequence of intervals." } },
-    { say:"Listen and identify the major, whole-tone, or chromatic scale. \u{1F447}",
+      try:{ type:"mc", choices:["Every note has a similar role, so none stands out as “home”","Its notes must be played quietly","It contains too few pitches"], answer:0,
+        success:"✓ Correct. A major scale's uneven steps make some notes feel more important; equal steps make every note feel the same.",
+        fail:"Compare the repeated interval with the uneven whole/half-step pattern of a major scale.",
+        hint:"Same interval everywhere → every note feels alike." } },
+    { say:"<b>Ear Training — Compare the Three:</b> Play the three short examples and tell them apart by their step size. \u{1F447}",
       try:{ type:"custom",
-        hint:"Whole-tone scales use only whole steps; chromatic scales use only half steps; major scales use a specific mixture of whole and half steps.",
-        mount:(container,fb)=>MF_L82_ear(container,fb) } },
-    { say:"<b>Musical Applications:</b> Composers use whole-tone collections when they want to weaken traditional major–minor relationships or create an ambiguous harmonic color. Chromatic scales may connect pitches, decorate a melody, intensify motion, or create tension. The effect of either scale depends on tempo, harmony, register, articulation, instrumentation, and context. \u{1F447} <b>Which scale is built entirely from whole steps and therefore avoids the half-step relationships of major and minor scales?</b>",
+        hint:"All whole steps = whole-tone; all half steps = chromatic; a mixture = major.",
+        mount:(container,fb)=>MF_L82_compare(container,fb) } },
+    { say:"<b>Musical Applications:</b><br>• <b>Whole-tone:</b> a floating, dreamy, or ambiguous sound.<br>• <b>Chromatic:</b> creates tension and smoothly connects notes. \u{1F447} <b>Which scale is built entirely from whole steps and avoids the half-step pulls of major and minor?</b>",
       try:{ type:"mc", choices:["The whole-tone scale","The chromatic scale","The major scale"], answer:0,
         success:"✓ Correct. The whole-tone scale repeats one whole step throughout the octave.",
         fail:"The chromatic scale moves by half steps, and the major scale mixes whole and half steps…",
@@ -187,7 +184,7 @@ LESSON_CONTENT[82]={
     {term:"Whole-Tone Scale", def:"Six pitch classes per octave, every step a whole step. Two distinct collections exist."},
     {term:"Chromatic Scale", def:"All twelve pitch classes, moving by half steps. Its enharmonic spelling depends on direction, tonal context, and notational clarity."},
     {term:"Equal-Interval (Symmetrical) Scale", def:"A scale built from one repeating interval, giving each pitch a similar structural position."},
-    {term:"Tonic Hierarchy", def:"The sense of a central home note, supported by uneven step patterns. Equal-interval scales give it little internal support, though musical context can still create a tonal center."}
+    {term:"Tonal Center", def:"The note that sounds like “home.” Equal-interval scales weaken this feeling because every step is the same."}
   ],
   mistakes:[],
   summary:[
