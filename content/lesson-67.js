@@ -23,11 +23,23 @@ function MF_L67_compose(container,fb){
       note:"Rule: end on the ROOT of the final I."}];
   let k=0; const picked=[];
   container.innerHTML=`<div class="big-q l67c-q" style="text-align:center"></div>
-    <div class="l67c-map" style="text-align:center;font-weight:800;letter-spacing:1px;margin:6px 0"></div>
+    <div class="l67c-map" style="text-align:center;margin:10px 0;letter-spacing:normal"></div>
     <div class="choices chips l67c-ch"></div>
     <div style="text-align:center"><button class="play l67c-play" style="display:none">▶ Play YOUR composition</button></div>`;
   const q=container.querySelector(".l67c-q"), map=container.querySelector(".l67c-map"), ch=container.querySelector(".l67c-ch"), pl=container.querySelector(".l67c-play");
-  function drawMap(){ map.textContent=MEAS.map((m,i)=>`${m.label}:${i<picked.length?picked[i].name:"·"}`).join("  |  "); }
+  function drawMap(){
+    map.innerHTML=MEAS.map((m,i)=>{
+      const done=i<picked.length, cur=(i===k && k<MEAS.length);
+      const note=done?picked[i].name:"—";
+      const bg=cur?"var(--accent,#4f7cff)":done?"#e6efff":"#f2f4f8";
+      const fg=cur?"#fff":done?"#1f4bd8":"#8a93a3";
+      const bd=cur?"var(--accent,#4f7cff)":done?"#bcd2ff":"#dde2ea";
+      return `<span style="display:inline-block;min-width:56px;margin:3px;padding:6px 6px;border-radius:10px;border:1.5px solid ${bd};background:${bg};color:${fg};text-align:center;vertical-align:top">
+        <span style="display:block;font-size:10.5px;font-weight:600;opacity:.85">m.${i+1}</span>
+        <span style="display:block;font-size:15px;font-weight:800;line-height:1.35">${m.sym}</span>
+        <span style="display:block;font-size:13px;font-weight:700">${note}</span></span>`;
+    }).join("");
+  }
   function ask(){
     drawMap();
     if(k>=MEAS.length){ q.textContent="Excellent! Your melody is complete. Press play!"; ch.innerHTML=""; pl.style.display="inline-block"; return; }
@@ -113,8 +125,8 @@ LESSON_CONTENT[67]={
         fail:"The root of I in C major is…",
         hint:"The tonic itself." } },
     { say:"<b>Reading the Labels:</b> R = root · 3 = third · 5 = fifth · 7 = seventh · P = passing tone. Decode this measure over a C chord: \u{1F447} <b>What is the correct label for the D?</b>",
-      show:{ type:"staff", spec:{clef:"treble",tempo:100,notes:[
-        {p:"E4",d:"q",label:"3"},{p:"D4",d:"q",label:"?"},{p:"C4",d:"q",label:"R"},{p:"G4",d:"h",label:"5"},{bar:"final"}],width:420} },
+      show:{ type:"staff", spec:{clef:"treble",tempo:100,time:"3/4",notes:[
+        {p:"E4",d:"q",label:"3"},{p:"D4",d:"q",label:"?"},{p:"C4",d:"q",label:"R"},{bar:"single"},{p:"G4",d:"h.",label:"5"},{bar:"final"}],width:460} },
       try:{ type:"mc", choices:["P — a passing tone between 3 and R","5 — the chord's fifth","R — a second root"], answer:0,
         success:"✓ P — a passing tone. D is not in C-E-G; it connects the 3rd (E) to the root (C).",
         fail:"Is D inside C-E-G?",
@@ -133,16 +145,16 @@ LESSON_CONTENT[67]={
   ],
   examples:[
     { caption:"A composed melody with labels: every note is R, 3, 5 — or P for a passing tone.",
-      staff:{clef:"treble",tempo:100,notes:[
-        {p:"C5",d:"q",label:"R"},{p:"E5",d:"q",label:"3"},{p:"G5",d:"q",label:"5"},{p:"E5",d:"q",label:"3"},
-        {p:"A4",d:"q",label:"3 (of IV)"},{p:"B4",d:"q",label:"P"},{p:"C5",d:"h",label:"5 (of IV)"},
-        {p:"E5",d:"q",label:"3 (of I)"},{p:"D5",d:"q",label:"5 (of V7)"},{p:"B4",d:"q",label:"3 (of V7)"},{p:"D5",d:"q",label:"5"},
-        {p:"C5",d:"w",label:"R (of I) — home!"},{bar:"final"}],width:660},
+      staff:{clef:"treble",tempo:100,time:"4/4",notes:[
+        {p:"C5",d:"q",label:"R"},{p:"E5",d:"q",label:"3"},{p:"G5",d:"q",label:"5"},{p:"E5",d:"q",label:"3"},{bar:"single"},
+        {p:"A4",d:"q",label:"3/IV"},{p:"B4",d:"q",label:"P"},{p:"C5",d:"h",label:"5/IV"},{bar:"single"},
+        {p:"E5",d:"q",label:"3/I"},{p:"D5",d:"q",label:"5/V7"},{p:"B4",d:"q",label:"3/V7"},{p:"D5",d:"q",label:"5"},{bar:"single"},
+        {p:"C5",d:"w",label:"R — home!"},{bar:"final"}],width:780},
       kb:{start:57,octaves:2,labels:true} },
     { caption:"The same melody twice: chord tones only, then with passing tones added on the weak beats.",
-      staff:{clef:"treble",tempo:100,notes:[
-        {p:"C4",d:"h",label:"chord tones…"},{p:"E4",d:"h"},{p:"G4",d:"h"},{p:"C5",d:"h"},{bar:"double"},
-        {p:"C4",d:"q",label:"…with P tones!"},{p:"D4",d:"q",label:"P"},{p:"E4",d:"q"},{p:"F4",d:"q",label:"P"},{p:"G4",d:"q"},{p:"A4",d:"q",label:"P"},{p:"B4",d:"q",label:"P"},{p:"C5",d:"q"},{bar:"final"}],width:640},
+      staff:{clef:"treble",tempo:100,time:"4/4",notes:[
+        {p:"C4",d:"h",label:"chord tones"},{p:"E4",d:"h"},{bar:"single"},{p:"G4",d:"h"},{p:"C5",d:"h"},{bar:"double"},
+        {p:"C4",d:"q",label:"+ P tones"},{p:"D4",d:"q",label:"P"},{p:"E4",d:"q"},{p:"F4",d:"q",label:"P"},{bar:"single"},{p:"G4",d:"q"},{p:"A4",d:"q",label:"P"},{p:"B4",d:"q",label:"P"},{p:"C5",d:"q"},{bar:"final"}],width:780},
       kb:{start:60,octaves:2,labels:true} }
   ],
   games:[
