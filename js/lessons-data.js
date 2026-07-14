@@ -73,7 +73,7 @@ const LESSONS=[
  {n:70, title:"12-Bar Blues Chord Progression", unit:17, book:3, time:15, kw:["blues","12-bar"]},
  {n:71, title:"The Blues Scale", unit:17, book:3, time:15, kw:["blues scale"]},
  {n:72, title:"Basic Forms of Music — Motive and Phrase", unit:18, book:3, time:15, kw:["motive","phrase","form"]},
- {n:73, title:"AB (Binary) Form", unit:18, book:3, time:15, kw:["binary","AB form"]},
+ {n:73, title:"Binary Form", unit:18, book:3, time:15, kw:["binary","AB form","sectional","continuous","rounded binary"]},
  {n:74, title:"ABA (Ternary) Form", unit:18, book:3, time:15, kw:["ternary","ABA form"]},
  {n:75, title:"Rondo Form", unit:18, book:3, time:15, kw:["rondo"]},
  {n:76, title:"Compound Meter Expanded", unit:19, book:4, time:15, kw:["compound meter","6/8","9/8","12/8","conducting"]},

@@ -1,291 +1,326 @@
-/* Lesson 73 — AB (Binary) Form (AEMT Book 3, Unit 18)
-   Built from drafts/UNIT 18 – Lesson 73.md; AEMT3 p.115 verified by render.
-   Core: phrases combine into SECTIONS; TWO-PART FORMS = AB (BINARY): the
-   A section's material CONTRASTS with the B section's — variety through
-   ELEMENTS: melody, rhythm, harmony, time signature, tempo. Sections may
-   share a motive or end similarly, but each is distinct. VERSE (tells a
-   story, changes each time) + REFRAIN/CHORUS (repeats) is typical AB.
+/* Lesson 73 — Binary Form (AB) — FULL REWRITE (instructor 2026-07-13)
+   Core: BINARY FORM = two main sections, A -> B, usually contrasting.
+   Repeats (|: A :| |: B :|) do NOT add sections. Section A begins in the
+   tonic and may stay (SECTIONAL) or leave toward the dominant/relative
+   major (CONTINUOUS); Section B returns to the tonic. If opening A material
+   returns near the end of B it is ROUNDED binary (A | B A'), else SIMPLE.
+   Binary is distinct from TERNARY (A B A) and from VERSE-CHORUS form.
+   Deliberately avoids "A rises / B falls" and "A must end on V7" as rules.
    NOTE: edit by FULL-FILE REWRITE only. */
 
-/* contrast detective: hear A and B, name what differs */
-function MF_L73_contrast(container,fb){
-  const A={notes:[60,62,64,65,67,67], durs:[.4,.4,.4,.4,.8,.8], label:"A: rising quarters"};
-  const B={notes:[72,71,69,67,69,67], durs:[.8,.4,.2,.2,.4,.8], label:"B: falling, dotted rhythm"};
-  const ROUNDS=[
-    {q:"Round 1: which ELEMENT contrasts most between A and B?",
-      choices:["Melody direction — A rises, B falls","The key signature","The clef"], right:0,
-      expl:"A climbs stepwise; B tumbles downward. Melodic contrast — element #1."},
-    {q:"Round 2: listen again — what ELSE differs?",
-      choices:["The rhythm — A is even, B mixes long and short","The instrument","Nothing else"], right:0,
-      expl:"A moves in even values; B uses longs and quick shorts — rhythmic contrast."}];
-  let r=0, heardA=false, heardB=false;
-  container.innerHTML=`<div class="big-q l73c-q" style="text-align:center"></div>
-    <div style="text-align:center">
-      <button class="play l73c-a">▶ Section A</button>
-      <button class="play l73c-b">▶ Section B</button></div>
-    <div class="choices l73c-ch" style="display:none"></div>`;
-  const q=container.querySelector(".l73c-q"), ch=container.querySelector(".l73c-ch");
-  function play(S){ let t=0; S.notes.forEach((m,i)=>{ MFAudio.tone(m,S.durs[i]*.95,t,.42); t+=S.durs[i]; }); return t; }
-  function ask(){
-    if(r>=ROUNDS.length){ q.textContent="Great! You found the contrast — melody AND rhythm make B a new section."; ch.style.display="none"; return; }
-    q.innerHTML=ROUNDS[r].q; ch.style.display="none"; ch.innerHTML="";
-    ROUNDS[r].choices.forEach((c,i)=>{
-      const b=document.createElement("button"); b.textContent=c;
-      b.onclick=()=>{
-        if(i===ROUNDS[r].right){ MFAudio.yay(); fb(true,"✓ "+ROUNDS[r].expl); r++; heardA=false; heardB=false; setTimeout(ask,1400); }
-        else { MFAudio.tone(40,.2); fb(false,"Listen for the contrast — play both sections again and compare that element."); }
-      };
-      ch.appendChild(b);
-    });
+/* tonal-journey builder: complete the continuous-binary plan */
+function MF_L73_journey(container,fb){
+  const STEPS=[
+    {q:"A major-key <b>continuous</b> binary begins in the TONIC. Where does Section A lean by its end?",
+      opts:["Dominant","Subdominant","Tonic (it never leaves)"], ans:0, expl:"Tonic → Dominant."},
+    {q:"Section B then carries the music from the dominant back to…",
+      opts:["Tonic","Dominant (it stays)","An unrelated key"], ans:0, expl:"Dominant → Tonic — home at last."}];
+  let k=0; const chosen=[];
+  container.innerHTML=`<div class="big-q l73j-q" style="text-align:center"></div>
+    <div class="l73j-map" style="text-align:center;font-weight:800;font-size:16px;margin:10px 0;letter-spacing:.5px;color:var(--ink,#333)"></div>
+    <div class="choices chips l73j-ch"></div>`;
+  const q=container.querySelector(".l73j-q"), map=container.querySelector(".l73j-map"), ch=container.querySelector(".l73j-ch");
+  function drawMap(){ map.innerHTML=`Section A: Tonic → <b>${chosen[0]||"?"}</b> &nbsp;|&nbsp; Section B: Dominant → <b>${chosen[1]||"?"}</b>`; }
+  function ask(){ drawMap();
+    if(k>=STEPS.length){ q.innerHTML="✓ <b>Tonic → Dominant | Dominant → Tonic</b> — the continuous-binary journey."; ch.innerHTML=""; return; }
+    q.innerHTML=STEPS[k].q; ch.innerHTML="";
+    STEPS[k].opts.forEach((o,i)=>{ const b=document.createElement("button"); b.textContent=o;
+      b.onclick=()=>{ if(i===STEPS[k].ans){ MFAudio.yay(); chosen[k]=o; fb(true,"✓ "+STEPS[k].expl); k++; setTimeout(ask,900); }
+        else { MFAudio.tone(40,.2); fb(false,"Think about where the harmony needs to travel next."); } };
+      ch.appendChild(b); });
   }
-  container.querySelector(".l73c-a").onclick=()=>{ play(A); heardA=true; if(heardB) setTimeout(()=>ch.style.display="",3300); };
-  container.querySelector(".l73c-b").onclick=()=>{ play(B); heardB=true; if(heardA) setTimeout(()=>ch.style.display="",3300); };
   ask();
 }
 
-/* verse-or-refrain sorter */
-function MF_L73_vr(container,fb){
-  const ROUNDS=[
-    {desc:"This section's WORDS CHANGE every time it comes around — verse 1 tells the beginning, verse 2 continues the story…", ans:0,
-      expl:"Changing words + storytelling = the VERSE."},
-    {desc:"This section REPEATS with the same words after every verse — the whole room sings along.", ans:1,
-      expl:"The repeated crowd-singer = the REFRAIN (or chorus)."},
-    {desc:"In 'Go, Tell It On the Mountain,' the part marked A tells the seeker's story differently in each stanza.", ans:0,
-      expl:"Story that changes = verse — the A section."},
-    {desc:"The part that always returns with 'Go, tell it on the mountain…' word for word.", ans:1,
-      expl:"Same words, every time = refrain — the B section."}];
-  let r=0;
-  container.innerHTML=`<div class="big-q l73v-q" style="text-align:center"></div>
-    <div class="choices chips l73v-ch"><button>Verse</button><button>Refrain</button></div>`;
-  const q=container.querySelector(".l73v-q"), ch=container.querySelector(".l73v-ch");
-  function ask(){
-    if(r>=ROUNDS.length){ q.textContent="Excellent! Verse and refrain — the AB song format is yours."; ch.style.display="none"; return; }
-    q.innerHTML=`Example ${r+1} of ${ROUNDS.length}: <i>${ROUNDS[r].desc}</i>`;
+/* form sorter: binary vs ternary vs rounded binary */
+function MF_L73_types(container,fb){
+  const R=[
+    {pat:"|: A :|  |: B :|", opts:["Binary","Ternary","Rounded binary"], ans:0, expl:"Two repeated sections — plain BINARY."},
+    {pat:"A → B → A", opts:["Ternary","Binary","Rounded binary"], ans:0, expl:"Three large sections, a full A return — TERNARY."},
+    {pat:"|: A :|  |: B A′ :|", opts:["Rounded binary","Ternary","Simple binary"], ans:0, expl:"A returns INSIDE the second section — ROUNDED binary."}];
+  let k=0;
+  container.innerHTML=`<div class="big-q l73t-q" style="text-align:center"></div>
+    <div class="l73t-pat" style="text-align:center;font-size:22px;font-weight:800;letter-spacing:1px;margin:12px 0;color:var(--ink,#333)"></div>
+    <div class="choices chips l73t-ch"></div>`;
+  const q=container.querySelector(".l73t-q"), pat=container.querySelector(".l73t-pat"), ch=container.querySelector(".l73t-ch");
+  function ask(){ if(k>=R.length){ q.textContent="✓ You can tell binary, ternary and rounded binary apart!"; pat.textContent=""; ch.innerHTML=""; return; }
+    q.innerHTML=`Round ${k+1} of ${R.length}: name this form.`; pat.textContent=R[k].pat; ch.innerHTML="";
+    R[k].opts.forEach((o,i)=>{ const b=document.createElement("button"); b.textContent=o;
+      b.onclick=()=>{ if(i===R[k].ans){ MFAudio.yay(); fb(true,"✓ "+R[k].expl); k++; setTimeout(ask,1000); }
+        else { MFAudio.tone(40,.2); fb(false,"Count the LARGE sections — and check whether A returns inside B."); } };
+      ch.appendChild(b); });
   }
-  [...ch.children].forEach((b,i)=>b.onclick=()=>{
-    const R=ROUNDS[r]; if(!R) return;
-    if(i===R.ans){ MFAudio.yay(); fb(true,"✓ "+R.expl); r++; setTimeout(ask,1300); }
-    else { MFAudio.tone(40,.2); fb(false,"Does it CHANGE each time (verse) or REPEAT the same (refrain)?"); }
-  });
   ask();
+}
+
+/* example 1 — a continuous binary demonstration (form diagram + notation + audio) */
+function MF_L73_ex1(host){
+  host.innerHTML=`<div style="text-align:center;font-weight:800;font-size:18px;letter-spacing:1px;color:var(--ink,#333)">|: A :| &nbsp; |: B :|</div>
+    <div style="text-align:center;font-size:14px;color:var(--muted,#667);margin:2px 0 10px">Tonic → Dominant &nbsp;|&nbsp; Dominant → Tonic</div>
+    <div id="l73ex1st"></div>
+    <div style="text-align:center;margin-top:12px"><button class="play" id="l73ex1btn">▶ Play the complete binary example</button></div>`;
+  Staff.render(host.querySelector("#l73ex1st"),{clef:"treble",tempo:96,time:"4/4",notes:[
+    {p:"C4",d:"q",label:"A: I → V"},{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"G4",d:"q"},{bar:"single"},
+    {p:"A4",d:"q"},{p:"G4",d:"q"},{p:"D4",d:"h",label:"ends on V"},{bar:"double"},
+    {p:"D4",d:"q",label:"B: V → I"},{p:"E4",d:"q"},{p:"F4",d:"q"},{p:"G4",d:"q"},{bar:"single"},
+    {p:"E4",d:"q"},{p:"D4",d:"q"},{p:"C4",d:"h",label:"ends on I"},{bar:"final"}],width:660});
+  host.querySelector("#l73ex1btn").onclick=()=>{
+    const A=[60,62,64,67,69,67,62]; A.forEach((m,i)=>MFAudio.tone(m,.42,i*.44,.4));
+    let t=A.length*.44+.1; [55,59,62].forEach(m=>MFAudio.tone(m,1.3,t,.2));   /* V chord closes A */
+    t+=1.5; const B=[62,64,65,67,64,62,60]; B.forEach((m,i)=>MFAudio.tone(m,.42,t+i*.44,.4));
+    let t2=t+B.length*.44+.1; [48,64,67].forEach(m=>MFAudio.tone(m,1.7,t2,.2)); /* I chord closes B */
+  };
+}
+
+/* example 2 — a rounded binary demonstration (A returns near the end of B) */
+function MF_L73_ex2(host){
+  host.innerHTML=`<div style="text-align:center;font-weight:800;font-size:18px;letter-spacing:1px;margin-bottom:10px;color:var(--ink,#333)">|: A :| &nbsp; |: B A′ :|</div>
+    <div id="l73ex2st"></div>
+    <div style="text-align:center;margin-top:12px"><button class="play" id="l73ex2btn">▶ Listen for the return of A</button></div>`;
+  Staff.render(host.querySelector("#l73ex2st"),{clef:"treble",tempo:100,time:"4/4",notes:[
+    {p:"G4",d:"q",label:"A"},{p:"E4",d:"q"},{p:"C4",d:"q"},{p:"E4",d:"q"},{bar:"double"},
+    {p:"F4",d:"q",label:"B"},{p:"G4",d:"q"},{p:"A4",d:"q"},{p:"B4",d:"q"},{bar:"single"},
+    {p:"G4",d:"q",label:"A′ (return)"},{p:"E4",d:"q"},{p:"C4",d:"h"},{bar:"final"}],width:620});
+  host.querySelector("#l73ex2btn").onclick=()=>{
+    const A=[67,64,60,64]; A.forEach((m,i)=>MFAudio.tone(m,.44,i*.46,.4));
+    let t=A.length*.46+.4; const B=[65,67,69,71]; B.forEach((m,i)=>MFAudio.tone(m,.44,t+i*.46,.4));
+    let t2=t+B.length*.46+.5; const Ap=[67,64,60]; Ap.forEach((m,i)=>MFAudio.tone(m,.5,t2+i*.5,.44)); /* A' returns */
+    let t3=t2+Ap.length*.5+.05; [48,64,67].forEach(m=>MFAudio.tone(m,1.7,t3,.2));
+  };
 }
 
 LESSON_CONTENT[73]={
-  welcome:"Binary (AB) form: music with two different sections. \u{1F1E6}",
+  welcome:"Binary form: two sections, one complete journey — A → B. \u{1F1E6}",
   hook:{
-    say:"<b>Listen to this piece.</b> \u{1F447} <b>Do you hear one musical idea, or two different sections?</b>",
+    say:"<b>Listen to two contrasting sections.</b> The first moves away from the home key; the second brings the music back home. \u{1F447} <b>What makes this music binary?</b>",
     interact:{ type:"custom",
       mount:(container,fb)=>{
         container.innerHTML=`<div style="text-align:center">
-          <button class="play hk-a">▶ First section</button>
-          <button class="play hk-b">▶ Second section</button></div>
-          <div class="choices hk-ch" style="display:none"><button>Two different sections — A, then a contrasting B</button><button>One idea, played twice</button></div>`;
+          <button class="play hk-a">▶ Section A</button>
+          <button class="play hk-b">▶ Section B</button></div>
+          <div class="choices hk-ch" style="display:none"><button>It has two main sections</button><button>It has three main sections</button><button>The same section repeats without contrast</button></div>`;
         const ch=container.querySelector(".hk-ch");
         let hA=false,hB=false;
-        container.querySelector(".hk-a").onclick=()=>{ [60,62,64,65,67,67].forEach((m,i)=>MFAudio.tone(m,.4,i*.42,.42)); hA=true; if(hB) setTimeout(()=>ch.style.display="",2800); };
-        container.querySelector(".hk-b").onclick=()=>{ const d=[.7,.35,.2,.2,.35,.7]; let t=0; [72,71,69,67,69,67].forEach((m,i)=>{ MFAudio.tone(m,d[i],t,.42); t+=d[i]; }); hB=true; if(hA) setTimeout(()=>ch.style.display="",2800); };
+        container.querySelector(".hk-a").onclick=()=>{ [60,64,67,69,67].forEach((m,i)=>MFAudio.tone(m,.42,i*.44,.42)); [55,59,62].forEach(m=>MFAudio.tone(m,1.2,5*.44,.2)); hA=true; if(hB) setTimeout(()=>ch.style.display="",2800); };
+        container.querySelector(".hk-b").onclick=()=>{ [74,72,71,69,67,64,60].forEach((m,i)=>MFAudio.tone(m,.4,i*.42,.42)); [48,64,67].forEach(m=>MFAudio.tone(m,1.4,7*.42,.2)); hB=true; if(hA) setTimeout(()=>ch.style.display="",2800); };
         [...ch.children].forEach((b,i)=>b.onclick=()=>{
-          if(i===0) fb(true,"✓ Rising even notes… then falling dotted ones: TWO contrasting sections. Music built as A-then-B is called AB or BINARY FORM — two parts, each distinct. Today's lesson!");
-          else fb(false,"Compare the direction and the rhythm of the two sections — same or different?");
+          if(i===0) fb(true,"✓ Binary form contains two main sections: A and B. Section A leaned away from home; Section B brought it back. Today: how binary form works — and how it differs from ternary and verse-chorus.");
+          else fb(false,"Binary means “two.” Listen for two main musical sections — a statement, then a contrasting answer.");
         });
       } }
   },
   objectives:[
-    "Combine phrases into complete SECTIONS (parts)",
-    "Define AB (binary) form: two contrasting sections",
-    "List the contrast ELEMENTS: melody, rhythm, harmony, time signature, tempo",
-    "Know sections may share a motive yet remain distinct",
-    "Define VERSE (changing story) and REFRAIN/CHORUS (repeats)",
-    "Recognize verse + refrain as typical AB form"
+    "Identify the two main sections of binary form: A → B",
+    "Recognize the common A–B pattern and its repeats",
+    "Understand why each section is often repeated",
+    "Distinguish SECTIONAL from CONTINUOUS binary form",
+    "Recognize SIMPLE and ROUNDED binary form",
+    "Tell binary form apart from ternary and verse–chorus form"
   ],
   steps:[
-    { say:"<b>What Is Binary Form?</b> Several phrases can combine to form a <b>section</b>. Music with <b>two different sections</b> is called <b>binary (AB) form</b>. \u{1F447} <b>What does binary form mean?</b>",
-      show:{ type:"html", html:`<div style="max-width:300px;margin:0 auto;font-size:16px;line-height:1.9;background:var(--card,#fff);border:1.5px solid #cdd5e1;border-radius:12px;padding:12px 18px;text-align:center;font-weight:800">
-        Section A&nbsp;&nbsp;|&nbsp;&nbsp;Section B<br><span style="font-weight:400;font-size:13.5px">two different sections</span></div>` },
-      try:{ type:"mc", choices:["Two contrasting parts","Two composers","Two tempos always"], answer:0,
-        success:"✓ Bi = two. Binary form has two different sections: A and B.",
-        fail:"Count the letters in 'AB'…",
-        hint:"Bi-nary, bi-cycle…" } },
-    { say:"<b>How Are the Sections Different?</b> Sections can be different in <b>melody, rhythm, harmony, tempo, and time signature</b>. In our example, A has an ascending melody in even notes; B has a descending melody in dotted rhythm. \u{1F447} <b>Which musical elements changed?</b>",
+    { say:"<b>What Does “Binary” Mean?</b> Binary means “made of two parts.” In music, binary form has <b>two main sections</b>, A then B. The letters describe whole sections, not single phrases. \u{1F447} <b>Which pattern represents binary form?</b>",
+      show:{ type:"html", html:`<div style="max-width:280px;margin:0 auto;font-size:22px;font-weight:800;letter-spacing:2px;background:var(--card,#fff);border:1.5px solid #cdd5e1;border-radius:12px;padding:14px 18px;text-align:center;color:#243244">A → B</div>` },
+      try:{ type:"mc", choices:["A–B","A–B–A","A–B–A–C–A"], answer:0,
+        success:"✓ Binary form has two main sections: A and B.",
+        fail:"Binary means two — count the section letters.",
+        hint:"Two parts, two letters." } },
+    { say:"<b>Repeats Do Not Create New Sections.</b> Many binary pieces repeat each section, so a performance may sound like A A B B. That is still <b>two</b> structural sections. \u{1F447} <b>How many main sections does |: A :| |: B :| contain?</b>",
+      show:{ type:"html", html:`<div style="max-width:320px;margin:0 auto;font-size:20px;font-weight:800;letter-spacing:1px;background:var(--card,#fff);border:1.5px solid #cdd5e1;border-radius:12px;padding:14px 16px;text-align:center;color:#243244">|: A :| &nbsp; |: B :|<br><span style="font-weight:400;font-size:13px;color:#667">sounds like A A B B — still two sections</span></div>` },
+      try:{ type:"mc", choices:["Two","Three","Four"], answer:0,
+        success:"✓ Each section repeats, but the large-scale form is still A–B.",
+        fail:"Repeats replay a section; they don't add new ones.",
+        hint:"Count the different letters, not the repeats." } },
+    { say:"<b>What Happens in Section A?</b> Section A begins in the tonic. It may stay there or move to a related key. In a major-key piece it often moves toward the <b>dominant</b> (I → V). This is a common possibility, not a rule for every piece. \u{1F447} <b>In a major-key binary piece, where does Section A often move?</b>",
+      show:{ type:"html", html:`<div style="max-width:260px;margin:0 auto;font-size:20px;font-weight:800;background:var(--card,#fff);border:1.5px solid #cdd5e1;border-radius:12px;padding:12px 18px;text-align:center;color:#243244">I → V<br><span style="font-weight:400;font-size:13px;color:#667">tonic toward dominant</span></div>` },
+      try:{ type:"mc", choices:["Toward the dominant","Always toward the subdominant","It never leaves the tonic"], answer:0,
+        success:"✓ Many major-key binary pieces move from tonic toward dominant during Section A.",
+        fail:"Think of the most common destination a half-step short of home.",
+        hint:"Scale degree 5." } },
+    { say:"<b>What Happens in Section B?</b> Section B usually begins in the key area A reached. It may develop motives, add contrast, or pass through new harmonies — but its most important job is to <b>bring the music back home</b>. \u{1F447} <b>What commonly happens near the end of Section B?</b>",
+      try:{ type:"mc", choices:["The music returns to the tonic","The piece changes permanently to a new key","Section A is repeated note for note"], answer:0,
+        success:"✓ Section B normally restores the tonic and completes the form.",
+        fail:"What would make the piece sound finished?",
+        hint:"Home key." } },
+    { say:"<b>Sectional vs Continuous (harmony).</b> In <b>sectional</b> binary, Section A ends with a strong cadence in the TONIC, so it sounds fairly complete. In <b>continuous</b> binary, Section A ends OUTSIDE the tonic (often the dominant), so it leans onward. \u{1F447} <b>Which statement describes sectional binary?</b>",
+      show:{ type:"html", html:`<table style="border-collapse:collapse;margin:0 auto;font-size:13.5px">
+        <tr><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:6px 12px">Sectional</th><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:6px 12px">Continuous</th></tr>
+        <tr><td style="border:1.5px solid #cdd5e1;padding:6px 12px;text-align:center">A ends in the TONIC</td><td style="border:1.5px solid #cdd5e1;padding:6px 12px;text-align:center">A ends OUTSIDE the tonic (often V)</td></tr></table>` },
+      try:{ type:"mc", choices:["Section A ends strongly in the tonic","Section A must end on V7","Section B never returns to the tonic"], answer:0,
+        success:"✓ Sectional binary closes Section A in the home key, so it sounds relatively complete.",
+        fail:"Sectional = A comes to rest at home.",
+        hint:"Where does A cadence?" } },
+    { say:"<b>Follow the Continuous Journey.</b> A common continuous-binary plan in a major key is tonic → dominant, then dominant → tonic. Complete it below. \u{1F447}",
       try:{ type:"custom",
-        hint:"Compare direction first, then rhythm.",
-        mount:(container,fb)=>MF_L73_contrast(container,fb) } },
-    { say:"<b>Different, but Connected:</b> The two sections should sound different. They may still share some musical ideas. <b>Remember: binary form has two different sections. They may share ideas, but they should sound different.</b> \u{1F447} <b>Must the two sections be completely different?</b>",
-      try:{ type:"mc", choices:["No — they may share ideas, but should sound different","Yes — they must share nothing","They must use different time signatures"], answer:0,
-        success:"✓ The sections may share a motive and still be distinct — contrast in SOME elements is enough.",
-        fail:"Total separation is not required…",
-        hint:"Different, but connected." } },
-    { say:"<b>Verse and Chorus:</b> In many songs, the <b>verse</b> tells a story and changes each time; the <b>chorus (refrain)</b> repeats after every verse. In many songs: verse = A, chorus = B. \u{1F447} <b>Which section repeats after each verse?</b>",
-      show:{ type:"html", html:`<table style="border-collapse:collapse;margin:0 auto;font-size:14.5px;min-width:240px">
-        <tr><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:6px 14px">Section</th><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:6px 14px">Typical Song Part</th></tr>
-        <tr><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center;font-weight:800">A</td><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center">Verse</td></tr>
-        <tr><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center;font-weight:800">B</td><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center">Chorus (Refrain)</td></tr></table>` },
+        hint:"A leans to the dominant; B travels home to the tonic.",
+        mount:(container,fb)=>MF_L73_journey(container,fb) } },
+    { say:"<b>Simple Binary (theme).</b> In <b>simple</b> binary, Section B may borrow motives from A, but there is <b>no clear return of the opening theme</b> near the end. The shape is just A | B. \u{1F447} <b>In simple binary, what does Section B do with the opening theme?</b>",
+      show:{ type:"html", html:`<div style="max-width:220px;margin:0 auto;font-size:22px;font-weight:800;letter-spacing:3px;background:var(--card,#fff);border:1.5px solid #cdd5e1;border-radius:12px;padding:12px 18px;text-align:center;color:#243244">A | B</div>` },
+      try:{ type:"mc", choices:["It does not clearly bring the opening theme back","It always repeats A exactly","It always changes the time signature"], answer:0,
+        success:"✓ Simple binary never gives a clear return of the opening material near the end.",
+        fail:"“Simple” = no clear return of the opening theme.",
+        hint:"Does the opening come back? No." } },
+    { say:"<b>Rounded Binary (theme).</b> In <b>rounded</b> binary, material from the start of A returns near the end of B — a brief homecoming, usually shorter than the original A. The label is A | B A′. \u{1F447} <b>Near the end of Section B, the opening theme returns briefly in the tonic. What type is this?</b>",
+      show:{ type:"html", html:`<div style="max-width:260px;margin:0 auto;font-size:22px;font-weight:800;letter-spacing:2px;background:var(--card,#fff);border:1.5px solid #cdd5e1;border-radius:12px;padding:12px 18px;text-align:center;color:#243244">A | B A′</div>` },
+      try:{ type:"mc", choices:["Rounded binary","Simple binary","Rondo form"], answer:0,
+        success:"✓ Rounded binary brings opening material back near the end of the B section.",
+        fail:"A brief return of A inside B has a special name.",
+        hint:"“Rounded” off by the opening's return." } },
+    { say:"<b>Binary vs Ternary.</b> Rounded binary keeps <b>two</b> repeated sections — the A return lives INSIDE the second section (|: A :| |: B A′ :|). Ternary form has <b>three</b> large sections, A B A, where the last A is a full, standalone return. Sort a few forms. \u{1F447}",
       try:{ type:"custom",
-        hint:"Changing story = verse; repeated sing-along = refrain.",
-        mount:(container,fb)=>MF_L73_vr(container,fb) } },
-    { say:"In this song, <b>verse = A</b> and <b>chorus = B</b>. In \u{201C}Go, Tell It On the Mountain,\u{201D} everyone joins in on the famous title line. \u{1F447} <b>Which section is the chorus?</b>",
-      try:{ type:"mc", choices:["The B section — the refrain","The A section — the verse","An improvised solo"], answer:0,
-        success:"✓ The repeated, join-in part is the chorus (refrain) — section B of this AB song.",
-        fail:"Which part repeats word-for-word every time?",
-        hint:"Refrain = the repeater = B here." } },
-    { say:"<b>Ending Each Section:</b> Section A often ends with an unfinished feeling. Section B usually sounds complete. \u{1F447} <b>Which section ends on V7?</b>",
-      try:{ type:"mc", choices:["A — leaving the door open for B","B — endings love V7","Neither can end on V7"], answer:0,
-        success:"✓ Section A ends on V7 (unfinished, leading onward); section B ends on I (complete).",
-        fail:"Which section needs to lead INTO the other?",
-        hint:"Unfinished endings come first." } },
-    { say:"<b>Review:</b> \u{1F447} <b>Which example shows binary form?</b>",
-      try:{ type:"mc", choices:["Verse (A) → Refrain (B), repeated","One melody with no sections","A section played three times identically"], answer:0,
-        success:"✓ Verse then chorus — two different sections: binary form. Next lesson: what happens when A comes BACK after B…",
-        fail:"AB needs TWO different sections…",
-        hint:"Verse + chorus." } }
+        hint:"Count the LARGE sections; check whether A returns inside B or as its own third section.",
+        mount:(container,fb)=>MF_L73_types(container,fb) } },
+    { say:"<b>Binary vs Verse–Chorus.</b> A modern song may alternate verse → chorus → verse → chorus (A–B–A–B). Both forms use the letters A and B, but their structures differ, so letters alone don't decide the form. \u{1F447} <b>Does every song containing an A section and a B section use binary form?</b>",
+      try:{ type:"mc", choices:["No — you must examine the whole structure, not just the letters","Yes — any A and B means binary form","Only if it is fast"], answer:0,
+        success:"✓ Letter labels alone don't determine the form. Verse–chorus repeatedly alternates two song functions; classical binary is two large structural sections.",
+        fail:"Letters can be reused by very different forms.",
+        hint:"Structure decides, not letters." } }
   ],
   examples:[
-    { caption:"A miniature binary piece: section A rises in even quarters and pauses on V7 (unfinished); section B falls in dotted rhythm and closes on I (complete).",
-      staff:{clef:"treble",tempo:100,notes:[
-        {p:"C4",d:"q",label:"A"},{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"F4",d:"q"},{p:"G4",d:"h",label:"…ends on V7"},{p:"B4",d:"h"},{bar:"double"},
-        {p:"C5",d:"q.",label:"B"},{p:"B4",d:"8"},{p:"A4",d:"q"},{p:"G4",d:"q"},{p:"E4",d:"h",label:"…ends on I"},{p:"C4",d:"h"},{bar:"final"}],width:640},
-      kb:{start:57,octaves:2,labels:true} },
-    { caption:"Verse and refrain: A (the changing story) hands off to B (the repeated refrain), again and again — the typical AB song format.",
-      staff:{clef:"treble",tempo:110,notes:[
-        {p:"E4",d:"q",label:"A: verse 1…"},{p:"G4",d:"q"},{p:"E4",d:"q"},{p:"D4",d:"h"},
-        {p:"G4",d:"q",label:"B: refrain!"},{p:"A4",d:"q"},{p:"G4",d:"q"},{p:"C5",d:"h"},{bar:"double"},
-        {p:"E4",d:"q",label:"A: verse 2…"},{p:"G4",d:"q"},{p:"F4",d:"q"},{p:"D4",d:"h"},
-        {p:"G4",d:"q",label:"B: refrain!"},{p:"A4",d:"q"},{p:"G4",d:"q"},{p:"C5",d:"h"},{bar:"final"}],width:660},
-      kb:{start:57,octaves:2,labels:true} }
+    { caption:"Continuous binary: Section A begins in the tonic and ends in the DOMINANT (unfinished); Section B develops the material and returns to the TONIC. The form diagram sits above the notes.",
+      mount:(host)=>MF_L73_ex1(host) },
+    { caption:"Rounded binary: after the contrasting B material, the opening motive of A returns briefly (A′) to close in the tonic. Listen for that return.",
+      mount:(host)=>MF_L73_ex2(host) }
   ],
+  exampleHeading:"Listen to a binary example",
   games:[
-    { type:"gen-race", title:"Game 1 · Binary Sprint (45s)",
-      intro:"Sections, elements, verses and refrains — race the form facts!",
-      miaIntro:"A states, B contrasts! \u{26A1}",
+    { type:"gen-race", title:"Game 1 · Binary Form Sprint (45s)",
+      intro:"Sections, repeats, harmony and theme types — race the binary facts!",
+      miaIntro:"Two sections, many labels! \u{26A1}",
       spec:{gen:"term-match", params:{subject:"term", pool:[
-        ["AB form","two contrasting sections (binary)"],
-        ["A section","the first statement"],
-        ["B section","the contrasting second part"],
-        ["Contrast elements","melody, rhythm, harmony, time signature, tempo"],
-        ["Verse","tells a story — changes each repetition"],
-        ["Refrain (chorus)","repeats after every verse"],
-        ["Verse + refrain","the typical AB song format"],
-        ["Section","several phrases combined"]], reverse:true}, seconds:45},
+        ["Binary form","two main sections: A → B"],
+        ["Repeat signs","replay a section — they add no new sections"],
+        ["Sectional binary","Section A ends in the tonic"],
+        ["Continuous binary","Section A ends outside the tonic"],
+        ["Simple binary","no clear return of the opening theme"],
+        ["Rounded binary","opening material returns near the end of B"],
+        ["Ternary form","three large sections: A B A"],
+        ["Tonic","the home key / tonal center"]], reverse:true}, seconds:45},
       result:(score)=>score>=8?score+" — binary brilliance!":null },
-    { type:"key-climb", title:"Game 2 · Play A, Then B",
-      intro:"Perform both sections: A rises evenly, B falls in style!",
-      miaIntro:"Feel the contrast in your fingers! \u{1FA9C}",
-      spec:{seq:[60,62,64,65,67, 72,71,69,67,60],
-        names:["C (A: rising…)","D","E","F","G — A complete!","C (B: falling…)","B","A","G","C — B lands home!"],
-        start:57, octaves:2, title:"Section A up, section B down"},
-      result:(score)=>score!==null?"Both sections performed — binary hands!":null },
-    { type:"symbol-hunt", title:"Game 3 · Which Section Is It?",
-      intro:"A-material, B-material — click what each round names!",
-      miaIntro:"Direction and rhythm are the clues! \u{1F440}",
+    { type:"order-tap", title:"Game 2 · Assemble the Repeated Form",
+      intro:"Tap the four parts of |: A :| |: B :| in performance order!",
+      miaIntro:"A, A, B, B — still two sections! \u{1F3C1}",
+      spec:{sequence:["A","A (repeat)","B","B (repeat)"],
+        title:"Repeated binary, as performed"},
+      result:(stars)=>stars>=2?"Repeats mastered — still two sections!":null },
+    { type:"symbol-hunt", title:"Game 3 · Tonic or Dominant?",
+      intro:"Section A of continuous binary leans to the dominant — spot each chord when called!",
+      miaIntro:"Home chord vs the away chord! \u{1F440}",
       spec:{rounds:6, pool:[
-        {label:"A material (rising, even)", spec:{clef:"treble",notes:[{p:"C4",d:"q"},{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"F4",d:"q"}],width:170}},
-        {label:"B material (falling, dotted)", spec:{clef:"treble",notes:[{p:"C5",d:"q."},{p:"B4",d:"8"},{p:"A4",d:"q"},{p:"G4",d:"q"}],width:170}},
-        {label:"A's ending (V7 — unfinished)", spec:{clef:"treble",notes:[{p:"G4",d:"w"},{p:"B4",d:"w",chord:true},{p:"F5",d:"w",chord:true}],width:150}},
-        {label:"B's ending (I — complete)", spec:{clef:"treble",notes:[{p:"C4",d:"w"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true}],width:150}}]},
-      result:(score)=>score>=5?"Sections sorted on sight!":null },
-    { type:"order-tap", title:"Game 4 · Assemble the AB Song",
-      intro:"Tap the parts of a two-verse AB song in performance order!",
-      miaIntro:"Story, sing-along, repeat! \u{1F3C1}",
-      spec:{sequence:["Verse 1 (A)","Refrain (B)","Verse 2 (A — new words)","Refrain (B — same words)"],
-        title:"One AB song, start to finish"},
-      result:(stars)=>stars>=2?"The AB song format is yours!":null }
+        {label:"Tonic (I) — the home chord", spec:{clef:"treble",notes:[{p:"C4",d:"w"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true}],width:150}},
+        {label:"Dominant (V) — scale degree 5", spec:{clef:"treble",notes:[{p:"G4",d:"w"},{p:"B4",d:"w",chord:true},{p:"D5",d:"w",chord:true}],width:150}},
+        {label:"Subdominant (IV)", spec:{clef:"treble",notes:[{p:"F4",d:"w"},{p:"A4",d:"w",chord:true},{p:"C5",d:"w",chord:true}],width:150}},
+        {label:"Dominant 7th (V7)", spec:{clef:"treble",notes:[{p:"G4",d:"w"},{p:"B4",d:"w",chord:true},{p:"D5",d:"w",chord:true},{p:"F5",d:"w",chord:true}],width:150}}]},
+      result:(score)=>score>=5?"Tonic and dominant, spotted on sight!":null },
+    { type:"order-tap", title:"Game 4 · Build Rounded Binary",
+      intro:"Tap the sections of a rounded binary form in order!",
+      miaIntro:"Statement, contrast, and a homecoming! \u{1F3C1}",
+      spec:{sequence:["A (opening)","B (contrast)","A′ (opening returns)"],
+        title:"Rounded binary: A | B A′"},
+      result:(stars)=>stars>=2?"Rounded binary, built!":null }
   ],
-  practiceIntro:"20 practice questions — sections, contrasts and the verse-refrain format. Answer right and the next appears automatically!",
+  practiceIntro:"20 practice questions — sections, repeats, sectional/continuous and simple/rounded. Answer right and the next appears automatically!",
   practice:[
-    { gen:"term-match", params:{subject:"term", pool:[["Binary","two-part"],["A section","the statement"],["B section","the contrast"],["Verse","the changing story"],["Refrain","the repeater"],["Section","phrases combined"]], reverse:true}, count:6 },
-    { gen:"triad-id", params:{ask:"numeral"}, count:2 },
-    { type:"mc", q:"Several phrases combine to form a…", choices:["complete section (or part)","motive","key signature"], answer:0,
-      explain:"The next size up from a phrase." },
-    { type:"mc", q:"Binary form has…", choices:["two different sections","three sections","one repeated section"], answer:0,
+    { gen:"term-match", params:{subject:"term", pool:[["Binary","two sections (A→B)"],["Sectional","A ends in the tonic"],["Continuous","A ends outside the tonic"],["Simple","no return of the opening"],["Rounded","opening returns in B"],["Ternary","A B A (three sections)"]], reverse:true}, count:6 },
+    { type:"mc", q:"What does “binary” mean?", choices:["Two-part","Three-part","Five-part"], answer:0,
       explain:"Bi = two." },
-    { type:"mc", q:"The A and B sections should…", choices:["sound different","be identical","use the same melody"], answer:0,
-      explain:"Contrast defines the form." },
-    { type:"mc", q:"Sections can be different in…", choices:["melody, rhythm, harmony, time signature and tempo","only volume","only key"], answer:0,
-      explain:"Five musical elements." },
-    { type:"mc", q:"What does a verse usually do?", choices:["Tells a story and changes with each repetition","Never changes","Is always instrumental"], answer:0,
-      explain:"The verse carries the story." },
-    { type:"mc", q:"What is a refrain (chorus)?", choices:["The section repeated after each verse","A section sung only once","The same as a motive"], answer:0,
-      explain:"The section that returns." },
-    { type:"truefalse", q:"The two sections of an AB piece may share a motive.", answer:true,
-      explain:"Shared DNA is allowed — distinctness is required." },
-    { type:"truefalse", q:"The verse-refrain song format is typical of AB form.", answer:true,
-      explain:"Verse = A, chorus = B." },
-    { type:"truefalse", q:"AB form requires a different time signature in each section.", answer:false,
-      explain:"A single time signature can serve both sections." },
-    { type:"truefalse", q:"In 'Go, Tell It On the Mountain,' the refrain is the B section.", answer:true,
-      explain:"Verse = A, refrain = B." }
+    { type:"mc", q:"What is the basic pattern of binary form?", choices:["A–B","A–B–A","A–B–A–C–A"], answer:0,
+      explain:"Two main sections." },
+    { type:"mc", q:"How is repeated binary form commonly written?", choices:["|: A :| |: B :|","A–B–A","A–A–A"], answer:0,
+      explain:"Each section repeats; the form is still A–B." },
+    { type:"mc", q:"In continuous binary, Section A ends…", choices:["outside the tonic","always in the tonic","without any cadence"], answer:0,
+      explain:"Often on the dominant." },
+    { type:"mc", q:"In sectional binary, Section A ends…", choices:["in the tonic","always in the dominant","in an unrelated key"], answer:0,
+      explain:"A comes to rest at home." },
+    { type:"mc", q:"What defines rounded binary form?", choices:["Opening material returns near the end of B","Both sections share one rhythm","Section B is always shorter than A"], answer:0,
+      explain:"A brief return of A inside B." },
+    { type:"mc", q:"The tonic is…", choices:["the home key or tonal center","the fifth scale degree's chord","a fast tempo"], answer:0,
+      explain:"Home base." },
+    { type:"truefalse", q:"A A B B means the piece has four main sections.", answer:false,
+      explain:"Two sections, each repeated." },
+    { type:"truefalse", q:"Section A must always end on V7.", answer:false,
+      explain:"A may end in the tonic, dominant, relative major, or another related key." },
+    { type:"truefalse", q:"Rounded binary and ternary form are identical.", answer:false,
+      explain:"Rounded binary has two sections; ternary has three." },
+    { type:"truefalse", q:"Verse–chorus form is always the same as classical binary form.", answer:false,
+      explain:"They may share letters but are different designs." }
   ],
-  miaQuizIntro:"Quiz! Two letters, five elements, one song format.",
+  miaQuizIntro:"Quiz! Two sections — then sectional/continuous and simple/rounded.",
   quiz:[
-    { type:"mc", q:"Several phrases make a…", choices:["complete section (or part)","single note","key signature"], answer:0,
-      explain:"Phrases → sections → forms.", hint:"The next building block." },
-    { type:"mc", q:"Binary form means…", choices:["music with two different sections (AB)","music with three sections","one repeated section"], answer:0,
-      explain:"Two letters, two parts.", hint:"Bi-." },
-    { type:"mc", q:"In AB form, the first section's material ____ the second's.", choices:["contrasts with","copies","must be shorter than"], answer:0,
-      explain:"Contrast is the definition.", hint:"Why B gets its own letter." },
-    { type:"mc", q:"Which musical elements can make two sections different?", choices:["Melody, rhythm, harmony, time signature and tempo","Paper size","The performer's clothing"], answer:0,
-      explain:"Five musical elements.", hint:"All musical elements." },
-    { type:"truefalse", q:"The two sections may share a motive or end similarly.", answer:true,
-      explain:"…while remaining musically distinct.", hint:"Different, but connected." },
-    { type:"truefalse", q:"A verse changes with each repetition.", answer:true,
-      explain:"The story moves on.", hint:"Verse 1, verse 2…" },
-    { type:"mc", q:"The section repeated after each verse is the…", choices:["refrain (or chorus)","bridge","coda"], answer:0,
-      explain:"Refrain and chorus are two names for it.", hint:"The crowd's favorite part." },
-    { type:"mc", q:"In this song, which section is the chorus? (Verse and chorus alternate.)", choices:["B — the chorus repeats after each verse","A — the chorus tells the story","Neither"], answer:0,
-      explain:"Verse = A, chorus = B.", hint:"Which part repeats?" },
-    { type:"mc", q:"Which musical elements create the contrast between A and B in our example?", choices:["Melody direction and rhythm","Time signature only","Nothing differs"], answer:0,
-      explain:"Ascending even notes vs descending dotted figures.", hint:"Compare direction and rhythm." },
-    { type:"mc", q:"Section A sounds unfinished, but Section B sounds complete. Why?", choices:["Section A ends on V7; section B ends on I","Section A is louder","Section B is shorter"], answer:0,
-      explain:"V7 leads onward; I closes.", hint:"Which chord says 'to be continued'?" },
-    { type:"mc", q:"A song alternates 'story stanza' → 'same-words chorus' → 'new story stanza' → 'same-words chorus.' Its form is…", choices:["AB (binary) — verse and refrain","one giant A","rondo"], answer:0,
-      explain:"The typical AB format in action.", hint:"Two alternating jobs." },
-    { type:"mc", q:"Which example is NOT binary form?", choices:["Repeating the same section without contrast","A verse followed by a contrasting chorus","Two sections with different melodies"], answer:0,
-      explain:"Repetition without contrast = still just A.", hint:"B must be DIFFERENT." },
+    { type:"mc", q:"What does “binary” mean?", choices:["Two-part","Three-part","Five-part"], answer:0,
+      explain:"Bi = two.", hint:"Bi-cycle." },
+    { type:"mc", q:"What is the basic pattern of binary form?", choices:["A–B","A–B–A","A–B–A–C–A"], answer:0,
+      explain:"Two main sections.", hint:"Two letters." },
+    { type:"mc", q:"How is repeated binary form commonly written?", choices:["|: A :| |: B :|","A–B–A","A–A–A"], answer:0,
+      explain:"Each section repeats; still A–B.", hint:"Repeat signs around each section." },
+    { type:"mc", q:"In continuous binary form, where does Section A end?", choices:["Outside the tonic","Always in the tonic","Without any cadence"], answer:0,
+      explain:"Often on the dominant.", hint:"It leans onward." },
+    { type:"mc", q:"In sectional binary form, where does Section A end?", choices:["In the tonic","Always in the dominant","In an unrelated key"], answer:0,
+      explain:"A comes to rest at home.", hint:"It sounds relatively complete." },
+    { type:"mc", q:"What defines rounded binary form?", choices:["Opening material returns near the end of B","Both sections use the same rhythm","Section B is shorter than A"], answer:0,
+      explain:"A brief return of A inside B.", hint:"The opening comes back." },
+    { type:"mc", q:"Principal difference between rounded binary and ternary form?", choices:["Rounded binary has two main sections; ternary has three","Rounded binary has no tonic","Ternary never repeats material"], answer:0,
+      explain:"Two repeated sections vs three large sections.", hint:"Count the LARGE sections." },
+    { type:"mc", q:"A piece is |: A :| |: B A′ :|; A begins in D and ends in A; B returns to D and restates the opening. Binary or ternary?", choices:["Binary — two repeated structural sections","Ternary — three large sections","Neither"], answer:0,
+      explain:"Two structural sections (the A return lives inside B).", hint:"Where does A return — inside B, or as its own section?" },
+    { type:"mc", q:"…and is that piece sectional or continuous?", choices:["Continuous — Section A ends outside the tonic","Sectional — Section A ends in the tonic","Cannot tell"], answer:0,
+      explain:"A ends in A major (the dominant of D), outside the tonic.", hint:"Where does A cadence?" },
+    { type:"mc", q:"…and is that piece simple or rounded?", choices:["Rounded — opening material returns near the end of B","Simple — no return of the opening","Ternary"], answer:0,
+      explain:"The opening theme returns near the end of B.", hint:"Does the opening come back?" },
+    { type:"truefalse", q:"Letter labels A and B, by themselves, always mean classical binary form.", answer:false,
+      explain:"We must examine the complete structure.", hint:"Verse–chorus also uses A and B." },
+    { type:"mc", q:"A verse→chorus→verse→chorus song labeled A–B–A–B…", choices:["is not automatically classical binary form","must be classical binary form","has no form at all"], answer:0,
+      explain:"Verse–chorus alternates two song functions; binary is two large sections.", hint:"Same letters, different design." },
     /* generated */
-    { gen:"term-match", params:{subject:"term", pool:[["A","the statement"],["B","the contrast"],["Verse","changes each time"],["Refrain","repeats each time"]], reverse:true}, count:3 },
-    { gen:"triad-id", params:{ask:"numeral"}, count:2 },
-    { gen:"note-value", params:{}, count:1 }
+    { gen:"term-match", params:{subject:"term", pool:[["Sectional","A ends in the tonic"],["Continuous","A ends outside the tonic"],["Simple","no return of A"],["Rounded","A returns in B"]], reverse:true}, count:3 }
   ],
   vocabulary:[
-    {term:"Section (Part)", def:"Several phrases combined into one complete unit of a piece."},
-    {term:"AB (Binary) Form", def:"A two-part form whose A and B sections contrast — through melody, rhythm, harmony, time signature or tempo."},
-    {term:"Verse", def:"The section that tells a story and CHANGES with each repetition."},
-    {term:"Refrain (Chorus)", def:"The section REPEATED after each verse — verse + refrain is the typical AB song format."}
+    {term:"Binary Form", def:"A form made of two main sections that usually contrast in melody, harmony, key area, rhythm or texture.", sym:"A → B"},
+    {term:"Repeat Signs", def:"Binary pieces often repeat each section (heard as A A B B), but the form still has only two sections, A and B.", sym:"|: A :|  |: B :|"},
+    {term:"Sectional Binary", def:"Section A ends with a strong cadence in the TONIC, so it sounds relatively complete.", sym:"A: I → I"},
+    {term:"Continuous Binary", def:"Section A ends OUTSIDE the tonic (often the dominant, or the relative major in minor); Section B carries the journey home.", sym:"A: I → V"},
+    {term:"Simple Binary", def:"Section B has no clear return of the opening theme near the end.", sym:"A | B"},
+    {term:"Rounded Binary", def:"Material from the start of A returns near the end of B — shorter than the original A, so it is still two sections, not ternary.", sym:"A | B A′"}
   ],
-  mistakes:[],
+  mistakes:[
+    "<b>“Section A must always end on V7.”</b> Not so — A may end in the tonic, the dominant, the relative major, or another related key. V or V7 is common, but not mandatory.",
+    "<b>“A always rises and B always falls.”</b> Melodic direction does not define form — the organization of the sections does.",
+    "<b>“A A B B has four sections.”</b> It contains two sections, each repeated.",
+    "<b>“Rounded binary and ternary are identical.”</b> Rounded binary has two repeated sections; ternary has three large sections.",
+    "<b>“Verse–chorus form is always binary.”</b> They may both use contrasting material, but they are different formal designs."
+  ],
   summary:[
-    "✔ Phrases combine into <b>SECTIONS</b>; two contrasting sections = <b>AB (BINARY) FORM</b>.",
-    "✔ Contrast comes from <b>elements</b>: melody, rhythm, harmony, time signature, tempo.",
-    "✔ Sections may <b>share a motive</b> — but each stays <b>musically distinct</b>.",
-    "✔ <b>Verse</b> = changing story (A); <b>refrain/chorus</b> = repeated sing-along (B).",
-    "✔ Verse + refrain = <b>the typical AB song format</b>."
+    "✔ Binary form = two main sections: <b>A → B</b>.",
+    "✔ Sections often repeat: <b>|: A :| |: B :|</b> — still only two sections.",
+    "✔ <b>Sectional</b>: A ends in the tonic · <b>Continuous</b>: A ends outside the tonic.",
+    "✔ <b>Simple</b>: no clear return of the opening · <b>Rounded</b>: opening returns near the end of B (A | B A′).",
+    "✔ Binary is not ternary (A B A) and not verse–chorus — letters alone don't decide the form."
   ],
   tips:[
-    "Radio test: in almost any song, the part you can't help singing is the refrain — you've been analyzing AB form your whole life.",
-    "When writing your own AB piece, change TWO elements between sections (say, direction and rhythm) — one is rarely enough contrast.",
-    "A section is just phrases holding hands: count the breaths inside each section like you did in Lesson 72.",
-    "Next lesson: what if A comes back AFTER B? Three letters, and one of music's favorite shapes…"
+    "Say it in one breath: “Binary is two — A then B.” Everything else (sectional, continuous, simple, rounded) just describes HOW those two sections behave.",
+    "Sectional vs continuous asks one question: does Section A come to rest at home (sectional) or lean away to the dominant (continuous)?",
+    "Rounded binary is the sneaky one — the opening peeks back at the end of B. Because that return is brief and lives inside section two, it is still binary, not ternary.",
+    "Next lesson: ternary form — when the whole A section returns as a full third section (A B A)."
   ],
   rewards:{ badge:"Binary Navigator", icon:"\u{1F1E6}" },
   sectionOrder:["secHook","secObjectives","secLearn","secExample","secReview",
     "secGame0","secGame1","secGame2","secGame3","secPractice","secQuiz","secTips","secNext"],
-  miaPerfect:"PERFECT! A and B hold no secrets — the two-part world is mapped. \u{1F1E6}\u{1F389}",
-  miaPass:"Passed! Statement and contrast, verse and refrain. Now — what if A returns?",
+  miaPerfect:"PERFECT! Sectional or continuous, simple or rounded — binary form holds no secrets. \u{1F1E6}\u{1F389}",
+  miaPass:"Passed! Two sections, four flavors. Next: what if the whole A section returns?",
   mia:{
     hook:{ label:"the welcome",
-      explain:"The first section rose in even notes; the second fell in dotted rhythm — two CONTRASTING sections: AB (binary) form.",
-      play:()=>{[60,62,64,65,67].forEach((m,i)=>MFAudio.tone(m,.38,i*.4,.42));const d=[.6,.3,.2,.2,.3,.6];let t=2.3;[72,71,69,67,69,67].forEach((m,i)=>{MFAudio.tone(m,d[i],t,.42);t+=d[i];});} },
-    learn:{ label:"AB form",
-      explain:"Phrases → sections. AB = two contrasting sections (via melody, rhythm, harmony, time signature, tempo). Verse (changes) + refrain (repeats) = typical AB.",
-      hint:"A states, B contrasts.",
-      play:()=>{[60,62,64,65,67,67].forEach((m,i)=>MFAudio.tone(m,.38,i*.4,.42));} },
+      explain:"Two contrasting sections: A leaned away toward the dominant, and B brought the music home. Two sections = binary form.",
+      play:()=>{[60,64,67,69,67].forEach((m,i)=>MFAudio.tone(m,.4,i*.42,.42));let t=2.4;[74,72,71,69,67,64,60].forEach((m,i)=>MFAudio.tone(m,.38,t+i*.4,.42));} },
+    learn:{ label:"binary form",
+      explain:"Two sections, A → B, often repeated. A may stay home (sectional) or leave to the dominant (continuous). If A's opening returns near the end of B it is rounded; otherwise simple.",
+      hint:"Two sections — then sectional/continuous and simple/rounded.",
+      play:()=>{[60,62,64,67].forEach((m,i)=>MFAudio.tone(m,.4,i*.42,.42));[55,59,62].forEach(m=>MFAudio.tone(m,1.2,1.8,.2));} },
     example:{ label:"the examples",
-      explain:"Example 1 is a miniature binary piece (A ends on V7, B on I); example 2 alternates verse and refrain twice." },
+      explain:"Example 1 is continuous binary (A ends on the dominant, B returns to the tonic); example 2 is rounded binary (the opening returns as A′ near the end of B)." },
     game:{ label:"the games",
-      explain:"Sprint the facts, play both sections, sort A/B material, then assemble a two-verse song.",
-      hint:"Contrast = different letter." },
+      explain:"Sprint the facts, assemble the repeated form, spot tonic vs dominant, then build a rounded binary.",
+      hint:"Two sections; watch how they behave." },
     quiz:{ label:"this question",
-      explain:"Three ideas answer everything: sections are groups of phrases, AB means two contrasting sections, and verse/refrain is the typical AB song format.",
-      play:()=>{[72,71,69,67,60].forEach((m,i)=>MFAudio.tone(m,.4,i*.38,.42));} }
+      explain:"A few ideas cover it: binary is two sections; sectional/continuous is about where A ends; simple/rounded is about whether A returns inside B; and letters alone don't decide the form.",
+      play:()=>{[67,64,60,64].forEach((m,i)=>MFAudio.tone(m,.42,i*.44,.42));} }
   }
 };
