@@ -59,31 +59,27 @@ function MF_L71_convert(container,fb){
   draw(true);
 }
 
-/* improvising: blues-scale free play over an optional vamp */
+/* improvising made simple: tap 5 blues-scale notes → hear your own solo */
 function MF_L71_improv(container,fb){
-  const BLUES=new Set([0,3,5,6,7,10]);
-  let hits=0, streak=0, vamped=false;
-  container.innerHTML=`<div class="big-q l71i-q" style="text-align:center">The blues scale: <b>C · E♭ · F · G♭ · G · B♭</b> (any octave). Try improvising — make up YOUR solo.</div>
-    <div style="text-align:center"><button class="play l71i-vamp">▶ Start a 4-bar backing vamp</button></div>
-    <div class="l71i-kb"></div>
-    <div class="streak l71i-s" style="text-align:center"></div>`;
-  const q=container.querySelector(".l71i-q"), kh=container.querySelector(".l71i-kb"), s=container.querySelector(".l71i-s"), vb=container.querySelector(".l71i-vamp");
-  vb.onclick=()=>{
-    const rows=[[48,64,67,72],[53,65,69,72],[43,67,71,77],[48,64,67,72]];
-    rows.forEach((row,i)=>row.forEach(m=>MFAudio.tone(m,1.1,i*1.2,.22)));
-    if(!vamped){ vamped=true; fb(true,"✓ Vamp rolling — now solo over it with the blues scale!"); }
-  };
+  const BLUES=new Set([0,3,5,6,7,10]); const GOAL=5; const solo=[];
+  container.innerHTML=`<div class="big-q" style="text-align:center">Make your own blues solo: tap any <b>5</b> keys from the blues scale <b>(C · E♭ · F · G♭ · G · B♭)</b>, in any order.</div>
+    <div class="l71i-prog" style="text-align:center;font-weight:800;font-size:17px;margin:8px 0;color:var(--ink,#333)">Your solo: 0 / ${GOAL}</div>
+    <div class="l71i-kb"></div>`;
+  const prog=container.querySelector(".l71i-prog"), kh=container.querySelector(".l71i-kb");
   Keyboard.create(kh,{start:60,octaves:2,labels:true,
     onKey:m=>{
-      const pc=m%12;
-      if(BLUES.has(pc)){
-        hits++; streak++;
-        if(pc===3||pc===6||pc===10){ s.textContent=`\u{1F535} BLUE NOTE! · notes: ${hits} · streak: ${streak}`; }
-        else s.textContent=`✓ in the scale · notes: ${hits} · streak: ${streak}`;
-        if(hits===12){ MFAudio.yay(); fb(true,"✓ Twelve blues notes — you're IMPROVISING: creating music as you play."); }
+      if(solo.length>=GOAL) return;
+      if(BLUES.has(m%12)){
+        MFAudio.tone(m,.5,0,.42); solo.push(m);
+        prog.textContent=`Your solo: ${solo.length} / ${GOAL}`;
+        if(solo.length===GOAL){
+          prog.textContent="\u{1F535} Your 5-note blues solo — listen back!";
+          solo.forEach((n,i)=>MFAudio.tone(n,.5,.4+i*.5,.42));
+          setTimeout(()=>fb(true,"✓ You just IMPROVISED — you made your own melody from the blues scale. That is improvising!"), GOAL*500+700);
+        }
       } else {
-        streak=0; s.textContent=`✗ outside the scale · streak reset`;
-        fb(false,"That note is not in the C blues scale — use C, E♭, F, G♭, G, B♭ (any octave).");
+        MFAudio.tone(40,.15,0,.3);
+        fb(false,"That key is not in the blues scale — use C, E♭, F, G♭, G or B♭ (any octave).");
       }
     }});
 }
@@ -147,9 +143,9 @@ LESSON_CONTENT[71]={
         success:"✓ Creating music as you play — and every note of the blues scale works over the progression.",
         fail:"Creating music as you play…",
         hint:"Spontaneous + unique." } },
-    { say:"Improvise a short melody using the blues scale. \u{1F447}",
+    { say:"Now improvise your own solo — tap 5 notes from the blues scale and hear it play back. \u{1F447}",
       try:{ type:"custom",
-        hint:"C, E♭, F, G♭, G, B♭ — any octave, any order, any rhythm. Start the vamp for atmosphere!",
+        hint:"Tap any 5 of C, E♭, F, G♭, G, B♭ — in any order.",
         mount:(container,fb)=>MF_L71_improv(container,fb) } },
     { say:"<b>Try Another Key:</b> Build the G blues scale. \u{1F447} <b>Which notes belong in the G blues scale?</b>",
       try:{ type:"mc", choices:["G-B♭-C-D♭-D-F-G","G-A-B-C-D-E-F♯-G","G-B-C-D-F♯-G"], answer:0,
