@@ -109,13 +109,13 @@ LESSON_CONTENT[92]={stackFigures:true,
         {p:"C4",d:"w",label:"m7"},{p:"Eb4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{p:"Bb4",d:"w",chord:true},
         {p:"C4",d:"w",label:"\u{00F8}7"},{p:"Eb4",d:"w",chord:true},{p:"Gb4",d:"w",chord:true},{p:"Bb4",d:"w",chord:true},
         {p:"C4",d:"w",label:"\u{00B0}7"},{p:"Eb4",d:"w",chord:true},{p:"Gb4",d:"w",chord:true},{p:"B4",d:"w",chord:true,acc:"bb",sound:"A4"},{bar:"final"}],width:680},
-      kb:{start:48,octaves:2,labels:true} },
+      kb:{start:60,octaves:1,labels:true} },
     { caption:"Sevenths in context: Dm7 → G7 → Cmaj7 — three of the five types chained into the smoothest progression in jazz (a preview of Lesson 95's ii-V-I).",
       staff:{clef:"treble",tempo:72,notes:[
         {p:"D4",d:"w",label:"Dm7"},{p:"F4",d:"w",chord:true},{p:"A4",d:"w",chord:true},{p:"C5",d:"w",chord:true},
         {p:"G3",d:"w",label:"G7"},{p:"B3",d:"w",chord:true},{p:"D4",d:"w",chord:true},{p:"F4",d:"w",chord:true},
         {p:"C4",d:"w",label:"Cmaj7"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{p:"B4",d:"w",chord:true},{bar:"final"}],width:560},
-      kb:{start:43,octaves:3,labels:true} }
+      kb:{start:48,octaves:2,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Seventh-Chord Formula Sprint (45s)",

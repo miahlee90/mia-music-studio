@@ -68,12 +68,12 @@ LESSON_CONTENT[109]={
         {p:"G3",d:"w",label:"sus4"},{p:"C4",d:"w",chord:true},{p:"D4",d:"w",chord:true},
         {p:"G3",d:"w",label:"resolves"},{p:"B3",d:"w",chord:true},{p:"D4",d:"w",chord:true},
         {p:"C4",d:"w",label:"sus2 — stays!"},{p:"D4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{bar:"final"}],width:520},
-      kb:{start:43,octaves:2,labels:true} },
+      kb:{start:48,octaves:2,labels:true} },
     { caption:"add9 and 6 side by side: Cadd9 (C-E-G-D) and C6 (C-E-G-A) — two ways to sweeten one triad.",
       staff:{clef:"treble",tempo:66,notes:[
         {p:"C4",d:"w",label:"add9"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{p:"D5",d:"w",chord:true},
         {p:"C4",d:"w",label:"C6"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{p:"A4",d:"w",chord:true},{bar:"final"}],width:440},
-      kb:{start:48,octaves:2,labels:true} }
+      kb:{start:60,octaves:2,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Suspended and Added-Tone Chords (45s)",

@@ -92,14 +92,14 @@ LESSON_CONTENT[103]={
         {p:"D5",d:"q"},{p:"B4",d:"q"},{p:"G4",d:"q"},{bar:"single"},
         {p:"A4",d:"q"},{p:"F4",d:"q"},{p:"D4",d:"q"},{bar:"single"},
         {p:"E4",d:"h."},{bar:"final"}],width:620},
-      kb:{start:48,octaves:2,labels:true} },
+      kb:{start:60,octaves:2,labels:true} },
     { caption:"A march phrase: duple meter, dotted tread, strong downbeats — left, right, left, right.",
       staff:{clef:"treble",time:"2/4",tempo:112,notes:[
         {p:"C4",d:"q.",artic:"accent"},{p:"C4",d:"8"},{bar:"single"},
         {p:"E4",d:"q",artic:"accent"},{p:"G4",d:"q"},{bar:"single"},
         {p:"F4",d:"q.",artic:"accent"},{p:"D4",d:"8"},{bar:"single"},
         {p:"C4",d:"h"},{bar:"final"}],width:560},
-      kb:{start:48,octaves:2,labels:true} }
+      kb:{start:60,octaves:1,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Instrumental-Form Identification",

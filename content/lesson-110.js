@@ -77,14 +77,14 @@ LESSON_CONTENT[110]={
         {p:"D4",d:"w",label:"ii7"},{p:"F4",d:"w",chord:true},{p:"A4",d:"w",chord:true},{p:"C5",d:"w",chord:true},
         {p:"Db4",d:"w",label:"\u{266D}II7"},{p:"F4",d:"w",chord:true},{p:"Ab4",d:"w",chord:true},{p:"B4",d:"w",chord:true},
         {p:"C4",d:"w",label:"I"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{bar:"final"}],width:560},
-      kb:{start:48,octaves:2,labels:true} },
+      kb:{start:60,octaves:1,labels:true} },
     { caption:"Chromatic mediants: C → E → A♭ → C — three same-quality chords hinged on common tones, circling home in major 3rds.",
       staff:{clef:"treble",tempo:72,notes:[
         {p:"C4",d:"w",label:"C"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},
         {p:"E4",d:"w",label:"E"},{p:"G#4",d:"w",chord:true},{p:"B4",d:"w",chord:true},
         {p:"Eb4",d:"w",label:"A\u{266D}"},{p:"Ab4",d:"w",chord:true},{p:"C5",d:"w",chord:true},
         {p:"C4",d:"w",label:"C"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{bar:"final"}],width:560},
-      kb:{start:48,octaves:2,labels:true} }
+      kb:{start:60,octaves:1,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Substitution and Reharmonization (45s)",

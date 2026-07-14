@@ -81,12 +81,12 @@ LESSON_CONTENT[99]={
         {p:"A3",d:"w",label:"pivot vi=ii"},{p:"C4",d:"w",chord:true},{p:"E4",d:"w",chord:true},
         {p:"D4",d:"w",label:"V (of G)"},{p:"F#4",d:"w",chord:true},{p:"A4",d:"w",chord:true},
         {p:"G3",d:"w",label:"I (G!)"},{p:"B3",d:"w",chord:true},{p:"D4",d:"w",chord:true},{bar:"final"}],width:640},
-      kb:{start:43,octaves:3,labels:true} },
+      kb:{start:48,octaves:2,labels:true} },
     { caption:"A phrase modulation: the phrase ends in C; the next phrase simply begins in D major — the pop lift, up a whole step.",
       staff:{clef:"treble",tempo:84,notes:[
         {p:"C4",d:"q"},{p:"E4",d:"q"},{p:"G4",d:"q"},{p:"C5",d:"h",label:"C ends"},{bar:"double"},
         {p:"D4",d:"q",label:"D begins!"},{p:"F#4",d:"q"},{p:"A4",d:"q"},{p:"D5",d:"h"},{bar:"final"}],width:560},
-      kb:{start:48,octaves:2,labels:true} }
+      kb:{start:60,octaves:2,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Modulation Identification (45s)",

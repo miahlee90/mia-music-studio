@@ -83,7 +83,7 @@ LESSON_CONTENT[89]={
         {p:"C5",d:"8"},{p:"B4",d:"8"},{p:"C5",d:"8"},{p:"A4",d:"8"},
         {p:"G4",d:"h",label:"arrival"},{bar:"final"}],
         beams:[[0,3],[4,7],[8,11]],width:660},
-      kb:{start:55,octaves:2,labels:true} },
+      kb:{start:60,octaves:2,labels:true} },
     { caption:"A rising sequence building intensity: the same leap-and-step shape climbing three levels, then releasing at the top.",
       staff:{clef:"treble",tempo:100,notes:[
         {p:"C4",d:"8"},{p:"E4",d:"8"},{p:"D4",d:"q"},
@@ -91,7 +91,7 @@ LESSON_CONTENT[89]={
         {p:"E4",d:"8"},{p:"G4",d:"8"},{p:"F4",d:"q"},
         {p:"G4",d:"h",label:"peak"},{bar:"final"}],
         beams:[[0,1],[3,4],[6,7]],width:620},
-      kb:{start:48,octaves:2,labels:true} }
+      kb:{start:60,octaves:1,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Sequence Identification (45s)",

@@ -137,7 +137,7 @@ LESSON_CONTENT[68]={
       staff:{clef:"treble",tempo:80,notes:[
         {p:"A4",d:"q",label:"i"},{p:"B4",d:"q",label:"V7"},{p:"C5",d:"q",label:"i"},{p:"D5",d:"q",label:"iv"},
         {p:"E5",d:"q",label:"i"},{p:"F5",d:"q",label:"iv"},{p:"G#5",d:"q",label:"V7"},{p:"A5",d:"q",label:"i"},{bar:"final"}],width:560},
-      kb:{start:56,octaves:3,labels:true} },
+      kb:{start:69,octaves:1,labels:true} },
     { caption:"The minor cadence: iv → V7 → i. The leading tone G♯ pulls to the tonic.",
       staff:{clef:"treble",tempo:80,notes:[
         {p:"D4",d:"w",label:"iv"},{p:"F4",d:"w",chord:true},{p:"A4",d:"w",chord:true},

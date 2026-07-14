@@ -109,7 +109,7 @@ LESSON_CONTENT[94]={stackFigures:true,
         {p:"B3",d:"w",label:"6/5"},{p:"D4",d:"w",chord:true},{p:"F4",d:"w",chord:true},{p:"G4",d:"w",chord:true},
         {p:"D4",d:"w",label:"4/3"},{p:"F4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{p:"B4",d:"w",chord:true},
         {p:"F4",d:"w",label:"4/2"},{p:"G4",d:"w",chord:true},{p:"B4",d:"w",chord:true},{p:"D5",d:"w",chord:true},{bar:"final"}],width:640},
-      kb:{start:43,octaves:3,labels:true} },
+      kb:{start:48,octaves:3,labels:true} },
     { caption:"Inversions building the bass line: I → V4/2 → I6 → ii6/5 → V7 → I. The bass moves C-F-E-F-G-C — the 4/2 and 6/5 keep the middle stepwise.",
       staff:{clef:"treble",tempo:72,notes:[
         {p:"C4",d:"w",label:"I"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},
@@ -118,7 +118,7 @@ LESSON_CONTENT[94]={stackFigures:true,
         {p:"F4",d:"w",label:"ii6/5"},{p:"A4",d:"w",chord:true},{p:"C5",d:"w",chord:true},{p:"D5",d:"w",chord:true},
         {p:"G3",d:"w",label:"V7"},{p:"B3",d:"w",chord:true},{p:"D4",d:"w",chord:true},{p:"F4",d:"w",chord:true},
         {p:"C4",d:"w",label:"I"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{bar:"final"}],width:680},
-      kb:{start:43,octaves:3,labels:true} }
+      kb:{start:48,octaves:3,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Inversion-Figure Sprint (45s)",

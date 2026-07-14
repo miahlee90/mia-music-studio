@@ -124,14 +124,14 @@ LESSON_CONTENT[86]={stackFigures:true,
         {p:"F4",d:"w",label:"IV"},{p:"A4",d:"w",chord:true},{p:"C5",d:"w",chord:true},
         {p:"G4",d:"w",label:"V7"},{p:"B4",d:"w",chord:true},{p:"D5",d:"w",chord:true},{p:"F5",d:"w",chord:true},
         {p:"C4",d:"w",label:"I"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{p:"C5",d:"w",chord:true},{bar:"final"}],width:600},
-      kb:{start:48,octaves:2,labels:true} },
+      kb:{start:60,octaves:2,labels:true} },
     { caption:"I-vi-ii-V — the classic turnaround: two tonics' worth of rest, then predominant and dominant hand in hand back to the top.",
       staff:{clef:"treble",tempo:80,notes:[
         {p:"C4",d:"w",label:"I"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},
         {p:"A3",d:"w",label:"vi"},{p:"C4",d:"w",chord:true},{p:"E4",d:"w",chord:true},
         {p:"D4",d:"w",label:"ii"},{p:"F4",d:"w",chord:true},{p:"A4",d:"w",chord:true},
         {p:"G4",d:"w",label:"V"},{p:"B4",d:"w",chord:true},{p:"D5",d:"w",chord:true},{bar:"final"}],width:600},
-      kb:{start:45,octaves:2,labels:true} }
+      kb:{start:57,octaves:2,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Harmonic-Function Sprint (45s)",

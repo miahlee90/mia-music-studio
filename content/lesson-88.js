@@ -106,12 +106,12 @@ LESSON_CONTENT[88]={
         {p:"A4",d:"q"},{p:"F4",d:"q"},{p:"D4",d:"h",label:"half cadence"},{bar:"single"},
         {p:"C4",d:"q"},{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"G4",d:"q"},
         {p:"F4",d:"q"},{p:"D4",d:"q"},{p:"C4",d:"h",label:"PAC — closed"},{bar:"final"}],width:680},
-      kb:{start:48,octaves:2,labels:true} },
+      kb:{start:60,octaves:1,labels:true} },
     { caption:"A contrasting period: the consequent begins with NEW material but still delivers the closing cadence — contrast in the opening, agreement at the end.",
       staff:{clef:"treble",tempo:96,notes:[
         {p:"C4",d:"q"},{p:"E4",d:"q"},{p:"G4",d:"q"},{p:"B4",d:"h",label:"half cadence"},{bar:"single"},
         {p:"A4",d:"q"},{p:"G4",d:"q"},{p:"F4",d:"q"},{p:"D4",d:"q"},{p:"C4",d:"h",label:"PAC"},{bar:"final"}],width:620},
-      kb:{start:48,octaves:2,labels:true} }
+      kb:{start:60,octaves:1,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Period Structure (45s)",

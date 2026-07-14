@@ -116,7 +116,7 @@ LESSON_CONTENT[90]={
         {p:"B3",d:"q"},{p:"F5",d:"q",chord:true},
         {p:"A3",d:"q"},{p:"G5",d:"q",chord:true},
         {p:"G3",d:"w"},{p:"E5",d:"w",chord:true},{bar:"final"}],width:520},
-      kb:{start:43,octaves:3,labels:true} }
+      kb:{start:48,octaves:3,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Texture Identification",

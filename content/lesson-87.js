@@ -128,14 +128,14 @@ LESSON_CONTENT[87]={
         {p:"C4",d:"q",label:"I"},{p:"E4",d:"q",chord:true},{p:"G4",d:"q",chord:true},{bar:"single"},
         {p:"G4",d:"q",label:"V7"},{p:"B4",d:"q",chord:true},{p:"F5",d:"q",chord:true},
         {p:"A4",d:"q",label:"vi!"},{p:"C5",d:"q",chord:true},{p:"E5",d:"q",chord:true},{bar:"final"}],width:680},
-      kb:{start:48,octaves:2,labels:true} },
+      kb:{start:60,octaves:2,labels:true} },
     { caption:"PAC vs IAC: the same V7-I twice — first with the tonic proudly on top (perfect), then with the 3rd on top (imperfect). Hear the difference in finality.",
       staff:{clef:"treble",tempo:80,notes:[
         {p:"G4",d:"w",label:"V7"},{p:"B4",d:"w",chord:true},{p:"F5",d:"w",chord:true},
         {p:"C4",d:"w",label:"I (C on top)"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{p:"C5",d:"w",chord:true},{bar:"single"},
         {p:"G4",d:"w",label:"V7"},{p:"B4",d:"w",chord:true},{p:"F5",d:"w",chord:true},
         {p:"C4",d:"w",label:"I (E on top)"},{p:"G4",d:"w",chord:true},{p:"C5",d:"w",chord:true},{p:"E5",d:"w",chord:true},{bar:"final"}],width:640},
-      kb:{start:48,octaves:2,labels:true} }
+      kb:{start:60,octaves:2,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Cadence Identification (45s)",

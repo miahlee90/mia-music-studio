@@ -82,13 +82,13 @@ LESSON_CONTENT[91]={
         {p:"G4",d:"h"},{p:"E4",d:"h"},{bar:"single"},
         {p:"D4",d:"q"},{p:"F4",d:"q"},{p:"A4",d:"q"},{p:"B4",d:"q"},
         {p:"C5",d:"w",label:"A ends"},{bar:"final"}],width:640},
-      kb:{start:48,octaves:2,labels:true} },
+      kb:{start:60,octaves:1,labels:true} },
     { caption:"A bridge (B) in miniature: new harmony color and direction — built to make A's return feel like home.",
       staff:{clef:"treble",tempo:92,notes:[
         {p:"A4",d:"q"},{p:"C5",d:"q"},{p:"E5",d:"h",label:"new color"},{bar:"single"},
         {p:"D5",d:"q"},{p:"B4",d:"q"},{p:"G4",d:"h",label:"turning…"},{bar:"single"},
         {p:"F4",d:"q"},{p:"G4",d:"q"},{p:"B4",d:"h",label:"…toward A"},{bar:"final"}],width:600},
-      kb:{start:53,octaves:2,labels:true} }
+      kb:{start:60,octaves:2,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Song-Form Identification (45s)",

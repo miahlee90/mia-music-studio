@@ -210,7 +210,7 @@ LESSON_CONTENT[52]={stackFigures:true,
         {p:"C4",d:"w",label:"C (I)"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},
         {p:"C4",d:"w",label:"F/C (IV 6/4)"},{p:"F4",d:"w",chord:true},{p:"A4",d:"w",chord:true},
         {p:"C4",d:"w",label:"C (I)"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{bar:"final"}],width:480},
-      kb:{start:48,octaves:2,labels:true} }
+      kb:{start:60,octaves:1,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Three-Position Sprint (45s)",

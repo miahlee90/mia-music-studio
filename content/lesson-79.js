@@ -121,7 +121,7 @@ LESSON_CONTENT[79]={
       staff:{clef:"treble",time:"5/4",tempo:104,notes:[
         {p:"D4",d:"q",artic:"accent"},{p:"E4",d:"q"},{p:"F4",d:"q"},{p:"A4",d:"q",artic:"accent"},{p:"G4",d:"q"},{bar:"single"},
         {p:"F4",d:"q",artic:"accent"},{p:"E4",d:"q"},{p:"F4",d:"q"},{p:"D4",d:"h",artic:"accent"},{bar:"final"}],width:640},
-      kb:{start:50,octaves:2,labels:true} },
+      kb:{start:60,octaves:1,labels:true} },
     { caption:"7/8 grouped 2+2+3: two short steps and a long one. The beaming shows the groups — feel the drive in the final three.",
       staff:{clef:"treble",time:"7/8",tempo:84,notes:[
         {p:"E4",d:"8",artic:"accent"},{p:"F#4",d:"8"},
@@ -131,7 +131,7 @@ LESSON_CONTENT[79]={
         {p:"F#4",d:"8",artic:"accent"},{p:"G4",d:"8"},
         {p:"E4",d:"q.",artic:"accent"},{bar:"final"}],
         beams:[[0,1],[2,3],[4,6],[8,9],[10,11]],width:640},
-      kb:{start:52,octaves:2,labels:true} }
+      kb:{start:60,octaves:1,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Uneven Meter Sprint (45s)",

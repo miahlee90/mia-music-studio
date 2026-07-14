@@ -105,12 +105,12 @@ LESSON_CONTENT[84]={
         {p:"F4",d:"8"},{p:"G4",d:"8"},{p:"A4",d:"8"},{p:"C5",d:"8"},{p:"A4",d:"8"},{p:"F4",d:"8"},{bar:"single"},
         {p:"G4",d:"8"},{p:"A4",d:"8"},{p:"B4",d:"8"},{p:"D5",d:"8"},{p:"B4",d:"8"},{p:"G4",d:"8"},{bar:"final"}],
         beams:[[0,2],[3,5],[7,9],[10,12],[14,16],[17,19]],width:660},
-      kb:{start:48,octaves:2,labels:true} },
+      kb:{start:60,octaves:2,labels:true} },
     { caption:"Accidentals keep intervals exact: the motive D-F♯-A in D major becomes E♭-G-B♭ in E♭ major — every note up a half step.",
       staff:{clef:"treble",tempo:96,notes:[
         {p:"D4",d:"q"},{p:"F#4",d:"q"},{p:"A4",d:"h"},{bar:"single"},
         {p:"Eb4",d:"q"},{p:"G4",d:"q"},{p:"Bb4",d:"h"},{bar:"final"}],width:480},
-      kb:{start:50,octaves:2,labels:true} }
+      kb:{start:60,octaves:1,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Transposition Sprint (45s)",

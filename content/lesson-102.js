@@ -87,14 +87,14 @@ LESSON_CONTENT[102]={
         {p:"A4",d:"8",label:"transition"},{p:"B4",d:"8"},{p:"C5",d:"8"},{p:"D5",d:"8"},{bar:"single"},
         {p:"D5",d:"q",label:"T2 (G!)"},{p:"B4",d:"q"},{p:"G4",d:"h"},{bar:"final"}],
         beams:[[4,7]],width:620},
-      kb:{start:48,octaves:2,labels:true} },
+      kb:{start:60,octaves:2,labels:true} },
     { caption:"Development in miniature: theme 1's opening fragment, sequenced through rising keys — familiar material on unstable ground.",
       staff:{clef:"treble",tempo:96,notes:[
         {p:"C4",d:"8",label:"fragment"},{p:"E4",d:"8"},{p:"G4",d:"q"},
         {p:"D4",d:"8",label:"sequenced…"},{p:"F#4",d:"8"},{p:"A4",d:"q"},
         {p:"E4",d:"8",label:"…and again"},{p:"G#4",d:"8"},{p:"B4",d:"q"},{bar:"final"}],
         beams:[[0,1],[3,4],[6,7]],width:620},
-      kb:{start:48,octaves:2,labels:true} }
+      kb:{start:60,octaves:1,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Sonata-Form Functions",

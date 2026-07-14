@@ -135,7 +135,7 @@ LESSON_CONTENT[56]={
       staff:{clef:"treble",keysig:"G",tempo:110,notes:[
         {p:"G4",d:"q",label:"G major"},{p:"A4",d:"q"},{p:"B4",d:"q"},{p:"C5",d:"q"},{p:"D5",d:"q"},{p:"E5",d:"q",label:"6 = E"},{p:"F#5",d:"q",acc:"none"},{p:"G5",d:"h"},{bar:"double"},
         {p:"E4",d:"q",label:"E minor"},{p:"F#4",d:"q",acc:"none"},{p:"G4",d:"q"},{p:"A4",d:"q"},{p:"B4",d:"q"},{p:"C5",d:"q"},{p:"D5",d:"q"},{p:"E5",d:"h"},{bar:"final"}],width:640},
-      kb:{start:52,octaves:2,labels:true} }
+      kb:{start:60,octaves:2,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Relative Race (45s)",

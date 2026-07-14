@@ -195,7 +195,7 @@ LESSON_CONTENT[55]={stackFigures:true,
         {p:"C4",d:"w",label:"I"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},
         {p:"G4",d:"w",label:"V7"},{p:"B4",d:"w",chord:true},{p:"D5",d:"w",chord:true},{p:"F5",d:"w",chord:true},
         {p:"C4",d:"w",label:"I"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{bar:"final"}],width:620},
-      kb:{start:48,octaves:3,labels:true} },
+      kb:{start:60,octaves:2,labels:true} },
     { caption:"The SMOOTH version: I-IV⁶₄-I-V⁶₅-I. Common tones hold their places, the bass whispers C-C-C-B-C, and the same harmony suddenly sounds like one connected thought.",
       staff:{clef:"treble",tempo:70,notes:[
         {p:"C4",d:"w",label:"I"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},

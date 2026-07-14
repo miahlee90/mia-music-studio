@@ -87,12 +87,12 @@ LESSON_CONTENT[97]={
         {p:"C4",d:"w",label:"IV"},{p:"F4",d:"w",chord:true},{p:"A4",d:"w",chord:true},{p:"C5",d:"w",chord:true},
         {p:"B3",d:"w",label:"V"},{p:"D4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{p:"D5",d:"w",chord:true},
         {p:"C4",d:"w",label:"I"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{p:"C5",d:"w",chord:true},{bar:"final"}],width:620},
-      kb:{start:48,octaves:2,labels:true} },
+      kb:{start:57,octaves:2,labels:true} },
     { caption:"Spacing on display: the first chord spreads the top voices too far (hollow); the second keeps S–A and A–T inside an octave (balanced). Hear the difference.",
       staff:{clef:"treble",tempo:60,notes:[
         {p:"C4",d:"w",label:"balanced"},{p:"G4",d:"w",chord:true},{p:"E5",d:"w",chord:true,label:"…hmm"},{bar:"single"},
         {p:"C4",d:"w",label:"good"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{p:"C5",d:"w",chord:true},{bar:"final"}],width:420},
-      kb:{start:48,octaves:2,labels:true} }
+      kb:{start:60,octaves:2,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · SATB Guidelines (45s)",

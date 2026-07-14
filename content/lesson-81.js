@@ -109,13 +109,13 @@ LESSON_CONTENT[81]={
         {p:"C4",d:"q"},{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"G4",d:"q"},
         {p:"A4",d:"h"},{p:"G4",d:"q"},{p:"E4",d:"q"},
         {p:"D4",d:"q"},{p:"C4",d:"h",label:"home"},{bar:"final"}],width:600},
-      kb:{start:48,octaves:2,labels:true} },
+      kb:{start:60,octaves:1,labels:true} },
     { caption:"The same five notes, tonic moved to A: the minor pentatonic — widely used in blues, rock and many other styles.",
       staff:{clef:"treble",tempo:96,notes:[
         {p:"A3",d:"q"},{p:"C4",d:"q"},{p:"D4",d:"q"},{p:"E4",d:"q"},
         {p:"G4",d:"h"},{p:"E4",d:"q"},{p:"D4",d:"q"},
         {p:"C4",d:"q"},{p:"A3",d:"h",label:"home"},{bar:"final"}],width:600},
-      kb:{start:45,octaves:2,labels:true} }
+      kb:{start:57,octaves:1,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Pentatonic Sprint (45s)",

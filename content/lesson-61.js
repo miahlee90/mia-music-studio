@@ -191,7 +191,7 @@ LESSON_CONTENT[61]={stackFigures:true,
         {p:"A3",d:"w",label:"i"},{p:"C4",d:"w",chord:true},{p:"E4",d:"w",chord:true},
         {p:"E4",d:"w",label:"V7"},{p:"G#4",d:"w",chord:true},{p:"B4",d:"w",chord:true},{p:"D5",d:"w",chord:true},
         {p:"A3",d:"w",label:"i"},{p:"C4",d:"w",chord:true},{p:"E4",d:"w",chord:true},{bar:"final"}],width:620},
-      kb:{start:45,octaves:3,labels:true} },
+      kb:{start:57,octaves:2,labels:true} },
     { caption:"The SMOOTH version: i-iv⁶₄-i-V⁶₅-i. The bass moves A-A-A-G♯-A while the common tones stay in place. The same chords — a much smoother bass line.",
       staff:{clef:"treble",tempo:70,notes:[
         {p:"A3",d:"w",label:"i"},{p:"C4",d:"w",chord:true},{p:"E4",d:"w",chord:true},

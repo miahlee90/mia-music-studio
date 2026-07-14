@@ -150,7 +150,7 @@ LESSON_CONTENT[67]={
         {p:"A4",d:"q",label:"3/IV"},{p:"B4",d:"q",label:"P"},{p:"C5",d:"h",label:"5/IV"},{bar:"single"},
         {p:"E5",d:"q",label:"3/I"},{p:"D5",d:"q",label:"5/V7"},{p:"B4",d:"q",label:"3/V7"},{p:"D5",d:"q",label:"5"},{bar:"single"},
         {p:"C5",d:"w",label:"R — home!"},{bar:"final"}],width:780},
-      kb:{start:57,octaves:2,labels:true} },
+      kb:{start:69,octaves:1,labels:true} },
     { caption:"The same melody twice: chord tones only, then with passing tones added on the weak beats.",
       staff:{clef:"treble",tempo:100,time:"4/4",notes:[
         {p:"C4",d:"h",label:"chord tones"},{p:"E4",d:"h"},{bar:"single"},{p:"G4",d:"h"},{p:"C5",d:"h"},{bar:"double"},

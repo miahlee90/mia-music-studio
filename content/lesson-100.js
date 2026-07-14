@@ -98,13 +98,13 @@ LESSON_CONTENT[100]={
         {p:"C5",d:"8",label:"mordent"},{p:"D5",d:"8"},{p:"C5",d:"q"},
         {p:"D5",d:"8",label:"turn"},{p:"C5",d:"8"},{p:"B4",d:"8"},{p:"C5",d:"q"},{bar:"final"}],
         beams:[[0,3],[4,5],[7,9]],width:640},
-      kb:{start:59,octaves:2,labels:true} },
+      kb:{start:69,octaves:1,labels:true} },
     { caption:"Grace notes in context: a crushed acciaccatura into the downbeat, then an appoggiatura that leans on the harmony before resolving.",
       staff:{clef:"treble",tempo:88,notes:[
         {p:"B4",d:"8",label:"crush"},{p:"C5",d:"q."},
         {p:"D5",d:"8",label:"lean…"},{p:"C5",d:"q."},{p:"C5",d:"q"},{bar:"final"}],
         beams:[[0,0]],width:440},
-      kb:{start:59,octaves:1,labels:true} }
+      kb:{start:69,octaves:1,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Ornament Identification (45s)",

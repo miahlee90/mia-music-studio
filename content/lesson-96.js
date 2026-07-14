@@ -96,7 +96,7 @@ LESSON_CONTENT[96]={
         {p:"C5",d:"w",label:"sus 4"},{p:"G4",d:"w",chord:true},{p:"D5",d:"w",chord:true},
         {p:"B4",d:"w",label:"res 3"},{p:"G4",d:"w",chord:true},{p:"D5",d:"w",chord:true},
         {p:"C5",d:"w",label:"I"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{bar:"final"}],width:600},
-      kb:{start:48,octaves:2,labels:true} },
+      kb:{start:60,octaves:2,labels:true} },
     { caption:"A tonic pedal: C holds in the bass through I, IV and V7 colors above — consonant, dissonant, consonant — then everything agrees again.",
       staff:{clef:"treble",tempo:69,notes:[
         {p:"C4",d:"w",label:"pedal"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},

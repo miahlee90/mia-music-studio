@@ -180,12 +180,12 @@ LESSON_CONTENT[69]={
         {p:"A4",d:"q",label:"5"},{p:"Bb4",d:"q",label:"3/iv"},{p:"G4",d:"h",label:"R/iv"},{bar:"single"},
         {p:"A4",d:"q",label:"R/V7"},{p:"C#5",d:"q",label:"3/V7"},{p:"E5",d:"h",label:"5/V7"},{bar:"single"},
         {p:"D5",d:"w",label:"R/i — home"},{bar:"final"}],width:800},
-      kb:{start:50,octaves:3,labels:true} },
+      kb:{start:60,octaves:2,labels:true} },
     { caption:"The same melody twice: chord tones only, then with a passing tone and an upper neighbor added.",
       staff:{clef:"treble",tempo:100,time:"4/4",notes:[
         {p:"D4",d:"h",label:"chord tones"},{p:"F4",d:"h"},{bar:"single"},{p:"A4",d:"h"},{p:"D5",d:"h"},{bar:"double"},
         {p:"D4",d:"q",label:"+ P & U"},{p:"E4",d:"q",label:"P"},{p:"F4",d:"q"},{p:"G4",d:"q",label:"P"},{bar:"single"},{p:"A4",d:"q"},{p:"Bb4",d:"q",label:"U"},{p:"A4",d:"q"},{p:"D5",d:"q"},{bar:"final"}],width:800},
-      kb:{start:50,octaves:2,labels:true} }
+      kb:{start:60,octaves:2,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Label Sprint (45s)",

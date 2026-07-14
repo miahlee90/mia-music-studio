@@ -70,12 +70,12 @@ LESSON_CONTENT[104]={stackFigures:true,
         {p:"C4",d:"w",label:"I"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},
         {p:"D4",d:"w",label:"vii\u{00B0}6"},{p:"F4",d:"w",chord:true},{p:"B4",d:"w",chord:true},
         {p:"E4",d:"w",label:"I6"},{p:"G4",d:"w",chord:true},{p:"C5",d:"w",chord:true},{bar:"final"}],width:480},
-      kb:{start:48,octaves:2,labels:true} },
+      kb:{start:60,octaves:1,labels:true} },
     { caption:"vii°7 resolving to i in C minor: every tendency tone obeys — B rises, the dissonances fall — maximum tension into calm.",
       staff:{clef:"treble",tempo:70,notes:[
         {p:"B3",d:"w",label:"vii\u{00B0}7"},{p:"D4",d:"w",chord:true},{p:"F4",d:"w",chord:true},{p:"Ab4",d:"w",chord:true},
         {p:"C4",d:"w",label:"i"},{p:"Eb4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{bar:"final"}],width:420},
-      kb:{start:47,octaves:2,labels:true} }
+      kb:{start:57,octaves:1,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Leading-Tone Chord Identification",

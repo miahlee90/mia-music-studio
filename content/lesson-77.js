@@ -117,7 +117,7 @@ LESSON_CONTENT[77]={
         {p:"G4",d:"8"},{p:"F4",d:"8"},{p:"E4",d:"8"},{bar:"single"},
         {p:"C4",d:"w"},{bar:"final"}],
         beams:[[0,1],[2,3],[4,6],[7,9]], tuplets:[{from:4,to:6},{from:7,to:9}], width:600},
-      kb:{start:48,octaves:2,labels:true} },
+      kb:{start:60,octaves:1,labels:true} },
     { caption:"A duplet in 6/8: the first beat rolls normally in three; the second stretches two even notes across the same time — marked 2.",
       staff:{clef:"treble",time:"6/8",tempo:63,notes:[
         {p:"E4",d:"8"},{p:"G4",d:"8"},{p:"B4",d:"8"},
@@ -125,7 +125,7 @@ LESSON_CONTENT[77]={
         {p:"A4",d:"8"},{p:"B4",d:"8"},{p:"C5",d:"8"},
         {p:"B4",d:"q."},{bar:"final"}],
         beams:[[0,2],[3,4],[6,8]], tuplets:[{from:3,to:4,n:2}], width:560},
-      kb:{start:52,octaves:2,labels:true} }
+      kb:{start:60,octaves:1,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Tuplet Sprint (45s)",

@@ -113,7 +113,7 @@ LESSON_CONTENT[78]={
         {p:"C4",d:"q"},{p:"E4",d:"q"},{p:"G4",d:"q"},{p:"E4",d:"q"},{bar:"single"},
         {p:"C4",d:"8"},{p:"E4",d:"8"},{p:"E4",d:"q"},{p:"G4",d:"8"},{p:"E4",d:"8"},{p:"E4",d:"q"},{bar:"final"}],
         beams:[[5,6],[8,9]],arcs:[{from:6,to:7,type:"tie"},{from:9,to:10,type:"tie"}],width:640},
-      kb:{start:48,octaves:2,labels:true} },
+      kb:{start:60,octaves:1,labels:true} },
     { caption:"The 3+3+2 pattern over a steady bass: three, three, then two — the tempo stays the same, but the changing accents create a different rhythmic feel.",
       staff:{clef:"treble",time:"4/4",tempo:96,notes:[
         {p:"E4",d:"8",artic:"accent"},{p:"E4",d:"8"},{p:"E4",d:"8"},
@@ -121,7 +121,7 @@ LESSON_CONTENT[78]={
         {p:"C5",d:"8",artic:"accent"},{p:"C5",d:"8"},{bar:"single"},
         {p:"C4",d:"h"},{p:"C4",d:"h"},{bar:"final"}],
         beams:[[0,2],[3,5],[6,7]],width:640},
-      kb:{start:48,octaves:2,labels:true} }
+      kb:{start:60,octaves:1,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Syncopation Sprint (45s)",

@@ -80,13 +80,13 @@ LESSON_CONTENT[107]={
         {p:"F4",d:"w",label:"IV"},{p:"A4",d:"w",chord:true},{p:"C5",d:"w",chord:true},
         {p:"F4",d:"w",label:"iv!"},{p:"Ab4",d:"w",chord:true},{p:"C5",d:"w",chord:true},
         {p:"E4",d:"w",label:"I"},{p:"G4",d:"w",chord:true},{p:"C5",d:"w",chord:true},{bar:"final"}],width:520},
-      kb:{start:52,octaves:2,labels:true} },
+      kb:{start:60,octaves:1,labels:true} },
     { caption:"♭VI and ♭VII climbing home: A♭ → B♭ → C — the borrowed 'Mario cadence' of film and game scores.",
       staff:{clef:"treble",tempo:76,notes:[
         {p:"Ab4",d:"w",label:"\u{266D}VI"},{p:"C5",d:"w",chord:true},{p:"Eb5",d:"w",chord:true},
         {p:"Bb4",d:"w",label:"\u{266D}VII"},{p:"D5",d:"w",chord:true},{p:"F5",d:"w",chord:true},
         {p:"C5",d:"w",label:"I"},{p:"E5",d:"w",chord:true},{p:"G5",d:"w",chord:true},{bar:"final"}],width:520},
-      kb:{start:56,octaves:2,labels:true} }
+      kb:{start:60,octaves:2,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Modal-Mixture Identification",

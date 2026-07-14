@@ -89,7 +89,7 @@ LESSON_CONTENT[98]={stackFigures:true,
         {p:"C4",d:"w",label:"I"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},
         {p:"E4",d:"w",label:"V/vi"},{p:"G#4",d:"w",chord:true},{p:"B4",d:"w",chord:true},
         {p:"A4",d:"w",label:"vi"},{p:"C5",d:"w",chord:true},{p:"E5",d:"w",chord:true},{bar:"final"}],width:480},
-      kb:{start:48,octaves:2,labels:true} }
+      kb:{start:60,octaves:2,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Applied-Dominant Identification",

@@ -106,14 +106,14 @@ LESSON_CONTENT[82]={
         {p:"C4",d:"q"},{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"F#4",d:"q"},
         {p:"G#4",d:"q"},{p:"A#4",d:"q"},{p:"C5",d:"h"},{bar:"single"},
         {p:"A#4",d:"q"},{p:"F#4",d:"q"},{p:"D4",d:"q"},{p:"C4",d:"h"},{bar:"final"}],width:620},
-      kb:{start:48,octaves:2,labels:true} },
+      kb:{start:60,octaves:1,labels:true} },
     { caption:"A chromatic climb: consecutive half steps rising to a release, spelled here with sharps — every key on the way.",
       staff:{clef:"treble",tempo:120,notes:[
         {p:"G4",d:"8"},{p:"G#4",d:"8"},{p:"A4",d:"8"},{p:"A#4",d:"8"},
         {p:"B4",d:"8"},{p:"C5",d:"8"},{p:"C#5",d:"8"},{p:"D5",d:"8"},
         {p:"E5",d:"h",label:"release!"},{bar:"final"}],
         beams:[[0,3],[4,7]],width:560},
-      kb:{start:55,octaves:2,labels:true} }
+      kb:{start:60,octaves:2,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Equal-Interval Sprint (45s)",

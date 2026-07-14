@@ -131,12 +131,12 @@ LESSON_CONTENT[80]={
       staff:{clef:"treble",tempo:100,notes:[
         {p:"D4",d:"q"},{p:"F4",d:"q"},{p:"A4",d:"q"},{p:"B4",d:"q",label:"raised 6"},
         {p:"A4",d:"q"},{p:"F4",d:"q"},{p:"E4",d:"q"},{p:"D4",d:"q"},{bar:"final"}],width:560},
-      kb:{start:50,octaves:2,labels:true} },
+      kb:{start:60,octaves:1,labels:true} },
     { caption:"G Mixolydian: a major-family melody that leans on its lowered 7th (F♮) instead of F♯ — the characteristic note in eight notes.",
       staff:{clef:"treble",tempo:100,notes:[
         {p:"G4",d:"q"},{p:"B4",d:"q"},{p:"D5",d:"q"},{p:"F5",d:"q",label:"♭7"},
         {p:"D5",d:"q"},{p:"F5",d:"q",label:"♭7"},{p:"D5",d:"q"},{p:"G4",d:"q"},{bar:"final"}],width:560},
-      kb:{start:55,octaves:2,labels:true} }
+      kb:{start:60,octaves:2,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Characteristic Scale-Degree Sprint (45s)",

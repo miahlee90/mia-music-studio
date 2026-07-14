@@ -101,11 +101,11 @@ LESSON_CONTENT[101]={
         {p:"C4",d:"q",label:"theme"},{p:"E4",d:"q"},{p:"G4",d:"q"},{p:"E4",d:"q"},{p:"C4",d:"h"},{bar:"single"},
         {p:"C4",d:"8",label:"var. 1"},{p:"D4",d:"8"},{p:"E4",d:"8"},{p:"F4",d:"8"},{p:"G4",d:"q"},{p:"F4",d:"8"},{p:"E4",d:"8"},{p:"C4",d:"h"},{bar:"final"}],
         beams:[[6,9],[11,12]],width:660},
-      kb:{start:48,octaves:2,labels:true} },
+      kb:{start:60,octaves:1,labels:true} },
     { caption:"The minore variation: the C-major outline recast in minor — here E becomes E♭, and the minor mode recolors the theme.",
       staff:{clef:"treble",tempo:88,notes:[
         {p:"C4",d:"q"},{p:"Eb4",d:"q",label:"minore"},{p:"G4",d:"q"},{p:"Eb4",d:"q"},{p:"C4",d:"h"},{bar:"final"}],width:440},
-      kb:{start:48,octaves:1,labels:true} }
+      kb:{start:60,octaves:1,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Variation Techniques (45s)",

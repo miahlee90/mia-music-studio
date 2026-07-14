@@ -110,13 +110,13 @@ LESSON_CONTENT[93]={stackFigures:true,
         {p:"A3",d:"w",label:"Am7"},{p:"C4",d:"w",chord:true},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},
         {p:"D4",d:"w",label:"Dm7"},{p:"F4",d:"w",chord:true},{p:"A4",d:"w",chord:true},{p:"C5",d:"w",chord:true},
         {p:"G3",d:"w",label:"G7"},{p:"B3",d:"w",chord:true},{p:"D4",d:"w",chord:true},{p:"F4",d:"w",chord:true},{bar:"final"}],width:640},
-      kb:{start:43,octaves:3,labels:true} },
+      kb:{start:48,octaves:2,labels:true} },
     { caption:"Sus resolving: Gsus4 → G → C. The suspended 4th (C) steps down to the 3rd (B) — tension released before the cadence.",
       staff:{clef:"treble",tempo:72,notes:[
         {p:"G3",d:"w",label:"Gsus4"},{p:"C4",d:"w",chord:true},{p:"D4",d:"w",chord:true},
         {p:"G3",d:"w",label:"G"},{p:"B3",d:"w",chord:true},{p:"D4",d:"w",chord:true},
         {p:"C4",d:"w",label:"C"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{bar:"final"}],width:480},
-      kb:{start:43,octaves:2,labels:true} }
+      kb:{start:48,octaves:2,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Chord-Symbol Sprint (45s)",
