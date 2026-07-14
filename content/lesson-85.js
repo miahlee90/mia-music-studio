@@ -114,7 +114,7 @@ LESSON_CONTENT[85]={
         {p:"A4",d:"q",label:"vi"},{p:"C5",d:"q",chord:true},{p:"E5",d:"q",chord:true},
         {p:"B4",d:"q",label:"vii°"},{p:"D5",d:"q",chord:true},{p:"F5",d:"q",chord:true},
         {p:"C5",d:"w",label:"I"},{p:"E5",d:"w",chord:true},{p:"G5",d:"w",chord:true},{bar:"final"}],width:680},
-      kb:{start:48,octaves:3,labels:true} },
+      kb:{start:60,octaves:2,labels:true} },
     { caption:"A harmonic-minor ladder in A minor: i ii° III+ iv V VI vii° — the G♯ colors III+ augmented, V major and vii° diminished.",
       staff:{clef:"treble",tempo:76,notes:[
         {p:"A3",d:"q",label:"i"},{p:"C4",d:"q",chord:true},{p:"E4",d:"q",chord:true},
@@ -125,7 +125,7 @@ LESSON_CONTENT[85]={
         {p:"F4",d:"q",label:"VI"},{p:"A4",d:"q",chord:true},{p:"C5",d:"q",chord:true},
         {p:"G#4",d:"q",label:"vii°"},{p:"B4",d:"q",chord:true},{p:"D5",d:"q",chord:true},
         {p:"A4",d:"w",label:"i"},{p:"C5",d:"w",chord:true},{p:"E5",d:"w",chord:true},{bar:"final"}],width:680},
-      kb:{start:45,octaves:3,labels:true} }
+      kb:{start:57,octaves:2,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Triad-Quality Pattern (45s)",
