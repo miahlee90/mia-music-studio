@@ -8,8 +8,9 @@
 /* guided black-key melody: follow the ▼ arrow to play Arirang (a pentatonic
    folk song) using only the five black keys = G♭ major pentatonic */
 function MF_L81_arirang(container,fb){
-  /* Arirang, on the black keys (G♭ major pentatonic: G♭ A♭ B♭ D♭ E♭) */
-  const MELODY=[73,75,78, 78,75,73, 75,78,80,78,75,73, 73,75,78, 78,75,73, 70,68,66];
+  /* Arirang on the black keys — solfège do re do re fa sol fa sol la sol la fa re do,
+     all sharps: do=C#4, re=D#4, fa=F#4, sol=G#4, la=A#4 (the five black keys) */
+  const MELODY=[61,63,61,63, 66,68,66,68, 70,68,70,66, 63,61];
   let i=0;
   container.innerHTML=`<div class="big-q l81a-q" style="text-align:center">Follow the red <b>▼</b> arrow and play <b>Arirang</b> on the black keys — a famous pentatonic folk song fits entirely on the five black keys. Press the key the arrow points to.</div>
     <div class="l81a-prog" style="text-align:center;font-weight:800;margin:6px 0;color:var(--ink,#333)"></div>
