@@ -34,7 +34,7 @@ function MF_L79_ear(container,fb){
 LESSON_CONTENT[79]={
   welcome:"Asymmetrical meter combines beat groups of unequal length.",
   hook:{
-    say:"<b>Listen to the two patterns.</b> One uses evenly spaced groups, while the other uses an unequal 3 + 2 grouping. \u{1F447} <b>Which pattern is asymmetrical?</b>",
+    say:"<b>Listen to two rhythmic patterns.</b> One divides the measure into equal beat groups, while the other divides it into unequal groups (3 + 2). \u{1F447} <b>Which pattern sounds asymmetrical?</b>",
     interact:{ type:"custom",
       mount:(container,fb)=>{
         container.innerHTML=`<div style="text-align:center">
@@ -55,17 +55,17 @@ LESSON_CONTENT[79]={
     "Define asymmetrical meter: groups of unequal length inside the measure",
     "Read common 5/4 groupings such as 3+2 and 2+3",
     "Read common 7/8 groupings such as 2+2+3, 2+3+2 and 3+2+2",
-    "Think additively: combine smaller groups, often 2s and 3s",
+    "Understand additive meter by combining groups of 2s and 3s",
     "Follow changing (mixed) meter as the signature changes during a piece",
     "Hear even vs uneven meters"
   ],
   steps:[
-    { say:"<b>Asymmetrical Meter:</b> An asymmetrical meter combines <b>beat groups of unequal length</b> within a measure. These groups often contain two or three equal note values, as in 5/8 grouped 2 + 3 or 7/8 grouped 2 + 2 + 3. Common examples include 5/8, 5/4, 7/8, and asymmetrically grouped 8/8. \u{1F447} <b>What makes a meter asymmetrical?</b>",
+    { say:"<b>Asymmetrical Meter:</b> An asymmetrical meter combines <b>beat groups of unequal length</b> within a measure. These beat groups are usually built from groups of 2 or 3 beats (or eighth notes), such as 2 + 3 or 2 + 2 + 3. Common examples include <b>5/4, 5/8, and 7/8</b>. \u{1F447} <b>What makes a meter asymmetrical?</b>",
       try:{ type:"mc", choices:["It combines beat groups of unequal length","It has no time signature","It must be performed slowly"], answer:0,
         success:"✓ Correct. Asymmetrical meter combines groups of different lengths, such as 3 + 2 or 2 + 2 + 3.",
         fail:"Look for groups of different lengths within the measure.",
         hint:"Look for a combination of groups containing two and three subdivisions." } },
-    { say:"<b>Common 5/4 Groupings:</b> Five quarter-note beats are often grouped <b style='color:#2F6DA8'>3 + 2</b> or <b style='color:#C05A21'>2 + 3</b>. When the beginning of each group is emphasized, a 3 + 2 pattern accents beats 1 and 4, while a 2 + 3 pattern accents beats 1 and 3. \u{1F447} <b>In 5/4 grouped 3 + 2, which beats begin the two groups?</b>",
+    { say:"<b>Common 5/4 Groupings:</b> Five quarter-note beats are often grouped <b style='color:#2F6DA8'>3 + 2</b> or <b style='color:#C05A21'>2 + 3</b>:<div style='text-align:center;font-family:monospace;font-weight:800;font-size:16px;letter-spacing:1px;margin:6px 0'>[1 2 3] [4 5]</div>In a 3 + 2 grouping, the second group begins on beat 4, so the natural accents fall on beats <b>1 and 4</b>. (A 2 + 3 grouping instead accents beats 1 and 3.) \u{1F447} <b>In 5/4 grouped 3 + 2, which beats begin the two groups?</b>",
       show:{ type:"staff", spec:{clef:"treble",time:"5/4",tempo:100,notes:[
         {p:"G4",d:"q",artic:"accent",label:"1"},{p:"G4",d:"q",label:"2"},{p:"G4",d:"q",label:"3"},
         {p:"D5",d:"q",artic:"accent",label:"4"},{p:"D5",d:"q",label:"5"},{bar:"final"}],width:440} },
@@ -73,7 +73,7 @@ LESSON_CONTENT[79]={
         success:"✓ Correct. Beat 1 begins the group of three, and beat 4 begins the group of two.",
         fail:"Count the groups: 1–2–3 | 4–5.",
         hint:"Identify the first beat of each group." } },
-    { say:"<b>Common 7/8 Groupings:</b> Seven eighth notes are often grouped <b>2 + 2 + 3</b>, <b>2 + 3 + 2</b>, or <b>3 + 2 + 2</b>. A group of two forms a shorter main beat, while a group of three forms a longer main beat. These unequal groupings occur in many musical traditions, including numerous dances from the Balkans. \u{1F447} <b>How many eighth-note subdivisions are in a measure of 7/8?</b>",
+    { say:"<b>Common 7/8 Groupings:</b> Seven eighth notes are often grouped <b>2 + 2 + 3</b>, <b>2 + 3 + 2</b>, or <b>3 + 2 + 2</b>. Each group acts like one beat: groups of two are shorter, while groups of three are longer.<div style='text-align:center;font-family:monospace;font-weight:800;font-size:15px;letter-spacing:1px;margin:6px 0'>2 + 2 + 3 → 1 2 | 3 4 | 5 6 7</div>These unequal groupings occur in many musical traditions, including numerous dances from the Balkans. \u{1F447} <b>How many eighth-note subdivisions are in a measure of 7/8?</b>",
       show:{ type:"staff", spec:{clef:"treble",time:"7/8",tempo:80,notes:[
         {p:"E4",d:"8",artic:"accent"},{p:"E4",d:"8"},
         {p:"G4",d:"8",artic:"accent"},{p:"G4",d:"8"},
@@ -83,17 +83,16 @@ LESSON_CONTENT[79]={
         success:"✓ Correct. The measure contains seven eighth-note subdivisions, shown here in a 2 + 2 + 3 grouping.",
         fail:"The top number indicates the number of eighth-note subdivisions in the measure.",
         hint:"Read the top number of the time signature." } },
-    { say:"<b>Additive Meter:</b> Additive meters may be understood by <b>combining smaller groups</b>, such as 5 = 3 + 2, 7 = 2 + 2 + 3, or 8 = 3 + 3 + 2. Emphasize the beginning of each group while maintaining the underlying subdivision. For example, count a 3 + 2 pattern as \u{201C}ONE-two-three | ONE-two.\u{201D} \u{1F447} <b>How is 7/8 grouped 3 + 2 + 2 counted?</b>",
+    { say:"<b>Additive Meter:</b> Additive meters are understood by <b>combining smaller groups of 2s and 3s</b>, such as 5 = 3 + 2 and 7 = 2 + 2 + 3. Emphasize the beginning of each group while keeping the underlying subdivision steady. For example, count a 3 + 2 pattern as \u{201C}ONE-two-three | ONE-two.\u{201D} \u{1F447} <b>How is 7/8 grouped 3 + 2 + 2 counted?</b>",
       show:{ type:"html", html:`<table style="border-collapse:collapse;margin:0 auto;font-size:14.5px;min-width:300px">
         <tr><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:6px 14px">Meter</th><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:6px 14px">Common groupings</th></tr>
         <tr><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center;font-weight:800">5/4 · 5/8</td><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center">3+2 · 2+3</td></tr>
-        <tr><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center;font-weight:800">7/8</td><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center">2+2+3 · 2+3+2 · 3+2+2</td></tr>
-        <tr><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center;font-weight:800">8/8 (uneven)</td><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center">3+3+2</td></tr></table>` },
+        <tr><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center;font-weight:800">7/8</td><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center">2+2+3 · 2+3+2 · 3+2+2</td></tr></table><div style="text-align:center;font-size:12px;color:#667;margin-top:6px">Optional advanced example: 8/8 grouped 3 + 3 + 2.</div>` },
       try:{ type:"mc", choices:["ONE-two-three | ONE-two | ONE-two","ONE-two | ONE-two | ONE-two-three","Seven equally accented counts"], answer:0,
         success:"✓ Correct. The group of three comes first, followed by two groups of two.",
         fail:"Follow the grouping in order: 3 + 2 + 2.",
         hint:"Emphasize the first count of each group." } },
-    { say:"<b>Changing or Mixed Meter:</b> The time signature may <b>change during a piece</b>—for example, from 4/4 to 3/4 and back again. Each time signature remains in effect until a new one appears. \u{1F447} <b>In the passage below, how many quarter-note beats are in the middle measure?</b>",
+    { say:"<b>Changing Meter (Mixed Meter):</b> The time signature may <b>change during a piece</b>—for example, from 4/4 to 3/4 and back again. Each time signature remains in effect until a new one appears. \u{1F447} <b>In the passage below, how many quarter-note beats are in the middle measure?</b>",
       show:{ type:"html", html:`<div style="display:flex;gap:10px;justify-content:center;align-items:center;font-weight:800;font-size:16px">
         <div style="border:2px solid #2F6DA8;border-radius:10px;padding:10px 16px;background:#fff"><span style="color:#2F6DA8">4/4</span><br>♩ ♩ ♩ ♩</div>
         <div style="border:2px solid #2F6DA8;border-radius:10px;padding:10px 16px;background:#fff"><span style="color:#2F6DA8">3/4</span><br>♩ ♩ ♩</div>
@@ -102,11 +101,11 @@ LESSON_CONTENT[79]={
         success:"✓ Correct. The 3/4 time signature remains in effect until another time signature appears.",
         fail:"Read the time signature that applies to the middle measure.",
         hint:"A time signature remains in effect until it is replaced." } },
-    { say:"Listen and identify whether the beat groups are equal or unequal. \u{1F447}",
+    { say:"Listen and decide whether each example uses equal or unequal beat groupings. \u{1F447}",
       try:{ type:"custom",
         hint:"Listen to the length of each group between accents: are the groups equal, or do they form a long–short pattern?",
         mount:(container,fb)=>MF_L79_ear(container,fb) } },
-    { say:"<b>Review:</b> \u{1F447} <b>Which time signature commonly supports an asymmetrical grouping?</b>",
+    { say:"<b>Review:</b> \u{1F447} <b>Which of these time signatures is most commonly grouped asymmetrically?</b>",
       try:{ type:"mc", choices:["7/8","4/4","12/8"], answer:0,
         success:"✓ Correct. A measure of 7/8 is commonly organized into unequal groups such as 2 + 2 + 3. By contrast, 12/8 normally contains four equal groups of three eighth notes.",
         fail:"Which meter is commonly organized using both groups of two and groups of three?",
@@ -196,8 +195,8 @@ LESSON_CONTENT[79]={
   vocabulary:[
     {term:"Asymmetrical Meter", def:"A meter that combines beat groups of unequal length, as in 5/4 grouped 3+2 or 7/8 grouped 2+2+3."},
     {term:"Additive Meter", def:"Understanding a meter by combining smaller groups, often 2s and 3s: 5 = 3+2, 7 = 2+2+3."},
-    {term:"Changing (Mixed) Meter", def:"The time signature changes during a piece; each remains in effect until replaced."},
-    {term:"Grouping Accent", def:"The accent on each group's first note — it tells the listener the meter's shape."}
+    {term:"Changing Meter (Mixed Meter)", def:"The time signature changes during a piece; each remains in effect until replaced."},
+    {term:"Grouping Accents", def:"The accent on each group's first note — it tells the listener the meter's shape."}
   ],
   mistakes:[],
   summary:[
