@@ -60,7 +60,6 @@ function MF_L73_ex1(host){
     <div id="l73ex1st"></div>
     <div style="text-align:center;margin-top:12px"><button class="play" id="l73ex1btn">▶ Play the complete binary example</button></div>`;
   Staff.render(host.querySelector("#l73ex1st"),{clef:"treble",tempo:96,time:"4/4",notes:[
-    {bar:"repeat-start"},
     {p:"C4",d:"q",label:"A"},{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"G4",d:"q"},{bar:"single"},
     {p:"A4",d:"q"},{p:"G4",d:"q"},{p:"D4",d:"h",label:"→ V"},{bar:"repeat-end"},
     {bar:"repeat-start"},
@@ -84,7 +83,6 @@ function MF_L73_ex2(host){
     <div id="l73ex2st"></div>
     <div style="text-align:center;margin-top:12px"><button class="play" id="l73ex2btn">▶ Listen for the return of A</button></div>`;
   Staff.render(host.querySelector("#l73ex2st"),{clef:"treble",tempo:100,time:"4/4",notes:[
-    {bar:"repeat-start"},
     {p:"G4",d:"q",label:"A"},{p:"E4",d:"q"},{p:"C4",d:"q"},{p:"E4",d:"q"},{bar:"repeat-end"},
     {bar:"repeat-start"},
     {p:"F4",d:"q",label:"B"},{p:"G4",d:"q"},{p:"A4",d:"q"},{p:"B4",d:"q"},{bar:"single"},
