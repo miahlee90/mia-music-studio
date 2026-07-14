@@ -280,7 +280,7 @@ LESSON_CONTENT[69]={
     {term:"R / 3 / 5 / U / L / P", def:"The full label set: chord members (root/3rd/5th) plus the non-harmonic tones (upper, lower, passing)."},
     {term:"The Minor Frame", def:"Begin and end on the ROOT of i; V(7) — with its raised 7th — precedes the final chord."},
     {term:"The C♯ Effect", def:"In D minor, the raised 7th inside A7 pulls straight to D — put it late in the phrase and the ending writes itself.",
-      staff:{clef:"treble",notes:[{p:"C#5",d:"h"},{p:"D5",d:"h"}],width:130}}
+      staff:{clef:"treble",notes:[{p:"C#5",d:"h"},{p:"D5",d:"h"}],width:260}}
   ],
   mistakes:[],
   summary:[
