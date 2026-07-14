@@ -56,11 +56,17 @@ LESSON_CONTENT[70]={
         container.innerHTML=`<div style="text-align:center">
           <button class="play hk-a">▶ Play the 12 bars</button></div>
           <div class="choices hk-ch" style="display:none"><button>Yes — it's the famous BLUES progression</button><button>No — it's a classical symphony pattern</button><button>No — it sounds brand new</button></div>`;
-        const FORM=[[48,64,67,72],[48,64,67,72],[48,64,67,72],[48,64,67,72],[53,65,69,72],[53,65,69,72],[48,64,67,72],[48,64,67,72],[43,67,71,77],[53,65,69,72],[48,64,67,72],[48,64,67,72]];
+        const CH={I:[48,64,67,70],IV:[53,69,72,75],V7:[43,67,71,77]}; /* dominant 7ths on every chord — THE blues sound */
+        const BASS={I:36,IV:41,V7:43};
+        const PROG=["I","I","I","I","IV","IV","I","I","V7","IV","I","I"], BAR=0.9;
         const ch=container.querySelector(".hk-ch");
         container.querySelector(".hk-a").onclick=()=>{
-          FORM.forEach((row,i)=>row.forEach(m=>MFAudio.tone(m,.72,i*.75,.26)));
-          setTimeout(()=>ch.style.display="",9200);
+          PROG.forEach((sym,i)=>{
+            const t=i*BAR;
+            CH[sym].forEach(m=>{ MFAudio.tone(m,.32,t,.22); MFAudio.tone(m,.28,t+BAR*.5,.18); }); /* comp on beats 1 & 3 */
+            MFAudio.tone(BASS[sym],.42,t,.30); MFAudio.tone(BASS[sym],.34,t+BAR*.5,.22);          /* bass pulse */
+          });
+          setTimeout(()=>ch.style.display="", PROG.length*BAR*1000+400);
         };
         [...ch.children].forEach((b,i)=>b.onclick=()=>{
           if(i===0) fb(true,"✓ The 12-BAR BLUES — born in America's south from West African rhythms, gospel singing and European harmonies, and used in jazz, rock and pop. Today you learn its pattern!");
@@ -100,9 +106,9 @@ LESSON_CONTENT[70]={
         fail:"Count the four bars of I first…",
         hint:"After the long opening." } },
     { say:"<b>Bars 9–12:</b> Bar 9 uses <b>V (or V7)</b>. Bar 10 moves to <b>IV</b>. Bars 11–12 return to <b>I</b>. <b>Remember: the chord pattern stays the same. Only the key changes.</b> \u{1F447} <b>Which chord comes after V?</b>",
-      try:{ type:"mc", choices:["V(7) then IV","IV then V","I then V"], answer:0,
-        success:"✓ V then IV — unlike a classical cadence, IV comes AFTER V here. That is part of the blues sound!",
-        fail:"Bar 9 is V; bar 10 steps down…",
+      try:{ type:"mc", choices:["IV","I","V"], answer:0,
+        success:"✓ IV — unlike a classical cadence (V→I), the blues steps V DOWN to IV before landing home. That's the blues sound!",
+        fail:"Bar 9 is V; bar 10 steps DOWN to…",
         hint:"V, then IV, then I." } },
     { say:"Build a complete 12-bar blues progression in C major. \u{1F447}",
       show:{ type:"html", html:`<table style="border-collapse:collapse;margin:0 auto;font-size:13px">
@@ -231,9 +237,9 @@ LESSON_CONTENT[70]={
   vocabulary:[
     {term:"The Blues", def:"Music born in America's south from West African rhythms, gospel singing and European harmonies — alive today in jazz, rock and pop."},
     {term:"Bar", def:"Another word for measure — the blues is counted in bars."},
-    {term:"12-Bar Blues Progression", def:"The traditional form: I (4 bars) · IV (2) · I (2) · V or V7 (1) · IV (1) · I (2)."},
+    {term:"12-Bar Blues Progression", def:`The traditional form — each box is one bar:<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:3px;max-width:150px;margin:8px auto 0;font-weight:800;font-size:13px">${["I","I","I","I","IV","IV","I","I","V7","IV","I","I"].map(c=>`<span style="border:1.5px solid #cdd5e1;border-radius:5px;padding:3px 0;text-align:center;background:#fff">${c}</span>`).join("")}</div>`},
     {term:"The V→IV Descent", def:"Bars 9-10: the dominant steps DOWN through IV before landing home — a signature blues move.",
-      staff:{clef:"treble",notes:[{p:"G4",d:"w",label:"V7"},{p:"B4",d:"w",chord:true},{p:"F5",d:"w",chord:true},{p:"F4",d:"w",label:"IV"},{p:"A4",d:"w",chord:true},{p:"C5",d:"w",chord:true}],width:130}}
+      staff:{clef:"treble",notes:[{p:"G4",d:"w",label:"V7"},{p:"B4",d:"w",chord:true},{p:"F5",d:"w",chord:true},{p:"F4",d:"w",label:"IV"},{p:"A4",d:"w",chord:true},{p:"C5",d:"w",chord:true}],width:280}}
   ],
   mistakes:[],
   summary:[
@@ -257,7 +263,7 @@ LESSON_CONTENT[70]={
   mia:{
     hook:{ label:"the welcome",
       explain:"That was the traditional 12-bar blues: I×4, IV×2, I×2, V7, IV, I×2 — the most reused progression in popular music.",
-      play:()=>{const F=[[48,64,67,72],[53,65,69,72],[48,64,67,72],[43,67,71,77],[53,65,69,72],[48,64,67,72]];F.forEach((row,i)=>row.forEach(m=>MFAudio.tone(m,.7,i*.75,.26)));} },
+      play:()=>{const F=[[48,64,67,70],[53,69,72,75],[48,64,67,70],[43,67,71,77],[53,69,72,75],[48,64,67,70]];F.forEach((row,i)=>row.forEach(m=>MFAudio.tone(m,.7,i*.75,.26)));} },
     learn:{ label:"the 12-bar blues",
       explain:"Born in America's south (African rhythms + gospel + European harmony). 12 bars: I×4, IV×2, I×2, V(7), IV, I×2 — three chords total.",
       hint:"4-2-2-1-1-2.",
