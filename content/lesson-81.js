@@ -9,7 +9,7 @@
 function MF_L81_improv(container,fb){
   const PENTA=new Set([1,3,6,8,10]); /* black-key pitch classes */
   let hits=0;
-  container.innerHTML=`<div class="big-q l81i-q" style="text-align:center">The five black keys form a PENTATONIC scale. Improvise using only the black keys — establish either G♭ or E♭ as the tonal center, and create short rhythmic and melodic patterns.</div>
+  container.innerHTML=`<div class="big-q l81i-q" style="text-align:center">The five black keys form a PENTATONIC scale — almost every combination sounds good. Improvise freely using only the black keys: try G♭ (or E♭) as your home note, and make up short rhythmic and melodic patterns.</div>
     <div class="l81i-kb"></div>
     <div class="streak l81i-s" style="text-align:center"></div>`;
   const kh=container.querySelector(".l81i-kb"), s=container.querySelector(".l81i-s");
@@ -40,20 +40,19 @@ LESSON_CONTENT[81]={
       } }
   },
   objectives:[
-    "Define pentatonic: a scale of five pitch classes per octave",
-    "Build the MAJOR pentatonic: major scale minus degrees 4 and 7",
-    "Build the MINOR pentatonic: natural minor minus degrees 2 and 6",
-    "Connect relatives: C major pentatonic = A minor pentatonic",
-    "Play the black-key pentatonic",
-    "Know the pentatonic's place in world music"
+    "Define the pentatonic scale",
+    "Build major pentatonic scales",
+    "Build minor pentatonic scales",
+    "Recognize relative pentatonic scales",
+    "Explore the black-key pentatonic on the piano"
   ],
   steps:[
-    { say:"<b>Pentatonic Scale:</b> A pentatonic scale contains <b>five different pitch classes</b> within an octave. Major and minor pentatonic scales can be derived from seven-note major and natural minor scales by omitting two scale degrees. These two common forms contain no half steps, although other types of pentatonic scales may include them. \u{1F447} <b>How many different pitch classes are in a pentatonic scale?</b>",
+    { say:"<b>Pentatonic Scale:</b> A pentatonic scale contains <b>five different pitches</b>. The major and minor pentatonic scales are made by <b>removing two notes from a seven-note scale</b>. \u{1F447} <b>How many different pitches are in a pentatonic scale?</b>",
       try:{ type:"mc", choices:["Five","Seven","Twelve"], answer:0,
         success:"✓ Correct. A pentatonic scale contains five different pitch classes within an octave.",
         fail:"The prefix “penta-” refers to the number five.",
         hint:"A pentagon has five sides." } },
-    { say:"<b>Major Pentatonic Scale:</b> One way to construct a major pentatonic scale is to begin with a major scale and <b>omit scale degrees 4 and 7</b>. For example, C major pentatonic is <b>C–D–E–G–A</b>. Omitting F and B removes the half steps found in the C major scale. \u{1F447} <b>Which scale degrees of the major scale are omitted to form the major pentatonic scale?</b>",
+    { say:"<b>Major Pentatonic Scale:</b><div style='max-width:300px;margin:8px auto;padding:8px 14px;border:2px solid #2F6DA8;border-radius:10px;background:#eef3fb;text-align:center;color:#2F6DA8'><b>Major Pentatonic</b><br><span style='color:#333;font-weight:600'>Remove scale degrees 4 and 7.</span></div>Start with a major scale and drop degrees 4 and 7. C major pentatonic is <b>C–D–E–G–A</b> (F and B are gone, so no half steps remain). \u{1F447} <b>Which two scale degrees disappear to form the major pentatonic?</b>",
       show:{ type:"html", html:`<table style="border-collapse:collapse;margin:0 auto;font-size:14px">
         <tr><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:5px 10px">Major scale</th><td style="border:1.5px solid #cdd5e1;padding:5px 10px;text-align:center;font-weight:800;color:#2F6DA8">C</td><td style="border:1.5px solid #cdd5e1;padding:5px 10px;text-align:center;font-weight:800;color:#2F6DA8">D</td><td style="border:1.5px solid #cdd5e1;padding:5px 10px;text-align:center;font-weight:800;color:#2F6DA8">E</td><td style="border:1.5px solid #cdd5e1;padding:5px 10px;text-align:center">F</td><td style="border:1.5px solid #cdd5e1;padding:5px 10px;text-align:center;font-weight:800;color:#2F6DA8">G</td><td style="border:1.5px solid #cdd5e1;padding:5px 10px;text-align:center;font-weight:800;color:#2F6DA8">A</td><td style="border:1.5px solid #cdd5e1;padding:5px 10px;text-align:center">B</td></tr>
         <tr><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:5px 10px">Major pentatonic</th><td style="border:1.5px solid #cdd5e1;padding:5px 10px;text-align:center;font-weight:800">C</td><td style="border:1.5px solid #cdd5e1;padding:5px 10px;text-align:center;font-weight:800">D</td><td style="border:1.5px solid #cdd5e1;padding:5px 10px;text-align:center;font-weight:800">E</td><td style="border:1.5px solid #cdd5e1;padding:5px 10px;text-align:center;color:#C05A21">—</td><td style="border:1.5px solid #cdd5e1;padding:5px 10px;text-align:center;font-weight:800">G</td><td style="border:1.5px solid #cdd5e1;padding:5px 10px;text-align:center;font-weight:800">A</td><td style="border:1.5px solid #cdd5e1;padding:5px 10px;text-align:center;color:#C05A21">—</td></tr></table>` },
@@ -61,7 +60,7 @@ LESSON_CONTENT[81]={
         success:"✓ Correct. Omitting scale degrees 4 and 7 produces the major pentatonic pattern without half steps.",
         fail:"Identify the scale degrees involved in the major scale’s two half steps.",
         hint:"In C major, omit F and B." } },
-    { say:"<b>Minor Pentatonic Scale:</b> One way to construct a minor pentatonic scale is to begin with a natural minor scale and <b>omit scale degrees 2 and 6</b>. For example, A minor pentatonic is <b>A–C–D–E–G</b>. This scale is widely used in blues, rock, folk, and many other musical styles. \u{1F447} <b>Which notes form the A minor pentatonic scale?</b>",
+    { say:"<b>Minor Pentatonic Scale:</b><div style='max-width:300px;margin:8px auto;padding:8px 14px;border:2px solid #C05A21;border-radius:10px;background:#fbeee6;text-align:center;color:#C05A21'><b>Minor Pentatonic</b><br><span style='color:#333;font-weight:600'>Remove scale degrees 2 and 6.</span></div>Start with a natural minor scale and drop degrees 2 and 6. A minor pentatonic is <b>A–C–D–E–G</b> — widely used in blues, rock, and folk. \u{1F447} <b>Which notes form the A minor pentatonic scale?</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:110,notes:[
         {p:"A3",d:"q",label:"1"},{p:"C4",d:"q",label:"3"},{p:"D4",d:"q",label:"4"},
         {p:"E4",d:"q",label:"5"},{p:"G4",d:"q",label:"7"},{p:"A4",d:"q",label:"8"},{bar:"final"}],width:440} },
@@ -69,16 +68,22 @@ LESSON_CONTENT[81]={
         success:"✓ Correct. Begin with A natural minor and omit scale degree 2, B, and scale degree 6, F.",
         fail:"Begin with A natural minor and omit its second and sixth scale degrees.",
         hint:"Use scale degrees 1, 3, 4, 5, and 7." } },
-    { say:"<b>Relative Pentatonic Scales:</b> C major pentatonic and A minor pentatonic contain <b>the same five pitch classes</b>: C, D, E, G, and A. Their tonal centers differ, just as relative major and minor keys share a key signature but have different tonics. \u{1F447} <b>Which minor pentatonic scale contains the same pitch collection as G major pentatonic?</b>",
+    { say:"<b>Relative Pentatonic Scales:</b> C major pentatonic and A minor pentatonic contain <b>the same five notes</b> — only the tonal center (home note) differs. Look at the two rows below: same notes, different starting point. \u{1F447} <b>Which minor pentatonic scale contains the same notes as G major pentatonic?</b>",
+      show:{ type:"html", html:`<div style="text-align:center;line-height:1.5">
+        <div style="font-weight:800;color:#2F6DA8">C Major Pentatonic</div>
+        <div style="font-family:monospace;font-size:18px;font-weight:800;letter-spacing:3px">C  D  E  G  A</div>
+        <div style="color:#667;font-size:13px;margin:4px 0">↓ &nbsp; the same five notes &nbsp; ↓</div>
+        <div style="font-weight:800;color:#C05A21">A Minor Pentatonic</div>
+        <div style="font-family:monospace;font-size:18px;font-weight:800;letter-spacing:3px">A  C  D  E  G</div></div>` },
       try:{ type:"mc", choices:["E minor pentatonic","G minor pentatonic","C minor pentatonic"], answer:0,
         success:"✓ Correct. G major pentatonic and E minor pentatonic share the pitch collection G–A–B–D–E but establish different tonal centers.",
         fail:"Find the relative minor tonic of G major.",
         hint:"Move down a minor third from G to E." } },
-    { say:"<b>The Black Keys:</b> The five black-key pitch classes form G♭ major pentatonic when G♭ is heard as the tonic and E♭ minor pentatonic when E♭ is heard as the tonic. <b>Major pentatonic uses scale degrees 1, 2, 3, 5, and 6; minor pentatonic uses 1, 3, 4, 5, and 7.</b> \u{1F447} <b>Improvise using only the black keys.</b>",
+    { say:"<b>The Black Keys:</b> The five black keys form a <b>pentatonic scale</b> — hear G♭ as the tonic for G♭ major pentatonic, or E♭ as the tonic for E♭ minor pentatonic. Play around: <b>almost any black keys sound good together.</b> \u{1F447} <b>Improvise using only the black keys — then notice why they sound so good.</b>",
       try:{ type:"custom",
         hint:"Establish either G♭ or E♭ as the tonal center, and create short rhythmic and melodic patterns using the five black keys.",
         mount:(container,fb)=>MF_L81_improv(container,fb) } },
-    { say:"<b>Pentatonic Scales in Musical Traditions:</b> Many types of five-note scales appear in musical traditions throughout the world, including traditions from <b>East Asia, Africa, Europe, and the Americas</b>. Pentatonic collections also appear in spirituals, blues, rock, jazz, and contemporary popular music. Their structures and musical functions vary across cultures and styles. \u{1F447} <b>Why do the major and minor pentatonic scales contain no half steps?</b>",
+    { say:"<b>Pentatonic Around the World:</b> Pentatonic scales are among the <b>most widely used scales in the world</b>. They appear in many musical traditions — <b>folk, blues, rock, popular music</b>, and music from many different cultures. \u{1F447} <b>Why do the major and minor pentatonic scales contain no half steps?</b>",
       try:{ type:"mc", choices:["Their construction omits the scale degrees that form half steps in the related major or natural minor scale","They contain additional sharps","They must be performed slowly"], answer:0,
         success:"✓ Correct. The major and minor pentatonic patterns omit the scale degrees that would create half steps.",
         fail:"In the major pentatonic scale, what interval type disappears when scale degrees 4 and 7 are omitted?",
@@ -176,11 +181,11 @@ LESSON_CONTENT[81]={
   ],
   mistakes:[],
   summary:[
-    "✔ <b>Pentatonic</b> = five pitch classes per octave; the major and minor forms contain <b>no half steps</b>.",
-    "✔ <b>Major pentatonic</b> = major − 4 & 7 (C-D-E-G-A).",
-    "✔ <b>Minor pentatonic</b> = natural minor − 2 & 6 (A-C-D-E-G).",
-    "✔ Relatives share all five notes — C major pent = A minor pent.",
-    "✔ The <b>black keys</b> form a pentatonic; many types of five-note scales appear in traditions worldwide."
+    "✔ <b>Pentatonic</b> = five-note scale.",
+    "✔ <b>Major pentatonic:</b> remove 4 and 7.",
+    "✔ <b>Minor pentatonic:</b> remove 2 and 6.",
+    "✔ Relative major and minor pentatonic scales <b>share the same notes</b>.",
+    "✔ Pentatonic scales are among the <b>most widely used scales in the world</b>."
   ],
   tips:[
     "Improvising with the major or minor pentatonic? A clear tonal center, rhythm and phrasing still matter.",
