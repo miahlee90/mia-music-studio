@@ -5,20 +5,28 @@
    a pentatonic scale. Found in music worldwide.
    NOTE: edit by FULL-FILE REWRITE only. */
 
-/* black-key improv: every black key belongs — free play */
-function MF_L81_improv(container,fb){
-  const PENTA=new Set([1,3,6,8,10]); /* black-key pitch classes */
-  let hits=0;
-  container.innerHTML=`<div class="big-q l81i-q" style="text-align:center">The five black keys form a PENTATONIC scale — almost every combination sounds good. Improvise freely using only the black keys: try G♭ (or E♭) as your home note, and make up short rhythmic and melodic patterns.</div>
-    <div class="l81i-kb"></div>
-    <div class="streak l81i-s" style="text-align:center"></div>`;
-  const kh=container.querySelector(".l81i-kb"), s=container.querySelector(".l81i-s");
-  Keyboard.create(kh,{start:60,octaves:2,labels:true,
+/* guided black-key melody: follow the ▼ arrow to play Arirang (a pentatonic
+   folk song) using only the five black keys = G♭ major pentatonic */
+function MF_L81_arirang(container,fb){
+  /* Arirang, on the black keys (G♭ major pentatonic: G♭ A♭ B♭ D♭ E♭) */
+  const MELODY=[73,75,78, 78,75,73, 75,78,80,78,75,73, 73,75,78, 78,75,73, 70,68,66];
+  let i=0;
+  container.innerHTML=`<div class="big-q l81a-q" style="text-align:center">Follow the red <b>▼</b> arrow and play <b>Arirang</b> on the black keys — a famous pentatonic folk song fits entirely on the five black keys. Press the key the arrow points to.</div>
+    <div class="l81a-prog" style="text-align:center;font-weight:800;margin:6px 0;color:var(--ink,#333)"></div>
+    <div class="l81a-kb"></div>
+    <div style="text-align:center;margin-top:10px"><button class="play l81a-demo">▶ Hear it first</button></div>`;
+  const prog=container.querySelector(".l81a-prog"), kh=container.querySelector(".l81a-kb");
+  const kb=Keyboard.create(kh,{start:60,octaves:2,labels:true,
     onKey:m=>{
-      if(PENTA.has(m%12)){ hits++; s.textContent=`\u{2B50} pentatonic note · total: ${hits}`;
-        if(hits===10){ MFAudio.yay(); fb(true,"✓ Ten black-key notes — you are improvising on the pentatonic scale. Keep a clear tonal center, and shape your rhythm and phrasing."); } }
-      else { s.textContent="that was a white key — stay on the black keys"; fb(false,"White key — the black-key pentatonic uses only the five black keys."); }
+      if(i>=MELODY.length) return;
+      if(m===MELODY[i]){ i++; update();
+        if(i>=MELODY.length){ MFAudio.yay(); fb(true,"✓ You played Arirang — every note came from the five black keys, the G♭ major pentatonic scale."); } }
+      else { MFAudio.tone(40,.15); fb(false,"Not that one — press the black key the ▼ arrow is pointing to."); }
     }});
+  function update(){ prog.textContent = i<MELODY.length? `Next note: ${i+1} of ${MELODY.length}` : "✓ Arirang complete!";
+    kb.point(i<MELODY.length? MELODY[i] : null); }
+  container.querySelector(".l81a-demo").onclick=()=>kb.demo(MELODY,430);
+  update();
 }
 
 LESSON_CONTENT[81]={
@@ -79,10 +87,10 @@ LESSON_CONTENT[81]={
         success:"✓ Correct. G major pentatonic and E minor pentatonic share the pitch collection G–A–B–D–E but establish different tonal centers.",
         fail:"Find the relative minor tonic of G major.",
         hint:"Move down a minor third from G to E." } },
-    { say:"<b>The Black Keys:</b> The five black keys form a <b>pentatonic scale</b> — hear G♭ as the tonic for G♭ major pentatonic, or E♭ as the tonic for E♭ minor pentatonic. Play around: <b>almost any black keys sound good together.</b> \u{1F447} <b>Improvise using only the black keys — then notice why they sound so good.</b>",
+    { say:"<b>The Black Keys — Play a Song:</b> The five black keys form a <b>pentatonic scale</b> (G♭ major pentatonic). Because <b>Arirang</b> is pentatonic, you can play the whole tune using <b>only the black keys</b>. \u{1F447} <b>Follow the arrow and play Arirang.</b>",
       try:{ type:"custom",
-        hint:"Establish either G♭ or E♭ as the tonal center, and create short rhythmic and melodic patterns using the five black keys.",
-        mount:(container,fb)=>MF_L81_improv(container,fb) } },
+        hint:"Press the black key the red ▼ arrow points to. Tap “Hear it first” to listen, then follow along.",
+        mount:(container,fb)=>MF_L81_arirang(container,fb) } },
     { say:"<b>Pentatonic Around the World:</b> Pentatonic scales are among the <b>most widely used scales in the world</b>. They appear in many musical traditions — <b>folk, blues, rock, popular music</b>, and music from many different cultures. \u{1F447} <b>Why do the major and minor pentatonic scales contain no half steps?</b>",
       try:{ type:"mc", choices:["Their construction omits the scale degrees that form half steps in the related major or natural minor scale","They contain additional sharps","They must be performed slowly"], answer:0,
         success:"✓ Correct. The major and minor pentatonic patterns omit the scale degrees that would create half steps.",
