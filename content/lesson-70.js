@@ -99,8 +99,13 @@ LESSON_CONTENT[70]={
         fail:"The progression begins on the tonic…",
         hint:"The I chord opens the form." } },
     { say:"<b>Bars 5–8:</b> Bars 5–6 use the <b>IV chord</b>. Bars 7–8 return to the <b>I chord</b>. \u{1F447} <b>When does the first chord change occur?</b>",
-      show:{ type:"html", html:`<div style="max-width:430px;margin:0 auto;font-size:15px;line-height:2.1;background:var(--card,#fff);border:1.5px solid #cdd5e1;border-radius:12px;padding:12px 18px;text-align:center;font-weight:700">
-        Bars 1-4: <b>I</b> &nbsp;·&nbsp; Bars 5-6: <b>IV</b> &nbsp;·&nbsp; Bars 7-8: <b>I</b><br>Bar 9: <b>V or V7</b> &nbsp;·&nbsp; Bar 10: <b>IV</b> &nbsp;·&nbsp; Bars 11-12: <b>I</b></div>` },
+      show:{ type:"html", html:`<div style="text-align:center">
+        <div style="font-weight:800;margin-bottom:8px;color:var(--ink,#333)">12-bar blues</div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:5px;max-width:340px;margin:0 auto">${
+          [["I","b"],["I","b"],["I","b"],["I","b"],["IV","r"],["IV","r"],["I","b"],["I","b"],["V","g"],["IV","r"],["I","b"],["I","b"]]
+          .map(([n,c])=>{const col={b:["#e3f0fb","#8fbce0"],r:["#f8e0e0","#dc9a9a"],g:["#dcecd6","#94c384"]}[c];
+            return `<span style="background:${col[0]};border:1.5px solid ${col[1]};border-radius:6px;padding:11px 0;font-weight:800;font-size:18px;color:#243244">${n}<sup style="font-size:.62em">7</sup></span>`;}).join("")
+        }</div></div>` },
       try:{ type:"mc", choices:["Bar 5 — up to IV","Bar 2","Bar 9"], answer:0,
         success:"✓ Bar 5 — after four bars of I, the progression moves to IV.",
         fail:"Count the four bars of I first…",
@@ -237,7 +242,7 @@ LESSON_CONTENT[70]={
   vocabulary:[
     {term:"The Blues", def:"Music born in America's south from West African rhythms, gospel singing and European harmonies — alive today in jazz, rock and pop."},
     {term:"Bar", def:"Another word for measure — the blues is counted in bars."},
-    {term:"12-Bar Blues Progression", def:`The traditional form — each box is one bar:<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:3px;max-width:150px;margin:8px auto 0;font-weight:800;font-size:13px">${["I","I","I","I","IV","IV","I","I","V7","IV","I","I"].map(c=>`<span style="border:1.5px solid #cdd5e1;border-radius:5px;padding:3px 0;text-align:center;background:#fff">${c}</span>`).join("")}</div>`},
+    {term:"12-Bar Blues Progression", def:`The traditional form — each box is one bar:<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:4px;max-width:152px;margin:8px auto 0">${[["I","b"],["I","b"],["I","b"],["I","b"],["IV","r"],["IV","r"],["I","b"],["I","b"],["V7","g"],["IV","r"],["I","b"],["I","b"]].map(([n,c])=>{const col={b:["#e3f0fb","#8fbce0"],r:["#f8e0e0","#dc9a9a"],g:["#dcecd6","#94c384"]}[c];return `<span style="background:${col[0]};border:1.5px solid ${col[1]};border-radius:4px;padding:4px 0;text-align:center;font-weight:800;font-size:12px;color:#243244">${n}</span>`;}).join("")}</div>`},
     {term:"The V→IV Descent", def:"Bars 9-10: the dominant steps DOWN through IV before landing home — a signature blues move.",
       staff:{clef:"treble",notes:[{p:"G4",d:"w",label:"V7"},{p:"B4",d:"w",chord:true},{p:"F5",d:"w",chord:true},{p:"F4",d:"w",label:"IV"},{p:"A4",d:"w",chord:true},{p:"C5",d:"w",chord:true}],width:280}}
   ],
