@@ -4,29 +4,34 @@
    2s and 3s. CHANGING (mixed) meter = the time signature changes from
    measure to measure. NOTE: edit by FULL-FILE REWRITE only. */
 
-/* ear lab: regular 4/4 vs asymmetrical 5/4 (3+2) */
+/* ear lab: four distinct meters (4/4, 5/4, 6/8, 7/8) — classify equal vs unequal grouping */
 function MF_L79_ear(container,fb){
-  const ROUNDS=[1,0,1,0].sort(()=>Math.random()-.5); /* 1 = 5/4 */
+  const METERS=[
+    {per:4, unit:.42, strong:b=>b===0||b===2,          unequal:false, why:"4/4 — four even beats, grouped 2 + 2 (equal)."},
+    {per:5, unit:.42, strong:b=>b===0||b===3,          unequal:true,  why:"5/4 grouped 3 + 2 — unequal beat groups."},
+    {per:6, unit:.3,  strong:b=>b===0||b===3,          unequal:false, why:"6/8 — two equal groups of three (3 + 3), a compound-duple pulse."},
+    {per:7, unit:.3,  strong:b=>b===0||b===2||b===4,   unequal:true,  why:"7/8 grouped 2 + 2 + 3 — unequal beat groups."}
+  ];
   let r=0, played=false;
   container.innerHTML=`<div class="big-q l79e-q" style="text-align:center"></div>
     <div style="text-align:center"><button class="play l79e-play">▶ Play two measures</button></div>
-    <div class="choices l79e-ch" style="display:none"><button>4/4 — even, four beats</button><button>5/4 — uneven, 3+2 grouping</button></div>`;
+    <div class="choices l79e-ch" style="display:none"><button>Equal beat groupings</button><button>Unequal beat groupings</button></div>`;
   const q=container.querySelector(".l79e-q"), pl=container.querySelector(".l79e-play"), ch=container.querySelector(".l79e-ch");
   pl.onclick=()=>{
-    if(r>=ROUNDS.length) return;
-    const five=ROUNDS[r]===1, per=five?5:4;
-    for(let m=0;m<2;m++) for(let b=0;b<per;b++){
-      const strong = five? (b===0||b===3) : (b===0||b===2);
-      MFAudio.tone(strong?43:55,.24,(m*per+b)*.42,strong?.42:.22);
+    if(r>=METERS.length) return;
+    const M=METERS[r];
+    for(let m=0;m<2;m++) for(let b=0;b<M.per;b++){
+      const s=M.strong(b);
+      MFAudio.tone(s?43:55,.24,(m*M.per+b)*M.unit,s?.42:.22);
     }
-    played=true; setTimeout(()=>ch.style.display="",2*per*420+300);
+    played=true; setTimeout(()=>ch.style.display="",2*M.per*M.unit*1000+300);
   };
   [...ch.children].forEach((b,i)=>b.onclick=()=>{
-    if(!played) return;
-    const five=ROUNDS[r]===1;
-    if((i===1)===five){ fb(true,five?"✓ STRONG-2-3-strong-2 — five beats grouped 3+2.":"✓ STRONG-2-strong-2 — four even beats."); r++; played=false; ch.style.display="none";
-      if(r>=ROUNDS.length){ q.textContent="Excellent! Uneven meters can't hide from you."; pl.style.display="none"; } else q.innerHTML=`Round ${r+1} of ${ROUNDS.length}: listen, then decide.`;
-    } else { MFAudio.tone(40,.2); fb(false,"Count the beats between the strong accents: equal groups, or a 3 followed by a 2?"); }
+    if(!played||r>=METERS.length) return;
+    const M=METERS[r];
+    if((i===1)===M.unequal){ fb(true,"✓ "+M.why); r++; played=false; ch.style.display="none";
+      if(r>=METERS.length){ q.textContent="Excellent! You can hear equal groupings from unequal ones."; pl.style.display="none"; } else q.innerHTML=`Round ${r+1} of ${METERS.length}: listen, then decide.`;
+    } else { MFAudio.tone(40,.2); fb(false,"Count the beats between the strong accents: are the groups equal, or a mix of longer and shorter?"); }
   });
   q.innerHTML="Round 1 of 4: listen, then decide.";
 }
