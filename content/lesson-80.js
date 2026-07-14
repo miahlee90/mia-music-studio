@@ -205,11 +205,11 @@ LESSON_CONTENT[80]={
   ],
   mistakes:[],
   summary:[
-    "✔ Two families by the 3rd: <b>major-type</b> (Ionian, Lydian, Mixolydian) and <b>minor-type</b> (Dorian, Phrygian, Aeolian). Locrian is separate (diminished 5th).",
-    "✔ <b>Change ONE scale degree</b> to color a scale: <b>Lydian ♯4 · Mixolydian ♭7 · Dorian raised 6 · Phrygian ♭2</b>.",
-    "✔ Ionian = major, Aeolian = natural minor — the reference scales.",
-    "✔ By ear: find the tonic, check the 3rd for the family, then listen for the characteristic scale degree.",
-    "✔ To write modal: establish the tonic, use the mode's notes, and emphasize the characteristic degree."
+    "✔ <b>Major-type:</b><br>Ionian • Lydian • Mixolydian",
+    "✔ <b>Minor-type:</b><br>Dorian • Phrygian • Aeolian<br>Locrian is a special case.",
+    "✔ <b>Characteristic Notes</b><br>Lydian ♯4<br>Mixolydian ♭7<br>Dorian ♮6<br>Phrygian ♭2<br>Locrian ♭5",
+    "✔ One changed note creates a new modal sound.",
+    "✔ <b>By ear:</b><br>Find the tonic → identify the major/minor family → listen for the characteristic note."
   ],
   tips:[
     "Fast ID at the keyboard: play white-key scales from each note — D=Dorian, E=Phrygian, F=Lydian, G=Mixolydian, A=Aeolian.",
