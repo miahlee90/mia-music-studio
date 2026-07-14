@@ -125,7 +125,7 @@ LESSON_CONTENT[66]={
       staff:{clef:"treble",time:"4/4",tempo:100,notes:[
         {p:"C4",d:"q",label:"I"},{p:"D4",d:"q",label:"P"},{p:"E4",d:"q"},{p:"G4",d:"q"},{bar:"single"},
         {p:"F4",d:"q",label:"IV"},{p:"G4",d:"q",label:"P"},{p:"A4",d:"q"},{p:"C5",d:"q"},{bar:"single"},
-        {p:"B4",d:"q",label:"V7"},{p:"A4",d:"q",label:"P"},{p:"G4",d:"q"},{p:"F4",d:"q"},{bar:"single"},
+        {p:"B4",d:"q",label:"V7"},{p:"A4",d:"q",label:"P"},{p:"G4",d:"q"},{p:"B4",d:"q"},{bar:"single"},
         {p:"C5",d:"w",label:"I"},{bar:"final"}],width:680},
       kb:{start:60,octaves:2,labels:true} },
     { caption:"Neighbors at work: the melody keeps returning home — E-F-E (upper), G-F♯-G (lower) — while the C harmony holds still underneath.",
