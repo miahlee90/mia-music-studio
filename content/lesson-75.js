@@ -117,14 +117,7 @@ LESSON_CONTENT[75]={
         {p:"G4",d:"8",label:"A"},{p:"G4",d:"8"},{p:"E4",d:"q"},{p:"G4",d:"q"},{p:"C5",d:"q"},{bar:"double"},
         {p:"F4",d:"8",label:"C"},{p:"A4",d:"8"},{p:"C5",d:"q"},{p:"A4",d:"q"},{p:"C4",d:"q"},{bar:"double"},
         {p:"G4",d:"8",label:"A"},{p:"G4",d:"8"},{p:"E4",d:"q"},{p:"G4",d:"q"},{p:"C5",d:"h"},{bar:"final"}],
-        beams:[[0,1],[6,7],[12,13],[18,19],[24,25]],width:680},
-      kb:{start:57,octaves:2,labels:true} },
-    { caption:"A closing cadence: I → IV → V7 → I — the same chords that closed Lesson 50, now heard with full understanding.",
-      staff:{clef:"treble",tempo:80,notes:[
-        {p:"C4",d:"w",label:"I"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},
-        {p:"F4",d:"w",label:"IV"},{p:"A4",d:"w",chord:true},{p:"C5",d:"w",chord:true},
-        {p:"G4",d:"w",label:"V7"},{p:"B4",d:"w",chord:true},{p:"D5",d:"w",chord:true},{p:"F5",d:"w",chord:true},
-        {p:"C4",d:"w",label:"I — 75/75!"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{p:"C5",d:"w",chord:true},{bar:"final"}],width:600},
+        beams:[[0,1],[6,7],[12,13],[18,19],[24,25]],width:940},
       kb:{start:57,octaves:2,labels:true} }
   ],
   games:[
@@ -243,8 +236,7 @@ LESSON_CONTENT[75]={
     "✔ A <b>RONDO</b> = the A section <b>alternating with contrasting sections</b>; A is the <b>recurring</b> one.",
     "✔ Common types: <b>ABABA, ABACA, ABACABA</b> — each opening and closing on A.",
     "✔ The family: <b>AB</b> (A–B) · <b>ABA</b> (A–B–A) · <b>rondo</b> (A–B–A–C–A…).",
-    "✔ Everything is built from <b>motives → phrases → sections</b> — Lesson 72's pyramid.",
-    "✔ <b>ALL 75 LESSONS COMPLETE — THE COURSE IS YOURS!</b> \u{1F386}\u{1F393}\u{1F3C6}"
+    "✔ Everything is built from <b>motives → phrases → sections</b> — Lesson 72's pyramid."
   ],
   tips:[
     "Listen for rondos in classical finales — composers loved ending big works with the friendliest form.",
@@ -265,8 +257,8 @@ LESSON_CONTENT[75]={
       explain:"Rondo = A alternating with contrasting sections; A recurs. Types: ABABA, ABACA, ABACABA. Family: AB (A–B), ABA (A–B–A), rondo (recurring A).",
       hint:"A begins it, A ends it, A keeps visiting.",
       play:()=>{[67,67,64,67,72].forEach((m,i)=>MFAudio.tone(m,.28,i*.3,.42));} },
-    example:{ label:"the examples",
-      explain:"Example 1 is a written-out ABACA miniature; example 2 is your graduation cadence — I-IV-V7-I, understood completely." },
+    example:{ label:"the example",
+      explain:"A written-out ABACA miniature — follow A, B, A, C, A as it plays; the main theme keeps returning between the contrasting episodes." },
     game:{ label:"the games",
       explain:"Sprint the rondo facts, play the theme, name every form on sight — then run the 75-lesson victory race.",
       hint:"It's the last one. Leave nothing behind. \u{1F3C6}" },
