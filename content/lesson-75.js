@@ -19,7 +19,7 @@ function MF_L75_track(container,fb){
     <div style="text-align:center"><button class="play l75t-play">▶ Play section 1</button></div>
     <div class="choices chips l75t-ch" style="display:none"><button>A</button><button>B</button><button>C</button></div>`;
   const q=container.querySelector(".l75t-q"), map=container.querySelector(".l75t-map"), pl=container.querySelector(".l75t-play"), ch=container.querySelector(".l75t-ch");
-  function drawMap(){ map.textContent=[0,1,2,3,4].map(i=>i<picked.length?picked[i]:"·").join(" "); }
+  function drawMap(){ map.textContent=[0,1,2,3,4].map(i=>i<picked.length?picked[i]:"?").join(" "); }
   function play(name){ const S=SEC[name]; let t=0; S.notes.forEach((m,i)=>{ MFAudio.tone(m,S.durs[i]*.95,t,.42); t+=S.durs[i]; }); return t; }
   pl.onclick=()=>{ if(k>=5) return; play(ORDER[k]); played=true; setTimeout(()=>ch.style.display="",2600); };
   [...ch.children].forEach((b)=>b.onclick=()=>{

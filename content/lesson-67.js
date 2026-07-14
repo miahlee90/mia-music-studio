@@ -30,7 +30,7 @@ function MF_L67_compose(container,fb){
   function drawMap(){
     map.innerHTML=MEAS.map((m,i)=>{
       const done=i<picked.length, cur=(i===k && k<MEAS.length);
-      const note=done?picked[i].name:"—";
+      const note=done?picked[i].name:"?";
       const bg=cur?"var(--accent,#4f7cff)":done?"#e6efff":"#f2f4f8";
       const fg=cur?"#fff":done?"#1f4bd8":"#8a93a3";
       const bd=cur?"var(--accent,#4f7cff)":done?"#bcd2ff":"#dde2ea";

@@ -17,7 +17,7 @@ function MF_L74_seq(container,fb){
     <div class="choices chips l74s-ch" style="display:none"><button>A</button><button>B</button></div>`;
   const q=container.querySelector(".l74s-q"), map=container.querySelector(".l74s-map"), pl=container.querySelector(".l74s-play"), ch=container.querySelector(".l74s-ch");
   let played=false;
-  function drawMap(){ map.textContent=[0,1,2].map(i=>i<picked.length?picked[i]:"·").join(" "); }
+  function drawMap(){ map.textContent=[0,1,2].map(i=>i<picked.length?picked[i]:"?").join(" "); }
   function play(S){ let t=0; S.notes.forEach((m,i)=>{ MFAudio.tone(m,S.durs[i]*.95,t,.42); t+=S.durs[i]; }); return t; }
   pl.onclick=()=>{ if(k>=3) return; play(ORDER[k]); played=true; setTimeout(()=>ch.style.display="",3300); };
   [...ch.children].forEach((b,i)=>b.onclick=()=>{

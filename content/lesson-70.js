@@ -22,7 +22,7 @@ function MF_L70_build(container,fb){
     FORM.forEach((f,i)=>{
       const cell=document.createElement("div");
       cell.style.cssText="border:2px solid "+(i<picked.length?"#3a9b57":"#cdd5e1")+";border-radius:8px;padding:8px 2px;text-align:center;font-weight:800;background:"+(i===picked.length?"#fff7df":"#fff");
-      cell.textContent=(i+1)+": "+(i<picked.length?picked[i]:"·");
+      cell.textContent=(i+1)+": "+(i<picked.length?picked[i]:"?");
       grid.appendChild(cell);
     });
   }

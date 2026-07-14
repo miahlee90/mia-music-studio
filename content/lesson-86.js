@@ -16,7 +16,7 @@ function MF_L86_label(container,fb){
     <div class="l86l-map" style="text-align:center;font-weight:800;letter-spacing:4px;margin-top:6px"></div>`;
   const q=container.querySelector(".l86l-q"), pl=container.querySelector(".l86l-play"), ch=container.querySelector(".l86l-ch"), map=container.querySelector(".l86l-map");
   const done=[];
-  function draw(){ map.textContent=cur.map((c,i)=>i<done.length?done[i]:"·").join("  "); }
+  function draw(){ map.textContent=cur.map((c,i)=>i<done.length?done[i]:"?").join("  "); }
   function ask(){
     draw();
     if(k>=cur.length){
