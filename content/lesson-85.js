@@ -83,7 +83,7 @@ LESSON_CONTENT[85]={
         success:"✓ Correct. The lowercase numeral indicates minor quality, and vi identifies scale degree 6 as the root.",
         fail:"Read both the numeral and its capitalization.",
         hint:"A lowercase numeral without an additional symbol indicates a minor triad." } },
-    { say:"<b>Triads from the Harmonic Minor Scale:</b> Stacking thirds using only the notes of the harmonic minor scale produces <b>i–ii°–III+–iv–V–VI–vii°</b>. The raised seventh becomes the third of V, making the dominant triad major, and it becomes the root of vii°, creating a diminished leading-tone triad. In tonal minor music, however, composers draw from natural, harmonic, and melodic minor forms according to harmonic and melodic function. As a result, III is often major rather than augmented, and other chord variants may occur. \u{1F447} <b>When triads are built from the harmonic minor scale, what is the quality of V?</b>",
+    { say:"<b>Triads from the Harmonic Minor Scale:</b> Raising the 7th scale degree changes several triad qualities. Most importantly, <b>V becomes major</b> and <b>vii° becomes diminished</b>, creating a stronger pull to the tonic. \u{1F447} <b>When triads are built from the harmonic minor scale, what is the quality of V?</b>",
       try:{ type:"mc", choices:["Major, because it contains the raised seventh scale degree","Minor","Diminished"], answer:0,
         success:"✓ Correct. The raised seventh is the third of the dominant triad, changing v to V.",
         fail:"Identify the raised scale degree and its position within the dominant triad.",
