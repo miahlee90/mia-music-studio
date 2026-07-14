@@ -35,7 +35,7 @@ function MF_L78_ear(container,fb){
 LESSON_CONTENT[78]={
   welcome:"Syncopation shifts emphasis away from the expected strong beats.",
   hook:{
-    say:"<b>Listen to two versions of the same rhythm.</b> The first emphasizes the beats; the second shifts the emphasis away from them. \u{1F447} <b>Which version is syncopated?</b>",
+    say:"<b>Listen to two versions of the same rhythm.</b> The first emphasizes the beats; the second shifts the emphasis away from them. \u{1F447} <b>Which version shifts the accent away from the beat?</b>",
     interact:{ type:"custom",
       mount:(container,fb)=>{
         container.innerHTML=`<div style="text-align:center">
@@ -55,18 +55,18 @@ LESSON_CONTENT[78]={
   objectives:[
     "Define syncopation: accents shifted to weak beats or off-beats",
     "Accent the off-beat (the '&') on purpose",
-    "Create syncopation with TIES that hold through a strong beat",
+    "Create syncopation using ties that hold through a strong beat",
     "Define rhythmic anticipation: arriving just before the beat",
     "Read and clap the 3+3+2 pattern",
-    "Hear syncopated vs on-the-beat rhythms"
+    "Recognize the difference between syncopated and on-the-beat rhythms"
   ],
   steps:[
-    { say:"<b>Syncopation</b> occurs when musical emphasis <b>shifts away from an expected strong beat</b>. It may emphasize a weak beat or offbeat, sustain a note across a strong beat, or replace an expected attack with a rest. The underlying pulse remains steady while the rhythm works against the expected metrical accents. \u{1F447} <b>What is syncopation?</b>",
+    { say:"<b>Syncopation</b> occurs when musical emphasis shifts away from an expected strong beat. The emphasis may fall on a weak beat or an offbeat, or a note may be tied across a strong beat. Although the accents shift, the underlying pulse remains steady. \u{1F447} <b>What is syncopation?</b>",
       try:{ type:"mc", choices:["A shift of emphasis away from an expected strong beat","An increase in tempo","The complete removal of the pulse"], answer:0,
         success:"✓ Correct. The pulse remains steady, but the musical emphasis shifts away from its expected location.",
         fail:"Syncopation changes the placement of emphasis, not the tempo.",
         hint:"Where does the musical emphasis occur?" } },
-    { say:"<b>Offbeat Accents:</b> One common type of syncopation emphasizes the <b>\u{201C}and\u{201D}</b>, or the second half of each beat. Count \u{201C}1 and 2 and 3 and 4 and\u{201D}, placing the emphasis on each <b>\u{201C}and\u{201D}</b>. \u{1F447} <b>In \u{201C}1 and 2 and 3 and 4 and\u{201D}, which syllables represent the offbeats?</b>",
+    { say:"<b>Offbeat Accents:</b> One common type of syncopation emphasizes the <b>\u{201C}and\u{201D}</b>, or the second half of each beat. Count <b>\u{201C}1-and-2-and-3-and-4-and\u{201D}</b>, placing the emphasis on each <b>\u{201C}and\u{201D}</b>. \u{1F447} <b>In \u{201C}1-and-2-and-3-and-4-and\u{201D}, which syllables represent the offbeats?</b>",
       show:{ type:"staff", spec:{clef:"treble",time:"4/4",tempo:88,notes:[
         {rest:"8"},{p:"G4",d:"8",artic:"accent"},{rest:"8"},{p:"G4",d:"8",artic:"accent"},
         {rest:"8"},{p:"G4",d:"8",artic:"accent"},{rest:"8"},{p:"G4",d:"8",artic:"accent"},{bar:"final"}],width:460} },
@@ -74,7 +74,7 @@ LESSON_CONTENT[78]={
         success:"✓ Correct. The \u{201C}ands\u{201D} occur halfway between the numbered beats. Emphasizing them creates offbeat syncopation.",
         fail:"The numbers represent the main beats. Look for the syllables between them.",
         hint:"Look between the numbered beats." } },
-    { say:"<b>Ties and Syncopation:</b> A note may begin on an offbeat and be <b>tied across the following strong beat</b>. Because no new note begins on that strong beat, the earlier offbeat attack receives greater emphasis. \u{1F447} <b>Why does this measure sound syncopated?</b>",
+    { say:"<b>Ties and Syncopation:</b> A note may begin on an offbeat and be <b>tied across the following strong beat</b>. Because no new note begins on the strong beat, the accent is heard on the earlier offbeat instead. \u{1F447} <b>Why does this measure sound syncopated?</b>",
       show:{ type:"staff", spec:{clef:"treble",time:"4/4",tempo:84,notes:[
         {p:"E4",d:"8"},{p:"G4",d:"8"},{p:"G4",d:"q"},{p:"G4",d:"8"},{p:"C5",d:"8"},{p:"C5",d:"q"},{bar:"final"}],
         beams:[[0,1],[3,4]],arcs:[{from:1,to:2,type:"tie"},{from:4,to:5,type:"tie"}],width:460} },
@@ -82,12 +82,12 @@ LESSON_CONTENT[78]={
         success:"✓ Correct. The notes begin on offbeats and continue through beats 2 and 4, so no new attack occurs on those beats.",
         fail:"Identify where each tied note begins.",
         hint:"The note begins on an \u{201C}and\u{201D} and continues through the following beat." } },
-    { say:"<b>Rhythmic Anticipation:</b> A rhythmic anticipation <b>begins shortly before an expected beat</b> and often continues across it. This technique is common in many popular, jazz, and dance-music styles. In harmony, the term <i>anticipation</i> has a more specific meaning: a note from the upcoming chord sounds before that chord arrives. \u{1F447} <b>A rhythmic anticipation begins…</b>",
+    { say:"<b>Rhythmic Anticipation:</b> A rhythmic anticipation <b>begins shortly before an expected beat</b> and often continues across it. This technique is common in many popular, jazz, and dance-music styles. \u{1F447} <b>A rhythmic anticipation begins…</b>",
       try:{ type:"mc", choices:["shortly before the expected beat","exactly on the expected beat","one full measure after the expected beat"], answer:0,
         success:"✓ Correct. A rhythmic anticipation begins before the expected beat and often continues across it.",
         fail:"An anticipation arrives earlier than expected.",
         hint:"It begins before the expected beat." } },
-    { say:"<b>The 3 + 3 + 2 Pattern:</b> In 4/4, eight eighth notes may be grouped <b>3 + 3 + 2</b>. When the beginning of each group is emphasized, the accents fall on beat 1, the \u{201C}and\u{201D} of beat 2, and beat 4. This grouping creates a syncopated pattern found in many musical traditions and contemporary styles. \u{1F447} <b>When a 3 + 3 + 2 pattern is counted as eight eighth notes, where do the group beginnings occur?</b>",
+    { say:"<b>The 3 + 3 + 2 Pattern:</b> In 4/4, eight eighth notes can be grouped <b>3 + 3 + 2</b> and counted:<div style='text-align:center;font-family:monospace;font-weight:800;font-size:16px;letter-spacing:1px;margin:6px 0'>1 2 3 | 4 5 6 | 7 8</div>When the first note of each group is emphasized, the accents fall on eighth notes <b>1, 4, and 7</b> — which correspond to beat 1, the \u{201C}and\u{201D} of beat 2, and beat 4. This grouping creates a syncopated pattern found in many musical traditions and contemporary styles. \u{1F447} <b>When a 3 + 3 + 2 pattern is counted as eight eighth notes, where do the group beginnings occur?</b>",
       show:{ type:"staff", spec:{clef:"treble",time:"4/4",tempo:92,notes:[
         {p:"C5",d:"8",artic:"accent"},{p:"G4",d:"8"},{p:"G4",d:"8"},
         {p:"C5",d:"8",artic:"accent"},{p:"G4",d:"8"},{p:"G4",d:"8"},
@@ -114,7 +114,7 @@ LESSON_CONTENT[78]={
         {p:"C4",d:"8"},{p:"E4",d:"8"},{p:"E4",d:"q"},{p:"G4",d:"8"},{p:"E4",d:"8"},{p:"E4",d:"q"},{bar:"final"}],
         beams:[[5,6],[8,9]],arcs:[{from:6,to:7,type:"tie"},{from:9,to:10,type:"tie"}],width:640},
       kb:{start:48,octaves:2,labels:true} },
-    { caption:"The 3+3+2 pattern over a steady bass: three, three, then two — the accents make the groove, not the tempo.",
+    { caption:"The 3+3+2 pattern over a steady bass: three, three, then two — the tempo stays the same, but the changing accents create a different rhythmic feel.",
       staff:{clef:"treble",time:"4/4",tempo:96,notes:[
         {p:"E4",d:"8",artic:"accent"},{p:"E4",d:"8"},{p:"E4",d:"8"},
         {p:"G4",d:"8",artic:"accent"},{p:"G4",d:"8"},{p:"G4",d:"8"},
@@ -190,8 +190,7 @@ LESSON_CONTENT[78]={
   vocabulary:[
     {term:"Syncopation", def:"An accent shifted to a weak beat or off-beat while the pulse stays steady."},
     {term:"Off-beat", def:"The space between beats — the '&' when counting '1 & 2 &'."},
-    {term:"Rhythmic Anticipation", def:"A note that arrives just before the beat it belongs to and holds through it."},
-    {term:"3+3+2", def:"Eight eighth notes grouped three-three-two — accents on 1, 4 and 7. A built-in syncopation."}
+    {term:"Rhythmic Anticipation", def:"A note that arrives just before the beat it belongs to and holds through it."}
   ],
   mistakes:[],
   summary:[
@@ -199,7 +198,8 @@ LESSON_CONTENT[78]={
     "✔ Three tools: <b>off-beat accents</b>, <b>ties through strong beats</b>, <b>rhythmic anticipation</b>.",
     "✔ <b>Anticipation</b> arrives just <b>before</b> its beat and holds.",
     "✔ <b>3+3+2</b>: accents on eighths 1, 4, 7 — groove by grouping.",
-    "✔ Jazz, pop, Latin and rock are built on these shifts."
+    "✔ Jazz, pop, Latin and rock are built on these shifts.",
+    "<div style='margin-top:4px;padding:10px 14px;border-left:4px solid var(--accent,#4f7cff);background:rgba(79,124,255,.08);border-radius:8px'><b>Remember</b><br>\u{2022} The pulse stays steady.<br>\u{2022} The accents move.<br>\u{2022} That shift of accents is called <b>syncopation</b>.</div>"
   ],
   tips:[
     "Practice trick: tap the pulse with your foot and clap only the &'s — when it stops feeling wrong, you own the off-beat.",
