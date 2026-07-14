@@ -101,7 +101,7 @@ LESSON_CONTENT[72]={
         hint:"Organization and structure." } },
     { say:"<b>What Is a Motive?</b> A <b>motive</b> is a short musical idea. It may be melodic, rhythmic, or harmonic. It is usually repeated throughout a piece. \u{1F447} <b>What makes a musical idea a motive?</b>",
       show:{ type:"staff", spec:{clef:"treble",time:"2/4",tempo:110,notes:[
-        {rest:"8"},{p:"G4",d:"8"},{p:"G4",d:"8"},{p:"G4",d:"8"},{p:"Eb4",d:"h",artic:"fermata"},{bar:"final"}],
+        {rest:"8"},{p:"G4",d:"8"},{p:"G4",d:"8"},{p:"G4",d:"8"},{bar:"single"},{p:"Eb4",d:"h",artic:"fermata"},{bar:"final"}],
         beams:[[1,3]],width:380} },
       try:{ type:"mc", choices:["Being SHORT and used REPEATEDLY","Being played by violins","Containing exactly four notes"], answer:0,
         success:"✓ Short + repeated = motive. Beethoven's is four notes, but a motive can also be a rhythm or even a chord pattern.",
