@@ -1,9 +1,8 @@
-/* Lesson 75 — Rondo Form (AEMT Book 3, Unit 18) — THE FINAL LESSON (75/75!)
+/* Lesson 75 — Rondo Form (AEMT Book 3, Unit 18)
    Built from drafts/UNIT 18 – Lesson 75.md; AEMT3 p.117 verified by render.
    Core: a RONDO consists of an A section ALTERNATING with other contrasting
-   sections; A is the RECURRING section. Most common types: ABABA, ABACA,
-   ABACABA. "La Raspa" is the book's rondo example (ABACA).
-   GRAND FINALE: course-wide victory lap.
+   sections (EPISODES); A is the RECURRING section. Most common types: ABABA,
+   ABACA, ABACABA. "La Raspa" is the book's rondo example (ABACA).
    NOTE: edit by FULL-FILE REWRITE only. */
 
 /* rondo tracker: label five sections as they play — A B A C A */
@@ -136,7 +135,7 @@ LESSON_CONTENT[75]={
       result:(score)=>score>=8?score+" — rondo master!":null },
     { type:"key-climb", title:"Game 2 · Play the Rondo Theme",
       intro:"Play the main theme, a contrast, and the theme again — a mini-rondo under your fingers!",
-      miaIntro:"One last climb — make it musical! \u{1FA9C}",
+      miaIntro:"Climb it — make it musical! \u{1FA9C}",
       spec:{seq:[67,67,64,67,72, 69,71,72,69, 67,67,64,67,72],
         names:["G (A!)","G","E","G","C — theme done","A (B: contrast)","B","C","A — contrast done","G (A RETURNS!)","G","E","G","C — rondo!"],
         start:57, octaves:2, title:"A · B · A — a mini-rondo"},
@@ -150,9 +149,9 @@ LESSON_CONTENT[75]={
         {label:"Binary (AB)", spec:{clef:"none",notes:[{letter:"A"},{letter:"B"}],width:140}},
         {label:"Rondo (ABACABA)", spec:{clef:"none",notes:[{letter:"A"},{letter:"B"},{letter:"A"},{letter:"C"},{letter:"A"},{letter:"B"},{letter:"A"}],width:260}}]},
       result:(score)=>score>=5?"All forms named on sight!":null },
-    { type:"term-race", title:"Game 4 · THE GRAND FINALE — 75-Lesson Victory Race",
-      intro:"The final game of the final lesson: highlights from ALL 75 LESSONS. Everything you are. GO!",
-      miaIntro:"THE LAST RACE — make the whole course proud! \u{1F3C6}\u{1F386}",
+    { type:"term-race", title:"Game 4 · Big Ideas Review Race",
+      intro:"A quick review race across the big ideas — the staff, chords, scales, and forms. GO!",
+      miaIntro:"Review race — how many can you catch? \u{26A1}",
       spec:{rounds:12, reverse:true, pool:[
         ["The staff","5 lines, 4 spaces (Lesson 1!)"],
         ["Treble & bass together","the grand staff"],
@@ -164,11 +163,11 @@ LESSON_CONTENT[75]={
         ["Harmonic minor","raised 7th, both directions"],
         ["The blues scale","Root, ♭3, 4, ♭5, 5, ♭7"],
         ["Motive","a short idea used repeatedly"],
-        ["Rondo","A keeps coming back"],
-        ["YOU","75 lessons complete! \u{1F393}"]]},
-      result:(score)=>score>=9?"COURSE CHAMPION — 75 OF 75! \u{1F386}\u{1F3C6}\u{1F393}":null }
+        ["Rondo","A keeps coming back between episodes"],
+        ["Ternary form","A B A — the opening returns"]]},
+      result:(score)=>score>=9?"Big ideas locked in — nicely done!":null }
   ],
-  practiceIntro:"The final 20 practice questions — rondo facts plus a whole-course victory mix. Answer right and the next appears automatically!",
+  practiceIntro:"20 practice questions — rondo facts plus a review mix from across the course. Answer right and the next appears automatically!",
   practice:[
     { gen:"term-match", params:{subject:"term", pool:[["Rondo","A alternates with contrasts"],["Recurring section","A"],["ABACA","a common rondo type"],["Binary","AB"],["Ternary","ABA"]], reverse:true}, count:5 },
     { gen:"inversion-id", params:{subject:"both", ask:"both"}, count:2 },
@@ -191,7 +190,7 @@ LESSON_CONTENT[75]={
     { type:"truefalse", q:"In ABACA, the A section appears three times.", answer:true,
       explain:"A, then B, A, C, A." }
   ],
-  miaQuizIntro:"Quiz! A begins it, A ends it, A keeps returning. \u{1F3C6}",
+  miaQuizIntro:"Quiz! A begins it, A ends it, A keeps returning between the episodes.",
   quiz:[
     { type:"mc", q:"A RONDO is a form consisting of…", choices:["an A section alternating with contrasting sections","exactly two sections","one endless melody"], answer:0,
       explain:"A recurring main theme with contrasting sections.", hint:"The recurring A." },
@@ -217,8 +216,8 @@ LESSON_CONTENT[75]={
       explain:"Lesson 72's order underlies Lessons 73-75.", hint:"The smallest ideas first." },
     { type:"mc", q:"Which statement best describes rondo form?", choices:["A recurring main theme alternates with contrasting sections","Two sections: A–B","One melody with no repeats"], answer:0,
       explain:"That is the rondo.", hint:"A keeps returning." },
-    /* generated — a victory mix from across the course */
-    { gen:"term-match", params:{subject:"term", pool:[["Rondo","the recurring-A form"],["ABACA","two contrasts, three returns"],["Recurring section","A"],["75/75","COMPLETE!"]], reverse:true}, count:2 },
+    /* generated — a review mix from across the course */
+    { gen:"term-match", params:{subject:"term", pool:[["Rondo","the recurring-A form"],["ABACA","two episodes, three returns"],["Recurring section","A"],["Episode","a contrasting section between A returns"]], reverse:true}, count:2 },
     { gen:"inversion-id", params:{subject:"both", ask:"both"}, count:2 },
     { gen:"triad-quality", params:{}, count:2 },
     { gen:"rel-key", params:{ask:"both"}, count:1 },
@@ -242,13 +241,13 @@ LESSON_CONTENT[75]={
     "Listen for rondos in classical finales — composers loved ending big works with the friendliest form.",
     "Review path: revisit any lesson here anytime — the games regenerate fresh questions forever.",
     "Play REAL music now: hymnals, lead sheets, easy classics. You'll be shocked how much of the page simply… makes sense.",
-    "From five staff lines to rondo form — thank you for taking all 75 steps with me. Keep playing, keep listening, keep going. \u{2764}\u{FE0F} — Mia"
+    "When you compose, borrow the rondo's trick: bring your best idea back often, and let fresh episodes shine between the returns. \u{2764}\u{FE0F} — Mia"
   ],
-  rewards:{ badge:"COURSE CHAMPION — 75 of 75", icon:"\u{1F3C6}" },
+  rewards:{ badge:"Rondo Navigator", icon:"\u{1F3A1}" },
   sectionOrder:["secHook","secObjectives","secLearn","secExample","secReview",
     "secGame0","secGame1","secGame2","secGame3","secPractice","secQuiz","secTips","secNext"],
-  miaPerfect:"A PERFECT SCORE ON THE FINAL LESSON — 75 OF 75, FLAWLESS! There has never been a prouder music teacher. \u{1F386}\u{1F3C6}\u{1F393}\u{1F389}\u{2764}\u{FE0F}",
-  miaPass:"PASSED — AND THE ENTIRE COURSE IS COMPLETE! 75 lessons, one musician: YOU. \u{1F393}\u{1F386}\u{1F389}",
+  miaPerfect:"PERFECT! Statement, episodes, and the theme always coming home — the rondo is completely yours. \u{1F3A1}\u{1F389}",
+  miaPass:"Passed! You can hear and name a rondo — one recurring theme with contrasting episodes between. \u{1F3A1}",
   mia:{
     hook:{ label:"the welcome",
       explain:"The main theme appeared THREE times (A), alternating with two different contrasts (B, then C): A-B-A-C-A — a rondo.",
@@ -260,10 +259,10 @@ LESSON_CONTENT[75]={
     example:{ label:"the example",
       explain:"A written-out ABACA miniature — follow A, B, A, C, A as it plays; the main theme keeps returning between the contrasting episodes." },
     game:{ label:"the games",
-      explain:"Sprint the rondo facts, play the theme, name every form on sight — then run the 75-lesson victory race.",
-      hint:"It's the last one. Leave nothing behind. \u{1F3C6}" },
+      explain:"Sprint the rondo facts, play the theme, name every form on sight, then race a review mix of the course's big ideas.",
+      hint:"Name the form by its pattern." },
     quiz:{ label:"this question",
-      explain:"Rondo questions reduce to one check: does A keep returning between contrasts? The victory-mix questions are your whole course saying hello.",
+      explain:"Rondo questions reduce to one check: does A keep returning between contrasting episodes? The review-mix questions revisit big ideas from across the course.",
       play:()=>{[60,64,67,72].forEach((m,i)=>MFAudio.tone(m,.5,i*.15,.4));} }
   }
 };
