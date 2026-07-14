@@ -137,17 +137,17 @@ LESSON_CONTENT[72]={
         hint:"Think of the motive lesson you JUST had." } }
   ],
   examples:[
-    { caption:"A motive grows: stated, transposed up a step, transposed again — then one long landing. One four-note idea powers the whole line, Beethoven-style.",
-      staff:{clef:"treble",tempo:110,notes:[
-        {p:"D4",d:"8",label:"motive"},{p:"D4",d:"8"},{p:"D4",d:"8"},{p:"G4",d:"q"},
-        {p:"E4",d:"8",label:"transposed"},{p:"E4",d:"8"},{p:"E4",d:"8"},{p:"A4",d:"q"},
-        {p:"G4",d:"8",label:"again!"},{p:"G4",d:"8"},{p:"G4",d:"8"},{p:"C5",d:"h"},{bar:"final"}],
-        beams:[[0,2],[4,6],[8,10]],width:620},
+    { caption:"A motive grows: stated, transposed up a step, transposed again — each three quick notes landing on a longer one. One four-note idea powers the whole line, Beethoven-style.",
+      staff:{clef:"treble",tempo:110,time:"6/8",notes:[
+        {p:"D4",d:"8",label:"motive"},{p:"D4",d:"8"},{p:"D4",d:"8"},{p:"G4",d:"q."},{bar:"single"},
+        {p:"E4",d:"8",label:"transposed"},{p:"E4",d:"8"},{p:"E4",d:"8"},{p:"A4",d:"q."},{bar:"single"},
+        {p:"G4",d:"8",label:"again!"},{p:"G4",d:"8"},{p:"G4",d:"8"},{p:"C5",d:"q."},{bar:"final"}],
+        beams:[[0,2],[5,7],[10,12]],width:620},
       kb:{start:60,octaves:2,labels:true} },
     { caption:"Two phrases in question-and-answer: the first pauses on G (incomplete), the second settles on C (complete). Every simple song breathes this way.",
-      staff:{clef:"treble",tempo:100,notes:[
-        {p:"C4",d:"q",label:"phrase 1…"},{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"G4",d:"h",label:"phrase ends (incomplete)"},
-        {p:"E4",d:"q",label:"phrase 2…"},{p:"D4",d:"q"},{p:"B3",d:"q"},{p:"C4",d:"h",label:"phrase ends (complete)"},{bar:"final"}],width:620},
+      staff:{clef:"treble",tempo:100,time:"5/4",notes:[
+        {p:"C4",d:"q",label:"phrase 1…"},{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"G4",d:"h",label:"phrase ends (incomplete)"},{bar:"single"},
+        {p:"E4",d:"q",label:"phrase 2…"},{p:"D4",d:"q"},{p:"B3",d:"q"},{p:"C4",d:"h",label:"phrase ends (complete)"},{bar:"final"}],width:680},
       kb:{start:57,octaves:2,labels:true} }
   ],
   games:[
