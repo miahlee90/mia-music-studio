@@ -21,11 +21,23 @@ function MF_L69_compose(container,fb){
       note:"Rule: end on the root of the final i."}];
   let k=0; const picked=[];
   container.innerHTML=`<div class="big-q l69c-q" style="text-align:center"></div>
-    <div class="l69c-map" style="text-align:center;font-weight:800;letter-spacing:1px;margin:6px 0"></div>
+    <div class="l69c-map" style="text-align:center;margin:10px 0;letter-spacing:normal"></div>
     <div class="choices chips l69c-ch"></div>
     <div style="text-align:center"><button class="play l69c-play" style="display:none">▶ Play YOUR minor composition</button></div>`;
   const q=container.querySelector(".l69c-q"), map=container.querySelector(".l69c-map"), ch=container.querySelector(".l69c-ch"), pl=container.querySelector(".l69c-play");
-  function drawMap(){ map.textContent=MEAS.map((m,i)=>`${m.label}:${i<picked.length?picked[i].name:"·"}`).join("  |  "); }
+  function drawMap(){
+    map.innerHTML=MEAS.map((m,i)=>{
+      const done=i<picked.length, cur=(i===k && k<MEAS.length);
+      const note=done?picked[i].name:"—";
+      const bg=cur?"var(--accent,#4f7cff)":done?"#e6efff":"#f2f4f8";
+      const fg=cur?"#fff":done?"#1f4bd8":"#8a93a3";
+      const bd=cur?"var(--accent,#4f7cff)":done?"#bcd2ff":"#dde2ea";
+      return `<span style="display:inline-block;min-width:56px;margin:3px;padding:6px 6px;border-radius:10px;border:1.5px solid ${bd};background:${bg};color:${fg};text-align:center;vertical-align:top">
+        <span style="display:block;font-size:10.5px;font-weight:600;opacity:.85">m.${i+1}</span>
+        <span style="display:block;font-size:15px;font-weight:800;line-height:1.35">${m.sym}</span>
+        <span style="display:block;font-size:13px;font-weight:700">${note}</span></span>`;
+    }).join("");
+  }
   function ask(){
     drawMap();
     if(k>=MEAS.length){ q.textContent="Excellent! Your melody is complete. Press play!"; ch.innerHTML=""; pl.style.display="inline-block"; return; }
@@ -162,17 +174,17 @@ LESSON_CONTENT[69]={
         hint:"The raised 7th, always." } }
   ],
   examples:[
-    { caption:"A composed D-minor melody with labels: chord tones (R, 3, 5) on the strong beats; a passing tone and a lower neighbor on the weak ones.",
-      staff:{clef:"treble",tempo:100,notes:[
-        {p:"D4",d:"q",label:"R"},{p:"F4",d:"q",label:"3"},{p:"A4",d:"q",label:"5"},{p:"G4",d:"q",label:"L"},
-        {p:"A4",d:"q",label:"5"},{p:"Bb4",d:"q",label:"3 (of iv)"},{p:"G4",d:"h",label:"R (of iv)"},
-        {p:"A4",d:"q",label:"R (of V7)"},{p:"C#5",d:"q",label:"3 (of V7)"},
-        {p:"D5",d:"w",label:"R (of i) — home"},{bar:"final"}],width:660},
+    { caption:"A composed D-minor melody with labels: chord tones (R, 3, 5) on the strong beats; a lower neighbor (L) decorates a weak one.",
+      staff:{clef:"treble",tempo:100,time:"4/4",notes:[
+        {p:"D4",d:"q",label:"R"},{p:"F4",d:"q",label:"3"},{p:"A4",d:"q",label:"5"},{p:"G4",d:"q",label:"L"},{bar:"single"},
+        {p:"A4",d:"q",label:"5"},{p:"Bb4",d:"q",label:"3/iv"},{p:"G4",d:"h",label:"R/iv"},{bar:"single"},
+        {p:"A4",d:"q",label:"R/V7"},{p:"C#5",d:"q",label:"3/V7"},{p:"E5",d:"h",label:"5/V7"},{bar:"single"},
+        {p:"D5",d:"w",label:"R/i — home"},{bar:"final"}],width:800},
       kb:{start:50,octaves:3,labels:true} },
     { caption:"The same melody twice: chord tones only, then with a passing tone and an upper neighbor added.",
-      staff:{clef:"treble",tempo:100,notes:[
-        {p:"D4",d:"h",label:"chord tones…"},{p:"F4",d:"h"},{p:"A4",d:"h"},{p:"D5",d:"h"},{bar:"double"},
-        {p:"D4",d:"q",label:"…with P and U!"},{p:"E4",d:"q",label:"P"},{p:"F4",d:"q"},{p:"G4",d:"q",label:"P"},{p:"A4",d:"q"},{p:"Bb4",d:"q",label:"U"},{p:"A4",d:"q"},{p:"D5",d:"q"},{bar:"final"}],width:640},
+      staff:{clef:"treble",tempo:100,time:"4/4",notes:[
+        {p:"D4",d:"h",label:"chord tones"},{p:"F4",d:"h"},{bar:"single"},{p:"A4",d:"h"},{p:"D5",d:"h"},{bar:"double"},
+        {p:"D4",d:"q",label:"+ P & U"},{p:"E4",d:"q",label:"P"},{p:"F4",d:"q"},{p:"G4",d:"q",label:"P"},{bar:"single"},{p:"A4",d:"q"},{p:"Bb4",d:"q",label:"U"},{p:"A4",d:"q"},{p:"D5",d:"q"},{bar:"final"}],width:800},
       kb:{start:50,octaves:2,labels:true} }
   ],
   games:[
