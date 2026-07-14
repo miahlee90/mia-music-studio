@@ -179,7 +179,12 @@
   document.getElementById("contBtn").onclick=function(){
     if(oi<reveal.length){ const id=reveal[oi++]; const el=document.getElementById(id);
       el.classList.add("open"); el.scrollIntoView({behavior:"smooth",block:"start"});
-      if(!id.startsWith("step")){ revealed++; updateProgress(); }
+      if(!id.startsWith("step")){ revealed++; updateProgress();
+        /* v3.6: keep the Continue button directly BELOW the newest section, so no
+           passive section (e.g. the "Remember!" recap) is ever revealed above the
+           button and scrolled past unseen — students always see what to do next. */
+        const row=this.parentElement; if(el.parentNode) el.parentNode.insertBefore(row,el.nextSibling);
+      }
       if(INTROS[id]) setTimeout(()=>Teacher.say(INTROS[id],{pose:"point",proactive:true}),500); }
     if(oi>=reveal.length) this.parentElement.style.display="none";
   };
