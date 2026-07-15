@@ -4,7 +4,11 @@ const Keyboard=(()=>{
   const NAMES={0:"C",2:"D",4:"E",5:"F",7:"G",9:"A",11:"B"};
   /* create(el,{start:60, octaves:2, labels:false, marks:[midi], onKey(midi)}) */
   function create(el,opts={}){
-    const start=opts.start??60, octaves=opts.octaves??2;
+    let start=opts.start??60, octaves=opts.octaves??2;
+    /* Never leave a G on the far left: a leftmost G shows only 2 of the 3 black keys
+       (G#/A#) and misreads as the C-D-E pair. Start one white key lower on F (the full
+       3-black group is visible) and extend the range up so the top note is unchanged. */
+    if(((start%12)+12)%12===7){ start-=2; octaves+=2/12; }
     const whites=[],blacks=[];
     for(let m=start;m<start+octaves*12+1;m++){
       const s=m%12;

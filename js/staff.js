@@ -73,7 +73,7 @@ const MFAudio=(()=>{
 const Staff=(()=>{
   const GAP=15, TOP=20, LEFT=10;
   const LETTERS=["C","D","E","F","G","A","B"];
-  const BEATS={w:4,h:2,q:1,"8":0.5,"16":0.25};
+  const BEATS={w:4,h:2,q:1,"8":0.5,"16":0.25,"32":0.125};
   const VOLS={pp:.14,p:.24,mp:.36,mf:.5,f:.66,ff:.85};
   function dia(p){ const m=p.match(/^([A-G])[#b]?(\d)$/); return (+m[2])*7+LETTERS.indexOf(m[1]); }
   /* diatonic index of bottom line: treble E4=30, bass G2=18 */
@@ -81,7 +81,7 @@ const Staff=(()=>{
   function yFor(p,clef,y0){ return (y0+4*GAP)-(dia(p)-baseIdx(clef))*(GAP/2); }
   function normD(d){ d=String(d||"q"); return d.endsWith(".")? d.slice(0,-1) : d; }
   function isDotted(n){ return !!n.dot || String(n.d||n.rest||"").endsWith("."); }
-  function durShape(d){ return {w:{hollow:true,stem:false},h:{hollow:true,stem:true},q:{hollow:false,stem:true},"8":{hollow:false,stem:true,flag:true},"16":{hollow:false,stem:true,flag:true,flag16:true}}[normD(d)]||{hollow:false,stem:true}; }
+  function durShape(d){ return {w:{hollow:true,stem:false},h:{hollow:true,stem:true},q:{hollow:false,stem:true},"8":{hollow:false,stem:true,flag:true},"16":{hollow:false,stem:true,flag:true,flag16:true},"32":{hollow:false,stem:true,flag:true,flag16:true,flag32:true}}[normD(d)]||{hollow:false,stem:true}; }
   function beatsOf(n){ return BEATS[normD(n.d||n.rest)]*(isDotted(n)?1.5:1); }
 
   function drawOneStaff(parts,y0,W,clef,opts){
@@ -163,7 +163,7 @@ const Staff=(()=>{
       if(s.flag&&!noFlag){
         /* v7.9b (instructor) - flags are BOLD filled curves, engraving-style,
            so a double flag reads instantly as two */
-        const nf=s.flag16?2:1;
+        const nf=s.flag32?3:s.flag16?2:1;
         for(let k=0;k<nf;k++){
           if(up){ const sx=x+8.4, sy=y-38+k*9;
             out+=`<path class="note flag" d="M ${sx} ${sy} C ${sx+7.5} ${sy+4}, ${sx+9.5} ${sy+9}, ${sx+8} ${sy+15} C ${sx+7.2} ${sy+18}, ${sx+5.5} ${sy+20}, ${sx+4.5} ${sy+21} C ${sx+7} ${sy+14}, ${sx+4.5} ${sy+8}, ${sx} ${sy+5.5} Z"/>`; }
@@ -494,14 +494,26 @@ const Staff=(()=>{
       beamGeo.push({a,b,up,xa,ya,yb,slope,grp,sx,lv:bm[2]||1});
     });
     beamGeo.forEach(g=>{
-      g.grp.forEach(P=>{ if(chordMembers.has(P.i)) return;
-        const xs=g.sx(P), yTip=g.ya+g.slope*(xs-g.xa);
-        parts.push(`<line class="stem" x1="${xs}" y1="${P.y+(g.up?-2:2)}" x2="${xs}" y2="${yTip}"/>`);
-        minEl=Math.min(minEl,yTip); maxEl=Math.max(maxEl,yTip);
-      });
-      const xB=g.sx(g.grp[g.grp.length-1]);
-      for(let L=1;L<=g.lv;L++){ const off=(L-1)*7.5*(g.up?1:-1);
-        parts.push(`<line class="beam" x1="${g.xa}" y1="${g.ya+off}" x2="${xB}" y2="${g.yb+off}"/>`);
+      /* v8.6: a sub-group fully inside a WIDER group (mixed durations, e.g. a 32nd
+         pair under an 8th's primary beam) inherits that group's line and slope and
+         draws ONLY its own top level — so partial secondary/tertiary beams stay
+         parallel and stacked instead of recomputing a divergent slope. */
+      const host=beamGeo.reduce((best,h)=>{
+        if(h===g||h.a>g.a||h.b<g.b||(h.b-h.a)<=(g.b-g.a)) return best;
+        return (!best||(h.b-h.a)>(best.b-best.a))?h:best;
+      },null);
+      const up=host?host.up:g.up, slope=host?host.slope:g.slope, xa=host?host.xa:g.xa, ya=host?host.ya:g.ya;
+      if(!host){
+        g.grp.forEach(P=>{ if(chordMembers.has(P.i)) return;
+          const xs=g.sx(P), yTip=ya+slope*(xs-xa);
+          parts.push(`<line class="stem" x1="${xs}" y1="${P.y+(up?-2:2)}" x2="${xs}" y2="${yTip}"/>`);
+          minEl=Math.min(minEl,yTip); maxEl=Math.max(maxEl,yTip);
+        });
+      }
+      const xL=g.sx(g.grp[0]), xR=g.sx(g.grp[g.grp.length-1]);
+      const yL=ya+slope*(xL-xa), yR=ya+slope*(xR-xa);
+      for(let L=(host?g.lv:1);L<=g.lv;L++){ const off=(L-1)*7.5*(up?1:-1);
+        parts.push(`<line class="beam" x1="${xL}" y1="${yL+off}" x2="${xR}" y2="${yR+off}"/>`);
       }
     });
     /* stub entries [i,i,lv] hang their upper level(s) off the host group's beam line */
@@ -622,7 +634,7 @@ const Staff=(()=>{
         if(i!=null){ const g=svg.querySelector(`.notegroup[data-i="${i}"] .note, .notegroup[data-i="${i}"] .rest, .notegroup[data-i="${i}"] .mtxt`); if(g)g.classList.add("hl"); } }
     };
   }
-  const DURSEC={w:1.6,h:1.0,q:0.55,"8":0.3,"16":0.18};
+  const DURSEC={w:1.6,h:1.0,q:0.55,"8":0.3,"16":0.18,"32":0.12};
   function play(spec, api){
     let t=0;
     const tempo=spec.tempo||0, spb=tempo?60/tempo:0;

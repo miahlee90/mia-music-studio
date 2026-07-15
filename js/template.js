@@ -64,7 +64,7 @@
     ${C.rewards?`<div id="rewardBox" class="score-box" style="display:none"></div>`:""}</section>`;
 
   S.secVocab=`<section class="card" id="secVocab"><h2>Vocabulary <span style="font-weight:400;font-size:13px;color:var(--muted)">(tap a card to flip it)</span></h2>
-    <div class="vox">${C.vocabulary.map((v,vi)=>`<div class="vox-card" role="button" tabindex="0"><div class="vox-front"><b>${v.term}</b>${v.staff?`<div class="vox-sym" data-vi="${vi}"></div>`: v.sym?`<div class="vox-sym vox-symtxt">${v.sym}</div>`:""}</div><div class="vox-back">${v.def}</div></div>`).join("")}</div></section>`;
+    <div class="vox">${C.vocabulary.map((v,vi)=>`<div class="vox-card" role="button" tabindex="0"><div class="vox-front"><b>${v.term}</b>${v.staff?`<div class="vox-sym" data-vi="${vi}"></div>`: v.sym?`<div class="vox-sym vox-symtxt">${v.sym}</div>`:""}</div><div class="vox-back">${v.staffBack?`<div class="vox-symb" data-vi="${vi}"></div>`:v.def}</div></div>`).join("")}</div></section>`;
 
   S.secReview=`<section class="card step" id="secReview"><h2>Remember!</h2>
     <ul class="summary">${C.summary.map(s=>`<li>${s}</li>`).join("")}</ul>
@@ -243,6 +243,7 @@
     v.onkeydown=e=>{ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); go(); } };
   });
   document.querySelectorAll(".vox-sym").forEach(el=>{ const v=C.vocabulary[+el.dataset.vi]; if(v&&v.staff) Staff.render(el,v.staff); });
+  document.querySelectorAll(".vox-symb").forEach(el=>{ const v=C.vocabulary[+el.dataset.vi]; if(v&&v.staffBack){ Staff.render(el,v.staffBack); const sv=el.querySelector("svg.mf-staff"); if(sv){ const w=(v.staffBack.width||200); sv.setAttribute("viewBox","2 24 "+(w-4)+" 84"); } } });
 
   /* ---------- Ask-Mia contexts ---------- */
   Teacher.init();

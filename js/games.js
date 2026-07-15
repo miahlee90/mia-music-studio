@@ -783,7 +783,7 @@ const Games=(()=>{
       el.innerHTML=`<div class="game-arena">
         <button class="play gstart">▶ Start</button>
         <div class="big-q gq"></div>
-        <div class="sh-grid" style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;max-width:460px;margin:12px auto"></div>
+        <div class="sh-grid" style="display:grid;grid-template-columns:repeat(2,1fr);gap:14px;max-width:640px;margin:12px auto"></div>
         <div class="streak gs"></div></div>`;
       const $=s=>el.querySelector(s);
       const grid=$(".sh-grid");
@@ -801,10 +801,10 @@ const Games=(()=>{
         shuffle([target,...others]).forEach(c=>{
           const b=document.createElement("button");
           b.className="notecard";
-          b.style.cssText="min-height:92px;border-radius:10px;padding:6px";
-          const d=document.createElement("div"); b.appendChild(d);
-          if(c.html){ d.innerHTML=c.html; d.style.cssText="font-size:1.6rem;font-weight:800;color:var(--primary-dark)"; }
-          else Staff.render(d,Object.assign({width:170},c.spec));
+          b.style.cssText="min-height:140px;border-radius:10px;padding:8px;display:flex;align-items:center;justify-content:center";
+          const d=document.createElement("div"); d.style.width="100%"; b.appendChild(d);
+          if(c.html){ d.innerHTML=c.html; d.style.cssText="width:100%;font-size:1.6rem;font-weight:800;color:var(--primary-dark)"; }
+          else { Staff.render(d,Object.assign({width:170},c.spec)); const sv=d.querySelector("svg.mf-staff"); if(sv){ sv.style.maxWidth="none"; sv.style.width="100%"; sv.style.height="auto"; sv.style.maxHeight="180px"; } }
           b.onclick=()=>{
             if(answered) return; answered=true;
             const ok=c.label===target.label;
@@ -872,7 +872,7 @@ const Games=(()=>{
         <button class="play gstart">▶ ${secs?`Start the ${secs}-second challenge`:"Start"}</button>
         <div class="gterm" style="font-size:2rem;font-weight:800;color:var(--primary-dark);min-height:48px;text-align:center"></div>
         <div class="big-q gq"></div>
-        <div class="gbtns gopts" style="display:none"></div>
+        <div class="gbtns gopts" style="display:none;grid-template-columns:1fr 1fr;gap:10px;max-width:520px;margin:8px auto"></div>
         <div class="streak gs"></div></div>`;
       const $=s=>el.querySelector(s);
       const opts=$(".gopts");
@@ -889,7 +889,7 @@ const Games=(()=>{
         shuffle([correct,...wrongs]).forEach(c=>{ const b=document.createElement("button");
           b.innerHTML=c; b.onclick=()=>ans(c,correct); opts.appendChild(b); });
         $(".gq").textContent=secs?"Pick the match!":`Round ${asked+1} of ${rounds}: pick the match!`;
-        opts.style.display="block";
+        opts.style.display="grid";
       }
       function ans(said,correct){
         if(!running||waiting) return;
@@ -983,10 +983,11 @@ const Games=(()=>{
         $(".gq").textContent=(secs?"":"Round "+(asked+1)+" of "+rounds+": ")+cur.q;
         const m=$(".gr-media"); m.innerHTML="";
         if(cur.staff) Staff.render(m,cur.staff);
-        const ch=$(".gr-ch"); ch.innerHTML=""; ch.style.display="block";
-        if(cur.choices.every(c=>String(c).length<=14)) ch.classList.add("chips");
+        const ch=$(".gr-ch"); ch.innerHTML="";
+        if(cur.choices.every(c=>String(c).length<=14)) ch.classList.add("chips"); else ch.classList.remove("chips");
         cur.choices.forEach((c,i)=>{ const b=document.createElement("button"); b.innerHTML=c;
           b.onclick=()=>ans(i); ch.appendChild(b); });
+        ch.style.cssText=cur.choices.length===4? "display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:520px;margin:0 auto" : "display:block";
       }
       function ans(i){
         if(!running||waiting) return;
@@ -1027,7 +1028,10 @@ const Games=(()=>{
       kb=Keyboard.create($(".gkb"),{start:spec.start??60,octaves:spec.octaves??2,labels:true,
         onKey:m=>{
           if(!running) return;
-          if(m===seq[i]){ i++;
+          if(m===seq[i]){
+            /* if the spec supplies chords, sound the full chord (the pressed root already rang) */
+            if(spec.chords&&spec.chords[i]) spec.chords[i].forEach(n=>{ if(n!==m) MFAudio.tone(n,.95,0,.26); });
+            i++;
             if(i>=seq.length){ running=false; clearInterval(timer); kb.point(null);
               const secs=((Date.now()-t0)/1000).toFixed(1);
               const stars=misses===0?3:misses<=2?2:1;

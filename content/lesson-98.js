@@ -23,41 +23,44 @@ LESSON_CONTENT[98]={stackFigures:true,
       } }
   },
   objectives:[
-    "Define secondary dominant: the dominant OF a chord other than I",
-    "Read the notation: V/V, V/ii, V/vi, V/IV ('five of five')",
-    "Build one: go a P5 above the target, make that chord major (or Mm7)",
-    "Spot them by their accidentals",
-    "Understand tonicization: the target briefly sounds like a tonic",
-    "Resolve them: V/X → X"
+    "Define a secondary (applied) dominant",
+    "Read Roman-numeral notation: V/V, V/ii, V/vi, V/IV",
+    "Build a secondary dominant from a target chord",
+    "Recognize chromatic leading tones",
+    "Distinguish tonicization from modulation",
+    "Predict normal resolutions"
   ],
   steps:[
-    { say:"<b>The Basic Idea:</b> A <b>secondary dominant</b>, also called an <b>applied dominant</b>, is a major triad or dominant seventh chord that functions temporarily as V of a diatonic chord other than the tonic. In C major, D major may precede G major and function as V of V. It is labeled <b>V/V</b> and read \u{201C}five of five.\u{201D} Secondary dominants most commonly tonicize major or minor diatonic triads; the diminished leading-tone triad is not normally treated as a temporary tonic. \u{1F447} <b>A secondary dominant is…</b>",
+    { say:"<b>The Basic Idea:</b> a <b>secondary dominant</b> temporarily makes another diatonic chord sound like a tonic — a V→I aimed at a chord other than I. It is written <b>V/X</b> and normally resolves to <b>X</b>. In C major, D major → G is <b>V/V</b> (read \u{201C}five of five\u{201D}). In practice it is usually a <b>major triad or dominant seventh</b>. \u{1F447} <b>A secondary dominant is…</b>",
       try:{ type:"mc", choices:["A chord that temporarily functions as the dominant of a nontonic chord","Any chord performed loudly","The second chord in a progression"], answer:0,
         success:"✓ Correct. A secondary dominant applies dominant function temporarily to a major or minor chord other than the tonic.",
         fail:"Identify the chord to which D major resolves.",
         hint:"D major is the dominant of G." } },
-    { say:"<b>Constructing a Secondary Dominant:</b> <b>1)</b> Identify the target chord and its root. <b>2)</b> Find the pitch a perfect fifth above the target root—or a perfect fourth below it. <b>3)</b> Build a major triad or dominant seventh chord on that pitch. <b>4)</b> Spell the temporary leading tone correctly and check the expected resolution to the target. Example: in C major the target ii chord is D minor; A is a perfect fifth above D, so A major (A–C♯–E) functions as V/ii, and A7 (A–C♯–E–G) can function as V⁷/ii. \u{1F447} <b>V/vi in C major is…</b>",
-      show:{ type:"html", html:`<table style="border-collapse:collapse;margin:0 auto;font-size:14.5px;min-width:300px">
-        <tr><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:6px 12px">Target</th><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:6px 12px">Secondary dominant</th><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:6px 12px">Accidental (in C)</th></tr>
-        <tr><td style="border:1.5px solid #cdd5e1;padding:4px 12px;text-align:center">V (G)</td><td style="border:1.5px solid #cdd5e1;padding:4px 12px;text-align:center;font-weight:800">V/V = D major</td><td style="border:1.5px solid #cdd5e1;padding:4px 12px;text-align:center;color:#C05A21;font-weight:800">F♯</td></tr>
-        <tr><td style="border:1.5px solid #cdd5e1;padding:4px 12px;text-align:center">ii (Dm)</td><td style="border:1.5px solid #cdd5e1;padding:4px 12px;text-align:center;font-weight:800">V/ii = A major</td><td style="border:1.5px solid #cdd5e1;padding:4px 12px;text-align:center;color:#C05A21;font-weight:800">C♯</td></tr>
-        <tr><td style="border:1.5px solid #cdd5e1;padding:4px 12px;text-align:center">vi (Am)</td><td style="border:1.5px solid #cdd5e1;padding:4px 12px;text-align:center;font-weight:800">V/vi = E major</td><td style="border:1.5px solid #cdd5e1;padding:4px 12px;text-align:center;color:#C05A21;font-weight:800">G♯</td></tr>
-        <tr><td style="border:1.5px solid #cdd5e1;padding:4px 12px;text-align:center">IV (F)</td><td style="border:1.5px solid #cdd5e1;padding:4px 12px;text-align:center;font-weight:800">V/IV = C(7)</td><td style="border:1.5px solid #cdd5e1;padding:4px 12px;text-align:center;color:#C05A21;font-weight:800">B♭ (as C7)</td></tr></table>` },
+    { say:"<b>Constructing a Secondary Dominant — four steps:</b><br><b>1.</b> Choose the <b>target chord</b>.<br><b>2.</b> Find its <b>dominant</b> — a perfect 5th above the target root.<br><b>3.</b> Build a <b>major triad (or dominant 7th)</b> there.<br><b>4.</b> <b>Resolve</b> to the target. Example: target ii = Dm; a 5th above D is A, so <b>A major (A–C♯–E) = V/ii</b> (A7 = V⁷/ii). \u{1F447} <b>V/vi in C major is…</b>",
+      show:{ type:"html", html:`<table style="border-collapse:collapse;margin:0 auto;font-size:13px;min-width:340px">
+        <tr><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:5px 8px">Target</th><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:5px 8px">Roman</th><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:5px 8px">Secondary dominant</th><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:5px 8px">New note</th><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:5px 8px">Resolves to</th></tr>
+        <tr><td style="border:1.5px solid #cdd5e1;padding:4px 8px;text-align:center">G</td><td style="border:1.5px solid #cdd5e1;padding:4px 8px;text-align:center">V</td><td style="border:1.5px solid #cdd5e1;padding:4px 8px;text-align:center;font-weight:800">V/V = D major</td><td style="border:1.5px solid #cdd5e1;padding:4px 8px;text-align:center;color:#C05A21;font-weight:800">F♯</td><td style="border:1.5px solid #cdd5e1;padding:4px 8px;text-align:center">G (V)</td></tr>
+        <tr><td style="border:1.5px solid #cdd5e1;padding:4px 8px;text-align:center">Dm</td><td style="border:1.5px solid #cdd5e1;padding:4px 8px;text-align:center">ii</td><td style="border:1.5px solid #cdd5e1;padding:4px 8px;text-align:center;font-weight:800">V/ii = A major</td><td style="border:1.5px solid #cdd5e1;padding:4px 8px;text-align:center;color:#C05A21;font-weight:800">C♯</td><td style="border:1.5px solid #cdd5e1;padding:4px 8px;text-align:center">Dm (ii)</td></tr>
+        <tr><td style="border:1.5px solid #cdd5e1;padding:4px 8px;text-align:center">Am</td><td style="border:1.5px solid #cdd5e1;padding:4px 8px;text-align:center">vi</td><td style="border:1.5px solid #cdd5e1;padding:4px 8px;text-align:center;font-weight:800">V/vi = E major</td><td style="border:1.5px solid #cdd5e1;padding:4px 8px;text-align:center;color:#C05A21;font-weight:800">G♯</td><td style="border:1.5px solid #cdd5e1;padding:4px 8px;text-align:center">Am (vi)</td></tr>
+        <tr><td style="border:1.5px solid #cdd5e1;padding:4px 8px;text-align:center">F</td><td style="border:1.5px solid #cdd5e1;padding:4px 8px;text-align:center">IV</td><td style="border:1.5px solid #cdd5e1;padding:4px 8px;text-align:center;font-weight:800">V⁷/IV = C7</td><td style="border:1.5px solid #cdd5e1;padding:4px 8px;text-align:center;color:#C05A21;font-weight:800">B♭</td><td style="border:1.5px solid #cdd5e1;padding:4px 8px;text-align:center">F (IV)</td></tr></table>` },
       try:{ type:"mc", choices:["E major: E–G♯–B","E minor: E–G–B","A major: A–C♯–E"], answer:0,
         success:"✓ Correct. E is a perfect fifth above the target root A. The G♯ in E major functions as the temporary leading tone to A.",
         fail:"Find the dominant root of A, and then build a major triad.",
         hint:"E–G♯–B is the dominant triad of A." } },
-    { say:"<b>Identifying Secondary Dominants:</b> Secondary dominants often contain chromatic pitches not found in the prevailing key. In C major, F♯ may appear as the temporary leading tone in D major (V/V); C♯ may appear in A major (V/ii); and G♯ may appear in E major (V/vi). An accidental alone does not prove that a chord is a secondary dominant—identify the complete chord, determine its expected target, and examine its resolution and musical context. \u{1F447} <b>In C major, an E major chord containing G♯ resolves to A minor. How should E major be analyzed?</b>",
+    { say:"<b>Identifying Secondary Dominants:</b> a chromatic accidental often signals one (F♯ in D major = V/V, C♯ in A major = V/ii, G♯ in E major = V/vi). But <b>a chromatic accidental alone does not prove a secondary dominant.</b> Always identify <b>(1)</b> the complete chord and <b>(2)</b> its expected resolution. \u{1F447} <b>In C major, an E major chord containing G♯ resolves to A minor. How should E major be analyzed?</b>",
       try:{ type:"mc", choices:["V/vi","A printing error","A modulation to G major"], answer:0,
         success:"✓ Correct. G♯ acts as a temporary leading tone to A, and E major functions as V of vi.",
         fail:"Identify the pitch a half step above G♯ and the chord rooted on that pitch.",
         hint:"G♯ resolves upward to A." } },
-    { say:"<b>Tonicization:</b> Tonicization occurs when a chord other than the tonic is treated temporarily as a local tonic, often through an applied dominant or applied leading-tone chord; the prevailing key remains structurally active. Modulation establishes a new key more substantially through factors such as cadential confirmation, sustained harmonic activity, thematic emphasis, or formal placement. Duration may contribute to the distinction, but it is not the only factor. \u{1F447} <b>What is tonicization?</b>",
+    { say:"<b>Tonicization vs. Modulation:</b> a secondary dominant creates <b>tonicization</b> — a brief spotlight on a chord — not a key change. Students often confuse the two; the difference is how long and how firmly the new center is established. \u{1F447} <b>What is tonicization?</b>",
+      show:{ type:"html", html:`<div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;font-size:13px;text-align:left">
+        <div style="border:2px solid #2F6DA8;border-radius:10px;padding:8px 14px"><b style="color:#2F6DA8">Tonicization</b><br>• temporary<br>• a few chords<br>• original key stays active</div>
+        <div style="border:2px solid #C05A21;border-radius:10px;padding:8px 14px"><b style="color:#C05A21">Modulation</b><br>• a new tonic<br>• a cadence confirms the new key<br>• longer-lasting</div></div>` },
       try:{ type:"mc", choices:["The temporary treatment of a nontonic chord as a local tonic","A permanently fixed change of key","An increase in the tonic chord's dynamic level"], answer:0,
         success:"✓ Correct. Tonicization briefly emphasizes a local tonic without displacing the prevailing key structurally.",
         fail:"Determine whether the original key remains structurally active.",
         hint:"Tonicization is temporary and locally focused." } },
-    { say:"<b>Expected Resolution:</b> A secondary dominant normally resolves to its indicated target: V/V → V, V/ii → ii, and V/vi → vi. The temporary leading tone normally resolves upward by step to the target root; when the applied dominant includes a chordal seventh, that seventh normally resolves downward by step. The notation V/X identifies X as the expected tonicized target, though secondary dominants may occasionally resolve deceptively or move elsewhere, so the full context must be examined. \u{1F447} <b>What is the expected resolution of V/ii?</b>",
+    { say:"<b>Expected Resolution:</b> a secondary dominant normally resolves to its target — V/V → V, V/ii → ii, V/vi → vi. The temporary leading tone rises by step to the target root; any chordal 7th falls by step. But composers sometimes <b>delay or avoid</b> the expected resolution — the notation V/X names the <b>intended target</b>, not an absolute rule. \u{1F447} <b>What is the expected resolution of V/ii?</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:72,notes:[
         {p:"A3",d:"w",label:"V/ii"},{p:"C#4",d:"w",chord:true},{p:"E4",d:"w",chord:true},
         {p:"D4",d:"w",label:"ii"},{p:"F4",d:"w",chord:true},{p:"A4",d:"w",chord:true},{bar:"final"}],width:380} },
@@ -65,7 +68,7 @@ LESSON_CONTENT[98]={stackFigures:true,
         success:"✓ Correct. In C major, A major or A7 functions as V/ii and normally resolves to D minor.",
         fail:"Read the chord named after the slash.",
         hint:"The denominator identifies the expected target." } },
-    { say:"<b>Secondary Dominants in Progressions:</b> Applied dominants can strengthen the expectation of an approaching diatonic chord and introduce chromatic voice leading. For example, I → <b>V/ii</b> → ii → V → I uses A major or A7 to tonicize ii before continuing through predominant, dominant, and tonic functions. Secondary dominants occur in classical, jazz, popular, film, and many other tonal styles. \u{1F447} <b>What effect does placing V/V immediately before V commonly create?</b>",
+    { say:"<b>Secondary Dominants in Progressions:</b> applied dominants strengthen the pull toward the next chord. Compare:<br>• <b>I → V/V → V → I</b> — loads the arrival on V.<br>• <b>I → V/ii → ii → V → I</b> — tonicizes ii, then continues home.<br>Each secondary dominant adds a local dominant-to-tonic push. They appear in classical, jazz, pop, and film styles alike. \u{1F447} <b>What effect does placing V/V immediately before V commonly create?</b>",
       try:{ type:"mc", choices:["It strengthens the expectation of arrival on V","It eliminates the dominant function of V","It requires the music to stop"], answer:0,
         success:"✓ Correct. V/V creates a local dominant-to-tonic relationship directed toward V.",
         fail:"Consider how a dominant prepares its expected tonic.",
@@ -83,13 +86,18 @@ LESSON_CONTENT[98]={stackFigures:true,
         {p:"D4",d:"w",label:"V/V"},{p:"F#4",d:"w",chord:true},{p:"A4",d:"w",chord:true},
         {p:"G3",d:"w",label:"V"},{p:"B3",d:"w",chord:true},{p:"D4",d:"w",chord:true},
         {p:"C4",d:"w",label:"I"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{bar:"final"}],width:560},
-      kb:{start:48,octaves:2,labels:true} },
+      kb:{start:53,octaves:1.58,labels:true} },
     { caption:"I → V/vi → vi: E major's G♯ tonicizes A minor — for one moment, Am sounds like home. Brief homeness = tonicization.",
       staff:{clef:"treble",tempo:72,notes:[
         {p:"C4",d:"w",label:"I"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},
         {p:"E4",d:"w",label:"V/vi"},{p:"G#4",d:"w",chord:true},{p:"B4",d:"w",chord:true},
         {p:"A4",d:"w",label:"vi"},{p:"C5",d:"w",chord:true},{p:"E5",d:"w",chord:true},{bar:"final"}],width:480},
-      kb:{start:60,octaves:2,labels:true} }
+      kb:{start:60,octaves:1.41,labels:true} },
+    { caption:"Secondary dominants live in every key — not just C. In G major, A7 → D is V/V → V; the C♯ is the temporary leading tone to D.",
+      staff:{clef:"treble",tempo:72,notes:[
+        {p:"A3",d:"w",label:"V/V = A7"},{p:"C#4",d:"w",chord:true},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},
+        {p:"D4",d:"w",label:"V = D"},{p:"F#4",d:"w",chord:true},{p:"A4",d:"w",chord:true},{bar:"final"}],width:360},
+      kb:{start:57,octaves:1,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Applied-Dominant Identification",
@@ -106,11 +114,12 @@ LESSON_CONTENT[98]={stackFigures:true,
         ["V/X resolves to","X"]], reverse:true}, seconds:45},
       result:(score)=>score>=8?score+" — Secondary dominants identified!":null },
     { type:"key-climb", title:"Game 2 · Perform the Applied-Dominant Progression",
-      intro:"Play the complete chords C major → D major → G major → C major. Listen to V/V → V → I.",
-      miaIntro:"Follow F♯ as it resolves to G.",
-      spec:{seq:[60,62,55,60],
-        names:["C major (I)","D major (V/V — includes F♯)","G major (V — loaded arrival)","C major (I — home)"],
-        start:55, octaves:2, title:"I → V/V → V → I"},
+      intro:"Follow the red arrow and press each chord's root: C → D → G → C. Each press sounds the full chord, so you hear the I → V/V → V → I progression.",
+      miaIntro:"Press the root — the whole chord rings. Follow F♯ as it resolves to G.",
+      spec:{seq:[60,62,67,72],
+        chords:[[60,64,67],[62,66,69],[67,71,74],[64,67,72]],
+        names:["C major (I)","D major (V/V — the F♯ chord)","G major (V)","C major (I — home, 1st inversion)"],
+        start:60, octaves:1, title:"Press each root — hear the chord:  I → V/V → V → I"},
       result:(score)=>score!==null?"You performed the applied-dominant progression.":null },
     { type:"symbol-hunt", title:"Game 3 · Identify the Secondary Dominant",
       intro:"Examine each chromatic chord and its resolution, then select the correct secondary-dominant label.",
@@ -157,18 +166,20 @@ LESSON_CONTENT[98]={stackFigures:true,
     { gen:"inversion-id", params:{subject:"v7", ask:"position"}, count:2 }
   ],
   vocabulary:[
-    {term:"Secondary Dominant", def:"The dominant of a chord other than I — V/V, V/ii, V/vi, V/IV. Read 'five of five,' etc."},
-    {term:"Building V/X", def:"A P5 above X's root, made major (or a dominant 7th). The accidental is X's temporary leading tone."},
-    {term:"Tonicization", def:"The target chord briefly sounds like a tonic. Extended tonicization becomes modulation."},
-    {term:"Resolution V/X → X", def:"The temporary leading tone rises; the chordal 7th falls; the target arrives loaded."}
+    {term:"Secondary Dominant", def:"The dominant of a chord other than the tonic."},
+    {term:"Applied Dominant", def:"Another name for a secondary dominant."},
+    {term:"Tonicization", def:"A temporary emphasis on a diatonic chord as if it were a tonic."},
+    {term:"Expected Resolution", def:"V/X → X."}
   ],
   mistakes:[],
   summary:[
-    "✔ <b>V/X</b> = X's own applied (secondary) dominant; resolves <b>V/X → X</b>.",
-    "✔ Build: <b>P5 above the target, made major</b> (accidental = temporary leading tone).",
-    "✔ In C: V/V = <b>D(F♯)</b> · V/ii = <b>A(C♯)</b> · V/vi = <b>E(G♯)</b> · V/IV = <b>C7(B♭)</b>.",
-    "✔ <b>Tonicization</b> = brief homeness; extended = modulation.",
-    "✔ Purpose: loaded arrivals and chained pushes."
+    "✔ Secondary dominant = the dominant of a chord other than I.",
+    "✔ Another name: <b>applied dominant</b>.",
+    "✔ Notation: <b>V/X</b>.",
+    "✔ Build it by finding the dominant of the target chord (a 5th above).",
+    "✔ The chromatic accidental is usually the temporary <b>leading tone</b>.",
+    "✔ Secondary dominants create <b>tonicization, not modulation</b>.",
+    "✔ They normally resolve to the target chord (<b>V/X → X</b>)."
   ],
   tips:[
     "See an accidental mid-phrase? Ask: whose leading tone is this? The answer names the target.",
@@ -206,7 +217,13 @@ LESSON_CONTENT[98]={stackFigures:true,
     { type:"mc", q:"In I → V/V → V → I, which chord is directly tonicized by V/V?", choices:["V","The opening I","The final I"], answer:0,
       explain:"V/V functions as the dominant of V and therefore directs attention toward V.", hint:"The loaded chord." },
     { type:"mc", q:"When a new key receives structural confirmation through sustained harmonic activity or cadential emphasis, the process is called…", choices:["Modulation","Cadence","Pedal point"], answer:0,
-      explain:"A modulation establishes a new tonic more substantially than a brief tonicization.", hint:"L99." }
+      explain:"A modulation establishes a new tonic more substantially than a brief tonicization.", hint:"L99." },
+    { type:"mc", q:"In C major, which note is the temporary leading tone in V/V (D major)?", choices:["F♯","C♯","G♯"], answer:0,
+      explain:"F♯ is the leading tone of G; it rises to G.", hint:"It resolves up to G." },
+    { type:"mc", q:"In C major, which accidental tells you a chord is functioning as V/ii?", choices:["C♯","F♯","B♭"], answer:0,
+      explain:"C♯ is the temporary leading tone to D (the root of ii = Dm).", hint:"The leading tone of D." },
+    { type:"mc", q:"Which chord should normally follow V/vi?", choices:["vi","V","IV"], answer:0,
+      explain:"A secondary dominant resolves to its target — V/vi → vi.", hint:"Read after the slash." }
   ],
   miaPerfect:"Perfect score! You accurately constructed and identified secondary dominants and their targets.",
   miaPass:"You passed! Next, you will study modulation between keys.",

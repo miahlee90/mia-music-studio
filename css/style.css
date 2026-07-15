@@ -373,6 +373,17 @@ button.notecard svg.mf-staff{height:46px;width:auto;max-width:100%;display:block
 .vox-card.back{background:linear-gradient(135deg,#1c1e54,#4434d4);border-color:transparent}
 .vox-card.back .vox-front{display:none}
 .vox-card.back .vox-back{display:block}
+/* vocab card BACK realization staff: white (readable on the dark flipped card) + fills the card, shorter and wider so the notes read clearly */
+.vox-card.back .vox-back{padding:6px}
+.vox-symb{width:100%;display:flex;align-items:center;justify-content:center}
+.vox-symb svg.mf-staff{height:54px;width:auto;max-width:100%;margin:0 auto;display:block}
+.vox-symb svg.mf-staff .staffline{stroke:rgba(255,255,255,.7)}
+.vox-symb svg.mf-staff .note{fill:#fff}
+.vox-symb svg.mf-staff .stem,.vox-symb svg.mf-staff .ledger{stroke:#fff}
+.vox-symb svg.mf-staff .beam{fill:#fff;stroke:#fff}
+.vox-symb svg.mf-staff text.clef,.vox-symb svg.mf-staff .clef-path,.vox-symb svg.mf-staff .clefdot{fill:#fff}
+.vox-symb svg.mf-staff .clef-stroke{stroke:#fff}
+.vox-symb svg.mf-staff .arc{stroke:#fff}
 @media (max-width:600px){ .vox-card{flex:1 1 45%} }
 
 /* v7 — key signatures (Book 2, L29-30) */

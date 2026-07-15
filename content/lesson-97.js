@@ -5,7 +5,7 @@
    NOTE: edit by FULL-FILE REWRITE only. */
 
 LESSON_CONTENT[97]={
-  welcome:"Voice leading connects chords through singable individual lines.",
+  welcome:"Good voice leading creates smooth, independent melodic lines while supporting the harmony.",
   hook:{
     say:"<b>Listen to two ways of connecting the same chords.</b> Version A uses several large leaps, while Version B retains a common tone and uses smaller melodic intervals. \u{1F447} <b>Which version creates smoother voice leading?</b>",
     interact:{ type:"custom",
@@ -25,20 +25,20 @@ LESSON_CONTENT[97]={
       } }
   },
   objectives:[
-    "Name the four voices: Soprano, Alto, Tenor, Bass (SATB)",
-    "Know each voice's general range and staff position",
-    "Space adjacent upper voices within an octave",
+    "Identify the four SATB voices",
+    "Understand basic spacing and voice order",
+    "Keep common tones when possible",
+    "Move voices by step or small intervals",
     "Avoid voice crossing",
-    "Keep common tones; move by step where possible",
-    "Meet the classic prohibition: parallel 5ths and octaves (introduction)"
+    "Recognize parallel fifths and octaves (introduction only)"
   ],
   steps:[
-    { say:"<b>SATB Keyboard-Style Notation:</b> Four-part SATB texture uses soprano, alto, tenor, and bass, ordered from highest to lowest. In keyboard-style notation, soprano and alto share the treble staff, while tenor and bass share the bass staff. Soprano and tenor normally use upward stems; alto and bass use downward stems when two voices share a staff. \u{1F447} <b>What is the standard high-to-low order of SATB voices?</b>",
+    { say:"<b>The Four Voices (SATB):</b> from <b>highest to lowest</b> — <b>S</b>oprano, <b>A</b>lto, <b>T</b>enor, <b>B</b>ass. In keyboard-style notation, soprano and alto share the <b>treble staff</b>; tenor and bass share the <b>bass staff</b>. \u{1F447} <b>What is the standard high-to-low order of SATB voices?</b>",
       try:{ type:"mc", choices:["Soprano, alto, tenor, bass","Bass, tenor, alto, soprano","Soprano, tenor, alto, bass"], answer:0,
         success:"✓ Correct. SATB is ordered from the highest voice, soprano, to the lowest voice, bass.",
         fail:"Begin with the highest voice.",
         hint:"S–A–T–B." } },
-    { say:"<b>Conservative Working Ranges:</b> The following ranges provide practical guidelines for beginning SATB part writing. They are instructional working ranges rather than absolute limits; actual vocal ranges depend on the singers, repertoire, dynamics, duration, and tessitura. \u{1F447} <b>Which SATB voice normally occupies the lowest range?</b>",
+    { say:"<b>Working Ranges:</b> these are practical <b>working ranges</b> for beginning SATB writing — not absolute vocal limits. Real ranges vary with the singer and the music. \u{1F447} <b>Which SATB voice normally occupies the lowest range?</b>",
       show:{ type:"html", html:`<table style="border-collapse:collapse;margin:0 auto;font-size:14.5px">
         <tr><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:5px 12px">Voice</th><td style="border:1.5px solid #cdd5e1;padding:4px 12px;font-weight:800;color:#2F6DA8">Soprano</td><td style="border:1.5px solid #cdd5e1;padding:4px 12px;font-weight:800;color:#A9821F">Alto</td><td style="border:1.5px solid #cdd5e1;padding:4px 12px;font-weight:800;color:#C05A21">Tenor</td><td style="border:1.5px solid #cdd5e1;padding:4px 12px;font-weight:800">Bass</td></tr>
         <tr><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:5px 12px">Range</th><td style="border:1.5px solid #cdd5e1;padding:4px 12px;text-align:center">C4–G5</td><td style="border:1.5px solid #cdd5e1;padding:4px 12px;text-align:center">G3–D5</td><td style="border:1.5px solid #cdd5e1;padding:4px 12px;text-align:center">C3–G4</td><td style="border:1.5px solid #cdd5e1;padding:4px 12px;text-align:center">E2–C4</td></tr></table>` },
@@ -46,39 +46,48 @@ LESSON_CONTENT[97]={
         success:"✓ Correct. The bass normally occupies the lowest range in SATB texture.",
         fail:"Recall the high-to-low SATB order.",
         hint:"Bass is the lowest voice." } },
-    { say:"<b>Spacing:</b> In common-practice keyboard-style SATB writing, soprano–alto and alto–tenor should normally remain within an octave. The interval between tenor and bass may exceed an octave, provided both voices remain within practical ranges. This helps maintain a balanced, clearly integrated upper-voice texture. \u{1F447} <b>Which adjacent voice pair may normally be separated by more than an octave?</b>",
+    { say:"<b>Spacing — one rule:</b> keep <b>adjacent upper voices (S–A and A–T) within an octave</b>. <b>Tenor–bass may be wider</b> — even more than an octave — as long as both stay in range. \u{1F447} <b>Which adjacent voice pair may normally be separated by more than an octave?</b>",
       try:{ type:"mc", choices:["Tenor and bass","Soprano and alto","Alto and tenor"], answer:0,
         success:"✓ Correct. Tenor and bass may be separated by more than an octave, while the adjacent upper voices normally remain within an octave.",
         fail:"Identify the adjacent pair that includes the bass.",
         hint:"The tenor–bass spacing rule is less restrictive." } },
-    { say:"<b>Voice Crossing and Overlap:</b> In beginning common-practice SATB writing, maintain the order soprano–alto–tenor–bass. Voice crossing occurs when a lower voice moves above a higher voice at the same moment; voice overlap occurs when one voice moves beyond the previous pitch of an adjacent voice. Both are normally avoided in introductory chorale-style writing because they can obscure the identity and register of the individual lines. \u{1F447} <b>At the same moment, the alto is written above the soprano. What is this called?</b>",
+    { say:"<b>Voice Crossing:</b> keep the order <b>S above A above T above B</b>. <b>Voice crossing</b> is when a lower voice rises above a higher one (e.g., alto above soprano) — avoided in beginning writing because it blurs which line is which. \u{1F447} <b>At the same moment, the alto is written above the soprano. What is this called?</b>",
+      show:{ type:"html", html:`<div style="display:flex;gap:24px;justify-content:center;font-size:14px;text-align:center">
+        <div style="border:2px solid #2F6DA8;border-radius:10px;padding:8px 20px">
+          <div style="font-weight:800;color:#2F6DA8;margin-bottom:5px">Correct ✓</div>
+          <div style="line-height:1.8;font-weight:700">S<br>A<br>T<br>B</div>
+          <div style="font-size:11px;color:#555;margin-top:4px">high → low, in order</div></div>
+        <div style="border:2px solid #C05A21;border-radius:10px;padding:8px 20px">
+          <div style="font-weight:800;color:#C05A21;margin-bottom:5px">Crossing ✗</div>
+          <div style="line-height:1.8;font-weight:700"><span style="color:#C05A21">A</span><br><span style="color:#C05A21">S</span><br>T<br>B</div>
+          <div style="font-size:11px;color:#555;margin-top:4px">A rose above S</div></div></div>` },
       try:{ type:"mc", choices:["Voice crossing","Contrary motion","Pedal point"], answer:0,
         success:"✓ Correct. The vertical order of the soprano and alto has been reversed, creating voice crossing.",
         fail:"Compare the vertical order of the two voices.",
         hint:"Maintain S above A above T above B in these exercises." } },
-    { say:"<b>Efficient Voice Leading:</b> When appropriate, retain common tones in the same voice and move the remaining upper voices primarily by step or small interval. Larger leaps may be used when they create a singable line and support the harmonic progression. The bass often moves by larger intervals because it frequently presents chord roots, but it should still form a coherent melodic line. \u{1F447} <b>Two adjacent chords share the pitch G. Which choice often creates efficient voice leading?</b>",
+    { say:"<b>Efficient Voice Leading — the heart of this lesson:</b> <b>keep common tones</b> in the same voice, and move the remaining voices <b>by step</b> whenever possible. Avoid unnecessary leaps. (The bass leaps more freely, since it carries the chord roots.) \u{1F447} <b>Two adjacent chords share the pitch G. Which choice often creates efficient voice leading?</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:72,notes:[
         {p:"C4",d:"w",label:"I"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{p:"C5",d:"w",chord:true},
-        {p:"B3",d:"w",label:"V"},{p:"D4",d:"w",chord:true},{p:"G4",d:"w",chord:true,label:"G stays!"},{p:"D5",d:"w",chord:true},{bar:"final"}],width:440} },
+        {p:"B3",d:"w",label:"V (G stays)"},{p:"D4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{p:"D5",d:"w",chord:true},{bar:"final"}],width:440} },
       try:{ type:"mc", choices:["Retain G in the same voice when other considerations allow","Move G by an unnecessary octave","Omit G automatically"], answer:0,
         success:"✓ Correct. Retaining a common tone can connect the chords smoothly, provided the result also follows range, spacing, doubling, and tendency-tone guidelines.",
         fail:"Check whether the common tone can remain in the same voice without creating another problem.",
         hint:"Retain common tones when practical." } },
-    { say:"<b>Doubling and Tendency Tones:</b> Because a triad has three chord members but SATB texture has four voices, one chord member normally must be doubled. In a root-position major or minor triad, doubling the root is often the safest choice. Avoid doubling the leading tone, because it has a strong tendency to resolve upward to the tonic. In a seventh chord, include all four chord members when possible; the chordal seventh normally resolves downward by step. \u{1F447} <b>Which chord member should normally not be doubled in introductory SATB writing?</b>",
+    { say:"<b>Doubling — three starter rules:</b> a triad has 3 tones but SATB has 4 voices, so one tone is doubled.<br>• <b>Double the root</b> — usually safest.<br>• <b>Don't double the leading tone</b> — it pulls up to the tonic.<br>• In a seventh chord, the <b>chordal 7th resolves down</b> by step. \u{1F447} <b>Which chord member should normally not be doubled in introductory SATB writing?</b>",
       try:{ type:"mc", choices:["The leading tone","The tonic","The dominant"], answer:0,
         success:"✓ Correct. The leading tone normally resolves upward to the tonic, so doubling it creates two strong tendency tones requiring resolution.",
         fail:"Which tone has the strongest pull to resolve?",
         hint:"It resolves up to the tonic." } },
-    { say:"<b>Parallel Perfect Fifths and Octaves (Introduction):</b> In common-practice SATB writing, parallel perfect fifths and octaves occur when the same pair of voices forms a perfect fifth or octave in two successive harmonies and both voices move in the same direction. These parallels are normally avoided because they weaken the perceptual independence of the two lines. \u{1F447} <b>Why are parallel perfect fifths normally avoided in common-practice SATB writing?</b>",
+    { say:"<b>Parallel Fifths and Octaves (introduction):</b> when two voices move together from one perfect <b>5th</b> (or <b>octave</b>) to another, their independence is weakened — so these parallels are normally avoided. You will study this more deeply later. \u{1F447} <b>Why are parallel perfect fifths normally avoided in common-practice SATB writing?</b>",
       try:{ type:"mc", choices:["They weaken the independence of the two voice lines","They automatically reduce the dynamic level","They change the key signature"], answer:0,
         success:"✓ Correct. Successive perfect fifths or octaves in similar motion can make two voices sound less independent.",
         fail:"Consider the effect of successive perfect intervals on melodic independence.",
         hint:"Track the same pair of voices through both chords." } },
-    { say:"<b>Review:</b> \u{1F447} <b>Which questions are useful when connecting two chords in introductory SATB writing?</b>",
-      try:{ type:"mc", choices:["Which tones are shared, where are the tendency tones, and how can each voice move singably?","How loud and fast should every chord be?","Which clef looks most decorative?"], answer:0,
-        success:"✓ Correct. Check common tones, tendency-tone resolutions, singable melodic motion, spacing, crossing, and parallels.",
-        fail:"Review the voice-leading priorities introduced in this lesson.",
-        hint:"Common tones + tendency tones + singable motion." } }
+    { say:"<b>Review:</b> \u{1F447} <b>Which describes smoother voice leading between two chords?</b>",
+      try:{ type:"mc", choices:["Hold the common tones and move the other voices by step","Leap every voice to a new register","Let the alto cross above the soprano"], answer:0,
+        success:"✓ Correct. Held common tones plus stepwise motion in the other voices give the smoothest connection.",
+        fail:"Which option keeps each line connected and in order?",
+        hint:"Hold what is shared; step the rest." } }
   ],
   examples:[
     { caption:"I–IV–V–I with smooth voice leading (upper voices on one staff): common tones held, steps everywhere else, bass doing the leaping.",
@@ -87,12 +96,12 @@ LESSON_CONTENT[97]={
         {p:"C4",d:"w",label:"IV"},{p:"F4",d:"w",chord:true},{p:"A4",d:"w",chord:true},{p:"C5",d:"w",chord:true},
         {p:"B3",d:"w",label:"V"},{p:"D4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{p:"D5",d:"w",chord:true},
         {p:"C4",d:"w",label:"I"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{p:"C5",d:"w",chord:true},{bar:"final"}],width:620},
-      kb:{start:57,octaves:2,labels:true} },
+      kb:{start:57,octaves:1.58,labels:true} },
     { caption:"Spacing on display: the first chord spreads the top voices too far (hollow); the second keeps S–A and A–T inside an octave (balanced). Hear the difference.",
       staff:{clef:"treble",tempo:60,notes:[
-        {p:"C4",d:"w",label:"balanced"},{p:"G4",d:"w",chord:true},{p:"E5",d:"w",chord:true,label:"…hmm"},{bar:"single"},
-        {p:"C4",d:"w",label:"good"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{p:"C5",d:"w",chord:true},{bar:"final"}],width:420},
-      kb:{start:60,octaves:2,labels:true} }
+        {p:"C4",d:"w",label:"hollow"},{p:"G4",d:"w",chord:true},{p:"E5",d:"w",chord:true},{bar:"single"},
+        {p:"C4",d:"w",label:"balanced"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{p:"C5",d:"w",chord:true},{bar:"final"}],width:420},
+      kb:{start:57,octaves:1.58,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · SATB Guidelines (45s)",
@@ -159,18 +168,20 @@ LESSON_CONTENT[97]={
     { gen:"triad-quality", params:{quals:["M","m"]}, count:2 }
   ],
   vocabulary:[
-    {term:"SATB", def:"Soprano, alto, tenor, bass — the four standard voices of part writing."},
-    {term:"Spacing", def:"Adjacent upper voices (S–A, A–T) within an octave; the bass may sit farther below."},
-    {term:"Voice Crossing", def:"A voice moving above/below its neighbor — avoided; each line keeps its lane."},
-    {term:"Parallel 5ths / Octaves", def:"Two voices moving from one perfect 5th/octave to another in the same direction — avoided because the lines fuse."}
+    {term:"SATB", def:"Soprano, Alto, Tenor, Bass."},
+    {term:"Voice Leading", def:"Move each voice as smoothly as possible. Keep common tones. Prefer stepwise motion."},
+    {term:"Spacing", def:"S–A and A–T normally stay within one octave. T–B may exceed an octave."},
+    {term:"Voice Independence", def:"Avoid voice crossing, parallel fifths, and parallel octaves."}
   ],
   mistakes:[],
   summary:[
-    "✔ Four voices: <b>S-A-T-B</b>, each in its range.",
-    "✔ Spacing: <b>S–A and A–T within an octave</b>; T–B free.",
-    "✔ <b>No crossing</b> — keep the vertical order.",
-    "✔ <b>Hold common tones, step the rest</b>; the bass does the leaping.",
-    "✔ Avoid <b>parallel perfect 5ths and octaves</b> — independence first."
+    "✔ <b>SATB</b> = Soprano, Alto, Tenor, Bass.",
+    "✔ Keep <b>common tones</b> whenever possible.",
+    "✔ Move voices mostly <b>by step</b>.",
+    "✔ Avoid <b>voice crossing</b>.",
+    "✔ <b>Root doubling</b> is usually safest.",
+    "✔ Avoid doubling the <b>leading tone</b>.",
+    "✔ <b>Parallel fifths and octaves</b> weaken voice independence."
   ],
   tips:[
     "Write the outer voices (S and B) first — if they sound good together, the middle fills easily.",

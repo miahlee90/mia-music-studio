@@ -53,15 +53,15 @@ LESSON_CONTENT[90]={
       } }
   },
   objectives:[
-    "Define texture: how musical layers combine",
-    "MONOPHONIC: one melody alone",
-    "HOMOPHONIC: melody with accompaniment (or chords moving together)",
-    "POLYPHONIC: two or more independent melodies",
-    "Meet HETEROPHONIC texture (introduction)",
-    "Identify textures by ear"
+    "Define musical texture",
+    "Identify monophonic texture",
+    "Identify homophonic texture",
+    "Identify polyphonic texture",
+    "Meet heterophonic texture",
+    "Recognize textures by ear"
   ],
   steps:[
-    { say:"<b>Musical Texture:</b> Texture describes how simultaneous musical lines and layers are organized and how they interact. A passage may be monophonic, homophonic, polyphonic, or heterophonic. Texture may also change within a composition. \u{1F447} <b>What does musical texture describe?</b>",
+    { say:"<b>Musical Texture:</b> texture describes how musical lines work together. Music may be:<br>• Monophonic<br>• Homophonic<br>• Polyphonic<br>• Heterophonic \u{1F447} <b>What does musical texture describe?</b>",
       show:{ type:"html", html:`<table style="border-collapse:collapse;margin:0 auto;font-size:14px;min-width:300px">
         <tr><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:5px 12px">Texture</th><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:5px 12px">Layers</th><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:5px 12px">Example setting</th></tr>
         <tr><td style="border:1.5px solid #cdd5e1;padding:4px 12px;font-weight:800;color:#2F6DA8">Monophonic</td><td style="border:1.5px solid #cdd5e1;padding:4px 12px">one melody alone</td><td style="border:1.5px solid #cdd5e1;padding:4px 12px">solo voice, unaccompanied</td></tr>
@@ -72,22 +72,22 @@ LESSON_CONTENT[90]={
         success:"✓ Correct. Texture concerns the number and organization of musical layers and the relationships among them.",
         fail:"Consider how the musical lines relate to one another.",
         hint:"Listen for the number and independence of the musical layers." } },
-    { say:"<b>Monophonic Texture:</b> Monophonic texture consists of one melodic line without harmonic accompaniment or an independent second melody. Multiple performers singing or playing the same melody in unison—or sometimes in octave doubling—still create a single melodic line. \u{1F447} <b>Forty people sing the same melody in unison without accompaniment. What is the texture?</b>",
+    { say:"<b>Monophonic Texture:</b> one melody only. Many performers singing the same melody in unison is still monophonic. \u{1F447} <b>Forty people sing the same melody in unison without accompaniment. What is the texture?</b>",
       try:{ type:"mc", choices:["Monophonic — many voices performing one melodic line","Polyphonic","Homophonic"], answer:0,
         success:"✓ Correct. The number of performers does not change the texture when everyone performs the same melodic line.",
         fail:"Count the distinct melodic lines rather than the number of performers.",
         hint:"\u{201C}Mono-\u{201D} means one." } },
-    { say:"<b>Homophonic Texture:</b> In melody-dominated homophony, one melody is prominent while the other parts provide harmonic support. In homorhythmic or chordal homophony, several voices move with the same or similar rhythm to form a chordal texture. Homophony is common in many songs and instrumental works. \u{1F447} <b>A singer performs a melody over a simple piano chordal accompaniment. What is the texture?</b>",
+    { say:"<b>Homophonic Texture:</b> one melody supported by accompaniment. Sometimes all voices move together as chords. \u{1F447} <b>A singer performs a melody over a simple piano chordal accompaniment. What is the texture?</b>",
       try:{ type:"mc", choices:["Homophonic — melody with harmonic support","Monophonic","Heterophonic"], answer:0,
         success:"✓ Correct. The vocal melody is prominent, while the piano chords provide harmonic support.",
         fail:"Determine whether the accompaniment supports the melody or presents an independent melodic line.",
         hint:"Listen for one prominent melody with chordal support." } },
-    { say:"<b>Polyphonic Texture:</b> Polyphonic texture combines two or more simultaneous melodic lines that maintain a meaningful degree of independence. The lines may differ in rhythm, contour, or entry time. Rounds, canons, and many fugal passages provide familiar examples. \u{1F447} <b>In polyphonic texture, the simultaneous lines…</b>",
+    { say:"<b>Polyphonic Texture:</b> two or more independent melodies. Each line has its own direction. Rounds and fugues are common examples. \u{1F447} <b>In polyphonic texture, the simultaneous lines…</b>",
       try:{ type:"mc", choices:["maintain independent melodic motion","form only one melody with chordal support","must always perform identical pitches and rhythms"], answer:0,
         success:"✓ Correct. Polyphonic lines retain melodic independence while sounding together.",
         fail:"Listen for multiple simultaneous melodic lines.",
         hint:"\u{201C}Poly-\u{201D} means many; focus on melodic independence." } },
-    { say:"<b>Heterophonic Texture:</b> Heterophony occurs when two or more performers present simultaneous variants of the same underlying melody. For example, one performer may play the basic melody while another adds ornaments or alters its rhythm. Heterophony appears in many musical traditions and may be created through performance practice rather than fully represented in notation. <b>Remember: Monophonic: one melodic line · Homophonic: melody with harmonic support or voices moving together chordally · Polyphonic: simultaneous independent melodic lines · Heterophonic: simultaneous variants of one underlying melody.</b> \u{1F447} <b>Two performers play the same underlying melody, but one adds ornaments. What is the texture?</b>",
+    { say:"<b>Heterophonic Texture:</b> one melody. Different performers play different versions at the same time — usually decorated with ornaments or rhythmic changes. \u{1F447} <b>Two performers play the same underlying melody, but one adds ornaments. What is the texture?</b>",
       try:{ type:"mc", choices:["Heterophonic","Polyphonic","Strictly monophonic"], answer:0,
         success:"✓ Correct. The performers present different versions of the same underlying melody at the same time.",
         fail:"Determine whether the two parts are variants of the same underlying melody.",
@@ -109,7 +109,7 @@ LESSON_CONTENT[90]={
         {p:"F5",d:"q"},{p:"C4",d:"q",chord:true},{p:"F4",d:"q",chord:true},{p:"A4",d:"q",chord:true},
         {p:"G5",d:"q"},{p:"B3",d:"q",chord:true},{p:"D4",d:"q",chord:true},{p:"G4",d:"q",chord:true},
         {p:"E5",d:"w"},{p:"C4",d:"w",chord:true},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{bar:"final"}],width:620},
-      kb:{start:48,octaves:3,labels:true} },
+      kb:{start:55,octaves:2,labels:true} },
     { caption:"Polyphonic texture: two independent lines — the upper climbs while the lower descends, each with its own path. (Played together.)",
       staff:{clef:"treble",tempo:88,notes:[
         {p:"C4",d:"q",label:"line 2"},{p:"E5",d:"q",chord:true,label:"line 1"},
@@ -186,18 +186,18 @@ LESSON_CONTENT[90]={
     { gen:"triad-quality", params:{quals:["M","m"]}, count:2 }
   ],
   vocabulary:[
-    {term:"Texture", def:"How the layers of music combine — how many lines, and what each does."},
-    {term:"Monophonic", def:"One melody alone (even sung by many in unison)."},
-    {term:"Homophonic", def:"One melody leads with accompaniment — or all voices move together chordally."},
-    {term:"Polyphonic / Heterophonic", def:"Polyphonic: simultaneous independent melodic lines. Heterophonic: one melody in simultaneous variants (intro)."}
+    {term:"Texture", def:"How musical layers work together."},
+    {term:"Monophonic", def:"One melody only."},
+    {term:"Homophonic", def:"Melody with accompaniment."},
+    {term:"Polyphonic / Heterophonic", def:"Polyphonic: independent melodies. Heterophonic: one melody, different versions."}
   ],
   mistakes:[],
   summary:[
-    "✔ <b>Texture</b> = the combination of layers.",
-    "✔ <b>Monophonic</b>: one line alone — unison counts.",
-    "✔ <b>Homophonic</b>: melody + support — common in many songs.",
-    "✔ <b>Polyphonic</b>: simultaneous independent lines — rounds and fugues.",
-    "✔ <b>Heterophonic</b>: one melody, simultaneous variants."
+    "✔ <b>Texture</b> = musical layers.",
+    "✔ <b>Monophonic</b> = one melody.",
+    "✔ <b>Homophonic</b> = melody + accompaniment.",
+    "✔ <b>Polyphonic</b> = independent melodies.",
+    "✔ <b>Heterophonic</b> = one melody, different versions."
   ],
   tips:[
     "Ear test order: is there more than one line? If no — mono. If yes: does one lead with support? homo. Independent lines? poly.",

@@ -26,20 +26,20 @@ LESSON_CONTENT[89]={
       } }
   },
   objectives:[
-    "Define sequence: a motive immediately repeated at a new pitch level",
-    "Know that the sequential interval and number of statements may vary",
-    "Tell TONAL sequences (stay in key) from EXACT/real (intervals preserved)",
-    "Spot sequences on the staff by their repeating shape",
-    "Connect sequence to motive development (Lesson 72)",
-    "Use sequence as a composing tool"
+    "Define a sequence",
+    "Recognize melodic sequences",
+    "Distinguish tonal and real sequences",
+    "Identify ascending and descending sequences",
+    "Recognize sequences on the staff and by ear",
+    "Understand how composers use sequences"
   ],
   steps:[
-    { say:"<b>Melodic Sequence:</b> A melodic sequence occurs when a motive or melodic pattern is <b>restated successively at a different pitch level</b>. The sequential interval may be a step, third, fourth, or another interval. A pattern restated at the same pitch level is repetition rather than sequence. \u{1F447} <b>What distinguishes a sequence from exact repetition?</b>",
+    { say:"<b>Melodic Sequence:</b> a sequence repeats the same musical idea at a different pitch level. If it stays at the same pitch, it is repetition — not a sequence. \u{1F447} <b>What distinguishes a sequence from exact repetition?</b>",
       try:{ type:"mc", choices:["The pattern returns at a different pitch level","The dynamic level increases","The rhythm must change completely"], answer:0,
         success:"✓ Correct. A sequence restates a recognizable melodic pattern at a different pitch level.",
         fail:"Compare the starting pitch of each statement.",
         hint:"The pitch level changes." } },
-    { say:"<b>Sequential Pattern and Interval:</b> A sequence contains an <b>initial statement</b> followed by one or more <b>restatements at successive pitch levels</b>. Many sequences move by step, but sequences may also move by other consistent intervals. Their length depends on the phrase, harmony, style, and expressive purpose. \u{1F447} <b>Which statement about melodic sequences is accurate?</b>",
+    { say:"<b>Sequential Pattern:</b> a sequence begins with one statement, then the same idea immediately repeats at new pitch levels. The distance between statements may vary. \u{1F447} <b>Which statement about melodic sequences is accurate?</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:104,notes:[
         {p:"C5",d:"8",label:"1st"},{p:"B4",d:"8"},{p:"C5",d:"8"},{p:"G4",d:"8"},
         {p:"B4",d:"8",label:"2nd (down a step)"},{p:"A4",d:"8"},{p:"B4",d:"8"},{p:"F4",d:"8"},
@@ -49,22 +49,29 @@ LESSON_CONTENT[89]={
         success:"✓ Correct. Stepwise sequences with several statements are common, but the sequential interval and number of statements may vary.",
         fail:"Focus on what changes consistently from one statement to the next.",
         hint:"The defining feature is the change in pitch level, not a fixed number of statements." } },
-    { say:"<b>Tonal Sequence:</b> A tonal, or diatonic, sequence restates a pattern on <b>different scale degrees while remaining within the key</b>. The generic interval pattern and melodic contour remain recognizable, but specific interval qualities may change. For example, a major second in one statement may become a minor second in another. \u{1F447} <b>What happens to the intervals in a tonal sequence?</b>",
+    { say:"<b>Tonal Sequence:</b> a tonal sequence stays within the key. Some interval qualities adjust to remain diatonic. The pattern is still recognizable, even though not every interval is exactly the same. \u{1F447} <b>What happens to the intervals in a tonal sequence?</b>",
       try:{ type:"mc", choices:["Their qualities may adjust to remain within the key","Every interval quality must remain identical","The intervals disappear completely"], answer:0,
         success:"✓ Correct. A tonal sequence follows the notes of the key, so interval qualities may change while the contour and generic interval pattern remain recognizable.",
         fail:"Determine whether the pattern adjusts to the diatonic notes of the key.",
         hint:"A tonal sequence remains within the prevailing key." } },
-    { say:"<b>Real Sequence:</b> A real, or exact, sequence <b>preserves the precise size and quality of each interval</b> in the original pattern. Accidentals are often required when the pattern moves to a new pitch level, although not every real sequence necessarily introduces accidentals. <b>Remember: A tonal sequence adjusts interval qualities to remain diatonic; a real sequence preserves the exact intervals.</b> \u{1F447} <b>What is the defining feature of a real sequence?</b>",
+    { say:"<b>Real Sequence:</b> a real sequence keeps every interval exactly the same. Accidentals may be added to preserve the intervals. \u{1F447} <b>What is the defining feature of a real sequence?</b>",
+      show:{ type:"html", html:`<div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:2px 0">
+        <div style="border:2px solid #2F6DA8;border-radius:10px;padding:10px 16px;background:#fff;min-width:190px">
+          <div style="font-weight:800;color:#2F6DA8;margin-bottom:5px">TONAL SEQUENCE</div>
+          <div style="font-size:13.5px;color:#333;line-height:1.6">✓ stays in the key<br>✓ interval qualities may change</div></div>
+        <div style="border:2px solid #C05A21;border-radius:10px;padding:10px 16px;background:#fff;min-width:190px">
+          <div style="font-weight:800;color:#C05A21;margin-bottom:5px">REAL SEQUENCE</div>
+          <div style="font-size:13.5px;color:#333;line-height:1.6">✓ exact intervals<br>✓ accidentals may appear</div></div></div>` },
       try:{ type:"mc", choices:["It preserves the exact interval pattern of the original statement","It changes the meter with each statement","It requires a new key signature for every note"], answer:0,
         success:"✓ Correct. A real sequence preserves each interval exactly. Accidentals may be necessary to maintain those intervals.",
         fail:"Check whether each interval retains the same number of half steps and the same spelling.",
         hint:"Compare the exact interval qualities in each statement." } },
-    { say:"<b>Identifying a Melodic Sequence:</b> Look for <b>successive statements of a recognizable melodic and rhythmic pattern</b> beginning at different pitch levels. Compare the contour, rhythm, and intervals of each statement, and then determine whether the sequence is tonal or real. This lesson uses unmodified examples, in which the rhythm and pattern remain the same in each statement. \u{1F447} <b>Which passage demonstrates a rising tonal sequence in C major?</b>",
+    { say:"<b>Identifying a Melodic Sequence:</b> look for the same pattern starting at different pitch levels. Compare the shape and rhythm of each statement, then decide if it is tonal or real. \u{1F447} <b>Which passage demonstrates a rising tonal sequence in C major?</b>",
       try:{ type:"mc", choices:["C–D–E, then D–E–F, then E–F–G","C–D–E repeated three times at the same pitch level","Three unrelated melodic patterns"], answer:0,
         success:"✓ Correct. The three-note pattern begins successively on C, D, and E while remaining within C major. Its interval qualities adjust to the key, making it a tonal sequence.",
         fail:"Look for a recognizable pattern beginning at successively higher pitch levels.",
         hint:"Compare the starting pitches C, D, and E." } },
-    { say:"<b>Sequence as a Compositional Tool:</b> A sequence can <b>extend or develop a motive</b>, continue a phrase, support harmonic motion, and create a sense of direction. Rising sequences often increase energy or intensity, while descending sequences may create relaxation or continuation, but their expressive effects depend on tempo, harmony, register, dynamics, and orchestration. \u{1F447} <b>A composer wants to extend a one-measure motive through successively higher pitch levels. Which technique would be most appropriate?</b>",
+    { say:"<b>Sequence as a Compositional Tool:</b> composers use sequences to:<br>• extend a motive<br>• build intensity<br>• create motion<br>• connect phrases<br>Ascending sequences often increase energy; descending sequences often relax the music. \u{1F447} <b>A composer wants to extend a one-measure motive through successively higher pitch levels. Which technique would be most appropriate?</b>",
       try:{ type:"mc", choices:["A rising sequence","A measure of silence","A key-signature change by itself"], answer:0,
         success:"✓ Correct. A rising sequence restates the motive at successively higher pitch levels, extending the original material.",
         fail:"Restate the same idea at successively higher pitch levels.",
@@ -159,18 +166,19 @@ LESSON_CONTENT[89]={
     { gen:"note-value", params:{}, count:2 }
   ],
   vocabulary:[
-    {term:"Melodic Sequence", def:"A motive or pattern restated successively at different pitch levels; the sequential interval and number of statements may vary."},
-    {term:"Tonal Sequence", def:"Stays in the key; interval qualities may adjust to the scale's own notes. Also called a diatonic sequence."},
-    {term:"Real (Exact) Sequence", def:"Every interval preserved exactly; accidentals often appear as the pattern moves."},
-    {term:"Rising / Falling Sequence", def:"Direction of the levels: rising often increases energy; falling may create relaxation."}
+    {term:"Melodic Sequence", def:"A motive repeated at a new pitch level."},
+    {term:"Tonal Sequence", def:"Stays in the key. Intervals may adjust."},
+    {term:"Real Sequence", def:"Keeps every interval exactly the same."},
+    {term:"Ascending / Descending", def:"Ascending = moves higher. Descending = moves lower."}
   ],
   mistakes:[],
   summary:[
-    "✔ <b>Sequence</b> = same shape, <b>new pitch level</b>, immediately.",
-    "✔ The <b>sequential interval</b> and <b>number of statements</b> may vary; stepwise motion is common.",
-    "✔ <b>Tonal</b> = in the key (interval qualities may adjust) · <b>real</b> = exact intervals preserved (accidentals often needed).",
-    "✔ Rising often builds energy · falling often relaxes — depending on context.",
-    "✔ Sequence is motive development's workhorse (Lesson 72's promise, kept)."
+    "✔ <b>Sequence</b> = same idea, new pitch level.",
+    "✔ <b>Tonal</b> = stays in the key.",
+    "✔ <b>Real</b> = exact intervals.",
+    "✔ <b>Ascending</b> = higher.",
+    "✔ <b>Descending</b> = lower.",
+    "✔ Sequences help develop motives."
   ],
   tips:[
     "Compose faster: write ONE good measure, then sequence it up or down twice — three measures done.",

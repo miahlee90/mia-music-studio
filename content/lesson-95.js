@@ -4,32 +4,47 @@
    HARMONIC RHYTHM (how fast chords change).
    NOTE: edit by FULL-FILE REWRITE only. */
 
-/* progression ear lab */
+/* progression ear lab — ii-V-I, four-chord loop, and harmonic rhythm */
 function MF_L95_ear(container,fb){
-  const P={
-    twofive:[[62,65,69,72],[55,59,62,65],[60,64,67,71]],
-    pop:[[60,64,67],[67,71,74],[69,72,76],[65,69,72]],
-    circle:[[57,60,64],[62,65,69],[67,71,74],[60,64,67]]};
-  const NAME={twofive:"ii-V-I", pop:"I-V-vi-IV", circle:"vi-ii-V-I — descending-fifths roots"};
-  const ROUNDS=["pop","twofive","circle"];
-  const KEY=["twofive","pop","circle"];
+  const LOOP=[[60,64,67],[67,71,74],[69,72,76],[65,69,72]];   /* I-V-vi-IV */
+  const TWOFIVE=[[62,65,69,72],[55,59,62,65],[60,64,67,71]];  /* ii-V-I */
+  const ROUNDS=[
+    { q:"which progression is this?",
+      play:()=>{ let t=0; LOOP.forEach(row=>{ row.forEach(m=>MFAudio.tone(m,.8,t,.26)); t+=.85; }); return t; },
+      choices:["ii-V-I","Four-chord loop (I-V-vi-IV)","One held chord"], answer:1,
+      ok:"Four-chord loop — I-V-vi-IV." },
+    { q:"which progression is this?",
+      play:()=>{ let t=0; TWOFIVE.forEach(row=>{ row.forEach(m=>MFAudio.tone(m,.85,t,.27)); t+=.9; }); return t; },
+      choices:["ii-V-I","Four-chord loop (I-V-vi-IV)","One held chord"], answer:0,
+      ok:"ii-V-I — predominant, dominant, tonic." },
+    { q:"the SAME four chords play twice — first slow, then fast. How did the harmonic rhythm change?",
+      play:()=>{ let t=0; LOOP.forEach(row=>{ row.forEach(m=>MFAudio.tone(m,.8,t,.24)); t+=.85; }); t+=.4; LOOP.forEach(row=>{ row.forEach(m=>MFAudio.tone(m,.4,t,.24)); t+=.42; }); return t; },
+      choices:["It got faster (chords change more often)","It got slower","It stayed the same"], answer:0,
+      ok:"Faster harmonic rhythm — the chords change more often." }];
   let r=0, played=false;
   container.innerHTML=`<div class="big-q l95e-q" style="text-align:center"></div>
-    <div style="text-align:center"><button class="play l95e-play">▶ Hear the progression</button></div>
-    <div class="choices l95e-ch" style="display:none"><button>ii-V-I</button><button>I-V-vi-IV</button><button>vi-ii-V-I (circle)</button></div>`;
+    <div style="text-align:center"><button class="play l95e-play">▶ Play</button></div>
+    <div class="choices l95e-ch" style="display:none"></div>`;
   const q=container.querySelector(".l95e-q"), pl=container.querySelector(".l95e-play"), ch=container.querySelector(".l95e-ch");
-  pl.onclick=()=>{ const w=ROUNDS[r]; if(!w) return; P[w].forEach((row,i)=>row.forEach(m=>MFAudio.tone(m,.85,i*.9,.27))); played=true; setTimeout(()=>ch.style.display="",P[w].length*900+300); };
-  [...ch.children].forEach((b,i)=>b.onclick=()=>{
-    if(!played) return;
-    if(KEY[i]===ROUNDS[r]){ fb(true,"✓ "+NAME[ROUNDS[r]]+"."); r++; played=false; ch.style.display="none";
-      if(r>=ROUNDS.length){ q.textContent="Excellent! Three famous progressions identified."; pl.style.display="none"; } else q.innerHTML=`Round ${r+1} of ${ROUNDS.length}: listen, then name it.`;
-    } else { MFAudio.tone(40,.2); fb(false,"Identify the chord roots, then compare with ii-V-I, I-V-vi-IV, or descending-fifths root motion."); }
-  });
-  q.innerHTML="Round 1 of 3: listen, then name it.";
+  function render(){
+    const R=ROUNDS[r]; played=false;
+    q.innerHTML=`Round ${r+1} of ${ROUNDS.length}: ${R.q}`;
+    ch.innerHTML=""; ch.style.display="none";
+    R.choices.forEach((c,i)=>{ const b=document.createElement("button"); b.textContent=c; b.onclick=()=>pick(i); ch.appendChild(b); });
+  }
+  pl.onclick=()=>{ const R=ROUNDS[r]; if(!R) return; const dur=R.play(); played=true; setTimeout(()=>ch.style.display="",dur*1000+300); };
+  function pick(i){
+    if(!played) return; const R=ROUNDS[r];
+    if(i===R.answer){ fb(true,"✓ "+R.ok); r++;
+      if(r>=ROUNDS.length){ q.textContent="Excellent! ii-V-I, the four-chord loop, and harmonic rhythm — all by ear."; pl.style.display="none"; ch.innerHTML=""; }
+      else render();
+    } else { MFAudio.tone(40,.2); fb(false,"Listen again: count the chords and how often they change."); }
+  }
+  render();
 }
 
 LESSON_CONTENT[95]={stackFigures:true,
-  welcome:"Recognize and perform several common chord progressions.",
+  welcome:"Common harmonic progressions create musical direction.",
   hook:{
     say:"<b>Many songs use recurring chord patterns.</b> Listen to this four-chord loop. \u{1F447} <b>How many different chords occur before the pattern repeats?</b>",
     interact:{ type:"custom",
@@ -47,15 +62,15 @@ LESSON_CONTENT[95]={stackFigures:true,
       } }
   },
   objectives:[
-    "Play and recognize ii-V-I — the predominant-dominant-tonic progression",
-    "Follow the descending-fifths progression: vi-ii-V-I",
-    "Know the four-chord loops: I-V-vi-IV and I-vi-IV-V",
-    "Review the 12-bar blues as a progression",
-    "Define HARMONIC RHYTHM: the rate of chord change",
+    "Recognize common harmonic progressions",
+    "Understand harmonic function: Tonic → Predominant → Dominant → Tonic",
+    "Identify ii–V–I",
+    "Recognize common four-chord loops",
+    "Understand harmonic rhythm",
     "Identify progressions by ear"
   ],
   steps:[
-    { say:"<b>The ii–V–I Progression:</b> The progression ii–V–I follows a common <b>predominant–dominant–tonic</b> pattern. In jazz and related styles, the chords frequently appear as seventh chords. In C major, ii⁷-V⁷-Imaj7 is Dm7-G7-Cmaj7. \u{1F447} <b>Which functional pattern does ii–V–I represent?</b>",
+    { say:"<b>ii–V–I — Tension and Release:</b> ii–V–I is really about <b>function</b>: <b>ii = Predominant</b> (sets up), <b>V = Dominant</b> (tension), <b>I = Tonic</b> (release). In C major that is Dm7 → G7 → Cmaj7 — listen for the pull of G7 resolving home to C. \u{1F447} <b>Which functional pattern does ii–V–I represent?</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:72,notes:[
         {p:"D4",d:"w",label:"ii7"},{p:"F4",d:"w",chord:true},{p:"A4",d:"w",chord:true},{p:"C5",d:"w",chord:true},
         {p:"G3",d:"w",label:"V7"},{p:"B3",d:"w",chord:true},{p:"D4",d:"w",chord:true},{p:"F4",d:"w",chord:true},
@@ -64,22 +79,26 @@ LESSON_CONTENT[95]={stackFigures:true,
         success:"✓ Correct. ii commonly serves predominant function, V serves dominant function, and I serves tonic function.",
         fail:"Identify the common function of ii, V, and I.",
         hint:"ii prepares V, and V resolves to I." } },
-    { say:"<b>The Descending-Fifths Progression:</b> In vi–ii–V–I, each chord root moves <b>down a fifth — or equivalently up a fourth</b> — to the next root. In C major, the roots are A-D-G-C. This root pattern follows part of the circle of fifths. \u{1F447} <b>In vi–ii–V–I, how does each chord root move to the next?</b>",
+    { say:"<b>Descending Fifths:</b> many progressions move by <b>descending fifths</b> because that root motion sounds strong and natural. <b>vi–ii–V–I</b> is one example — its roots step A → D → G → C, each a fifth lower (or a fourth higher). \u{1F447} <b>In vi–ii–V–I, how does each chord root move to the next?</b>",
       try:{ type:"mc", choices:["Down a fifth, or equivalently up a fourth","Down a second","Up a third"], answer:0,
-        success:"✓ Correct. The roots A-D-G-C form a sequence of descending fifths, or ascending fourths.",
+        success:"✓ Correct. The roots A-D-G-C move down a fifth (or up a fourth) each time — a strong, forward-driving motion.",
         fail:"Measure the descending interval from A to D.",
-        hint:"Follow the circle-of-fifths relationship among the roots." } },
-    { say:"<b>Common Four-Chord Loops:</b> <b>I-V-vi-IV</b> and <b>I-vi-IV-V</b> are two recurring progressions found in many popular styles. They use the same four diatonic chords in different orders. Either progression may repeat as a loop or appear as part of a larger harmonic design. \u{1F447} <b>Which chord symbols realize I–V–vi–IV in C major?</b>",
+        hint:"Each root is a fifth below the one before it." } },
+    { say:"<b>Four-Chord Loops:</b> a few progressions repeat over and over and power countless <b>pop</b> songs. Three common loops — <b>I–V–vi–IV</b>, <b>I–vi–IV–V</b>, and <b>vi–IV–I–V</b> — reuse the same four diatonic chords in different orders and cycle continuously. Many famous songs are built on one of them. \u{1F447} <b>Which chord symbols realize I–V–vi–IV in C major?</b>",
+      show:{ type:"html", html:`<div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;font-size:13.5px">
+        <div style="border:2px solid #2F6DA8;border-radius:10px;padding:8px 14px;text-align:center"><b>I–V–vi–IV</b><br><span style="color:#555">C–G–Am–F</span></div>
+        <div style="border:2px solid #A9821F;border-radius:10px;padding:8px 14px;text-align:center"><b>I–vi–IV–V</b><br><span style="color:#555">C–Am–F–G</span></div>
+        <div style="border:2px solid #C05A21;border-radius:10px;padding:8px 14px;text-align:center"><b>vi–IV–I–V</b><br><span style="color:#555">Am–F–C–G</span></div></div>` },
       try:{ type:"mc", choices:["C - G - Am - F","C - F - G - C","C - Dm - Em - F"], answer:0,
         success:"✓ Correct. In C major, I is C, V is G, vi is A minor, and IV is F.",
         fail:"Match scale degrees 1, 5, 6, and 4 with their diatonic triads in C major.",
         hint:"I = C, V = G, vi = Am, and IV = F." } },
-    { say:"<b>Twelve-Bar Blues — Review:</b> Twelve-bar blues is organized as a repeating twelve-measure cycle. One basic version is: <b>measures 1–4: I · measures 5–6: IV · measures 7–8: I · measure 9: V · measure 10: IV · measures 11–12: I</b>. Many blues performances use substitutions, quick changes, seventh chords, and a turnaround in measure 12. \u{1F447} <b>What distinguishes twelve-bar blues from the four-chord loops introduced in this lesson?</b>",
+    { say:"<b>Enrichment — The Blues:</b> the <b>twelve-bar blues</b> is another famous recurring progression, built on a twelve-measure cycle of I, IV, and V. You will study its full form in detail later — for now, just know it is one more example of a progression that repeats. \u{1F447} <b>What distinguishes twelve-bar blues from the four-chord loops introduced in this lesson?</b>",
       try:{ type:"mc", choices:["It is conventionally organized as a twelve-measure cycle with recognizable harmonic locations","It never includes the tonic chord","It contains no chord progression"], answer:0,
         success:"✓ Correct. Twelve-bar blues combines a recurring harmonic progression with a conventional twelve-measure formal cycle.",
         fail:"Identify the conventional number of measures in each blues cycle.",
         hint:"The form contains twelve measures per cycle." } },
-    { say:"<b>Harmonic Rhythm:</b> Harmonic rhythm is the <b>rate at which harmonies change</b>. A passage may sustain one chord for several measures, change once per measure, change several times within a measure, or use an irregular pattern. The same progression can produce a different sense of motion when its harmonic rhythm changes. <b>Remember: ii-V-I = common predominant–dominant–tonic progression · vi-ii-V-I = descending-fifths root motion · four-chord loops = recurring chord order · harmonic rhythm = rate of harmonic change.</b> \u{1F447} <b>A passage changes chords on every beat rather than once per measure. How has its harmonic rhythm changed?</b>",
+    { say:"<b>Harmonic Rhythm:</b> harmonic rhythm is <b>how often the chords change</b>. The same progression can feel very different depending on its rate:<br>• one chord every measure — slow<br>• two chords every measure — faster<br>• one chord every two measures — slower<br>The chords stay the same; only the <b>rate of change</b> moves. \u{1F447} <b>A passage changes chords on every beat rather than once per measure. How has its harmonic rhythm changed?</b>",
       try:{ type:"mc", choices:["It has become faster","It has become slower","It has remained unchanged"], answer:0,
         success:"✓ Correct. More frequent harmonic changes create a faster harmonic rhythm. The expressive effect depends on the complete musical context.",
         fail:"Compare the number of harmonic changes within each measure.",
@@ -88,29 +107,29 @@ LESSON_CONTENT[95]={stackFigures:true,
       try:{ type:"custom",
         hint:"Identify the key and chord roots. Listen for ii-V-I, I-V-vi-IV, or a sequence of descending-fifths roots.",
         mount:(container,fb)=>MF_L95_ear(container,fb) } },
-    { say:"<b>Review:</b> \u{1F447} <b>In C major, how is Dm7–G7–Cmaj7 analyzed?</b>",
-      try:{ type:"mc", choices:["ii⁷-V⁷-Imaj7","I-V-vi-IV","Twelve-bar blues"], answer:0,
-        success:"✓ Correct. Dm7 is ii⁷, G7 is V⁷, and Cmaj7 is the tonic major-seventh chord in C major.",
-        fail:"Identify each chord root's scale degree in C major.",
-        hint:"The roots are scale degrees 2, 5, and 1." } }
+    { say:"<b>Review:</b> \u{1F447} <b>Which progression creates the strongest tension-and-release, dominant-to-tonic arrival?</b>",
+      try:{ type:"mc", choices:["ii–V–I","A four-chord loop (I–V–vi–IV)","Changing the harmonic rhythm"], answer:0,
+        success:"✓ Correct. ii–V–I drives predominant → dominant → tonic, giving the strongest V→I resolution.",
+        fail:"Which progression ends with dominant resolving to tonic?",
+        hint:"Look for the predominant → dominant → tonic path." } }
   ],
   examples:[
     { caption:"Descending fifths in action: vi-ii-V-I with roots falling in 5ths, or rising in 4ths (A-D-G-C).",
-      staff:{clef:"treble",tempo:76,notes:[
-        {p:"A3",d:"w",label:"vi"},{p:"C4",d:"w",chord:true},{p:"E4",d:"w",chord:true},
-        {p:"D4",d:"w",label:"ii"},{p:"F4",d:"w",chord:true},{p:"A4",d:"w",chord:true},
-        {p:"G3",d:"w",label:"V"},{p:"B3",d:"w",chord:true},{p:"D4",d:"w",chord:true},
-        {p:"C4",d:"w",label:"I"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{bar:"final"}],width:560},
-      kb:{start:45,octaves:3,labels:true} },
-    { caption:"Harmonic rhythm demonstrated: first I and IV at one chord per measure, then the full I-IV-V-I at two chords per measure — the rate of harmonic change doubles.",
-      staff:{clef:"treble",tempo:84,notes:[
+      staff:{clef:"treble",tempo:76,time:"4/4",notes:[
+        {p:"A3",d:"w",label:"vi"},{p:"C4",d:"w",chord:true},{p:"E4",d:"w",chord:true},{bar:"single"},
+        {p:"D4",d:"w",label:"ii"},{p:"F4",d:"w",chord:true},{p:"A4",d:"w",chord:true},{bar:"single"},
+        {p:"G3",d:"w",label:"V"},{p:"B3",d:"w",chord:true},{p:"D4",d:"w",chord:true},{bar:"single"},
+        {p:"C4",d:"w",label:"I"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{bar:"final"}],width:580},
+      kb:{start:53,octaves:1.74,labels:true} },
+    { caption:"Harmonic rhythm demonstrated: first I and IV at one chord per measure (whole notes), then the full I-IV-V-I at two chords per measure (half notes) — the rate of harmonic change doubles.",
+      staff:{clef:"treble",tempo:84,time:"4/4",notes:[
         {p:"C4",d:"w",label:"1 per bar"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{bar:"single"},
         {p:"F4",d:"w"},{p:"A4",d:"w",chord:true},{p:"C5",d:"w",chord:true},{bar:"single"},
-        {p:"C4",d:"w",label:"2 per bar"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},
-        {p:"F4",d:"w"},{p:"A4",d:"w",chord:true},{p:"C5",d:"w",chord:true},{bar:"single"},
-        {p:"G4",d:"w"},{p:"B4",d:"w",chord:true},{p:"D5",d:"w",chord:true},
-        {p:"C4",d:"w"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{bar:"final"}],width:680},
-      kb:{start:60,octaves:2,labels:true} }
+        {p:"C4",d:"h",label:"2 per bar"},{p:"E4",d:"h",chord:true},{p:"G4",d:"h",chord:true},
+        {p:"F4",d:"h"},{p:"A4",d:"h",chord:true},{p:"C5",d:"h",chord:true},{bar:"single"},
+        {p:"G4",d:"h"},{p:"B4",d:"h",chord:true},{p:"D5",d:"h",chord:true},
+        {p:"C4",d:"h"},{p:"E4",d:"h",chord:true},{p:"G4",d:"h",chord:true},{bar:"final"}],width:700},
+      kb:{start:60,octaves:1.16,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Progression Identification (45s)",
@@ -175,18 +194,18 @@ LESSON_CONTENT[95]={stackFigures:true,
     { gen:"inversion-id", params:{subject:"v7", ask:"position"}, count:2 }
   ],
   vocabulary:[
-    {term:"ii-V-I", def:"A common predominant-dominant-tonic progression; in jazz and related styles it frequently appears as seventh chords."},
-    {term:"Descending-Fifths Progression", def:"Roots moving down a fifth — or up a fourth — as in vi-ii-V-I; the root pattern follows part of the circle of fifths."},
-    {term:"Four-Chord Loops", def:"I-V-vi-IV and I-vi-IV-V — recurring progressions in many popular styles, using the same four chords in different orders."},
-    {term:"Harmonic Rhythm", def:"The rate at which harmonies change — per measure, per beat, or in irregular patterns."}
+    {term:"Harmonic Progression", def:"A sequence of chords that creates musical motion."},
+    {term:"Harmonic Function", def:"Tonic → Predominant → Dominant → Tonic."},
+    {term:"ii–V–I", def:"The most common progression in jazz. Predominant → Dominant → Tonic."},
+    {term:"Harmonic Rhythm", def:"How often the chords change."}
   ],
   mistakes:[],
   summary:[
-    "✔ <b>ii-V-I</b> = PD→D→T — frequently as sevenths (Dm7-G7-Cmaj7).",
-    "✔ <b>Descending fifths</b>: roots fall in 5ths, or rise in 4ths — vi-ii-V-I.",
-    "✔ Loops: <b>I-V-vi-IV</b> and <b>I-vi-IV-V</b> — the same four chords in different orders.",
-    "✔ <b>12-bar blues</b>: a conventional twelve-measure cycle (review).",
-    "✔ <b>Harmonic rhythm</b> = the rate of harmonic change."
+    "✔ Harmonic progression = a sequence of chords that creates musical motion.",
+    "✔ <b>ii–V–I</b> = Predominant → Dominant → Tonic (one of the most common progressions in jazz).",
+    "✔ Four-chord loops such as <b>I–V–vi–IV</b> and <b>I–vi–IV–V</b> repeat throughout many pop songs.",
+    "✔ <b>Harmonic rhythm</b> = how often the chords change.",
+    "✔ Many progressions move by <b>descending fifths</b>, creating a strong sense of forward motion."
   ],
   tips:[
     "Learn ii-V-I in three keys this week — jazz tunes are chains of them.",

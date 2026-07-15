@@ -9,7 +9,7 @@ function MF_L100_ear(container,fb){
   const play={
     trill:()=>{ for(let i=0;i<8;i++) MFAudio.tone(i%2?74:72,.09,i*.09,.34); MFAudio.tone(72,.5,.75,.4); return 1.4; },
     mord:()=>{ MFAudio.tone(72,.09,0,.36); MFAudio.tone(74,.09,.09,.34); MFAudio.tone(72,.7,.18,.42); return 1.0; },
-    turn:()=>{ [74,72,71,72].forEach((m,i)=>MFAudio.tone(m,.12,i*.12,.36)); MFAudio.tone(72,.5,.5,.4); return 1.1; },
+    turn:()=>{ [74,72,71,72].forEach((m,i)=>MFAudio.tone(m,i===3?.55:.12,i*.12,.36)); return 1.0; },
     grace:()=>{ MFAudio.tone(71,.07,0,.3); MFAudio.tone(72,.8,.07,.42); return 1.0; }};
   const NAME={trill:"Trill — rapid alternation",mord:"Mordent — one quick alternation",turn:"Turn — around the note",grace:"Grace note — crushed in"};
   const ROUNDS=["mord","trill","grace","turn"], KEY=["trill","mord","turn","grace"];
@@ -27,8 +27,22 @@ function MF_L100_ear(container,fb){
   });
 }
 
+/* one ornament step: show the written-out realization, let students HEAR it, then ask */
+function MF_L100_orn(container,fb,cfg){
+  container.innerHTML=`<div class="orn-staff" style="margin:2px 0"></div>
+    <div style="text-align:center"><button class="play orn-play">▶ Hear it</button></div>
+    <div class="big-q orn-q" style="text-align:center;margin-top:6px">${cfg.q}</div>
+    <div class="choices orn-ch"></div>`;
+  Staff.render(container.querySelector(".orn-staff"),cfg.staff);
+  container.querySelector(".orn-play").onclick=cfg.play;
+  const ch=container.querySelector(".orn-ch");
+  cfg.choices.forEach((c,i)=>{ const b=document.createElement("button"); b.textContent=c;
+    b.onclick=()=>{ if(i===cfg.answer) fb(true,cfg.ok); else { MFAudio.tone(40,.2); fb(false,cfg.no); } };
+    ch.appendChild(b); });
+}
+
 LESSON_CONTENT[100]={
-  welcome:"Ornaments embellish melodic notes and gestures.",
+  welcome:"Ornaments decorate a melody without changing the melody itself.",
   hook:{
     say:"<b>Listen to a sustained note and then to an ornamented version.</b> \u{1F447} <b>What does the ornament add?</b>",
     interact:{ type:"custom",
@@ -56,31 +70,43 @@ LESSON_CONTENT[100]={
     "Identify ornaments by symbol and by ear"
   ],
   steps:[
-    { say:"<b>Performance-Practice Note:</b> The execution of ornaments varies according to historical period, musical style, tempo, instrument, composer, and edition. The patterns in this lesson provide common modern introductory interpretations, not universal rules.<br><br><b>Ornament:</b> An ornament embellishes a written note or melodic gesture by adding neighboring pitches, rhythmic activity, or expressive emphasis. Ornament symbols may appear above or below a note. Their interpretation depends on the symbol and the music's style and historical context. \u{1F447} <b>What does an ornament normally do?</b>",
+    { say:"<b>What is an ornament?</b> An ornament <b>decorates a melody without changing the melody itself</b> — it adds neighboring pitches, quick motion, or emphasis around a written note, while that note stays the structural focus. This lesson uses common <b>modern introductory realizations</b> (historical practice varies, but we keep it simple here). Ornaments are still everywhere today — <b>classical piano, jazz, gospel, pop vocals, and film scores</b>. \u{1F447} <b>What does an ornament normally do?</b>",
       try:{ type:"mc", choices:["It embellishes a written note or melodic gesture","It replaces the complete formal structure","It changes the key automatically"], answer:0,
         success:"✓ Correct. An ornament changes the musical surface while preserving the underlying melodic function.",
         fail:"Compare the structural note with its ornamented realization.",
         hint:"The written note remains the focus of the embellishment." } },
-    { say:"<b>The Trill (tr):</b> A trill is a rapid alternation between a written note and its upper neighboring note. It is indicated by 'tr,' sometimes followed by a wavy extension line. The alternation normally continues for much or all of the written note's duration. Its starting pitch, speed, and ending pattern depend on style and performance practice. The upper neighbor follows the key signature unless an accidental near the ornament indicates otherwise. \u{1F447} <b>Which neighboring pitch participates in a standard trill?</b>",
-      try:{ type:"mc", choices:["The upper neighbor","The lower octave","The tonic in every key"], answer:0,
-        success:"✓ Correct. A standard trill alternates the written pitch with its upper neighbor.",
-        fail:"Compare the neighboring pitch with the written note.",
-        hint:"The trill uses the note immediately above according to the key or indicated accidental." } },
-    { say:"<b>The Mordent:</b> In common modern notation, a mordent is a brief ornament consisting of the written note, a neighboring note, and a return to the written note. An upper mordent uses the upper neighbor; a lower mordent uses the lower neighbor and is commonly shown with a vertical stroke through the symbol. Mordent terminology and symbol interpretation vary historically, so performers should consider the edition and musical style. \u{1F447} <b>How does a mordent normally differ from an extended trill?</b>",
-      try:{ type:"mc", choices:["It usually consists of one brief main–neighbor–main figure","It spans two octaves","It never returns to the written note"], answer:0,
-        success:"✓ Correct. A mordent is normally a brief three-note figure rather than an extended alternation.",
-        fail:"Listen for a single brief movement to the neighbor and back.",
-        hint:"Written note → neighbor → written note." } },
-    { say:"<b>The Turn:</b> In a common modern realization, a turn circles the written note through four pitches: upper neighbor → written note → lower neighbor → written note. It is represented by a curved symbol resembling a sideways S. The rhythm and placement of these pitches depend on where the symbol appears and on stylistic context. Accidentals placed above or below the turn symbol may alter the upper or lower neighbor. \u{1F447} <b>Which pattern represents the common turn introduced in this lesson?</b>",
-      try:{ type:"mc", choices:["Upper neighbor → written note → lower neighbor → written note","Written note → octave → written note","Lower neighbor → lower neighbor → upper neighbor"], answer:0,
-        success:"✓ Correct. This common realization moves above the written note, returns to it, moves below it, and returns again.",
-        fail:"Follow the motion around the written note.",
-        hint:"Upper → main → lower → main." } },
-    { say:"<b>Grace Notes:</b> Grace notes are written smaller than the principal notes. Their timing and duration depend on style and context. A notated appoggiatura is commonly shown as a small unslashed note. It normally receives perceptible duration, often borrowing time from the following principal note. An acciaccatura is commonly shown as a small note with a slash through its stem. It is performed very briefly before or at the beginning of the principal note, according to stylistic practice. <b>Remember — trill: repeated alternation with the upper neighbor · mordent: brief main–neighbor–main figure · turn: a pattern circling the written note · grace note: a small notated embellishing note.</b> \u{1F447} <b>How is an acciaccatura commonly performed?</b>",
-      try:{ type:"mc", choices:["Very briefly before or at the beginning of the principal note, according to style","Always as exactly half the principal note's value","Always after the principal note ends"], answer:0,
-        success:"✓ Correct. An acciaccatura is performed very briefly, but its exact placement depends on musical style and performance practice.",
-        fail:"Distinguish the slashed acciaccatura from the unslashed appoggiatura.",
-        hint:"The slashed grace note is normally very brief." } },
+    { say:"<b>The Trill (tr):</b> a trill is a <b>rapid alternation between the written note and its upper neighbor</b>, marked <b>tr</b> (sometimes with a wavy line). It usually lasts most of the note. Historical practice differs on its exact start and end; this lesson uses the modern introductory version. See it written out and hear it:",
+      try:{ type:"custom", mount:(c,fb)=>MF_L100_orn(c,fb,{
+        staff:{clef:"treble",tempo:120,notes:[{p:"C5",d:"32"},{p:"D5",d:"32"},{p:"C5",d:"32"},{p:"D5",d:"32"},{p:"C5",d:"32"},{p:"D5",d:"32"},{p:"C5",d:"32"},{p:"D5",d:"32"}],beams:[[0,7,3]],width:380},
+        play:()=>{[72,74,72,74,72,74,72,74].forEach((m,i)=>MFAudio.tone(m,.14,i*.13,.34));},
+        q:"\u{1F447} <b>Which neighboring pitch participates in a standard trill?</b>",
+        choices:["The upper neighbor","The lower octave","The tonic in every key"], answer:0,
+        ok:"✓ Correct. A standard trill alternates the written pitch with its upper neighbor.",
+        no:"Compare the neighboring pitch with the written note." }) } },
+    { say:"<b>The Mordent:</b> the basic idea is <b>written note → neighbor → written note</b> — one quick alternation. The neighbor may be <b>above</b> (upper mordent) or <b>below</b> (lower mordent, often marked with a vertical stroke through the symbol), depending on which symbol is used. See and hear an upper mordent:",
+      try:{ type:"custom", mount:(c,fb)=>MF_L100_orn(c,fb,{
+        staff:{clef:"treble",tempo:120,notes:[{p:"C5",d:"32",label:"main"},{p:"D5",d:"32"},{p:"C5",d:"16"},{p:"C5",d:"8"}],beams:[[0,3],[0,2,2],[0,1,3]],arcs:[{from:2,to:3,type:"tie"}],width:280},
+        play:()=>{MFAudio.tone(72,.12,0,.36);MFAudio.tone(74,.12,.13,.34);MFAudio.tone(72,.7,.26,.42);},
+        q:"\u{1F447} <b>How does a mordent normally differ from an extended trill?</b>",
+        choices:["It usually consists of one brief main–neighbor–main figure","It spans two octaves","It never returns to the written note"], answer:0,
+        ok:"✓ Correct. A mordent is normally a brief three-note figure rather than an extended alternation.",
+        no:"Listen for a single quick movement to the neighbor and back." }) } },
+    { say:"<b>The Turn:</b> a turn circles the written note through four pitches: <b>upper neighbor → written note → lower neighbor → written note</b>. Its symbol is a curved <b>sideways S</b>. Accidentals above or below the symbol can raise or lower a neighbor. See and hear a turn on C (D–C–B–C):",
+      try:{ type:"custom", mount:(c,fb)=>MF_L100_orn(c,fb,{
+        staff:{clef:"treble",tempo:104,notes:[{p:"D5",d:"16",label:"upper"},{p:"C5",d:"16"},{p:"B4",d:"16"},{p:"C5",d:"16"}],beams:[[0,3,2]],width:320},
+        play:()=>{[74,72,71,72].forEach((m,i)=>MFAudio.tone(m,i===3?.55:.14,i*.14,.36));},
+        q:"\u{1F447} <b>Which pattern represents the common turn introduced in this lesson?</b>",
+        choices:["Upper neighbor → written note → lower neighbor → written note","Written note → octave → written note","Lower neighbor → lower neighbor → upper neighbor"], answer:0,
+        ok:"✓ Correct. It moves above the written note, returns, moves below, and returns again.",
+        no:"Follow the motion around the written note: upper → main → lower → main." }) } },
+    { say:"<b>Grace Notes:</b> small notes that decorate the main note; their exact timing depends on style and period (avoid rigid rules).<br>• <b>Appoggiatura</b> — <i>unslashed</i>; <b>leans</b> on the beat and takes real time, often borrowed from the main note.<br>• <b>Acciaccatura</b> — <i>slashed</i>; <b>crushed</b> in very briefly, just before or at the main note. Hear the crushed grace note, then the main note:",
+      try:{ type:"custom", mount:(c,fb)=>MF_L100_orn(c,fb,{
+        staff:{clef:"treble",tempo:96,notes:[{p:"B4",d:"32",label:"crush"},{p:"C5",d:"32"},{p:"C5",d:"16"},{p:"C5",d:"8"}],beams:[[0,3],[0,2,2],[0,1,3]],arcs:[{from:1,to:2,type:"tie"},{from:2,to:3,type:"tie"}],width:240},
+        play:()=>{MFAudio.tone(71,.07,0,.3);MFAudio.tone(72,.9,.07,.42);},
+        q:"\u{1F447} <b>How is an acciaccatura commonly performed?</b>",
+        choices:["Very briefly before or at the beginning of the principal note, according to style","Always as exactly half the principal note's value","Always after the principal note ends"], answer:0,
+        ok:"✓ Correct. An acciaccatura is performed very briefly, but its exact placement depends on style.",
+        no:"The slashed grace note is normally very brief — a crush." }) } },
     { say:"Listen to each clearly presented ornament and identify its type. \u{1F447}",
       try:{ type:"custom",
         hint:"Listen for an extended alternation, a brief neighbor-and-return figure, a four-note turn, or a short grace note.",
@@ -92,18 +118,18 @@ LESSON_CONTENT[100]={
         hint:"Upper → main → lower → main." } }
   ],
   examples:[
-    { caption:"Ornaments written out: a trill on C (C-D alternating), then a mordent (C-D-C), then a turn (D-C-B-C). Same main note, three decorations.",
-      staff:{clef:"treble",tempo:112,notes:[
-        {p:"C5",d:"8",label:"trill…"},{p:"D5",d:"8"},{p:"C5",d:"8"},{p:"D5",d:"8"},
-        {p:"C5",d:"8",label:"mordent"},{p:"D5",d:"8"},{p:"C5",d:"q"},
-        {p:"D5",d:"8",label:"turn"},{p:"C5",d:"8"},{p:"B4",d:"8"},{p:"C5",d:"q"},{bar:"final"}],
-        beams:[[0,3],[4,5],[7,9]],width:640},
+    { caption:"Ornaments written out: a trill on C (8 fast C-D notes), then a mordent (C-D-C), then a turn (D-C-B-C). Same main note, three decorations.",
+      staff:{clef:"treble",tempo:120,notes:[
+        {p:"C5",d:"32",label:"trill…"},{p:"D5",d:"32"},{p:"C5",d:"32"},{p:"D5",d:"32"},{p:"C5",d:"32"},{p:"D5",d:"32"},{p:"C5",d:"32"},{p:"D5",d:"32"},
+        {p:"C5",d:"32",label:"mordent"},{p:"D5",d:"32"},{p:"C5",d:"16"},{p:"C5",d:"8"},
+        {p:"D5",d:"16",label:"turn"},{p:"C5",d:"16"},{p:"B4",d:"16"},{p:"C5",d:"16"},{bar:"final"}],
+        beams:[[0,7,3],[8,11],[8,10,2],[8,9,3],[12,15,2]],arcs:[{from:10,to:11,type:"tie"}],width:720},
       kb:{start:69,octaves:1,labels:true} },
     { caption:"Grace notes in context: a crushed acciaccatura into the downbeat, then an appoggiatura that leans on the harmony before resolving.",
       staff:{clef:"treble",tempo:88,notes:[
-        {p:"B4",d:"8",label:"crush"},{p:"C5",d:"q."},
-        {p:"D5",d:"8",label:"lean…"},{p:"C5",d:"q."},{p:"C5",d:"q"},{bar:"final"}],
-        beams:[[0,0]],width:440},
+        {p:"B4",d:"32",label:"crush"},{p:"C5",d:"32"},{p:"C5",d:"16"},{p:"C5",d:"8"},
+        {p:"D5",d:"q",label:"lean…"},{p:"C5",d:"q"},{bar:"final"}],
+        beams:[[0,3],[0,2,2],[0,1,3]],arcs:[{from:1,to:2,type:"tie"},{from:2,to:3,type:"tie"}],width:440},
       kb:{start:69,octaves:1,labels:true} }
   ],
   games:[
@@ -162,18 +188,31 @@ LESSON_CONTENT[100]={
     { gen:"step-type", params:{}, count:2 }
   ],
   vocabulary:[
-    {term:"Trill (tr)", def:"Rapid alternation between the note and its upper neighbor, lasting the note's length."},
-    {term:"Mordent", def:"A brief main–neighbor–main figure — upper, or lower (the lower form often marked with a vertical stroke)."},
-    {term:"Turn", def:"Upper neighbor → note → lower neighbor → note. Written as a sideways S."},
-    {term:"Grace Notes", def:"Appoggiatura: an unslashed grace note that normally takes perceptible time. Acciaccatura: slashed, performed very briefly according to style."}
+    {term:"Trill (tr)",
+      sym:"<svg viewBox='0 0 66 26' width='66' height='26' style='overflow:visible'><text x='1' y='19' font-family='Georgia,serif' font-style='italic' font-weight='700' font-size='19' fill='currentColor'>tr</text><path d='M26 11 q2.5 -4 5 0 t5 0 t5 0 t5 0 t5 0 t5 0' fill='none' stroke='currentColor' stroke-width='1.6'/></svg>",
+      staffBack:{clef:"none",notes:[{p:"C5",d:"32"},{p:"D5",d:"32"},{p:"C5",d:"32"},{p:"D5",d:"32"},{p:"C5",d:"32"},{p:"D5",d:"32"},{p:"C5",d:"32"},{p:"D5",d:"32"}],beams:[[0,7,3]],width:280},
+      def:"Rapid alternation with the upper neighbor."},
+    {term:"Mordent",
+      sym:"<svg viewBox='0 0 42 22' width='42' height='22'><path d='M3 14 L10 6 L17 14 L24 6 L31 14 L38 6' fill='none' stroke='currentColor' stroke-width='2.4' stroke-linejoin='round' stroke-linecap='round'/></svg>",
+      staffBack:{clef:"none",notes:[{p:"C5",d:"32"},{p:"D5",d:"32"},{p:"C5",d:"16"},{p:"C5",d:"8"}],beams:[[0,3],[0,2,2],[0,1,3]],arcs:[{from:2,to:3,type:"tie"}],width:180},
+      def:"Written note → neighbor → written note."},
+    {term:"Turn",
+      sym:"<svg viewBox='0 0 42 26' width='42' height='26'><path d='M6 17 C6 8 16 6 21 13 C26 20 36 18 36 9' fill='none' stroke='currentColor' stroke-width='2.4' stroke-linecap='round'/></svg>",
+      staffBack:{clef:"none",notes:[{p:"D5",d:"16"},{p:"C5",d:"16"},{p:"B4",d:"16"},{p:"C5",d:"16"}],beams:[[0,3,2]],width:190},
+      def:"Upper → note → lower → note."},
+    {term:"Grace Notes",
+      sym:"<svg viewBox='0 0 30 32' width='30' height='32'><ellipse cx='8.5' cy='24' rx='4.3' ry='3.1' fill='currentColor' transform='rotate(-22 8.5 24)'/><line x1='12.4' y1='23' x2='12.4' y2='7' stroke='currentColor' stroke-width='1.6'/><path d='M12.4 7 q6 2.5 4.5 9' fill='none' stroke='currentColor' stroke-width='1.6'/><line x1='5' y1='17' x2='19' y2='9' stroke='currentColor' stroke-width='1.5'/></svg>",
+      staffBack:{clef:"none",notes:[{p:"B4",d:"32"},{p:"C5",d:"32"},{p:"C5",d:"16"},{p:"C5",d:"8"}],beams:[[0,3],[0,2,2],[0,1,3]],arcs:[{from:1,to:2,type:"tie"},{from:2,to:3,type:"tie"}],width:180},
+      def:"A grace note quickly decorates the main note."}
   ],
   mistakes:[],
   summary:[
-    "✔ Ornaments decorate <b>one note</b> — the melody survives intact.",
-    "✔ <b>Trill</b>: many alternations (upper neighbor) · <b>mordent</b>: one.",
-    "✔ <b>Turn</b>: up, home, down, home — the orbit.",
-    "✔ <b>Appoggiatura</b> leans (real time) · <b>acciaccatura</b> crushes (slashed).",
-    "✔ Ear test: count the alternations."
+    "✔ Ornaments decorate a melody without changing its identity.",
+    "✔ <b>Trill</b> = repeated alternation.",
+    "✔ <b>Mordent</b> = one quick alternation.",
+    "✔ <b>Turn</b> = upper–main–lower–main.",
+    "✔ <b>Grace notes</b> briefly decorate the main note.",
+    "✔ Ornament interpretation may vary slightly between musical styles and historical periods."
   ],
   tips:[
     "Practice trills slowly first — evenness beats speed.",
@@ -208,7 +247,7 @@ LESSON_CONTENT[100]={
     learn:{ label:"ornaments",
       explain:"Trill = many alternations (upper); mordent = one; turn = up-home-down-home; appoggiatura leans, acciaccatura crushes.",
       hint:"Count the alternations.",
-      play:()=>{[74,72,71,72].forEach((m,i)=>MFAudio.tone(m,.12,i*.12,.36));} },
+      play:()=>{[74,72,71,72].forEach((m,i)=>MFAudio.tone(m,i===3?.55:.12,i*.12,.36));} },
     example:{ label:"the examples",
       explain:"Example 1 writes out trill, mordent and turn on one note; example 2 contrasts the two grace notes." },
     game:{ label:"the games",

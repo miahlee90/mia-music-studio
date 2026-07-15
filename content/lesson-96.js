@@ -7,7 +7,7 @@
    suspension). NOTE: edit by FULL-FILE REWRITE only. */
 
 LESSON_CONTENT[96]={
-  welcome:"Explore six additional types of nonchord tones.",
+  welcome:"Nonchord tones are identified by how they enter, how they leave, where they sit in the harmony, and how they resolve.",
   hook:{
     say:"<b>Listen to the upper note as the harmony changes beneath it.</b> The note is sustained into the new chord and then resolves downward by step. \u{1F447} <b>How does the dissonance resolve?</b>",
     interact:{ type:"custom",
@@ -29,34 +29,34 @@ LESSON_CONTENT[96]={
       } }
   },
   objectives:[
-    "Review passing and neighboring tones (Lesson 66) in one step",
-    "SUSPENSION: prepare - suspend - resolve down (4-3, 7-6, 9-8)",
-    "RETARDATION: a suspension resolving UP",
-    "APPOGGIATURA: leap in, step out",
-    "ESCAPE TONE: step in, leap out",
-    "ANTICIPATION and PEDAL POINT"
+    "Review passing and neighboring tones",
+    "Identify common nonchord tones",
+    "Understand suspensions and retardations",
+    "Distinguish appoggiaturas from escape tones",
+    "Recognize anticipation and pedal point",
+    "Identify nonchord tones by approach and resolution"
   ],
   steps:[
-    { say:"<b>Review:</b> A nonchord tone is a pitch that does not belong to the harmony sounding at that moment. A <b>passing tone</b> connects two different chord tones by step, while a <b>neighboring tone</b> leaves a chord tone by step and returns to it. Nonchord tones are identified through their approach and departure, metric placement, preparation, duration, voice, and relationship to the surrounding harmony. \u{1F447} <b>Which information is most useful for identifying a nonchord tone?</b>",
+    { say:"<b>Review — one system for every nonchord tone:</b> a nonchord tone does not belong to the chord sounding at that moment. You identify each one by <b>how it enters, how it leaves, where it sits in the meter, and how it resolves</b>. Quick reminder: a <b>passing tone</b> steps → steps (onward); a <b>neighbor tone</b> steps away → steps back. \u{1F447} <b>Which information is most useful for identifying a nonchord tone?</b>",
       try:{ type:"mc", choices:["Its approach, departure, metric placement, and harmonic context","Only its dynamic level","Only its octave"], answer:0,
         success:"✓ Correct. Approach and departure are important, but metric placement and harmonic context may also determine the classification.",
         fail:"Examine how the note enters, how it leaves, and which harmonies surround it.",
         hint:"Approach + departure + harmonic context." } },
-    { say:"<b>Suspension:</b> A suspension has three stages: <b>preparation</b> — the pitch is a chord tone in the first harmony; <b>suspension</b> — the same pitch is sustained or repeated as the harmony changes, becoming a dissonant nonchord tone; <b>resolution</b> — the suspended pitch moves downward by step to a chord tone. Suspensions are named by the suspended and resolution intervals above the bass, as in <b>4-3, 7-6, 9-8</b>. \u{1F447} <b>In its standard form, how does a suspension resolve?</b>",
-      show:{ type:"staff", spec:{clef:"treble",tempo:66,notes:[
-        {p:"C5",d:"w",label:"prep"},{p:"F4",d:"w",chord:true},{p:"A4",d:"w",chord:true},
-        {p:"C5",d:"w",label:"SUS (4)"},{p:"G4",d:"w",chord:true},{p:"D5",d:"w",chord:true},
-        {p:"B4",d:"w",label:"res (3)"},{p:"G4",d:"w",chord:true},{p:"D5",d:"w",chord:true},{bar:"final"}],width:520} },
+    { say:"<b>Suspension — three stages:</b> <b>preparation</b> (a chord tone in chord 1), <b>suspension</b> (the same pitch holds as chord 2 arrives, now dissonant), <b>resolution</b> (it steps <b>down</b> to a chord tone). Most suspensions resolve <b>downward by step</b>. Common figures — <b>4–3, 7–6, 9–8</b> — are measured above the <b>bass</b>. Example: <b>F</b>, the 7th of <b>G7</b>, is prepared, held as the <b>4th over C</b> in <b>Csus4</b>, then resolves down to <b>E</b>, the 3rd. \u{1F447} <b>In its standard form, how does a suspension resolve?</b>",
+      show:{ type:"staff", spec:{clef:"grand",tempo:66,notes:[
+        {p:"G2",d:"w",clef:"bass",label:"G7 — prep"},{p:"B4",d:"w",chord:true},{p:"D5",d:"w",chord:true},{p:"F5",d:"w",chord:true},
+        {p:"C3",d:"w",clef:"bass",label:"Csus4 — sus 4"},{p:"G4",d:"w",chord:true},{p:"C5",d:"w",chord:true},{p:"F5",d:"w",chord:true},
+        {p:"C3",d:"w",clef:"bass",label:"C — res 3"},{p:"G4",d:"w",chord:true},{p:"C5",d:"w",chord:true},{p:"E5",d:"w",chord:true},{bar:"final"}],width:560} },
       try:{ type:"mc", choices:["Downward by step to a chord tone","Upward by octave","By remaining unresolved"], answer:0,
         success:"✓ Correct. A standard suspension resolves downward by step, as in 4-3, 7-6, or 9-8.",
         fail:"Observe the direction and size of the resolution.",
         hint:"A standard suspension resolves downward by step." } },
-    { say:"<b>Retardation:</b> A retardation is prepared and sustained like a suspension, but it resolves <b>upward by step</b>. A common example is scale degree 7 resolving upward to scale degree 1 over tonic harmony at a cadence. \u{1F447} <b>How does a retardation differ from a standard suspension?</b>",
+    { say:"<b>Retardation:</b> unlike a suspension, a retardation resolves <b>upward by step</b>. The preparation and the held dissonance are the same — only the resolution direction differs. The most common example is <b>7–8</b>: scale degree 7 rising to 1 at a cadence. \u{1F447} <b>How does a retardation differ from a standard suspension?</b>",
       try:{ type:"mc", choices:["It resolves upward by step","It never resolves","It has no preparation"], answer:0,
         success:"✓ Correct. Both tones are prepared and sustained, but a retardation resolves upward rather than downward.",
         fail:"The resolution is delayed and then moves upward by step.",
         hint:"Prepared → sustained → resolved upward." } },
-    { say:"<b>Appoggiatura and Escape Tone:</b> An appoggiatura is typically approached by leap and resolved by step, often in the direction opposite the approach. It usually occurs in an accented or otherwise prominent position. An escape tone is typically approached by step and left by leap in the opposite direction. It usually occurs in an unaccented position. \u{1F447} <b>A prominent nonchord tone is approached by leap and resolved by step. What is it?</b>",
+    { say:"<b>Appoggiatura and Escape Tone — mirror images:</b> an <b>appoggiatura</b> leaps in and steps out, usually <b>accented</b> and expressive. An <b>escape tone</b> steps in and leaps out, usually <b>unaccented</b>. \u{1F447} <b>A prominent nonchord tone is approached by leap and resolved by step. What is it?</b>",
       show:{ type:"html", html:`<table style="border-collapse:collapse;margin:0 auto;font-size:14.5px;min-width:300px">
         <tr><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:6px 14px">Tone</th><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:6px 14px">Enters by</th><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:6px 14px">Leaves by</th></tr>
         <tr><td style="border:1.5px solid #cdd5e1;padding:4px 14px;font-weight:800;color:#2F6DA8">Passing</td><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center">step</td><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center">step (onward)</td></tr>
@@ -68,12 +68,12 @@ LESSON_CONTENT[96]={
         success:"✓ Correct. An appoggiatura is typically approached by leap and resolved by step.",
         fail:"Compare both the approach and departure intervals.",
         hint:"Leap in, step out." } },
-    { say:"<b>Anticipation:</b> An anticipation is a pitch belonging to the following chord that arrives before the harmony changes. It is a nonchord tone against the current harmony and normally remains at the same pitch or is repeated when the anticipated chord arrives. Anticipation involves both timing and harmonic membership, so it may also contribute to the rhythmic anticipation studied in Lesson 78. \u{1F447} <b>An anticipation belongs to which harmony?</b>",
+    { say:"<b>Anticipation:</b> the defining feature — <b>the note belongs to the FOLLOWING harmony</b>, arriving early. Against the current chord it is dissonant; it then stays (or repeats) when the anticipated chord arrives. \u{1F447} <b>An anticipation belongs to which harmony?</b>",
       try:{ type:"mc", choices:["The following chord","Only the previous chord","No surrounding chord"], answer:0,
         success:"✓ Correct. The pitch arrives before the chord to which it belongs and remains or repeats when that harmony begins.",
         fail:"Identify which chord contains the anticipated pitch.",
         hint:"A chord tone of the following harmony arrives early." } },
-    { say:"<b>Pedal Point:</b> A pedal point is a sustained or repeated pitch, usually in the bass, while the harmonies above it change. Tonic and dominant pedals are especially common. The pedal may belong to some surrounding chords and conflict with others. A sustained pitch in an upper voice is sometimes called an inverted pedal. <b>Remember:</b> suspension — prepared, sustained, resolves down by step; retardation — prepared, sustained, resolves up by step; appoggiatura — typically leap in, step out; escape tone — typically step in, leap out; anticipation — a chord tone of the following harmony arrives early; pedal point — one pitch remains while harmonies change. \u{1F447} <b>In which voice does a pedal point most commonly occur?</b>",
+    { say:"<b>Pedal Point:</b> a sustained or repeated pitch — <b>most commonly in the bass</b> — while the harmonies above it change. Tonic and dominant pedals are especially common; the pedal fits some chords and clashes with others. <b>Upper-voice pedals also occur</b> (an inverted pedal). \u{1F447} <b>In which voice does a pedal point most commonly occur?</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:72,notes:[
         {p:"C4",d:"w",label:"pedal C"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},
         {p:"C4",d:"w",label:"(held)"},{p:"F4",d:"w",chord:true},{p:"A4",d:"w",chord:true},
@@ -93,17 +93,17 @@ LESSON_CONTENT[96]={
     { caption:"A 4-3 suspension at a cadence: the C prepares over F (IV), holds over G (V) as a dissonant 4th, then falls to B — the 3rd. Prepare, suspend, resolve.",
       staff:{clef:"treble",tempo:63,notes:[
         {p:"C5",d:"w",label:"prep"},{p:"F4",d:"w",chord:true},{p:"A4",d:"w",chord:true},
-        {p:"C5",d:"w",label:"sus 4"},{p:"G4",d:"w",chord:true},{p:"D5",d:"w",chord:true},
-        {p:"B4",d:"w",label:"res 3"},{p:"G4",d:"w",chord:true},{p:"D5",d:"w",chord:true},
+        {p:"C5",d:"w",label:"sus 4"},{p:"G4",d:"w",chord:true},
+        {p:"B4",d:"w",label:"res 3"},{p:"G4",d:"w",chord:true},
         {p:"C5",d:"w",label:"I"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{bar:"final"}],width:600},
-      kb:{start:60,octaves:2,labels:true} },
-    { caption:"A tonic pedal: C holds in the bass through I, IV and V7 colors above — consonant, dissonant, consonant — then everything agrees again.",
+      kb:{start:60,octaves:1,labels:true} },
+    { caption:"A tonic pedal: C holds in the bass while the harmony moves I – IV – V7 – I above it. The held C is consonant with I, clashes over IV and V7, then agrees again — one pitch tying the whole progression together.",
       staff:{clef:"treble",tempo:69,notes:[
-        {p:"C4",d:"w",label:"pedal"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},
-        {p:"C4",d:"w"},{p:"F4",d:"w",chord:true},{p:"A4",d:"w",chord:true},
-        {p:"C4",d:"w"},{p:"B3",d:"w",chord:true},{p:"F4",d:"w",chord:true},{p:"G4",d:"w",chord:true},
-        {p:"C4",d:"w"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{bar:"final"}],width:620},
-      kb:{start:48,octaves:2,labels:true} }
+        {p:"C4",d:"w",label:"I (pedal)"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},
+        {p:"C4",d:"w",label:"IV"},{p:"F4",d:"w",chord:true},{p:"A4",d:"w",chord:true},
+        {p:"C4",d:"w",label:"V7"},{p:"F4",d:"w",chord:true},{p:"B4",d:"w",chord:true},{p:"D5",d:"w",chord:true},
+        {p:"C4",d:"w",label:"I"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{bar:"final"}],width:620},
+      kb:{start:60,octaves:1.16,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Nonchord-Tone Identification (45s)",
@@ -170,18 +170,20 @@ LESSON_CONTENT[96]={
     { gen:"triad-quality", params:{quals:["M","m"]}, count:2 }
   ],
   vocabulary:[
-    {term:"Suspension (4-3, 7-6, 9-8)", def:"Prepare on chord 1, hold into chord 2, resolve DOWN by step. Figures count from the bass."},
-    {term:"Retardation", def:"A suspension that resolves UP — usually 7 rising to 8."},
-    {term:"Appoggiatura / Escape Tone", def:"Appoggiatura: leap in, step out (accented). Escape tone: step in, leap out (unaccented)."},
-    {term:"Anticipation / Pedal Point", def:"Anticipation: the next chord's note arrives early. Pedal: a sustained pitch, usually in the bass, under changing harmony (an upper-voice pedal is an inverted pedal)."}
+    {term:"Suspension", def:"prepare → suspend → resolve DOWN. Common figures: 4–3, 7–6, 9–8."},
+    {term:"Retardation", def:"prepare → suspend → resolve UP. Common figure: 7–8."},
+    {term:"Appoggiatura / Escape Tone", def:"Appoggiatura: leap in → step out. Escape tone: step in → leap out."},
+    {term:"Anticipation / Pedal Point", def:"Anticipation: the next chord tone arrives early. Pedal point: one pitch remains while the harmony changes."}
   ],
   mistakes:[],
   summary:[
     "✔ Nonchord tones are identified by <b>approach, departure, metric placement, and harmonic context</b>.",
-    "✔ <b>Suspension</b>: prepare → hold → fall (4-3, 7-6, 9-8) · <b>retardation</b> rises.",
-    "✔ <b>Appoggiatura</b>: leap in, step out · <b>escape tone</b>: step in, leap out.",
-    "✔ <b>Anticipation</b>: tomorrow's note today · <b>pedal</b>: the bass that stays.",
-    "✔ With L66's passing and neighbor: eight tones, one system."
+    "✔ <b>Suspension</b>: prepare → suspend → resolve down.",
+    "✔ <b>Retardation</b>: prepare → suspend → resolve up.",
+    "✔ <b>Appoggiatura</b>: leap in → step out.",
+    "✔ <b>Escape tone</b>: step in → leap out.",
+    "✔ <b>Anticipation</b>: the next chord arrives early.",
+    "✔ <b>Pedal point</b>: one pitch remains while the harmony changes."
   ],
   tips:[
     "Suspensions are expressive gold: the clash is the emotion, the resolution is the relief — do not rush them.",
@@ -217,7 +219,9 @@ LESSON_CONTENT[96]={
     { type:"mc", q:"The soprano C is prepared, sustained over a G chord, and then resolves to B. What nonchord tone is created?", choices:["A 4-3 suspension","An escape tone","A pedal point"], answer:0,
       explain:"C forms a fourth above the bass G and resolves downward by step to B, a third above the bass.", hint:"Held, then fell." },
     { type:"mc", q:"Which pair has contrasting approach-and-departure patterns?", choices:["Appoggiatura and escape tone","Suspension and pedal point","Passing tone and anticipation"], answer:0,
-      explain:"An appoggiatura is typically approached by leap and resolved by step; an escape tone is typically approached by step and left by leap.", hint:"Contrasting, not identical." }
+      explain:"An appoggiatura is typically approached by leap and resolved by step; an escape tone is typically approached by step and left by leap.", hint:"Contrasting, not identical." },
+    { type:"mc", q:"A note steps up from a chord tone and then steps back down to that same chord tone. What is it?", choices:["A neighbor tone","A passing tone","An anticipation"], answer:0,
+      explain:"A neighbor tone steps away and returns; a passing tone steps onward to a DIFFERENT chord tone.", hint:"Does it return, or continue onward?" }
   ],
   miaPerfect:"Perfect score! You accurately identified eight types of nonchord tones from their melodic and harmonic contexts.",
   miaPass:"You passed! Next, you will study voice-leading principles for four-part harmony.",

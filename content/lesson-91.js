@@ -1,11 +1,11 @@
-/* Lesson 91 — Song Forms (Book 4, Unit 22 — SELF-AUTHORED)
+/* Lesson 91 — Common Song Forms (Book 4, Unit 22 — SELF-AUTHORED)
    Binary/ternary/rondo (L73-75) get ONE review step only. New material:
    STROPHIC (same music, new words each verse), THROUGH-COMPOSED (new music
    throughout), 32-BAR AABA, VERSE-CHORUS form.
    NOTE: edit by FULL-FILE REWRITE only. */
 
 LESSON_CONTENT[91]={
-  welcome:"Song form describes how sections are organized across an entire song.",
+  welcome:"Song forms are common patterns used mainly in vocal music — how verses, choruses, and other sections are organized.",
   hook:{
     say:"<b>Listen to two verses that use the same music with different lyrics.</b> \u{1F447} <b>What remains the same, and what changes?</b>",
     interact:{ type:"custom",
@@ -26,30 +26,30 @@ LESSON_CONTENT[91]={
       } }
   },
   objectives:[
-    "Review the section forms: AB, ABA, rondo",
-    "Define STROPHIC form: the same or essentially the same music for every verse",
-    "Define THROUGH-COMPOSED form: new music without a regularly recurring large-scale section",
-    "Read the 32-bar AABA form: A A B A, with the B as bridge",
-    "Know VERSE-CHORUS form: alternating story and refrain",
+    "Understand what song forms are — patterns in vocal music",
+    "Strophic: same music, new lyrics each verse",
+    "Modified strophic and through-composed",
+    "AABA: A A B A, with B as the bridge",
+    "Verse–chorus: verses alternate with a recurring chorus",
     "Match real songs to their forms"
   ],
   steps:[
-    { say:"<b>Formal Designs—Review:</b> Binary form contains two principal sections, ternary form returns to the first section after a contrasting section, and rondo form repeatedly returns to a principal section. This lesson examines several forms commonly used in vocal music. \u{1F447} <b>What is ABA form called?</b>",
+    { say:"<b>What are song forms?</b> Song forms are common organizational patterns used mainly in <b>vocal music</b>. Unlike binary, ternary, or rondo forms, they describe how <b>verses, choruses, and other vocal sections</b> are organized.<br>Quick review of the section forms: binary (two sections), ternary (A–B–A), rondo (A returns between episodes). \u{1F447} <b>What is ABA form called?</b>",
       try:{ type:"mc", choices:["Ternary form","Binary form","Rondo form"], answer:0,
         success:"✓ Correct. Ternary form consists of an opening section, a contrasting section, and a return of the opening section.",
         fail:"Count the three-part design: A–B–A.",
         hint:"ABA has three formal parts." } },
-    { say:"<b>Strophic Form:</b> In strophic form, each stanza of text is sung to the same or essentially the same music. It may be represented as <b>A–A–A</b>. Strophic form is common in many folk songs, hymns, carols, and popular songs. <b>Modified Strophic Form:</b> In modified strophic form, the same basic music returns for each stanza, but one or more verses contain meaningful musical changes. \u{1F447} <b>In a strictly strophic song, what normally changes from one verse to the next?</b>",
+    { say:"<b>Strophic Form:</b> each verse (stanza) is sung to the same music — only the lyrics change (<b>A–A–A</b>). Common in hymns, folk songs, and traditional songs.<br><b>Modified Strophic:</b> the same basic music returns, but one or more verses include meaningful musical changes. \u{1F447} <b>In a strictly strophic song, what normally changes from one verse to the next?</b>",
       try:{ type:"mc", choices:["The lyrics","The complete melody and harmony","The key in every verse"], answer:0,
         success:"✓ Correct. Each verse presents new text using the same musical setting.",
         fail:"Compare the musical setting of the two verses.",
         hint:"The music repeats while the text changes." } },
-    { say:"<b>Through-Composed Form:</b> In through-composed form, new music accompanies successive portions of the text without a recurring large-scale strophic or sectional pattern. Motives, short phrases, or other musical ideas may still return. Through-composed design is found in many art songs and other text-centered vocal works. \u{1F447} <b>Which statement best describes through-composed form?</b>",
+    { say:"<b>Through-Composed Form:</b> each new section receives new music, with little or no large-scale repetition. Often used when the music closely follows the meaning of the text. \u{1F447} <b>Which statement best describes through-composed form?</b>",
       try:{ type:"mc", choices:["New music accompanies successive portions of the text without a recurring large-scale section","One complete musical section repeats for every verse","The music must be instrumental"], answer:0,
         success:"✓ Correct. A through-composed song avoids a regularly recurring large-scale section, although smaller musical ideas may return.",
         fail:"Look for continuously developing large-scale musical sections.",
         hint:"The same complete musical setting does not return for each stanza." } },
-    { say:"<b>Thirty-Two-Bar AABA Form:</b> This form commonly consists of four eight-measure sections arranged <b>A–A–B–A</b>. The B section, often called the <b>bridge</b> or middle eight, provides contrast before the final return of A. The contrast may involve melody, harmony, key area, rhythm, texture, or lyrics. In jazz performance, one complete statement of the full form may be called a <b>chorus</b>. \u{1F447} <b>Which section provides the principal contrast in AABA form?</b>",
+    { say:"<b>32-Bar AABA Form</b> — one of the most important song forms. Four 8-bar sections: <b>A A B A</b>. The <b>B section (bridge)</b> provides contrast before the final return of A. (In jazz, one full statement of the form is called a chorus.) \u{1F447} <b>Which section provides the principal contrast in AABA form?</b>",
       show:{ type:"html", html:`<div style="display:flex;gap:8px;justify-content:center;font-weight:800;font-size:15px">
         <div style="border:2px solid #2F6DA8;border-radius:10px;padding:8px 14px;color:#2F6DA8">A<br><span style="font-weight:400;font-size:12px;color:#555">8 bars</span></div>
         <div style="border:2px solid #2F6DA8;border-radius:10px;padding:8px 14px;color:#2F6DA8">A<br><span style="font-weight:400;font-size:12px;color:#555">8 bars</span></div>
@@ -59,12 +59,12 @@ LESSON_CONTENT[91]={
         success:"✓ Correct. The B section provides contrast in the third part of the form before A returns.",
         fail:"Identify the only contrasting letter in A–A–B–A.",
         hint:"Three A sections surround one contrasting section." } },
-    { say:"<b>Verse–Chorus Form:</b> Verse–chorus form alternates <b>verses</b> with a recurring <b>chorus</b>. The verses normally use similar music with different lyrics, while the chorus returns with substantially the same music and lyrics. Many songs also include an introduction, prechorus, bridge, instrumental section, or outro. <b>Remember: Strophic = substantially the same music for each stanza · Modified strophic = recurring basic music with meaningful changes · Through-composed = no recurring large-scale strophic or sectional pattern · AABA = two A sections, a contrasting B section, and a return of A · Verse–chorus = verses alternate with a recurring chorus.</b> \u{1F447} <b>In a typical verse–chorus song, which section normally returns with substantially the same lyrics and music?</b>",
+    { say:"<b>Verse–Chorus Form</b> — the backbone of most popular songs. <b>Verses</b> tell the story (new lyrics, similar music). The <b>chorus</b> repeats the main musical and lyrical idea. Many songs also add a <b>bridge</b>. \u{1F447} <b>In a typical verse–chorus song, which section normally returns with substantially the same lyrics and music?</b>",
       try:{ type:"mc", choices:["The chorus","The verse","Neither section"], answer:0,
         success:"✓ Correct. The recurring music and lyrics help make the chorus recognizable.",
         fail:"Which section normally returns with the same central text and music?",
         hint:"Identify the recurring section that often contains the song's principal hook." } },
-    { say:"<b>Distinguishing Song Forms:</b> First, identify the major sections and their boundaries. Next, determine which sections return and whether their music or lyrics change. Finally, map the complete sectional order, such as A–A–A, A–A–B–A, or verse–chorus–verse–chorus. \u{1F447} <b>A song follows verse–chorus–verse–chorus–bridge–chorus. How is its form best described?</b>",
+    { say:"<b>Distinguishing Song Forms:</b> identify the major sections, see which ones return and whether their music or lyrics change, then map the order — A–A–A, A–A–B–A, or verse–chorus–verse–chorus. \u{1F447} <b>A song follows verse–chorus–verse–chorus–bridge–chorus. How is its form best described?</b>",
       try:{ type:"mc", choices:["Verse–chorus form with a bridge","Strophic form","Through-composed form"], answer:0,
         success:"✓ Correct. The recurring chorus alternates with verses, and a contrasting bridge appears before the final chorus.",
         fail:"Identify the section that returns after each verse.",
@@ -76,19 +76,26 @@ LESSON_CONTENT[91]={
         hint:"A–A–A–A–A." } }
   ],
   examples:[
-    { caption:"An 8-bar A section of an AABA song, in miniature: this melody would play twice (AA), yield to a bridge (B), then return (A).",
-      staff:{clef:"treble",tempo:92,notes:[
-        {p:"C4",d:"q"},{p:"E4",d:"q"},{p:"G4",d:"q"},{p:"A4",d:"q"},
+    { caption:"① A section — a 4-bar miniature: this melody plays twice (A A), yields to a bridge (B), then returns (A).",
+      staff:{clef:"treble",tempo:92,time:"4/4",notes:[
+        {p:"C4",d:"q"},{p:"E4",d:"q"},{p:"G4",d:"q"},{p:"A4",d:"q"},{bar:"single"},
         {p:"G4",d:"h"},{p:"E4",d:"h"},{bar:"single"},
-        {p:"D4",d:"q"},{p:"F4",d:"q"},{p:"A4",d:"q"},{p:"B4",d:"q"},
-        {p:"C5",d:"w",label:"A ends"},{bar:"final"}],width:640},
+        {p:"D4",d:"q"},{p:"F4",d:"q"},{p:"A4",d:"q"},{p:"B4",d:"q"},{bar:"single"},
+        {p:"C5",d:"w",label:"A ends"},{bar:"final"}],width:680},
       kb:{start:60,octaves:1,labels:true} },
-    { caption:"A bridge (B) in miniature: new harmony color and direction — built to make A's return feel like home.",
-      staff:{clef:"treble",tempo:92,notes:[
+    { caption:"② Bridge (B) — a 3-bar miniature: new harmony color and direction, built to make A's return feel like home.",
+      staff:{clef:"treble",tempo:92,time:"4/4",notes:[
         {p:"A4",d:"q"},{p:"C5",d:"q"},{p:"E5",d:"h",label:"new color"},{bar:"single"},
         {p:"D5",d:"q"},{p:"B4",d:"q"},{p:"G4",d:"h",label:"turning…"},{bar:"single"},
-        {p:"F4",d:"q"},{p:"G4",d:"q"},{p:"B4",d:"h",label:"…toward A"},{bar:"final"}],width:600},
-      kb:{start:60,octaves:2,labels:true} }
+        {p:"F4",d:"q"},{p:"G4",d:"q"},{p:"B4",d:"h",label:"…toward A"},{bar:"final"}],width:620},
+      kb:{start:60,octaves:1.33,labels:true} },
+    { caption:"③ Full AABA — now the A and the B combined: hear A, A, B, then A returning home. The two A's frame the contrasting bridge.",
+      staff:{clef:"treble",tempo:96,time:"4/4",notes:[
+        {p:"C5",d:"q",label:"A"},{p:"G4",d:"q"},{p:"C5",d:"h"},{bar:"single"},
+        {p:"C5",d:"q",label:"A"},{p:"G4",d:"q"},{p:"C5",d:"h"},{bar:"single"},
+        {p:"G4",d:"q",label:"B"},{p:"B4",d:"q"},{p:"D5",d:"q"},{p:"B4",d:"q"},{bar:"single"},
+        {p:"C5",d:"q",label:"A"},{p:"G4",d:"q"},{p:"C5",d:"h",label:"home"},{bar:"final"}],width:560},
+      kb:{start:60,octaves:1.16,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Song-Form Identification (45s)",
@@ -152,20 +159,20 @@ LESSON_CONTENT[91]={
     { gen:"triad-quality", params:{quals:["M","m"]}, count:2 }
   ],
   vocabulary:[
-    {term:"Strophic Form", def:"The same or essentially the same music repeated for every verse (strophe) — only the words change. A A A…"},
-    {term:"Modified Strophic Form", def:"The same basic music returns for each stanza, but one or more verses contain meaningful musical changes."},
-    {term:"Through-Composed Form", def:"New music accompanies successive portions of the text; no large-scale section regularly returns, though smaller musical ideas may."},
-    {term:"32-Bar AABA Form", def:"Four 8-bar sections — A A B A. The B is the bridge; in jazz, one complete statement of the form may be called a chorus."},
-    {term:"Verse-Chorus Form", def:"Verses (new words, similar music) alternate with a chorus that returns with substantially the same words and music, often plus a bridge."}
+    {term:"Strophic Form", def:"Same music for every verse. Only the lyrics change. (A A A…)"},
+    {term:"Modified Strophic Form", def:"Same basic music, with meaningful changes in some verses."},
+    {term:"Through-Composed Form", def:"New music throughout. Little or no large-scale repetition."},
+    {term:"32-Bar AABA Form", def:"Four 8-bar sections: A A B A. B = the bridge (contrast)."},
+    {term:"Verse-Chorus Form", def:"Verses tell the story; the chorus repeats the main idea. Often plus a bridge."}
   ],
   mistakes:[],
   summary:[
-    "✔ <b>Strophic</b>: the same or essentially the same music for each stanza — common in many hymns and folk songs.",
-    "✔ <b>Modified strophic</b>: the basic music returns with meaningful changes in some verses.",
-    "✔ <b>Through-composed</b>: no regularly recurring large-scale section — found in many art songs.",
-    "✔ <b>AABA</b>: four 8-bar sections with the <b>bridge</b> third — in jazz, one full statement may be called a chorus.",
-    "✔ <b>Verse-chorus</b>: verses alternate with a recurring chorus — common in popular music.",
-    "✔ ID method: identify the sections, determine what repeats, and locate the contrast."
+    "✔ Song forms describe common structures used in <b>vocal music</b>.",
+    "✔ <b>Strophic</b> = same music for every verse.",
+    "✔ <b>Modified strophic</b> = same basic music with changes.",
+    "✔ <b>Through-composed</b> = new music throughout.",
+    "✔ <b>AABA</b> = A A B A (B = bridge).",
+    "✔ <b>Verse–chorus</b> = verses alternate with a recurring chorus."
   ],
   tips:[
     "Radio exercise: label tonight's songs V-C-V-C-B-C — you'll find the form everywhere.",
@@ -214,7 +221,7 @@ LESSON_CONTENT[91]={
       hint:"What repeats, and how?",
       play:()=>{[60,64,67,69,67].forEach((m,i)=>MFAudio.tone(m,.32,i*.3,.42));} },
     example:{ label:"the examples",
-      explain:"Example 1 is an AABA song's A phrase; example 2 a bridge, engineered to make A's return satisfying." },
+      explain:"Example ① is the A phrase; example ② the bridge; example ③ plays the whole AABA so you hear the two A's frame the B." },
     game:{ label:"the games",
       explain:"Identify the forms, assemble AABA, build a verse-chorus song in order, then name forms from descriptions.",
       hint:"Bridge = the B slot." },

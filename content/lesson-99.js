@@ -13,7 +13,7 @@ LESSON_CONTENT[99]={
         container.innerHTML=`<div style="text-align:center">
           <button class="play hk-a">▶ Play the passage</button></div>
           <div class="choices hk-ch" style="display:none"><button>G major—the final cadence confirms G as the new tonic</button><button>C major—the passage returns to its original tonic</button><button>The passage remains entirely in C major</button></div>`;
-        const ROWS=[[60,64,67],[65,69,72],[62,66,69],[55,59,62],[62,66,67],[55,59,62,67]];
+        const ROWS=[[60,64,67],[60,65,69],[62,66,69],[62,67,71],[62,66,69,72],[55,62,67,71]];
         const ch=container.querySelector(".hk-ch");
         container.querySelector(".hk-a").onclick=()=>{ ROWS.forEach((row,i)=>row.forEach(m=>MFAudio.tone(m,.8,i*.85,.26))); setTimeout(()=>ch.style.display="",ROWS.length*850+300); };
         [...ch.children].forEach((b,i)=>b.onclick=()=>{
@@ -23,46 +23,56 @@ LESSON_CONTENT[99]={
       } }
   },
   objectives:[
-    "Define modulation: a real key change confirmed by a cadence",
-    "Tell modulation from tonicization (Lesson 98)",
-    "Know the CLOSELY RELATED keys: ±1 accidental plus relatives",
-    "PIVOT-CHORD modulation: a chord both keys share",
-    "DIRECT and PHRASE modulation",
-    "Hear a key change and name its type"
+    "Define modulation as a true change of key",
+    "Distinguish modulation from tonicization",
+    "Learn closely related keys",
+    "Understand pivot-chord modulation",
+    "Introduce direct and phrase modulation",
+    "Recognize modulation by cadence and harmonic evidence"
   ],
   steps:[
-    { say:"<b>Modulation:</b> Modulation occurs when music establishes a new tonic and key. A cadence in the new key provides strong confirmation, especially when supported by a functional progression, consistent pitch collection, formal emphasis, or continued harmonic activity. A composition may later modulate again or return to its original key. Tonicization gives a nontonic chord brief local emphasis; modulation establishes the new key more structurally. \u{1F447} <b>Which event provides especially strong confirmation of a modulation?</b>",
+    { say:"<b>Modulation vs. Tonicization:</b> you just learned <b>tonicization</b> — a brief, local emphasis. <b>Modulation</b> goes further: it establishes a <b>new tonic</b>, confirmed by a cadence, and the music continues in the new key. \u{1F447} <b>Which event provides especially strong confirmation of a modulation?</b>",
+      show:{ type:"html", html:`<div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;font-size:13px;text-align:left">
+        <div style="border:2px solid #2F6DA8;border-radius:10px;padding:8px 14px"><b style="color:#2F6DA8">Tonicization</b><br>• temporary<br>• local emphasis<br>• original key stays active</div>
+        <div style="border:2px solid #C05A21;border-radius:10px;padding:8px 14px"><b style="color:#C05A21">Modulation</b><br>• a new tonic<br>• new key established<br>• confirmed by a cadence<br>• music continues in the new key</div></div>` },
       try:{ type:"mc", choices:["A cadence that establishes the new tonic","A single isolated accidental","A change in tempo alone"], answer:0,
         success:"✓ Correct. A cadence in the new key is strong evidence of modulation, especially when the surrounding harmony also supports the new tonic.",
         fail:"Determine whether the new tonic receives sustained or structural harmonic confirmation.",
         hint:"Listen for dominant-to-tonic motion in the new key." } },
-    { say:"<b>Closely Related Keys:</b> For a major key, closely related keys include its relative minor, dominant and subdominant keys, and the relative minor keys of the dominant and subdominant. Their key signatures are identical to or differ by one accidental from the original major key. The closely related keys of C major are A minor, G major, E minor, F major, and D minor. \u{1F447} <b>Which list contains the closely related keys of C major?</b>",
-      show:{ type:"html", html:`<div style="text-align:center;font-weight:800;font-size:15px;line-height:2">
-        <span style="color:#2F6DA8">C major</span> \u{2194} G · F · <span style="color:#C05A21">Am · Em · Dm</span><br>
-        <span style="font-weight:400;font-size:12.5px;color:#555">(±1 accidental and the relative minors)</span></div>` },
+    { say:"<b>Closely Related Keys:</b> the easiest keys to modulate to share many diatonic chords with the original. For a major key they are its <b>dominant, subdominant, relative minor,</b> and the relative minors of the dominant and subdominant — all within one accidental. \u{1F447} <b>Which list contains the closely related keys of C major?</b>",
+      show:{ type:"html", html:`<div style="text-align:center;font-size:14px;line-height:1.9">
+        <b style="color:#2F6DA8;font-size:16px">C major</b><br>
+        Dominant <b style="color:#2F6DA8">G</b> · Subdominant <b style="color:#2F6DA8">F</b> · Relative minor <b style="color:#C05A21">Am</b> · Rel. of dominant <b style="color:#C05A21">Em</b> · Rel. of subdominant <b style="color:#C05A21">Dm</b><br>
+        <span style="font-size:12px;color:#555">All within ±1 accidental — they share the most diatonic chords, so they are the easiest destinations.</span></div>` },
       try:{ type:"mc", choices:["G major, F major, A minor, E minor, and D minor","F♯ major and B♭ minor","C minor only"], answer:0,
         success:"✓ Correct. These keys have the same key signature as C major or differ from it by one accidental. They also share several diatonic chords with C major.",
         fail:"Compare the key signatures and relative-key relationships.",
         hint:"Relative minor, dominant, subdominant, and their relative minors." } },
-    { say:"<b>Pivot-Chord Modulation:</b> A pivot chord, or common chord, is diatonic to both the original key and the destination key. It is first understood in the original key and then reinterpreted in the new key. For example, A minor is vi in C major and ii in G major. A progression may approach it as vi in C major, reinterpret it as ii in G major, and then continue to V–I in G. \u{1F447} <b>What must be true of a diatonic pivot chord?</b>",
-      show:{ type:"html", html:`<div style="text-align:center;font-weight:800;font-size:15px">
-        C major: I → <span style="color:#A9821F">vi</span> … <span style="color:#A9821F">ii</span> ← G major: → V → I<br>
-        <span style="font-weight:400;font-size:12.5px;color:#555">Am = the shared doorway (vi in C, ii in G)</span></div>` },
+    { say:"<b>Pivot-Chord Modulation:</b> a pivot chord is diatonic to <b>both</b> keys. The process: old key → reach the shared chord → <b>reinterpret its function</b> → dominant of the new key → cadence → new key. The pivot changes <b>function, not spelling</b> — the same notes get a new Roman numeral. \u{1F447} <b>What must be true of a diatonic pivot chord?</b>",
+      show:{ type:"html", html:`<div style="text-align:center;font-size:13.5px;line-height:1.9;font-weight:700">
+        Old key → shared chord → <span style="color:#A9821F">reinterpret function</span> → V of new key → cadence → new key<br>
+        <span style="font-weight:400;font-size:12.5px;color:#555">Am = vi in C  →  ii in G  (same notes, new function)</span></div>` },
       try:{ type:"mc", choices:["It belongs to both the original and destination keys","It must be the tonic triad of both keys","It must contain a chromatic accidental"], answer:0,
         success:"✓ Correct. A pivot chord has a valid diatonic function in both keys, allowing it to be reinterpreted.",
         fail:"Identify A minor's Roman numeral in each key.",
         hint:"Am is vi in C major and ii in G major." } },
-    { say:"<b>Direct and Phrase Modulation:</b> A direct modulation moves to a new key without using a diatonic pivot chord. It may occur within a phrase or at a formal boundary. When the new key begins at the start of a new phrase or section, the process is often called phrase modulation. A common popular-music example is a final chorus transposed upward by a half step or whole step. Terminology varies among textbooks; phrase modulation may be treated as a type of direct modulation. <b>Remember: pivot-chord modulation uses a chord shared by both keys · direct modulation changes key without a diatonic pivot chord · phrase modulation begins the new key at a phrase or section boundary.</b> \u{1F447} <b>A final chorus begins one whole step higher without a pivot chord. How is this best described?</b>",
+    { say:"<b>Direct and Phrase Modulation:</b> <b>direct modulation</b> changes key with <b>no shared pivot chord</b>. <b>Phrase modulation</b> is usually a direct modulation that <b>begins at a new phrase or section</b> — like a final chorus lifted up a step. (They are related ideas, not opposites.) \u{1F447} <b>A final chorus begins one whole step higher without a pivot chord. How is this best described?</b>",
       try:{ type:"mc", choices:["Phrase modulation, a type of direct modulation","Pivot-chord modulation","No modulation"], answer:0,
         success:"✓ Correct. The new key begins at a phrase boundary without a shared pivot chord, creating phrase modulation.",
         fail:"Identify the formal location of the key change.",
         hint:"The new key begins with the new phrase." } },
-    { say:"<b>Recognizing Modulation:</b> Listen and look for several types of evidence: a new pitch is emphasized as tonic; dominant-function harmony points toward the new tonic; a cadence confirms the new key; the new key continues or receives formal and thematic emphasis; accidentals may support the new pitch collection, although they are not required in every modulation. \u{1F447} <b>A passage in C major introduces F♯, develops dominant harmony directed toward G, and cadences in G major. What has occurred?</b>",
+    { say:"<b>Recognizing Modulation — a checklist:</b><br>✓ a new tonic emerges<br>✓ dominant harmony points toward it<br>✓ a cadence confirms it<br>✓ the music continues in the new key<br>✓ accidentals may support it<br>But <b>accidentals alone do NOT prove modulation</b> — you need the cadence and continued harmony. \u{1F447} <b>A passage in C major introduces F♯, develops dominant harmony directed toward G, and cadences in G major. What has occurred?</b>",
       try:{ type:"mc", choices:["A modulation to G major","A tonicization of ii","No change of tonal center"], answer:0,
         success:"✓ Correct. The pitch collection, dominant preparation, and cadence work together to establish G as the new tonic.",
         fail:"Combine the chromatic, harmonic, and cadential evidence.",
         hint:"The cadence confirms G as tonic." } },
-    { say:"<b>Modulation and Tonicization:</b> A brief applied dominant resolving to a diatonic chord normally creates tonicization. Modulation establishes a new key more substantially through cadential confirmation, continued functional harmony, formal emphasis, or other structural evidence. Duration may contribute to the distinction, but duration alone does not determine it. \u{1F447} <b>V/V resolves to V, after which the progression continues clearly in the original key. How should the event be classified?</b>",
+    { say:"<b>Tonicization vs. Modulation:</b> this is the pair students confuse most. A brief applied dominant = tonicization; a cadence-confirmed new key that continues = modulation. \u{1F447} <b>V/V resolves to V, after which the progression continues clearly in the original key. How should the event be classified?</b>",
+      show:{ type:"html", html:`<table style="border-collapse:collapse;margin:0 auto;font-size:13.5px;min-width:340px">
+        <tr><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:5px 12px;color:#2F6DA8">Tonicization</th><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:5px 12px;color:#C05A21">Modulation</th></tr>
+        <tr><td style="border:1.5px solid #cdd5e1;padding:4px 12px">brief</td><td style="border:1.5px solid #cdd5e1;padding:4px 12px">new key established</td></tr>
+        <tr><td style="border:1.5px solid #cdd5e1;padding:4px 12px">local</td><td style="border:1.5px solid #cdd5e1;padding:4px 12px">a cadence confirms it</td></tr>
+        <tr><td style="border:1.5px solid #cdd5e1;padding:4px 12px">no new cadence</td><td style="border:1.5px solid #cdd5e1;padding:4px 12px">the new tonic continues</td></tr>
+        <tr><td style="border:1.5px solid #cdd5e1;padding:4px 12px">original key remains</td><td style="border:1.5px solid #cdd5e1;padding:4px 12px">functional harmony supports the new key</td></tr></table>` },
       try:{ type:"mc", choices:["Tonicization of V","Modulation to the dominant key","Phrase modulation"], answer:0,
         success:"✓ Correct. V receives temporary dominant emphasis, but the original tonic remains structurally active.",
         fail:"Determine whether V becomes a structurally confirmed tonic or remains a tonicized diatonic chord.",
@@ -86,7 +96,14 @@ LESSON_CONTENT[99]={
       staff:{clef:"treble",tempo:84,notes:[
         {p:"C4",d:"q"},{p:"E4",d:"q"},{p:"G4",d:"q"},{p:"C5",d:"h",label:"C ends"},{bar:"double"},
         {p:"D4",d:"q",label:"D begins!"},{p:"F#4",d:"q"},{p:"A4",d:"q"},{p:"D5",d:"h"},{bar:"final"}],width:560},
-      kb:{start:60,octaves:2,labels:true} }
+      kb:{start:60,octaves:2,labels:true} },
+    { caption:"Modulation isn't only major-to-major. In G major, Em is the pivot (vi of G = i of E minor); B7 → Em then cadences in the new minor key.",
+      staff:{clef:"treble",tempo:72,notes:[
+        {p:"G4",d:"w",label:"I (G)"},{p:"B4",d:"w",chord:true},{p:"D5",d:"w",chord:true},
+        {p:"E4",d:"w",label:"pivot vi=i"},{p:"G4",d:"w",chord:true},{p:"B4",d:"w",chord:true},
+        {p:"B3",d:"w",label:"V7 (of Em)"},{p:"D#4",d:"w",chord:true},{p:"F#4",d:"w",chord:true},{p:"A4",d:"w",chord:true},
+        {p:"E4",d:"w",label:"i (Em!)"},{p:"G4",d:"w",chord:true},{p:"B4",d:"w",chord:true},{bar:"final"}],width:560},
+      kb:{start:57,octaves:1.41,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Modulation Identification (45s)",
@@ -103,10 +120,11 @@ LESSON_CONTENT[99]={
         ["The pop final-chorus lift","phrase modulation"]], reverse:true}, seconds:45},
       result:(score)=>score>=8?"Modulations identified!":null },
     { type:"key-climb", title:"Game 2 · Perform a Pivot-Chord Modulation",
-      intro:"Play the complete progression C major → F major → A minor → D7 → G major. Hear A minor first as vi in C major and then as ii in G major.",
-      miaIntro:"Reinterpret Am, then confirm G with D7–G.",
+      intro:"Follow the red arrow and press each chord's root — you'll hear the full chord: C → F → Am → D7 → G. Hear Am first as vi in C, then as ii in G.",
+      miaIntro:"Press the root, hear the chord. Reinterpret Am, then confirm G with D7–G.",
       spec:{seq:[60,65,57,62,55],
-        names:["C major (I of C)","F major (IV)","A minor (pivot: vi of C = ii of G)","D7 (V of G)","G major (the new home)"],
+        chords:[[60,64,67],[60,65,69],[57,60,64],[62,66,69,72],[55,62,67,71]],
+        names:["C major (I of C)","F major (IV)","A minor (pivot: vi of C = ii of G)","D7 (V of G)","G major (I of G — cadence)"],
         start:55, octaves:2, title:"C to G, via the shared chord"},
       result:(score)=>score!==null?"You performed the pivot-chord modulation.":null },
     { type:"order-tap", title:"Game 3 · Build the Pivot Modulation",
@@ -151,18 +169,21 @@ LESSON_CONTENT[99]={
     { gen:"triad-id", params:{ask:"numeral"}, count:3 }
   ],
   vocabulary:[
-    {term:"Modulation", def:"A key change that establishes a new tonic, with a cadence in the new key providing strong confirmation."},
-    {term:"Closely Related Keys", def:"Signatures within one accidental, plus the relatives. From C: G, F, Am, Em, Dm."},
-    {term:"Pivot-Chord Modulation", def:"A chord shared by both keys turns the corner — entered in the old key, left in the new."},
-    {term:"Direct / Phrase Modulation", def:"Direct: the new key arrives without a diatonic pivot chord. Phrase: the new key starts at a phrase or section boundary (the pop lift)."}
+    {term:"Modulation", def:"A change of key confirmed by a cadence in the new key."},
+    {term:"Closely Related Keys", def:"Keys sharing most diatonic chords (usually differing by one accidental or a relative relationship)."},
+    {term:"Pivot Chord", def:"A chord belonging to both keys that smooths the modulation."},
+    {term:"Direct / Phrase Modulation", def:"Direct: changes key without a pivot chord. Phrase: a direct modulation that begins at a new phrase or section."}
   ],
   mistakes:[],
   summary:[
-    "✔ <b>Modulation</b> = key change + <b>confirming cadence</b>; tonicization only visits.",
-    "✔ <b>Closely related keys</b> (±1 accidental + relatives) share many diatonic chords.",
-    "✔ <b>Pivot chord</b>: double-citizen chord turns the corner smoothly.",
-    "✔ <b>Direct</b> = no diatonic pivot chord · <b>phrase</b> = new key at the phrase or section line.",
-    "✔ Recognizing it: new tonic emphasized → dominant harmony → new-key cadence (accidentals may help, not required)."
+    "✔ Modulation establishes a <b>new key</b>.",
+    "✔ A confirming <b>cadence</b> is the strongest evidence.",
+    "✔ Tonicization is temporary; modulation is structural.",
+    "✔ <b>Closely related keys</b> share many diatonic chords.",
+    "✔ <b>Pivot chords</b> belong to both keys but change harmonic function.",
+    "✔ <b>Direct</b> modulation changes keys without a pivot.",
+    "✔ <b>Phrase</b> modulation is usually a direct modulation at a phrase or section boundary.",
+    "✔ Accidentals alone do not prove modulation."
   ],
   tips:[
     "Find pivots fast: list the old key's triads, the new key's triads, and circle the shared ones.",
@@ -198,14 +219,20 @@ LESSON_CONTENT[99]={
     { type:"mc", q:"Which key is not closely related to G major?", choices:["E♭ major","D major","C major"], answer:0,
       explain:"E♭ major is more distantly related.", hint:"Count the signature gap." },
     { type:"mc", q:"Which sequence describes a common pivot-chord modulation process?", choices:["Original key → pivot chord → dominant of the new key → cadence in the new key","Cadence in the new key → pivot chord → original key","New key → original key without confirmation"], answer:0,
-      explain:"The pivot chord is reinterpreted before the new key receives dominant and cadential confirmation.", hint:"Doorway before proof." }
+      explain:"The pivot chord is reinterpreted before the new key receives dominant and cadential confirmation.", hint:"Doorway before proof." },
+    { type:"mc", q:"Which event most clearly confirms a modulation to G major?", choices:["A V–I (D→G) cadence in G major","A single F♯ in the melody","A change of tempo"], answer:0,
+      explain:"A cadence in the NEW key is the strongest confirmation.", hint:"Dominant-to-tonic in G." },
+    { type:"mc", q:"In a modulation from C major to G major, which accidental functions as the new leading tone?", choices:["F♯","B♭","C♯"], answer:0,
+      explain:"F♯ is the leading tone of G and points to the new tonic.", hint:"A half step below G." },
+    { type:"mc", q:"A phrase cadences in G with D7→G and the music continues in G. Is this tonicization or modulation?", choices:["Modulation — a cadence confirms the new key and it continues","Tonicization — just a brief visit","Neither"], answer:0,
+      explain:"A confirming cadence plus continuation in the new key = modulation.", hint:"Did the new key get its own cadence?" }
   ],
   miaPerfect:"Perfect score! You accurately identified tonicization, pivot-chord modulation, direct modulation, and phrase modulation.",
   miaPass:"You passed and completed unit 24. Next, you will study melodic ornaments.",
   mia:{
     hook:{ label:"the welcome",
       explain:"The F♯ arrived and a cadence confirmed G major — the piece modulated from C major to G major.",
-      play:()=>{const ROWS=[[60,64,67],[65,69,72],[62,66,69],[55,59,62],[62,66,67],[55,59,62,67]];ROWS.forEach((row,i)=>row.forEach(m=>MFAudio.tone(m,.75,i*.8,.26)));} },
+      play:()=>{const ROWS=[[60,64,67],[60,65,69],[62,66,69],[62,67,71],[62,66,69,72],[55,62,67,71]];ROWS.forEach((row,i)=>row.forEach(m=>MFAudio.tone(m,.75,i*.8,.26)));} },
     learn:{ label:"modulation",
       explain:"Key change + confirming cadence. Closely related keys (±1 accidental + relatives). Pivot (shared chord), direct (no pivot chord), phrase (at the boundary).",
       hint:"Cadence = proof.",

@@ -56,20 +56,19 @@ LESSON_CONTENT[87]={
       } }
   },
   objectives:[
-    "Define cadence: a melodic and harmonic gesture marking a phrase ending or point of arrival",
-    "Authentic cadence: V(7) → I — and PAC vs IAC",
-    "Half cadence: the phrase ends on root-position V",
-    "Plagal cadence: IV → I",
-    "Deceptive cadence: V → vi in major or V → VI in minor",
-    "Identify all four by ear and by eye"
+    "Define cadence: a harmonic ending that marks the end of a phrase",
+    "Recognize Authentic, Half, Plagal, and Deceptive cadences",
+    "Distinguish PAC and IAC",
+    "Identify each cadence by ear and by notation",
+    "Understand how different cadences create different musical endings"
   ],
   steps:[
-    { say:"<b>Cadence:</b> a melodic and harmonic gesture that creates a sense of arrival, pause, or continuation <b>at or near the end of a phrase</b>. Cadences are often identified by their final harmonic motion. \u{1F447} <b>Where does a cadence normally occur?</b>",
+    { say:"<b>Cadence:</b> a harmonic ending that marks the end of a phrase. You identify it by the final chord motion. \u{1F447} <b>Where does a cadence normally occur?</b>",
       try:{ type:"mc", choices:["At or near the end of a phrase","On every beat","Only at the end of an entire composition"], answer:0,
         success:"✓ Correct. Cadences commonly mark phrase endings, so a composition may contain many cadential points.",
         fail:"Where does a phrase create a point of arrival or pause?",
         hint:"Recall the phrase endings introduced in Lesson 72." } },
-    { say:"<b>Authentic Cadence — V or V⁷ to I:</b> an authentic cadence occurs when a <b>dominant chord resolves to the tonic</b> at a phrase ending. A perfect authentic cadence provides the strongest conventional closure; an imperfect authentic cadence provides a less conclusive form of the same dominant-to-tonic motion. \u{1F447} <b>Which harmonic motion defines an authentic cadence in a major key?</b>",
+    { say:"<b>Authentic Cadence — V (or V⁷) → I:</b> the dominant resolves to the tonic at a phrase ending. This is the strongest way to close a phrase. \u{1F447} <b>Which harmonic motion defines an authentic cadence in a major key?</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:80,notes:[
         {p:"G4",d:"w",label:"V7"},{p:"B4",d:"w",chord:true},{p:"D5",d:"w",chord:true},{p:"F5",d:"w",chord:true},
         {p:"C4",d:"w",label:"I"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{p:"C5",d:"w",chord:true},{bar:"final"}],width:440} },
@@ -77,12 +76,12 @@ LESSON_CONTENT[87]={
         success:"✓ Correct. An authentic cadence moves from dominant to tonic at a phrase ending.",
         fail:"Identify the motion from dominant to tonic.",
         hint:"The leading tone resolves to the tonic in a typical authentic cadence." } },
-    { say:"<b>Perfect and Imperfect Authentic Cadences:</b> a <b>PAC</b> (perfect authentic cadence) requires V or V⁷ and I in <b>root position</b>, with the <b>soprano ending on the tonic</b>. An authentic V–I cadence that does not meet all these conditions is classified as an <b>IAC</b> (imperfect authentic cadence). \u{1F447} <b>A root-position V–I cadence ends with scale degree 3 in the soprano. How is it classified?</b>",
+    { say:"<b>PAC vs IAC:</b><br>• <b>PAC</b> — V(⁷)→I, both chords in root position, soprano ends on the tonic (strongest ending).<br>• <b>IAC</b> — any authentic V–I that does not meet all PAC conditions. \u{1F447} <b>A root-position V–I cadence ends with scale degree 3 in the soprano. How is it classified?</b>",
       try:{ type:"mc", choices:["Imperfect authentic cadence","Perfect authentic cadence","Half cadence"], answer:0,
         success:"✓ Correct. The cadence is authentic because it moves from V to I, but it is imperfect because the soprano ends on scale degree 3 rather than the tonic.",
         fail:"Check the chord positions and the final soprano note.",
         hint:"A PAC requires root-position V–I and the tonic in the final soprano." } },
-    { say:"<b>Half Cadence — ends on V:</b> a half cadence occurs when a phrase ends on a <b>root-position dominant chord</b>. Various chords may precede V. Because the dominant does not resolve to tonic, the cadence creates an expectation of continuation. \u{1F447} <b>A half cadence normally ends on…</b>",
+    { say:"<b>Half Cadence — ends on V:</b> the phrase ends on the dominant. It feels unfinished and expects continuation. \u{1F447} <b>A half cadence normally ends on…</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:80,notes:[
         {p:"C4",d:"w",label:"I"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},
         {p:"D4",d:"w",label:"ii"},{p:"F4",d:"w",chord:true},{p:"A4",d:"w",chord:true},
@@ -91,7 +90,7 @@ LESSON_CONTENT[87]={
         success:"✓ Correct. Ending on the dominant creates an open cadence that commonly suggests continuation.",
         fail:"The dominant is reached but does not resolve to tonic.",
         hint:"The phrase ends on V." } },
-    { say:"<b>Plagal Cadence — IV to I:</b> a plagal cadence occurs when <b>IV moves to I</b> at a phrase ending. It provides tonic arrival without the dominant-to-tonic motion of an authentic cadence. Plagal motion also frequently appears after an authentic cadence as a post-cadential extension. \u{1F447} <b>Which harmonic motion defines a plagal cadence?</b>",
+    { say:"<b>Plagal Cadence — IV → I:</b> often called the “Amen” cadence. It gives a gentle sense of arrival, without the dominant-to-tonic motion of an authentic cadence. \u{1F447} <b>Which harmonic motion defines a plagal cadence?</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:80,notes:[
         {p:"F4",d:"w",label:"IV"},{p:"A4",d:"w",chord:true},{p:"C5",d:"w",chord:true},
         {p:"C4",d:"w",label:"I"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{p:"C5",d:"w",chord:true},{bar:"final"}],width:400} },
@@ -99,7 +98,7 @@ LESSON_CONTENT[87]={
         success:"✓ Correct. A plagal cadence moves from IV to I without dominant-to-tonic harmonic motion.",
         fail:"Identify the motion from IV to I.",
         hint:"Subdominant to tonic." } },
-    { say:"<b>Deceptive Cadence:</b> a deceptive cadence begins with V but <b>avoids the expected resolution to I</b>. In a major key, V commonly moves to vi; in a minor key, V commonly moves to VI. This motion delays tonic arrival and often allows the phrase or progression to continue. <b>Remember: Authentic V–I · Half ends on root-position V · Plagal IV–I · Deceptive V–vi in major or V–VI in minor.</b> \u{1F447} <b>Why is V–vi in a major key called deceptive?</b>",
+    { say:"<b>Deceptive Cadence:</b> V begins as if it will resolve to I, but moves somewhere else instead — <b>V → vi</b> in major, <b>V → VI</b> in minor. This delays the tonic and often keeps the music going. \u{1F447} <b>Why is V–vi in a major key called deceptive?</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:80,notes:[
         {p:"G4",d:"w",label:"V7"},{p:"B4",d:"w",chord:true},{p:"D5",d:"w",chord:true},{p:"F5",d:"w",chord:true},
         {p:"A4",d:"w",label:"vi — surprise!"},{p:"C5",d:"w",chord:true},{p:"E5",d:"w",chord:true},{bar:"final"}],width:440} },
@@ -205,18 +204,19 @@ LESSON_CONTENT[87]={
     { gen:"triad-quality", params:{quals:["M","m"]}, count:1 }
   ],
   vocabulary:[
-    {term:"Cadence", def:"A melodic and harmonic gesture that creates a sense of arrival, pause, or continuation at or near the end of a phrase."},
-    {term:"Authentic Cadence (PAC / IAC)", def:"V(7) → I. Perfect = root positions + tonic soprano; otherwise imperfect."},
-    {term:"Half Cadence", def:"The phrase ends on a root-position V — open, suggesting continuation."},
-    {term:"Plagal & Deceptive", def:"Plagal: IV → I, a gentle tonic arrival. Deceptive: V → vi in major (V → VI in minor), avoiding the expected tonic."}
+    {term:"Cadence", def:"A harmonic ending that marks the end of a musical phrase."},
+    {term:"Authentic Cadence (PAC / IAC)", sym:"V(⁷) → I", def:"V or V7 → I. PAC = strongest ending. IAC = less complete ending."},
+    {term:"Half Cadence", sym:"? → V", def:"Ends on V. Creates an expectation of continuation."},
+    {term:"Plagal & Deceptive", sym:"IV→I & V→vi", def:"Plagal: IV → I (“Amen” cadence). Deceptive: V → vi (major) or V → VI (minor)."}
   ],
   mistakes:[],
   summary:[
-    "✔ <b>Cadence</b> = a melodic and harmonic gesture marking a phrase ending or point of arrival.",
-    "✔ <b>Authentic V(7)→I</b>: <b>PAC</b> (roots + tonic on top) gives the strongest conventional close; otherwise <b>IAC</b>.",
-    "✔ <b>Half</b>: ends on root-position V — open, suggesting continuation.",
-    "✔ <b>Plagal IV→I</b>: gentle tonic arrival · <b>Deceptive V→vi</b> (V→VI in minor): avoids the expected tonic.",
-    "✔ Ear test: listen for the final two harmonies at the phrase ending — V–I, IV–I, ending on V, or V–vi."
+    "✔ <b>Cadence</b> = harmonic ending of a phrase.",
+    "✔ <b>Authentic</b>: V(⁷)→I — PAC strongest; otherwise IAC.",
+    "✔ <b>Half</b>: ends on V → unfinished.",
+    "✔ <b>Plagal</b>: IV→I (“Amen”).",
+    "✔ <b>Deceptive</b>: V→vi (major) or V→VI (minor).",
+    "✔ Listen to the final two chords to identify the cadence."
   ],
   tips:[
     "Question-answer pairs: phrase 1 with a weaker cadence (often a half cadence), phrase 2 with a stronger one (often a PAC) — one common design in countless melodies (and next lesson's periods).",

@@ -1,4 +1,4 @@
-/* Lesson 94 — Inversions of Seventh Chords (Book 4, Unit 23 — SELF-AUTHORED)
+/* Lesson 94 — Seventh-Chord Inversions (Book 4, Unit 23 — SELF-AUTHORED)
    L51-54 covered triad inversions + V7 inversions + figured bass — reviewed
    in ONE step. New: ALL five seventh types invert the same way; figures
    7 / 6-5 / 4-3 / 4-2 apply to every seventh chord; bass-line reading;
@@ -7,10 +7,11 @@
 /* position detective for any seventh chord */
 function MF_L94_pos(container,fb){
   const ROUNDS=[
-    {name:"Cmaj7, E in the bass", notes:[52,60,67,71], pos:1, expl:"3rd in the bass = 1st inversion — figure 6/5."},
-    {name:"Dm7, C in the bass", notes:[48,62,65,69], pos:3, expl:"7th in the bass = 3rd inversion — figure 4/2."},
-    {name:"G7, D in the bass", notes:[50,55,59,65], pos:2, expl:"5th in the bass = 2nd inversion — figure 4/3."},
-    {name:"Am7, A in the bass", notes:[45,60,64,67], pos:0, expl:"Root in the bass = root position — figure 7."}];
+    {name:"Cmaj7, C in the bass", notes:[48,64,67,71], pos:0, expl:"Root in the bass = root position — figure 7."},
+    {name:"C7, E in the bass", notes:[52,60,67,70], pos:1, expl:"3rd (E) in the bass = 1st inversion — figure 6/5."},
+    {name:"Cm7, G in the bass", notes:[55,60,63,70], pos:2, expl:"5th (G) in the bass = 2nd inversion — figure 4/3."},
+    {name:"Cm7♭5, B♭ in the bass", notes:[58,60,63,66], pos:3, expl:"7th (B♭) in the bass = 3rd inversion — figure 4/2."},
+    {name:"C°7, G♭ in the bass", notes:[54,60,63,69], pos:2, expl:"5th (G♭) in the bass = 2nd inversion — figure 4/3."}];
   let r=0, played=false;
   container.innerHTML=`<div class="big-q l94p-q" style="text-align:center"></div>
     <div style="text-align:center"><button class="play l94p-play">▶ Hear the voicing</button></div>
@@ -28,7 +29,7 @@ function MF_L94_pos(container,fb){
 }
 
 LESSON_CONTENT[94]={stackFigures:true,
-  welcome:"A seventh chord can appear in root position or three inversions.",
+  welcome:"A seventh chord has four chord members, so it has four possible bass positions.",
   hook:{
     say:"<b>A complete seventh chord has four chord members, and each one can appear in the bass.</b> Listen to Cmaj7 in root position and three inversions. \u{1F447} <b>Which chord member changes in the bass?</b>",
     interact:{ type:"custom",
@@ -46,22 +47,22 @@ LESSON_CONTENT[94]={stackFigures:true,
       } }
   },
   objectives:[
-    "Review triad inversions and figured bass (L51–54) in one step",
-    "Invert any seventh chord into four positions",
-    "Attach the figures: 7 · 6/5 · 4/3 · 4/2",
-    "Apply the figures to seventh chords of any quality",
-    "Read the bass note to name the position",
-    "Translate to lead-sheet slashes (G7/B = V6/5)"
+    "Extend triad inversion concepts to seventh chords",
+    "Identify the four positions of a seventh chord",
+    "Read the figured-bass symbols: 7, 6/5, 4/3, 4/2",
+    "Identify the bass note in each inversion",
+    "Connect figured bass with modern slash-chord notation",
+    "Understand why inversions improve bass motion and voice leading"
   ],
   steps:[
-    { say:"<b>Review:</b> A triad has root position and two inversions, represented by 5/3, 6/3, and 6/4. The figures are usually abbreviated as no figure, 6, and 6/4. A seventh chord has root position and three inversions, represented by 7, 6/5, 4/3, and 4/2. Figured-bass numbers identify intervals above the bass. \u{1F447} <b>In figured bass, intervals are measured above which note?</b>",
+    { say:"<b>From triads to sevenths:</b> you already know triads have <b>three positions</b> (root, 1st, 2nd inversion). A seventh chord extends the same idea by adding <b>one more inversion</b> — because it has <b>four</b> chord members instead of three. Figured-bass numbers still measure intervals above the bass. \u{1F447} <b>In figured bass, intervals are measured above which note?</b>",
       try:{ type:"mc", choices:["The bass note","The chord root","The soprano note"], answer:0,
         success:"✓ Correct. Figured-bass numbers identify intervals above the notated or sounding bass pitch.",
         fail:"Recall the reference note used for figured-bass intervals.",
         hint:"Measure each interval upward from the lowest voice." } },
-    { say:"<b>Four Positions of a Seventh Chord:</b> In a complete seventh chord, any chord member may appear in the bass:<br>Root in the bass: root position — 7<br>Third in the bass: first inversion — 6/5<br>Fifth in the bass: second inversion — 4/3<br>Seventh in the bass: third inversion — 4/2, sometimes abbreviated as 2<br>These inversion figures can be used with major, dominant, minor, half-diminished, fully diminished, and other seventh-chord qualities. \u{1F447} <b>How many inversions does a seventh chord have?</b>",
+    { say:"<b>Four Positions of a Seventh Chord:</b> any of the four chord members can sit in the bass — that gives root position plus three inversions. The bass note determines the figure. \u{1F447} <b>How many inversions does a seventh chord have?</b>",
       show:{ type:"html", html:`<table style="border-collapse:collapse;margin:0 auto;font-size:14.5px;min-width:300px">
-        <tr><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:6px 14px">Bass note</th><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:6px 14px">Position</th><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:6px 14px">Figure</th></tr>
+        <tr><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:6px 14px">Bass note</th><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:6px 14px">Position</th><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:6px 14px">Figured bass</th></tr>
         <tr><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center">Root</td><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center">root position</td><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center;font-weight:800">7</td></tr>
         <tr><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center">3rd</td><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center">1st inversion</td><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center;font-weight:800">6\u{2085} (6/5)</td></tr>
         <tr><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center">5th</td><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center">2nd inversion</td><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center;font-weight:800">4\u{2083} (4/3)</td></tr>
@@ -70,14 +71,18 @@ LESSON_CONTENT[94]={stackFigures:true,
         success:"✓ Correct. A seventh chord has four possible bass positions: root position and three inversions.",
         fail:"Count the four chord members that can appear in the bass.",
         hint:"Four bass positions minus root position equals three inversions." } },
-    { say:"<b>Identifying an Inversion:</b> First, identify and spell the chord in root position. Next, identify the bass pitch and determine whether it is the root, third, fifth, or seventh of the chord. Then assign the appropriate inversion and figured-bass symbol. Example: In C major, D–F–A–C is ii\u{2077}. With F in the bass, the chord is in first inversion and is labeled ii\u{2076}\u{2085}. \u{1F447} <b>In C major, G7 has F in the bass. How is the chord labeled?</b>",
-      show:{ type:"staff", spec:{clef:"treble",tempo:80,notes:[
-        {p:"F4",d:"w",label:"bass = 7th"},{p:"G4",d:"w",chord:true},{p:"B4",d:"w",chord:true},{p:"D5",d:"w",chord:true},{bar:"final"}],width:300} },
+    { say:"<b>One Chord, Two Notations:</b> take <b>G7 (G–B–D–F)</b> in C major. Change only the bass note and you move through all four positions. Lead sheets write the bass after a slash; Roman-numeral analysis writes the figured-bass number. <b>Both describe the same inversion.</b> \u{1F447} <b>In C major, G7 has F in the bass. How is the chord labeled?</b>",
+      show:{ type:"html", html:`<table style="border-collapse:collapse;margin:0 auto;font-size:14.5px;min-width:320px">
+        <tr><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:6px 14px">Lead sheet</th><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:6px 14px">Roman / figured</th><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:6px 14px">Bass</th></tr>
+        <tr><td style="border:1.5px solid #cdd5e1;padding:4px 14px;font-weight:800;text-align:center">G7</td><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center;font-weight:800">V7</td><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center">G (root)</td></tr>
+        <tr><td style="border:1.5px solid #cdd5e1;padding:4px 14px;font-weight:800;text-align:center">G7/B</td><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center;font-weight:800">V6/5</td><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center">B (3rd)</td></tr>
+        <tr><td style="border:1.5px solid #cdd5e1;padding:4px 14px;font-weight:800;text-align:center">G7/D</td><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center;font-weight:800">V4/3</td><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center">D (5th)</td></tr>
+        <tr><td style="border:1.5px solid #cdd5e1;padding:4px 14px;font-weight:800;text-align:center">G7/F</td><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center;font-weight:800">V4/2</td><td style="border:1.5px solid #cdd5e1;padding:4px 14px;text-align:center">F (7th)</td></tr></table>` },
       try:{ type:"mc", choices:["Third inversion — V\u{2074}\u{2082}","First inversion — V\u{2076}\u{2085}","Root position — V\u{2077}"], answer:0,
         success:"✓ Correct. F is the seventh of G–B–D–F. A seventh chord with its seventh in the bass is in third inversion and carries the figure 4/2.",
         fail:"Identify F's chord-member role within G–B–D–F.",
         hint:"F is a minor seventh above the root G." } },
-    { say:"<b>The Same Inversion Figures Apply to Different Qualities:</b> Cmaj7/E, Cm7/E♭, and C°7/E♭ all place the chordal third in the bass and therefore are first-inversion, or 6/5, seventh chords. The inversion figure identifies intervals above the bass and the chord's position; the chord symbol or Roman numeral identifies its root and quality. <b>Remember: root=7 · 3rd=6/5 · 5th=4/3 · 7th=4/2.</b> \u{1F447} <b>Am7 has G in the bass. Which inversion figure applies?</b>",
+    { say:"<b>Same Figures for Every Quality:</b> the inversion depends <b>only on the bass note</b> — the chord quality does not matter. The same figures (7 · 6/5 · 4/3 · 4/2) apply to <b>Cmaj7, C7, Cm7, Cm7♭5, and C°7</b> alike. The figure names the position; the chord symbol or Roman numeral names the root and quality. \u{1F447} <b>Am7 has G in the bass. Which inversion figure applies?</b>",
       try:{ type:"mc", choices:["4/2 — G is the seventh","6/5 — G is the third","7 — G is the root"], answer:0,
         success:"✓ Correct. G is the seventh of A–C–E–G, so Am7/G is in third inversion and carries the figure 4/2.",
         fail:"Spell Am7 in thirds: A–C–E–G. Identify G's relationship to the root.",
@@ -91,16 +96,19 @@ LESSON_CONTENT[94]={stackFigures:true,
       try:{ type:"custom",
         hint:"Spell the chord in root position and identify which chord member appears in the bass.",
         mount:(container,fb)=>MF_L94_pos(container,fb) } },
-    { say:"<b>Why Use Seventh-Chord Inversions?</b> Inversions allow composers and performers to shape the bass line, improve voice leading, retain common tones, avoid unnecessary leaps, create harmonic prolongation, and emphasize different chord members. Stepwise bass motion is one especially common result. \u{1F447} <b>Which is an important musical use of chord inversions?</b>",
+    { say:"<b>Why Use Inversions? Smoother Bass Motion.</b> Compare two versions of the same chords:<br><b>C → G7 → Am</b> — bass leaps C → G → A.<br><b>C → G7/B → Am</b> — bass steps C → B → A.<br>The inversion turns a leaping bass into a smooth, stepwise line — better voice leading with the same harmony. \u{1F447} <b>Which is an important musical use of chord inversions?</b>",
+      show:{ type:"html", html:`<div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;font-size:13.5px">
+        <div style="border:2px solid #999;border-radius:10px;padding:8px 14px;text-align:center"><b>C → G7 → Am</b><br><span style="color:#C05A21">bass C – G – A</span><br><span style="font-size:12px;color:#555">leaps</span></div>
+        <div style="border:2px solid #2F6DA8;border-radius:10px;padding:8px 14px;text-align:center"><b>C → G7/B → Am</b><br><span style="color:#2F6DA8">bass C – B – A</span><br><span style="font-size:12px;color:#555">stepwise ✓</span></div></div>` },
       try:{ type:"mc", choices:["Creating smoother bass motion and more efficient voice leading","Automatically increasing the dynamic level","Automatically increasing the tempo"], answer:0,
         success:"✓ Correct. An appropriate inversion can reduce bass leaps and connect adjacent chords more smoothly.",
         fail:"Compare the bass intervals in the root-position and inverted versions.",
         hint:"Look for the version with smaller bass intervals." } },
-    { say:"<b>Review:</b> \u{1F447} <b>Which figure identifies a seventh chord with its fifth in the bass?</b>",
-      try:{ type:"mc", choices:["4/3","6/5","4/2"], answer:0,
-        success:"✓ Correct. A seventh chord with its fifth in the bass is in second inversion and carries the figure 4/3.",
-        fail:"Recall the order: root–third–fifth–seventh in the bass.",
-        hint:"Second inversion of a seventh chord uses 4/3." } }
+    { say:"<b>Review:</b> \u{1F447} <b>In C major, which slash chord matches V4/3?</b>",
+      try:{ type:"mc", choices:["G7/D","G7/B","G7/F"], answer:0,
+        success:"✓ Correct. V4/3 puts the 5th in the bass; G7's 5th is D, so V4/3 = G7/D.",
+        fail:"4/3 = second inversion = the 5th in the bass. What is the 5th of G7?",
+        hint:"G–B–D–F: the 5th is D." } }
   ],
   examples:[
     { caption:"G7 in all four positions: 7 → 6/5 → 4/3 → 4/2. Same four notes; the bass rotates through root, 3rd, 5th, 7th.",
@@ -109,7 +117,7 @@ LESSON_CONTENT[94]={stackFigures:true,
         {p:"B3",d:"w",label:"6/5"},{p:"D4",d:"w",chord:true},{p:"F4",d:"w",chord:true},{p:"G4",d:"w",chord:true},
         {p:"D4",d:"w",label:"4/3"},{p:"F4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{p:"B4",d:"w",chord:true},
         {p:"F4",d:"w",label:"4/2"},{p:"G4",d:"w",chord:true},{p:"B4",d:"w",chord:true},{p:"D5",d:"w",chord:true},{bar:"final"}],width:640},
-      kb:{start:48,octaves:3,labels:true} },
+      kb:{start:55,octaves:1.58,labels:true} },
     { caption:"Inversions building the bass line: I → V4/2 → I6 → ii6/5 → V7 → I. The bass moves C-F-E-F-G-C — the 4/2 and 6/5 keep the middle stepwise.",
       staff:{clef:"treble",tempo:72,notes:[
         {p:"C4",d:"w",label:"I"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},
@@ -118,7 +126,7 @@ LESSON_CONTENT[94]={stackFigures:true,
         {p:"F4",d:"w",label:"ii6/5"},{p:"A4",d:"w",chord:true},{p:"C5",d:"w",chord:true},{p:"D5",d:"w",chord:true},
         {p:"G3",d:"w",label:"V7"},{p:"B3",d:"w",chord:true},{p:"D4",d:"w",chord:true},{p:"F4",d:"w",chord:true},
         {p:"C4",d:"w",label:"I"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{bar:"final"}],width:680},
-      kb:{start:48,octaves:3,labels:true} }
+      kb:{start:55,octaves:1.58,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Inversion-Figure Sprint (45s)",
@@ -186,18 +194,22 @@ LESSON_CONTENT[94]={stackFigures:true,
     { gen:"triad-quality", params:{quals:["M","m"]}, count:2 }
   ],
   vocabulary:[
-    {term:"Third Inversion", def:"The 7th in the bass — unique to seventh chords. Figure: 4/2."},
-    {term:"The Four Figures", def:"7 (root) · 6/5 (3rd in bass) · 4/3 (5th) · 4/2 (7th) — quality-independent."},
-    {term:"Slash Equivalent", def:"G7/B = V6/5: lead sheets and figured bass identify the same chord and bass position."},
-    {term:"Walking Bass by Inversion", def:"Inversions let the bass move by step while the harmony holds."}
+    {term:"Four Positions", def:"Root in bass → 3rd in bass → 5th in bass → 7th in bass."},
+    {term:"Figured Bass", def:"7 · 6/5 · 4/3 · 4/2 — one figure per bass position."},
+    {term:"Slash Chords", def:"G7 · G7/B · G7/D · G7/F — same harmony, different bass note."},
+    {term:"Important Rule", def:"Changing inversion changes only the bass note. Chord quality never changes."}
   ],
   mistakes:[],
   summary:[
-    "✔ Four notes → <b>four positions</b>: root, 1st, 2nd, 3rd inversion.",
-    "✔ Figures: <b>7 · 6/5 · 4/3 · 4/2</b> — they identify intervals above the bass; quality never changes them.",
-    "✔ Works for <b>seventh chords of any quality</b>.",
-    "✔ Lead-sheet slashes identify the same chord and bass position: <b>G7/B = V\u{2076}\u{2085}</b>.",
-    "✔ Purpose: <b>shaping bass lines and improving voice leading</b>."
+    "✔ Seventh chords have <b>FOUR positions</b>.",
+    "✔ Root in bass = <b>7</b>.",
+    "✔ 3rd in bass = <b>6/5</b>.",
+    "✔ 5th in bass = <b>4/3</b>.",
+    "✔ 7th in bass = <b>4/2</b>.",
+    "✔ Inversion changes only the <b>bass note</b>.",
+    "✔ Chord <b>quality never changes</b>.",
+    "✔ Slash chords and figured bass describe the same bass position in different notation systems.",
+    "✔ Inversions often create <b>smoother bass motion</b> and better voice leading."
   ],
   tips:[
     "Memory aid: the figures COUNT DOWN as the bass climbs — 7, 65, 43, 42.",

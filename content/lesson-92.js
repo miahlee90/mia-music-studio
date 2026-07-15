@@ -1,7 +1,7 @@
 /* Lesson 92 — Five Common Seventh-Chord Types (Book 4, Unit 23 — SELF-AUTHORED)
    Core: triad + 7th above the root = seventh chord. Five common types:
    MAJOR 7 (M triad + M7) · DOMINANT 7 (M triad + m7) · MINOR 7 (m + m7) ·
-   HALF-DIMINISHED 7 (dim + m7) · DIMINISHED 7 (dim + dim7).
+   HALF-DIMINISHED 7 (dim + m7) · FULLY DIMINISHED 7 (dim + dim7).
    NOTE: edit by FULL-FILE REWRITE only. */
 
 /* seventh-quality ear lab */
@@ -48,7 +48,7 @@ LESSON_CONTENT[92]={stackFigures:true,
     "MAJOR 7: major triad + major 7th (Cmaj7: C-E-G-B)",
     "DOMINANT 7: major triad + minor 7th (C7: C-E-G-B♭) — review",
     "MINOR 7: minor triad + minor 7th (Cm7: C-E♭-G-B♭)",
-    "HALF-DIMINISHED 7 (Cm7♭5) and DIMINISHED 7 (C°7)",
+    "HALF-DIMINISHED 7 (Cø7 / Cm7♭5) and FULLY DIMINISHED 7 (C°7)",
     "Identify all five by formula, sight and sound"
   ],
   steps:[
@@ -71,7 +71,7 @@ LESSON_CONTENT[92]={stackFigures:true,
         success:"✓ Correct. C-E-G forms a major triad, and B is a major seventh above C.",
         fail:"Identify the pitch a major seventh above C.",
         hint:"A major seventh is one half step smaller than an octave." } },
-    { say:"<b>Dominant Seventh Chord — C7:</b> a dominant seventh chord combines a major triad with a <b>minor 7th</b> above the root. C7 is spelled C-E-G-<b>B♭</b>. This chord type occurs diatonically on scale degree 5 in a major key; a dominant-seventh-quality chord may also appear on other roots through chromatic harmony. \u{1F447} <b>Which chord member distinguishes C7 from Cmaj7?</b>",
+    { say:"<b>Dominant Seventh Chord — C7:</b> a dominant seventh chord combines a major triad with a <b>minor 7th</b> above the root. C7 is spelled C-E-G-<b>B♭</b>. It occurs diatonically on scale degree 5 in a major key. The dominant seventh naturally creates a <b>strong pull to the tonic</b>, which makes it central to tonal harmony. \u{1F447} <b>Which chord member distinguishes C7 from Cmaj7?</b>",
       try:{ type:"mc", choices:["The seventh: B♭ in C7 and B♮ in Cmaj7","The root","The fifth"], answer:0,
         success:"✓ Correct. C7 contains a minor seventh, B♭, while Cmaj7 contains a major seventh, B♮.",
         fail:"Compare the seventh above the root in each chord.",
@@ -83,7 +83,7 @@ LESSON_CONTENT[92]={stackFigures:true,
         success:"✓ Correct. C-E♭-G forms a minor triad, and B♭ is a minor seventh above C.",
         fail:"Identify both the triad quality and the seventh quality.",
         hint:"Minor triad + minor seventh." } },
-    { say:"<b>The Two Diminished-Triad Seventh Chords:</b> <b>half-diminished seventh</b>: Cø7 or Cm7♭5 = diminished triad + minor 7th, spelled C-E♭-G♭-B♭ · <b>fully diminished seventh</b>: C°7 = diminished triad + <b>diminished 7th</b>, spelled C-E♭-G♭-B𝄫. A root-position fully diminished seventh chord consists of three stacked minor 3rds; its pitch-class structure is symmetrical in twelve-tone equal temperament. <b>Remember the five common types introduced here: maj7, 7, m7, ø7 or m7♭5, and °7.</b> \u{1F447} <b>How is a root-position fully diminished seventh chord constructed?</b>",
+    { say:"<b>The Two Diminished-Triad Seventh Chords:</b> <b>half-diminished seventh chord</b>: Cø7 (also written Cm7♭5) = diminished triad + minor 7th, spelled C-E♭-G♭-B♭ · <b>fully diminished seventh chord</b>: C°7 = diminished triad + <b>diminished 7th</b>, spelled C-E♭-G♭-B𝄫. A root-position fully diminished seventh chord is <b>three stacked minor 3rds</b>, which gives it a symmetrical structure. \u{1F447} <b>How is a root-position fully diminished seventh chord constructed?</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:80,notes:[
         {p:"C4",d:"w",label:"Cø7"},{p:"Eb4",d:"w",chord:true},{p:"Gb4",d:"w",chord:true},{p:"Bb4",d:"w",chord:true},
         {p:"C4",d:"w",label:"C°7"},{p:"Eb4",d:"w",chord:true},{p:"Gb4",d:"w",chord:true},{p:"B4",d:"w",chord:true,acc:"bb",sound:"A4"},{bar:"final"}],width:420} },
@@ -110,12 +110,12 @@ LESSON_CONTENT[92]={stackFigures:true,
         {p:"C4",d:"w",label:"\u{00F8}7"},{p:"Eb4",d:"w",chord:true},{p:"Gb4",d:"w",chord:true},{p:"Bb4",d:"w",chord:true},
         {p:"C4",d:"w",label:"\u{00B0}7"},{p:"Eb4",d:"w",chord:true},{p:"Gb4",d:"w",chord:true},{p:"B4",d:"w",chord:true,acc:"bb",sound:"A4"},{bar:"final"}],width:680},
       kb:{start:60,octaves:1,labels:true} },
-    { caption:"Sevenths in context: Dm7 → G7 → Cmaj7 — three of the five types chained into the smoothest progression in jazz (a preview of Lesson 95's ii-V-I).",
+    { caption:"Sevenths in context: Dm7 → G7 → Cmaj7 — three of the five types chained into the ii–V–I, one of the most common progressions in tonal and jazz harmony.",
       staff:{clef:"treble",tempo:72,notes:[
         {p:"D4",d:"w",label:"Dm7"},{p:"F4",d:"w",chord:true},{p:"A4",d:"w",chord:true},{p:"C5",d:"w",chord:true},
         {p:"G3",d:"w",label:"G7"},{p:"B3",d:"w",chord:true},{p:"D4",d:"w",chord:true},{p:"F4",d:"w",chord:true},
         {p:"C4",d:"w",label:"Cmaj7"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{p:"B4",d:"w",chord:true},{bar:"final"}],width:560},
-      kb:{start:48,octaves:2,labels:true} }
+      kb:{start:55,octaves:1.4,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Seventh-Chord Formula Sprint (45s)",
@@ -136,16 +136,16 @@ LESSON_CONTENT[92]={stackFigures:true,
       miaIntro:"Keep C-E-G and change only the seventh.",
       spec:{seq:[60,64,67,71, 60,64,67,70],
         names:["C (root)","E (3rd)","G (5th)","B (major 7!)","C","E","G","B♭ (minor 7!)"],
-        start:60, octaves:2, title:"Cmaj7, then C7"},
+        start:60, octaves:1, title:"Cmaj7, then C7"},
       result:(score)=>score!==null?"You performed both seventh chords correctly.":null },
     { type:"symbol-hunt", title:"Game 3 · Identify the Seventh Chord",
       intro:"Examine each notated seventh chord and select its quality.",
       miaIntro:"Find the root, then check the third, fifth, and seventh.",
       spec:{rounds:6, pool:[
-        {label:"Cmaj7 (C-E-G-B)", spec:{clef:"treble",notes:[{p:"C4",d:"w"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{p:"B4",d:"w",chord:true}],width:150}},
-        {label:"C7 (C-E-G-B♭)", spec:{clef:"treble",notes:[{p:"C4",d:"w"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{p:"Bb4",d:"w",chord:true}],width:150}},
-        {label:"Cm7 (C-E♭-G-B♭)", spec:{clef:"treble",notes:[{p:"C4",d:"w"},{p:"Eb4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{p:"Bb4",d:"w",chord:true}],width:150}},
-        {label:"C°7 (C-E♭-G♭-B𝄫)", spec:{clef:"treble",notes:[{p:"C4",d:"w"},{p:"Eb4",d:"w",chord:true},{p:"Gb4",d:"w",chord:true},{p:"B4",d:"w",chord:true,acc:"bb",sound:"A4"}],width:150}}]},
+        {label:"Cmaj7 (C-E-G-B)", spec:{clef:"treble",notes:[{p:"C4",d:"w"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{p:"B4",d:"w",chord:true}],width:120}},
+        {label:"C7 (C-E-G-B♭)", spec:{clef:"treble",notes:[{p:"C4",d:"w"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{p:"Bb4",d:"w",chord:true}],width:120}},
+        {label:"Cm7 (C-E♭-G-B♭)", spec:{clef:"treble",notes:[{p:"C4",d:"w"},{p:"Eb4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{p:"Bb4",d:"w",chord:true}],width:120}},
+        {label:"C°7 (C-E♭-G♭-B𝄫)", spec:{clef:"treble",notes:[{p:"C4",d:"w"},{p:"Eb4",d:"w",chord:true},{p:"Gb4",d:"w",chord:true},{p:"B4",d:"w",chord:true,acc:"bb",sound:"A4"}],width:120}}]},
       result:(score)=>score>=5?"You identified the seventh chords correctly.":null },
     { type:"term-race", title:"Game 4 · Compare the Formulas",
       intro:"Match each seventh-chord symbol with its triad and seventh qualities.",
@@ -183,15 +183,17 @@ LESSON_CONTENT[92]={stackFigures:true,
     {term:"Seventh Chord", def:"A tertian chord built by stacking three 3rds above a root: root, 3rd, 5th, 7th."},
     {term:"Major 7 / Dominant 7", def:"maj7 = M triad + M7. dom7 = M triad + m7."},
     {term:"Minor 7", def:"m triad + m7."},
-    {term:"Half-Diminished / Diminished 7", def:"ø7 (m7♭5) = dim triad + m7. °7 = dim triad + dim 7th (three stacked minor 3rds — symmetrical)."}
+    {term:"Half-Diminished / Fully Diminished 7", def:"Half-diminished 7 (ø7 / m7♭5) = diminished triad + minor 7th. Fully diminished 7 (°7) = diminished triad + diminished 7th (three stacked minor 3rds — symmetrical)."}
   ],
   mistakes:[],
   summary:[
     "✔ Seventh chord = <b>triad + 7th</b> — four notes.",
-    "✔ <b>maj7</b> M+M7 · <b>dom7</b> M+m7 · <b>m7</b> m+m7 · <b>ø7</b> d+m7 · <b>°7</b> d+d7.",
-    "✔ These five are <b>common types</b> — other seventh-chord types also exist.",
-    "✔ °7 is a <b>symmetrical stack</b> of minor 3rds: C°7 = C-E♭-G♭-B𝄫.",
-    "✔ Diatonic homes: I→maj7 · ii→m7 · V→dom7 · vii→ø7 (major keys)."
+    "✔ <b>Major 7</b> = major triad + major 7th.",
+    "✔ <b>Dominant 7</b> = major triad + minor 7th.",
+    "✔ <b>Minor 7</b> = minor triad + minor 7th.",
+    "✔ <b>Half-diminished 7</b> = diminished triad + minor 7th.",
+    "✔ <b>Fully diminished 7</b> = diminished triad + diminished 7th.",
+    "✔ In major keys: Imaj7 · iim7 · iiim7 · IVmaj7 · V7 · vim7 · viiø7."
   ],
   tips:[
     "Learn the five on C first; the formulas transfer to every root unchanged.",

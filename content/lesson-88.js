@@ -47,30 +47,30 @@ LESSON_CONTENT[88]={
       } }
   },
   objectives:[
-    "Review the phrase: a complete or incomplete musical thought",
-    "Define ANTECEDENT: the question phrase, ending with a weaker cadence (often HC or IAC)",
-    "Define CONSEQUENT: the answer phrase, ending with a stronger cadence (often a PAC)",
-    "Define PERIOD: antecedent + consequent as one unit",
-    "Tell PARALLEL periods (same or closely related opening) from CONTRASTING (different)",
-    "Hear question vs answer by cadence"
+    "Review the musical phrase",
+    "Define Antecedent and Consequent",
+    "Define a Period",
+    "Distinguish Parallel and Contrasting periods",
+    "Recognize question vs. answer phrases",
+    "Identify periods by ear and by notation"
   ],
   steps:[
-    { say:"<b>Phrase — Review:</b> A phrase is a relatively complete musical idea that normally concludes with a cadence. Two phrases may form an antecedent–consequent relationship when the second provides a stronger cadential response to the first. \u{1F447} <b>What normally helps mark the end of a phrase?</b>",
+    { say:"<b>Phrase — Review:</b> A phrase is a musical idea that usually ends with a cadence. Two phrases can form a period when the second answers the first. \u{1F447} <b>What normally helps mark the end of a phrase?</b>",
       try:{ type:"mc", choices:["A cadence","A key signature","A double bar line by itself"], answer:0,
         success:"✓ Correct. A cadence normally marks the end of a phrase and helps define its degree of closure.",
         fail:"Recall the harmonic and melodic gesture that marks a phrase ending.",
         hint:"Review the cadence types from Lesson 87." } },
-    { say:"<b>The Antecedent:</b> The antecedent is the first phrase of a period. It ends with a relatively weak or open cadence, often a half cadence or an imperfect authentic cadence, creating an expectation of continuation. \u{1F447} <b>How does an antecedent usually end?</b>",
+    { say:"<b>The Antecedent — the first phrase of a period.</b> Usually ends with:<br>• Half Cadence, or<br>• Imperfect Authentic Cadence<br>This leaves the music feeling unfinished. \u{1F447} <b>How does an antecedent usually end?</b>",
       try:{ type:"mc", choices:["With a cadence weaker than the consequent's cadence","With the strongest cadence in the period","Without any phrase ending"], answer:0,
         success:"✓ Correct. The antecedent ends with less closure than the consequent, often through a half cadence or IAC.",
         fail:"Compare the strength of the antecedent cadence with the consequent cadence.",
         hint:"The first cadence is normally weaker than the final cadence." } },
-    { say:"<b>The Consequent:</b> The consequent is the second phrase of a period. It responds to the antecedent and ends with a stronger cadence, often a perfect authentic cadence. \u{1F447} <b>How does a consequent normally relate to the antecedent?</b>",
+    { say:"<b>The Consequent — the second phrase of a period.</b> It answers the antecedent and usually ends with a <b>Perfect Authentic Cadence</b>, creating stronger closure. \u{1F447} <b>How does a consequent normally relate to the antecedent?</b>",
       try:{ type:"mc", choices:["It provides a stronger cadential conclusion","It ends with less closure","It avoids cadential motion"], answer:0,
         success:"✓ Correct. The consequent provides greater closure than the antecedent, commonly by ending with a PAC.",
         fail:"Identify which phrase has the stronger final cadence.",
         hint:"The consequent completes the period." } },
-    { say:"<b>The Period:</b> A simple period consists of two phrases in an antecedent–consequent relationship. The antecedent ends with a weaker cadence, and the consequent responds with a stronger cadence. A common pattern is HC followed by PAC, but IAC followed by PAC is also common. \u{1F447} <b>What is the defining relationship within a simple period?</b>",
+    { say:"<b>The Period:</b> two related phrases — the antecedent asks, the consequent answers. The second phrase ends more strongly than the first. \u{1F447} <b>What is the defining relationship within a simple period?</b>",
       show:{ type:"html", html:`<div style="display:flex;gap:12px;justify-content:center;align-items:center;font-weight:800;font-size:15px;flex-wrap:wrap">
         <div style="border:2px solid #C05A21;border-radius:10px;padding:10px 16px;background:#fff;color:#C05A21">Antecedent<br><span style="font-weight:400;font-size:12.5px;color:#555">question · weaker cadence</span></div>
         <div style="font-size:20px">+</div>
@@ -81,7 +81,7 @@ LESSON_CONTENT[88]={
         success:"✓ Correct. The antecedent creates an expectation that the consequent answers with a stronger cadence.",
         fail:"Compare the cadences at the ends of the two phrases.",
         hint:"Antecedent followed by consequent." } },
-    { say:"<b>Parallel and Contrasting Periods:</b> In a parallel period, the antecedent and consequent begin with the same or closely related melodic material. In a contrasting period, the consequent begins with material that differs from the opening of the antecedent. Both types still require a clear antecedent–consequent cadential relationship. \u{1F447} <b>Both phrases of a period begin with the same four-note motive. How is the period classified?</b>",
+    { say:"<b>Parallel vs Contrasting Periods:</b><br>• <b>Parallel</b> — both phrases start the same (or similar).<br>• <b>Contrasting</b> — the second phrase starts differently.<br>Both still need the weaker → stronger cadence pair. \u{1F447} <b>Both phrases of a period begin with the same four-note motive. How is the period classified?</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:100,notes:[
         {p:"C4",d:"q",label:"a…"},{p:"E4",d:"q"},{p:"G4",d:"q"},{p:"B4",d:"h",label:"HC"},{bar:"single"},
         {p:"C4",d:"q",label:"a again…"},{p:"E4",d:"q"},{p:"F4",d:"q"},{p:"C4",d:"h",label:"PAC"},{bar:"final"}],width:620} },
@@ -178,18 +178,19 @@ LESSON_CONTENT[88]={
     { gen:"triad-quality", params:{quals:["M","m"]}, count:2 }
   ],
   vocabulary:[
-    {term:"Antecedent", def:"The question phrase — ending with a weaker cadence, often a half cadence or an IAC."},
-    {term:"Consequent", def:"The answer phrase — ending with a stronger cadence, often a PAC."},
-    {term:"Period", def:"Antecedent + consequent: two phrases forming one complete musical sentence."},
-    {term:"Parallel / Contrasting Period", def:"Parallel: both phrases begin with the same or closely related material (a + a\u{2032}). Contrasting: they begin differently (a + b)."}
+    {term:"Antecedent", def:"The question phrase. Ends with a weaker cadence."},
+    {term:"Consequent", def:"The answer phrase. Ends with a stronger cadence."},
+    {term:"Period", def:"Two phrases that form one complete musical idea."},
+    {term:"Parallel / Contrasting Period", def:"Parallel: same or similar opening. Contrasting: different opening."}
   ],
   mistakes:[],
   summary:[
-    "✔ <b>Antecedent</b> asks — ends with a <b>weaker cadence</b> (often HC or IAC).",
-    "✔ <b>Consequent</b> answers — ends with a <b>stronger cadence</b> (often a PAC).",
-    "✔ Together they form a <b>PERIOD</b>: one complete musical sentence.",
-    "✔ <b>Parallel</b> = same or closely related openings (a + a\u{2032}) · <b>contrasting</b> = different (a + b).",
-    "✔ The cadence pair (weaker → stronger) is what makes the pairing work."
+    "✔ <b>Antecedent</b> = question phrase → weaker cadence.",
+    "✔ <b>Consequent</b> = answer phrase → stronger cadence.",
+    "✔ Together they form a <b>Period</b>.",
+    "✔ <b>Parallel</b> = same beginning.",
+    "✔ <b>Contrasting</b> = different beginning.",
+    "✔ Stronger second cadence completes the musical sentence."
   ],
   tips:[
     "Hum a familiar tune phrase by phrase — most begin with a classic parallel period.",

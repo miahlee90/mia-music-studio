@@ -1,4 +1,4 @@
-/* Lesson 93 — Lead-Sheet Chord Symbols (Book 4, Unit 23 — SELF-AUTHORED)
+/* Lesson 93 — Lead Sheet Reading (Chord Symbols) (Book 4, Unit 23 — SELF-AUTHORED)
    Core: reading/writing chord symbols: C, Cm, C+, C°, Cmaj7, Cm7, C7,
    Cm7b5, Cdim7, Csus4, Csus2, Cadd9, slash chords (C/E).
    NOTE: edit by FULL-FILE REWRITE only. */
@@ -6,10 +6,14 @@
 /* symbol-to-sound: read a symbol, pick its notes */
 function MF_L93_read(container,fb){
   const ROUNDS=[
-    {sym:"Cmaj7", notes:[60,64,67,71], wrong:[[60,64,67,70],[60,63,67,70]], names:["C-E-G-B","C-E-G-B♭","C-E♭-G-B♭"]},
-    {sym:"Am7", notes:[57,60,64,67], wrong:[[57,61,64,67],[57,60,63,67]], names:["A-C-E-G","A-C♯-E-G","A-C-E♭-G"]},
-    {sym:"Gsus4", notes:[55,60,62], wrong:[[55,59,62],[55,58,62]], names:["G-C-D (4 replaces 3)","G-B-D","G-B♭-D"]},
-    {sym:"C/E", notes:[52,60,64,67], wrong:[[60,64,67],[52,55,60]], names:["C chord with E in the bass","C chord, root position","E minor chord"]}];
+    {sym:"C", notes:[60,64,67], names:["C-E-G (major triad)","C-E♭-G (minor triad)","C-E-G-B♭"]},
+    {sym:"Cm", notes:[60,63,67], names:["C-E♭-G (minor triad)","C-E-G (major triad)","C-E-G-B"]},
+    {sym:"C7", notes:[60,64,67,70], names:["C-E-G-B♭ (dominant 7)","C-E-G-B (major 7)","C-E♭-G-B♭ (minor 7)"]},
+    {sym:"Cmaj7", notes:[60,64,67,71], names:["C-E-G-B (major 7)","C-E-G-B♭ (dominant 7)","C-E♭-G-B♭ (minor 7)"]},
+    {sym:"Cm7♭5", notes:[60,63,66,70], names:["C-E♭-G♭-B♭ (half-diminished)","C-E♭-G-B♭ (minor 7)","C-E-G-B (major 7)"]},
+    {sym:"Csus4", notes:[60,65,67], names:["C-F-G (4 replaces the 3rd)","C-E-G (major triad)","C-D-G (sus2)"]},
+    {sym:"Cadd9", notes:[60,64,67,74], names:["C-E-G-D (triad + added 9th)","C-D-G (9 replaces the 3rd)","C-E-G (plain triad)"]},
+    {sym:"C/E", notes:[52,60,64,67], names:["C chord with E in the bass","C chord, root position","E minor chord"]}];
   let r=0;
   container.innerHTML=`<div class="big-q l93r-q" style="text-align:center"></div>
     <div class="choices l93r-ch"></div>`;
@@ -33,7 +37,7 @@ function MF_L93_read(container,fb){
 }
 
 LESSON_CONTENT[93]={stackFigures:true,
-  welcome:"Lead-sheet symbols communicate chords in a compact form.",
+  welcome:"Learn to read and decode the chord symbols on a lead sheet.",
   hook:{
     say:"<b>A lead sheet presents a melody with chord symbols such as Cmaj7, Am7, and G7.</b> \u{1F447} <b>What information do the chord symbols communicate?</b>",
     interact:{ type:"custom",
@@ -51,31 +55,43 @@ LESSON_CONTENT[93]={stackFigures:true,
       } }
   },
   objectives:[
-    "Read the symbol anatomy: root + quality + number + alterations",
-    "Triads: C, Cm, C+, C° (dim)",
-    "Sevenths: Cmaj7, Cm7, C7, Cm7♭5 (ø7), Cdim7 (°7)",
-    "Suspensions: Csus4, Csus2 — the 3rd replaced",
-    "Added tones: Cadd9, C6",
-    "Slash chords: C/E = C chord, E in the bass"
+    "Decode chord symbols from left to right",
+    "Identify root, quality, extensions, alterations, and bass notes",
+    "Recognize the most common lead-sheet symbols",
+    "Distinguish triads, seventh chords, suspended, added-tone, and slash chords",
+    "Read real chord symbols used in pop, jazz, worship, and commercial music"
   ],
   steps:[
-    { say:"<b>Chord-Symbol Anatomy:</b> A chord symbol normally begins with a root letter and accidental, if needed. It may then include a quality symbol, an extension, an alteration or added tone, and a specified bass note. For example: <b>root → quality → extension or alteration → slash bass</b> — C | m | 7♭5 | /E♭. Common conventions include: no quality suffix = major triad; m = minor; aug or + = augmented; dim or ° = diminished; 7, 9, 11, or 13 = chord extensions; ♭5, ♯5, ♭9, or ♯9 = alterations; sus2 or sus4 = suspended chord; add9 = added tone; /bass = specified bass pitch. Chord-symbol conventions vary somewhat among publishers and musical styles. \u{1F447} <b>In Cm7, what does the \u{201C}m\u{201D} indicate?</b>",
-      show:{ type:"html", html:`<table style="border-collapse:collapse;margin:0 auto;font-size:14.5px;min-width:300px">
-        <tr><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:6px 14px">Symbol</th><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:6px 14px">Meaning</th><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:6px 14px">On C</th></tr>
-        <tr><td style="border:1.5px solid #cdd5e1;padding:4px 14px;font-weight:800">C</td><td style="border:1.5px solid #cdd5e1;padding:4px 14px">major triad</td><td style="border:1.5px solid #cdd5e1;padding:4px 14px">C-E-G</td></tr>
-        <tr><td style="border:1.5px solid #cdd5e1;padding:4px 14px;font-weight:800">Cm</td><td style="border:1.5px solid #cdd5e1;padding:4px 14px">minor triad</td><td style="border:1.5px solid #cdd5e1;padding:4px 14px">C-E♭-G</td></tr>
-        <tr><td style="border:1.5px solid #cdd5e1;padding:4px 14px;font-weight:800">C+ / C°</td><td style="border:1.5px solid #cdd5e1;padding:4px 14px">augmented / diminished</td><td style="border:1.5px solid #cdd5e1;padding:4px 14px">C-E-G♯ / C-E♭-G♭</td></tr>
-        <tr><td style="border:1.5px solid #cdd5e1;padding:4px 14px;font-weight:800">C7 · Cmaj7 · Cm7</td><td style="border:1.5px solid #cdd5e1;padding:4px 14px">the sevenths</td><td style="border:1.5px solid #cdd5e1;padding:4px 14px">Lesson 92's family</td></tr></table>` },
+    { say:"<b>Chord-Symbol Anatomy:</b> read every symbol <b>left to right</b> — root → quality → number/extension → alteration → bass. For example, <b>Cmaj7♯11/E</b> decodes to root <b>C</b>, <b>major</b> quality, <b>maj7</b> extension, <b>♯11</b> alteration, <b>E</b> in the bass. This lesson is about <b>decoding</b> symbols you already know the harmony for. \u{1F447} <b>In Cm7, what does the \u{201C}m\u{201D} indicate?</b>",
+      show:{ type:"html", html:`<div style="text-align:center;margin:2px 0">
+        <div style="font-size:23px;font-weight:800;color:#2F6DA8;margin-bottom:8px">Cmaj7♯11/E</div>
+        <div style="display:flex;gap:6px;justify-content:center;flex-wrap:wrap;font-size:12.5px">
+          <div style="border:2px solid #2F6DA8;border-radius:8px;padding:6px 12px"><b>Root</b><br>C</div>
+          <div style="border:2px solid #A9821F;border-radius:8px;padding:6px 12px"><b>Quality</b><br>major</div>
+          <div style="border:2px solid #A9821F;border-radius:8px;padding:6px 12px"><b>Extension</b><br>maj7</div>
+          <div style="border:2px solid #C05A21;border-radius:8px;padding:6px 12px"><b>Alteration</b><br>♯11</div>
+          <div style="border:2px solid #2F6DA8;border-radius:8px;padding:6px 12px"><b>Bass</b><br>E</div></div>
+        <div style="font-size:12px;color:#555;margin-top:7px">Decode left → right</div></div>` },
       try:{ type:"mc", choices:["The underlying triad is minor","The chord should be played quietly","The meter changes"], answer:0,
         success:"✓ Correct. The \u{201C}m\u{201D} identifies a minor triad, and the complete symbol Cm7 represents a minor seventh chord.",
         fail:"Read the quality symbol immediately following the root.",
         hint:"\u{201C}m\u{201D} stands for minor." } },
-    { say:"<b>Common Seventh-Chord Symbols:</b> <b>Cmaj7</b> or C\u{25B3}7 = C major seventh · <b>C7</b> = C dominant seventh · <b>Cm7</b> = C minor seventh · <b>Cm7♭5</b> or Cø7 = C half-diminished seventh · <b>Cdim7</b> or C°7 = C fully diminished seventh. When 7 follows a bare root letter, as in C7, it indicates a dominant-seventh-quality chord: a major triad with a minor seventh. A major seventh must be identified explicitly with maj7 or an equivalent symbol. \u{1F447} <b>What chord does C7 represent?</b>",
+    { say:"<b>Common Lead-Sheet Symbols:</b> these appear constantly in <b>jazz, worship, pop, and commercial</b> charts. You only need to <b>recognize and decode</b> them — not master advanced voicings yet. Note: <b>7</b> after a bare root = dominant (major triad + minor 7th); a major 7th must say <b>maj7</b>. \u{1F447} <b>What chord does C7 represent?</b>",
+      show:{ type:"html", html:`<table style="border-collapse:collapse;margin:0 auto 8px;font-size:13px;min-width:320px">
+        <tr><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:5px 10px;text-align:left">Category</th><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:5px 10px;text-align:left">Symbols (on C)</th></tr>
+        <tr><td style="border:1.5px solid #cdd5e1;padding:4px 10px;font-weight:800;color:#2F6DA8">Triads</td><td style="border:1.5px solid #cdd5e1;padding:4px 10px">C · Cm · C+ · C°</td></tr>
+        <tr><td style="border:1.5px solid #cdd5e1;padding:4px 10px;font-weight:800;color:#A9821F">Sevenths</td><td style="border:1.5px solid #cdd5e1;padding:4px 10px">Cmaj7 · C7 · Cm7 · Cm7♭5 (ø7) · C°7</td></tr>
+        <tr><td style="border:1.5px solid #cdd5e1;padding:4px 10px;font-weight:800;color:#C05A21">Suspended</td><td style="border:1.5px solid #cdd5e1;padding:4px 10px">Csus2 · Csus4 · C7sus4</td></tr>
+        <tr><td style="border:1.5px solid #cdd5e1;padding:4px 10px;font-weight:800">Added tones</td><td style="border:1.5px solid #cdd5e1;padding:4px 10px">C6 · Cm6 · Cadd9</td></tr>
+        <tr><td style="border:1.5px solid #cdd5e1;padding:4px 10px;font-weight:800">Extensions</td><td style="border:1.5px solid #cdd5e1;padding:4px 10px">C9 · C13</td></tr>
+        <tr><td style="border:1.5px solid #cdd5e1;padding:4px 10px;font-weight:800">Altered</td><td style="border:1.5px solid #cdd5e1;padding:4px 10px">C7♯5 · C7♭5 · C7♭9 · C7♯9 · Cmaj7♯11</td></tr></table>
+        <div style="font-size:12.5px;color:#333;max-width:360px;margin:0 auto;line-height:1.7">
+        <b>Seventh formulas:</b> maj7 = major triad + major 7th · 7 = major triad + minor 7th · m7 = minor triad + minor 7th · ø7 = diminished triad + minor 7th · °7 = diminished triad + diminished 7th</div>` },
       try:{ type:"mc", choices:["C dominant seventh: C-E-G-B♭","C major seventh: C-E-G-B","C minor triad: C-E♭-G"], answer:0,
         success:"✓ Correct. A bare root followed by 7 indicates a dominant-seventh-quality chord. Use Cmaj7 to indicate a major seventh.",
         fail:"Compare C7 with Cmaj7.",
         hint:"C7 contains B♭; Cmaj7 contains B♮." } },
-    { say:"<b>Suspended Chords:</b> In a <b>sus4</b> chord, the fourth replaces the third: Csus4 is C-F-G. In a <b>sus2</b> chord, the second replaces the third: Csus2 is C-D-G. Because these chords omit the third, they are not classified as major or minor triads. A sus4 chord may resolve to a major or minor triad, but resolution is not required in many contemporary styles. \u{1F447} <b>In Csus4, which chord member replaces the third?</b>",
+    { say:"<b>Suspended Chords:</b> a suspended chord is <b>neither major nor minor because the 3rd is replaced</b>. In <b>sus4</b>, the 4th replaces the 3rd (Csus4 = C-F-G); in <b>sus2</b>, the 2nd replaces the 3rd (Csus2 = C-D-G). The sus tone may resolve to the 3rd, but many styles leave it unresolved. \u{1F447} <b>In Csus4, which chord member replaces the third?</b>",
       show:{ type:"staff", spec:{clef:"treble",tempo:80,notes:[
         {p:"C4",d:"w",label:"Csus4"},{p:"F4",d:"w",chord:true},{p:"G4",d:"w",chord:true},
         {p:"C4",d:"w",label:"C"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{bar:"final"}],width:400} },
@@ -83,12 +99,12 @@ LESSON_CONTENT[93]={stackFigures:true,
         success:"✓ Correct. F, the fourth above C, replaces E, the third. In some contexts, F may resolve to E.",
         fail:"A suspended chord omits the third and replaces it with the second or fourth.",
         hint:"In sus4, the fourth replaces the third." } },
-    { say:"<b>Added-Tone Chords:</b> An <b>add9</b> chord retains the triad's third and adds scale degree 9. Cadd9 contains the pitch classes C-E-G-D. A <b>C6</b> chord combines a C major triad with A, the sixth above the root. Chord symbols identify chord members but do not necessarily prescribe their exact octave placement or voicing. \u{1F447} <b>Which pitch classes belong to Cadd9?</b>",
+    { say:"<b>Added-Tone Chords:</b> an <b>add</b> chord keeps the whole triad and adds a note. <b>Cadd9 = C-E-G-D</b> (3rd stays, 9th added). <b>C6 = C-E-G-A</b> (adds the 6th). Don't confuse <b>Cadd9</b> with <b>Csus2 = C-D-G</b>: in sus2 the 2nd <i>replaces</i> the 3rd (no E), while add9 <i>keeps</i> the 3rd. \u{1F447} <b>Which pitch classes belong to Cadd9?</b>",
       try:{ type:"mc", choices:["C-E-G plus D","C-D-G without E","C-E-G-B"], answer:0,
         success:"✓ Correct. Cadd9 retains the complete C major triad and adds D.",
         fail:"An added-tone symbol retains the basic triad unless the symbol indicates otherwise.",
         hint:"Complete triad plus one added pitch." } },
-    { say:"<b>Slash Chords:</b> In a slash chord, the symbol before the slash identifies the chord, and the note after the slash identifies the bass pitch. <b>C/E</b> means a C major chord with E in the bass. Because E is the third of the C major triad, C/E is a first-inversion C major chord. The slash bass is not always a chord member: for example, <b>C/D</b> indicates a C major chord over D in the bass and is not a standard inversion of C major. \u{1F447} <b>What does G/B mean?</b>",
+    { say:"<b>Slash Chords:</b> the chord is <b>before</b> the slash, the <b>bass note after</b> it. <b>C/E</b> = C major with E in the bass — E is the 3rd, so this is <b>first inversion</b>. But <b>C/D</b> = C major over a D bass — D is <b>not</b> a chord tone, so it is <b>NOT an inversion</b>, just C harmony with D in the bass. \u{1F447} <b>What does G/B mean?</b>",
       try:{ type:"mc", choices:["A G major chord with B in the bass","A B major chord with G in the soprano","Two separate chords performed one after another"], answer:0,
         success:"✓ Correct. G is the chord root, and B is the bass pitch. Because B is the third of G major, the chord is in first inversion.",
         fail:"Read the chord before the slash and the bass note after it.",
@@ -97,11 +113,11 @@ LESSON_CONTENT[93]={stackFigures:true,
       try:{ type:"custom",
         hint:"Read the root, quality, extension or alteration, and specified bass note.",
         mount:(container,fb)=>MF_L93_read(container,fb) } },
-    { say:"<b>Review:</b> \u{1F447} <b>Which symbol represents a C half-diminished seventh chord?</b>",
-      try:{ type:"mc", choices:["Cm7♭5","Cmaj7","Csus4"], answer:0,
-        success:"✓ Correct. Cm7♭5 represents C-E♭-G♭-B♭ and is equivalent to Cø7.",
-        fail:"Begin with Cm7 and lower its fifth from G to G♭.",
-        hint:"It may also be written Cø7." } }
+    { say:"<b>Review:</b> \u{1F447} <b>Which symbol contains a sharp 11 (♯11)?</b>",
+      try:{ type:"mc", choices:["Cmaj7♯11","C7♭9","Csus4"], answer:0,
+        success:"✓ Correct. Cmaj7♯11 carries the ♯11 alteration; C7♭9 has a ♭9, and Csus4 has no alteration.",
+        fail:"Look for the symbol whose alteration reads \u{201C}♯11\u{201D}.",
+        hint:"Read the alteration part of each symbol." } }
   ],
   examples:[
     { caption:"A lead-sheet progression realized: Cmaj7 · Am7 · Dm7 · G7 — the symbols above, the sounding chords below.",
@@ -184,18 +200,21 @@ LESSON_CONTENT[93]={stackFigures:true,
     { gen:"inversion-id", params:{subject:"triad", ask:"position"}, count:2 }
   ],
   vocabulary:[
-    {term:"Lead Sheet", def:"Melody + chord symbols — the player realizes the harmony from the shorthand."},
-    {term:"Chord Symbol Anatomy", def:"Root letter → quality (m, +, °) → number (7, 9) → alterations (♭5, sus, add, /bass)."},
-    {term:"Sus4 / Sus2", def:"The 4th (or 2nd) REPLACES the 3rd — suspended; it may resolve to the 3rd, but resolution is not required in many styles."},
-    {term:"Slash Chord", def:"C/E: the chord before the slash, the BASS note after it — often, but not always, an inversion."}
+    {term:"Lead Sheet", def:"A melody with chord symbols. The symbols tell you WHAT harmony to play, not exactly HOW to voice it."},
+    {term:"Chord Symbol Anatomy", def:"Read left → right: <b>Root → Quality → Number/Extension → Alteration → Bass</b>. e.g. C · Cm · Cmaj7 · C7 · Csus4 · Cadd9 · C13 · C7♯9 · Cmaj7♯11 · C/E."},
+    {term:"Suspended vs Added", def:"<b>sus2 / sus4</b> replace the 3rd. <b>add9</b> keeps the 3rd."},
+    {term:"Slash Chord", def:"Chord before the slash, BASS note after it. C/E · C/G · C/B · C/D."}
   ],
   mistakes:[],
   summary:[
-    "✔ Read symbols left to right: <b>root → quality → number → extras</b>.",
-    "✔ After a bare root, <b>7 = dominant</b>; major 7th must say <b>maj7</b>.",
-    "✔ <b>sus</b> replaces the 3rd; <b>add</b> keeps it and adds a tone.",
-    "✔ <b>m7♭5 = ø7</b>; <b>dim7 = °7</b>.",
-    "✔ <b>C/E</b> = C chord over an E bass — the slash names the bass note."
+    "✔ Read chord symbols left to right: <b>Root → Quality → Number/Extension → Alteration → Bass</b>.",
+    "✔ No quality symbol = <b>major triad</b>.",
+    "✔ \u{201C}7\u{201D} alone means <b>dominant seventh</b>.",
+    "✔ \u{201C}maj7\u{201D} must be written explicitly.",
+    "✔ <b>sus</b> replaces the 3rd.",
+    "✔ <b>add</b> keeps the 3rd.",
+    "✔ A <b>slash</b> names the bass note.",
+    "✔ Chord symbols describe harmony — not exact voicing."
   ],
   tips:[
     "Realize lead sheets root-position first; add slash-chord bass notes once the changes flow.",
