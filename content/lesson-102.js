@@ -5,6 +5,18 @@
    Built on: periods, sequence, modulation.
    NOTE: edit by FULL-FILE REWRITE only. */
 
+function MF_L102_playAll(){
+  let t=0; const q=0.45, g=0.30;
+  const play=(seq)=>{ seq.forEach(([m,b])=>{ MFAudio.tone(m,Math.max(0.18,b*q*0.9),t,0.32); t+=b*q; }); };
+  /* exposition (C -> F# -> G) */
+  play([[60,1],[67,1],[64,.5],[62,.5],[60,1],[62,1],[64,1],[66,1],[67,1],[67,1],[74,1],[71,.5],[69,.5],[67,1]]); t+=g;
+  /* development (fragments, F#, unstable) */
+  play([[60,.5],[67,.5],[64,1],[62,.5],[69,.5],[66,1],[67,.5],[74,.5],[71,.5],[69,.5],[67,2]]); t+=g;
+  /* recapitulation (same opening, F-natural, stays home) */
+  play([[60,1],[67,1],[64,.5],[62,.5],[60,1],[62,1],[64,1],[65,1],[67,1],[67,.5],[74,.5],[72,.5],[71,.5],[72,2]]); t+=g;
+  /* coda (C-major scale to tonic) */
+  play([[67,.5],[69,.5],[71,.5],[72,.5],[74,.5],[76,.5],[77,.5],[74,.5],[72,4]]);
+}
 function MF_L102_diagram(host){
   host.innerHTML=`<div style="border:1px dashed #b9a86a;border-radius:8px;padding:10px 12px;background:#FBF9F1">
     <div style="text-align:center;font-weight:800;font-size:13px;color:#5a4a12;margin-bottom:8px">Miniature sonata-form example</div>
@@ -13,7 +25,11 @@ function MF_L102_diagram(host){
       <div style="border:2px solid #C05A21;border-radius:8px;padding:5px 9px;color:#C05A21;text-align:center">DEVELOPMENT<br><span style="font-weight:400;font-size:10px;color:#555">fragments · sequences · changing keys</span></div>
       <div style="border:2px solid #2F6DA8;border-radius:8px;padding:5px 9px;color:#2F6DA8;text-align:center">RECAPITULATION<br><span style="font-weight:400;font-size:10px;color:#555">primary + secondary in tonic</span></div>
       <div style="border:2px solid #A9821F;border-radius:8px;padding:5px 9px;color:#A9821F;text-align:center">CODA<br><span style="font-weight:400;font-size:10px;color:#555">optional closing section</span></div>
-    </div></div>`;
+    </div>
+    <div style="text-align:center;margin-top:10px"><button class="play" id="l102-playall">▶ Hear the whole sonata — exposition → development → recapitulation → coda</button></div>
+    <div style="text-align:center;font-size:11px;color:#5a4a12;margin-top:6px">Listen to all four sections connected as one movement: the exposition leans to a new key (F♯ → G), the development stays unstable, then the recapitulation brings everything home (F♮ this time) and the coda confirms the tonic.</div>
+  </div>`;
+  const b=host.querySelector("#l102-playall"); if(b) b.onclick=()=>MF_L102_playAll();
 }
 
 LESSON_CONTENT[102]={
@@ -93,30 +109,30 @@ LESSON_CONTENT[102]={
   ],
   examples:[
     { mount:(host)=>MF_L102_diagram(host) },
-    { caption:"Exposition: the primary idea in the tonic (C), then the line pushes up with an F♯ — leaning toward the contrasting key (G). Tonal contrast established.",
+    { caption:"Exposition — analysis: the primary idea arpeggiates C major (I: C–G–E–D–C); then D–E–F♯–G raises the 4th to F♯, the leading tone of G, pulling toward the dominant; G–D–B–A–G confirms the new key. Tonic (C) vs contrasting key (G) — the conflict is set.",
       staff:{clef:"treble",tempo:96,time:"4/4",notes:[
-        {p:"C4",d:"q"},{p:"G4",d:"q"},{p:"E4",d:"8"},{p:"D4",d:"8"},{p:"C4",d:"q"},{bar:"single"},
-        {p:"D4",d:"q"},{p:"E4",d:"q"},{p:"F#4",d:"q"},{p:"G4",d:"q"},{bar:"single"},
-        {p:"G4",d:"q"},{p:"D5",d:"q"},{p:"B4",d:"8"},{p:"A4",d:"8"},{p:"G4",d:"q"},{bar:"final"}],
+        {p:"C4",d:"q",label:"C: I"},{p:"G4",d:"q"},{p:"E4",d:"8"},{p:"D4",d:"8"},{p:"C4",d:"q"},{bar:"single"},
+        {p:"D4",d:"q"},{p:"E4",d:"q"},{p:"F#4",d:"q",label:"F♯→G"},{p:"G4",d:"q"},{bar:"single"},
+        {p:"G4",d:"q",label:"in G"},{p:"D5",d:"q"},{p:"B4",d:"8"},{p:"A4",d:"8"},{p:"G4",d:"q"},{bar:"final"}],
         beams:[[2,3],[13,14]],width:660},
       kb:{start:60,octaves:2,labels:true} },
-    { caption:"Development: fragments of the idea tumbling through changing keys (note the F♯) — unstable ground driving toward the return.",
+    { caption:"Development — analysis: the opening fragments (C–G–E, D–A–F♯) are tossed about while F♯ keeps the key unstable, building tension that drives back toward the tonic and the return.",
       staff:{clef:"treble",tempo:96,time:"4/4",notes:[
-        {p:"C4",d:"8"},{p:"G4",d:"8"},{p:"E4",d:"q"},{p:"D4",d:"8"},{p:"A4",d:"8"},{p:"F#4",d:"q"},{bar:"single"},
+        {p:"C4",d:"8",label:"fragment"},{p:"G4",d:"8"},{p:"E4",d:"q"},{p:"D4",d:"8"},{p:"A4",d:"8"},{p:"F#4",d:"q",label:"unstable"},{bar:"single"},
         {p:"G4",d:"8"},{p:"D5",d:"8"},{p:"B4",d:"8"},{p:"A4",d:"8"},{p:"G4",d:"h"},{bar:"final"}],
         beams:[[0,1],[3,4],[7,10]],width:560},
       kb:{start:60,octaves:2,labels:true} },
-    { caption:"Recapitulation: the same opening, but now the transition uses F♮ instead of F♯ — the material stays home in the tonic. Contrast resolved.",
+    { caption:"Recapitulation — analysis: the same opening in C (I), but the second phrase now uses F♮ instead of F♯, so it never leaves home; G–D–C–B–C cadences on the tonic. The conflict resolves in C.",
       staff:{clef:"treble",tempo:96,time:"4/4",notes:[
-        {p:"C4",d:"q"},{p:"G4",d:"q"},{p:"E4",d:"8"},{p:"D4",d:"8"},{p:"C4",d:"q"},{bar:"single"},
-        {p:"D4",d:"q"},{p:"E4",d:"q"},{p:"F4",d:"q"},{p:"G4",d:"q"},{bar:"single"},
-        {p:"G4",d:"8"},{p:"D5",d:"8"},{p:"C5",d:"8"},{p:"B4",d:"8"},{p:"C5",d:"h"},{bar:"final"}],
+        {p:"C4",d:"q",label:"C: I"},{p:"G4",d:"q"},{p:"E4",d:"8"},{p:"D4",d:"8"},{p:"C4",d:"q"},{bar:"single"},
+        {p:"D4",d:"q"},{p:"E4",d:"q"},{p:"F4",d:"q",label:"F♮ home"},{p:"G4",d:"q"},{bar:"single"},
+        {p:"G4",d:"8"},{p:"D5",d:"8"},{p:"C5",d:"8"},{p:"B4",d:"8"},{p:"C5",d:"h",label:"tonic C"},{bar:"final"}],
         beams:[[2,3],[11,14]],width:680},
       kb:{start:60,octaves:2,labels:true} },
-    { caption:"Coda: a rising C-major scale to a held tonic — an optional closing flourish.",
+    { caption:"Coda — analysis: a rising C-major scale (G–A–B–C–D–E–F–D) settles onto a held tonic C — the closing confirmation of home.",
       staff:{clef:"treble",tempo:96,time:"4/4",notes:[
-        {p:"G4",d:"8"},{p:"A4",d:"8"},{p:"B4",d:"8"},{p:"C5",d:"8"},{p:"D5",d:"8"},{p:"E5",d:"8"},{p:"F5",d:"8"},{p:"D5",d:"8"},{bar:"single"},
-        {p:"C5",d:"w"},{bar:"final"}],
+        {p:"G4",d:"8",label:"coda"},{p:"A4",d:"8"},{p:"B4",d:"8"},{p:"C5",d:"8"},{p:"D5",d:"8"},{p:"E5",d:"8"},{p:"F5",d:"8"},{p:"D5",d:"8"},{bar:"single"},
+        {p:"C5",d:"w",label:"tonic C"},{bar:"final"}],
         beams:[[0,3],[4,7]],width:560},
       kb:{start:60,octaves:2,labels:true} }
   ],
