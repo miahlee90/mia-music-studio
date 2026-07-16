@@ -75,7 +75,7 @@ LESSON_CONTENT[104]={stackFigures:true,
       staff:{clef:"treble",tempo:70,notes:[
         {p:"B3",d:"w",label:"vii\u{00B0}7"},{p:"D4",d:"w",chord:true},{p:"F4",d:"w",chord:true},{p:"Ab4",d:"w",chord:true},
         {p:"C4",d:"w",label:"i"},{p:"Eb4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{bar:"final"}],width:420},
-      kb:{start:57,octaves:1,labels:true} }
+      kb:{start:57,octaves:1.25,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Leading-Tone Chord Identification",
