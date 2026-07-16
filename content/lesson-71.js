@@ -158,13 +158,13 @@ LESSON_CONTENT[71]={
       staff:{clef:"treble",tempo:110,notes:[
         {p:"C4",d:"q",label:"C major"},{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"F4",d:"q"},{p:"G4",d:"q"},{p:"A4",d:"q"},{p:"B4",d:"q"},{p:"C5",d:"q"},{bar:"double"},
         {p:"C4",d:"q",label:"C blues"},{p:"Eb4",d:"q"},{p:"F4",d:"q"},{p:"Gb4",d:"q"},{p:"G4",d:"q",acc:"n"},{p:"Bb4",d:"q"},{p:"C5",d:"q"},{bar:"final"}],width:640},
-      kb:{start:60,octaves:2,labels:true} },
+      kb:{start:60,octaves:1,labels:true} },
     { caption:"A written blues melody — blues-scale notes over the I chord. The ♭3 against the chord's natural 3rd creates the blues sound.",
       staff:{clef:"treble",tempo:100,time:"4/4",notes:[
         {p:"C4",d:"8"},{p:"Eb4",d:"8"},{p:"F4",d:"8"},{p:"Gb4",d:"8"},{p:"G4",d:"q",acc:"n"},{p:"Bb4",d:"q"},{bar:"single"},
         {p:"G4",d:"8"},{p:"Gb4",d:"8"},{p:"F4",d:"8"},{p:"Eb4",d:"8"},{p:"C4",d:"h"},{bar:"final"}],
         beams:[[0,1],[2,3],[7,8],[9,10]],width:600},
-      kb:{start:60,octaves:2,labels:true} }
+      kb:{start:60,octaves:0.9167,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Blue-Note Sprint (45s)",
@@ -185,7 +185,7 @@ LESSON_CONTENT[71]={
       miaIntro:"Up and back down! \u{1FA9C}",
       spec:{seq:[60,63,65,66,67,70,72, 70,67,66,65,63,60],
         names:["C (root)","E♭ (♭3 — blue!)","F (4)","G♭ (♭5 — blue!)","G (5)","B♭ (♭7 — blue!)","C (top)","B♭","G","G♭","F","E♭","C — home"],
-        start:60, octaves:2, title:"C blues scale, up and down"},
+        start:60, octaves:1, title:"C blues scale, up and down"},
       result:(score)=>score!==null?"The blues scale lives in your fingers now!":null },
     { type:"symbol-hunt", title:"Game 3 · Spot the Blue Note",
       intro:"Four intervals from the root — click the BLUE one each round calls!",

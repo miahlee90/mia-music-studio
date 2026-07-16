@@ -138,7 +138,7 @@ LESSON_CONTENT[48]={
         {p:"F4",d:"w",label:"IV"},{p:"A4",d:"w",chord:true},{p:"C5",d:"w",chord:true},
         {p:"G4",d:"w",label:"V"},{p:"B4",d:"w",chord:true},{p:"D5",d:"w",chord:true},
         {p:"C4",d:"w",label:"I"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{bar:"final"}],width:600},
-      kb:{start:60,octaves:2,labels:true} },
+      kb:{start:60,octaves:1.3333,labels:true} },
     { caption:"Anatomy of the major triad: Major 3rd below + minor 3rd above = a Perfect 5th from root to top.",
       staff:{clef:"bass",tempo:60,notes:[
         {p:"C3",d:"w"},{p:"E3",d:"w",chord:true},{p:"G3",d:"w",chord:true}],

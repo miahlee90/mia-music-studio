@@ -157,7 +157,7 @@ LESSON_CONTENT[60]={
         {p:"D4",d:"w",label:"iv"},{p:"F4",d:"w",chord:true},{p:"A4",d:"w",chord:true},
         {p:"E4",d:"w",label:"V"},{p:"G#4",d:"w",chord:true},{p:"B4",d:"w",chord:true},
         {p:"A3",d:"w",label:"i"},{p:"C4",d:"w",chord:true},{p:"E4",d:"w",chord:true},{bar:"final"}],width:520},
-      kb:{start:57,octaves:2,labels:true} },
+      kb:{start:57,octaves:1.1667,labels:true} },
     { caption:"The harmonic-minor triad scale, played through: i ii° III+ iv V VI vii° i. Listen for the augmented III+ and the two diminished triads.",
       staff:{clef:"treble",tempo:90,notes:[
         {p:"A3",d:"w",label:"i"},{p:"C4",d:"w",chord:true},{p:"E4",d:"w",chord:true},
@@ -168,7 +168,7 @@ LESSON_CONTENT[60]={
         {p:"F4",d:"w",label:"VI"},{p:"A4",d:"w",chord:true},{p:"C5",d:"w",chord:true},
         {p:"G#4",d:"w",label:"vii°"},{p:"B4",d:"w",chord:true},{p:"D5",d:"w",chord:true},
         {p:"A4",d:"w",label:"i"},{p:"C5",d:"w",chord:true},{p:"E5",d:"w",chord:true},{bar:"final"}],width:680},
-      kb:{start:57,octaves:2,labels:true} }
+      kb:{start:57,octaves:1.5833,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Minor-Primary Sprint (45s)",
@@ -189,7 +189,7 @@ LESSON_CONTENT[60]={
       miaIntro:"Watch for the black key! \u{1FA9C}",
       spec:{seq:[57,60,64, 62,65,69, 64,68,71, 69,72,76],
         names:["A (i: root)","C","E","D (iv: root)","F","A","E (V: root)","G♯ — the raised 7th!","B","A (i: home)","C","E"],
-        start:57, octaves:2, title:"i → iv → V → i in A minor"},
+        start:57, octaves:1.5833, title:"i → iv → V → i in A minor"},
       result:(score)=>score!==null?"The minor primary tour, under your fingers!":null },
     { type:"symbol-hunt", title:"Game 3 · Primary Spotter (minor edition)",
       intro:"i, iv, V and one intruder — click what each round names!",

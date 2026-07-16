@@ -109,7 +109,7 @@ LESSON_CONTENT[90]={
         {p:"F5",d:"q"},{p:"C4",d:"q",chord:true},{p:"F4",d:"q",chord:true},{p:"A4",d:"q",chord:true},
         {p:"G5",d:"q"},{p:"B3",d:"q",chord:true},{p:"D4",d:"q",chord:true},{p:"G4",d:"q",chord:true},
         {p:"E5",d:"w"},{p:"C4",d:"w",chord:true},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{bar:"final"}],width:620},
-      kb:{start:55,octaves:2,labels:true} },
+      kb:{start:59,octaves:2,labels:true} },
     { caption:"Polyphonic texture: two independent lines — the upper climbs while the lower descends, each with its own path. (Played together.)",
       staff:{clef:"treble",tempo:88,notes:[
         {p:"C4",d:"q",label:"line 2"},{p:"E5",d:"q",chord:true,label:"line 1"},

@@ -152,7 +152,7 @@ LESSON_CONTENT[65]={
         {p:"C3",d:"q",label:"I"},{p:"E3",d:"q"},{p:"G3",d:"q"},{bar:true},
         {p:"G2",d:"q",label:"V"},{p:"B2",d:"q"},{p:"D3",d:"q"},{bar:true},
         {p:"C3",d:"q",label:"I"},{p:"E3",d:"q"},{p:"G3",d:"q"},{bar:"final"}],width:560},
-      kb:{start:43,octaves:2,labels:true} }
+      kb:{start:41,octaves:1.5,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Texture-Term Sprint (45s)",

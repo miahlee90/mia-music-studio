@@ -203,7 +203,7 @@ LESSON_CONTENT[55]={stackFigures:true,
         {p:"C4",d:"w",label:"I"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},
         {p:"B3",d:"w",label:"V⁶₅"},{p:"D4",d:"w",chord:true},{p:"F4",d:"w",chord:true},{p:"G4",d:"w",chord:true},
         {p:"C4",d:"w",label:"I"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{bar:"final"}],width:620},
-      kb:{start:48,octaves:3,labels:true} }
+      kb:{start:59,octaves:1,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Toolkit Sprint (45s)",
@@ -216,7 +216,7 @@ LESSON_CONTENT[55]={stackFigures:true,
       miaIntro:"Feel the bass hold its ground! \u{1FA9C}",
       spec:{seq:[60,64,67, 60,65,69, 59,62,65,67, 60,64,67],
         names:["C (I: bass)","E","G","C (IV⁶₄: same bass!)","F","A","B (V⁶₅: half step down)","D","F","G","C (I: home)","E","G"],
-        start:48, octaves:2, title:"I → IV⁶₄ → V⁶₅ → I, note by note"},
+        start:59, octaves:1, title:"I → IV⁶₄ → V⁶₅ → I, note by note"},
       result:(score)=>score!==null?"You just PLAYED smooth voice leading!":null },
     { type:"symbol-hunt", title:"Game 3 · Progression Chord Spotter",
       intro:"The four chords of the smooth progression — click what each round names!",

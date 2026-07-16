@@ -86,7 +86,7 @@ LESSON_CONTENT[107]={
         {p:"Ab4",d:"w",label:"\u{266D}VI"},{p:"C5",d:"w",chord:true},{p:"Eb5",d:"w",chord:true},
         {p:"Bb4",d:"w",label:"\u{266D}VII"},{p:"D5",d:"w",chord:true},{p:"F5",d:"w",chord:true},
         {p:"C5",d:"w",label:"I"},{p:"E5",d:"w",chord:true},{p:"G5",d:"w",chord:true},{bar:"final"}],width:520},
-      kb:{start:60,octaves:2,labels:true} }
+      kb:{start:65,octaves:1.5,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Modal-Mixture Identification",
@@ -107,7 +107,7 @@ LESSON_CONTENT[107]={
       miaIntro:"Follow the chromatic inner voice A–A♭–G.",
       spec:{seq:[65,69,72,65,68,72,60,64,67],
         names:["F (root of IV)","A (3rd of IV)","C (5th of IV)","F (root of iv)","A♭ (borrowed 3rd of iv)","C (5th of iv)","C (root of I)","E (3rd of I)","G (5th of I)"],
-        start:60, octaves:2, title:"Play each complete chord: IV → iv → I"},
+        start:60, octaves:1, title:"Play each complete chord: IV → iv → I"},
       result:(score)=>score!==null?"You performed the mixture progression.":null },
     { type:"symbol-hunt", title:"Game 3 · Borrowed or Diatonic?",
       intro:"Examine each chord in a C-major context and determine whether it is diatonic or drawn from the parallel minor.",

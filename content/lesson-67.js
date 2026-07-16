@@ -150,12 +150,12 @@ LESSON_CONTENT[67]={
         {p:"A4",d:"q",label:"3/IV"},{p:"B4",d:"q",label:"P"},{p:"C5",d:"h",label:"5/IV"},{bar:"single"},
         {p:"E5",d:"q",label:"3/I"},{p:"D5",d:"q",label:"5/V7"},{p:"B4",d:"q",label:"3/V7"},{p:"D5",d:"q",label:"5"},{bar:"single"},
         {p:"C5",d:"w",label:"R — home!"},{bar:"final"}],width:780},
-      kb:{start:69,octaves:1,labels:true} },
+      kb:{start:69,octaves:1.1667,labels:true} },
     { caption:"The same melody twice: chord tones only, then with passing tones added on the weak beats.",
       staff:{clef:"treble",tempo:100,time:"4/4",notes:[
         {p:"C4",d:"h",label:"chord tones"},{p:"E4",d:"h"},{bar:"single"},{p:"G4",d:"h"},{p:"C5",d:"h"},{bar:"double"},
         {p:"C4",d:"q",label:"+ P tones"},{p:"D4",d:"q",label:"P"},{p:"E4",d:"q"},{p:"F4",d:"q",label:"P"},{bar:"single"},{p:"G4",d:"q"},{p:"A4",d:"q",label:"P"},{p:"B4",d:"q",label:"P"},{p:"C5",d:"q"},{bar:"final"}],width:780},
-      kb:{start:60,octaves:2,labels:true} }
+      kb:{start:60,octaves:1,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Composer's Checklist Sprint (45s)",
@@ -176,7 +176,7 @@ LESSON_CONTENT[67]={
       miaIntro:"Composer, meet performer! \u{1FA9C}",
       spec:{seq:[72,76,79,76, 69,71,72],
         names:["C (R)","E (3)","G (5)","E (3)","A (3rd of F)","B (P — passing!)","C (5th of F)"],
-        start:60, octaves:2, title:"The model melody, phrase one"},
+        start:65, octaves:1.5, title:"The model melody, phrase one"},
       result:(score)=>score!==null?"Composed AND performed!":null },
     { type:"symbol-hunt", title:"Game 3 · Safe-Note Spotter",
       intro:"A chord is called — click the melody fragment that fits ENTIRELY inside it!",

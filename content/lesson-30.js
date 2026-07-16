@@ -164,7 +164,7 @@ LESSON_CONTENT[30]={
       kb:{start:60,octaves:2,labels:true,marks:[65,67,69,70,72,74,76,77]} },
     { caption:"Key of B♭ — 2 flats (B♭, E♭). Every B and every E in the piece is played flat, in any octave, without another sign.",
       staff:{clef:"treble",tempo:100,keysig:"Bb",notes:[{p:"B3",sound:"Bb3",d:"q",label:"B♭"},{p:"C4",d:"q",label:"C"},{p:"D4",d:"q",label:"D"},{p:"E4",sound:"Eb4",d:"q",label:"E♭"},{p:"F4",d:"q",label:"F"},{p:"G4",d:"q",label:"G"},{p:"A4",d:"q",label:"A"},{p:"B4",sound:"Bb4",d:"q",label:"B♭"}],width:540},
-      kb:{start:57,octaves:2,labels:true,marks:[58,60,62,63,65,67,69,70]} }
+      kb:{start:57,octaves:1.1667,labels:true,marks:[58,60,62,63,65,67,69,70]} }
   ],
   games:[
     { type:"order-tap", title:"Game 1 · Order of Flats Race",

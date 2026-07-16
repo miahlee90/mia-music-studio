@@ -195,7 +195,7 @@ LESSON_CONTENT[59]={
         {p:"C4",d:"w",label:"Cm"},{p:"Eb4",d:"w",chord:true},{p:"G4",d:"w",chord:true},
         {p:"C4",d:"w",label:"C+"},{p:"E4",d:"w",chord:true},{p:"G#4",d:"w",chord:true},
         {p:"C4",d:"w",label:"C°"},{p:"Eb4",d:"w",chord:true},{p:"Gb4",d:"w",chord:true}],width:560},
-      kb:{start:60,octaves:2,labels:true} },
+      kb:{start:60,octaves:0.9167,labels:true} },
     { caption:"The complete major-triad scale of C: I ii iii IV V vi vii° I. Listen for the vii° — the built-in troublemaker that makes the final I feel so earned.",
       staff:{clef:"treble",tempo:90,notes:[
         {p:"C4",d:"w",label:"I"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},
@@ -219,7 +219,7 @@ LESSON_CONTENT[59]={
       miaIntro:"One root, four moods! \u{1FA9C}",
       spec:{seq:[60,64,67, 60,64,68, 60,63,67, 60,63,66],
         names:["C","E","G — major \u{2600}\u{FE0F}","C","E","G♯ — augmented \u{1F388}","C","E♭","G — minor \u{1F311}","C","E♭","G♭ — diminished \u{1F32A}\u{FE0F}"],
-        start:60, octaves:2, title:"C → C+ → Cm → C°, chord by chord"},
+        start:60, octaves:0.9167, title:"C → C+ → Cm → C°, chord by chord"},
       result:(score)=>score!==null?"All four qualities under your fingers!":null },
     { type:"symbol-hunt", title:"Game 3 · Symbol Match",
       intro:"C, Cm, C+ and C° on cards — click what each round calls!",

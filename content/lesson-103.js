@@ -103,7 +103,7 @@ LESSON_CONTENT[103]={
         {p:"B4",d:"q"},{p:"C5",d:"q"},{p:"D5",d:"q"},{bar:"single"},
         {p:"A4",d:"q"},{p:"G4",d:"h"},{bar:"final"}],
         beams:[[0,1],[12,13],[16,17]],width:900},
-      kb:{start:62,octaves:1,labels:true} },
+      kb:{start:62,octaves:1.1667,labels:true} },
     { caption:"A march phrase: duple meter, dotted tread, strong downbeats — left, right, left, right.",
       staff:{clef:"treble",time:"2/4",tempo:112,notes:[
         {p:"C4",d:"q.",artic:"accent"},{p:"C4",d:"8"},{bar:"single"},

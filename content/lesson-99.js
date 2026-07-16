@@ -96,14 +96,14 @@ LESSON_CONTENT[99]={
       staff:{clef:"treble",tempo:84,notes:[
         {p:"C4",d:"q"},{p:"E4",d:"q"},{p:"G4",d:"q"},{p:"C5",d:"h",label:"C ends"},{bar:"double"},
         {p:"D4",d:"q",label:"D begins!"},{p:"F#4",d:"q"},{p:"A4",d:"q"},{p:"D5",d:"h"},{bar:"final"}],width:560},
-      kb:{start:60,octaves:2,labels:true} },
+      kb:{start:60,octaves:1.3333,labels:true} },
     { caption:"Modulation isn't only major-to-major. In G major, Em is the pivot (vi of G = i of E minor); B7 → Em then cadences in the new minor key.",
       staff:{clef:"treble",tempo:72,notes:[
         {p:"G4",d:"w",label:"I (G)"},{p:"B4",d:"w",chord:true},{p:"D5",d:"w",chord:true},
         {p:"E4",d:"w",label:"pivot vi=i"},{p:"G4",d:"w",chord:true},{p:"B4",d:"w",chord:true},
         {p:"B3",d:"w",label:"V7 (of Em)"},{p:"D#4",d:"w",chord:true},{p:"F#4",d:"w",chord:true},{p:"A4",d:"w",chord:true},
         {p:"E4",d:"w",label:"i (Em!)"},{p:"G4",d:"w",chord:true},{p:"B4",d:"w",chord:true},{bar:"final"}],width:560},
-      kb:{start:57,octaves:1.41,labels:true} }
+      kb:{start:57,octaves:1.5833,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Modulation Identification (45s)",
@@ -125,7 +125,7 @@ LESSON_CONTENT[99]={
       spec:{seq:[60,65,57,62,55],
         chords:[[60,64,67],[60,65,69],[57,60,64],[62,66,69,72],[55,62,67,71]],
         names:["C major (I of C)","F major (IV)","A minor (pivot: vi of C = ii of G)","D7 (V of G)","G major (I of G — cadence)"],
-        start:55, octaves:2, title:"C to G, via the shared chord"},
+        start:53, octaves:1.5833, title:"C to G, via the shared chord"},
       result:(score)=>score!==null?"You performed the pivot-chord modulation.":null },
     { type:"order-tap", title:"Game 3 · Build the Pivot Modulation",
       intro:"Arrange the stages of a pivot-chord modulation.",

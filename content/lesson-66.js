@@ -127,13 +127,13 @@ LESSON_CONTENT[66]={
         {p:"F4",d:"q",label:"IV"},{p:"G4",d:"q",label:"P"},{p:"A4",d:"q"},{p:"C5",d:"q"},{bar:"single"},
         {p:"B4",d:"q",label:"V7"},{p:"A4",d:"q",label:"P"},{p:"G4",d:"q"},{p:"B4",d:"q"},{bar:"single"},
         {p:"C5",d:"w",label:"I"},{bar:"final"}],width:680},
-      kb:{start:60,octaves:2,labels:true} },
+      kb:{start:60,octaves:1,labels:true} },
     { caption:"Neighbors at work: the melody keeps returning home — E-F-E (upper), G-F♯-G (lower) — while the C harmony holds still underneath.",
       staff:{clef:"treble",time:"3/4",tempo:100,notes:[
         {p:"E4",d:"q",label:"C chord"},{p:"F4",d:"q",label:"U"},{p:"E4",d:"q"},{bar:"single"},
         {p:"G4",d:"q"},{p:"F#4",d:"q",label:"L"},{p:"G4",d:"q"},{bar:"single"},
         {p:"C5",d:"h."},{bar:"final"}],width:560},
-      kb:{start:60,octaves:2,labels:true} }
+      kb:{start:60,octaves:1,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Term Sprint (45s)",
@@ -153,7 +153,7 @@ LESSON_CONTENT[66]={
       miaIntro:"Chord tones and decorations! \u{1FA9C}",
       spec:{seq:[60,62,64, 64,65,64, 62,60],
         names:["C (chord tone)","D (passing!)","E (chord tone)","E again","F (upper neighbor!)","E (home)","D (passing down)","C (home)"],
-        start:60, octaves:2, title:"A melody with passing and neighboring tones"},
+        start:60, octaves:0.4167, title:"A melody with passing and neighboring tones"},
       result:(score)=>score!==null?"Non-harmonic tones under your fingers!":null },
     { type:"symbol-hunt", title:"Game 3 · P, U or L?",
       intro:"Three-note figures on cards — click the one each round names! (Harmony: C chord.)",

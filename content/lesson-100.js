@@ -124,13 +124,13 @@ LESSON_CONTENT[100]={
         {p:"C5",d:"32",label:"mordent"},{p:"D5",d:"32"},{p:"C5",d:"16"},{p:"C5",d:"8"},
         {p:"D5",d:"16",label:"turn"},{p:"C5",d:"16"},{p:"B4",d:"16"},{p:"C5",d:"16"},{bar:"final"}],
         beams:[[0,7,3],[8,11],[8,10,2],[8,9,3],[12,15,2]],arcs:[{from:10,to:11,type:"tie"}],width:720},
-      kb:{start:69,octaves:1,labels:true} },
+      kb:{start:69,octaves:0.5833,labels:true} },
     { caption:"Grace notes in context: a crushed acciaccatura into the downbeat, then an appoggiatura that leans on the harmony before resolving.",
       staff:{clef:"treble",tempo:88,notes:[
         {p:"B4",d:"32",label:"crush"},{p:"C5",d:"32"},{p:"C5",d:"16"},{p:"C5",d:"8"},
         {p:"D5",d:"q",label:"lean…"},{p:"C5",d:"q"},{bar:"final"}],
         beams:[[0,3],[0,2,2],[0,1,3]],arcs:[{from:1,to:2,type:"tie"},{from:2,to:3,type:"tie"}],width:440},
-      kb:{start:69,octaves:1,labels:true} }
+      kb:{start:69,octaves:0.5833,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Ornament Identification (45s)",
@@ -151,7 +151,7 @@ LESSON_CONTENT[100]={
       miaIntro:"Upper neighbor → main note → lower neighbor → main note.",
       spec:{seq:[62,60,59,60],
         names:["D (upper)","C (the note)","B (lower)","C (home)"],
-        start:55, octaves:1, title:"A written-out turn"},
+        start:59, octaves:0.4167, title:"A written-out turn"},
       result:(score)=>score!==null?"You performed the turn correctly.":null },
     { type:"order-tap", title:"Game 3 · Build the Turn",
       intro:"Arrange the four pitches of the indicated turn in order.",

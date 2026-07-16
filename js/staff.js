@@ -404,6 +404,7 @@ const Staff=(()=>{
     const chordMembers=new Set(), chordGroups={};
     items.forEach((n,i)=>{ if(n&&n.chord&&!n.rest){ let b=i-1; while(b>0&&items[b]&&items[b].chord)b--;
       if(!chordGroups[b]) chordGroups[b]=[b]; chordGroups[b].push(i); chordMembers.add(i); chordMembers.add(b); }});
+    const labelSlot={};
     placed.forEach(({n,i,clef,y0,x,y,kind,accShift})=>{
       if(kind==="bar"){
         const yTop=grand? y0t : y0, yBot=grand? y0b+4*GAP : y0+4*GAP;
@@ -434,6 +435,10 @@ const Staff=(()=>{
       }
       if(n.label){ const hw=Math.min(W/2-4, 4+String(n.label).length*3.4);
         const lx=Math.max(hw+4, Math.min(W-hw-4, x));
+        /* v8.7: stack multiple labels at the same x (chord members) so they
+           never overlap — each additional label drops one row below. */
+        const _lk=Math.round(x), _ls=labelSlot[_lk]||0; labelSlot[_lk]=_ls+1;
+        const ly=labelY+_ls*11; maxEl=Math.max(maxEl,ly+10);
         /* v8.3 - figured-bass labels: real stacked figures (6 over 5), larger + bold.
            Two accepted forms: unicode super/subscript ("I⁶₄") and a plain slash
            form ("6/4", "V6/5") — the slash form is restricted to Roman-numeral
@@ -445,16 +450,16 @@ const Staff=(()=>{
         const sl=lab.match(/^([IViv]*)(\d)\/(\d)$/);
         function stackFig(base,top,bot){
           const cx=base? lx+2 : lx, an=base? "start":"middle";
-          if(base) parts.push(`<text class="lbl" x="${lx+1}" y="${labelY}" text-anchor="end">${base}</text>`);
-          parts.push(`<text class="lbl fig" x="${cx}" y="${labelY-4}" text-anchor="${an}">${top}</text>`);
-          if(bot!=="") parts.push(`<text class="lbl fig" x="${cx}" y="${labelY+7}" text-anchor="${an}">${bot}</text>`);
+          if(base) parts.push(`<text class="lbl" x="${lx+1}" y="${ly}" text-anchor="end">${base}</text>`);
+          parts.push(`<text class="lbl fig" x="${cx}" y="${ly-4}" text-anchor="${an}">${top}</text>`);
+          if(bot!=="") parts.push(`<text class="lbl fig" x="${cx}" y="${ly+7}" text-anchor="${an}">${bot}</text>`);
         }
         if(fm){
           const SUP={"⁰":0,"¹":1,"²":2,"³":3,"⁴":4,"⁵":5,"⁶":6,"⁷":7,"⁸":8,"⁹":9};
           stackFig(fm[1], [...fm[2]].map(c=>SUP[c]).join(""), [...fm[3]].map(c=>c.charCodeAt(0)-0x2080).join(""));
         } else if(sl && (sl[1] || FIGSET[sl[2]+"/"+sl[3]])){
           stackFig(sl[1], sl[2], sl[3]);
-        } else parts.push(`<text class="lbl" x="${lx}" y="${labelY}" text-anchor="middle">${n.label}</text>`); }
+        } else parts.push(`<text class="lbl" x="${lx}" y="${ly}" text-anchor="middle">${n.label}</text>`); }
     });
     /* v7.8 - one shared stem per stemmed chord group */
     Object.keys(chordGroups).forEach(b=>{

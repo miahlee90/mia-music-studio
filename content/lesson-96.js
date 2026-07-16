@@ -103,7 +103,7 @@ LESSON_CONTENT[96]={
         {p:"C4",d:"w",label:"IV"},{p:"F4",d:"w",chord:true},{p:"A4",d:"w",chord:true},
         {p:"C4",d:"w",label:"V7"},{p:"F4",d:"w",chord:true},{p:"B4",d:"w",chord:true},{p:"D5",d:"w",chord:true},
         {p:"C4",d:"w",label:"I"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{bar:"final"}],width:620},
-      kb:{start:60,octaves:1.16,labels:true} }
+      kb:{start:60,octaves:1.3333,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Nonchord-Tone Identification (45s)",

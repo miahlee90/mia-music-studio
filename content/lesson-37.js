@@ -165,7 +165,7 @@ LESSON_CONTENT[37]={
         {p:"C4",d:"w"},{p:"E4",d:"w",chord:true,acc:"n"},
         {p:"C4",d:"w"},{p:"E4",d:"w",chord:true,acc:"#",sound:"F4"}],
         brackets:[{from:0,to:1,label:"dim 3"},{from:2,to:3,label:"m3"},{from:4,to:5,label:"M3"},{from:6,to:7,label:"aug 3"}],width:560},
-      kb:{start:60,octaves:1,labels:true} }
+      kb:{start:60,octaves:0.3333,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Five-Quality Sprint (45s)",

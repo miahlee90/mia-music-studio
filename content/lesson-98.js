@@ -97,7 +97,7 @@ LESSON_CONTENT[98]={stackFigures:true,
       staff:{clef:"treble",tempo:72,notes:[
         {p:"A3",d:"w",label:"V/V = A7"},{p:"C#4",d:"w",chord:true},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},
         {p:"D4",d:"w",label:"V = D"},{p:"F#4",d:"w",chord:true},{p:"A4",d:"w",chord:true},{bar:"final"}],width:360},
-      kb:{start:57,octaves:1,labels:true} }
+      kb:{start:57,octaves:1.1667,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Applied-Dominant Identification",
@@ -119,7 +119,7 @@ LESSON_CONTENT[98]={stackFigures:true,
       spec:{seq:[60,62,67,72],
         chords:[[60,64,67],[62,66,69],[67,71,74],[64,67,72]],
         names:["C major (I)","D major (V/V — the F♯ chord)","G major (V)","C major (I — home, 1st inversion)"],
-        start:60, octaves:1, title:"Press each root — hear the chord:  I → V/V → V → I"},
+        start:60, octaves:1.3333, title:"Press each root — hear the chord:  I → V/V → V → I"},
       result:(score)=>score!==null?"You performed the applied-dominant progression.":null },
     { type:"symbol-hunt", title:"Game 3 · Identify the Secondary Dominant",
       intro:"Examine each chromatic chord and its resolution, then select the correct secondary-dominant label.",

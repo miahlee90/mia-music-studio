@@ -131,7 +131,7 @@ LESSON_CONTENT[86]={stackFigures:true,
         {p:"A3",d:"w",label:"vi"},{p:"C4",d:"w",chord:true},{p:"E4",d:"w",chord:true},
         {p:"D4",d:"w",label:"ii"},{p:"F4",d:"w",chord:true},{p:"A4",d:"w",chord:true},
         {p:"G4",d:"w",label:"V"},{p:"B4",d:"w",chord:true},{p:"D5",d:"w",chord:true},{bar:"final"}],width:600},
-      kb:{start:57,octaves:2,labels:true} }
+      kb:{start:57,octaves:1.5833,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Harmonic-Function Sprint (45s)",

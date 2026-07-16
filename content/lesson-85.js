@@ -125,7 +125,7 @@ LESSON_CONTENT[85]={
         {p:"F4",d:"q",label:"VI"},{p:"A4",d:"q",chord:true},{p:"C5",d:"q",chord:true},
         {p:"G#4",d:"q",label:"vii°"},{p:"B4",d:"q",chord:true},{p:"D5",d:"q",chord:true},
         {p:"A4",d:"w",label:"i"},{p:"C5",d:"w",chord:true},{p:"E5",d:"w",chord:true},{bar:"final"}],width:680},
-      kb:{start:57,octaves:2,labels:true} }
+      kb:{start:57,octaves:1.5833,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Triad-Quality Pattern (45s)",
@@ -146,7 +146,7 @@ LESSON_CONTENT[85]={
       miaIntro:"Each scale degree becomes a triad root.",
       spec:{seq:[60,62,64,65,67,69,71,72],
         names:["C (I)","D (ii)","E (iii)","F (IV)","G (V)","A (vi)","B (vii°)","C (I)"],
-        start:60, octaves:2, title:"Diatonic roots, degree by degree"},
+        start:60, octaves:1, title:"Diatonic roots, degree by degree"},
       result:(score)=>score!==null?"You played all seven triad roots correctly.":null },
     { type:"symbol-hunt", title:"Game 3 · Which Triad Is It?",
       intro:"Examine each diatonic triad in C major and select its Roman numeral.",

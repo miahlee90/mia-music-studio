@@ -193,13 +193,13 @@ LESSON_CONTENT[51]={stackFigures:true,
       staff:{clef:"treble",tempo:60,notes:[
         {p:"C4",d:"w",label:"root position"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},
         {p:"E4",d:"w",label:"1st inversion"},{p:"G4",d:"w",chord:true},{p:"C5",d:"w",chord:true}],width:420},
-      kb:{start:60,octaves:2,labels:true} },
+      kb:{start:60,octaves:1,labels:true} },
     { caption:"WHY musicians flip chords: listen to the BASS. With G major in 1st inversion in the middle, the bass line walks C → B → C.",
       staff:{clef:"treble",tempo:70,notes:[
         {p:"C4",d:"w",label:"C"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},
         {p:"B3",d:"w",label:"G (1st inv.)"},{p:"D4",d:"w",chord:true},{p:"G4",d:"w",chord:true},
         {p:"C4",d:"w",label:"C"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{bar:"final"}],width:460},
-      kb:{start:48,octaves:2,labels:true} }
+      kb:{start:59,octaves:1,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Position Sprint (45s)",

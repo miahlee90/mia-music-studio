@@ -119,7 +119,7 @@ LESSON_CONTENT[27]={
       kb:{start:60,octaves:2,labels:true,marks:[67,69,71,72,74,76,78,79]} },
     { caption:"The D major scale: D and A tetrachords. C is raised to C♯ — and F♯ carries over from G major.",
       staff:{clef:"treble",tempo:100,notes:[{p:"D4",d:"q",label:"D"},{p:"E4",d:"q",label:"E"},{p:"F#4",d:"q",label:"F♯"},{p:"G4",d:"q",label:"G"},{p:"A4",d:"q",label:"A"},{p:"B4",d:"q",label:"B"},{p:"C#5",d:"q",label:"C♯"},{p:"D5",d:"q",label:"D"}],steps:[{from:0,to:1,label:"W"},{from:1,to:2,label:"W"},{from:2,to:3,label:"H"},{from:3,to:4,label:"W"},{from:4,to:5,label:"W"},{from:5,to:6,label:"W"},{from:6,to:7,label:"H"}],brackets:[{from:0,to:3,label:"D tetrachord"},{from:4,to:7,label:"A tetrachord"}],width:540},
-      kb:{start:60,octaves:2,labels:true,marks:[62,64,66,67,69,71,73,74]} }
+      kb:{start:60,octaves:1.3333,labels:true,marks:[62,64,66,67,69,71,73,74]} }
   ],
   games:[
     { type:"symbol-hunt", title:"Game 1 · Sharp Hunt",

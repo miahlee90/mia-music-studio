@@ -80,13 +80,13 @@ LESSON_CONTENT[106]={
         {p:"F4",d:"w",label:"It+6"},{p:"A4",d:"w",chord:true},{p:"D#5",d:"w",chord:true},
         {p:"E4",d:"w",label:"V"},{p:"G#4",d:"w",chord:true},{p:"E5",d:"w",chord:true},
         {p:"A4",d:"w",label:"i"},{p:"C5",d:"w",chord:true},{p:"E5",d:"w",chord:true},{bar:"final"}],width:520},
-      kb:{start:60,octaves:2,labels:true} },
+      kb:{start:60,octaves:1.3333,labels:true} },
     { caption:"The three flavors side by side: Italian (3 notes), French (+2), German (+♭3). One frame, three national colors.",
       staff:{clef:"treble",tempo:66,notes:[
         {p:"F4",d:"w",label:"It"},{p:"A4",d:"w",chord:true},{p:"D#5",d:"w",chord:true},
         {p:"F4",d:"w",label:"Fr"},{p:"A4",d:"w",chord:true},{p:"B4",d:"w",chord:true},{p:"D#5",d:"w",chord:true},
         {p:"F4",d:"w",label:"Ger"},{p:"A4",d:"w",chord:true},{p:"C5",d:"w",chord:true},{p:"D#5",d:"w",chord:true},{bar:"final"}],width:560},
-      kb:{start:60,octaves:2,labels:true} }
+      kb:{start:60,octaves:1.3333,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Augmented-Sixth Identification (45s)",
@@ -107,7 +107,7 @@ LESSON_CONTENT[106]={
       miaIntro:"Resolve both tendency tones outward by half step.",
       spec:{seq:[53,63,52,64],
         names:["F (♭6)","D♯ (♯4)","E (♭6 falls)","E (♯4 rises — octave!)"],
-        start:52, octaves:2, title:"The outward resolution"},
+        start:52, octaves:1, title:"The outward resolution"},
       result:(score)=>score!==null?"You resolved the augmented-sixth interval correctly.":null },
     { type:"symbol-hunt", title:"Game 3 · Identify the Chord Type",
       intro:"Examine each augmented-sixth chord in A minor and identify it as Italian, French, or German.",

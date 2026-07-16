@@ -143,12 +143,12 @@ LESSON_CONTENT[72]={
         {p:"E4",d:"8",label:"transposed"},{p:"E4",d:"8"},{p:"E4",d:"8"},{p:"A4",d:"q."},{bar:"single"},
         {p:"G4",d:"8",label:"again!"},{p:"G4",d:"8"},{p:"G4",d:"8"},{p:"C5",d:"q."},{bar:"final"}],
         beams:[[0,2],[5,7],[10,12]],width:620},
-      kb:{start:60,octaves:2,labels:true} },
+      kb:{start:60,octaves:1,labels:true} },
     { caption:"Two phrases in question-and-answer: the first pauses on G (incomplete), the second settles on C (complete). Every simple song breathes this way.",
       staff:{clef:"treble",tempo:100,time:"5/4",notes:[
         {p:"C4",d:"q",label:"phrase 1…"},{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"G4",d:"h",label:"phrase ends (incomplete)"},{bar:"single"},
         {p:"E4",d:"q",label:"phrase 2…"},{p:"D4",d:"q"},{p:"B3",d:"q"},{p:"C4",d:"h",label:"phrase ends (complete)"},{bar:"final"}],width:680},
-      kb:{start:57,octaves:2,labels:true} }
+      kb:{start:57,octaves:1.1667,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Building-Block Sprint (45s)",
@@ -169,7 +169,7 @@ LESSON_CONTENT[72]={
       miaIntro:"Fate knocks at the door! \u{1FA9C}",
       spec:{seq:[67,67,67,63, 65,65,65,62],
         names:["G","G","G","E♭ — the LONG one!","F (transposed!)","F","F","D — long again"],
-        start:60, octaves:2, title:"The four-note motive, original and transposed"},
+        start:60, octaves:0.9167, title:"The four-note motive, original and transposed"},
       result:(score)=>score!==null?"You just played music's most famous motive!":null },
     { type:"symbol-hunt", title:"Game 3 · Motive Detective",
       intro:"Original, transposed, varied — or unrelated? Click what each round names!",

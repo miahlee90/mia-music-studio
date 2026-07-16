@@ -180,12 +180,12 @@ LESSON_CONTENT[69]={
         {p:"A4",d:"q",label:"5"},{p:"Bb4",d:"q",label:"3/iv"},{p:"G4",d:"h",label:"R/iv"},{bar:"single"},
         {p:"A4",d:"q",label:"R/V7"},{p:"C#5",d:"q",label:"3/V7"},{p:"E5",d:"h",label:"5/V7"},{bar:"single"},
         {p:"D5",d:"w",label:"R/i — home"},{bar:"final"}],width:800},
-      kb:{start:60,octaves:2,labels:true} },
+      kb:{start:60,octaves:1.3333,labels:true} },
     { caption:"The same melody twice: chord tones only, then with a passing tone and an upper neighbor added.",
       staff:{clef:"treble",tempo:100,time:"4/4",notes:[
         {p:"D4",d:"h",label:"chord tones"},{p:"F4",d:"h"},{bar:"single"},{p:"A4",d:"h"},{p:"D5",d:"h"},{bar:"double"},
         {p:"D4",d:"q",label:"+ P & U"},{p:"E4",d:"q",label:"P"},{p:"F4",d:"q"},{p:"G4",d:"q",label:"P"},{bar:"single"},{p:"A4",d:"q"},{p:"Bb4",d:"q",label:"U"},{p:"A4",d:"q"},{p:"D5",d:"q"},{bar:"final"}],width:800},
-      kb:{start:60,octaves:2,labels:true} }
+      kb:{start:60,octaves:1.3333,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Label Sprint (45s)",
@@ -206,7 +206,7 @@ LESSON_CONTENT[69]={
       miaIntro:"Composer's fingers on! \u{1FA9C}",
       spec:{seq:[62,62,69,69,67,69, 65,62],
         names:["D (R)","D (R)","A (5)","A (5)","G (L — the lower neighbor!)","A (5)","F (3)","D (R — home)"],
-        start:57, octaves:2, title:"A Pat-A-Pan-style phrase in D minor"},
+        start:57, octaves:1.1667, title:"A Pat-A-Pan-style phrase in D minor"},
       result:(score)=>score!==null?"Model phrase performed!":null },
     { type:"symbol-hunt", title:"Game 3 · Minor Safe-Note Spotter",
       intro:"A D-minor chord is called — click the melody fragment that fits inside it!",

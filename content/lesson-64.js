@@ -141,7 +141,7 @@ LESSON_CONTENT[64]={
         {p:"C5",d:"q",label:"IV"},{p:"F5",d:"q",chord:true},{p:"A5",d:"q",chord:true},
         {p:"D5",d:"q",label:"V7"},{p:"F5",d:"q",chord:true},{p:"G5",d:"q",chord:true},{p:"B5",d:"q",chord:true},
         {p:"E5",d:"q",label:"I"},{p:"G5",d:"q",chord:true},{p:"C6",d:"q",chord:true},{bar:"final"}],width:620},
-      kb:{start:60,octaves:3,labels:true} },
+      kb:{start:60,octaves:2,labels:true} },
     { caption:"The closing rules, isolated: a mini-phrase that begins on I, wanders, then lands V7 → I. This V7 → I cadence ends most harmonizations.",
       staff:{clef:"treble",tempo:80,notes:[
         {p:"C4",d:"w",label:"I"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},

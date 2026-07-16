@@ -105,7 +105,7 @@ LESSON_CONTENT[84]={
         {p:"F4",d:"8"},{p:"G4",d:"8"},{p:"A4",d:"8"},{p:"C5",d:"8"},{p:"A4",d:"8"},{p:"F4",d:"8"},{bar:"single"},
         {p:"G4",d:"8"},{p:"A4",d:"8"},{p:"B4",d:"8"},{p:"D5",d:"8"},{p:"B4",d:"8"},{p:"G4",d:"8"},{bar:"final"}],
         beams:[[0,2],[3,5],[7,9],[10,12],[14,16],[17,19]],width:660},
-      kb:{start:60,octaves:2,labels:true} },
+      kb:{start:60,octaves:1.3333,labels:true} },
     { caption:"Accidentals keep intervals exact: the motive D-F♯-A in D major becomes E♭-G-B♭ in E♭ major — every note up a half step.",
       staff:{clef:"treble",tempo:96,notes:[
         {p:"D4",d:"q"},{p:"F#4",d:"q"},{p:"A4",d:"h"},{bar:"single"},
@@ -131,7 +131,7 @@ LESSON_CONTENT[84]={
       miaIntro:"Preserve the scale-degree pattern in both keys.",
       spec:{seq:[60,62,64,60, 65,67,69,65],
         names:["C (1)","D (2)","E (3)","C (1)","F (new 1!)","G (2)","A (3)","F (1)"],
-        start:60, octaves:2, title:"The same degrees in two keys"},
+        start:60, octaves:0.9167, title:"The same degrees in two keys"},
       result:(score)=>score!==null?"You performed the motive correctly in both keys.":null },
     { type:"symbol-hunt", title:"Game 3 · Find the Transposition",
       intro:"The original pattern is C–E–G. Select the requested transposition in each round.",

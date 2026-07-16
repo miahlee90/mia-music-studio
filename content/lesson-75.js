@@ -117,7 +117,7 @@ LESSON_CONTENT[75]={
         {p:"F4",d:"8",label:"C"},{p:"A4",d:"8"},{p:"C5",d:"q"},{p:"A4",d:"q"},{p:"C4",d:"q"},{bar:"double"},
         {p:"G4",d:"8",label:"A"},{p:"G4",d:"8"},{p:"E4",d:"q"},{p:"G4",d:"q"},{p:"C5",d:"h"},{bar:"final"}],
         beams:[[0,1],[6,7],[12,13],[18,19],[24,25]],width:940},
-      kb:{start:57,octaves:2,labels:true} }
+      kb:{start:57,octaves:1.25,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Rondo Sprint (45s)",
@@ -138,7 +138,7 @@ LESSON_CONTENT[75]={
       miaIntro:"Climb it — make it musical! \u{1FA9C}",
       spec:{seq:[67,67,64,67,72, 69,71,72,69, 67,67,64,67,72],
         names:["G (A!)","G","E","G","C — theme done","A (B: contrast)","B","C","A — contrast done","G (A RETURNS!)","G","E","G","C — rondo!"],
-        start:57, octaves:2, title:"A · B · A — a mini-rondo"},
+        start:64, octaves:0.6667, title:"A · B · A — a mini-rondo"},
       result:(score)=>score!==null?"Mini-rondo performed — bravo!":null },
     { type:"symbol-hunt", title:"Game 3 · Name That Form",
       intro:"Form patterns on cards — click the one each round names!",

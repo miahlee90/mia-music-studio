@@ -181,7 +181,7 @@ LESSON_CONTENT[54]={stackFigures:true,
         {p:"D4",d:"w",label:"V⁴₃"},{p:"F4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{p:"B4",d:"w",chord:true},
         {p:"F4",d:"w",label:"V⁴₂"},{p:"G4",d:"w",chord:true},{p:"B4",d:"w",chord:true},{p:"D5",d:"w",chord:true},
         {p:"E4",d:"w",label:"I⁶"},{p:"G4",d:"w",chord:true},{p:"C5",d:"w",chord:true},{bar:"final"}],width:640},
-      kb:{start:48,octaves:3,labels:true} }
+      kb:{start:53,octaves:1.9167,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Figure Sprint (45s)",

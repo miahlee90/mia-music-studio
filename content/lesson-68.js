@@ -137,13 +137,13 @@ LESSON_CONTENT[68]={
       staff:{clef:"treble",tempo:80,notes:[
         {p:"A4",d:"q",label:"i"},{p:"B4",d:"q",label:"V7"},{p:"C5",d:"q",label:"i"},{p:"D5",d:"q",label:"iv"},
         {p:"E5",d:"q",label:"i"},{p:"F5",d:"q",label:"iv"},{p:"G#5",d:"q",label:"V7"},{p:"A5",d:"q",label:"i"},{bar:"final"}],width:560},
-      kb:{start:69,octaves:1,labels:true} },
+      kb:{start:69,octaves:1.1667,labels:true} },
     { caption:"The minor cadence: iv → V7 → i. The leading tone G♯ pulls to the tonic.",
       staff:{clef:"treble",tempo:80,notes:[
         {p:"D4",d:"w",label:"iv"},{p:"F4",d:"w",chord:true},{p:"A4",d:"w",chord:true},
         {p:"E4",d:"w",label:"V7"},{p:"G#4",d:"w",chord:true},{p:"D5",d:"w",chord:true},
         {p:"A3",d:"w",label:"i"},{p:"C4",d:"w",chord:true},{p:"E4",d:"w",chord:true},{bar:"final"}],width:480},
-      kb:{start:56,octaves:2,labels:true} }
+      kb:{start:56,octaves:1.6667,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Minor-Chart Sprint (45s)",
@@ -164,7 +164,7 @@ LESSON_CONTENT[68]={
       miaIntro:"The leading tone lives in V! \u{1FA9C}",
       spec:{seq:[62,65,69, 64,68,71,74, 69,72,76],
         names:["D (iv: root)","F","A","E (V7: root)","G♯ — the raised 7th!","B","D (the 7th)","A (i: home)","C","E"],
-        start:57, octaves:2, title:"iv → V7 → i in A minor"},
+        start:57, octaves:1.5833, title:"iv → V7 → i in A minor"},
       result:(score)=>score!==null?"The minor cadence is in your hands!":null },
     { type:"symbol-hunt", title:"Game 3 · Which Minor Chord Holds the Note?",
       intro:"A melody note is called — click the A-minor chord that CONTAINS it!",

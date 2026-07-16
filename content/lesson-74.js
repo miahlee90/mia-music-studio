@@ -118,14 +118,14 @@ LESSON_CONTENT[74]={
         {p:"G4",d:"q",label:"A: statement"},{p:"E4",d:"q"},{p:"C4",d:"q"},{p:"E4",d:"q"},{p:"G4",d:"h"},{bar:"double"},
         {p:"A4",d:"q",label:"B: NEW material"},{p:"Bb4",d:"q"},{p:"A4",d:"q"},{p:"F4",d:"q"},{p:"D4",d:"h"},{bar:"double"},
         {p:"G4",d:"q",label:"A: restatement!"},{p:"E4",d:"q"},{p:"C4",d:"q"},{p:"E4",d:"q"},{p:"G4",d:"h"},{bar:"final"}],width:680},
-      kb:{start:57,octaves:2,labels:true} },
+      kb:{start:57,octaves:1.1667,labels:true} },
     { caption:"The same shape drawn with chords: I, then IV and V7, then I again — the harmony returns with the melody.",
       staff:{clef:"treble",tempo:90,notes:[
         {p:"C4",d:"w",label:"A: I chord"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},
         {p:"F4",d:"w",label:"B: away…"},{p:"A4",d:"w",chord:true},{p:"C5",d:"w",chord:true},
         {p:"G4",d:"w",label:"…farther…"},{p:"B4",d:"w",chord:true},{p:"F5",d:"w",chord:true},
         {p:"C4",d:"w",label:"A: I again"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{bar:"final"}],width:560},
-      kb:{start:57,octaves:2,labels:true} }
+      kb:{start:57,octaves:1.6667,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Ternary Sprint (45s)",
@@ -146,7 +146,7 @@ LESSON_CONTENT[74]={
       miaIntro:"A, then B, then A again! \u{1FA9C}",
       spec:{seq:[67,64,60,64,67, 69,70,65,62, 67,64,60,64,67],
         names:["G (A begins)","E","C","E","G (A ends)","A (B: new!)","B♭","F","D (B ends)","G (A RETURNS)","E","C","E","G — done!"],
-        start:57, octaves:2, title:"A · B · A under your fingers"},
+        start:57, octaves:1.1667, title:"A · B · A under your fingers"},
       result:(score)=>score!==null?"A-B-A performed!":null },
     { type:"symbol-hunt", title:"Game 3 · Statement or Contrast?",
       intro:"A-material, B-material, and the two endings — click what's called!",

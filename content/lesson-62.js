@@ -152,13 +152,13 @@ LESSON_CONTENT[62]={
         {p:"C4",d:"q",label:"Ionian"},{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"F4",d:"q"},{p:"G4",d:"q"},{p:"A4",d:"q"},{p:"B4",d:"q"},{bar:"double"},
         {p:"C4",d:"q",label:"Mixolydian"},{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"F4",d:"q"},{p:"G4",d:"q"},{p:"A4",d:"q"},{p:"Bb4",d:"q"},{bar:"double"},
         {p:"C4",d:"q",label:"Lydian"},{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"F#4",d:"q"},{p:"G4",d:"q"},{p:"A4",d:"q"},{p:"B4",d:"q"},{bar:"final"}],width:720},
-      kb:{start:60,octaves:2,labels:true} },
+      kb:{start:60,octaves:0.9167,labels:true} },
     { caption:"The white-key family: the same seven notes starting on C (Ionian), then on G (Mixolydian), then on F (Lydian) — one reliable way of finding every mode.",
       staff:{clef:"treble",tempo:120,notes:[
         {p:"C4",d:"q",label:"C→C: Ionian"},{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"F4",d:"q"},{p:"G4",d:"q"},{p:"A4",d:"q"},{p:"B4",d:"q"},{p:"C5",d:"q"},{bar:"double"},
         {p:"G4",d:"q",label:"G→G: Mixolydian"},{p:"A4",d:"q"},{p:"B4",d:"q"},{p:"C5",d:"q"},{p:"D5",d:"q"},{p:"E5",d:"q"},{p:"F5",d:"q"},{p:"G5",d:"q"},{bar:"double"},
         {p:"F4",d:"q",label:"F→F: Lydian"},{p:"G4",d:"q"},{p:"A4",d:"q"},{p:"B4",d:"q"},{p:"C5",d:"q"},{p:"D5",d:"q"},{p:"E5",d:"q"},{p:"F5",d:"q"},{bar:"final"}],width:680},
-      kb:{start:60,octaves:3,labels:true} }
+      kb:{start:60,octaves:1.9167,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Major-Mode Sprint (45s)",
@@ -171,7 +171,7 @@ LESSON_CONTENT[62]={
       miaIntro:"B♭ down, F♯ up! \u{1FA9C}",
       spec:{seq:[60,62,64,65,67,69,70,72, 60,62,64,66,67,69,71,72],
         names:["C","D","E","F","G","A","B♭ (the lowered 7th!)","C","C again","D","E","F♯ (the raised 4th!)","G","A","B","C"],
-        start:60, octaves:2, title:"C Mixolydian, then C Lydian"},
+        start:60, octaves:1, title:"C Mixolydian, then C Lydian"},
       result:(score)=>score!==null?"Both modes played perfectly!":null },
     { type:"symbol-hunt", title:"Game 3 · Mode Spotter",
       intro:"Three modes on C — click the one each round names!",

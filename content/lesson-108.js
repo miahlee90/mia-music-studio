@@ -69,13 +69,13 @@ LESSON_CONTENT[108]={
       staff:{clef:"treble",tempo:66,notes:[
         {p:"G3",d:"w",label:"G9"},{p:"B3",d:"w",chord:true},{p:"F4",d:"w",chord:true},{p:"A4",d:"w",chord:true},
         {p:"G3",d:"w",label:"G13"},{p:"B3",d:"w",chord:true},{p:"F4",d:"w",chord:true},{p:"E5",d:"w",chord:true},{bar:"final"}],width:440},
-      kb:{start:48,octaves:3,labels:true} },
+      kb:{start:53,octaves:1.9167,labels:true} },
     { caption:"The extended ii-V-I: Dm9 → G13 → Cmaj9 — Lesson 95's engine wearing its evening clothes.",
       staff:{clef:"treble",tempo:69,notes:[
         {p:"D4",d:"w",label:"Dm9"},{p:"F4",d:"w",chord:true},{p:"C5",d:"w",chord:true},{p:"E5",d:"w",chord:true},
         {p:"G3",d:"w",label:"G13"},{p:"B3",d:"w",chord:true},{p:"F4",d:"w",chord:true},{p:"E5",d:"w",chord:true},
         {p:"C4",d:"w",label:"Cmaj9"},{p:"E4",d:"w",chord:true},{p:"B4",d:"w",chord:true},{p:"D5",d:"w",chord:true},{bar:"final"}],width:560},
-      kb:{start:48,octaves:3,labels:true} }
+      kb:{start:53,octaves:1.9167,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Extended-Chord Identification (45s)",
@@ -96,7 +96,7 @@ LESSON_CONTENT[108]={
       miaIntro:"Retain the guide tones and the thirteenth.",
       spec:{seq:[55,59,65,76],
         names:["G (root)","B (3rd)","F (7th)","E (13th)"],
-        start:55, octaves:2, title:"A practical G13"},
+        start:53, octaves:1.9167, title:"A practical G13"},
       result:(score)=>score!==null?"You compared the complete stack with a practical voicing.":null },
     { type:"symbol-hunt", title:"Game 3 · Identify the Extension",
       intro:"Examine each chord symbol and voicing, then identify the named extension.",

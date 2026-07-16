@@ -187,14 +187,14 @@ LESSON_CONTENT[58]={
         {p:"C4",d:"w",label:"Cm"},{p:"Eb4",d:"w",chord:true},{p:"G4",d:"w",chord:true},
         {p:"G4",d:"w",label:"G"},{p:"B4",d:"w",chord:true},{p:"D5",d:"w",chord:true},
         {p:"G4",d:"w",label:"Gm"},{p:"Bb4",d:"w",chord:true},{p:"D5",d:"w",chord:true}],width:560},
-      kb:{start:60,octaves:2,labels:true} },
+      kb:{start:60,octaves:1.3333,labels:true} },
     { caption:"The minor residents of C major: ii, iii and vi — Dm, Em, Am — played in a row, then resolved home to I. All white keys; the minors were hiding in plain sight.",
       staff:{clef:"treble",tempo:70,notes:[
         {p:"D4",d:"w",label:"ii"},{p:"F4",d:"w",chord:true},{p:"A4",d:"w",chord:true},
         {p:"E4",d:"w",label:"iii"},{p:"G4",d:"w",chord:true},{p:"B4",d:"w",chord:true},
         {p:"A4",d:"w",label:"vi"},{p:"C5",d:"w",chord:true},{p:"E5",d:"w",chord:true},
         {p:"C4",d:"w",label:"I"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{bar:"final"}],width:560},
-      kb:{start:60,octaves:2,labels:true} }
+      kb:{start:60,octaves:1.3333,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Major/Minor Sprint (45s)",
@@ -207,7 +207,7 @@ LESSON_CONTENT[58]={
       miaIntro:"Three minor triads! \u{1FA9C}",
       spec:{seq:[62,65,69, 69,72,76, 60,63,67],
         names:["D (root)","F (m3)","A (P5)","A (root)","C (m3)","E (P5)","C (root)","E♭ (m3 — black key!)","G (P5)"],
-        start:60, octaves:2, title:"Dm → Am → Cm, note by note"},
+        start:60, octaves:1.3333, title:"Dm → Am → Cm, note by note"},
       result:(score)=>score!==null?"Three minors under your fingers!":null },
     { type:"symbol-hunt", title:"Game 3 · m or Not?",
       intro:"Major and minor triads on cards — click the symbol each round calls!",

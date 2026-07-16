@@ -90,7 +90,7 @@ LESSON_CONTENT[89]={
         {p:"C5",d:"8"},{p:"B4",d:"8"},{p:"C5",d:"8"},{p:"A4",d:"8"},
         {p:"G4",d:"h",label:"arrival"},{bar:"final"}],
         beams:[[0,3],[4,7],[8,11]],width:660},
-      kb:{start:60,octaves:2,labels:true} },
+      kb:{start:65,octaves:0.9167,labels:true} },
     { caption:"A rising sequence building intensity: the same leap-and-step shape climbing three levels, then releasing at the top.",
       staff:{clef:"treble",tempo:100,notes:[
         {p:"C4",d:"8"},{p:"E4",d:"8"},{p:"D4",d:"q"},
@@ -119,7 +119,7 @@ LESSON_CONTENT[89]={
       miaIntro:"Begin each statement one scale step higher.",
       spec:{seq:[60,64,62, 62,65,64, 64,67,65],
         names:["C","E","D (level 1)","D","F","E (level 2)","E","G","F (level 3)"],
-        start:60, octaves:2, title:"One shape, three levels"},
+        start:60, octaves:0.9167, title:"One shape, three levels"},
       result:(score)=>score!==null?"You performed the rising tonal sequence correctly.":null },
     { type:"symbol-hunt", title:"Game 3 · Sequence or Repetition?",
       intro:"Examine each passage and determine whether it contains a sequence, exact repetition, or unrelated material.",

@@ -10,7 +10,8 @@ const Keyboard=(()=>{
        3-black group is visible) and extend the range up so the top note is unchanged. */
     if(((start%12)+12)%12===7){ start-=2; octaves+=2/12; }
     const whites=[],blacks=[];
-    for(let m=start;m<start+octaves*12+1;m++){
+    const _span=Math.round(octaves*12);
+    for(let m=start;m<=start+_span;m++){
       const s=m%12;
       if(WHITE_SEMIS.includes(s)) whites.push(m); else blacks.push(m);
     }

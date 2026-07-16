@@ -129,7 +129,7 @@ LESSON_CONTENT[31]={
       kb:{start:59,octaves:1,labels:true,marks:[59,61,63,64,66,68,70,71]} },
     { caption:"C♭ major — 7 flats. Different spelling, yet listen: EXACTLY the same scale, on exactly the same keys.",
       staff:{clef:"treble",tempo:100,keysig:"Cb",notes:[{p:"C4",sound:"B3",d:"q",label:"1"},{p:"D4",sound:"Db4",d:"q",label:"2"},{p:"E4",sound:"Eb4",d:"q",label:"3"},{p:"F4",sound:"E4",d:"q",label:"4"},{p:"G4",sound:"Gb4",d:"q",label:"5"},{p:"A4",sound:"Ab4",d:"q",label:"6"},{p:"B4",sound:"Bb4",d:"q",label:"7"},{p:"C5",sound:"B4",d:"q",label:"8"}],width:540},
-      kb:{start:59,octaves:1,labels:true,marks:[59,61,63,64,66,68,70,71]} }
+      kb:{start:59,octaves:1.0833,labels:true,marks:[59,61,63,64,66,68,70,71]} }
   ],
   games:[
     { type:"sig-match", title:"Game 1 · The GRAND Match-Up — all 15 keys!",
@@ -160,7 +160,7 @@ LESSON_CONTENT[31]={
     { type:"key-climb", title:"Game 4 · Climb B Major — five black keys!",
       intro:"The sharpest scale you know by heart: B major has FIVE black keys. Climb it fast and clean!",
       miaIntro:"The black-key mountain! \u{1F9D7}",
-      spec:{start:59, octaves:2, seq:[59,61,63,64,66,68,70,71],
+      spec:{start:59, octaves:1, seq:[59,61,63,64,66,68,70,71],
         names:["B","C♯","D♯","E","F♯","G♯","A♯","B"],
         title:"Play the B major scale — keynote first!"},
       result:(stars)=>stars>=3?"A flawless climb over five black keys!":null }

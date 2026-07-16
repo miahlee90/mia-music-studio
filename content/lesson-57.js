@@ -168,12 +168,12 @@ LESSON_CONTENT[57]={
         {p:"A3",d:"q",label:"natural"},{p:"B3",d:"q"},{p:"C4",d:"q"},{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"F4",d:"q"},{p:"G4",d:"q"},{p:"A4",d:"q"},{bar:"double"},
         {p:"A3",d:"q",label:"harmonic"},{p:"B3",d:"q"},{p:"C4",d:"q"},{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"F4",d:"q"},{p:"G#4",d:"q"},{p:"A4",d:"q"},{bar:"double"},
         {p:"A3",d:"q",label:"melodic ↑"},{p:"B3",d:"q"},{p:"C4",d:"q"},{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"F#4",d:"q"},{p:"G#4",d:"q"},{p:"A4",d:"q"},{bar:"final"}],width:680},
-      kb:{start:57,octaves:2,labels:true} },
+      kb:{start:57,octaves:1.1667,labels:true} },
     { caption:"The melodic minor's full round trip: ♯6 and ♯7 climbing up… then the naturals reappear on the way home. One scale, two faces.",
       staff:{clef:"treble",tempo:120,notes:[
         {p:"A3",d:"q"},{p:"B3",d:"q"},{p:"C4",d:"q"},{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"F#4",d:"q"},{p:"G#4",d:"q"},{p:"A4",d:"q"},
         {p:"G4",d:"q",acc:"n"},{p:"F4",d:"q",acc:"n"},{p:"E4",d:"q"},{p:"D4",d:"q"},{p:"C4",d:"q"},{p:"B3",d:"q"},{p:"A3",d:"h"},{bar:"final"}],width:680},
-      kb:{start:57,octaves:2,labels:true} }
+      kb:{start:57,octaves:1.1667,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Three-Form Fact Sprint (45s)",
@@ -193,7 +193,7 @@ LESSON_CONTENT[57]={
       miaIntro:"Up with lifts, down without! \u{1FA9C}",
       spec:{seq:[57,59,60,62,64,66,68,69, 67,65,64,62,60,59,57],
         names:["A","B","C","D","E","F♯ (raised 6!)","G♯ (raised 7!)","A — top!","G♮ (back to natural)","F♮","E","D","C","B","A — home"],
-        start:48, octaves:2, title:"A melodic minor: ascend raised, descend natural"},
+        start:53, octaves:1.5, title:"A melodic minor: ascend raised, descend natural"},
       result:(score)=>score!==null?"The shape-shifter, mastered in both directions!":null },
     { type:"symbol-hunt", title:"Game 3 · Form Spotter",
       intro:"Three A-minor scales on cards — click the form each round names!",

@@ -177,7 +177,7 @@ LESSON_CONTENT[70]={
       miaIntro:"C-C-C-C, F-F, C-C, G-F, C-C! \u{1FA9C}",
       spec:{seq:[48,48,48,48, 53,53, 48,48, 55,53, 48,48],
         names:["C (bar 1)","C (2)","C (3)","C (4)","F (5 — first change!)","F (6)","C (7)","C (8)","G (9 — the V bar!)","F (10 — step down)","C (11)","C (12 — done!)"],
-        start:48, octaves:2, title:"The 12-bar bass roots, in order"},
+        start:48, octaves:0.9167, title:"The 12-bar bass roots, in order"},
       result:(score)=>score!==null?"Twelve bars walked — hired for the gig!":null },
     { type:"symbol-hunt", title:"Game 3 · Blues Chord Spotter",
       intro:"The three chords of a C blues — click the bar's chord when called!",

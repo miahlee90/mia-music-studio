@@ -112,7 +112,7 @@ LESSON_CONTENT[36]={
       show:{ type:"staff", spec:{clef:"treble",tempo:70,notes:[
         {p:"C4",d:"w",x:150},{p:"E4",d:"w",chord:true},{p:"C4",d:"w",x:330},{p:"Eb4",d:"w",chord:true}],
         brackets:[{from:0,to:1,label:"M3 — 4 half steps"},{from:2,to:3,label:"m3 — 3 half steps"}],width:440},
-        kb:{start:60,octaves:1,labels:true,marks:[60,63,64]} },
+        kb:{start:60,octaves:0.3333,labels:true,marks:[60,63,64]} },
       try:{ type:"mc", choices:["Only the size — one half step smaller","The letter names","The interval number"], answer:0,
         success:"✓ Letters stay (still C to some kind of E, still a 3rd) — only the size shrinks by one half step.",
         fail:"C→E♭ still uses the letters C and E…",

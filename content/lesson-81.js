@@ -115,7 +115,7 @@ LESSON_CONTENT[81]={
         {p:"A3",d:"q"},{p:"C4",d:"q"},{p:"D4",d:"q"},{p:"E4",d:"q"},
         {p:"G4",d:"h"},{p:"E4",d:"q"},{p:"D4",d:"q"},
         {p:"C4",d:"q"},{p:"A3",d:"h",label:"home"},{bar:"final"}],width:600},
-      kb:{start:57,octaves:1,labels:true} }
+      kb:{start:57,octaves:1.1667,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Pentatonic Sprint (45s)",
@@ -136,7 +136,7 @@ LESSON_CONTENT[81]={
       miaIntro:"The scales share the same pitch collection but have different tonics.",
       spec:{seq:[60,62,64,67,69,72, 57,60,62,64,67,69],
         names:["C","D","E","G","A","C (top)","A (new home)","C","D","E","G","A (top)"],
-        start:57, octaves:2, title:"Major pentatonic, then its relative minor"},
+        start:57, octaves:1.25, title:"Major pentatonic, then its relative minor"},
       result:(score)=>score!==null?"You performed both pentatonic scales correctly.":null },
     { type:"symbol-hunt", title:"Game 3 · Spot the Pentatonic",
       intro:"Examine each scale and select the requested pentatonic scale.",

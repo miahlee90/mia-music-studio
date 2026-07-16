@@ -95,7 +95,7 @@ LESSON_CONTENT[91]={
         {p:"C5",d:"q",label:"A"},{p:"G4",d:"q"},{p:"C5",d:"h"},{bar:"single"},
         {p:"G4",d:"q",label:"B"},{p:"B4",d:"q"},{p:"D5",d:"q"},{p:"B4",d:"q"},{bar:"single"},
         {p:"C5",d:"q",label:"A"},{p:"G4",d:"q"},{p:"C5",d:"h",label:"home"},{bar:"final"}],width:560},
-      kb:{start:60,octaves:1.16,labels:true} }
+      kb:{start:65,octaves:0.9167,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Song-Form Identification (45s)",

@@ -163,13 +163,13 @@ LESSON_CONTENT[63]={
         {p:"A3",d:"q",label:"Dorian"},{p:"B3",d:"q"},{p:"C4",d:"q"},{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"F#4",d:"q"},{bar:"double"},
         {p:"A3",d:"q",label:"Phrygian"},{p:"Bb3",d:"q"},{p:"C4",d:"q"},{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"F4",d:"q"},{bar:"double"},
         {p:"A3",d:"q",label:"Locrian"},{p:"Bb3",d:"q"},{p:"C4",d:"q"},{p:"D4",d:"q"},{p:"Eb4",d:"q"},{p:"F4",d:"q"},{bar:"final"}],width:780},
-      kb:{start:57,octaves:2,labels:true} },
+      kb:{start:57,octaves:1.1667,labels:true} },
     { caption:"The white-key origins: D to D gives Dorian, E to E gives Phrygian, B to B gives Locrian — each white-key octave is a mode.",
       staff:{clef:"treble",tempo:120,notes:[
         {p:"D4",d:"q",label:"D→D: Dorian"},{p:"E4",d:"q"},{p:"F4",d:"q"},{p:"G4",d:"q"},{p:"A4",d:"q"},{p:"B4",d:"q"},{p:"C5",d:"q"},{p:"D5",d:"q"},{bar:"double"},
         {p:"E4",d:"q",label:"E→E: Phrygian"},{p:"F4",d:"q"},{p:"G4",d:"q"},{p:"A4",d:"q"},{p:"B4",d:"q"},{p:"C5",d:"q"},{p:"D5",d:"q"},{p:"E5",d:"q"},{bar:"double"},
         {p:"B3",d:"q",label:"B→B: Locrian"},{p:"C4",d:"q"},{p:"D4",d:"q"},{p:"E4",d:"q"},{p:"F4",d:"q"},{p:"G4",d:"q"},{p:"A4",d:"q"},{p:"B4",d:"q"},{bar:"final"}],width:680},
-      kb:{start:57,octaves:3,labels:true} }
+      kb:{start:57,octaves:1.5833,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Minor-Mode Sprint (45s)",
@@ -182,7 +182,7 @@ LESSON_CONTENT[63]={
       miaIntro:"Raised 6th, then lowered 2nd! \u{1FA9C}",
       spec:{seq:[57,59,60,62,64,66,67,69, 57,58,60,62,64,65,67,69],
         names:["A","B","C","D","E","F♯ (the raised 6th!)","G","A","A again","B♭ (the lowered 2nd!)","C","D","E","F","G","A"],
-        start:57, octaves:2, title:"A Dorian, then A Phrygian"},
+        start:57, octaves:1.1667, title:"A Dorian, then A Phrygian"},
       result:(score)=>score!==null?"Both modes played perfectly!":null },
     { type:"symbol-hunt", title:"Game 3 · Minor-Mode Spotter",
       intro:"Four modes on A — click the one each round names!",

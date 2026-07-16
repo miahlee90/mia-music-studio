@@ -96,7 +96,7 @@ LESSON_CONTENT[83]={
         {p:"E4",d:"w",label:"m6"},{p:"C5",d:"w",chord:true},{bar:"single"},
         {p:"D4",d:"w",label:"P5"},{p:"A4",d:"w",chord:true},
         {p:"A4",d:"w",label:"P4"},{p:"D5",d:"w",chord:true},{bar:"final"}],width:560},
-      kb:{start:60,octaves:2,labels:true} },
+      kb:{start:60,octaves:1.3333,labels:true} },
     { caption:"Compound intervals from C: a 9th (D), a 10th (E) and a 13th (A) — each a simple interval pushed past the octave.",
       staff:{clef:"treble",tempo:80,notes:[
         {p:"C4",d:"w",label:"9th"},{p:"D5",d:"w",chord:true},

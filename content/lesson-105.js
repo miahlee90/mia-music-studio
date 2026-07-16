@@ -69,11 +69,11 @@ LESSON_CONTENT[105]={stackFigures:true,
         {p:"D4",d:"w",label:"N6"},{p:"F4",d:"w",chord:true},{p:"Bb4",d:"w",chord:true},
         {p:"E4",d:"w",label:"V"},{p:"G#4",d:"w",chord:true},{p:"B4",d:"w",chord:true},
         {p:"A3",d:"w",label:"i"},{p:"C4",d:"w",chord:true},{p:"E4",d:"w",chord:true},{bar:"final"}],width:560},
-      kb:{start:57,octaves:2,labels:true} },
+      kb:{start:57,octaves:1.1667,labels:true} },
     { caption:"The melodic move: ♭2 (B♭) falls to the leading tone (G♯) — a diminished third.",
       staff:{clef:"treble",tempo:76,notes:[
         {p:"Bb4",d:"h",label:"\u{266D}2"},{p:"A4",d:"q",label:"(tonic)"},{p:"G#4",d:"h",label:"leading tone"},{p:"A4",d:"w",label:"home"},{bar:"final"}],width:440},
-      kb:{start:60,octaves:1,labels:true} }
+      kb:{start:65,octaves:0.5,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Neapolitan-Chord Identification",
@@ -95,7 +95,7 @@ LESSON_CONTENT[105]={stackFigures:true,
       spec:{seq:[57,50,52,45],
         chords:[[57,60,64],[50,53,58],[52,56,59],[45,48,52]],
         names:["Am (i)","B♭/D (N6)","E major (V)","Am (i)"],
-        start:45, octaves:2, title:"The Neapolitan progression: i - N6 - V - i"},
+        start:45, octaves:1.5833, title:"The Neapolitan progression: i - N6 - V - i"},
       result:(score)=>score!==null?"You performed both Neapolitan progressions.":null },
     { type:"symbol-hunt", title:"Game 3 · Identify the Neapolitan",
       intro:"Examine each chord in A minor and select the Neapolitan chord or its first inversion.",

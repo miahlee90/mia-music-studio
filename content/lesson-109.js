@@ -73,7 +73,7 @@ LESSON_CONTENT[109]={
       staff:{clef:"treble",tempo:66,notes:[
         {p:"C4",d:"w",label:"add9"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{p:"D5",d:"w",chord:true},
         {p:"C4",d:"w",label:"C6"},{p:"E4",d:"w",chord:true},{p:"G4",d:"w",chord:true},{p:"A4",d:"w",chord:true},{bar:"final"}],width:440},
-      kb:{start:60,octaves:2,labels:true} }
+      kb:{start:60,octaves:1.3333,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Suspended and Added-Tone Chords (45s)",
@@ -94,7 +94,7 @@ LESSON_CONTENT[109]={
       miaIntro:"In sus4, F replaces E; in add9, D is added beside the complete triad.",
       spec:{seq:[60,65,67, 60,64,67, 74],
         names:["C","F (the sus 4)","G","C","E (resolved!)","G","D (the added 9th)"],
-        start:60, octaves:2, title:"Three colors in one pass"},
+        start:60, octaves:1.3333, title:"Three colors in one pass"},
       result:(score)=>score!==null?"You performed and compared the three chords.":null },
     { type:"symbol-hunt", title:"Game 3 · Identify the Chord",
       intro:"Examine each pitch collection and identify the correct chord symbol.",

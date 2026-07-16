@@ -113,7 +113,7 @@ LESSON_CONTENT[82]={
         {p:"B4",d:"8"},{p:"C5",d:"8"},{p:"C#5",d:"8"},{p:"D5",d:"8"},
         {p:"E5",d:"h",label:"release!"},{bar:"final"}],
         beams:[[0,3],[4,7]],width:560},
-      kb:{start:60,octaves:2,labels:true} }
+      kb:{start:65,octaves:0.9167,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Equal-Interval Sprint (45s)",

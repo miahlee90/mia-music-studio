@@ -119,7 +119,7 @@ LESSON_CONTENT[28]={
       kb:{start:60,octaves:2,labels:true,marks:[65,67,69,70,72,74,76,77]} },
     { caption:"The B♭ major scale: B♭ and F tetrachords. E is lowered to E♭ — and B♭ carries over from F major.",
       staff:{clef:"treble",tempo:100,notes:[{p:"Bb3",d:"q",label:"B♭"},{p:"C4",d:"q",label:"C"},{p:"D4",d:"q",label:"D"},{p:"Eb4",d:"q",label:"E♭"},{p:"F4",d:"q",label:"F"},{p:"G4",d:"q",label:"G"},{p:"A4",d:"q",label:"A"},{p:"Bb4",d:"q",label:"B♭"}],steps:[{from:0,to:1,label:"W"},{from:1,to:2,label:"W"},{from:2,to:3,label:"H"},{from:3,to:4,label:"W"},{from:4,to:5,label:"W"},{from:5,to:6,label:"W"},{from:6,to:7,label:"H"}],brackets:[{from:0,to:3,label:"B♭ tetrachord"},{from:4,to:7,label:"F tetrachord"}],width:540},
-      kb:{start:57,octaves:2,labels:true,marks:[58,60,62,63,65,67,69,70]} }
+      kb:{start:57,octaves:1.1667,labels:true,marks:[58,60,62,63,65,67,69,70]} }
   ],
   games:[
     { type:"symbol-hunt", title:"Game 1 · Flat Hunt",
