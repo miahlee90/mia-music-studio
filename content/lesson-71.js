@@ -1,6 +1,6 @@
 /* Lesson 71 — The Blues Scale (AEMT Book 3, Unit 17 FINALE)
    Built from drafts/UNIT 17 – Lesson 71.md; AEMT3 p.111 verified by render.
-   Core: the blues sound = the progression (L70) + a unique SCALE. The BLUES
+   Core: the blues sound = the progression + a unique SCALE. The BLUES
    SCALE has only 7 notes with a flatted 3rd, 5th and 7th — the BLUE NOTES.
    Recipe from major: 1) remove degrees 2 and 6; 2) flat the 3rd and 7th;
    3) add a flatted 5th. C blues: C-E♭-F-G♭-G-B♭-C. IMPROVISING = to

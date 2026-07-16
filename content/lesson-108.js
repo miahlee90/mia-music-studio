@@ -21,7 +21,7 @@ LESSON_CONTENT[108]={
   },
   objectives:[
     "Build extensions: keep stacking 3rds past the 7th",
-    "Name them by compound intervals: 9th, 11th, 13th (L83)",
+    "Name them by compound intervals: 9th, 11th, 13th",
     "Spell C9, C11, C13 (dominant family by default)",
     "Know practical voicing: omit the unaltered 5th (and the natural 11th in dominants)",
     "Why 13 is the ceiling: the 15th would repeat the root",
@@ -139,7 +139,7 @@ LESSON_CONTENT[108]={
   mistakes:[],
   summary:[
     "✔ Stack 3rds past the 7th: <b>9 → 11 → 13</b>.",
-    "✔ Numbers = <b>compound intervals</b> (L83): 9=2+oct, 11=4+oct, 13=6+oct.",
+    "✔ Numbers = <b>compound intervals</b>: 9=2+oct, 11=4+oct, 13=6+oct.",
     "✔ Bare numbers = <b>dominant family</b>; maj/m must be written.",
     "✔ Voice the essentials in context: <b>3rd, 7th + the extension</b> (an unaltered 5th usually leaves first).",
     "✔ 13 is the ceiling — the 15th repeats the root."

@@ -15,10 +15,17 @@ LESSON_CONTENT[103]={
           <div class="choices hk-ch" style="display:none"><button>Minuet and trio—a large ternary design</button><button>A fugue</button><button>Twelve-bar blues</button></div>`;
         const ch=container.querySelector(".hk-ch");
         container.querySelector(".hk-a").onclick=()=>{
-          let t=0;
-          [[60,64,67],[65,69,72],[67,71,74],[60,64,67]].forEach(row=>{ row.forEach(m=>MFAudio.tone(m,.55,t,.26)); t+=.6; });
-          [[57,60,64],[62,65,69]].forEach(row=>{ row.forEach(m=>MFAudio.tone(m,.55,t,.18)); t+=.6; });
-          [[60,64,67],[67,71,74],[60,64,67]].forEach(row=>{ row.forEach(m=>MFAudio.tone(m,.55,t,.26)); t+=.6; });
+          let t=0; const q=.42;
+          /* Minuet (A) — bright, high, C major */
+          [72,76,79,77,74,71].forEach(m=>{MFAudio.tone(m,q*.9,t,.28);t+=q;});
+          MFAudio.tone(72,q*1.8,t,.30);t+=q*2;
+          /* Trio (B) — lower register, softer, a NEW key (F#), smoother motion */
+          MFAudio.tone(62,q*.95,t,.15);t+=q; MFAudio.tone(66,q*.95,t,.15);t+=q; MFAudio.tone(69,q*.95,t,.15);t+=q;
+          MFAudio.tone(67,q*1.9,t,.15);t+=q*2; MFAudio.tone(62,q*.95,t,.15);t+=q;
+          MFAudio.tone(67,q*1.8,t,.15);t+=q*2;
+          /* Minuet (A) returns — bright and high again */
+          [72,76,79].forEach(m=>{MFAudio.tone(m,q*.9,t,.28);t+=q;});
+          MFAudio.tone(72,q*1.8,t,.30);t+=q*2;
           setTimeout(()=>ch.style.display="",t*1000+400);
         };
         [...ch.children].forEach((b,i)=>b.onclick=()=>{
@@ -28,10 +35,10 @@ LESSON_CONTENT[103]={
       } }
   },
   objectives:[
-    "MINUET & TRIO: a triple-meter dance in large ABA (each part commonly binary)",
+    "MINUET & TRIO: a triple-meter dance movement in a large A–B–A design; each main section is commonly binary",
     "SCHERZO: the minuet's faster, more energetic successor",
     "MARCH: duple or quadruple meter, often with a contrasting trio",
-    "CONCERTO (intro): soloist(s) vs orchestra, commonly three movements, cadenza",
+    "CONCERTO (intro): soloist(s) in dialogue or contrast with an ensemble, commonly three movements, cadenza",
     "Place these forms inside multi-movement works",
     "Recognize each by meter, tempo and plan"
   ],
@@ -86,13 +93,17 @@ LESSON_CONTENT[103]={
         hint:"Opening section → contrast → return." } }
   ],
   examples:[
-    { caption:"A minuet phrase: moderate 3/4, elegant steps — the courtly dance that became a symphonic movement.",
+    { caption:"A minuet in 3/4 with a pickup — an elegant courtly dance phrase in G major (note the F♯).",
       staff:{clef:"treble",time:"3/4",tempo:120,notes:[
-        {p:"G4",d:"q"},{p:"C5",d:"q"},{p:"E5",d:"q"},{bar:"single"},
-        {p:"D5",d:"q"},{p:"B4",d:"q"},{p:"G4",d:"q"},{bar:"single"},
-        {p:"A4",d:"q"},{p:"F4",d:"q"},{p:"D4",d:"q"},{bar:"single"},
-        {p:"E4",d:"h."},{bar:"final"}],width:620},
-      kb:{start:60,octaves:2,labels:true} },
+        {p:"G4",d:"8"},{p:"D5",d:"8"},{bar:"single"},
+        {p:"B4",d:"q"},{p:"C5",d:"q"},{p:"D5",d:"q"},{bar:"single"},
+        {p:"A4",d:"q"},{p:"G4",d:"h"},{bar:"single"},
+        {p:"D4",d:"q"},{p:"E4",d:"q"},{p:"F#4",d:"8"},{p:"G4",d:"8"},{bar:"single"},
+        {p:"A4",d:"h"},{p:"G4",d:"8"},{p:"D5",d:"8"},{bar:"single"},
+        {p:"B4",d:"q"},{p:"C5",d:"q"},{p:"D5",d:"q"},{bar:"single"},
+        {p:"A4",d:"q"},{p:"G4",d:"h"},{bar:"final"}],
+        beams:[[0,1],[12,13],[16,17]],width:900},
+      kb:{start:62,octaves:1,labels:true} },
     { caption:"A march phrase: duple meter, dotted tread, strong downbeats — left, right, left, right.",
       staff:{clef:"treble",time:"2/4",tempo:112,notes:[
         {p:"C4",d:"q.",artic:"accent"},{p:"C4",d:"8"},{bar:"single"},
@@ -110,7 +121,7 @@ LESSON_CONTENT[103]={
         ["Trio","the contrasting middle section"],
         ["Scherzo","the fast, playful minuet successor"],
         ["March","duple tread with a trio"],
-        ["Concerto","soloist vs orchestra, 3 movements"],
+        ["Concerto","soloist(s) & ensemble in dialogue, 3 movements"],
         ["Cadenza","the soloist's brilliant solo passage"],
         ["Movement 3 of a symphony","minuet or scherzo"],
         ["Concerto movement plan","fast - slow - fast"]], reverse:true}, seconds:45},
@@ -156,17 +167,17 @@ LESSON_CONTENT[103]={
     { gen:"triad-quality", params:{quals:["M","m"]}, count:2 }
   ],
   vocabulary:[
-    {term:"Minuet & Trio", def:"A triple-meter dance in grand ABA — minuet, contrasting trio, minuet again; each part commonly a binary form."},
-    {term:"Scherzo", def:"The minuet's fast, energetic successor ('joke') — same plan, new energy."},
-    {term:"March", def:"Duple- or quadruple-meter tread with strong downbeats, often with a contrasting trio."},
-    {term:"Concerto / Cadenza", def:"Soloist(s) vs orchestra, commonly in three movements (fast-slow-fast); the cadenza is the soloist's brilliant solo near the first movement's end."}
+    {term:"Minuet and Trio", def:"A triple-meter dance movement in a large A–B–A design."},
+    {term:"Scherzo and Trio", def:"A faster, more energetic successor to the minuet."},
+    {term:"March", def:"Duple-based music with a strong, regular beat; may include a trio."},
+    {term:"Concerto", def:"Soloist(s) and ensemble in dialogue, commonly in three movements."}
   ],
   mistakes:[],
   summary:[
     "✔ <b>Minuet & trio</b> = big ABA in 3/4; sections commonly binary.",
     "✔ <b>Scherzo</b> = the same plan, fast and energetic.",
     "✔ <b>March</b> = duple or quadruple tread, often with a trio.",
-    "✔ <b>Concerto</b> = soloist(s) vs orchestra, commonly fast-slow-fast, with <b>cadenza</b>.",
+    "✔ <b>Concerto</b> = soloist(s) in dialogue with an ensemble, commonly fast-slow-fast, with <b>cadenza</b>.",
     "✔ Symphony map: sonata · slow · dance · finale."
   ],
   tips:[
@@ -185,7 +196,7 @@ LESSON_CONTENT[103]={
     { type:"mc", q:"Which statement best describes the trio section?", choices:["It provides contrast before the return of the opening minuet or scherzo","It must repeat the opening section exactly","It must be a percussion solo"], answer:0, explain:"The B of the big ABA.", hint:"Historically, some trios used reduced scoring, but later trio sections are not limited to fewer performers." },
     { type:"mc", q:"What does the Italian word \u{201C}scherzo\u{201D} mean?", choices:["Joke","Song","Slow"], answer:0, explain:"Despite the name, a scherzo may be playful, dramatic, or ominous.", hint:"Italian humor." },
     { type:"mc", q:"Which meter type is especially common in marches?", choices:["Duple or quadruple","Triple only","Unmetered only"], answer:0, explain:"Left-right.", hint:"Two feet." },
-    { type:"mc", q:"A concerto normally features…", choices:["One or more soloists in relation to an ensemble","Unaccompanied choir","Two pianos only"], answer:0, explain:"Star vs ensemble.", hint:"The dialogue." },
+    { type:"mc", q:"A concerto normally features…", choices:["One or more soloists in relation to an ensemble","Unaccompanied choir","Two pianos only"], answer:0, explain:"Soloist and ensemble in dialogue.", hint:"The dialogue." },
     { type:"mc", q:"Which movement plan is common in Classical concertos?", choices:["Fast–slow–fast","Three slow movements","Exactly one movement in every concerto"], answer:0, explain:"Three movements.", hint:"Outer speed." },
     { type:"mc", q:"Where does a cadenza commonly occur in a Classical concerto first movement?", choices:["Near the end, before the final cadential close","Only at the very beginning","In the trio section"], answer:0, explain:"The orchestra traditionally pauses while the soloist performs a passage that may have been improvised historically.", hint:"The spotlight." },
     { type:"truefalse", q:"The minuet and trio are each commonly organized in binary or rounded-binary form.", answer:true, explain:"Binary inside ternary.", hint:"Forms nest." },
@@ -204,7 +215,7 @@ LESSON_CONTENT[103]={
       hint:"Meter, tempo, cast.",
       play:()=>{let t=0;[[60,64,67],[62,65,69],[60,64,67]].forEach(row=>{row.forEach(m=>MFAudio.tone(m,.5,t,.26));t+=.55;});} },
     example:{ label:"the examples",
-      explain:"Example 1 dances a minuet phrase in 3/4; example 2 treads a dotted march in 2/4." },
+      explain:"Example 1 is a minuet in 3/4 with a pickup; example 2 treads a dotted march in 2/4." },
     game:{ label:"the games",
       explain:"Sprint the forms, assemble a symphony, stage the minuet & trio, then identify forms from clues.",
       hint:"Three questions: meter, tempo, cast." },

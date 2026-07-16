@@ -3,7 +3,7 @@
    I ii iii IV V vi vii° = M m m M M m dim. Harmonic minor:
    i ii° III+ iv V VI vii° (L60 introduced this — reviewed here).
    Case convention: upper = major, lower = minor, ° = dim, + = aug.
-   This lesson is the prerequisite for Roman numeral analysis (L86).
+   This lesson is the prerequisite for Roman numeral analysis.
    NOTE: edit by FULL-FILE REWRITE only. */
 
 /* quality detective: name the quality of the triad on each degree of C major */

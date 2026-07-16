@@ -20,7 +20,7 @@ LESSON_CONTENT[109]={
       } }
   },
   objectives:[
-    "Review sus4/sus2: the 4th or 2nd REPLACES the 3rd (L93)",
+    "Review sus4/sus2: the 4th or 2nd REPLACES the 3rd",
     "Know the classical habit: sus4 resolves down to the 3rd (L96's 4-3)",
     "Know the modern habit: sus chords can stand unresolved",
     "add9 vs add2: same pitch-class collection; voicing conventions vary",

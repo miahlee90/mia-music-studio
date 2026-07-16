@@ -140,7 +140,7 @@ LESSON_CONTENT[37]={
         success:"✓ You can't shrink zero! The unison can be perfect or augmented — never diminished.",
         fail:"A unison has NO distance — can it get smaller?",
         hint:"Try to make 0 half steps smaller…" } },
-    { say:"Last vocabulary upgrade: intervals whose notes are both in the same major scale are <b>diatonic</b> (Lesson 35). When the upper note is <b>NOT</b> from the keynote's major scale, the interval is <b>CHROMATIC</b>. Minor, diminished, and augmented intervals are always chromatic in major keys. \u{1F447} <b>In the key of C, the interval C–E♭ is…?</b>",
+    { say:"Last vocabulary upgrade: intervals whose notes are both in the same major scale are <b>diatonic</b>. When the upper note is <b>NOT</b> from the keynote's major scale, the interval is <b>CHROMATIC</b>. Minor, diminished, and augmented intervals are always chromatic in major keys. \u{1F447} <b>In the key of C, the interval C–E♭ is…?</b>",
       try:{ type:"mc", choices:["Chromatic — E♭ isn't in the C major scale","Diatonic — every 3rd is diatonic","Neither"], answer:0,
         success:"✓ E♭ lives outside C major, so C–E♭ (m3) is a chromatic interval. Diatonic = in the scale; chromatic = colored from outside.",
         fail:"Is E♭ one of the seven notes of C major?",

@@ -200,7 +200,7 @@ LESSON_CONTENT[44]={
     { type:"mc", q:"Fast 6/8's two counts land on written beats…", choices:["1 and 4","1 and 3","3 and 6"], answer:0,
       explain:"The old strong beats get promoted." },
     { type:"mc", q:"This idea matches which earlier lesson?", choices:["cut time — fast 4/4 felt in 2","key signatures","dotted eighths"], answer:0,
-      explain:"Same speed-logic as alla breve (Lesson 42)." },
+      explain:"Same speed-logic as alla breve." },
     { type:"mc", q:"Which dance practically lives in fast 6/8?", choices:["the jig","the waltz","the tango"], answer:0,
       explain:"Jigs (and tarantellas) ride the two-pulse gallop." }
   ],

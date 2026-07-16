@@ -134,7 +134,7 @@ LESSON_CONTENT[63]={
         {p:"Eb4",d:"q",label:"♭5"},{p:"F4",d:"q",label:"6"},{p:"G4",d:"q",label:"7"},{p:"A4",d:"q",label:"8"}],width:520} },
       try:{ type:"mc", choices:["Its tonic chord is diminished, so it has no stable home","It has too many notes","It's too cheerful"], answer:0,
         success:"✓ Its tonic triad (1, ♭3, ♭5) is diminished — there is no stable place to rest, so Locrian is rarely used.",
-        fail:"What quality is a triad with a lowered 5th (Lesson 59)?",
+        fail:"What quality is a triad with a lowered 5th?",
         hint:"A-C-E♭…" } },
     { say:"Compare each mode with the natural minor scale. <b>Which notes are different?</b> \u{1F447}",
       show:{ type:"html", html:`<table style="border-collapse:collapse;margin:0 auto;font-size:14.5px;min-width:320px">

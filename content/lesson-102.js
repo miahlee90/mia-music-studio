@@ -2,8 +2,19 @@
    Core: EXPOSITION (theme 1 in tonic, theme 2 in a new key — usually V or
    relative major) → DEVELOPMENT (themes fragmented, sequenced, modulating)
    → RECAPITULATION (both themes home in the tonic) → optional CODA.
-   Built on: periods (L88), sequence (L89), modulation (L99).
+   Built on: periods, sequence, modulation.
    NOTE: edit by FULL-FILE REWRITE only. */
+
+function MF_L102_diagram(host){
+  host.innerHTML=`<div style="border:1px dashed #b9a86a;border-radius:8px;padding:10px 12px;background:#FBF9F1">
+    <div style="text-align:center;font-weight:800;font-size:13px;color:#5a4a12;margin-bottom:8px">Miniature sonata-form example</div>
+    <div style="display:flex;gap:6px;justify-content:center;font-weight:800;font-size:12px;flex-wrap:wrap">
+      <div style="border:2px solid #2F6DA8;border-radius:8px;padding:5px 9px;color:#2F6DA8;text-align:center">EXPOSITION<br><span style="font-weight:400;font-size:10px;color:#555">primary: tonic · secondary: contrasting key</span></div>
+      <div style="border:2px solid #C05A21;border-radius:8px;padding:5px 9px;color:#C05A21;text-align:center">DEVELOPMENT<br><span style="font-weight:400;font-size:10px;color:#555">fragments · sequences · changing keys</span></div>
+      <div style="border:2px solid #2F6DA8;border-radius:8px;padding:5px 9px;color:#2F6DA8;text-align:center">RECAPITULATION<br><span style="font-weight:400;font-size:10px;color:#555">primary + secondary in tonic</span></div>
+      <div style="border:2px solid #A9821F;border-radius:8px;padding:5px 9px;color:#A9821F;text-align:center">CODA<br><span style="font-weight:400;font-size:10px;color:#555">optional closing section</span></div>
+    </div></div>`;
+}
 
 LESSON_CONTENT[102]={
   welcome:"Sonata form presents, develops, and recomposes contrasting tonal and thematic material.",
@@ -13,7 +24,7 @@ LESSON_CONTENT[102]={
       mount:(container,fb)=>{
         container.innerHTML=`<div style="text-align:center">
           <button class="play hk-a">▶ Play the short sonata-form example</button></div>
-          <div class="choices hk-ch" style="display:none"><button>The primary and secondary material return in the tonic key area</button><button>Entirely unrelated themes replace the opening material</button><button>The opening material never returns</button></div>`;
+          <div class="choices hk-ch" style="display:none"><button>The primary and secondary material return in the tonic region</button><button>Entirely unrelated themes replace the opening material</button><button>The opening material never returns</button></div>`;
         const ch=container.querySelector(".hk-ch");
         container.querySelector(".hk-a").onclick=()=>{
           let t=0;
@@ -31,20 +42,20 @@ LESSON_CONTENT[102]={
       } }
   },
   objectives:[
-    "Name the three big sections: exposition, development, recapitulation",
-    "Exposition: theme 1 in the tonic, theme 2 in a NEW key",
-    "Development: fragmentation, sequence and modulation",
-    "Recapitulation: both themes return IN THE TONIC",
-    "Know the optional frames: introduction and coda",
-    "Connect the form to periods, sequence and modulation"
+    "Name the three principal sections: exposition, development, and recapitulation",
+    "Exposition: primary material in the tonic; secondary material in a contrasting key area",
+    "Development: fragmentation, sequence, and modulation",
+    "Recapitulation: primary and secondary material return in the tonic region",
+    "Know the optional framing sections: introduction and coda",
+    "Connect the form to periods, sequences, and modulation"
   ],
   steps:[
     { say:"<b>The Basic Plan:</b> Sonata form is commonly organized into three large functional sections. <b>Exposition</b> establishes the principal thematic material and contrasting tonal areas. <b>Development</b> transforms, fragments, combines, or reinterprets material while creating tonal instability. <b>Recapitulation</b> returns the principal material and resolves the exposition's tonal contrast, usually within the tonic region. A slow introduction may precede the exposition, and a coda may follow the recapitulation; expositions are also frequently repeated. \u{1F447} <b>What are the three principal sections of sonata form?</b>",
       show:{ type:"html", html:`<div style="border:1px solid #A9821F;background:#FBF6E9;border-radius:8px;padding:8px 12px;margin-bottom:10px;font-size:12.5px;color:#5a4a12;text-align:left"><b>Sonata form vs. sonata genre:</b> Sonata form is the formal design studied in this lesson. A <i>sonata</i> is a multi-movement instrumental genre. A movement of a sonata may use sonata form, but not every movement does, and sonata form also appears in symphonies, quartets, concertos, overtures, and other genres.</div><div style="display:flex;gap:8px;justify-content:center;font-weight:800;font-size:14px;flex-wrap:wrap">
-        <div style="border:2px solid #2F6DA8;border-radius:10px;padding:8px 12px;color:#2F6DA8">EXPOSITION<br><span style="font-weight:400;font-size:11.5px;color:#555">primary (tonic) · secondary (new key)</span></div>
-        <div style="border:2px solid #C05A21;border-radius:10px;padding:8px 12px;color:#C05A21">DEVELOPMENT<br><span style="font-weight:400;font-size:11.5px;color:#555">fragments · sequences · keys</span></div>
+        <div style="border:2px solid #2F6DA8;border-radius:10px;padding:8px 12px;color:#2F6DA8">EXPOSITION<br><span style="font-weight:400;font-size:11.5px;color:#555">primary: tonic · secondary: contrasting key</span></div>
+        <div style="border:2px solid #C05A21;border-radius:10px;padding:8px 12px;color:#C05A21">DEVELOPMENT<br><span style="font-weight:400;font-size:11.5px;color:#555">fragments · sequences · changing keys</span></div>
         <div style="border:2px solid #2F6DA8;border-radius:10px;padding:8px 12px;color:#2F6DA8">RECAPITULATION<br><span style="font-weight:400;font-size:11.5px;color:#555">primary + secondary in tonic</span></div>
-        <div style="border:2px solid #A9821F;border-radius:10px;padding:8px 12px;color:#A9821F">CODA<br><span style="font-weight:400;font-size:11.5px;color:#555">optional tail</span></div></div>` },
+        <div style="border:2px solid #A9821F;border-radius:10px;padding:8px 12px;color:#A9821F">CODA<br><span style="font-weight:400;font-size:11.5px;color:#555">optional closing section</span></div></div>` },
       try:{ type:"mc", choices:["exposition, development, and recapitulation","verse, chorus, and bridge","A, B, A, C, and A"], answer:0,
         success:"✓ Correct. The exposition establishes the material, the development transforms it, and the recapitulation returns and tonally resolves it.",
         fail:"Recall the three principal formal functions.",
@@ -54,12 +65,12 @@ LESSON_CONTENT[102]={
         success:"✓ Correct. In a conventional major-key exposition, the secondary thematic area commonly appears in the dominant key.",
         fail:"Identify the dominant key of C major.",
         hint:"The dominant of C major is G major." } },
-    { say:"<b>The Development:</b> The development often transforms material from the exposition through fragmentation, sequence, recombination, rhythmic change, contrapuntal treatment, and modulation. It may also introduce new material. Tonal instability and increasing emphasis on the dominant commonly prepare the return of the tonic and the recapitulation. \u{1F447} <b>Which process commonly occurs in a development section?</b>",
+    { say:"<b>The Development:</b> The development often transforms material from the exposition through fragmentation, sequence, recombination, rhythmic change, and modulation. It may also introduce new material. Tonal instability and increasing emphasis on the dominant commonly prepare the return of the tonic and the recapitulation. \u{1F447} <b>Which process commonly occurs in a development section?</b>",
       try:{ type:"mc", choices:["thematic transformation and tonal instability","initial presentation of the complete exposition","exact repetition of the exposition in every detail"], answer:0,
         success:"✓ Correct. The development reworks familiar material or introduces related ideas within a less tonally stable context.",
         fail:"Listen for fragmentation, sequence, recombination, and changes of key.",
         hint:"The exposition's material is transformed rather than simply restated." } },
-    { say:"<b>The Recapitulation:</b> The recapitulation begins with the return of the primary thematic area, usually in the tonic. The transition is recomposed so that the secondary thematic area also appears in the tonic region rather than the contrasting key of the exposition. This tonal return provides the principal large-scale resolution of the form. \u{1F447} <b>What is the principal tonal change to the secondary thematic area in a conventional recapitulation?</b>",
+    { say:"<b>The Recapitulation:</b> The recapitulation begins with the return of the primary thematic area, usually in the tonic. The transition is often adjusted or recomposed so that the secondary thematic area appears in the tonic region rather than in the contrasting key of the exposition. This tonal return provides the principal large-scale resolution of the form. \u{1F447} <b>What is the principal tonal change to the secondary thematic area in a conventional recapitulation?</b>",
       try:{ type:"mc", choices:["it returns in the tonic region","it is always omitted","it becomes a fugue"], answer:0,
         success:"✓ Correct. The secondary area is recomposed into the tonic region, resolving the exposition's large-scale tonal contrast.",
         fail:"Compare the key of the secondary area in the exposition with its key in the recapitulation.",
@@ -81,20 +92,33 @@ LESSON_CONTENT[102]={
         hint:"E–D–R, followed by an optional coda." } }
   ],
   examples:[
-    { caption:"An exposition in miniature: theme 1 in C, a rising transition, theme 2 in G — two themes, two keys, one tension.",
-      staff:{clef:"treble",tempo:96,notes:[
-        {p:"C4",d:"q",label:"T1 (C)"},{p:"E4",d:"q"},{p:"G4",d:"h"},{bar:"single"},
-        {p:"A4",d:"8",label:"transition"},{p:"B4",d:"8"},{p:"C5",d:"8"},{p:"D5",d:"8"},{bar:"single"},
-        {p:"D5",d:"q",label:"T2 (G!)"},{p:"B4",d:"q"},{p:"G4",d:"h"},{bar:"final"}],
-        beams:[[4,7]],width:620},
+    { mount:(host)=>MF_L102_diagram(host) },
+    { caption:"Exposition: the primary idea in the tonic (C), then the line pushes up with an F♯ — leaning toward the contrasting key (G). Tonal contrast established.",
+      staff:{clef:"treble",tempo:96,time:"4/4",notes:[
+        {p:"C4",d:"q"},{p:"G4",d:"q"},{p:"E4",d:"8"},{p:"D4",d:"8"},{p:"C4",d:"q"},{bar:"single"},
+        {p:"D4",d:"q"},{p:"E4",d:"q"},{p:"F#4",d:"q"},{p:"G4",d:"q"},{bar:"single"},
+        {p:"G4",d:"q"},{p:"D5",d:"q"},{p:"B4",d:"8"},{p:"A4",d:"8"},{p:"G4",d:"q"},{bar:"final"}],
+        beams:[[2,3],[13,14]],width:660},
       kb:{start:60,octaves:2,labels:true} },
-    { caption:"Development in miniature: theme 1's opening fragment, sequenced through rising keys — familiar material on unstable ground.",
-      staff:{clef:"treble",tempo:96,notes:[
-        {p:"C4",d:"8",label:"fragment"},{p:"E4",d:"8"},{p:"G4",d:"q"},
-        {p:"D4",d:"8",label:"sequenced…"},{p:"F#4",d:"8"},{p:"A4",d:"q"},
-        {p:"E4",d:"8",label:"…and again"},{p:"G#4",d:"8"},{p:"B4",d:"q"},{bar:"final"}],
-        beams:[[0,1],[3,4],[6,7]],width:620},
-      kb:{start:60,octaves:1,labels:true} }
+    { caption:"Development: fragments of the idea tumbling through changing keys (note the F♯) — unstable ground driving toward the return.",
+      staff:{clef:"treble",tempo:96,time:"4/4",notes:[
+        {p:"C4",d:"8"},{p:"G4",d:"8"},{p:"E4",d:"q"},{p:"D4",d:"8"},{p:"A4",d:"8"},{p:"F#4",d:"q"},{bar:"single"},
+        {p:"G4",d:"8"},{p:"D5",d:"8"},{p:"B4",d:"8"},{p:"A4",d:"8"},{p:"G4",d:"h"},{bar:"final"}],
+        beams:[[0,1],[3,4],[7,10]],width:560},
+      kb:{start:60,octaves:2,labels:true} },
+    { caption:"Recapitulation: the same opening, but now the transition uses F♮ instead of F♯ — the material stays home in the tonic. Contrast resolved.",
+      staff:{clef:"treble",tempo:96,time:"4/4",notes:[
+        {p:"C4",d:"q"},{p:"G4",d:"q"},{p:"E4",d:"8"},{p:"D4",d:"8"},{p:"C4",d:"q"},{bar:"single"},
+        {p:"D4",d:"q"},{p:"E4",d:"q"},{p:"F4",d:"q"},{p:"G4",d:"q"},{bar:"single"},
+        {p:"G4",d:"8"},{p:"D5",d:"8"},{p:"C5",d:"8"},{p:"B4",d:"8"},{p:"C5",d:"h"},{bar:"final"}],
+        beams:[[2,3],[11,14]],width:680},
+      kb:{start:60,octaves:2,labels:true} },
+    { caption:"Coda: a rising C-major scale to a held tonic — an optional closing flourish.",
+      staff:{clef:"treble",tempo:96,time:"4/4",notes:[
+        {p:"G4",d:"8"},{p:"A4",d:"8"},{p:"B4",d:"8"},{p:"C5",d:"8"},{p:"D5",d:"8"},{p:"E5",d:"8"},{p:"F5",d:"8"},{p:"D5",d:"8"},{bar:"single"},
+        {p:"C5",d:"w"},{bar:"final"}],
+        beams:[[0,3],[4,7]],width:560},
+      kb:{start:60,octaves:2,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Sonata-Form Functions",
@@ -153,18 +177,18 @@ LESSON_CONTENT[102]={
     { gen:"triad-id", params:{ask:"numeral"}, count:3 }
   ],
   vocabulary:[
-    {term:"Exposition", def:"Theme 1 in the tonic; a transition modulates; theme 2 in a new key (usually V, or relative major)."},
-    {term:"Development", def:"The themes fragmented, sequenced and driven through keys — the form's unstable core."},
-    {term:"Recapitulation", def:"Both themes restated — theme 2 now in the tonic. The key conflict resolves."},
-    {term:"Introduction / Coda", def:"Optional frames: a slow opening before, an added tail after."}
+    {term:"Exposition", def:"Primary material in the tonic; secondary material in a contrasting key."},
+    {term:"Development", def:"Material transformed and moved through changing keys."},
+    {term:"Recapitulation", def:"Primary and secondary material return in the tonic region."},
+    {term:"Introduction / Coda", def:"Optional opening and closing sections."}
   ],
   mistakes:[],
   summary:[
-    "✔ Three acts: <b>exposition → development → recapitulation</b> (+ coda).",
-    "✔ Exposition: <b>T1 tonic, T2 new key</b> — conflict created.",
-    "✔ Development: <b>fragments, sequences, modulations</b> — conflict explored.",
-    "✔ Recapitulation: <b>both themes in the tonic</b> — conflict resolved.",
-    "✔ Built from your toolkit: periods (L88), sequence (L89), modulation (L99)."
+    "✔ Three principal sections: <b>exposition → development → recapitulation</b> (+ optional coda).",
+    "✔ Exposition: <b>primary material in the tonic; secondary material in a contrasting key area</b> — tonal contrast established.",
+    "✔ Development: <b>material fragmented, sequenced, recombined, and moved through keys</b> — tonal instability created.",
+    "✔ Recapitulation: <b>primary and secondary material return in the tonic region</b> — tonal contrast resolved.",
+    "✔ Built from your toolkit: periods, sequences, and modulation."
   ],
   tips:[
     "Listen for the recapitulation's arrival — theme 1's return in the tonic is the movement's biggest landmark.",
@@ -201,7 +225,8 @@ LESSON_CONTENT[102]={
       hint:"E-D-R.",
       play:()=>{let t=0;[[60,.3],[64,.3],[67,.5],[60,.3],[64,.3],[67,.7]].forEach(([m,d])=>{MFAudio.tone(m,d*.9,t,.42);t+=d;});} },
     example:{ label:"the examples",
-      explain:"Example 1 is a miniature exposition (two themes, two keys); example 2 a development fragment climbing in sequence." },
+      explain:"A miniature sonata-form example across four areas: exposition (tonal contrast), development (instability), recapitulation (resolved in the tonic), and an optional coda.",
+      play:()=>{const b=document.getElementById("exBtn1"); if(b)b.click();} },
     game:{ label:"the games",
       explain:"Sprint the map, stage the drama, walk the key plan, then locate moments in the form.",
       hint:"Where is the tonic?" },

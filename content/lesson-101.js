@@ -90,20 +90,20 @@ LESSON_CONTENT[101]={
         hint:"Listen for melodic embellishment, rhythmic transformation, modal change, reharmonization, or a new texture. More than one technique may occur.",
         mount:(container,fb)=>MF_L101_ear(container,fb) } },
     { say:"<b>Review:</b> \u{1F447} <b>What helps listeners connect a variation to its theme?</b>",
-      try:{ type:"mc", choices:["Each variation keeps the theme's core structure recognizable","The variations are identical","The theme never returns"], answer:0,
+      try:{ type:"mc", choices:["Each variation preserves enough recognizable features to remain connected to the theme","The variations are identical","The theme never returns"], answer:0,
         success:"✓ Correct. Each variation transforms the theme while retaining enough musical relationships to remain connected to it.",
         fail:"Identify the feature or combination of features that connects the variation to the theme.",
         hint:"Compare melody, bass, harmony, phrasing, and form." } }
   ],
   examples:[
     { caption:"Theme (C-E-G-E-C outline), then an ornamented variation: passing tones fill the 3rds; the core structure is untouched.",
-      staff:{clef:"treble",tempo:88,notes:[
+      staff:{clef:"treble",tempo:88,time:"6/4",notes:[
         {p:"C4",d:"q",label:"theme"},{p:"E4",d:"q"},{p:"G4",d:"q"},{p:"E4",d:"q"},{p:"C4",d:"h"},{bar:"single"},
         {p:"C4",d:"8",label:"var. 1"},{p:"D4",d:"8"},{p:"E4",d:"8"},{p:"F4",d:"8"},{p:"G4",d:"q"},{p:"F4",d:"8"},{p:"E4",d:"8"},{p:"C4",d:"h"},{bar:"final"}],
         beams:[[6,9],[11,12]],width:660},
       kb:{start:60,octaves:1,labels:true} },
     { caption:"The minore variation: the C-major outline recast in minor — here E becomes E♭, and the minor mode recolors the theme.",
-      staff:{clef:"treble",tempo:88,notes:[
+      staff:{clef:"treble",tempo:88,time:"6/4",notes:[
         {p:"C4",d:"q"},{p:"Eb4",d:"q",label:"minore"},{p:"G4",d:"q"},{p:"Eb4",d:"q"},{p:"C4",d:"h"},{bar:"final"}],width:440},
       kb:{start:60,octaves:1,labels:true} }
   ],
@@ -166,7 +166,7 @@ LESSON_CONTENT[101]={
     {term:"Theme and Variations", def:"A theme stated plainly, then restated in successive transformations — A A\u{2032} A\u{2033}…"},
     {term:"Core Structure", def:"The recognizable features a variation keeps to stay connected to the theme, such as phrase structure, harmony, bass, or melodic outline."},
     {term:"Ornamented / Rhythmic Variation", def:"Added decorations around the theme's tones; or new note values and meters under its pitches."},
-    {term:"Minore Variation", def:"The major-mode theme recast in the parallel minor — the altered scale degrees recolor the music."}
+    {term:"Minore Variation", def:"The major-mode theme is recast in the parallel minor, and altered scale degrees give the music a different color."}
   ],
   mistakes:[],
   summary:[
