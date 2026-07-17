@@ -13,7 +13,7 @@ LESSON_CONTENT[105]={stackFigures:true,
           <button class="play hk-a">▶ Play i → N⁶ → V → i</button></div>
           <div class="choices hk-ch" style="display:none"><button>It prepares the dominant and functions as a predominant</button><button>It functions as the tonic throughout</button><button>Silent</button></div>`;
         const ch=container.querySelector(".hk-ch");
-        container.querySelector(".hk-a").onclick=()=>{ [[61,64,69],[62,65,70],[59,64,68],[61,64,69]].forEach((row,i)=>row.forEach(m=>MFAudio.tone(m,.85,i*.9,.27))); setTimeout(()=>ch.style.display="",4*900+300); };
+        container.querySelector(".hk-a").onclick=()=>{ [[60,64,69],[62,65,70],[59,64,68],[60,64,69]].forEach((row,i)=>row.forEach(m=>MFAudio.tone(m,.85,i*.9,.27))); setTimeout(()=>ch.style.display="",4*900+300); };
         [...ch.children].forEach((b,i)=>b.onclick=()=>{
           if(i===0) fb(true,"✓ Correct. B♭-D-F is the Neapolitan chord in A minor. It is a major triad built on ♭2 and commonly provides predominant function before V.");
           else fb(false,"B♭ is chromatic in A minor. Listen to how the chord prepares the dominant E major.");
@@ -179,7 +179,7 @@ LESSON_CONTENT[105]={stackFigures:true,
   mia:{
     hook:{ label:"the welcome",
       explain:"B♭ major in A minor — the Neapolitan (♭II): chromatic predominant, driving into V.",
-      play:()=>{[[61,64,69],[62,65,70],[59,64,68],[61,64,69]].forEach((row,i)=>row.forEach(m=>MFAudio.tone(m,.8,i*.85,.27)));} },
+      play:()=>{[[60,64,69],[62,65,70],[59,64,68],[60,64,69]].forEach((row,i)=>row.forEach(m=>MFAudio.tone(m,.8,i*.85,.27)));} },
     learn:{ label:"the Neapolitan",
       explain:"Major triad on ♭2, standard in first inversion (N⁶, degree-4 bass), predominant to V; ♭2 falls toward the leading tone.",
       hint:"Half step up, made major.",
