@@ -26,20 +26,20 @@ LESSON_CONTENT[106]={
     "Resolve it: both notes expand OUTWARD to the octave on 5",
     "Italian +6: ♭6, 1, ♯4 (three notes)",
     "French +6: adds scale degree 2",
-    "German +6: adds ♭3 (and loves the cadential 6/4)",
+    "German +6: adds ♭3 and often moves through a cadential 6/4 before V",
     "Function: chromatic predominants driving to V"
   ],
   steps:[
-    { say:"<b>The Characteristic Interval:</b> An augmented sixth is formed from scale degree ♭6 up to scale degree ♯4. In A minor, F up to D♯ forms an augmented sixth. This interval is one half step larger than a major sixth. The scale-degree labels ♭6 and ♯4 are measured in relation to the parallel major scale. In minor, ♭6 is normally diatonic, while ♯4 remains chromatic. In major, both pitches are chromatically altered. \u{1F447} <b>Which scale degrees form the characteristic augmented sixth?</b>",
+    { say:"<b>The Characteristic Interval:</b> An augmented sixth is formed from scale degree ♭6 up to scale degree ♯4. In A minor, F up to D♯ forms an augmented sixth. This interval is one half step larger than a major sixth. These scale-degree labels use the major scale built on the tonic as the reference. Therefore, in A minor, F is labeled ♭6 and D♯ is labeled ♯4. In minor, ♭6 is normally diatonic, while ♯4 is chromatic. In major, both pitches are chromatically altered. \u{1F447} <b>Which scale degrees form the characteristic augmented sixth?</b>",
       try:{ type:"mc", choices:["♭6 below and ♯4 above","1 below and 5 above","2 below and 7 above"], answer:0,
         success:"✓ Correct. Scale degree ♭6 forms the lower note, and ♯4 forms the upper note.",
         fail:"Identify F and D♯ in relation to the A-major scale degrees.",
         hint:"♭6 is below scale degree 5; ♯4 is above scale degree 4." } },
-    { say:"<b>The Characteristic Resolution:</b> The two notes of the augmented-sixth interval normally resolve outward by half step. Scale degree ♭6 descends to 5, while ♯4 ascends to 5 in a higher octave. This contrary motion produces an octave on the dominant scale degree. Augmented-sixth chords normally serve predominant function and approach V, either directly or through a cadential 6/4. \u{1F447} <b>How does the characteristic augmented-sixth interval normally resolve?</b>",
-      show:{ type:"staff", spec:{clef:"treble",tempo:66,notes:[
-        {p:"F4",d:"w",label:"\u{266D}6"},{p:"D#5",d:"w",chord:true,label:"\u{266F}4"},
-        {p:"E4",d:"w",label:"5"},{p:"E5",d:"w",chord:true,label:"octave!"},{bar:"final"}],width:380} },
-      try:{ type:"mc", choices:["Outward to two statements of scale degree 5 an octave apart","Inward to a unison on scale degree 1","To a third on scale degree 2"], answer:0,
+    { say:"<b>The Characteristic Resolution:</b> The two notes of the augmented-sixth interval normally resolve outward by half step. Scale degree ♭6 descends to 5, while ♯4 ascends to 5 in a higher octave. This contrary motion produces an octave on the dominant scale degree. Augmented-sixth chords normally serve predominant function and approach V, either directly or through a cadential 6/4. \u{1F447} <b>How does the characteristic augmented-sixth interval normally resolve?</b><br><b>Key: A minor</b> — in A minor, ♭6 and ♯4 expand outward by half step to two occurrences of scale degree 5, an octave apart.",
+      show:{ type:"staff", spec:{clef:"treble",tempo:66,time:"4/4",notes:[
+        {p:"F4",d:"h",label:"\u{266D}6"},{p:"D#5",d:"h",chord:true,label:"\u{266F}4"},
+        {p:"E4",d:"h",label:"5"},{p:"E5",d:"h",chord:true,label:"5"},{bar:"final"}],width:380} },
+      try:{ type:"mc", choices:["Outward to scale degree 5 in two voices, an octave apart","Inward to a unison on scale degree 1","To a third on scale degree 2"], answer:0,
         success:"✓ Correct. Both tendency tones approach scale degree 5 by contrary half-step motion.",
         fail:"Identify the scale degree reached by both voices.",
         hint:"♭6 ↓ 5 and ♯4 ↑ 5." } },
@@ -106,7 +106,7 @@ LESSON_CONTENT[106]={
       intro:"Play F below D♯, then resolve outward to two E pitches an octave apart: F descends to the lower E, and D♯ ascends to the upper E.",
       miaIntro:"Resolve both tendency tones outward by half step.",
       spec:{seq:[53,63,52,64],
-        names:["F (♭6)","D♯ (♯4)","E (♭6 falls)","E (♯4 rises — octave!)"],
+        names:["F (♭6)","D♯ (♯4)","E (♭6 falls to 5)","E (♯4 rises to 5)"],
         start:52, octaves:1, title:"The outward resolution"},
       result:(score)=>score!==null?"You resolved the augmented-sixth interval correctly.":null },
     { type:"symbol-hunt", title:"Game 3 · Identify the Chord Type",
@@ -147,16 +147,16 @@ LESSON_CONTENT[106]={
     { gen:"triad-quality", params:{quals:["M","m"]}, count:2 }
   ],
   vocabulary:[
-    {term:"Augmented 6th Interval", def:"♭6 up to ♯4 — a chromatic pair that expands outward to an octave on the dominant's root."},
-    {term:"Italian +6", def:"♭6, 1, ♯4 — the three-note frame."},
-    {term:"French +6", def:"The frame plus scale degree 2 — a whole-tone shimmer."},
-    {term:"German +6", def:"The frame plus ♭3 — enharmonically a dominant 7th; usually resolves through the cadential 6/4."}
+    {term:"Characteristic Interval", def:"♭6 and ♯4 expand outward to scale degree 5."},
+    {term:"Italian +6", def:"♭6–1–♯4"},
+    {term:"French +6", def:"♭6–1–2–♯4"},
+    {term:"German +6", def:"♭6–1–♭3–♯4"}
   ],
   mistakes:[],
   summary:[
     "✔ Engine: <b>♭6 + ♯4</b> expanding outward to an <b>octave on 5</b>.",
     "✔ <b>Italian</b> = 3 notes · <b>French</b> = +2 · <b>German</b> = +♭3.",
-    "✔ Ger⁺⁶ ≈ a dominant 7th sonority, enharmonically — spelling and function differ.",
+    "✔ <b>Ger⁺⁶</b> can be enharmonically respelled as a dominant seventh chord, but its spelling and harmonic function are different.",
     "✔ All three: <b>chromatic predominants to V</b>.",
     "✔ With the Neapolitan: important members of the chromatic-predominant family."
   ],
