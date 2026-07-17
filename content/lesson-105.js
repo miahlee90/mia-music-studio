@@ -73,7 +73,14 @@ LESSON_CONTENT[105]={stackFigures:true,
     { caption:"Key: A minor — ♭2 → 1̂ → 7̂ → 1̂. With a cadential i⁶₄ between N⁶ and V, ♭2 descends stepwise B♭–A–G♯ before resolving to A.",
       staff:{clef:"treble",tempo:76,time:"4/4",notes:[
         {p:"Bb4",d:"q",label:"♭2 (B♭)"},{p:"A4",d:"q",label:"1̂ (A)"},{p:"G#4",d:"q",label:"7̂ (G♯)"},{p:"A4",d:"q",label:"1̂ (A)"},{bar:"final"}],width:480},
-      kb:{start:65,octaves:0.5,labels:true} }
+      kb:{start:65,octaves:0.5,labels:true} },
+    { caption:"Key: A major — the same Neapolitan, B♭–D–F. In a major key both ♭2 (B♭) and ♭6 (F♮) are chromatic (A major's scale has F♯), and the tonic is major (C♯). Compare it with the A-minor version above.",
+      staff:{clef:"grand",tempo:72,time:"4/4",notes:[
+        {p:"A2",d:"w",clef:"bass",label:"I"},{p:"C#4",d:"w",chord:true},{p:"E4",d:"w",chord:true},{p:"A4",d:"w",chord:true},{bar:"single"},
+        {p:"D3",d:"w",clef:"bass",label:"N⁶"},{p:"D4",d:"w",chord:true},{p:"F4",d:"w",chord:true},{p:"Bb4",d:"w",chord:true},{bar:"single"},
+        {p:"E3",d:"w",clef:"bass",label:"V"},{p:"E4",d:"w",chord:true},{p:"G#4",d:"w",chord:true},{p:"B4",d:"w",chord:true},{bar:"single"},
+        {p:"A2",d:"w",clef:"bass",label:"I"},{p:"C#4",d:"w",chord:true},{p:"E4",d:"w",chord:true},{p:"A4",d:"w",chord:true},{bar:"final"}],width:640},
+      kb:{start:45,octaves:2.1667,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Neapolitan-Chord Identification",
@@ -185,7 +192,7 @@ LESSON_CONTENT[105]={stackFigures:true,
       hint:"Half step up, made major.",
       play:()=>{[50,53,58].forEach(m=>MFAudio.tone(m,.9,.05,.28));[52,56,59].forEach(m=>MFAudio.tone(m,1.0,1.0,.28));} },
     example:{ label:"the examples",
-      explain:"Example 1 runs the full i-N⁶-V-i route; example 2 isolates ♭2 stepping down through the tonic to the leading tone." },
+      explain:"Example 1 runs the i-N⁶-V-i route in A minor; example 2 isolates ♭2 stepping down to the leading tone; example 3 shows the same Neapolitan in A major, where ♭2 and ♭6 are both chromatic." },
     game:{ label:"the games",
       explain:"Sprint the facts, walk the bass route, spot N⁶ among lookalikes, then build Neapolitans across keys.",
       hint:"D-F-B♭ vs D-F-A: one half step." },
