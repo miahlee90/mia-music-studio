@@ -16,26 +16,26 @@ LESSON_CONTENT[106]={
         const ch=container.querySelector(".hk-ch");
         container.querySelector(".hk-a").onclick=()=>{ MFAudio.tone(53,.9,.05,.34); MFAudio.tone(63,.9,.05,.34); MFAudio.tone(52,1.1,1.0,.34); MFAudio.tone(64,1.1,1.0,.34); setTimeout(()=>ch.style.display="",2400); };
         [...ch.children].forEach((b,i)=>b.onclick=()=>{
-          if(i===0) fb(true,"✓ Correct. In A minor, F and D♯ form an augmented sixth. F resolves downward to the lower E, while D♯ resolves upward to the E an octave higher. Both pitches approach scale degree 5.");
+          if(i===0) fb(true,"✓ Correct. In A minor, F and D♯ form an augmented sixth. F descends by half step to E4, while D♯ ascends by half step to E5. The two voices arrive on scale degree 5, an octave apart.");
           else fb(false,"Follow the contrary motion: the lower note descends by half step, and the upper note ascends by half step.");
         });
       } }
   },
   objectives:[
-    "Build the augmented 6th interval: ♭6 up to ♯4 (F to D♯ in A minor)",
-    "Resolve it: both notes expand OUTWARD to the octave on 5",
-    "Italian +6: ♭6, 1, ♯4 (three notes)",
-    "French +6: adds scale degree 2",
-    "German +6: adds ♭3 and often moves through a cadential 6/4 before V",
-    "Function: chromatic predominants driving to V"
+    "Build the characteristic augmented sixth from ♭6 up to ♯4",
+    "Resolve ♭6 and ♯4 outward by half step to scale degree 5",
+    "Build It⁺⁶: ♭6, 1, and ♯4",
+    "Build Fr⁺⁶: ♭6, 1, 2, and ♯4",
+    "Build Ger⁺⁶: ♭6, 1, ♭3, and ♯4",
+    "Identify augmented-sixth chords as chromatic predominants leading to V"
   ],
   steps:[
-    { say:"<b>The Characteristic Interval:</b> An augmented sixth is formed from scale degree ♭6 up to scale degree ♯4. In A minor, F up to D♯ forms an augmented sixth. This interval is one half step larger than a major sixth. These scale-degree labels use the major scale built on the tonic as the reference. Therefore, in A minor, F is labeled ♭6 and D♯ is labeled ♯4. In minor, ♭6 is normally diatonic, while ♯4 is chromatic. In major, both pitches are chromatically altered. \u{1F447} <b>Which scale degrees form the characteristic augmented sixth?</b>",
+    { say:"<b>The Characteristic Interval:</b> An augmented sixth is formed from scale degree ♭6 up to scale degree ♯4. In A minor, F up to D♯ forms an augmented sixth, one half step larger than a major sixth. These scale-degree labels use the major scale built on the tonic as the reference. Therefore, in A minor, F is labeled ♭6 and D♯ is labeled ♯4. In minor, ♭6 is normally diatonic, while ♯4 is chromatic. In major, both pitches are chromatically altered. \u{1F447} <b>Which scale degrees form the characteristic augmented sixth?</b>",
       try:{ type:"mc", choices:["♭6 below and ♯4 above","1 below and 5 above","2 below and 7 above"], answer:0,
         success:"✓ Correct. Scale degree ♭6 forms the lower note, and ♯4 forms the upper note.",
         fail:"Identify F and D♯ in relation to the A-major scale degrees.",
         hint:"♭6 is below scale degree 5; ♯4 is above scale degree 4." } },
-    { say:"<b>The Characteristic Resolution:</b> The two notes of the augmented-sixth interval normally resolve outward by half step. Scale degree ♭6 descends to 5, while ♯4 ascends to 5 in a higher octave. This contrary motion produces an octave on the dominant scale degree. Augmented-sixth chords normally serve predominant function and approach V, either directly or through a cadential 6/4. \u{1F447} <b>How does the characteristic augmented-sixth interval normally resolve?</b><br><b>Key: A minor</b> — in A minor, ♭6 and ♯4 expand outward by half step to two occurrences of scale degree 5, an octave apart.",
+    { say:"<b>The Characteristic Resolution:</b> The two notes of the augmented-sixth interval normally resolve outward by half step. Scale degree ♭6 descends to 5, while ♯4 ascends to 5 in a higher octave. This contrary motion produces an octave on the dominant scale degree. Augmented-sixth chords normally have predominant function and approach V, either directly or through a cadential 6/4. \u{1F447} <b>How does the characteristic augmented-sixth interval normally resolve?</b><br><b>Key: A minor.</b> In A minor, ♭6 and ♯4 expand outward by half step to two occurrences of scale degree 5, an octave apart.",
       show:{ type:"staff", spec:{clef:"treble",tempo:66,time:"4/4",notes:[
         {p:"F4",d:"h",label:"\u{266D}6"},{p:"D#5",d:"h",chord:true,label:"\u{266F}4"},
         {p:"E4",d:"h",label:"5"},{p:"E5",d:"h",chord:true,label:"5"},{bar:"final"}],width:380} },
@@ -43,19 +43,19 @@ LESSON_CONTENT[106]={
         success:"✓ Correct. Both tendency tones approach scale degree 5 by contrary half-step motion.",
         fail:"Identify the scale degree reached by both voices.",
         hint:"♭6 ↓ 5 and ♯4 ↑ 5." } },
-    { say:"<b>Italian Augmented Sixth—It⁺⁶:</b> The Italian augmented-sixth chord contains three different pitch classes: ♭6, 1, and ♯4. In A minor, it is spelled F–A–D♯. In four-part SATB writing, the tonic pitch A is normally doubled. \u{1F447} <b>Which scale degrees form the Italian augmented-sixth chord?</b>",
+    { say:"<b>Italian Augmented Sixth—It⁺⁶:</b> The Italian augmented-sixth chord, It⁺⁶, contains three pitch classes: ♭6, 1, and ♯4. In A minor, it is spelled F–A–D♯. In four-part writing, the tonic pitch A is normally doubled. \u{1F447} <b>Which scale degrees form the Italian augmented-sixth chord?</b>",
       try:{ type:"mc", choices:["♭6, 1, and ♯4","♭6 and ♯4 only","♭6, 1, 2, and ♯4"], answer:0,
         success:"✓ Correct. It⁺⁶ contains the augmented-sixth frame, ♭6 and ♯4, plus the tonic scale degree.",
         fail:"Identify the three different pitch classes in F–A–D♯.",
         hint:"♭6–1–♯4." } },
-    { say:"<b>French Augmented Sixth—Fr⁺⁶:</b> The French augmented-sixth chord contains ♭6, 1, 2, and ♯4. In A minor, it is spelled F–A–B–D♯. These four pitches belong to the same whole-tone collection, although the chord functions here as a predominant rather than as a whole-tone sonority. \u{1F447} <b>Which scale degree distinguishes Fr⁺⁶ from It⁺⁶?</b>",
+    { say:"<b>French Augmented Sixth—Fr⁺⁶:</b> The French augmented-sixth chord, Fr⁺⁶, contains ♭6, 1, 2, and ♯4. In A minor, it is spelled F–A–B–D♯. These four pitches belong to the same whole-tone collection, although the chord functions here as a chromatic predominant rather than as a whole-tone sonority. \u{1F447} <b>Which scale degree distinguishes Fr⁺⁶ from It⁺⁶?</b>",
       try:{ type:"mc", choices:["Scale degree 2","Scale degree ♭3","Scale degree 7"], answer:0,
         success:"✓ Correct. Adding scale degree 2, B, to F–A–D♯ produces Fr⁺⁶.",
         fail:"Complete the scale-degree pattern ♭6–1–2–♯4.",
         hint:"Scale degree 2 in A minor is B." } },
-    { say:"<b>German Augmented Sixth—Ger⁺⁶:</b> The German augmented-sixth chord contains ♭6, 1, ♭3, and ♯4. In A minor, it is spelled F–A–C–D♯. If D♯ is enharmonically respelled as E♭, the pitch collection becomes F–A–C–E♭, the spelling of F7. The two chords have different spellings and normally serve different harmonic functions. A direct Ger⁺⁶–V resolution may create parallel perfect fifths in common-practice four-part writing. For this reason, Ger⁺⁶ frequently moves through a cadential 6/4 before V. Other voice-leading solutions are also possible. \u{1F447} <b>When its ♯4 is enharmonically respelled, Ger⁺⁶ has the same sounding pitch collection as…</b>",
+    { say:"<b>German Augmented Sixth—Ger⁺⁶:</b> The German augmented-sixth chord, Ger⁺⁶, contains ♭6, 1, ♭3, and ♯4. In A minor, it is spelled F–A–C–D♯. If D♯ is enharmonically respelled as E♭, the pitch collection becomes F–A–C–E♭, the spelling of F7. The two chords have the same sounding pitches but different spellings and harmonic functions. A direct Ger⁺⁶–V resolution may create parallel perfect fifths in common-practice four-part writing. For this reason, Ger⁺⁶ often moves through a cadential i⁶₄ before V. Other voice-leading solutions are also possible. \u{1F447} <b>When its ♯4 is enharmonically respelled, Ger⁺⁶ has the same sounding pitch collection as…</b>",
       show:{ type:"html", html:`<table style="border-collapse:collapse;margin:0 auto;font-size:14px;min-width:300px">
-        <tr><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:5px 12px">Chord</th><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:5px 12px">Notes (A minor)</th><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:5px 12px">Extra note</th></tr>
+        <tr><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:5px 12px">Chord</th><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:5px 12px">Notes in A minor</th><th style="border:1.5px solid #cdd5e1;background:#eef1ff;padding:5px 12px">Added scale degree</th></tr>
         <tr><td style="border:1.5px solid #cdd5e1;padding:4px 12px;font-weight:800;color:#2F6DA8">Italian +6</td><td style="border:1.5px solid #cdd5e1;padding:4px 12px;text-align:center">F-A-D♯</td><td style="border:1.5px solid #cdd5e1;padding:4px 12px;text-align:center">—</td></tr>
         <tr><td style="border:1.5px solid #cdd5e1;padding:4px 12px;font-weight:800;color:#A9821F">French +6</td><td style="border:1.5px solid #cdd5e1;padding:4px 12px;text-align:center">F-A-B-D♯</td><td style="border:1.5px solid #cdd5e1;padding:4px 12px;text-align:center">degree 2</td></tr>
         <tr><td style="border:1.5px solid #cdd5e1;padding:4px 12px;font-weight:800;color:#C05A21">German +6</td><td style="border:1.5px solid #cdd5e1;padding:4px 12px;text-align:center">F-A-C-D♯</td><td style="border:1.5px solid #cdd5e1;padding:4px 12px;text-align:center">degree \u{266D}3</td></tr></table>` },
@@ -75,18 +75,18 @@ LESSON_CONTENT[106]={
         hint:"In A minor, Fr⁺⁶ includes B." } }
   ],
   examples:[
-    { caption:"Italian sixth resolving in A minor: F-A-D♯ opens outward into E — the octave on V — then V leads home.",
-      staff:{clef:"treble",tempo:69,notes:[
-        {p:"F4",d:"w",label:"It+6"},{p:"A4",d:"w",chord:true},{p:"D#5",d:"w",chord:true},
-        {p:"E4",d:"w",label:"V"},{p:"G#4",d:"w",chord:true},{p:"E5",d:"w",chord:true},
-        {p:"A4",d:"w",label:"i"},{p:"C5",d:"w",chord:true},{p:"E5",d:"w",chord:true},{bar:"final"}],width:520},
-      kb:{start:60,octaves:1.3333,labels:true} },
-    { caption:"The three flavors side by side: Italian (3 notes), French (+2), German (+♭3). One frame, three national colors.",
-      staff:{clef:"treble",tempo:66,notes:[
-        {p:"F4",d:"w",label:"It"},{p:"A4",d:"w",chord:true},{p:"D#5",d:"w",chord:true},
-        {p:"F4",d:"w",label:"Fr"},{p:"A4",d:"w",chord:true},{p:"B4",d:"w",chord:true},{p:"D#5",d:"w",chord:true},
-        {p:"F4",d:"w",label:"Ger"},{p:"A4",d:"w",chord:true},{p:"C5",d:"w",chord:true},{p:"D#5",d:"w",chord:true},{bar:"final"}],width:560},
-      kb:{start:60,octaves:1.3333,labels:true} }
+    { caption:"Key: A minor — F and D♯ in It⁺⁶ expand outward to E4 and E5; V then resolves to i.",
+      staff:{clef:"treble",tempo:69,time:"4/4",notes:[
+        {p:"F4",d:"w",label:"It⁺⁶"},{p:"A4",d:"w",chord:true},{p:"D#5",d:"w",chord:true},{bar:"single"},
+        {p:"E4",d:"w",label:"V"},{p:"G#4",d:"w",chord:true},{p:"E5",d:"w",chord:true},{bar:"single"},
+        {p:"A4",d:"w",label:"i"},{p:"C5",d:"w",chord:true},{p:"E5",d:"w",chord:true},{bar:"final"}],width:560},
+      kb:{start:65,octaves:0.9167,labels:true} },
+    { caption:"Augmented-Sixth Pitch Collections in A Minor — Italian uses the three-note frame, French adds scale degree 2, German adds ♭3; all three contain the same ♭6–♯4 interval.",
+      staff:{clef:"treble",tempo:66,time:"4/4",notes:[
+        {p:"F4",d:"w",label:"It⁺⁶"},{p:"A4",d:"w",chord:true},{p:"D#5",d:"w",chord:true},{bar:"single"},
+        {p:"F4",d:"w",label:"Fr⁺⁶"},{p:"A4",d:"w",chord:true},{p:"B4",d:"w",chord:true},{p:"D#5",d:"w",chord:true},{bar:"single"},
+        {p:"F4",d:"w",label:"Ger⁺⁶"},{p:"A4",d:"w",chord:true},{p:"C5",d:"w",chord:true},{p:"D#5",d:"w",chord:true},{bar:"final"}],width:600},
+      kb:{start:65,octaves:0.9167,labels:true} }
   ],
   games:[
     { type:"gen-race", title:"Game 1 · Augmented-Sixth Identification (45s)",
@@ -154,11 +154,12 @@ LESSON_CONTENT[106]={
   ],
   mistakes:[],
   summary:[
-    "✔ Engine: <b>♭6 + ♯4</b> expanding outward to an <b>octave on 5</b>.",
-    "✔ <b>Italian</b> = 3 notes · <b>French</b> = +2 · <b>German</b> = +♭3.",
-    "✔ <b>Ger⁺⁶</b> can be enharmonically respelled as a dominant seventh chord, but its spelling and harmonic function are different.",
-    "✔ All three: <b>chromatic predominants to V</b>.",
-    "✔ With the Neapolitan: important members of the chromatic-predominant family."
+    "✔ The characteristic interval is <b>♭6–♯4</b>, expanding outward to an octave on scale degree 5.",
+    "✔ <b>It⁺⁶</b> contains ♭6, 1, and ♯4.",
+    "✔ <b>Fr⁺⁶</b> adds scale degree 2.",
+    "✔ <b>Ger⁺⁶</b> adds ♭3 and can be enharmonically respelled as a dominant seventh chord, although its spelling and function are different.",
+    "✔ All three chords are <b>chromatic predominants</b> leading toward V.",
+    "✔ The Neapolitan and augmented-sixth chords are important members of the chromatic-predominant family."
   ],
   tips:[
     "Spell any +6 fast: find 5, put half steps on both sides (♭6 below-target, ♯4 above-target… both aiming at 5).",
@@ -197,9 +198,9 @@ LESSON_CONTENT[106]={
       hint:"Pincers on the dominant.",
       play:()=>{[53,57,63].forEach(m=>MFAudio.tone(m,.9,.05,.3));[52,56,64].forEach(m=>MFAudio.tone(m,1.0,1.0,.3));} },
     example:{ label:"the examples",
-      explain:"Example 1 resolves the Italian sixth through V to i; example 2 lines up all three nations on one frame." },
+      explain:"Example 1 resolves the Italian sixth through V to i; example 2 lines up all three types on one frame." },
     game:{ label:"the games",
-      explain:"Sprint the flavors, open the pincers by hand, name the nations on cards, then race the mechanics.",
+      explain:"Sprint the types, open the pincers by hand, name each chord on cards, then race the mechanics.",
       hint:"Extra note names the nation." },
     quiz:{ label:"this question",
       explain:"Find the ♭6+♯4 pair aiming at 5; count the notes (3=It); name the extra (2=Fr, ♭3=Ger); resolve outward to V.",
