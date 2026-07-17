@@ -78,7 +78,7 @@ LESSON_CONTENT[107]={
     { caption:"The sad plagal in C: IV (F-A-C) → iv (F-A♭-C) → I. One half-step darkening, maximum emotion.",
       staff:{clef:"treble",tempo:69,notes:[
         {p:"F4",d:"w",label:"IV"},{p:"A4",d:"w",chord:true},{p:"C5",d:"w",chord:true},
-        {p:"F4",d:"w",label:"iv!"},{p:"Ab4",d:"w",chord:true},{p:"C5",d:"w",chord:true},
+        {p:"F4",d:"w",label:"iv"},{p:"Ab4",d:"w",chord:true},{p:"C5",d:"w",chord:true},
         {p:"E4",d:"w",label:"I"},{p:"G4",d:"w",chord:true},{p:"C5",d:"w",chord:true},{bar:"final"}],width:520},
       kb:{start:60,octaves:1,labels:true} },
     { caption:"♭VI and ♭VII climbing home: A♭ → B♭ → C — the borrowed 'Mario cadence' of film and game scores.",
