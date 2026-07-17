@@ -138,14 +138,14 @@ LESSON_CONTENT[105]={stackFigures:true,
     {term:"Neapolitan Chord (♭II)", def:"A major triad built on lowered scale degree 2."},
     {term:"N⁶", def:"The Neapolitan in first inversion, with scale degree 4 in the bass."},
     {term:"Predominant Function", def:"Prepares V, like ii°⁶ or iv."},
-    {term:"The ♭2 Resolution", def:"♭2 descends toward 7̂, directly or through 1̂."}
+    {term:"The ♭2 Resolution", def:"♭2 descends toward the leading tone, directly or through the tonic."}
   ],
   mistakes:[],
   summary:[
     "✔ <b>♭II</b> is a major triad built on the lowered second scale degree.",
     "✔ <b>N⁶</b> is the standard first-inversion form, with scale degree 4 in the bass.",
     "✔ The Neapolitan has <b>predominant function</b> and prepares V.",
-    "✔ <b>♭2 descends</b> toward the leading tone, directly or through 1̂.",
+    "✔ <b>♭2 descends</b> toward the leading tone, directly or through the tonic.",
     "✔ More common in <b>minor</b> but also occurs in major."
   ],
   tips:[
