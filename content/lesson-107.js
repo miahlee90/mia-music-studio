@@ -14,7 +14,7 @@ LESSON_CONTENT[107]={
           <button class="play hk-a">▶ Play IV–iv–I in C major</button></div>
           <div class="choices hk-ch" style="display:none"><button>F minor, iv — drawn from the parallel minor mode</button><button>C major, I — the diatonic tonic chord</button><button>The passage permanently modulates to C minor</button></div>`;
         const ch=container.querySelector(".hk-ch");
-        container.querySelector(".hk-a").onclick=()=>{ [[65,69,72],[65,68,72],[60,64,67]].forEach((row,i)=>row.forEach(m=>MFAudio.tone(m,.85,i*.9,.27))); setTimeout(()=>ch.style.display="",3*900+300); };
+        container.querySelector(".hk-a").onclick=()=>{ [[65,69,72],[65,68,72],[64,67,72]].forEach((row,i)=>row.forEach(m=>MFAudio.tone(m,.85,i*.9,.27))); setTimeout(()=>ch.style.display="",3*900+300); };
         [...ch.children].forEach((b,i)=>b.onclick=()=>{
           if(i===0) fb(true,"✓ Correct. F–A♭–C is iv in C minor. Its use within a passage that remains centered on C major demonstrates modal mixture.");
           else fb(false,"Listen for A♭, the pitch that changes the diatonic F-major triad into F minor.");
