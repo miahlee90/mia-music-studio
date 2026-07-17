@@ -64,12 +64,12 @@ LESSON_CONTENT[105]={stackFigures:true,
   ],
   examples:[
     { caption:"Key: A minor — i → N⁶ → V → i. In the direct N⁶–V connection, B♭ may move to G♯, a diminished third.",
-      staff:{clef:"treble",tempo:72,time:"4/4",notes:[
-        {p:"A3",d:"w",label:"i"},{p:"C4",d:"w",chord:true},{p:"E4",d:"w",chord:true},{bar:"single"},
-        {p:"D4",d:"w",label:"N⁶"},{p:"F4",d:"w",chord:true},{p:"Bb4",d:"w",chord:true},{bar:"single"},
-        {p:"E4",d:"w",label:"V"},{p:"G#4",d:"w",chord:true},{p:"B4",d:"w",chord:true},{bar:"single"},
-        {p:"A3",d:"w",label:"i"},{p:"C4",d:"w",chord:true},{p:"E4",d:"w",chord:true},{bar:"final"}],width:620},
-      kb:{start:57,octaves:1.1667,labels:true} },
+      staff:{clef:"grand",tempo:72,time:"4/4",notes:[
+        {p:"A2",d:"w",clef:"bass",label:"i"},{p:"C4",d:"w",chord:true},{p:"E4",d:"w",chord:true},{p:"A4",d:"w",chord:true},{bar:"single"},
+        {p:"D3",d:"w",clef:"bass",label:"N⁶"},{p:"D4",d:"w",chord:true},{p:"F4",d:"w",chord:true},{p:"Bb4",d:"w",chord:true},{bar:"single"},
+        {p:"E3",d:"w",clef:"bass",label:"V"},{p:"E4",d:"w",chord:true},{p:"G#4",d:"w",chord:true},{p:"B4",d:"w",chord:true},{bar:"single"},
+        {p:"A2",d:"w",clef:"bass",label:"i"},{p:"C4",d:"w",chord:true},{p:"E4",d:"w",chord:true},{p:"A4",d:"w",chord:true},{bar:"final"}],width:640},
+      kb:{start:45,octaves:2.1667,labels:true} },
     { caption:"Key: A minor — ♭2 → 1̂ → 7̂ → 1̂. With a cadential i⁶₄ between N⁶ and V, ♭2 descends stepwise B♭–A–G♯ before resolving to A.",
       staff:{clef:"treble",tempo:76,time:"4/4",notes:[
         {p:"Bb4",d:"q",label:"♭2 (B♭)"},{p:"A4",d:"q",label:"1̂ (A)"},{p:"G#4",d:"q",label:"7̂ (G♯)"},{p:"A4",d:"q",label:"1̂ (A)"},{bar:"final"}],width:480},
